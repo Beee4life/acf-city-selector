@@ -49,9 +49,10 @@ Loading the stored values when editing is still missing... This is a javascript/
 * [X] - Store values properly
 * [X] - Validate values upon empty
 * [ ] - Load values when editing
-* [X] - Drop tables on plugin deactivation
+* [X] - Drop tables on plugin deactivation (DROP TABLE doesn't seem to work)
+* [ ] - Add ajax/lazy/fancy loading
 * [X] - Add Dutch cities/provences
-* [ ] - Add Belgian cities/provences
+* [ ] - Add Belgian cities/provences (in progress)
 * [ ] - Add Luxembourg cities/provences
 * [ ] - Add German cities/provences
 * [X] - Drop tables on plugin deactivation
@@ -61,9 +62,10 @@ Loading the stored values when editing is still missing... This is a javascript/
 * [ ] - Test on PC Chrome
 * [ ] - Test on PC Firefox
 * [ ] - Test on PC Safari
+* [ ] - Test on iPhone Chrome
 * [ ] - Test on iPhone Safari
+* [ ] - Test on iPad Chrome
 * [ ] - Test on iPad Safari
-* [ ] - Test on PC ie7
 
 ### Installation
 
