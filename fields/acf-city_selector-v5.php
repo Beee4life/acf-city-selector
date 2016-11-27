@@ -17,9 +17,6 @@ class acf_field_city_selector extends acf_field {
     *  This function will setup the field type data
     *
     *  @type    function
-    *  @date    5/03/2014
-    *  @since   5.0.0
-    *
     *  @param   n/a
     *  @return  n/a
     */
@@ -42,23 +39,19 @@ class acf_field_city_selector extends acf_field {
         );
 
         /*
+        *  Keep for now
         *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
         *  var message = acf._e('city_selector', 'error');
         */
 
-        $this->l10n = array(
-            // 'error' => __('Error! Please enter a higher value', 'acf-city-selector'),
-        );
+        // $this->l10n = array(
+        //     'error' => __('Error! Please enter a higher value', 'acf-city-selector'),
+        // );
 
         /*
         *  settings (array) Store plugin settings (url, path, version) as a reference for later use with assets
         */
         $this->settings = $settings;
-        // $this->settings = array(
-        //     'path'      => apply_filters('acf/helpers/get_path', __FILE__),
-        //     'dir'       => plugin_dir_url( __FILE__ ),
-        //     'version'   => '1.0.0'
-        // );
 
         // do not delete!
         parent::__construct();
@@ -71,9 +64,6 @@ class acf_field_city_selector extends acf_field {
     *  Create extra settings for your field. These are visible when editing a field
     *
     *  @type    action
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   $field (array) the $field being edited
     *  @return  n/a
     */
@@ -84,9 +74,6 @@ class acf_field_city_selector extends acf_field {
         *  acf_render_field_setting
         *
         *  This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-        *  The array of settings does not require a `value` or `prefix`; These settings are found from the $field array.
-        *
-        *  More than one setting can be added by copy/paste the above code.
         *  Please note that you must also have a matching $defaults value for the field name (show_labels)
         */
 
@@ -112,23 +99,15 @@ class acf_field_city_selector extends acf_field {
     *
     *  Create the HTML interface for your field
     *
-    *  @param   $field (array) the $field being rendered
-    *
     *  @type    action
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   $field (array) the $field being edited
     *  @return  n/a
     */
 
     function render_field( $field ) {
 
-        // $field  = array_merge( $this->defaults, $field );
-        // $key    = $field['name'];
-
         // field output in form
-        // echo '<pre>'; print_r( $field ); echo '</pre>';
+        // echo '<pre>'; print_r( $field['value'] ); echo '</pre>';
         // exit;
 
         ?>
@@ -167,9 +146,6 @@ class acf_field_city_selector extends acf_field {
     *  Use this action to add CSS + JavaScript to assist your render_field() action.
     *
     *  @type    action (admin_enqueue_scripts)
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   n/a
     *  @return  n/a
     */
@@ -184,9 +160,6 @@ class acf_field_city_selector extends acf_field {
     *  Use this action to add CSS and JavaScript to assist your render_field() action.
     *
     *  @type    action (admin_head)
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   n/a
     *  @return  n/a
     */
@@ -217,19 +190,12 @@ class acf_field_city_selector extends acf_field {
     *  $args that related to the current screen such as $args['post_id']
     *
     *  @type    function
-    *  @date    6/03/2014
-    *  @since   5.0.0
-    *
     *  @param   $args (array)
     *  @return  n/a
     */
 
-    /*
-
     function input_form_data( $args ) {
     }
-
-    */
 
 
     /*
@@ -238,18 +204,15 @@ class acf_field_city_selector extends acf_field {
     *  This filter is applied to the $value after it is loaded from the db
     *
     *  @type    filter
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   $value (mixed) the value found in the database
     *  @param   $post_id (mixed) the $post_id from which the value was loaded
     *  @param   $field (array) the field array holding all the field options
     *  @return  $value
     */
 
-    function load_value( $value, $post_id, $field ) {
-        return $value;
-    }
+    // function load_value( $value, $post_id, $field ) {
+    //     return $value;
+    // }
 
 
     /*
@@ -258,18 +221,15 @@ class acf_field_city_selector extends acf_field {
     *  This filter is applied to the $value before it is saved in the db
     *
     *  @type    filter
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   $value (mixed) the value found in the database
     *  @param   $post_id (mixed) the $post_id from which the value was loaded
     *  @param   $field (array) the field array holding all the field options
     *  @return  $value
     */
 
-    function update_value( $value, $post_id, $field ) {
-        return $value;
-    }
+    // function update_value( $value, $post_id, $field ) {
+    //     return $value;
+    // }
 
 
     /*
@@ -278,42 +238,23 @@ class acf_field_city_selector extends acf_field {
     *  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
     *
     *  @type    filter
-    *  @since   3.6
-    *  @date    23/01/13
-    *
     *  @param   $value (mixed) the value which was loaded from the database
     *  @param   $post_id (mixed) the $post_id from which the value was loaded
     *  @param   $field (array) the field array holding all the field options
-    *
     *  @return  $value (mixed) the modified value
     */
 
-    /*
-
-    function format_value( $value, $post_id, $field ) {
-
-        // bail early if no value
-        if( empty($value) ) {
-
-            return $value;
-
-        }
 
 
-        // apply setting
-        if( $field['font_size'] > 12 ) {
+    // function format_value( $value, $post_id, $field ) {
+    //     // bail early if no value
+    //     if( empty( $value ) ) {
+    //         return $value;
+    //     }
 
-            // format the value
-            // $value = 'something';
-
-        }
-
-
-        // return
-        return $value;
-    }
-
-    */
+    //     // return
+    //     return $value;
+    // }
 
 
     /*
@@ -334,10 +275,8 @@ class acf_field_city_selector extends acf_field {
     *  @return  $valid
     */
 
-    function validate_value( $valid, $value, $field, $input ) {
 
-        // echo '<pre>'; var_dump($value); echo '</pre>';
-        // exit;
+    function validate_value( $valid, $value, $field, $input ) {
 
         // Advanced usage
         if ( !isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' ) {
@@ -357,23 +296,13 @@ class acf_field_city_selector extends acf_field {
     *  Please note that saving a blank value is treated as an update, not a delete
     *
     *  @type    action
-    *  @date    6/03/2014
-    *  @since   5.0.0
-    *
     *  @param   $post_id (mixed) the $post_id from which the value was deleted
     *  @param   $key (string) the $meta_key which the value was deleted
     *  @return  n/a
     */
 
-    /*
-
     function delete_value( $post_id, $key ) {
-
-
-
     }
-
-    */
 
 
     /*
@@ -382,9 +311,6 @@ class acf_field_city_selector extends acf_field {
     *  This filter is applied to the $field after it is loaded from the database
     *
     *  @type    filter
-    *  @date    23/01/2013
-    *  @since   3.6.0
-    *
     *  @param   $field (array) the field array holding all the field options
     *  @return  $field
     */
@@ -399,21 +325,11 @@ class acf_field_city_selector extends acf_field {
     *  This filter is applied to the $field before it is saved to the database
     *
     *  @type    filter
-    *  @date    23/01/2013
-    *  @since   3.6.0
-    *
     *  @param   $field (array) the field array holding all the field options
     *  @return  $field
     */
 
     function update_field( $field ) {
-
-        $cs_fields = array(
-            'cityNameAscii' => '',
-            'stateCode'     => '',
-            'countryCode'   => '',
-            // etc...
-        );
         return $field;
     }
 
@@ -424,22 +340,13 @@ class acf_field_city_selector extends acf_field {
     *  This action is fired after a field is deleted from the database
     *
     *  @type    action
-    *  @date    11/02/2014
-    *  @since   5.0.0
-    *
     *  @param   $field (array) the field array holding all the field options
     *  @return  n/a
     */
 
-    /*
-
     function delete_field( $field ) {
-
-
-
     }
 
-    */
 
     /**
      * Get Countries
@@ -449,16 +356,18 @@ class acf_field_city_selector extends acf_field {
      */
     public function _acf_get_countries() {
         global $wpdb;
-        $countries_db = $wpdb->get_results( " SELECT DISTINCT * FROM " . $wpdb->prefix . "cities group by country order by country ASC" );
+        $countries_db = $wpdb->get_results( "
+            SELECT DISTINCT *
+            FROM " . $wpdb->prefix . "cities
+            group by country
+            order by country ASC
+        " );
 
         $countries = array();
-
         foreach ( $countries_db as $country ) {
-            if (trim($country->country) == '') continue;
+            if ( trim( $country->country ) == '' ) continue;
             $countries[$country->id] = $country->country;
         }
-        // echo '<pre>'; var_dump( $countries ); echo '</pre>';
-        // exit;
 
         return $countries;
     }
