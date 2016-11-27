@@ -83,7 +83,7 @@ The plugin contains the following languages:
 
 ### Support
 
-If you run into bugs or have questions, please post them on [Github](https://github.com/Beee4life/acf-city-selector/issues).
+Support is welcome since I haven't fixed a few issues. You're welcome to fork it and create a pull request.
 
 ### Credit
 
