@@ -72,4 +72,4 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 ### Changelog
 
-Nothing yet, first version.
+Nothing yet, still developing.
