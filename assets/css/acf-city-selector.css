@@ -1,0 +1,13 @@
+/**
+ *  CSS for the ACF City Selector plugin
+ *  Version: 1.0
+ */
+
+.acf-field-sd-city-selector div {
+    margin-bottom: 10px;
+}
+
+.acf-field-sd-city-selector span.acf-input-header {
+    display: block;
+    margin-bottom: 5px;
+}
