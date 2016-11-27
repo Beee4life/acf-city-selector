@@ -39,17 +39,18 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 * Wordpress 4.6.1.
 * Advanced Custom Fields 5.4.8
 
-#### Browsers
+#### To Do
 * [X] - Store values properly
-* [X] - Mac Chrome
-* [X] - Mac Firefox
-* [X] - Mac Safari
-* [ ] - PC Chrome
-* [ ] - PC Firefox
-* [ ] - PC Safari
-* [ ] - iPhone Safari
-* [ ] - iPad Safari
-* [ ] - PC ie7
+* [ ] - Load values when editing
+* [X] - Test on Mac Chrome
+* [ ] - Test on Mac Firefox
+* [ ] - Test on Mac Safari
+* [ ] - Test on PC Chrome
+* [ ] - Test on PC Firefox
+* [ ] - Test on PC Safari
+* [ ] - Test on iPhone Safari
+* [ ] - Test on iPad Safari
+* [ ] - Test on PC ie7
 
 ### Installation
 
