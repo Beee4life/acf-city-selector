@@ -41,6 +41,7 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 
 #### To Do
 * [X] - Store values properly
+* [X] - Validate values upon empty
 * [ ] - Load values when editing
 * [X] - Test on Mac Chrome
 * [ ] - Test on Mac Firefox
