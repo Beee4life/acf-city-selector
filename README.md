@@ -34,6 +34,10 @@ This ACF field type is compatible/tested with ACF 5.
 
 I didn't look at the compatibility for ACF 4. Don't assume it will work, just assume it will break your site and leave it until it's compatible. I don't take any responsibility for it :)
 
+### Disclaimer
+
+Loading the stored values when editing is still missing... This is a javascript/jquery thing, which is not my thing :) If you have a solution, fork it and send me a pull request.
+
 ### Tested on
 
 * Wordpress 4.6.1.
