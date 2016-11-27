@@ -62,15 +62,16 @@ class acf_plugin_city_selector {
     function create_fill_db() {
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         ob_start();
-        require_once 'lib/prepare-tables.php';
+        require_once('lib/prepare-tables.php');
         $sql = ob_get_clean();
         dbDelta( $sql );
     }
 
     function drop_db() {
+        // die('DIE DROP DB');
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         ob_start();
-        require_once 'lib/drop-tables.php';
+        require_once('lib/drop-tables.php');
         $sql = ob_get_clean();
         dbDelta( $sql );
     }
