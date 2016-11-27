@@ -72,6 +72,10 @@ The plugin contains the following languages:
 * javascript / jquery
 * css
 
+### Support
+
+If you run into bugs or have questions, please post them on [Github](https://github.com/Beee4life/acf-city-selector/issues).
+
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who was giving support in the issue list of another ACF plugin  on Github, which can be found [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
