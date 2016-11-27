@@ -63,8 +63,7 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 
 The plugin contains the following languages:
 * php
-* javascript
-* jquery
+* javascript / jquery
 * css
 
 ### Credit
