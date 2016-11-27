@@ -11,3 +11,4 @@ Thumbs.db
 lib/sql-data.php
 lib/unused-countries.php
 lib/usa-states.php
+import/~*.xlsx
