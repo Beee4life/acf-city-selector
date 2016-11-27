@@ -1,7 +1,7 @@
 /* JS File for Country Field */
 (function($) {
 
-    console.log('-= ACF City Selector loaded');
+    console.log('-= Hit ACF City Selector');
 
     var country = $("select[name*='countryCode']");
     var state = $("select[name*='stateCode']");
@@ -13,16 +13,28 @@
 
             get_states($(this).val(), function(response) {
 
-                var obj = JSON.parse(response);
-                var len = obj.length;
+                var obj          = JSON.parse(response);
+                var len          = obj.length;
                 var $stateValues = '';
 
                 $("select[name*='stateCode']").empty();
                 $("select[name*='cityNameAscii']").empty();
                 for (i = 0; i < len; i++) {
                     var mystate = obj[i];
-                    $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
-                }
+
+                    // if has stored provence/state, get that value
+                    if ( mystate.state_code == 'NH' ) {
+                        // set selected
+                        $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
+
+                        // if state is selected, load city dropdown here already instead
+                        // of on.change, since there is no on.change
+                        console.log('-= TODO: LOAD CITY DROPDOWN NOW');
+
+                    } else {
+                        $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
+                   }
+                 }
                 $("select[name*='stateCode']").append($stateValues);
 
             });
@@ -32,14 +44,16 @@
     }
 
     if (state.length) {
+
         state.change(function() {
+            console.log('-= Hit state change');
 
             var $this = $(this);
 
             get_cities($(this).val(), function(response) {
 
-                var obj = JSON.parse(response);
-                var len = obj.length;
+                var obj         = JSON.parse(response);
+                var len         = obj.length;
                 var $cityValues = '';
 
                 $("select[name*='cityNameAscii']").empty();
