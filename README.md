@@ -49,7 +49,6 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 * [ ] - iPhone Safari
 * [ ] - iPad Safari
 * [ ] - PC ie7
-* [ ] - Safari
 
 ### Installation
 
