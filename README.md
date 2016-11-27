@@ -41,13 +41,19 @@ Loading the stored values when editing is still missing... This is a javascript/
 ### Tested on
 
 * Wordpress 4.6.1.
-* Advanced Custom Fields 5.4.8
+* Advanced Custom Fields Pro 5.4.8
 
 #### To Do
 * [X] - Store values properly
 * [X] - Validate values upon empty
 * [ ] - Load values when editing
-* [X] - Test on Mac Chrome
+* [X] - Drop tables on plugin deactivation
+* [X] - Add Dutch cities/provences
+* [ ] - Add Belgian cities/provences
+* [ ] - Add Luxembourg cities/provences
+* [ ] - Add German cities/provences
+* [X] - Drop tables on plugin deactivation
+* [ ] - Test on Mac Chrome
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
 * [ ] - Test on PC Chrome
