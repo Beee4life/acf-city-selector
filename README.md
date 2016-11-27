@@ -38,7 +38,7 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 
 ### Disclaimer
 
-Loading the stored values when editing is still missing... This is a javascript/jquery thing, which is not my thing :) If you have a solution, fork it and send me a pull request.
+This plugin is not finished yet. Using it, is at your own risk.
 
 ### Tested on
 
