@@ -20,7 +20,7 @@ This plugin adds one database table named `$wpdb->prefix_cities`.
 
 ### Cities
 
-The plugin comes pre-installed with all cities in the Benelux (Belgium, Netherlands, Luxembourg), but you can add more countries yourself, through a simple excel sheet which is included in the plugin.
+The plugin comes pre-installed with all cities in the Benelux (Belgium, Netherlands, Luxembourg), but you can add more countries yourself, through a simple excel sheet which is included in the plugin and can be found in the impport folder.
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
