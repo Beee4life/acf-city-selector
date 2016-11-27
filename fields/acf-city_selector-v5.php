@@ -136,7 +136,7 @@ class acf_field_city_selector extends acf_field {
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select country', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="countryCode" id="countryCode" class="countrySelect">
+            <select name="acf[<?php echo $fields['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
             <?php foreach( populate_country_select() as $key => $country ) { ?>
                 <option value="<?php echo $key; ?>"><?php echo $country; ?></option>
             <?php } ?>
@@ -147,14 +147,14 @@ class acf_field_city_selector extends acf_field {
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select provence/state', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="stateCode" id="stateCode" class="countrySelect"></select>
+            <select name="acf[<?php echo $fields['key']; ?>][stateCode]" id="stateCode" class="countrySelect"></select>
         </div>
 
         <div class="cs_cities">
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="cityNameAscii" id="cityNameAscii" class="countrySelect"></select>
+            <select name="acf[<?php echo $fields['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect"></select>
         </div>
         <?php
     }
@@ -417,9 +417,6 @@ class acf_field_city_selector extends acf_field {
     */
 
     function update_field( $field ) {
-
-        echo '<pre>'; var_dump($field); echo '</pre>';
-        exit;
 
         $cs_fields = array(
             'cityNameAscii' => '',

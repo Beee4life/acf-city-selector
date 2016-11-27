@@ -40,6 +40,7 @@ I didn't look at the compatibility for ACF 4. Don't assume it will work, just as
 * Advanced Custom Fields 5.4.8
 
 #### Browsers
+* [X] - Store values properly
 * [X] - Mac Chrome
 * [X] - Mac Firefox
 * [X] - Mac Safari
