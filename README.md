@@ -51,6 +51,7 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [ ] - Load values when editing post (jquery)
 * [ ] - Drop tables on plugin deactivation (sql - DROP TABLE doesn't seem to work)
 * [ ] - Add lazy/fancy loading (ajax)
+* [ ] - Add translations for English country names
 * [X] - Add Dutch cities/provences
 * [ ] - Add Belgian cities/provences (in progress)
 * [ ] - Add Luxembourg cities/provences
