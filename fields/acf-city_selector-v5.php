@@ -99,7 +99,7 @@ class acf_field_city_selector extends acf_field {
             'choices'       => $select_options,
             'layout'        =>  'horizontal',
             'label'         => __( 'Show labels', 'acf-city-selector' ),
-            'instructions'  => __( 'Show field labels (or not).', 'acf-city-selector' ),
+            'instructions'  => __( 'Show field labels (or not)', 'acf-city-selector' ),
             'name'          => 'show_labels',
             // 'default_value' => 'Yes'
             // 'prepend'       => 'px',
@@ -136,7 +136,7 @@ class acf_field_city_selector extends acf_field {
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select country', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="acf[<?php echo $fields['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
+            <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
             <?php foreach( populate_country_select() as $key => $country ) { ?>
                 <option value="<?php echo $key; ?>"><?php echo $country; ?></option>
             <?php } ?>
@@ -147,14 +147,14 @@ class acf_field_city_selector extends acf_field {
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select provence/state', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="acf[<?php echo $fields['key']; ?>][stateCode]" id="stateCode" class="countrySelect"></select>
+            <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect"></select>
         </div>
 
         <div class="cs_cities">
             <?php if ( $field['show_labels'] == 1 ) { ?>
                 <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
             <?php } ?>
-            <select name="acf[<?php echo $fields['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect"></select>
+            <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect"></select>
         </div>
         <?php
     }
@@ -334,30 +334,20 @@ class acf_field_city_selector extends acf_field {
     *  @return  $valid
     */
 
-    /*
+    function validate_value( $valid, $value, $field, $input ) {
 
-    function validate_value( $valid, $value, $field, $input ){
-
-        // Basic usage
-        if( $value < $field['custom_minimum_setting'] )
-        {
-            $valid = false;
-        }
-
+        // echo '<pre>'; var_dump($value); echo '</pre>';
+        // exit;
 
         // Advanced usage
-        if( $value < $field['custom_minimum_setting'] )
-        {
-            $valid = __('The value is too little!','acf-city_selector'),
+        if ( !isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' ) {
+            $valid = __('You didn\'t select a city', 'acf-city-selector' );
         }
-
 
         // return
         return $valid;
 
     }
-
-    */
 
 
     /*
