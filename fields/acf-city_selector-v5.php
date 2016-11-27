@@ -110,6 +110,10 @@ class acf_field_city_selector extends acf_field {
         // echo '<pre>'; print_r( $field['value'] ); echo '</pre>';
         // exit;
 
+        $countrycode    = $field['value']['countryCode'];
+        $statecode      = $field['value']['stateCode'];
+        $city           = $field['value']['cityNameAscii'];
+
         ?>
         <div class="cs_countries">
             <?php if ( $field['show_labels'] == 1 ) { ?>
@@ -117,7 +121,16 @@ class acf_field_city_selector extends acf_field {
             <?php } ?>
             <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
             <?php foreach( populate_country_select() as $key => $country ) { ?>
-                <option value="<?php echo $key; ?>"><?php echo $country; ?></option>
+                <?php
+                    if ( $countrycode == $key ) {
+                        $selected = ' selected';
+                        $selected = false;
+                        // load states here already, since there no on.change when pre-selected
+                    } else {
+                        $selected = false;
+                    }
+                ?>
+                <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
             <?php } ?>
             </select>
         </div>
