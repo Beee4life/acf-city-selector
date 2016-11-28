@@ -1,19 +1,19 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2016-11-28 22:13+0100\n"
-"PO-Revision-Date: 2016-11-27 04:33+0100\n"
+"POT-Creation-Date: 2016-11-28 22:14+0100\n"
+"PO-Revision-Date: 2016-11-28 22:22+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en_US\n"
-"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;"
+"esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: fields/acf-city_selector-v4.php:31 fields/acf-city_selector-v5.php:27
@@ -22,36 +22,39 @@ msgstr ""
 
 #: fields/acf-city_selector-v4.php:32
 msgid "Choice"
-msgstr ""
+msgstr "Wahl"
 
 #: fields/acf-city_selector-v5.php:81
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: fields/acf-city_selector-v5.php:82
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: fields/acf-city_selector-v5.php:88
 msgid "Show labels"
-msgstr ""
+msgstr "Labels zeigen"
 
 #: fields/acf-city_selector-v5.php:89
 msgid "Show field labels above the dropdown menus"
-msgstr ""
+msgstr "Labels zeigen oben der dropdown menus"
 
 #: fields/acf-city_selector-v5.php:120 inc/country-field.php:30
 msgid "Select country"
-msgstr ""
+msgstr "Wähle ein Land"
 
 #: fields/acf-city_selector-v5.php:140 inc/country-field.php:57
 msgid "Select provence/state"
-msgstr ""
+msgstr "Wähle ein Provinz/Stat/Bundesland"
 
 #: fields/acf-city_selector-v5.php:147 inc/country-field.php:106
 msgid "Select city"
-msgstr ""
+msgstr "Wähle eine Stadt"
 
 #: fields/acf-city_selector-v5.php:296
 msgid "You didn't select a city"
-msgstr ""
+msgstr "Du hast keine Stadt selektiert"
+
+#~ msgid "Show field labels (or not)"
+#~ msgstr "Labels zeigen (oder nicht)"
