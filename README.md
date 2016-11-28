@@ -22,7 +22,8 @@ Update/save the Field Group.
 
 ### Impact
 
-This plugin adds one database table named `$wpdb->prefix_cities`.
+* The plugin adds a database table named `$wpdb->prefix_cities` upon plugin activation.
+* The plugin removes the database table named `$wpdb->prefix_cities` upon plugin deletion through the admin panel. Deleting by FTP won't delete the table !
 
 ### Cities
 
@@ -36,7 +37,7 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 This ACF field type is compatible/tested with ACF 5.
 
-I didn't look at the compatibility for ACF 4. Don't assume it will work, just assume it will break your site and leave it until it's compatible. I don't take any responsibility for it :)
+I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't assume it will work, it won't. Just leave it until it's compatible or update to v5/Pro.
 
 ### Disclaimer
 
@@ -53,9 +54,11 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [ ] - Load values when editing post (jquery)
 * [X] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [X] - Drop tables on plugin deletion
-* [ ] - Add lazy/fancy loading (ajax)
-* [ ] - Add settings page with option to drop tables if preset countries are not needed
-* [ ] - Add translations for English country names
+* [ ] - Add lazy/fancy loading (ajax) - optional
+* [ ] - Add settings page
+* [ ] - Add settings page option to drop tables if preset countries are not needed
+* [ ] - Add settings page option to import countries from CSV
+* [ ] - Add translations for English country names - optional
 * [X] - Add Dutch cities/provences
 * [ ] - Add Belgian cities/provences (in progress)
 * [ ] - Add Luxembourg cities/provences
@@ -83,6 +86,7 @@ This plugin is not finished yet. Using it, is at your own risk.
 The plugin contains the following languages:
 * php
 * javascript / jquery
+* sql
 * css
 
 ### Support
@@ -91,8 +95,11 @@ Support is welcome since I haven't fixed a few issues. You're welcome to fork it
 
 ### Credit
 
-I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who was giving support in the issue list of another ACF plugin  on Github, which can be found [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
+I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who was giving support in the issue list of another ACF plugin on Github, which can be found [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
 ### Changelog
 
-Nothing yet, still developing.
+#### 0.1
+
+* added Dutch translation
+* added German translation
