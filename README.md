@@ -59,7 +59,6 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [X] - Add Dutch cities/provences
 * [ ] - Add Belgian cities/provences (in progress)
 * [ ] - Add Luxembourg cities/provences
-* [ ] - Add German cities/provences
 * [X] - Test on Mac Chrome
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
