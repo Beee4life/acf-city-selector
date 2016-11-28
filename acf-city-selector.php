@@ -44,9 +44,6 @@ class acf_plugin_city_selector {
             'path'      => plugin_dir_path( __FILE__ )
         );
 
-        // echo '<pre>'; var_dump($this->settings); echo '</pre>';
-        // exit;
-
         // set text domain
         // https://codex.wordpress.org/Function_Reference/load_plugin_textdomain
         load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
