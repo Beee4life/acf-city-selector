@@ -44,12 +44,14 @@ class acf_plugin_city_selector {
             'path'      => plugin_dir_path( __FILE__ )
         );
 
+        // echo '<pre>'; var_dump($this->settings); echo '</pre>';
+        // exit;
+
         // set text domain
         // https://codex.wordpress.org/Function_Reference/load_plugin_textdomain
-        load_plugin_textdomain( 'acf-city-selector', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' );
+        load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
         register_activation_hook( __FILE__,     array( $this, 'create_fill_db' ) );
-        register_deactivation_hook( __FILE__,   array( $this, 'drop_db' ) );
 
         include( 'inc/country-field.php' );
 
@@ -63,15 +65,6 @@ class acf_plugin_city_selector {
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         ob_start();
         require_once('lib/prepare-tables.php');
-        $sql = ob_get_clean();
-        dbDelta( $sql );
-    }
-
-    function drop_db() {
-        // die('DIE DROP DB');
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        ob_start();
-        require_once('lib/drop-tables.php');
         $sql = ob_get_clean();
         dbDelta( $sql );
     }
