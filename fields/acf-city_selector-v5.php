@@ -86,7 +86,7 @@ class acf_field_city_selector extends acf_field {
             'choices'       => $select_options,
             'layout'        =>  'horizontal',
             'label'         => __( 'Show labels', 'acf-city-selector' ),
-            'instructions'  => __( 'Show field labels (or not)', 'acf-city-selector' ),
+            'instructions'  => __( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
             'name'          => 'show_labels',
             // 'default_value' => 'Yes'
             // 'prepend'       => 'px',
@@ -107,13 +107,10 @@ class acf_field_city_selector extends acf_field {
     function render_field( $field ) {
 
         // field output in form
-        // echo '<pre>'; print_r( $field['value'] ); echo '</pre>';
+        // echo '<pre>'; var_dump( $field ); echo '</pre>';
         // exit;
 
         $countrycode    = $field['value']['countryCode'];
-        $statecode      = $field['value']['stateCode'];
-        $city           = $field['value']['cityNameAscii'];
-
         ?>
         <div class="cs_countries">
             <?php if ( $field['show_labels'] == 1 ) { ?>
