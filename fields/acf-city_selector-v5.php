@@ -117,7 +117,7 @@ class acf_field_city_selector extends acf_field {
                 <span class="acf-input-header"><?php _e( 'Select country', 'acf-city-selector' ); ?></span>
             <?php } ?>
             <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
-            <?php foreach( populate_country_select() as $key => $country ) { ?>
+            <?php foreach( populate_country_select( '', $field ) as $key => $country ) { ?>
                 <?php
                     if ( $countrycode == $key ) {
                         $selected = ' selected';
