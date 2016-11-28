@@ -17,7 +17,7 @@ add_action( 'wp_head', 'city_selector_ajaxurl' );
  * @return Array
  */
 
-function populate_country_select( $selectedCountry = null ) {
+function populate_country_select( $selectedCountry = null, $field ) {
     global $wpdb;
     $db = $wpdb->get_results( "
         SELECT * FROM " . $wpdb->prefix . "cities
@@ -27,7 +27,11 @@ function populate_country_select( $selectedCountry = null ) {
 
     $items = array();
     if ( null == $selectedCountry ) {
-        $items[] = __( 'Select country', 'acf-city-selector' );
+        if ( $field['show_labels'] == 1 ) {
+            $items[] = '-';
+        } else {
+            $items[] = __( 'Select country', 'acf-city-selector' );
+        }
     }
     foreach( $db as $data ) {
         $items[ $data->country_code ] = $data->country;
@@ -44,6 +48,7 @@ function populate_country_select( $selectedCountry = null ) {
  */
 
 function get_states_call() {
+
     $country_code = $_POST['country_code'];
 
     global $wpdb;
@@ -61,16 +66,16 @@ function get_states_call() {
 
     $i = 1;
     foreach( $db as $data ) {
-        $items[$i]['country_code']  = $data->country_code;
-        $items[$i]['state_code']    = $data->state_code;
+        $items[ $i ]['country_code']  = $data->country_code;
+        $items[ $i ]['state_code']    = $data->state_code;
         if( $data->states != 'N/A' ) {
-            $items[$i]['states'] = $data->states;
+            $items[ $i ]['states'] = $data->states;
         } else {
-            $items[$i]['states'] = $data->country;
+            $items[ $i ]['states'] = $data->country;
         }
         $i++;
     }
-    //return $items;
+    // return $items;
     ob_clean();
     echo json_encode( $items );
     die();
@@ -104,7 +109,6 @@ function get_cities_call() {
             " );
         }
         $items = array();
-
         $items[0]['id']             = "";
         $items[0]['city_name']      = __( 'Select city', 'acf-city-selector' );
         $i = 1;
@@ -114,7 +118,7 @@ function get_cities_call() {
             $items[$i]['city_name'] = $data->city_name_ascii;
             $i++;
         }
-        //return $items;
+        //  return $items;
         ob_clean();
         echo json_encode($items);
         die();
