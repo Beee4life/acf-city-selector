@@ -50,6 +50,7 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [X] - Validate values upon empty
 * [ ] - Load values when editing post (jquery)
 * [ ] - Drop tables on plugin deactivation (sql - DROP TABLE doesn't seem to work)
+* [ ] - Create option to choose whether to drop table or not.
 * [ ] - Add lazy/fancy loading (ajax)
 * [ ] - Add translations for English country names
 * [X] - Add Dutch cities/provences
