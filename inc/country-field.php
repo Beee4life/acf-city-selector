@@ -27,10 +27,13 @@ function populate_country_select( $selectedCountry = null ) {
 
     $items = array();
     if ( null == $selectedCountry ) {
-        $items[] = 'Select country';
+        $items[] = __( 'Select country', 'acf-city-selector' );
     }
     foreach( $db as $data ) {
-        $items[$data->country_code] = $data->country;
+        $items[ $data->country_code ] = $data->country;
+    }
+    if ( count( $items ) > 1 ) {
+        // TO DO: print countries to file to index for translation
     }
     return $items;
 }
@@ -54,7 +57,7 @@ function get_states_call() {
     $items                      = array();
     $items[0]['country_code']   = "";
     $items[0]['state_code']     = "";
-    $items[0]['states']         = 'Select provence';
+    $items[0]['states']         = __( 'Select provence/state', 'acf-city-selector' );
 
     $i = 1;
     foreach( $db as $data ) {
@@ -103,7 +106,7 @@ function get_cities_call() {
         $items = array();
 
         $items[0]['id']             = "";
-        $items[0]['city_name']      = 'Select city';
+        $items[0]['city_name']      = __( 'Select city', 'acf-city-selector' );
         $i = 1;
 
         foreach( $db as $data ) {
