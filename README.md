@@ -49,7 +49,7 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [X] - Store values properly
 * [X] - Validate values upon empty
 * [ ] - Load values when editing post (jquery)
-* [ ] - Prevent values being inserted again if already exist (sql)
+* [X] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [X] - Drop tables on plugin deletion
 * [ ] - Add lazy/fancy loading (ajax)
 * [ ] - Add translations for English country names
