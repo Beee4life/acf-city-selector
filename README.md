@@ -49,15 +49,15 @@ This plugin is not finished yet. Using it, is at your own risk.
 * [X] - Store values properly
 * [X] - Validate values upon empty
 * [ ] - Load values when editing post (jquery)
-* [ ] - Drop tables on plugin deactivation (sql - DROP TABLE doesn't seem to work)
-* [ ] - Create option to choose whether to drop table or not.
+* [ ] - Prevent values being inserted again if already exist (sql)
+* [X] - Drop tables on plugin deletion
 * [ ] - Add lazy/fancy loading (ajax)
 * [ ] - Add translations for English country names
 * [X] - Add Dutch cities/provences
 * [ ] - Add Belgian cities/provences (in progress)
 * [ ] - Add Luxembourg cities/provences
 * [ ] - Add German cities/provences
-* [ ] - Test on Mac Chrome
+* [X] - Test on Mac Chrome
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
 * [ ] - Test on PC Chrome
