@@ -1,5 +1,4 @@
 <?php
-
 /*
 Plugin Name: ACF City Selector (not finished)
 Plugin URI: http://berryplasman.com/wordpress/acf-city-selector
@@ -16,9 +15,19 @@ Contributors: Fabrizio Sabato - http://deskema.it
 // exit if accessed directly
 if( ! defined( 'ABSPATH' ) ) exit;
 
+if (!class_exists('acf')) {
+    add_action('admin_notices', function() {
+        echo sprintf(
+            '<div class="error"><p>%s not activated. Make sure you activate the plugin in <a href="%s">%s</a></p></div>',
+            'Advanced Custom Fields',
+            esc_url(admin_url('plugins.php?s=advanced')),
+            esc_url(admin_url( 'plugins.php'))
+        );
+    });
+}
 
 // check if class already exists
-if( !class_exists('acf_plugin_city_selector') ) :
+if( ! class_exists('acf_plugin_city_selector') ) :
 
 class acf_plugin_city_selector {
 
