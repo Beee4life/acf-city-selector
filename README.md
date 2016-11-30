@@ -121,7 +121,7 @@ Support is welcome since I haven't fixed a few issues. You're welcome to fork it
 
 ### Credit
 
-I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who was giving support in the issue list of another ACF plugin on Github, which can be found [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
+I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
 ### Changelog
 
