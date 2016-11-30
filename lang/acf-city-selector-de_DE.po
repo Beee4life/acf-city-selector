@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2016-11-30 22:10+0100\n"
-"PO-Revision-Date: 2016-11-30 22:20+0100\n"
+"POT-Creation-Date: 2016-11-30 22:20+0100\n"
+"PO-Revision-Date: 2016-11-30 22:23+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -57,6 +57,38 @@ msgstr ""
 
 #: acf-city-selector.php:164
 msgid "Delete all cities from the database"
+msgstr ""
+
+#: acf-city-selector.php:173
+msgid "About the plugin"
+msgstr ""
+
+#: acf-city-selector.php:174
+#, php-format
+msgid ""
+"This plugin is an extension for %s. I built it because there was no properly "
+"working plugin which did this."
+msgstr ""
+
+#: acf-city-selector.php:178
+msgid "About Beee"
+msgstr ""
+
+#: acf-city-selector.php:179
+msgid ""
+"If you need a Wordpress designer/coder to do work on your site, hit me up."
+msgstr ""
+
+#: acf-city-selector.php:180
+#, php-format
+msgid "Check my %s"
+msgstr ""
+
+#: acf-city-selector.php:184
+#, php-format
+msgid ""
+"If you need support for this plugin or if you have some good suggestions for "
+"improvements and/or new features, please turn to %s"
 msgstr ""
 
 #: acf-city-selector.php:188
