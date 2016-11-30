@@ -184,7 +184,7 @@ class acf_plugin_city_selector {
                 echo '<p>If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to <a href="https://github.com/Beee4life/acf-city-selector/issues" target="_blank">GitHub</a>.</p>';
                 echo '<hr />';
 
-                echo '<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=info%40berryplasman%2ecom&lc=NL&item_name=ACF%20City%20Selector%20plugin&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest" target="_blank"><img src="' . plugins_url('assets/img/paypal_donate.gif', __FILE__) . '" alt="" class="donateimg" /></a> If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.</p>';
+                echo '<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="' . plugins_url('assets/img/paypal_donate.gif', __FILE__) . '" alt="" class="donateimg" /></a> If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.</p>';
             echo '</div><!-- end .admin_right -->';
 
         }
