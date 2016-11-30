@@ -145,7 +145,7 @@ class acf_plugin_city_selector {
 
             // header
             echo "<h1>" . __( 'ACF City Selector Settings', 'acf-city-selector' ) . "</h1>";
-            echo "<p>" . __( 'On this page you can find some helpful info about your City Selector plugin as well as some settings.', 'acf-city-selector' ) . "</p>";
+            echo "<p>" . sprintf( __( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ) . "</p>";
 
             // left part
             echo '<div class="admin_left">';
@@ -161,7 +161,7 @@ class acf_plugin_city_selector {
                 echo '<input name="acf_nuke_nonce" id="" value="' . wp_create_nonce( 'acf-nuke-nonce' ).'" type="hidden" />';
 
                 echo '<p>';
-                    echo '<span class="acfcs_label">' . __( 'Delete all cities from the database', 'acf-city-selcetor' ) . '</span>';
+                    echo '<span class="acfcs_label">' . __( 'Delete all cities from the database', 'acf-city-selector' ) . '</span>';
                     echo '<span class="acfcs_input"><input type="checkbox" name="delete_cities" id="delete_cities" value="1" /></span>';
                 echo '</p>';
 
@@ -184,7 +184,8 @@ class acf_plugin_city_selector {
                 echo '<p>If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to <a href="https://github.com/Beee4life/acf-city-selector/issues" target="_blank">GitHub</a>.</p>';
                 echo '<hr />';
 
-                echo '<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="' . plugins_url('assets/img/paypal_donate.gif', __FILE__) . '" alt="" class="donateimg" /></a> If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.</p>';
+                echo '<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="' . plugins_url('assets/img/paypal_donate.gif', __FILE__) . '" alt="" class="donateimg" /></a>';
+                echo __( 'If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.', 'acf-city-selector' ) . '</p>';
             echo '</div><!-- end .admin_right -->';
 
         }

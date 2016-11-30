@@ -24,7 +24,7 @@ class acf_field_city_selector extends acf_field {
     function __construct( $settings ) {
 
         $this->name         = 'sd_city_selector';
-        $this->label        = __( 'City Selector', 'acf-city_selector' );
+        $this->label        = 'City Selector';
         $this->category     = 'choice';
         $this->defaults     = array(
             // 'font_size'         => 14,

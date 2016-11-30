@@ -28,7 +28,7 @@ class acf_field_city_selector extends acf_field {
 	{
 		// vars
 		$this->name 	= 'city_selector';
-		$this->label 	= __( 'City Selector', 'acf-city-selector' );
+		$this->label 	= 'City Selector';
 		$this->category = __( 'Choice', 'acf' );
 		$this->defaults = array(
 			// add default here to merge into your field.

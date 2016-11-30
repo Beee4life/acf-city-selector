@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2016-11-30 20:59+0100\n"
-"PO-Revision-Date: 2016-11-30 20:59+0100\n"
+"POT-Creation-Date: 2016-11-30 22:08+0100\n"
+"PO-Revision-Date: 2016-11-30 22:10+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,50 +16,53 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:116
+#: acf-city-selector.php:129
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: acf-city-selector.php:127
+#: acf-city-selector.php:137
 msgid "Your cities table has been emptied."
 msgstr ""
 
-#: acf-city-selector.php:137
+#: acf-city-selector.php:147
 msgid "ACF City Selector Settings"
 msgstr ""
 
-#: acf-city-selector.php:138
+#: acf-city-selector.php:148
+#, php-format
 msgid ""
-"On this page you can find some helpful info about your City Selector plugin "
-"as well as some settings."
+"On this page you can find some helpful info about the %s plugin as well as "
+"some settings."
 msgstr ""
 
-#: acf-city-selector.php:148
+#: acf-city-selector.php:154
 msgid "General info"
 msgstr "Allgemeine Information"
 
-#: acf-city-selector.php:149
+#: acf-city-selector.php:155
 #, php-format
 msgid "This plugin requires %s to be activated to work."
 msgstr ""
 
-#: acf-city-selector.php:153
+#: acf-city-selector.php:159
 msgid "Clear the database"
 msgstr ""
 
-#: acf-city-selector.php:154
+#: acf-city-selector.php:160
 msgid ""
 "By selecting this option, you will remove all cities, which are present in "
 "the database. This is handy if you don't need the preset cities or you want "
 "a fresh start."
 msgstr ""
 
-#: acf-city-selector.php:158
+#: acf-city-selector.php:164
 msgid "Delete all cities from the database"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:31 fields/acf-city_selector-v5.php:27
-msgid "City Selector"
+#: acf-city-selector.php:188
+msgid ""
+"If you like this plugin, buy me a coke to show your appreciation so I can "
+"continue to develop it."
 msgstr ""
 
 #: fields/acf-city_selector-v4.php:32
