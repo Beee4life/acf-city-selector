@@ -62,12 +62,12 @@ I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't as
 This plugin is not finished yet. Using it, is at your own risk. If you do, keep the following in mind.
 
 * You have to set the city each time you update, since it doesn't load stored values (yet)
-* If you deactivate the plugin and reactivate it again, all cities are inserted again.
+* If you deactivate the plugin and reactivate it again, all cities are inserted again (but there's a truncate table option now).
 
 ### Tested on
 
 * Wordpress 4.6.1.
-* Advanced Custom Fields Pro 5.4.8
+* Advanced Custom Fields Pro 5.5.0
 
 #### To Do
 * [X] - Store values properly
