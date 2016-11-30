@@ -11,3 +11,65 @@
     display: block;
     margin-bottom: 5px;
 }
+
+
+/*
+ * admin style
+ */
+
+.admin_left, .admin_right {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+.admin_left {
+    float: left;
+    width: 60%;
+    margin-right: 5%;
+}
+
+.admin_left input[type="checkbox"] {
+    margin-left: 20px;
+}
+
+.admin_right {
+    float: left;
+    max-width: 25%;
+}
+
+.admin_right ul {
+    margin: 0 0 0 16px;
+}
+
+
+.admin_right ul li {
+    list-style: disc;
+    margin: 0 0 5px 0;
+}
+
+.admin_left h2, .admin_right h2,
+.admin_left h3, .admin_right h3 {
+    margin: 0 0 5px 0;
+}
+
+
+label.description {
+    color: #000;
+    margin-right: 5px;
+}
+
+hr {
+    background: #CCCCCC;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+img.donateimg {
+    float: left;
+    margin-top: 3px;
+    margin-right: 10px;
+}
