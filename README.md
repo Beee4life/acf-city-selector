@@ -16,9 +16,27 @@ This plugin allows you to select a city, based on country and provence/state in 
 
 It creates a new 'field type' for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will get a new option to choose called `City Selector`.
 
-Add it, give it a name and add a unique field name. We recommend `$wpdb->prefix_city_selector`.
+Add it, give it a name and add a unique field name. We recommend something like `$wpdb->prefix_city_selector`.
 
 Update/save the Field Group.
+
+### Usage
+
+The values are stored in an array, containing 3 values, which looks like this:
+
+    array(3) {
+      ["countryCode"]=>
+      string(2) "NL"
+      ["stateCode"]=>
+      string(5) "NL-NH"
+      ["cityNameAscii"]=>
+      string(9) "Amsterdam"
+    }
+
+Echo as follows:
+
+    $city_selector = get_field('field_name');
+    echo 'I live in ' . $city_selector['cityNameAscii'];
 
 ### Impact
 
@@ -41,7 +59,10 @@ I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't as
 
 ### Disclaimer
 
-This plugin is not finished yet. Using it, is at your own risk.
+This plugin is not finished yet. Using it, is at your own risk. If you do, keep the following in mind.
+
+* You have to set the city each time you update, since it doesn't load stored values (yet)
+* If you deactivate the plugin and reactivate it again, all cities are inserted again.
 
 ### Tested on
 
@@ -51,12 +72,12 @@ This plugin is not finished yet. Using it, is at your own risk.
 #### To Do
 * [X] - Store values properly
 * [X] - Validate values upon empty
-* [ ] - Load values when editing post (jquery)
+* [ ] - Load values when editing post
 * [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [X] - Drop tables on plugin deletion
 * [ ] - Add lazy/fancy loading (ajax) - optional
-* [ ] - Add settings page
-* [ ] - Add settings page option to drop tables if preset countries are not needed
+* [X] - Add settings page
+* [X] - Add settings page option to truncate table
 * [ ] - Add settings page option to import countries from CSV
 * [ ] - Add translations for English country names - optional
 * [X] - Add Dutch cities/provences
@@ -89,6 +110,11 @@ The plugin contains the following languages:
 * sql
 * css
 
+### Remove donation notice
+
+If you want to remove the donation box in ACF, add the following line to functions.php:
+`add_filter('remove_donate_nag', '__return_true');`
+
 ### Support
 
 Support is welcome since I haven't fixed a few issues. You're welcome to fork it and create a pull request.
@@ -99,7 +125,4 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 ### Changelog
 
-#### 0.1
-
-* added Dutch translation
-* added German translation
+Nothing yet, still developing...
