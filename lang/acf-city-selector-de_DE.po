@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2016-11-28 22:14+0100\n"
-"PO-Revision-Date: 2016-11-28 22:22+0100\n"
+"POT-Creation-Date: 2016-11-30 20:59+0100\n"
+"PO-Revision-Date: 2016-11-30 20:59+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -15,6 +15,48 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;"
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: acf-city-selector.php:116
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: acf-city-selector.php:127
+msgid "Your cities table has been emptied."
+msgstr ""
+
+#: acf-city-selector.php:137
+msgid "ACF City Selector Settings"
+msgstr ""
+
+#: acf-city-selector.php:138
+msgid ""
+"On this page you can find some helpful info about your City Selector plugin "
+"as well as some settings."
+msgstr ""
+
+#: acf-city-selector.php:148
+msgid "General info"
+msgstr "Allgemeine Information"
+
+#: acf-city-selector.php:149
+#, php-format
+msgid "This plugin requires %s to be activated to work."
+msgstr ""
+
+#: acf-city-selector.php:153
+msgid "Clear the database"
+msgstr ""
+
+#: acf-city-selector.php:154
+msgid ""
+"By selecting this option, you will remove all cities, which are present in "
+"the database. This is handy if you don't need the preset cities or you want "
+"a fresh start."
+msgstr ""
+
+#: acf-city-selector.php:158
+msgid "Delete all cities from the database"
+msgstr ""
 
 #: fields/acf-city_selector-v4.php:31 fields/acf-city_selector-v5.php:27
 msgid "City Selector"
@@ -40,19 +82,19 @@ msgstr "Labels zeigen"
 msgid "Show field labels above the dropdown menus"
 msgstr "Labels zeigen oben der dropdown menus"
 
-#: fields/acf-city_selector-v5.php:120 inc/country-field.php:30
+#: fields/acf-city_selector-v5.php:117 inc/country-field.php:33
 msgid "Select country"
 msgstr "Wähle ein Land"
 
-#: fields/acf-city_selector-v5.php:140 inc/country-field.php:57
+#: fields/acf-city_selector-v5.php:137 inc/country-field.php:65
 msgid "Select provence/state"
 msgstr "Wähle ein Provinz/Stat/Bundesland"
 
-#: fields/acf-city_selector-v5.php:147 inc/country-field.php:106
+#: fields/acf-city_selector-v5.php:144 inc/country-field.php:113
 msgid "Select city"
 msgstr "Wähle eine Stadt"
 
-#: fields/acf-city_selector-v5.php:296
+#: fields/acf-city_selector-v5.php:293
 msgid "You didn't select a city"
 msgstr "Du hast keine Stadt selektiert"
 
