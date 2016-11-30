@@ -47,16 +47,19 @@ class acf_plugin_city_selector {
         load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
         register_activation_hook( __FILE__,     array( $this, 'create_fill_db' ) );
+        $plugin = plugin_basename(__FILE__);
 
         include( 'inc/country-field.php' );
 
-        // include field
-        add_action( 'acf/include_field_types',  array( $this, 'include_field_types' ) ); // v5
-        add_action( 'acf/register_fields',      array( $this, 'include_field_types' ) ); // v4
-        add_action( 'admin_menu',               array( $this, 'admin_menu' ) );
-        add_action( 'admin_enqueue_scripts',    array( $this, 'ACFCS_admin_addCSS' ) );
-        add_action( 'init',                     array( $this, 'truncate_db' ) );
+        add_action( 'acf/include_field_types',      array( $this, 'include_field_types' ) );    // v5
+        add_action( 'acf/register_fields',          array( $this, 'include_field_types' ) );    // v4
+        add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );             // add settings page
+        add_action( 'admin_enqueue_scripts',        array( $this, 'ACFCS_admin_addCSS' ) );     // add css in admin
+        add_action( 'init',                         array( $this, 'truncate_db' ) );            // optionn to truncate table
         // add_action( 'init',                     array( $this, 'write_to_file' ) );
+
+        add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );    // adds settings link to plugin page
+
     }
 
         function create_fill_db() {
@@ -98,6 +101,17 @@ class acf_plugin_city_selector {
                     }
                 }
             }
+        }
+
+        /**
+         * Add settings link on plugin page
+         * @author c.bavota (http://bavotasan.com/2009/a-settings-link-for-your-wordpress-plugins/)
+         */
+
+        function acfcs_settings_link( $links ) {
+              $settings_link = '<a href="options-general.php?page=acfcs-options">Settings</a>';
+              array_unshift( $links, $settings_link );
+              return $links;
         }
 
         /**
