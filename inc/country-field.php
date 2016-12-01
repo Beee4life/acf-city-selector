@@ -23,7 +23,7 @@ function populate_country_select( $selectedCountry = null, $field ) {
         SELECT * FROM " . $wpdb->prefix . "cities
         group by country_code
         order by country ASC
-    ");
+    " );
 
     $items = array();
     if ( null == $selectedCountry ) {
@@ -114,13 +114,13 @@ function get_cities_call() {
         $i = 1;
 
         foreach( $db as $data ) {
-            $items[$i]['id']        = $data->state_code;
-            $items[$i]['city_name'] = $data->city_name_ascii;
+            $items[ $i ]['id']        = $data->state_code;
+            $items[ $i ]['city_name'] = $data->city_name_ascii;
             $i++;
         }
-        //  return $items;
+        // return $items;
         ob_clean();
-        echo json_encode($items);
+        echo json_encode( $items );
         die();
     }
 }
