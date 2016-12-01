@@ -171,7 +171,7 @@ class acf_plugin_city_selector {
             echo '<div class="admin_right">';
 
                 echo '<h3>' . __( 'About the plugin', 'acf-city-selector' ) . '</h3>';
-                echo '<p>' . sprintf( __( 'This plugin is an extension for %s. I built it because there was no properly working plugin which did this.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>' . '</p>';
+                echo '<p>' . sprintf( __( 'This plugin is an extension for %s. I built it because there was no properly working plugin which did this.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>' ) . '</p>';
                 echo '<p><a href="http://www.berryplasman.com/wordpress/acf-city-selector/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin" target="_blank">Click here</a> for a demo on my site.</p>';
                 echo '<hr />';
 
@@ -181,7 +181,7 @@ class acf_plugin_city_selector {
                 echo '<hr />';
 
                 echo '<h3>Support</h3>';
-                echo '<p>'. sprintf( __( 'If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s', 'acf-city-selector' ), '<a href="https://github.com/Beee4life/acf-city-selector/issues" target="_blank">GitHub</a>' . '.</p>';
+                echo '<p>'. sprintf( __( 'If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s', 'acf-city-selector' ), '<a href="https://github.com/Beee4life/acf-city-selector/issues" target="_blank">GitHub</a>' ) . '.</p>';
                 echo '<hr />';
 
                 echo '<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="' . plugins_url('assets/img/paypal_donate.gif', __FILE__) . '" alt="" class="donateimg" /></a>';
@@ -194,7 +194,7 @@ class acf_plugin_city_selector {
          * Adds CSS on the admin side
          */
         function ACFCS_admin_addCSS() {
-            wp_enqueue_style( 'acf-city-selector', plugins_url('assets/css/acf-city-selector.css', __FILE__) );
+            wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
         }
 
         /*
