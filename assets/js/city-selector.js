@@ -22,19 +22,25 @@
                 for (i = 0; i < len; i++) {
                     var mystate = obj[i];
 
-                    // if has stored provence/state, get that value
-                    if ( mystate.state_code == 'NH' ) {
-                        // set selected
-                        $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
+                    $( document ).ready(function() {
+                        // Handler for .ready() called.
 
-                        // if state is selected, load city dropdown here already instead
-                        // of on.change, since there is no on.change
-                        console.log('-= TODO: LOAD CITY DROPDOWN NOW');
+                        // if has stored provence/state, get that value
+                        if ( mystate.state_code == 'NH' ) {
+                            // set selected
+                            // alert( "Load was performed." );
+                            $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
 
-                    } else {
-                        $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
-                   }
-                 }
+                            // if state is selected, load city dropdown here already instead
+                            // of on.change, since there is no on.change
+                            console.log('-= TODO: LOAD CITY DROPDOWN NOW');
+
+                        } else {
+                            $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
+                        }
+                    });
+
+                }
                 $("select[name*='stateCode']").append($stateValues);
 
             });
