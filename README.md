@@ -37,6 +37,7 @@ Echo as follows:
 
     $city_selector = get_field('field_name');
     echo 'I live in ' . $city_selector['cityNameAscii'];
+    echo 'which is in ' . substr( $city_selector['stateCode'], 3 ); // this strips the country code and the dash
 
 ### Impact
 
@@ -75,6 +76,7 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 * [ ] - Load values when editing post
 * [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [X] - Drop tables on plugin deletion
+* [ ] - Return state/provence name
 * [ ] - Add lazy/fancy loading (ajax) - optional
 * [X] - Add settings page
 * [X] - Add settings page option to truncate table
