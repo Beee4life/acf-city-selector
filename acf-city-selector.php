@@ -16,7 +16,7 @@ Contributors: Fabrizio Sabato - http://deskema.it
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // check if class already exists
-if( ! class_exists('acf_plugin_city_selector') ) :
+if ( ! class_exists('acf_plugin_city_selector') ) :
 
 class acf_plugin_city_selector {
 
@@ -53,8 +53,8 @@ class acf_plugin_city_selector {
 
         add_action( 'acf/include_field_types',      array( $this, 'include_field_types' ) );    // v5
         add_action( 'acf/register_fields',          array( $this, 'include_field_types' ) );    // v4
-        add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );             // add settings page
         add_action( 'admin_enqueue_scripts',        array( $this, 'ACFCS_admin_addCSS' ) );     // add css in admin
+        add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );
         add_action( 'init',                         array( $this, 'truncate_db' ) );            // optionn to truncate table
         // add_action( 'init',                     array( $this, 'write_to_file' ) );
 
@@ -101,6 +101,26 @@ class acf_plugin_city_selector {
                     }
                 }
             }
+        }
+
+        /*
+        *  include_field_types
+        *
+        *  This function will include the field type class
+        *
+        *  @type    function
+        *  @param   $version (int) major ACF version. Defaults to false
+        *  @return  n/a
+        */
+
+        function include_field_types( $version = false ) {
+
+            // support empty $version
+            if( !$version ) $version = 4;
+
+            // include
+            include_once('fields/acf-city_selector-v' . $version . '.php');
+
         }
 
         /**
@@ -196,26 +216,6 @@ class acf_plugin_city_selector {
         function ACFCS_admin_addCSS() {
             wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
         }
-
-        /*
-        *  include_field_types
-        *
-        *  This function will include the field type class
-        *
-        *  @type    function
-        *  @param   $version (int) major ACF version. Defaults to false
-        *  @return  n/a
-        */
-
-        function include_field_types( $version = false ) {
-
-            // support empty $version
-            if( !$version ) $version = 4;
-
-            // include
-            include_once('fields/acf-city_selector-v' . $version . '.php');
-
-        }
 }
 
 // initialize
@@ -226,24 +226,25 @@ new acf_plugin_city_selector();
 endif;
 
 if ( ! function_exists( 'donate_meta_box' ) ) {
-        function donate_meta_box() {
-            if ( apply_filters( 'remove_donate_nag', false ) ) {
-                return;
-            }
-
-            $id             = 'donate-beee';
-            $title          = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">Beee says "Thank you"</a>';
-            $callback       = 'show_donate_meta_box';
-            $screens        = array();
-            $context        = 'side';
-            $priority       = 'low';
-            add_meta_box( $id, $title, $callback, $screens, $context, $priority );
-
-        } // end function donate_meta_box
-        add_action( 'add_meta_boxes', 'donate_meta_box' );
-
-        function show_donate_meta_box() {
-            echo '<p style="margin-bottom: 0;">Thank you for installing the \'City Selector\' plugin. I hope you enjoy it. Please <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank">consider a donation</a> if you do, so I can continue to improve it even more.</p>';
+    function donate_meta_box() {
+        if ( apply_filters( 'remove_donate_nag', false ) ) {
+            return;
         }
-    } // end if !function_exists
+
+        $id             = 'donate-beee';
+        $title          = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">Beee says "Thank you"</a>';
+        $callback       = 'show_donate_meta_box';
+        $screens        = array();
+        $context        = 'side';
+        $priority       = 'low';
+        add_meta_box( $id, $title, $callback, $screens, $context, $priority );
+
+    } // end function donate_meta_box
+    add_action( 'add_meta_boxes', 'donate_meta_box' );
+
+    function show_donate_meta_box() {
+        echo '<p style="margin-bottom: 0;">Thank you for installing the \'City Selector\' plugin. I hope you enjoy it. Please <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank">consider a donation</a> if you do, so I can continue to improve it even more.</p>';
+    }
+} // end if !function_exists
+
 ?>
