@@ -83,8 +83,8 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 * [ ] - Add settings page option to import countries from CSV
 * [ ] - Add translations for English country names - optional
 * [X] - Add Dutch cities/provences
-* [ ] - Add Belgian cities/provences (in progress)
-* [ ] - Add Luxembourg cities/provences
+* [X] - Add Belgian cities/provences (in progress)
+* [X] - Add Luxembourg cities/provences
 * [X] - Test on Mac Chrome
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
