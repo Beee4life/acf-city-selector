@@ -3630,3 +3630,15 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, st
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Zuidschote", "WV", "West Vlaanderen", "BE", "Belgium");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Zuienkerke", "WV", "West Vlaanderen", "BE", "Belgium");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Zwevegem", "WV", "West Vlaanderen", "BE", "Belgium");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Diekirch", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Differdange", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Dudelange", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Echternach", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Esch-sur-Alzette", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Ettelbruck", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Grevenmacher", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Luxembourg City", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Remich", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Rumelange", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Vianden", "na", "n/a", "LU", "Luxembourg");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Wiltz", "na", "n/a", "LU", "Luxembourg");
