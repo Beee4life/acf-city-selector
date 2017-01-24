@@ -1,4 +1,4 @@
-/* JS File for Country Field */
+// JS File for Country Field
 (function($) {
 
     console.log('-= Hit ACF City Selector');
@@ -22,23 +22,7 @@
                 for (i = 0; i < len; i++) {
                     var mystate = obj[i];
 
-                    $( document ).ready(function() {
-                        // Handler for .ready() called.
-
-                        // if has stored provence/state, get that value
-                        if ( mystate.state_code == 'NH' ) {
-                            // set selected
-                            // alert( "Load was performed." );
-                            $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
-
-                            // if state is selected, load city dropdown here already instead
-                            // of on.change, since there is no on.change
-                            console.log('-= TODO: LOAD CITY DROPDOWN NOW');
-
-                        } else {
-                            $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
-                        }
-                    });
+                    $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
 
                 }
                 $("select[name*='stateCode']").append($stateValues);
