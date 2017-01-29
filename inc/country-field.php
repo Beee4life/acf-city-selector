@@ -47,9 +47,11 @@ function populate_country_select( $selectedCountry = null, $field ) {
  * @return JSON Object
  */
 
-function get_states_call() {
+function get_states_call( $country_code = false ) {
 
-    $country_code = $_POST['country_code'];
+    if ( ! $country_code ) {
+        $country_code = $_POST['country_code'];
+    }
 
     global $wpdb;
     $db = $wpdb->get_results( "
