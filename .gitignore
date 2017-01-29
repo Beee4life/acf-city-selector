@@ -5,7 +5,7 @@
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db
-Thumbs.db
 
-tmp/**
+# Development
+.idea/**
+*.sublime-*
