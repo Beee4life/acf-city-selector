@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: ACF City Selector (not finished)
-Plugin URI: http://berryplasman.com/wordpress/acf-city-selector
-Description: An extension for ACF which allows you to select a city based on country and provence/state.
-Version: 0.1 (beta)
-Author: Beee
-Author URI: http://berryplasman.com
-Text Domain: acf-city-selector
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl.html
-Contributors: Fabrizio Sabato - http://deskema.it
+Plugin Name:    ACF City Selector (not finished)
+Plugin URI:     http://berryplasman.com/wordpress/acf-city-selector
+Description:    An extension for ACF which allows you to select a city based on country and provence/state.
+Version:        0.1 (beta)
+Author:         Beee
+Author URI:     http://berryplasman.com
+Text Domain:    acf-city-selector
+License:        GPLv2 or later
+License URI:    https://www.gnu.org/licenses/gpl.html
+Contributors:   Fabrizio Sabato - http://deskema.it
 */
 
 // exit if accessed directly
@@ -55,8 +55,8 @@ class acf_plugin_city_selector {
         add_action( 'acf/register_fields',          array( $this, 'include_field_types' ) );    // v4
         add_action( 'admin_enqueue_scripts',        array( $this, 'ACFCS_admin_addCSS' ) );     // add css in admin
         add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );
-        add_action( 'init',                         array( $this, 'truncate_db' ) );            // optionn to truncate table
-        // add_action( 'init',                     array( $this, 'write_to_file' ) );
+	    add_action( 'init',                         array( $this, 'truncate_db' ) );            // option to truncate table
+	    add_action( 'init',                         array( $this, 'db_actions' ) );             // option to truncate table
 
         add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );    // adds settings link to plugin page
 
@@ -70,32 +70,12 @@ class acf_plugin_city_selector {
             dbDelta( $sql );
         }
 
-        function write_to_file() {
-            $url = wp_nonce_url('options-general.php?page=acfcs-options', 'acf-city-selector');
-            if ( false === ( $creds = request_filesystem_credentials( $url, '', false, false, null) ) ) {
-                return; // stop processing here
-            }
-
-            if ( ! WP_Filesystem( $creds ) ) {
-                request_filesystem_credentials( $url, '', true, false, null );
-                return;
-            }
-
-            global $wp_filesystem;
-            $wp_filesystem->put_contents(
-                '/example.txt',
-                'Example contents of a file',
-                FS_CHMOD_FILE // predefined mode settings for WP files
-            );
-
-        }
-
         function truncate_db() {
-            if ( isset( $_POST["acf_nuke_nonce"] )) {
-                if ( ! wp_verify_nonce( $_POST["acf_nuke_nonce"], 'acf-nuke-nonce' ) ) {
+            if ( isset( $_POST[ "acf_nuke_nonce" ] ) ) {
+                if ( ! wp_verify_nonce( $_POST[ "acf_nuke_nonce" ], 'acf-nuke-nonce' ) ) {
                     return;
                 } else {
-                    if ( isset( $_POST['delete_cities'] ) && 1 == $_POST["delete_cities"] ) {
+                    if ( isset( $_POST[ 'delete_cities' ] ) && 1 == $_POST[ "delete_cities" ] ) {
                         global $wpdb;
                         $wpdb->query( 'TRUNCATE ' . $wpdb->prefix . 'cities' );
                     }
@@ -103,15 +83,46 @@ class acf_plugin_city_selector {
             }
         }
 
-        /*
-        *  include_field_types
-        *
-        *  This function will include the field type class
-        *
-        *  @type    function
-        *  @param   $version (int) major ACF version. Defaults to false
-        *  @return  n/a
-        */
+        function db_actions() {
+            if ( isset( $_POST[ "db_actions_nonce" ] ) ) {
+                if ( ! wp_verify_nonce( $_POST[ "db_actions_nonce" ], 'db-actions-nonce' ) ) {
+                    return;
+                } else {
+
+	                if ( isset( $_POST[ 'delete_cities' ] ) || isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
+		                global $wpdb;
+		                if ( isset( $_POST[ 'delete_cities' ] ) && 1 == $_POST[ "delete_cities" ] ) {
+			                $wpdb->query( 'TRUNCATE ' . $wpdb->prefix . 'cities' );
+		                }
+		                if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
+			                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			                ob_start();
+			                if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
+				                require_once( 'lib/import_nl.php' );
+			                }
+			                if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
+				                require_once( 'lib/import_be.php' );
+			                }
+			                if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
+				                require_once( 'lib/import_lux.php' );
+			                }
+			                $sql = ob_get_clean();
+			                dbDelta( $sql );
+		                }
+	                }
+                }
+            }
+        }
+
+	/*
+	*  include_field_types
+	*
+	*  This function will include the field type class
+	*
+	*  @type    function
+	*  @param   $version (int) major ACF version. Defaults to false
+	*  @return  n/a
+	*/
 
         function include_field_types( $version = false ) {
 
@@ -149,15 +160,24 @@ class acf_plugin_city_selector {
                 wp_die( __('You do not have sufficient permissions to access this page.') );
             }
 
-            if ( isset( $_POST["acf_nuke_nonce"] )) {
-                if ( ! wp_verify_nonce( $_POST["acf_nuke_nonce"], 'acf-nuke-nonce' ) ) {
-                    return;
-                } else {
-                    if ( isset( $_POST['delete_cities'] ) && 1 == $_POST["delete_cities"] ) {
-                        echo '<div class="updated"><p><strong>' . __( 'Your cities table has been emptied.', 'acf-city-selector' ) . '</strong></p></div>';
-                    }
-                }
-            }
+	        if ( isset( $_POST[ "db_actions_nonce" ] ) ) {
+		        if ( ! wp_verify_nonce( $_POST[ "db_actions_nonce" ], 'db-actions-nonce' ) ) {
+			        return;
+		        } else {
+			        if ( isset( $_POST[ 'delete_cities' ] ) && 1 == $_POST[ "delete_cities" ] ) {
+				        echo '<div class="updated"><p><strong>' . __( 'Your cities table has been emptied.', 'acf-city-selector' ) . '</strong></p></div>';
+			        }
+			        if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in The Netherlands', 'acf-city-selector' ) . '</strong></p></div>';
+			        }
+			        if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in Belgium', 'acf-city-selector' ) . '</strong></p></div>';
+			        }
+			        if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in Luxembourg', 'acf-city-selector' ) . '</strong></p></div>';
+			        }
+		        }
+	        }
 
             // Now display the settings editing screen
             echo '<div class="wrap">';
@@ -176,16 +196,39 @@ class acf_plugin_city_selector {
 
                 echo '<hr />';
 
+	            echo '<input name="db_actions_nonce" value="' . wp_create_nonce( 'db-actions-nonce' ) .'" type="hidden" />';
+
                 echo '<h3>' . __( 'Clear the database', 'acf-city-selector' ) . '</h3>';
                 echo '<p>' . __( "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ) . '</p>';
-                echo '<input name="acf_nuke_nonce" id="" value="' . wp_create_nonce( 'acf-nuke-nonce' ).'" type="hidden" />';
 
                 echo '<p>';
-                    echo '<span class="acfcs_label">' . __( 'Delete all cities from the database', 'acf-city-selector' ) . '</span>';
-                    echo '<span class="acfcs_input"><input type="checkbox" name="delete_cities" id="delete_cities" value="1" /></span>';
+                echo '<span class="acfcs_input"><input type="checkbox" name="delete_cities" id="delete_cities" value="1" /></span>';
+                echo '<span class="acfcs_label">' . __( 'Delete all cities from the database', 'acf-city-selector' ) . '</span>';
                 echo '</p>';
 
-                submit_button();
+                echo '<hr />';
+
+	            echo '<h3>' . __( 'Import countries', 'acf-city-selector' ) . '</h3>';
+                echo '<p>' . __( "Here you can import individual countries (and of 'course its states/cities).", 'acf-city-selector' ) . '</p>';
+                echo '<input name="import_nl_nonce" value="' . wp_create_nonce( 'import-nl-nonce' ) .'" type="hidden" />';
+
+                echo '<p>';
+                echo '<span class="acfcs_input"><input type="checkbox" name="import_nl" id="import_nl" value="1" /></span>';
+	            echo '<span class="acfcs_label">' . __( 'Import cities in Holland/The Netherlands', 'acf-city-selector' ) . ' (2449)</span>';
+                echo '</p>';
+
+                echo '<p>';
+                echo '<span class="acfcs_input"><input type="checkbox" name="import_be" id="import_be" value="1" /></span>';
+                echo '<span class="acfcs_label">' . __( 'Import cities in Belgium', 'acf-city-selector' ) . ' (1166)</span>';
+                echo '</p>';
+
+                echo '<p>';
+                echo '<span class="acfcs_input"><input type="checkbox" name="import_lux" id="import_lux" value="1" /></span>';
+                echo '<span class="acfcs_label">' . __( 'Import cities in Luxembourg', 'acf-city-selector' ) . ' (12)</span>';
+                echo '</p>';
+
+	            submit_button();
+
             echo '</div><!-- end .admin_left -->';
 
             echo '<div class="admin_right">';
@@ -193,11 +236,12 @@ class acf_plugin_city_selector {
                 echo '<h3>' . __( 'About the plugin', 'acf-city-selector' ) . '</h3>';
                 echo '<p>' . sprintf( __( 'This plugin is an extension for %s. I built it because there was no properly working plugin which did this.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" target="_blank">Advanced Custom Fields</a>' ) . '</p>';
                 echo '<p><a href="http://www.berryplasman.com/wordpress/acf-city-selector/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin" target="_blank">Click here</a> for a demo on my site.</p>';
+
                 echo '<hr />';
 
                 echo '<h3>' . __( 'About Beee', 'acf-city-selector' ) . '</h3>';
-                echo '<p>' . __( 'If you need a Wordpress designer/coder to do work on your site, hit me up.', 'acf-city-selector' );
-                echo sprintf( __( 'Check my %s', '<a href="http://www.berryplasman.com/portfolio/?utm_source=wpadmin&utm_medium=about_beee&utm_campaign=tinynavplugin" target="_blank">portfolio</a>' ), 'acf-city-selector' ) . '.</p>';
+                echo '<p>' . __( 'If you need a Wordpress designer/coder to do work on your site, hit me up.', 'acf-city-selector' ) . '</p>';
+
                 echo '<hr />';
 
                 echo '<h3>Support</h3>';
