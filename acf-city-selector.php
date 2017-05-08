@@ -168,13 +168,13 @@ class acf_plugin_city_selector {
 				        echo '<div class="updated"><p><strong>' . __( 'Your cities table has been emptied.', 'acf-city-selector' ) . '</strong></p></div>';
 			        }
 			        if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
-				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in The Netherlands', 'acf-city-selector' ) . '</strong></p></div>';
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imported all cities in The Netherlands.', 'acf-city-selector' ) . '</strong></p></div>';
 			        }
 			        if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
-				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in Belgium', 'acf-city-selector' ) . '</strong></p></div>';
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imported all cities in Belgium.', 'acf-city-selector' ) . '</strong></p></div>';
 			        }
 			        if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
-				        echo '<div class="updated"><p><strong>' . __( 'You successfully imorted all cities in Luxembourg', 'acf-city-selector' ) . '</strong></p></div>';
+				        echo '<div class="updated"><p><strong>' . __( 'You successfully imported all cities in Luxembourg.', 'acf-city-selector' ) . '</strong></p></div>';
 			        }
 		        }
 	        }
@@ -210,7 +210,6 @@ class acf_plugin_city_selector {
 
 	            echo '<h3>' . __( 'Import countries', 'acf-city-selector' ) . '</h3>';
                 echo '<p>' . __( "Here you can import individual countries (and of 'course its states/cities).", 'acf-city-selector' ) . '</p>';
-                echo '<input name="import_nl_nonce" value="' . wp_create_nonce( 'import-nl-nonce' ) .'" type="hidden" />';
 
                 echo '<p>';
                 echo '<span class="acfcs_input"><input type="checkbox" name="import_nl" id="import_nl" value="1" /></span>';
