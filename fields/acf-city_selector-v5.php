@@ -26,8 +26,6 @@ if( !class_exists('acf_field_city_selector') ) :
             $this->label        = 'City Selector';
             $this->category     = 'choice';
             $this->defaults     = array(
-                // 'font_size'         => 14,
-                // 'initial_value'     => 1,
                 'country_name'      => '',
                 'city_name'         => '',
                 'provence_name'     => 0,
@@ -104,9 +102,6 @@ if( !class_exists('acf_field_city_selector') ) :
         function render_field( $field ) {
 
             // field output in form
-            // echo '<pre>'; var_dump( $field ); echo '</pre>';
-            // exit;
-
             $countrycode    = $field['value']['countryCode'];
             ?>
             <div class="cs_countries">

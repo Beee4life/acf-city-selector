@@ -1,13 +1,21 @@
 // JS File for Country Field
 (function($) {
 
-    console.log('-= Hit ACF City Selector');
+    console.log('-= ACF City Selector reached ');
 
     var country = $("select[name*='countryCode']");
     var state = $("select[name*='stateCode']");
 
     if (country.length) {
+
+        // get_field( 'sd_city_selector' )
+        // if has value, split array in 3 values
+        // $country, $state, $city
+        // else country.change
+
         country.change(function() {
+
+            console.log('-= Country selected');
 
             var $this = $(this);
 
@@ -36,7 +44,8 @@
     if (state.length) {
 
         state.change(function() {
-            console.log('-= Hit state change');
+
+            console.log('-= State selected');
 
             var $this = $(this);
 
