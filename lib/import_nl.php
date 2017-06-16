@@ -24,7 +24,7 @@ ELSE
         country_code varchar(2) NULL,
         country varchar(50) NULL,
         PRIMARY KEY (id)
-    ) ;
+    );
 
 END;
 
