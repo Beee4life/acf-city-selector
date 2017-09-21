@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-21 20:44+0200\n"
-"PO-Revision-Date: 2017-09-21 20:46+0200\n"
+"POT-Creation-Date: 2017-09-22 01:48+0200\n"
+"PO-Revision-Date: 2017-09-22 01:49+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,135 +16,51 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:166
+#: acf-city-selector.php:122 acf-city-selector.php:141
+#: acf-city-selector.php:163 acf-city-selector.php:194
+msgid "Something went wrong, please try again."
+msgstr "Er ging iets fout, probeer het aub nog een keer."
+
+#: acf-city-selector.php:151
+msgid "Settings saved"
+msgstr "Instellingen opgeslagen"
+
+#: acf-city-selector.php:202
+msgid "Congratulations, your csv data seems valid."
+msgstr "Gefeliciteerd, je csv data bevat geen fouten."
+
+#: acf-city-selector.php:232
+#, php-format
+msgid "Congratulations, you imported %d city."
+msgstr "Gefeliciteerd, je hebt %d stad geïmporteerd."
+
+#: acf-city-selector.php:264
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: acf-city-selector.php:271
+msgid "Error"
+msgstr "Fout"
+
+#: acf-city-selector.php:283
+msgid "Dismiss this notice"
+msgstr "Verberg deze melding"
+
+#: acf-city-selector.php:316
 msgid "Settings"
 msgstr "Instellingen"
 
-#: acf-city-selector.php:187
-msgid "You do not have sufficient permissions to access this page."
-msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
-
-#: acf-city-selector.php:195
-msgid "Your cities table has been emptied."
-msgstr "De tabel met steden is geleegd."
-
-#: acf-city-selector.php:198
-msgid "You successfully imported all cities in The Netherlands."
-msgstr "Je hebt succesvol alle steden in Nederland geïmporteerd."
-
-#: acf-city-selector.php:201
-msgid "You successfully imported all cities in Belgium."
-msgstr "Je hebt succesvol alle steden in België geïmporteerd."
-
-#: acf-city-selector.php:204
-msgid "You successfully imported all cities in Luxembourg."
-msgstr "Je hebt succesvol alle steden in Luxemburg geïmporteerd."
-
-#: acf-city-selector.php:213
-msgid "ACF City Selector Settings"
-msgstr "ACF City Selector Opties"
-
-#: acf-city-selector.php:214
+#: acf-city-selector.php:378
 #, php-format
 msgid ""
-"On this page you can find some helpful info about the %s plugin as well as "
-"some settings."
-msgstr "Op deze pagina vind je informatie en opties voor de %s plugin."
-
-#: acf-city-selector.php:219
-msgid "General info"
-msgstr "Algemene informatie"
-
-#: acf-city-selector.php:220
-#, php-format
-msgid "This plugin requires %s to be activated to work."
-msgstr "Deze plugin heeft %s nodig om te functioneren."
-
-#: acf-city-selector.php:227
-msgid "Clear the database"
-msgstr "Maak de database leeg"
-
-#: acf-city-selector.php:228
-msgid ""
-"By selecting this option, you will remove all cities, which are present in "
-"the database. This is handy if you don't need the preset cities or you want "
-"a fresh start."
+"Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
+"Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, "
+"so I can continue to improve it even more."
 msgstr ""
-"Als je deze optie selecteer, worden alle steden verwijderd uit de database. "
-"Dit is handig als je de default steden niet nodig hebt of een frisse start "
-"wilt."
-
-#: acf-city-selector.php:232
-msgid "Delete all cities from the database"
-msgstr "Verwijder alle steden uit de database"
-
-#: acf-city-selector.php:235 acf-city-selector.php:260
-msgid "Save settings"
-msgstr "Instellingen opslaan"
-
-#: acf-city-selector.php:240
-msgid "Import countries"
-msgstr "Importeer landen"
-
-#: acf-city-selector.php:241
-msgid ""
-"Here you can (re-)import all cities for the individual countries listed "
-"below."
-msgstr ""
-"Hier kun je alle steden (opnieuw) importeren voor alle onderstaande landen."
-
-#: acf-city-selector.php:247
-msgid "Import cities in Holland/The Netherlands"
-msgstr "Importeer steden in Nederland"
-
-#: acf-city-selector.php:252
-msgid "Import cities in Belgium"
-msgstr "Importeer steden in België"
-
-#: acf-city-selector.php:257
-msgid "Import cities in Luxembourg"
-msgstr "Importeer steden in Luxemburg"
-
-#: acf-city-selector.php:267
-msgid "About the plugin"
-msgstr "Over de plugin"
-
-#: acf-city-selector.php:268
-#, php-format
-msgid ""
-"This plugin is an extension for %s. I built it because there was no properly "
-"working plugin which did this."
-msgstr ""
-"Deze plugin bouwt verder op %s. Ik heb het geschreven omdat er geen werkende "
-"plugin beschikbaar was."
-
-#: acf-city-selector.php:273
-msgid "About Beee"
-msgstr "Over Beee"
-
-#: acf-city-selector.php:274
-msgid ""
-"If you need a Wordpress designer/coder to do work on your site, hit me up."
-msgstr ""
-"Als je een Wordpress developer nodig hebt voor werk aan je site, contact me "
-"via mijn site."
-
-#: acf-city-selector.php:279
-#, php-format
-msgid ""
-"If you need support for this plugin or if you have some good suggestions for "
-"improvements and/or new features, please turn to %s"
-msgstr ""
-"Als je support nodig hebt voor deze plugin of als je goede suggesties hebt, "
-"dan post ze op %s"
-
-#: acf-city-selector.php:283
-msgid ""
-"If you like this plugin, buy me a coke to show your appreciation so I can "
-"continue to develop it."
-msgstr ""
-"Als je deze plug-in leuk vindt, laat dat dan blijken door een coke voor me "
-"te kopen zodat ik door kan gaan met het ontwikkelen van de plugin."
+"Bedankt voor het installeren van de ‘Stad Kiezer’ plugin. Als je er plezier "
+"van hebt, hoop ik dat je een <a href=“%s” target=“_blank”>kleine donatie</a> "
+"overweegt. Dit motiveert mij weer om de plugin te verbeteren in mijn vrije "
+"tijd."
 
 #: fields/acf-city_selector-v4.php:32
 msgid "Choice"
@@ -182,6 +98,241 @@ msgstr "Selecteer een stad"
 msgid "You didn't select a city"
 msgstr "Je hebt geen stad gekozen"
 
+#: inc/admin-page.php:8 inc/settings-page.php:8
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
+
+#: inc/admin-page.php:18 inc/settings-page.php:18
+msgid "You successfully imported all cities in The Netherlands."
+msgstr "Je hebt succesvol alle steden in Nederland geïmporteerd."
+
+#: inc/admin-page.php:21 inc/settings-page.php:21
+msgid "You successfully imported all cities in Belgium."
+msgstr "Je hebt succesvol alle steden in België geïmporteerd."
+
+#: inc/admin-page.php:24 inc/settings-page.php:24
+msgid "You successfully imported all cities in Luxembourg."
+msgstr "Je hebt succesvol alle steden in Luxemburg geïmporteerd."
+
+#: inc/admin-page.php:33
+msgid "ACF City Selector"
+msgstr "ACF Stad Kiezer"
+
+#: inc/admin-page.php:34 inc/settings-page.php:34
+#, php-format
+msgid ""
+"On this page you can find some helpful info about the %s plugin as well as "
+"some settings."
+msgstr "Op deze pagina vind je informatie en opties voor de %s plugin."
+
+#: inc/admin-page.php:43
+msgid "Import countries"
+msgstr "Importeer landen"
+
+#: inc/admin-page.php:44
+msgid ""
+"Here you can (re-)import all cities for the individual countries listed "
+"below."
+msgstr ""
+"Hier kun je alle steden (opnieuw) importeren voor alle onderstaande landen."
+
+#: inc/admin-page.php:49
+msgid "Import cities in Holland/The Netherlands"
+msgstr "Importeer steden in Nederland"
+
+#: inc/admin-page.php:56
+msgid "Import cities in Belgium"
+msgstr "Importeer steden in België"
+
+#: inc/admin-page.php:63
+msgid "Import cities in Luxembourg"
+msgstr "Importeer steden in Luxemburg"
+
+#: inc/admin-page.php:73
+msgid "Import selected countries"
+msgstr "Importeer geselecteerde landen"
+
+#: inc/admin-page.php:100 inc/settings-page.php:82
+msgid "About the plugin"
+msgstr "Over de plugin"
+
+#: inc/admin-page.php:101 inc/settings-page.php:83
+#, php-format
+msgid ""
+"This plugin is an extension for %s. I built it because there was no properly "
+"working plugin which did this."
+msgstr ""
+"Deze plugin bouwt verder op %s. Ik heb het geschreven omdat er geen werkende "
+"plugin beschikbaar was."
+
+#: inc/admin-page.php:102 inc/settings-page.php:84
+#, php-format
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Click here</a> for a demo on my own website."
+msgstr ""
+"<a href=“%s” target=“_blank”>Klik hier</a> voor een demo op mijn eigen "
+"website."
+
+#: inc/admin-page.php:106 inc/settings-page.php:88
+msgid "About Beee"
+msgstr "Over Beee"
+
+#: inc/admin-page.php:107 inc/settings-page.php:89
+msgid ""
+"If you need a Wordpress designer/coder to do work on your site, hit me up."
+msgstr ""
+"Als je een Wordpress developer nodig hebt voor werk aan je site, contact me "
+"via mijn site."
+
+#: inc/admin-page.php:112 inc/settings-page.php:94
+#, php-format
+msgid ""
+"If you need support for this plugin or if you have some good suggestions for "
+"improvements and/or new features, please turn to %s."
+msgstr ""
+"Als je support nodig hebt voor deze plugin of als je goede suggesties hebt, "
+"dan post ze op %s."
+
+#: inc/admin-page.php:117 inc/settings-page.php:99
+msgid ""
+"If you like this plugin, buy me a coke to show your appreciation so I can "
+"continue to develop it."
+msgstr ""
+"Als je deze plug-in leuk vindt, laat dat dan blijken door een coke voor me "
+"te kopen zodat ik door kan gaan met het ontwikkelen van de plugin."
+
+#: inc/help-tabs.php:25
+msgid "Import data"
+msgstr "Importeer data"
+
+#: inc/help-tabs.php:28
+msgid ""
+"On this page you can import cities. You can select cities from The "
+"Netherlands, Belgium and Luxembourg which come included in the plugin."
+msgstr ""
+"Op deze pagina kan je steden importeren. Je kan steden kiezen uit Nederland, "
+"België en Luxemburg, welke ingesloten zijn in de plugin."
+
+#: inc/help-tabs.php:29
+msgid ""
+"You can also import raw csv data, but this has to be formatted (and ordered) "
+"in a certain way, otherwise it won't work."
+msgstr ""
+"Je kunt ook ‘raw’ CSV data importeren maar dit moet volgens een bepaald "
+"format en in een bepaalde volgorde, anders werkt het niet."
+
+#: inc/help-tabs.php:30
+msgid "The required order is \"City,State code,State,Country code,Country\"."
+msgstr ""
+"De verplichten volgorde is “Stad,Staat/provincie code (afkorting),Staat/"
+"provincie,Land code (afkorting),Land”."
+
+#: inc/help-tabs.php:32
+msgid "City : full name, no use of double quotes/\"."
+msgstr "Stad : volledige naam, gebruik geen dubbele quotes/“."
+
+#: inc/help-tabs.php:33
+msgid "State code : state abbreviation (exactly 2 characters)"
+msgstr ""
+"Staat/provincie code : afkorting van de staat/provincie (precies 2 karakters)"
+
+#: inc/help-tabs.php:34
+msgid "State : full state name"
+msgstr "Staat/provincie: volledige naam"
+
+#: inc/help-tabs.php:35
+msgid "Country code : country abbreviation (exactly 2 characters)"
+msgstr "Land code : afkorting van het land (precies 2 karakters)"
+
+#: inc/help-tabs.php:36
+msgid "Country : full country name"
+msgstr "Land : volledige land naam"
+
+#: inc/help-tabs.php:43
+msgid "Author's website"
+msgstr "Auteur’s website"
+
+#: inc/settings-page.php:33
+msgid "ACF City Selector Settings"
+msgstr "ACF City Selector Opties"
+
+#: inc/settings-page.php:44
+msgid "Save data"
+msgstr "Data bewaren"
+
+#: inc/settings-page.php:45
+msgid ""
+"When the plugin is deleted, all settings and cities are deleted as well. "
+"Select this option to save all your cities/settings."
+msgstr ""
+"Wanneer de plugin wordt verwijderd, worden alle instellingen en alle steden "
+"ook verwijderd. Selecteer deze optie om deze te bewaren wanneer de plugin "
+"wordt verwijderd."
+
+#: inc/settings-page.php:51
+msgid "Preserve settings on plugin deletion"
+msgstr "Bewaar data bij verwijderen plugin"
+
+#: inc/settings-page.php:55
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+#: inc/settings-page.php:64
+msgid "Clear the database"
+msgstr "Maak de database leeg"
+
+#: inc/settings-page.php:65
+msgid ""
+"By selecting this option, you will remove all cities, which are present in "
+"the database. This is handy if you don't need the preset cities or you want "
+"a fresh start."
+msgstr ""
+"Als je deze optie selecteer, worden alle steden verwijderd uit de database. "
+"Dit is handig als je de default steden niet nodig hebt of een frisse start "
+"wilt."
+
+#: inc/settings-page.php:70
+msgid "Delete all cities from the database"
+msgstr "Verwijder alle steden uit de database"
+
+#: inc/settings-page.php:74
+msgid "Nuke 'em"
+msgstr "Nuke alles"
+
+#: inc/verify-csv-data.php:33
+#, php-format
+msgid "There are too few columns on line %d."
+msgstr "Er zijn te weinig kolommen op regel %d."
+
+#: inc/verify-csv-data.php:38
+#, php-format
+msgid "There are too many columns on line %d."
+msgstr "Er zijn te veel kolommen op regel %d."
+
+#: inc/verify-csv-data.php:50
+#, php-format
+msgid "The length of the state abbreviation on line %d is incorrect."
+msgstr "De lengte van de staat/provincie afkorting op regel %d is incorrect."
+
+#: inc/verify-csv-data.php:57
+#, php-format
+msgid "The length of the country abbreviation on line %d is incorrect."
+msgstr "De lengte van de land afkorting op regel %d is incorrect."
+
+#, fuzzy
+#~| msgid "Save settings"
+#~ msgid "Preserve settings"
+#~ msgstr "Instellingen opslaan"
+
+#~ msgid "Your cities table has been emptied."
+#~ msgstr "De tabel met steden is geleegd."
+
+#~ msgid "General info"
+#~ msgstr "Algemene informatie"
+
+#~ msgid "This plugin requires %s to be activated to work."
+#~ msgstr "Deze plugin heeft %s nodig om te functioneren."
+
 #~ msgid "Check my %s"
 #~ msgstr "Bekijk mijn %s"
 
@@ -190,9 +341,6 @@ msgstr "Je hebt geen stad gekozen"
 #~ "plugin as well as some settings."
 #~ msgstr ""
 #~ "Op deze pagina vind je informatie en opties voor de City Selector plugin."
-
-#~ msgid "City Selector"
-#~ msgstr "Stad Kiezer"
 
 #~ msgid ""
 #~ "On this page you can find some helpful info about your City Selector "
