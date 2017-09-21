@@ -8,7 +8,7 @@
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
-		// @TODO: show proper error notices
+		acf_plugin_city_selector::al_show_admin_notices();
 
 		if ( isset( $_POST["db_actions_nonce"] ) ) {
 			if ( ! wp_verify_nonce( $_POST["db_actions_nonce"], 'db-actions-nonce' ) ) {
@@ -33,8 +33,10 @@
 		<div class="wrap">
             <div id="icon-options-general" class="icon32"><br /></div>
 
-            <h1><?php esc_html_e( 'ACF City Selector Settings', 'acf-city-selector' ); ?></h1>
+            <h1><?php esc_html_e( 'ACF City Selector', 'acf-city-selector' ); ?></h1>
             <p><?php sprintf( esc_html__( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
+
+            <p><a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-settings">Settings</a></p>
 
             <!-- left part -->
             <div class="admin_left">
@@ -80,14 +82,15 @@
                 <p>Make sure the cursor is ON the last line (after the last character), NOT on a new line.<br />This is seen as a new entry and creates an error !!!</p>
                 <?php
                     $submitted_raw_data = false;
+	                $submitted_raw_data = 'Amsterdam,NH,Noord-Holland,NL,Netherlands';
                     if ( isset( $_POST[ 'raw_csv_import' ] ) ) {
                         $submitted_raw_data = $_POST[ 'raw_csv_import' ];
                     }
                 ?>
                 <form method="post">
-                    <input name="import_csv_nonce" type="hidden" value="<?php echo wp_create_nonce( 'import-csv-nonce' ); ?>" />
+                    <input name="import_raw_nonce" type="hidden" value="<?php echo wp_create_nonce( 'import-raw-nonce' ); ?>" />
                     <label for="raw-import"></label>
-                    <textarea name="raw_csv_import" id="raw-import" rows="5" cols="100" placeholder=""><?php echo $submitted_raw_data; ?></textarea>
+                    <textarea name="raw_csv_import" id="raw-import" rows="5" cols="100" placeholder="Amsterdam,NH,Noord-Holland,NL,Netherlands"><?php echo $submitted_raw_data; ?></textarea>
                     <br />
                     <input name="verify" type="submit" class="button button-primary" value="Verify CSV data" />
                     <input name="import" type="submit" class="button button-primary" value="Import CSV data" />
