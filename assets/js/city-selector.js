@@ -4,7 +4,7 @@
     console.log('-= ACF City Selector reached ');
 
     var country = $("select[name*='countryCode']");
-    var state = $("select[name*='stateCode']");
+    var state   = $("select[name*='stateCode']");
 
     if (country.length) {
 

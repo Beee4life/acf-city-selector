@@ -12,7 +12,7 @@
 	}
 	add_action( 'wp_head', 'city_selector_ajaxurl' );
 
-	/**
+	/*
 	 * Fill the countries select
 	 * @return Array
 	 */
@@ -43,7 +43,7 @@
 		return $items;
 	}
 
-	/**
+	/*
 	 * Get states by related Country Code
 	 * @return JSON Object
 	 */
@@ -84,11 +84,10 @@
 		die();
 	}
 
-	/**
+	/*
 	 * Get cities by related State Code or Country Code (IF State code == "00" or States == 'N/A')
 	 * @return JSON Object
 	 */
-
 	function get_cities_call() {
 		if ( trim( $_POST['row_code'] ) ) {
 			$codes        = explode( '-', $_POST['row_code'] );

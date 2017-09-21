@@ -7,4 +7,6 @@
     // drop the database table
     global $wpdb;
     $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
+
+    // drop all settings from db (if any)
 ?>
