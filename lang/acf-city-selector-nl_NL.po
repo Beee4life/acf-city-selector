@@ -1,54 +1,70 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2016-12-01 00:44+0100\n"
-"PO-Revision-Date: 2016-12-01 00:45+0100\n"
+"POT-Creation-Date: 2017-09-21 20:44+0200\n"
+"PO-Revision-Date: 2017-09-21 20:46+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;"
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:129
+#: acf-city-selector.php:166
+msgid "Settings"
+msgstr "Instellingen"
+
+#: acf-city-selector.php:187
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
 
-#: acf-city-selector.php:137
+#: acf-city-selector.php:195
 msgid "Your cities table has been emptied."
 msgstr "De tabel met steden is geleegd."
 
-#: acf-city-selector.php:147
+#: acf-city-selector.php:198
+msgid "You successfully imported all cities in The Netherlands."
+msgstr "Je hebt succesvol alle steden in Nederland geïmporteerd."
+
+#: acf-city-selector.php:201
+msgid "You successfully imported all cities in Belgium."
+msgstr "Je hebt succesvol alle steden in België geïmporteerd."
+
+#: acf-city-selector.php:204
+msgid "You successfully imported all cities in Luxembourg."
+msgstr "Je hebt succesvol alle steden in Luxemburg geïmporteerd."
+
+#: acf-city-selector.php:213
 msgid "ACF City Selector Settings"
 msgstr "ACF City Selector Opties"
 
-#: acf-city-selector.php:148
+#: acf-city-selector.php:214
 #, php-format
 msgid ""
 "On this page you can find some helpful info about the %s plugin as well as "
 "some settings."
 msgstr "Op deze pagina vind je informatie en opties voor de %s plugin."
 
-#: acf-city-selector.php:154
+#: acf-city-selector.php:219
 msgid "General info"
 msgstr "Algemene informatie"
 
-#: acf-city-selector.php:155
+#: acf-city-selector.php:220
 #, php-format
 msgid "This plugin requires %s to be activated to work."
 msgstr "Deze plugin heeft %s nodig om te functioneren."
 
-#: acf-city-selector.php:159
+#: acf-city-selector.php:227
 msgid "Clear the database"
-msgstr "Maak de database leeg."
+msgstr "Maak de database leeg"
 
-#: acf-city-selector.php:160
+#: acf-city-selector.php:228
 msgid ""
 "By selecting this option, you will remove all cities, which are present in "
 "the database. This is handy if you don't need the preset cities or you want "
@@ -58,15 +74,42 @@ msgstr ""
 "Dit is handig als je de default steden niet nodig hebt of een frisse start "
 "wilt."
 
-#: acf-city-selector.php:164
+#: acf-city-selector.php:232
 msgid "Delete all cities from the database"
 msgstr "Verwijder alle steden uit de database"
 
-#: acf-city-selector.php:173
+#: acf-city-selector.php:235 acf-city-selector.php:260
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+#: acf-city-selector.php:240
+msgid "Import countries"
+msgstr "Importeer landen"
+
+#: acf-city-selector.php:241
+msgid ""
+"Here you can (re-)import all cities for the individual countries listed "
+"below."
+msgstr ""
+"Hier kun je alle steden (opnieuw) importeren voor alle onderstaande landen."
+
+#: acf-city-selector.php:247
+msgid "Import cities in Holland/The Netherlands"
+msgstr "Importeer steden in Nederland"
+
+#: acf-city-selector.php:252
+msgid "Import cities in Belgium"
+msgstr "Importeer steden in België"
+
+#: acf-city-selector.php:257
+msgid "Import cities in Luxembourg"
+msgstr "Importeer steden in Luxemburg"
+
+#: acf-city-selector.php:267
 msgid "About the plugin"
 msgstr "Over de plugin"
 
-#: acf-city-selector.php:174
+#: acf-city-selector.php:268
 #, php-format
 msgid ""
 "This plugin is an extension for %s. I built it because there was no properly "
@@ -75,23 +118,18 @@ msgstr ""
 "Deze plugin bouwt verder op %s. Ik heb het geschreven omdat er geen werkende "
 "plugin beschikbaar was."
 
-#: acf-city-selector.php:178
+#: acf-city-selector.php:273
 msgid "About Beee"
 msgstr "Over Beee"
 
-#: acf-city-selector.php:179
+#: acf-city-selector.php:274
 msgid ""
 "If you need a Wordpress designer/coder to do work on your site, hit me up."
 msgstr ""
 "Als je een Wordpress developer nodig hebt voor werk aan je site, contact me "
 "via mijn site."
 
-#: acf-city-selector.php:180
-#, php-format
-msgid "Check my %s"
-msgstr "Bekijk mijn %s"
-
-#: acf-city-selector.php:184
+#: acf-city-selector.php:279
 #, php-format
 msgid ""
 "If you need support for this plugin or if you have some good suggestions for "
@@ -100,7 +138,7 @@ msgstr ""
 "Als je support nodig hebt voor deze plugin of als je goede suggesties hebt, "
 "dan post ze op %s"
 
-#: acf-city-selector.php:188
+#: acf-city-selector.php:283
 msgid ""
 "If you like this plugin, buy me a coke to show your appreciation so I can "
 "continue to develop it."
@@ -112,37 +150,40 @@ msgstr ""
 msgid "Choice"
 msgstr "Keuze"
 
-#: fields/acf-city_selector-v5.php:81
+#: fields/acf-city_selector-v5.php:76
 msgid "Yes"
 msgstr "Ja"
 
-#: fields/acf-city_selector-v5.php:82
+#: fields/acf-city_selector-v5.php:77
 msgid "No"
 msgstr "Nee"
 
-#: fields/acf-city_selector-v5.php:88
+#: fields/acf-city_selector-v5.php:83
 msgid "Show labels"
 msgstr "Toon labels"
 
-#: fields/acf-city_selector-v5.php:89
+#: fields/acf-city_selector-v5.php:84
 msgid "Show field labels above the dropdown menus"
 msgstr "Labels tonen boven de dropdown menu’s"
 
-#: fields/acf-city_selector-v5.php:117 inc/country-field.php:33
+#: fields/acf-city_selector-v5.php:106 inc/country-field.php:33
 msgid "Select country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v5.php:137 inc/country-field.php:65
+#: fields/acf-city_selector-v5.php:127 inc/country-field.php:68
 msgid "Select provence/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v5.php:144 inc/country-field.php:113
+#: fields/acf-city_selector-v5.php:135 inc/country-field.php:115
 msgid "Select city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city_selector-v5.php:293
+#: fields/acf-city_selector-v5.php:240
 msgid "You didn't select a city"
-msgstr "Je hebt geen stad gekozen."
+msgstr "Je hebt geen stad gekozen"
+
+#~ msgid "Check my %s"
+#~ msgstr "Bekijk mijn %s"
 
 #~ msgid ""
 #~ "On this page you can find some helpful info about the City Selector "
