@@ -27,7 +27,7 @@
 					'<h5>Import cities</h5>' .
 					'<p>' . esc_html__( 'On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin.', 'action-logger' ) . '</p>' .
 					'<p>' . esc_html__( 'You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won\'t work.', 'action-logger' ) . '</p>' .
-					'<p>' . esc_html__( 'The reqiured order is "City,State code,State,Country code,Country".', 'action-logger' ) . '</p>' .
+					'<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'action-logger' ) . '</p>' .
 					'<ul>' .
 					'<li>' . esc_html__( 'City : full name, no use of double quotes/".', 'action-logger' ) . '</li>' .
 					'<li>' . esc_html__( 'State code : state abbreviation (exactly 2 characters)', 'action-logger' ) . '</li>' .
