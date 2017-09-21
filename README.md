@@ -67,25 +67,25 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 
 ### Tested on
 
-* Wordpress 4.6.1.
-* Advanced Custom Fields Pro 5.5.0
+* Wordpress 4.8.2.
+* Advanced Custom Fields Pro 5.6.2
 
 #### To Do
 * [X] - Store values properly
 * [X] - Validate values upon empty
-* [ ] - Load values when editing post
-* [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [X] - Drop tables on plugin deletion
-* [ ] - Return state/provence name
-* [ ] - Add lazy/fancy loading (ajax) - optional
 * [X] - Add settings page
 * [X] - Add settings page option to truncate table
-* [ ] - Add settings page option to import countries from CSV
-* [ ] - Add translations for English country names - optional
 * [X] - Add Dutch cities/provences
 * [X] - Add Belgian cities/provences (in progress)
 * [X] - Add Luxembourg cities/provences
 * [X] - Test on Mac Chrome
+* [ ] - Load values when editing post
+* [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
+* [ ] - Return state/provence name
+* [ ] - Add lazy/fancy loading (ajax) - optional
+* [ ] - Add settings page option to import countries from CSV
+* [ ] - Add translations for English country names - optional
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
 * [ ] - Test on PC Chrome
