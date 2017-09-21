@@ -14,9 +14,6 @@
 			if ( ! wp_verify_nonce( $_POST["db_actions_nonce"], 'db-actions-nonce' ) ) {
 				return;
 			} else {
-				if ( isset( $_POST['delete_cities'] ) && 1 == $_POST["delete_cities"] ) {
-					echo '<div class="updated"><p><strong>' . __( 'Your cities table has been emptied.', 'acf-city-selector' ) . '</strong></p></div>';
-				}
 				if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
 					echo '<div class="updated"><p><strong>' . __( 'You successfully imported all cities in The Netherlands.', 'acf-city-selector' ) . '</strong></p></div>';
 				}
@@ -36,15 +33,10 @@
             <h1><?php esc_html_e( 'ACF City Selector', 'acf-city-selector' ); ?></h1>
             <p><?php sprintf( esc_html__( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
 
-            <p><a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-settings">Settings</a></p>
+            <p><a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-settings">Settings</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-pro">Go Pro</a></p>
 
             <!-- left part -->
             <div class="admin_left">
-
-                <!--<h2>--><?php //esc_html_e( 'General info', 'acf-city-selector' ); ?><!--</h2>-->
-                <!--<p>--><?php //sprintf( esc_html__( 'This plugin requires %s to be activated to work.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/">Advanced Custom Fields</a>' ); ?><!--</p>-->
-                <!---->
-                <!--<hr />-->
 
                 <form method="post" action="">
                     <input name="import_actions_nonce" value="<?php echo wp_create_nonce( 'import-actions-nonce' ); ?>" type="hidden" />
@@ -70,6 +62,12 @@
                         <span class="acfcs_input">
                             <label for="import_lux" class="screen-reader-text"></label>
                             <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import cities in Luxembourg', 'acf-city-selector' ); ?> (12)
+                        </span>
+                    </p>
+
+                    <p>
+                        Get more countries !!!!
+                        <span class="acfcs_input">
                         </span>
                     </p>
 
@@ -116,7 +114,7 @@
                 </p>
                 <hr />
 
-                <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="<?php echo plugins_url( 'assets/img/paypal_donate.gif', __FILE__ ); ?>" alt="" class="donateimg" /></a>
+                <p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="<?php echo plugins_url( 'assets/img/paypal_donate.gif', dirname(__FILE__) ); ?>" alt="" class="donateimg" /></a>
                     <?php esc_html_e( 'If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.', 'acf-city-selector' ); ?></p>
 
             </div><!-- end .admin_right -->
