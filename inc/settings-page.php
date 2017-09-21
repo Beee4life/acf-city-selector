@@ -8,15 +8,12 @@
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
-		// @TODO: show proper error notices
+		acf_plugin_city_selector::al_show_admin_notices();
 
 		if ( isset( $_POST["db_actions_nonce"] ) ) {
 			if ( ! wp_verify_nonce( $_POST["db_actions_nonce"], 'db-actions-nonce' ) ) {
 				return;
 			} else {
-				if ( isset( $_POST['delete_cities'] ) && 1 == $_POST["delete_cities"] ) {
-					echo '<div class="updated"><p><strong>' . __( 'Your cities table has been emptied.', 'acf-city-selector' ) . '</strong></p></div>';
-				}
 				if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
 					echo '<div class="updated"><p><strong>' . __( 'You successfully imported all cities in The Netherlands.', 'acf-city-selector' ) . '</strong></p></div>';
 				}
@@ -36,13 +33,10 @@
             <h1><?php esc_html_e( 'ACF City Selector Settings', 'acf-city-selector' ); ?></h1>
             <p><?php sprintf( esc_html__( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
 
+            <p><a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-settings">Settings</a></p>
+
             <!-- left part -->
             <div class="admin_left">
-
-                <!--<h2>--><?php //esc_html_e( 'General info', 'acf-city-selector' ); ?><!--</h2>-->
-                <!--<p>--><?php //sprintf( esc_html__( 'This plugin requires %s to be activated to work.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/">Advanced Custom Fields</a>' ); ?><!--</p>-->
-                <!---->
-                <!--<hr />-->
 
                 <form method="post" action="">
                     <input name="preserve_settings_nonce" value="<?php echo wp_create_nonce( 'preserve-settings-nonce' ); ?>" type="hidden" />
