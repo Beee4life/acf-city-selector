@@ -50,7 +50,8 @@
 				add_action( 'acf/include_field_types',      array( $this, 'include_field_types' ) );    // v5
 				add_action( 'acf/register_fields',          array( $this, 'include_field_types' ) );    // v4 (not done)
 				add_action( 'admin_enqueue_scripts',        array( $this, 'ACFCS_admin_addCSS' ) );     // add css in admin
-				add_action( 'admin_menu',                   array( $this, 'admin_menu' ) );
+				add_action( 'admin_menu',                   array( $this, 'add_admin_page' ) );
+				add_action( 'admin_menu',                   array( $this, 'add_settings_page' ) );
 				add_action( 'init',                         array( $this, 'truncate_db' ) );
 				add_action( 'init',                         array( $this, 'import_actions' ) );
 				add_action( 'init',                         array( $this, 'preserve_settings' ) );
@@ -96,6 +97,13 @@
 			 */
 			public function load_admin_page() {
 				include( 'admin-page.php' );
+			}
+
+			/*
+			 * Load admin page
+			 */
+			public function load_settings_page() {
+				include( 'settings-page.php' );
 			}
 
 			/*
@@ -203,8 +211,15 @@
 			/*
 			 * Adds a page in the settings menu
 			 */
-			public function admin_menu() {
+			public function add_admin_page() {
 				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
+			}
+
+			/*
+			 * Adds a page in the settings menu
+			 */
+			public function add_settings_page() {
+				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 			}
 
 			/*

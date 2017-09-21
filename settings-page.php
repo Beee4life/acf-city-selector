@@ -2,7 +2,7 @@
 	/*
 	 * Content for the settings page
 	 */
-	function acfcs_options() {
+	function acfcs_settings() {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
@@ -45,52 +45,40 @@
                 <!--<hr />-->
 
                 <form method="post" action="">
-                    <input name="import_actions_nonce" value="<?php echo wp_create_nonce( 'import-actions-nonce' ); ?>" type="hidden" />
+                    <input name="preserve_settings_nonce" value="<?php echo wp_create_nonce( 'preserve-settings-nonce' ); ?>" type="hidden" />
 
-                    <h2><?php esc_html_e( 'Import countries', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?></p>
+                    <h2><?php esc_html_e( 'Preserve settings', 'acf-city-selector' ); ?></h2>
+                    <p><?php esc_html_e( "When the plugin is deleted, all settings and cities are deleted as well. Select this option to save all your cities/settings.", 'acf-city-selector' ); ?></p>
 
+                    <?php $checked = get_option( 'acfcs_preserve_settings' ) ? ' checked="checked"' : false; ?>
                     <p>
                         <span class="acfcs_input">
-                            <label for="import_nl" class="screen-reader-text"></label>
-                            <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
+                            <label for="preserve_settings" class="screen-reader-text"></label>
+                            <input type="checkbox" name="preserve_settings" id="preserve_settings" value="1" <?php echo $checked; ?>/> <?php esc_html_e( 'Preserve settings on plugin deletion', 'acf-city-selector' ); ?>
                         </span>
                     </p>
 
-                    <p>
-                        <span class="acfcs_input">
-                            <label for="import_be" class="screen-reader-text"></label>
-                            <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import cities in Belgium', 'acf-city-selector' ); ?> (1166)
-                        </span>
-                    </p>
-
-                    <p>
-                        <span class="acfcs_input">
-                            <label for="import_lux" class="screen-reader-text"></label>
-                            <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import cities in Luxembourg', 'acf-city-selector' ); ?> (12)
-                        </span>
-                    </p>
-
-                    <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected countries', 'acf-city-selector' ); ?>" />
+                    <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Save settings', 'acf-city-selector' ); ?>" />
+                    <?php //submit_button(); ?>
                 </form>
 
                 <br /><hr />
 
-                <h2>Import raw CSV data</h2>
-                <p>Make sure the cursor is ON the last line (after the last character), NOT on a new line.<br />This is seen as a new entry and creates an error !!!</p>
-                <?php
-                    $submitted_raw_data = false;
-                    if ( isset( $_POST[ 'raw_csv_import' ] ) ) {
-                        $submitted_raw_data = $_POST[ 'raw_csv_import' ];
-                    }
-                ?>
-                <form method="post">
-                    <input name="import_csv_nonce" type="hidden" value="<?php echo wp_create_nonce( 'import-csv-nonce' ); ?>" />
-                    <label for="raw-import"></label>
-                    <textarea name="raw_csv_import" id="raw-import" rows="5" cols="100" placeholder=""><?php echo $submitted_raw_data; ?></textarea>
-                    <br />
-                    <input name="verify" type="submit" class="button button-primary" value="Verify CSV data" />
-                    <input name="import" type="submit" class="button button-primary" value="Import CSV data" />
+                <form method="post" action="">
+                    <input name="truncate_table_nonce" value="<?php echo wp_create_nonce( 'truncate-table-nonce' ); ?>" type="hidden" />
+
+                    <h2><?php esc_html_e( 'Clear the database', 'acf-city-selector' ); ?></h2>
+                    <p><?php esc_html_e( "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ); ?></p>
+
+                    <p>
+                        <span class="acfcs_input">
+                            <label for="delete_cities" class="screen-reader-text"></label>
+                            <input type="checkbox" name="delete_cities" id="delete_cities" value="1" /> <?php esc_html_e( 'Delete all cities from the database', 'acf-city-selector' ); ?>
+                        </span>
+                    </p>
+
+                    <input name="" type="submit" class="button button-primary"  onclick="return confirm( 'Are you sure you want to delete all cities ?' )" value="<?php esc_html_e( 'Nuke \'em', 'acf-city-selector' ); ?>" />
+                    <?php //submit_button(); ?>
                 </form>
 
             </div><!-- end .admin_left -->
