@@ -38,25 +38,6 @@
     max-width: 25%;
 }
 
-.admin_right ul {
-    margin: 0 0 0 16px;
-}
-
-.admin_right ul li {
-    list-style: disc;
-    margin:     0 0 5px 0;
-}
-
-.admin_left h2, .admin_right h2,
-.admin_left h3, .admin_right h3 {
-    margin: 0 0 5px 0;
-}
-
-label.description {
-    color:        #000;
-    margin-right: 5px;
-}
-
 hr {
     background:    #CCCCCC;
     width:         100%;
@@ -73,4 +54,8 @@ img.donateimg {
 
 #contextual-help-columns h5 {
     margin-top: 10px;
+}
+
+.acfcs-admin-menu a {
+    text-decoration: none;
 }
