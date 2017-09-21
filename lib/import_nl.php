@@ -1,5 +1,3 @@
-<?php global $wpdb; ?>
-
 #
 # Table structure for table 'cities'
 #
