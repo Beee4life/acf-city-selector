@@ -33,7 +33,6 @@
             <h1><?php esc_html_e( 'ACF City Selector', 'acf-city-selector' ); ?></h1>
             <p><?php sprintf( esc_html__( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
 
-            <p><a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-settings">Settings</a> | <a href="<?php echo site_url(); ?>/wp-admin/options-general.php?page=acfcs-pro">Go Pro</a></p>
 
             <!-- left part -->
             <div class="admin_left">
@@ -65,12 +64,6 @@
                         </span>
                     </p>
 
-                    <p>
-                        Get more countries !!!!
-                        <span class="acfcs_input">
-                        </span>
-                    </p>
-
                     <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected countries', 'acf-city-selector' ); ?>" />
                 </form>
 
@@ -80,7 +73,7 @@
                 <p>Make sure the cursor is ON the last line (after the last character), NOT on a new line.<br />This is seen as a new entry and creates an error !!!</p>
                 <?php
                     $submitted_raw_data = false;
-	                $submitted_raw_data = 'Amsterdam,NH,Noord-Holland,NL,Netherlands';
+	                // $submitted_raw_data = 'Amsterdam,NH,Noord-Holland,NL,Netherlands';
                     if ( isset( $_POST[ 'raw_csv_import' ] ) ) {
                         $submitted_raw_data = $_POST[ 'raw_csv_import' ];
                     }

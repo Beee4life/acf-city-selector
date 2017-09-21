@@ -41,7 +41,7 @@
                 <form method="post" action="">
                     <input name="preserve_settings_nonce" value="<?php echo wp_create_nonce( 'preserve-settings-nonce' ); ?>" type="hidden" />
 
-                    <h2><?php esc_html_e( 'Preserve settings', 'acf-city-selector' ); ?></h2>
+                    <h2><?php esc_html_e( 'Save data', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "When the plugin is deleted, all settings and cities are deleted as well. Select this option to save all your cities/settings.", 'acf-city-selector' ); ?></p>
 
                     <?php $checked = get_option( 'acfcs_preserve_settings' ) ? ' checked="checked"' : false; ?>
@@ -53,7 +53,6 @@
                     </p>
 
                     <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Save settings', 'acf-city-selector' ); ?>" />
-                    <?php //submit_button(); ?>
                 </form>
 
                 <br /><hr />
