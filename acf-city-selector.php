@@ -1,6 +1,6 @@
 <?php
 	/*
-	Plugin Name:    ACF City Selector (not finished)
+	Plugin Name:    ACF City Selector (almost finished)
 	Plugin URI:     http://berryplasman.com/wordpress/acf-city-selector
 	Description:    An extension for ACF which allows you to select a city based on country and provence/state.
 	Version:        0.1 (beta)
@@ -15,6 +15,18 @@
 	// exit if accessed directly
 	if ( ! defined( 'ABSPATH' ) ) {
 		exit;
+	}
+
+	if ( ! class_exists( 'acf' ) ) {
+		add_action( 'admin_notices', function() {
+			echo sprintf(
+				'<div class="error"><p>%s not activated. Make sure you activate the plugin in <a href="%s">%s</a></p></div>',
+				'Advanced Custom Fields',
+				esc_url( admin_url( 'plugins.php?s=advanced-custom-fields-pro' ) ),
+				esc_url( admin_url( 'plugins.php') )
+			);
+		});
+		return;
 	}
 
 	// check if class already exists
@@ -44,26 +56,29 @@
 
 				$plugin = plugin_basename( __FILE__ );
 
-				register_activation_hook( __FILE__,         array( $this, 'plugin_activation' ) );
-				register_deactivation_hook( __FILE__,       array( $this, 'plugin_deactivation' ) );
+				register_activation_hook( __FILE__,         array( $this, 'acfcs_plugin_activation' ) );
+				register_deactivation_hook( __FILE__,       array( $this, 'acfcs_plugin_deactivation' ) );
 
 				// actions
-				add_action( 'acf/include_field_types',      array( $this, 'include_field_types' ) );    // v5
-				add_action( 'acf/register_fields',          array( $this, 'include_field_types' ) );    // v4 (not done)
-				add_action( 'admin_enqueue_scripts',        array( $this, 'ACFCS_admin_addCSS' ) );     // add css in admin
-				add_action( 'admin_menu',                   array( $this, 'add_admin_page' ) );
-				add_action( 'admin_menu',                   array( $this, 'add_settings_page' ) );
+				add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
+				add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4 (not done)
+				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
+				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_page' ) );
+				add_action( 'admin_menu',                   array( $this, 'acfcs_add_settings_page' ) );
+				add_action( 'admin_menu',                   array( $this, 'acfcs_add_pro_page' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-				add_action( 'init',                         array( $this, 'truncate_db' ) );
-				add_action( 'init',                         array( $this, 'import_preset_countries' ) );
-				add_action( 'init',                         array( $this, 'import_raw_data' ) );
-				add_action( 'init',                         array( $this, 'preserve_settings' ) );
+
+				add_action( 'init',                         array( $this, 'acfcs_trucate_db' ) );
+				add_action( 'init',                         array( $this, 'acfcs_import_preset_countries' ) );
+				add_action( 'init',                         array( $this, 'acfcs_import_raw_data' ) );
+				add_action( 'init',                         array( $this, 'acfcs_preserve_settings' ) );
 
 				// filters
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
 
-				$this->load_admin_page();
-				$this->load_settings_page();
+				// always load
+				$this->acfcs_load_admin_pages();
+				$this->acfcs_admin_menu();
 
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
@@ -74,21 +89,21 @@
 			/*
 			 * Do stuff upon plugin activation
 			 */
-			public function plugin_activation() {
-				$this->create_fill_db();
+			public function acfcs_plugin_activation() {
+				// $this->acfcs_create_fill_db();
 			}
 
 			/*
 			 * Do stuff upon plugin activation
 			 */
-			public function plugin_deactivation() {
+			public function acfcs_plugin_deactivation() {
 			    // nothing yet
 			}
 
 			/*
 			 * Prepare database upon plugin activation
 			 */
-			public function create_fill_db() {
+			public function acfcs_create_fill_db() {
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 				ob_start();
 				require_once( 'lib/prepare-tables.php' );
@@ -99,21 +114,16 @@
 			/*
 			 * Load admin page
 			 */
-			public function load_admin_page() {
+			public function acfcs_load_admin_pages() {
 				include( 'inc/admin-page.php' );
-			}
-
-			/*
-			 * Load admin page
-			 */
-			public function load_settings_page() {
 				include( 'inc/settings-page.php' );
+				include( 'inc/pro-page.php' );
 			}
 
 			/*
 			 * Truncate cities table
 			 */
-			public function truncate_db() {
+			public function acfcs_trucate_db() {
 				if ( isset( $_POST["truncate_table_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["truncate_table_nonce"], 'truncate-table-nonce' ) ) {
 						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
@@ -122,7 +132,7 @@
 
 						if ( isset( $_POST['delete_cities'] ) ) {
 							if ( isset( $_POST['delete_cities'] ) && 1 == $_POST["delete_cities"] ) {
-								$this->truncate_db();
+								$this->acfcs_trucate_db();
 							}
 						}
 					}
@@ -132,7 +142,7 @@
 			/*
 			 * Preserve settings
 			 */
-			public function preserve_settings() {
+			public function acfcs_preserve_settings() {
 				if ( isset( $_POST["preserve_settings_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["preserve_settings_nonce"], 'preserve-settings-nonce' ) ) {
 						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
@@ -154,7 +164,7 @@
 			/*
 			 * Import actions
 			 */
-			public function import_preset_countries() {
+			public function acfcs_import_preset_countries() {
 				if ( isset( $_POST["import_actions_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["import_actions_nonce"], 'import-action-nonce' ) ) {
 						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
@@ -184,7 +194,7 @@
 			/*
 			 * Import actions
 			 */
-			public function import_raw_data() {
+			public function acfcs_import_raw_data() {
 				if ( isset( $_POST["import_raw_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["import_raw_nonce"], 'import-raw-nonce' ) ) {
 						// @TODO: Throw error
@@ -244,7 +254,7 @@
 			/**
 			 * Displays error messages from form submissions
 			 */
-			public static function al_show_admin_notices() {
+			public static function acfcs_show_admin_notices() {
 				if ( $codes = acf_plugin_city_selector::acfcs_errors()->get_error_codes() ) {
 					if ( is_wp_error( acf_plugin_city_selector::acfcs_errors() ) ) {
 
@@ -294,7 +304,7 @@
 			 * @param   $version (int) major ACF version. Defaults to false
 			 * @return  n/a
 			 */
-			public function include_field_types( $version = false ) {
+			public function acfcs_include_field_types( $version = false ) {
 
 				// support empty $version
 				if ( ! $version ) {
@@ -316,24 +326,40 @@
 				return $links;
 			}
 
+
 			/*
 			 * Adds a page in the settings menu
 			 */
-			public function add_admin_page() {
-				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
+			public static function acfcs_admin_menu() {
+				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">Settings</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">Go Pro</a></p>';
+
 			}
 
 			/*
 			 * Adds a page in the settings menu
 			 */
-			public function add_settings_page() {
+			public function acfcs_add_admin_page() {
+				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
+			}
+
+			/*
+			 * Adds a (hidden) settings page
+			 */
+			public function acfcs_add_settings_page() {
 				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
+			}
+
+			/*
+			 * Adds a (hidden) pro page
+			 */
+			public function acfcs_add_pro_page() {
+				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
 			}
 
 			/*
 			 * Adds CSS on the admin side
 			 */
-			public function ACFCS_admin_addCSS() {
+			public function acfcs_add_css() {
 				wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
 			}
 		}
@@ -345,9 +371,9 @@
 		// class_exists check
 	endif;
 
-	if ( ! function_exists( 'donate_meta_box' ) ) {
-		function donate_meta_box() {
-			if ( apply_filters( 'remove_acf_cs_donate_nag', false ) ) {
+	if ( ! function_exists( 'acfcs_donate_meta_box' ) ) {
+		function acfcs_donate_meta_box() {
+			if ( apply_filters( 'remove_acfcs_donate_nag', false ) ) {
 				return;
 			}
 
@@ -360,10 +386,10 @@
 			add_meta_box( $id, $title, $callback, $screens, $context, $priority );
 
 		} // end function donate_meta_box
-		add_action( 'add_meta_boxes', 'donate_meta_box' );
+		add_action( 'add_meta_boxes', 'acfcs_donate_meta_box' );
 
 		function show_donate_meta_box() {
-			echo '<p style="margin-bottom: 0;">Thank you for installing the \'City Selector\' plugin. I hope you enjoy it. Please <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank">consider a donation</a> if you do, so I can continue to improve it even more.</p>';
+			echo '<p style="margin-bottom: 0;">' . sprintf( __( 'Thank you for installing the \'City Selector\' plugin. I hope you enjoy it. Please <a href="%s" target="_blank">consider a donation</a> if you do, so I can continue to improve it even more.', 'acf-city-selector' ), esc_url( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL' ) ) . '</p>';
 		}
 	} // end if !function_exists
 
