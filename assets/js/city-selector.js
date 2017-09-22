@@ -8,11 +8,6 @@
 
     if (country.length) {
 
-        // get_field( 'sd_city_selector' )
-        // if has value, split array in 3 values
-        // $country, $state, $city
-        // else country.change
-
         country.change(function() {
 
             console.log('-= Country selected');
@@ -94,7 +89,6 @@
 
     // Load select states when editing a post
     function admin_post_edit_load_states() {
-        $("select[name*='stateCode']").hide();
         get_states(city_selector_vars.countryCode, function(response) {
 
             var obj          = JSON.parse(response);
@@ -115,7 +109,7 @@
 
     // Load select cities when editing a post
     function admin_post_edit_load_cities() {
-        $("select[name*='cityNameAscii']").hide();
+        // $("select[name*='cityNameAscii']").hide();
         get_cities(city_selector_vars.stateCode, function(response) {
 
             var obj          = JSON.parse(response);
