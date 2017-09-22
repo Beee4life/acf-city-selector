@@ -65,9 +65,10 @@
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
 
 				// always load
-				$this->acfcs_load_admin_page();
-				$this->acfcs_load_settings_page();
-				$this->acfcs_load_pro_page();
+				$this->acfcs_load_admin_pages();
+				// $this->acfcs_load_admin_page();
+				// $this->acfcs_load_settings_page();
+				// $this->acfcs_load_pro_page();
 				$this->acfcs_admin_menu();
 
 				include( 'inc/help-tabs.php' );
@@ -104,19 +105,28 @@
 			/*
 			 * Load admin page
 			 */
+			public function acfcs_load_admin_pages() {
+				include( 'inc/admin-page.php' );
+				include( 'inc/settings-page.php' );
+				include( 'inc/pro-page.php' );
+			}
+
+			/*
+			 * Load admin page
+			 */
 			public function acfcs_load_admin_page() {
 				include( 'inc/admin-page.php' );
 			}
 
 			/*
-			 * Load admin page
+			 * Load settings page
 			 */
 			public function acfcs_load_settings_page() {
 				include( 'inc/settings-page.php' );
 			}
 
 			/*
-			 * Load admin page
+			 * Load pro page
 			 */
 			public function acfcs_load_pro_page() {
 				include( 'inc/pro-page.php' );
