@@ -31,9 +31,9 @@
 					<table class="" cellpadding="0" cellspacing="0">
 					<thead>
 					<tr>
-					<th>Field</th>
-					<th>What to enter</th>
-					<th>Note</th>
+					<th>' . esc_html__( 'Field', 'action-logger' ) . '</th>
+					<th>' . esc_html__( 'What to enter', 'action-logger' ) . '</th>
+					<th>' . esc_html__( 'Note', 'action-logger' ) . '</th>
 					</tr>					
 					</thead>
 					<tbody>

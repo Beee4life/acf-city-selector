@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-22 03:33+0200\n"
-"PO-Revision-Date: 2017-09-22 03:36+0200\n"
+"POT-Creation-Date: 2017-09-22 03:38+0200\n"
+"PO-Revision-Date: 2017-09-22 03:38+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -216,6 +216,18 @@ msgid "The required order is \"City,State code,State,Country code,Country\"."
 msgstr ""
 "De verplichten volgorde is “Stad,Staat/provincie code (afkorting),Staat/"
 "provincie,Land code (afkorting),Land”."
+
+#: inc/help-tabs.php:34
+msgid "Field"
+msgstr "Veld"
+
+#: inc/help-tabs.php:35
+msgid "What to enter"
+msgstr "Wat in te vullen"
+
+#: inc/help-tabs.php:36
+msgid "Note"
+msgstr "Notitie"
 
 #: inc/help-tabs.php:41
 msgid "City"
