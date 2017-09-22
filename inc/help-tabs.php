@@ -40,7 +40,7 @@
 					<tr>
 					<td>' . esc_html__( 'City', 'action-logger' ) . '</td>
 					<td>' . esc_html__( 'full name', 'action-logger' ) . '</td>
-					<td>' . esc_html__( 'no use of double quotes/".', 'action-logger' ) . '</td>
+					<td>&nbsp;</td>
 					</tr>
 					<tr>
 					<td>' . esc_html__( 'State code', 'action-logger' ) . '</td>
