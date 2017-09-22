@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-22 01:48+0200\n"
-"PO-Revision-Date: 2017-09-22 01:49+0200\n"
+"POT-Creation-Date: 2017-09-22 03:33+0200\n"
+"PO-Revision-Date: 2017-09-22 03:36+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,41 +16,41 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:122 acf-city-selector.php:141
-#: acf-city-selector.php:163 acf-city-selector.php:194
+#: acf-city-selector.php:141 acf-city-selector.php:160
+#: acf-city-selector.php:182 acf-city-selector.php:213
 msgid "Something went wrong, please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: acf-city-selector.php:151
+#: acf-city-selector.php:170
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: acf-city-selector.php:202
+#: acf-city-selector.php:221
 msgid "Congratulations, your csv data seems valid."
 msgstr "Gefeliciteerd, je csv data bevat geen fouten."
 
-#: acf-city-selector.php:232
+#: acf-city-selector.php:251
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr "Gefeliciteerd, je hebt %d stad geïmporteerd."
 
-#: acf-city-selector.php:264
+#: acf-city-selector.php:283
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: acf-city-selector.php:271
+#: acf-city-selector.php:290
 msgid "Error"
 msgstr "Fout"
 
-#: acf-city-selector.php:283
+#: acf-city-selector.php:302
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: acf-city-selector.php:316
+#: acf-city-selector.php:335
 msgid "Settings"
 msgstr "Instellingen"
 
-#: acf-city-selector.php:378
+#: acf-city-selector.php:404
 #, php-format
 msgid ""
 "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
@@ -98,65 +98,53 @@ msgstr "Selecteer een stad"
 msgid "You didn't select a city"
 msgstr "Je hebt geen stad gekozen"
 
-#: inc/admin-page.php:8 inc/settings-page.php:8
+#: inc/admin-page.php:8 inc/pro-page.php:8 inc/settings-page.php:8
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
 
-#: inc/admin-page.php:18 inc/settings-page.php:18
-msgid "You successfully imported all cities in The Netherlands."
-msgstr "Je hebt succesvol alle steden in Nederland geïmporteerd."
-
-#: inc/admin-page.php:21 inc/settings-page.php:21
-msgid "You successfully imported all cities in Belgium."
-msgstr "Je hebt succesvol alle steden in België geïmporteerd."
-
-#: inc/admin-page.php:24 inc/settings-page.php:24
-msgid "You successfully imported all cities in Luxembourg."
-msgstr "Je hebt succesvol alle steden in Luxemburg geïmporteerd."
-
-#: inc/admin-page.php:33
+#: inc/admin-page.php:18
 msgid "ACF City Selector"
 msgstr "ACF Stad Kiezer"
 
-#: inc/admin-page.php:34 inc/settings-page.php:34
+#: inc/admin-page.php:22 inc/settings-page.php:37
 #, php-format
 msgid ""
 "On this page you can find some helpful info about the %s plugin as well as "
 "some settings."
 msgstr "Op deze pagina vind je informatie en opties voor de %s plugin."
 
-#: inc/admin-page.php:43
+#: inc/admin-page.php:30
 msgid "Import countries"
 msgstr "Importeer landen"
 
-#: inc/admin-page.php:44
+#: inc/admin-page.php:31
 msgid ""
 "Here you can (re-)import all cities for the individual countries listed "
 "below."
 msgstr ""
 "Hier kun je alle steden (opnieuw) importeren voor alle onderstaande landen."
 
-#: inc/admin-page.php:49
+#: inc/admin-page.php:36
 msgid "Import cities in Holland/The Netherlands"
 msgstr "Importeer steden in Nederland"
 
-#: inc/admin-page.php:56
+#: inc/admin-page.php:43
 msgid "Import cities in Belgium"
 msgstr "Importeer steden in België"
 
-#: inc/admin-page.php:63
+#: inc/admin-page.php:50
 msgid "Import cities in Luxembourg"
 msgstr "Importeer steden in Luxemburg"
 
-#: inc/admin-page.php:73
+#: inc/admin-page.php:54
 msgid "Import selected countries"
 msgstr "Importeer geselecteerde landen"
 
-#: inc/admin-page.php:100 inc/settings-page.php:82
+#: inc/admin-right.php:3
 msgid "About the plugin"
 msgstr "Over de plugin"
 
-#: inc/admin-page.php:101 inc/settings-page.php:83
+#: inc/admin-right.php:4
 #, php-format
 msgid ""
 "This plugin is an extension for %s. I built it because there was no properly "
@@ -165,7 +153,7 @@ msgstr ""
 "Deze plugin bouwt verder op %s. Ik heb het geschreven omdat er geen werkende "
 "plugin beschikbaar was."
 
-#: inc/admin-page.php:102 inc/settings-page.php:84
+#: inc/admin-right.php:5
 #, php-format
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Click here</a> for a demo on my own website."
@@ -173,18 +161,20 @@ msgstr ""
 "<a href=“%s” target=“_blank”>Klik hier</a> voor een demo op mijn eigen "
 "website."
 
-#: inc/admin-page.php:106 inc/settings-page.php:88
+#: inc/admin-right.php:9
 msgid "About Beee"
 msgstr "Over Beee"
 
-#: inc/admin-page.php:107 inc/settings-page.php:89
+#: inc/admin-right.php:10
+#, php-format
 msgid ""
-"If you need a Wordpress designer/coder to do work on your site, hit me up."
+"If you need a Wordpress designer/coder to do work on your site, hit me up <a "
+"href=\"%s\">here</a>."
 msgstr ""
 "Als je een Wordpress developer nodig hebt voor werk aan je site, contact me "
-"via mijn site."
+"via <a href=“%s”>mijn site</a>."
 
-#: inc/admin-page.php:112 inc/settings-page.php:94
+#: inc/admin-right.php:15
 #, php-format
 msgid ""
 "If you need support for this plugin or if you have some good suggestions for "
@@ -193,7 +183,7 @@ msgstr ""
 "Als je support nodig hebt voor deze plugin of als je goede suggesties hebt, "
 "dan post ze op %s."
 
-#: inc/admin-page.php:117 inc/settings-page.php:99
+#: inc/admin-right.php:20
 msgid ""
 "If you like this plugin, buy me a coke to show your appreciation so I can "
 "continue to develop it."
@@ -227,40 +217,134 @@ msgstr ""
 "De verplichten volgorde is “Stad,Staat/provincie code (afkorting),Staat/"
 "provincie,Land code (afkorting),Land”."
 
-#: inc/help-tabs.php:32
-msgid "City : full name, no use of double quotes/\"."
-msgstr "Stad : volledige naam, gebruik geen dubbele quotes/“."
+#: inc/help-tabs.php:41
+msgid "City"
+msgstr "Stad"
 
-#: inc/help-tabs.php:33
-msgid "State code : state abbreviation (exactly 2 characters)"
-msgstr ""
-"Staat/provincie code : afkorting van de staat/provincie (precies 2 karakters)"
-
-#: inc/help-tabs.php:34
-msgid "State : full state name"
-msgstr "Staat/provincie: volledige naam"
-
-#: inc/help-tabs.php:35
-msgid "Country code : country abbreviation (exactly 2 characters)"
-msgstr "Land code : afkorting van het land (precies 2 karakters)"
-
-#: inc/help-tabs.php:36
-msgid "Country : full country name"
-msgstr "Land : volledige land naam"
+#: inc/help-tabs.php:42
+msgid "full name"
+msgstr "volledige naam"
 
 #: inc/help-tabs.php:43
+msgid "no use of double quotes/\"."
+msgstr "gebruik geen dubbele quotes/“."
+
+#: inc/help-tabs.php:46
+msgid "State code"
+msgstr "Staat/provincie code"
+
+#: inc/help-tabs.php:47
+msgid "state abbreviation"
+msgstr "staat/provincie afkorting"
+
+#: inc/help-tabs.php:48 inc/help-tabs.php:58
+msgid "exactly 2 characters"
+msgstr "precies 2 karakters"
+
+#: inc/help-tabs.php:51
+msgid "State"
+msgstr "Staat/provincie"
+
+#: inc/help-tabs.php:52
+msgid "full state name"
+msgstr "volledige naam"
+
+#: inc/help-tabs.php:56
+msgid "Country code"
+msgstr "Land code"
+
+#: inc/help-tabs.php:57
+msgid "country abbreviation"
+msgstr "land afkorting"
+
+#: inc/help-tabs.php:61 inc/pro-page.php:42
+msgid "Country"
+msgstr "Land"
+
+#: inc/help-tabs.php:62
+msgid "full country name"
+msgstr "volledige land naam"
+
+#: inc/help-tabs.php:72
 msgid "Author's website"
 msgstr "Auteur’s website"
 
-#: inc/settings-page.php:33
+#: inc/pro-page.php:18 inc/settings-page.php:33
 msgid "ACF City Selector Settings"
 msgstr "ACF City Selector Opties"
 
-#: inc/settings-page.php:44
+#: inc/pro-page.php:25
+msgid "Go Pro"
+msgstr "Go Pro"
+
+#: inc/pro-page.php:26
+msgid ""
+"Default the plugin comes with 3 languages included, namely the Benelux; "
+"Belgium, Netherlands, Luxembourg, but you might want to add more countries "
+"to choose from. And now you can !!!"
+msgstr ""
+
+#: inc/pro-page.php:27
+msgid ""
+"We have more countries available. You can either buy a seperate country "
+"packages or get a Pro subscription and get every new update when we'll make "
+"a new country available."
+msgstr ""
+"We hebben meer landen beschikbaar. Je kan of een apart land pakket kopen of "
+"een Pro pakket bestellen en elke komende update voor niks krijgen."
+
+#: inc/pro-page.php:31
+msgid "Pro subscription"
+msgstr "Pro abonnement"
+
+#: inc/pro-page.php:32
+msgid ""
+"Buy once and get all coming countries for free !!! One price for all "
+"packages."
+msgstr ""
+"Koop 1x en krijg alle komende landen gratis !!! 1 prijs voor alle pakketten."
+
+#: inc/pro-page.php:33
+msgid "Order now !!!"
+msgstr "Bestel nu !!!"
+
+#: inc/pro-page.php:37
+msgid "Country packages"
+msgstr "Land pakketten"
+
+#: inc/pro-page.php:43
+msgid "states/provences"
+msgstr "staten/provincies"
+
+#: inc/pro-page.php:44
+msgid "cities"
+msgstr "steden"
+
+#: inc/pro-page.php:45
+msgid "Price"
+msgstr "Prijs"
+
+#: inc/pro-page.php:46
+msgid "Order"
+msgstr "Bestel"
+
+#: inc/settings-page.php:18
+msgid "You successfully imported all cities in The Netherlands."
+msgstr "Je hebt succesvol alle steden in Nederland geïmporteerd."
+
+#: inc/settings-page.php:21
+msgid "You successfully imported all cities in Belgium."
+msgstr "Je hebt succesvol alle steden in België geïmporteerd."
+
+#: inc/settings-page.php:24
+msgid "You successfully imported all cities in Luxembourg."
+msgstr "Je hebt succesvol alle steden in Luxemburg geïmporteerd."
+
+#: inc/settings-page.php:45
 msgid "Save data"
 msgstr "Data bewaren"
 
-#: inc/settings-page.php:45
+#: inc/settings-page.php:46
 msgid ""
 "When the plugin is deleted, all settings and cities are deleted as well. "
 "Select this option to save all your cities/settings."
@@ -269,11 +353,11 @@ msgstr ""
 "ook verwijderd. Selecteer deze optie om deze te bewaren wanneer de plugin "
 "wordt verwijderd."
 
-#: inc/settings-page.php:51
+#: inc/settings-page.php:52
 msgid "Preserve settings on plugin deletion"
 msgstr "Bewaar data bij verwijderen plugin"
 
-#: inc/settings-page.php:55
+#: inc/settings-page.php:56
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
@@ -318,6 +402,14 @@ msgstr "De lengte van de staat/provincie afkorting op regel %d is incorrect."
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr "De lengte van de land afkorting op regel %d is incorrect."
+
+#~ msgid "State code : state abbreviation (exactly 2 characters)"
+#~ msgstr ""
+#~ "Staat/provincie code : afkorting van de staat/provincie (precies 2 "
+#~ "karakters)"
+
+#~ msgid "Country code : country abbreviation (exactly 2 characters)"
+#~ msgstr "Land code : afkorting van het land (precies 2 karakters)"
 
 #, fuzzy
 #~| msgid "Save settings"
