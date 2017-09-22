@@ -50,7 +50,7 @@
 					<tr>
 					<td>' . esc_html__( 'State', 'action-logger' ) . '</td>
 					<td>' . esc_html__( 'full state name', 'action-logger' ) . '</td>
-					<td>' . esc_html__( '', 'action-logger' ) . '</td>
+					<td>&nbsp;</td>
 					</tr>
 					<tr>
 					<td>' . esc_html__( 'Country code', 'action-logger' ) . '</td>
@@ -60,7 +60,7 @@
 					<tr>
 					<td>' . esc_html__( 'Country', 'action-logger' ) . '</td>
 					<td>' . esc_html__( 'full country name', 'action-logger' ) . '</td>
-					<td>' . esc_html__( '', 'action-logger' ) . '</td>
+					<td>&nbsp;</td>
 					</tr>
 					</tbody>
 					</table>'
