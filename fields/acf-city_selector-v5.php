@@ -98,8 +98,13 @@
 			 */
 			function render_field( $field ) {
 
-				// field output in form
-				$countrycode = $field['value']['countryCode'];
+                // field output in form
+                $countrycode = $field[ 'value' ][ 'countryCode' ];
+                $countries   = populate_country_select( '', $field );
+                $stateCode   = $field[ 'value' ][ 'stateCode' ];
+                $cityName    = $field[ 'value' ][ 'cityNameAscii' ];
+                $states      = get_states( $countrycode );
+                $stateName   = $states[ substr( $stateCode, 3 ) ];
 				?>
                 <div class="cs_countries">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
@@ -107,6 +112,9 @@
 					<?php } ?>
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
+                        <optgroup label="<?php _e( 'Current option', 'acf-city-selector' ); ?>">
+                            <option value="<?php echo $countrycode; ?>"><?php echo $countries[$countrycode]; ?></option>
+                        </optgroup>
 						<?php
                             foreach ( populate_country_select( '', $field ) as $key => $country ) {
                                 if ( $countrycode == $key ) {
@@ -127,7 +135,11 @@
                         <span class="acf-input-header"><?php _e( 'Select provence/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect"></select>
+                    <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
+                        <optgroup label="<?php _e( 'Current option', 'acf-city-selector' ); ?>">
+                            <option value="<?php echo $stateCode; ?>"><?php echo $stateName; ?></option>
+                        </optgroup>
+                    </select>
                 </div>
 
                 <div class="cs_cities">
@@ -135,7 +147,11 @@
                         <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityNameAscii" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect"></select>
+                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
+                        <optgroup label="<?php _e( 'Current option', 'acf-city-selector' ); ?>">
+                            <option value="<?php echo $cityName; ?>"><?php echo $cityName; ?></option>
+                        </optgroup>
+                    </select>
                 </div>
 				<?php
 			}

@@ -43,6 +43,35 @@
 		return $items;
 	}
 
+    /**
+     * Create an array with states based on a Country Code.
+     *
+     * @param bool|string $country_code
+     *
+     * @return array
+     */
+    function get_states( $country_code = false ) {
+        if ( ! $country_code ) {
+            $country_code = $country_code;
+        }
+
+        global $wpdb;
+
+        $items = array();
+
+        $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
+            WHERE country_code = '%s'
+            group by state_code
+            order by states ASC",  $country_code );
+
+        $db = $wpdb->get_results( $sql );
+
+        foreach ( $db as $data ) {
+            $items[ $data->state_code ]   = $data->states;
+        }
+        return $items;
+    }
+
 	/*
 	 * Get states by related Country Code
 	 * @return JSON Object
@@ -55,12 +84,13 @@
 		}
 
 		global $wpdb;
-		$db = $wpdb->get_results( "
-        SELECT * FROM " . $wpdb->prefix . "cities
-        WHERE country_code = '" . $country_code . "'
+
+        $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
+        WHERE country_code = '%s'
         group by state_code
-        order by states ASC
-    " );
+        order by states ASC",  $country_code );
+
+        $db = $wpdb->get_results( $sql );
 
 		$items                    = array();
 		$items[0]['country_code'] = "";
