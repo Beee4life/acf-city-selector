@@ -4,7 +4,7 @@
 	 * @param bool $csv_data
 	 * @return array|bool
 	 */
-	function verify_csv_data( $csv_data = false ) {
+	function verify_raw_csv_data( $csv_data = false ) {
 
 		if ( false != $csv_data ) {
 
