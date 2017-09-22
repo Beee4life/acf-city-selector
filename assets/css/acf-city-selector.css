@@ -32,8 +32,22 @@
 .admin_left input[type="checkbox"] {
     margin-right: 10px;
 }
+
 .admin_left h2 {
     margin: 0.5em 0 1em 0;
+}
+
+.admin_left th,
+.admin_left td {
+    padding: 5px 3em 5px 0;
+}
+
+.admin_left th {
+    text-align: left;
+}
+
+.admin_left td {
+    border-top: 1px solid #444444;
 }
 
 .admin_right {
@@ -43,6 +57,27 @@
 
 .admin_right h3 {
     margin: 0.5em 0 1em 0;
+}
+
+#contextual-help-columns h5 {
+    margin-top: 10px;
+}
+
+#contextual-help-columns th,
+#contextual-help-columns td {
+    padding: 5px 3em 5px 0;
+}
+
+#contextual-help-columns th {
+    text-align: left;
+}
+
+#contextual-help-columns td {
+    border-top: 1px solid #444444;
+}
+
+.acfcs-admin-menu a {
+    text-decoration: none;
 }
 
 hr {
@@ -57,26 +92,4 @@ img.donateimg {
     float:        left;
     margin-top:   3px;
     margin-right: 10px;
-}
-
-#contextual-help-columns h5 {
-    margin-top: 10px;
-}
-
-#contextual-help-columns th,
-#contextual-help-columns td {
-    padding-right: 2em;
-}
-
-#contextual-help-columns th {
-    text-align: left;
-}
-
-#contextual-help-columns td {
-    border-top: 1px solid #444444;
-    padding: 5px 2em 5px 0;
-}
-
-.acfcs-admin-menu a {
-    text-decoration: none;
 }
