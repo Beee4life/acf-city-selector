@@ -32,10 +32,17 @@
 .admin_left input[type="checkbox"] {
     margin-right: 10px;
 }
+.admin_left h2 {
+    margin: 0.5em 0 1em 0;
+}
 
 .admin_right {
     float:     left;
     max-width: 25%;
+}
+
+.admin_right h3 {
+    margin: 0.5em 0 1em 0;
 }
 
 hr {
