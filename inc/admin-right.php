@@ -7,7 +7,7 @@
     <hr />
 
     <h3><?php esc_html_e( 'About Beee', 'acf-city-selector' ); ?></h3>
-    <p><?php esc_html_e( 'If you need a Wordpress designer/coder to do work on your site, hit me up.', 'acf-city-selector' ); ?></p>
+    <p><?php echo sprintf( __( 'If you need a Wordpress designer/coder to do work on your site, hit me up <a href="%s">here</a>.', 'acf-city-selector' ), esc_url( 'http://www.berryplasman.com' ) ); ?></p>
 
     <hr />
 
