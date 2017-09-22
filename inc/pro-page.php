@@ -39,11 +39,11 @@
                 <table cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Country</th>
-                        <th># states/provences</th>
-                        <th># cities</th>
-                        <th>Price</th>
-                        <th>Order</th>
+                        <th><?php esc_html_e( 'Country', 'acf-city-selector' ); ?></th>
+                        <th># <?php esc_html_e( 'states/provences', 'acf-city-selector' ); ?></th>
+                        <th># <?php esc_html_e( 'cities', 'acf-city-selector' ); ?></th>
+                        <th><?php esc_html_e( 'Price', 'acf-city-selector' ); ?></th>
+                        <th><?php esc_html_e( 'Order', 'acf-city-selector' ); ?></th>
                     </tr>
                     </thead>
                     <tbody>
