@@ -181,11 +181,15 @@
 
 				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
 					$post_meta = get_post_meta( get_the_ID(), 'test_acf', 1 );
+					if ( ! empty( $post_meta) ) {
 
-					wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-						'countryCode' => $post_meta[ 'countryCode' ],
-						'stateCode'   => $post_meta[ 'stateCode' ],
-					) );
+						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+							'countryCode' => $post_meta[ 'countryCode' ],
+							'stateCode'   => $post_meta[ 'stateCode' ],
+						) );
+
+                    }
+
 				}
 
 				// register & include CSS
