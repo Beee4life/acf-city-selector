@@ -177,6 +177,15 @@
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
 
+                if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
+                    $post_meta = get_post_meta( get_the_ID(), 'cities', 1 );
+
+                    wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+                        'countryCode' => $post_meta[ 'countryCode' ],
+                        'stateCode'   => $post_meta[ 'stateCode' ],
+                    ) );
+                }
+
 				// register & include CSS
 				wp_register_style( 'acf-city-selector-css', "{$url}assets/css/acf-city-selector.css", array( 'acf-input' ), $version );
 				wp_enqueue_style( 'acf-city-selector-css' );
