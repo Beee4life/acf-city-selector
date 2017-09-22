@@ -63,6 +63,20 @@ img.donateimg {
     margin-top: 10px;
 }
 
+#contextual-help-columns th,
+#contextual-help-columns td {
+    padding-right: 2em;
+}
+
+#contextual-help-columns th {
+    text-align: left;
+}
+
+#contextual-help-columns td {
+    border-top: 1px solid #444444;
+    padding: 5px 2em 5px 0;
+}
+
 .acfcs-admin-menu a {
     text-decoration: none;
 }

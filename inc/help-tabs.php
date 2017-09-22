@@ -24,18 +24,47 @@
 				'id'      => 'logs-overview',
 				'title'   => esc_html__( 'Import data', 'action-logger' ),
 				'content' =>
-					'<h5>Import cities</h5>' .
-					'<p>' . esc_html__( 'On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin.', 'action-logger' ) . '</p>' .
-					'<p>' . esc_html__( 'You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won\'t work.', 'action-logger' ) . '</p>' .
-					'<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'action-logger' ) . '</p>' .
-					'<ul>' .
-					'<li>' . esc_html__( 'City : full name, no use of double quotes/".', 'action-logger' ) . '</li>' .
-					'<li>' . esc_html__( 'State code : state abbreviation (exactly 2 characters)', 'action-logger' ) . '</li>' .
-					'<li>' . esc_html__( 'State : full state name', 'action-logger' ) . '</li>' .
-					'<li>' . esc_html__( 'Country code : country abbreviation (exactly 2 characters)', 'action-logger' ) . '</li>' .
-					'<li>' . esc_html__( 'Country : full country name', 'action-logger' ) . '</li>' .
-					'</ul>' .
-			'') );
+					'<h5>Import cities</h5>
+					<p>' . esc_html__( 'On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin.', 'action-logger' ) . '</p>
+					<p>' . esc_html__( 'You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won\'t work.', 'action-logger' ) . '</p>
+					<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'action-logger' ) . '</p>
+					<table class="" cellpadding="0" cellspacing="0">
+					<thead>
+					<tr>
+					<th>Field</th>
+					<th>What to enter</th>
+					<th>Note</th>
+					</tr>					
+					</thead>
+					<tbody>
+					<tr>
+					<td>' . esc_html__( 'City', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'full name', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'no use of double quotes/".', 'action-logger' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'State code', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'state abbreviation', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'exactly 2 characters', 'action-logger' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'State', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'full state name', 'action-logger' ) . '</td>
+					<td>' . esc_html__( '', 'action-logger' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'Country code', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'country abbreviation', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'exactly 2 characters', 'action-logger' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'Country', 'action-logger' ) . '</td>
+					<td>' . esc_html__( 'full country name', 'action-logger' ) . '</td>
+					<td>' . esc_html__( '', 'action-logger' ) . '</td>
+					</tr>
+					</tbody>
+					</table>'
+			) );
 
 		}
 
