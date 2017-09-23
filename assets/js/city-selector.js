@@ -91,6 +91,8 @@
     function admin_post_edit_load_states() {
         get_states(city_selector_vars.countryCode, function(response) {
 
+            // @TODO: get stored state value (for selected)
+
             var obj          = JSON.parse(response);
             var len          = obj.length;
             var $stateValues = '';
@@ -111,6 +113,8 @@
     function admin_post_edit_load_cities() {
         // $("select[name*='cityNameAscii']").hide();
         get_cities(city_selector_vars.stateCode, function(response) {
+
+            // @TODO: get stored city value (for selected)
 
             var obj          = JSON.parse(response);
             var len          = obj.length;
