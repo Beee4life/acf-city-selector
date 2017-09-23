@@ -93,3 +93,19 @@ img.donateimg {
     margin-top:   3px;
     margin-right: 10px;
 }
+
+.wrap .notice {
+    border-left:       4px solid white;
+    border-left-color: #dc3232;
+    margin:            5px 0 15px;
+    padding:           10px 0 10px 15px;
+}
+
+.wrap .notice-success {
+    border-left-color: #43bc71;
+}
+
+.wrap .notice-warning {
+    border-left-color: #ff9000;
+}
+
