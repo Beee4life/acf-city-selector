@@ -106,7 +106,7 @@
 			 * Load admin page
 			 */
 			public function acfcs_load_admin_pages() {
-				include( 'inc/admin-page.php' );
+				include( 'inc/dashboard-page.php' );
 				include( 'inc/settings-page.php' );
 				include( 'inc/pro-page.php' );
 			}
