@@ -75,11 +75,13 @@
         });
     }
 
-    function get_cities(rowCODE, callback) {
+    function get_cities(stateCODE, callback) {
+
+        // console.log(stateCODE);
 
         var data = {
             action: 'get_cities_call',
-            row_code: rowCODE
+            row_code: stateCODE
         };
 
         $.post( ajaxurl, data, function(response) {
