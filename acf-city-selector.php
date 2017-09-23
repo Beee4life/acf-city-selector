@@ -43,8 +43,8 @@
 
 				$plugin = plugin_basename( __FILE__ );
 
-				register_activation_hook( __FILE__,         array( $this, 'acfcs_plugin_activation' ) );
-				register_deactivation_hook( __FILE__,       array( $this, 'acfcs_plugin_deactivation' ) );
+				register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
+				register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
 				// actions
 				add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
@@ -323,33 +323,11 @@
 			}
 
 			/*
-			 * Adds a page in the settings menu
-			 */
-			public function acfcs_add_admin_page() {
-				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
-			}
-
-			/*
 			 * Adds admin pages
 			 */
 			public function acfcs_add_admin_pages() {
 				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
 				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
-				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
-				wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
-			}
-
-			/*
-			 * Adds a (hidden) settings page
-			 */
-			public function acfcs_add_settings_page() {
-				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
-			}
-
-			/*
-			 * Adds a (hidden) pro page
-			 */
-			public function acfcs_add_pro_page() {
 				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
 			}
 
