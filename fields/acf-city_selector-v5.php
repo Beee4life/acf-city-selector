@@ -116,13 +116,7 @@
                     ?>
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
-                        <?php if ( $countrycode != null ) { ?>
-                            <!--<optgroup label="--><?php //esc_html_e( 'Current option', 'acf-city-selector' ); ?><!--">-->
-                            <!--    <option value="--><?php //echo $countrycode; ?><!--">--><?php //echo $countries[ $countrycode ]; ?><!--</option>-->
-                            <!--</optgroup>-->
-                        <?php
-                        }
-                            foreach ( populate_country_select( '', $field ) as $key => $country ) {
+                        <?php foreach ( populate_country_select( '', $field ) as $key => $country ) {
                                 if ( $countrycode == $key ) {
                                     $selected = " selected=\"selected\"";
                                 } else {
@@ -140,9 +134,6 @@
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
-                        <!--<optgroup label="--><?php //esc_html_e( 'Current option', 'acf-city-selector' ); ?><!--">-->
-                        <!--</optgroup>-->
-                            <option value="<?php echo $stateCode; ?>"><?php echo $stateName; ?> (selected)</option>
                     </select>
                 </div>
 
@@ -152,9 +143,6 @@
 					<?php } ?>
                     <label for="cityNameAscii" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
-                        <!--<optgroup label="--><?php //_e( 'Current option', 'acf-city-selector' ); ?><!--">-->
-                        <!--</optgroup>-->
-                            <option value="<?php echo $cityName; ?>"><?php echo $cityName; ?> (selected)</option>
                     </select>
                 </div>
 				<?php
@@ -186,8 +174,9 @@
 					if ( ! empty( $post_meta) ) {
 
 						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-							'countryCode' => $post_meta[ 'countryCode' ],
-							'stateCode'   => $post_meta[ 'stateCode' ],
+							'countryCode'   => $post_meta['countryCode'],
+							'stateCode'     => $post_meta['stateCode'],
+							'cityNameAscii' => $post_meta['cityNameAscii'],
 						) );
 
                     }
