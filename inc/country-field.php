@@ -164,5 +164,3 @@
 	add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 	add_action( 'wp_ajax_get_cities_call', 'get_cities_call' );
 	add_action( 'wp_ajax_nopriv_get_cities_call', 'get_cities_call' );
-	add_action( 'wp_ajax_get_selected_city_call', 'get_selected_city_call' );
-	add_action( 'wp_ajax_nopriv_get_selected_city_call', 'get_selected_city_call' );
