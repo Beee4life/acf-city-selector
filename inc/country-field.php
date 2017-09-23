@@ -55,6 +55,7 @@
      * @return array
      */
     function get_states( $country_code = false ) {
+
         if ( ! $country_code ) {
             $country_code = $country_code;
         }
@@ -127,6 +128,7 @@
 	 * @return JSON Object
 	 */
 	function get_cities_call() {
+
 		if ( trim( $_POST['row_code'] ) ) {
 			$codes        = explode( '-', $_POST['row_code'] );
 			$country_code = $codes[0];
