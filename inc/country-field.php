@@ -16,7 +16,6 @@
 	 * Fill the countries select
 	 * @return Array
 	 */
-
 	function populate_country_select( $selectedCountry = null, $field ) {
 		global $wpdb;
 		$db = $wpdb->get_results( "
@@ -93,11 +92,11 @@
         $db = $wpdb->get_results( $sql );
 
 		$items                    = array();
-		$items[0]['country_code'] = "";
-		$items[0]['state_code']   = "";
-		$items[0]['states']       = __( 'Select provence/state', 'acf-city-selector' );
+		// $items[0]['country_code'] = "";
+		// $items[0]['state_code']   = "";
+		// $items[0]['states']       = __( 'Select provence/state', 'acf-city-selector' );
+		$i                        = 0;
 
-		$i = 1;
 		foreach ( $db as $data ) {
 			$items[ $i ]['country_code'] = $data->country_code;
 			$items[ $i ]['state_code']   = $data->state_code;
@@ -141,9 +140,9 @@
             " );
 			}
 			$items                 = array();
-			$items[0]['id']        = "";
-			$items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
-			$i                     = 1;
+			// $items[0]['id']        = "";
+			// $items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
+			$i                     = 0;
 
 			foreach ( $db as $data ) {
 				$items[ $i ]['id']        = $data->state_code;
@@ -156,7 +155,14 @@
 			die();
 		}
 	}
+
+	function get_selected_city_call() {
+	    // echo '<pre>'; var_dump($_POST); echo '</pre>'; exit;
+	}
+
 	add_action( 'wp_ajax_get_states_call', 'get_states_call' );
 	add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 	add_action( 'wp_ajax_get_cities_call', 'get_cities_call' );
 	add_action( 'wp_ajax_nopriv_get_cities_call', 'get_cities_call' );
+	add_action( 'wp_ajax_get_selected_city_call', 'get_selected_city_call' );
+	add_action( 'wp_ajax_nopriv_get_selected_city_call', 'get_selected_city_call' );
