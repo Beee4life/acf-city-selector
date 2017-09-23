@@ -16,9 +16,11 @@ This plugin allows you to select a city, based on country and provence/state in 
 
 It creates a new 'field type' for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will get a new option to choose called `City Selector`.
 
-Add it, the name MUST be exactly `acf_city_selector`. A fix for this is in the making.
-
-Update/save the Field Group.
+* Add the field.
+* Choose any name you want.
+* **!!!** The key MUST be exactly `acf_city_selector` (a fix for this is in the making).
+* Set any other values as you see fit.
+* Save/publish the Field Group.
 
 ### Usage
 
