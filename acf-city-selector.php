@@ -9,7 +9,7 @@
 	Text Domain:    acf-city-selector
 	License:        GPLv2 or later
 	License URI:    https://www.gnu.org/licenses/gpl.html
-	Contributors:   Fabrizio Sabato - http://deskema.it
+	Contributors:   Jarah de Jong
 	*/
 
 	// exit if accessed directly
