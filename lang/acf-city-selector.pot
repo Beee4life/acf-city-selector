@@ -1,0 +1,341 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ACF City Selector 1.0\n"
+"POT-Creation-Date: 2017-09-22 03:33+0200\n"
+"PO-Revision-Date: 2016-11-27 04:33+0100\n"
+"Last-Translator: Beee\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: acf-city-selector.php:141 acf-city-selector.php:160
+#: acf-city-selector.php:182 acf-city-selector.php:213
+msgid "Something went wrong, please try again."
+msgstr ""
+
+#: acf-city-selector.php:170
+msgid "Settings saved"
+msgstr ""
+
+#: acf-city-selector.php:221
+msgid "Congratulations, your csv data seems valid."
+msgstr ""
+
+#: acf-city-selector.php:251
+#, php-format
+msgid "Congratulations, you imported %d city."
+msgstr ""
+
+#: acf-city-selector.php:283
+msgid "Warning"
+msgstr ""
+
+#: acf-city-selector.php:290
+msgid "Error"
+msgstr ""
+
+#: acf-city-selector.php:302
+msgid "Dismiss this notice"
+msgstr ""
+
+#: acf-city-selector.php:335
+msgid "Settings"
+msgstr ""
+
+#: acf-city-selector.php:404
+#, php-format
+msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
+msgstr ""
+
+#: fields/acf-city_selector-v4.php:32
+msgid "Choice"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:76
+msgid "Yes"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:77
+msgid "No"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:83
+msgid "Show labels"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:84
+msgid "Show field labels above the dropdown menus"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:106 inc/country-field.php:33
+msgid "Select country"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:127 inc/country-field.php:68
+msgid "Select provence/state"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:135 inc/country-field.php:115
+msgid "Select city"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:240
+msgid "You didn't select a city"
+msgstr ""
+
+#: inc/admin-page.php:8 inc/pro-page.php:8 inc/settings-page.php:8
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: inc/admin-page.php:18
+msgid "ACF City Selector"
+msgstr ""
+
+#: inc/admin-page.php:22 inc/settings-page.php:37
+#, php-format
+msgid "On this page you can find some helpful info about the %s plugin as well as some settings."
+msgstr ""
+
+#: inc/admin-page.php:30
+msgid "Import countries"
+msgstr ""
+
+#: inc/admin-page.php:31
+msgid "Here you can (re-)import all cities for the individual countries listed below."
+msgstr ""
+
+#: inc/admin-page.php:36
+msgid "Import cities in Holland/The Netherlands"
+msgstr ""
+
+#: inc/admin-page.php:43
+msgid "Import cities in Belgium"
+msgstr ""
+
+#: inc/admin-page.php:50
+msgid "Import cities in Luxembourg"
+msgstr ""
+
+#: inc/admin-page.php:54
+msgid "Import selected countries"
+msgstr ""
+
+#: inc/admin-right.php:3
+msgid "About the plugin"
+msgstr ""
+
+#: inc/admin-right.php:4
+#, php-format
+msgid "This plugin is an extension for %s. I built it because there was no properly working plugin which did this."
+msgstr ""
+
+#: inc/admin-right.php:5
+#, php-format
+msgid "<a href=\"%s\" target=\"_blank\">Click here</a> for a demo on my own website."
+msgstr ""
+
+#: inc/admin-right.php:9
+msgid "About Beee"
+msgstr ""
+
+#: inc/admin-right.php:10
+#, php-format
+msgid "If you need a Wordpress designer/coder to do work on your site, hit me up <a href=\"%s\">here</a>."
+msgstr ""
+
+#: inc/admin-right.php:15
+#, php-format
+msgid "If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s."
+msgstr ""
+
+#: inc/admin-right.php:20
+msgid "If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it."
+msgstr ""
+
+#: inc/help-tabs.php:25
+msgid "Import data"
+msgstr ""
+
+#: inc/help-tabs.php:28
+msgid "On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin."
+msgstr ""
+
+#: inc/help-tabs.php:29
+msgid "You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won't work."
+msgstr ""
+
+#: inc/help-tabs.php:30
+msgid "The required order is \"City,State code,State,Country code,Country\"."
+msgstr ""
+
+#: inc/help-tabs.php:41
+msgid "City"
+msgstr ""
+
+#: inc/help-tabs.php:42
+msgid "full name"
+msgstr ""
+
+#: inc/help-tabs.php:43
+msgid "no use of double quotes/\"."
+msgstr ""
+
+#: inc/help-tabs.php:46
+msgid "State code"
+msgstr ""
+
+#: inc/help-tabs.php:47
+msgid "state abbreviation"
+msgstr ""
+
+#: inc/help-tabs.php:48 inc/help-tabs.php:58
+msgid "exactly 2 characters"
+msgstr ""
+
+#: inc/help-tabs.php:51
+msgid "State"
+msgstr ""
+
+#: inc/help-tabs.php:52
+msgid "full state name"
+msgstr ""
+
+#: inc/help-tabs.php:56
+msgid "Country code"
+msgstr ""
+
+#: inc/help-tabs.php:57
+msgid "country abbreviation"
+msgstr ""
+
+#: inc/help-tabs.php:61 inc/pro-page.php:42
+msgid "Country"
+msgstr ""
+
+#: inc/help-tabs.php:62
+msgid "full country name"
+msgstr ""
+
+#: inc/help-tabs.php:72
+msgid "Author's website"
+msgstr ""
+
+#: inc/pro-page.php:18 inc/settings-page.php:33
+msgid "ACF City Selector Settings"
+msgstr ""
+
+#: inc/pro-page.php:25
+msgid "Go Pro"
+msgstr ""
+
+#: inc/pro-page.php:26
+msgid "Default the plugin comes with 3 languages included, namely the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!"
+msgstr ""
+
+#: inc/pro-page.php:27
+msgid "We have more countries available. You can either buy a seperate country packages or get a Pro subscription and get every new update when we'll make a new country available."
+msgstr ""
+
+#: inc/pro-page.php:31
+msgid "Pro subscription"
+msgstr ""
+
+#: inc/pro-page.php:32
+msgid "Buy once and get all coming countries for free !!! One price for all packages."
+msgstr ""
+
+#: inc/pro-page.php:33
+msgid "Order now !!!"
+msgstr ""
+
+#: inc/pro-page.php:37
+msgid "Country packages"
+msgstr ""
+
+#: inc/pro-page.php:43
+msgid "states/provences"
+msgstr ""
+
+#: inc/pro-page.php:44
+msgid "cities"
+msgstr ""
+
+#: inc/pro-page.php:45
+msgid "Price"
+msgstr ""
+
+#: inc/pro-page.php:46
+msgid "Order"
+msgstr ""
+
+#: inc/settings-page.php:18
+msgid "You successfully imported all cities in The Netherlands."
+msgstr ""
+
+#: inc/settings-page.php:21
+msgid "You successfully imported all cities in Belgium."
+msgstr ""
+
+#: inc/settings-page.php:24
+msgid "You successfully imported all cities in Luxembourg."
+msgstr ""
+
+#: inc/settings-page.php:45
+msgid "Save data"
+msgstr ""
+
+#: inc/settings-page.php:46
+msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to save all your cities/settings."
+msgstr ""
+
+#: inc/settings-page.php:52
+msgid "Preserve settings on plugin deletion"
+msgstr ""
+
+#: inc/settings-page.php:56
+msgid "Save settings"
+msgstr ""
+
+#: inc/settings-page.php:64
+msgid "Clear the database"
+msgstr ""
+
+#: inc/settings-page.php:65
+msgid "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start."
+msgstr ""
+
+#: inc/settings-page.php:70
+msgid "Delete all cities from the database"
+msgstr ""
+
+#: inc/settings-page.php:74
+msgid "Nuke 'em"
+msgstr ""
+
+#: inc/verify-csv-data.php:33
+#, php-format
+msgid "There are too few columns on line %d."
+msgstr ""
+
+#: inc/verify-csv-data.php:38
+#, php-format
+msgid "There are too many columns on line %d."
+msgstr ""
+
+#: inc/verify-csv-data.php:50
+#, php-format
+msgid "The length of the state abbreviation on line %d is incorrect."
+msgstr ""
+
+#: inc/verify-csv-data.php:57
+#, php-format
+msgid "The length of the country abbreviation on line %d is incorrect."
+msgstr ""
