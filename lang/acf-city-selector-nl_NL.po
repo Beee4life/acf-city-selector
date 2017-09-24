@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-24 05:47+0200\n"
-"PO-Revision-Date: 2017-09-24 05:54+0200\n"
+"POT-Creation-Date: 2017-09-24 07:14+0200\n"
+"PO-Revision-Date: 2017-09-24 07:14+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -90,19 +90,24 @@ msgstr "Fout"
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: acf-city-selector.php:459 acf-city-selector.php:470
+#: acf-city-selector.php:459 acf-city-selector.php:472
 msgid "Settings"
 msgstr "Instellingen"
-
-#: acf-city-selector.php:470
-msgid "Dashboard"
-msgstr "Dashboard"
 
 #: acf-city-selector.php:470 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr "Go Pro"
 
-#: acf-city-selector.php:516
+#: acf-city-selector.php:472
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: acf-city-selector.php:507
+#, php-format
+msgid "%s says \"Thank you\""
+msgstr "%s zegt “Bedankt”"
+
+#: acf-city-selector.php:518
 #, php-format
 msgid ""
 "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
@@ -160,31 +165,15 @@ msgid ""
 "This plugin is an extension for %s. I built it because there was no properly "
 "working plugin which did this."
 msgstr ""
-"Deze plugin bouwt verder op %s. Ik heb het geschreven omdat er geen werkende "
-"plugin beschikbaar was."
+"Deze plugin is een extensie voor %s. Ik heb het geschreven omdat er geen "
+"werkende plugin beschikbaar was."
 
 #: inc/admin-right.php:5
 #, php-format
-msgid ""
-"<a href=\"%s\" target=\"_blank\">Click here</a> for a demo on my own website."
-msgstr ""
-"<a href=“%s” target=“_blank”>Klik hier</a> voor een demo op mijn eigen "
-"website."
+msgid "<a href=\"%s\" target=\"_blank\">Click here</a> for our website."
+msgstr "<a href=“%s” target=“_blank”>Klik hier</a> voor onze website."
 
-#: inc/admin-right.php:9
-msgid "About Beee"
-msgstr "Over Beee"
-
-#: inc/admin-right.php:10
-#, php-format
-msgid ""
-"If you need a Wordpress designer/coder to do work on your site, hit me up <a "
-"href=\"%s\">here</a>."
-msgstr ""
-"Als je een Wordpress developer nodig hebt voor werk aan je site, contact me "
-"via <a href=“%s”>mijn site</a>."
-
-#: inc/admin-right.php:15
+#: inc/admin-right.php:11
 #, php-format
 msgid ""
 "If you need support for this plugin or if you have some good suggestions for "
@@ -193,13 +182,24 @@ msgstr ""
 "Als je support nodig hebt voor deze plugin of als je goede suggesties hebt, "
 "dan post ze op %s."
 
-#: inc/admin-right.php:20
+#: inc/admin-right.php:16
+msgid "About Beee"
+msgstr "Over Beee"
+
+#: inc/admin-right.php:17
+#, php-format
+msgid ""
+"If you need a Wordpress designer/coder for a project, contact me on me %s."
+msgstr ""
+"Als je een Wordpress developer nodig hebt voor een project, contact me op %s."
+
+#: inc/admin-right.php:22
 msgid ""
 "If you like this plugin, buy me a coke to show your appreciation so I can "
 "continue to develop it."
 msgstr ""
-"Als je deze plug-in leuk vindt, laat dat dan blijken door een coke voor me "
-"te kopen zodat ik door kan gaan met het ontwikkelen van de plugin."
+"Als je deze plug-in leuk vindt, laat dat dan blijken door een colaatje voor "
+"me te kopen zodat ik door kan gaan met het ontwikkelen van de plugin."
 
 #: inc/dashboard-page.php:8 inc/pro-page.php:8 inc/settings-page.php:8
 msgid "You do not have sufficient permissions to access this page."
@@ -214,12 +214,12 @@ msgid ""
 "On this page you can find some helpful info about the ACF City Selector "
 "plugin as well as some settings."
 msgstr ""
-"Op deze pagina vind je enige nuttige over de aCF City Selecteer plugin "
+"Op deze pagina vind je enige nuttige over de ACF City Selecteer plugin "
 "alsook enige instellingen."
 
 #: inc/dashboard-page.php:27
 msgid "Upload a csv file"
-msgstr "Upload een ckv bestand"
+msgstr "Upload een csv bestand"
 
 #: inc/dashboard-page.php:34
 msgid "Upload file"
@@ -366,7 +366,7 @@ msgid ""
 "to choose from. And now you can !!!"
 msgstr ""
 "Standaard komt de plugin met 3 talen, namelijk de Benelux; België, Nederland "
-"en Luxemburg but misschien wil je meer landen toevoegen. En nu kan dat !!!"
+"en Luxemburg maar misschien wil je meer landen toevoegen. En nu kan dat !!!"
 
 #: inc/pro-page.php:27
 msgid ""
@@ -413,11 +413,10 @@ msgid "Order"
 msgstr "Bestel"
 
 #: inc/settings-page.php:22
-#, php-format
 msgid ""
-"On this page you can find some helpful info about the %s plugin as well as "
-"some settings."
-msgstr "Op deze pagina vind je informatie en opties voor de %s plugin."
+"On this page you can find import options for the 'ACF City Selector' plugin."
+msgstr ""
+"Op deze pagina vind je import opties voor de ‘ACF City Selector’ plugin."
 
 #: inc/settings-page.php:30
 msgid "Import countries"
@@ -431,16 +430,16 @@ msgstr ""
 "Hier kun je alle steden (opnieuw) importeren voor alle onderstaande landen."
 
 #: inc/settings-page.php:35
-msgid "Import cities in Holland/The Netherlands"
-msgstr "Importeer steden in Nederland"
+msgid "Import all cities in Holland/The Netherlands"
+msgstr "Importeer alle steden in Nederland"
 
 #: inc/settings-page.php:40
-msgid "Import cities in Belgium"
-msgstr "Importeer steden in België"
+msgid "Import all cities in Belgium"
+msgstr "Importeer alle steden in België"
 
 #: inc/settings-page.php:45
-msgid "Import cities in Luxembourg"
-msgstr "Importeer steden in Luxemburg"
+msgid "Import all cities in Luxembourg"
+msgstr "Importeer alle steden in Luxemburg"
 
 #: inc/settings-page.php:48
 msgid "Import selected countries"
@@ -456,7 +455,7 @@ msgid ""
 "the database. This is handy if you don't need the preset cities or you want "
 "a fresh start."
 msgstr ""
-"Als je deze optie selecteer, worden alle steden verwijderd uit de database. "
+"Als je deze optie selecteert, worden alle steden verwijderd uit de database. "
 "Dit is handig als je de default steden niet nodig hebt of een frisse start "
 "wilt."
 
@@ -477,9 +476,9 @@ msgid ""
 "When the plugin is deleted, all settings and cities are deleted as well. "
 "Select this option to save all your cities/settings."
 msgstr ""
-"Wanneer de plugin wordt verwijderd, worden alle instellingen en alle steden "
-"ook verwijderd. Selecteer deze optie om deze te bewaren wanneer de plugin "
-"wordt verwijderd."
+"Wanneer de plugin wordt verwijderd, worden alle steden en instellingen "
+"verwijderd. Selecteer deze optie om alle steden en instellingen te bewaren "
+"wanneer de plugin wordt verwijderd."
 
 #: inc/settings-page.php:80
 msgid "Preserve settings on plugin deletion"

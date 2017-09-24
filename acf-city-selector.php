@@ -467,7 +467,9 @@
 			 * Admin menu
 			 */
 			public static function acfcs_admin_menu() {
-				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a></p>';
+				$gopro = ( ENV == 'dev' ) ? ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>' : false;
+
+				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
 
 			}
 
@@ -502,7 +504,7 @@
 			}
 
 			$id       = 'donate-acf-cs';
-			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">Beee says "Thank you"</a>';
+			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">' . sprintf( __( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
 			$callback = 'show_donate_meta_box';
 			$screens  = array();
 			$context  = 'side';

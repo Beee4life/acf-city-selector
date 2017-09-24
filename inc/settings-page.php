@@ -19,7 +19,7 @@
 
 			<?php echo acf_plugin_city_selector::acfcs_admin_menu(); ?>
 
-            <p><?php sprintf( esc_html__( 'On this page you can find some helpful info about the %s plugin as well as some settings.', 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
+            <p><?php esc_html_e( 'On this page you can find import options for the \'ACF City Selector\' plugin.', 'acf-city-selector' ); ?></p>
 
             <!-- left part -->
             <div class="admin_left">
@@ -32,17 +32,17 @@
 
                     <p>
                         <label for="import_nl" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
+                        <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
                     </p>
 
                     <p>
                         <label for="import_be" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import cities in Belgium', 'acf-city-selector' ); ?> (1166)
+                        <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
                     </p>
 
                     <p>
                         <label for="import_lux" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import cities in Luxembourg', 'acf-city-selector' ); ?> (12)
+                        <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import all cities in Luxembourg', 'acf-city-selector' ); ?> (12)
                     </p>
 
                     <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected countries', 'acf-city-selector' ); ?>" />
