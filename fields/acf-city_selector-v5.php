@@ -257,10 +257,15 @@
 			 */
 			function validate_value( $valid, $value, $field, $input ) {
 
-				// Advanced usage
-				if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' ) {
-					$valid = __( 'You didn\'t select a city', 'acf-city-selector' );
-				}
+
+			    if ( 1 == $field['required'] ) {
+
+				    // Advanced usage
+				    if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' || $value['cityNameAscii'] == 0 ) {
+					    $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
+				    }
+
+                }
 
 				// return
 				return $valid;
