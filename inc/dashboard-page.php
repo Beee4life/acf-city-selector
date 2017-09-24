@@ -64,8 +64,8 @@
 					            <?php if ( $has_files ) { ?>
                                     <br />
                                     <input name="verify" type="submit" class="button button-primary" value="Verify selected file(s)" />
-                                    <!--<input name="import" type="submit" class="button button-primary" value="Import selected file(s)" />-->
-                                    <!--<input name="remove" type="submit" class="button button-primary" value="Remove selected file(s)" />-->
+                                    <input name="import" type="submit" class="button button-primary" value="Import selected file(s)" />
+                                    <input name="remove" type="submit" class="button button-primary" value="Remove selected file(s)" />
 						        <?php } ?>
                             </form>
 
