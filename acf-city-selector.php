@@ -265,7 +265,7 @@
 								$prefix     = esc_html( __( 'Error', 'action-logger' ) );
 							}
 						}
-						echo '<div class="notice ' . $span_class . 'is-dismissible">';
+						echo '<div class="error notice ' . $span_class . 'is-dismissible">';
 						foreach( $codes as $code ) {
 							$message = acf_plugin_city_selector::acfcs_errors()->get_error_message( $code );
 							echo '<div class="">';
