@@ -126,7 +126,7 @@
 			public function acfcs_upload_csv_file() {
 				if ( isset( $_POST["upload_csv_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["upload_csv_nonce"], 'upload-csv-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 						return;
 					} else {
 
@@ -137,14 +137,14 @@
 						if (move_uploaded_file($_FILES['csv_upload']['tmp_name'], $target_file)) {
 
 							// file uploaded succeeded
-							$this->acfcs_errors()->add( 'success_file_uploaded', __( 'File "' . $_FILES[ 'csv_upload' ][ 'name' ] . '" is successfully uploaded and now shows under \'Select files to import\'.', 'rankings-import' ) );
+							$this->acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( 'File "%s" is successfully uploaded and now shows under \'Select files to import\'', 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
 
 							return;
 
 						} else {
 
 							// file upload failed
-							$this->acfcs_errors()->add( 'error_file_uploaded', __( 'Upload failed. Please try again.', 'rankings-import' ) );
+							$this->acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
 
 							return;
 						}
@@ -162,14 +162,14 @@
 
 				if ( isset( $_POST[ "select_file_nonce" ] ) ) {
 					if ( ! wp_verify_nonce( $_POST[ "select_file_nonce" ], 'select-file-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_nonce_no_match', __( 'Something went wrong. Please try again.', 'rankings-import' ) );
+						$this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong. Please try again.', 'acf-city-selector' ) );
 
 						return;
 					} else {
 						// nonce ok + verified
 
 						if ( ! isset( $_POST[ 'file_name' ] ) ) {
-							$this->acfcs_errors()->add( 'error_no_file_selected', __( 'You didn\'t select a file.', 'rankings-import' ) );
+							$this->acfcs_errors()->add( 'error_no_file_selected', esc_html__( 'You didn\'t select a file.', 'acf-city-selector' ) );
 
 							return;
 						}
@@ -185,7 +185,7 @@
 							$verified_data = acfcs_verify_csv_data( $read_data );
 
 							if ( false != $verified_data ) {
-								$this->acfcs_errors()->add( 'success_no_errors_in_csv', __( 'Congratulations, there appear to be no errors in your CSV.', 'rankings-import' ) );
+								$this->acfcs_errors()->add( 'success_no_errors_in_csv', esc_html__( 'Congratulations, there appear to be no errors in your CSV.', 'acf-city-selector' ) );
 
 								return;
 							}
@@ -219,7 +219,7 @@
 
 								}
 
-								$this->acfcs_errors()->add( 'success_rankings_imported', __( 'YAY ! ' . $line_number . ' lines are imported.', 'rankings-import' ) );
+								$this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'YAY ! %d lines are imported.', 'acf-city-selector' ), $line_number ) );
 
 								return;
 							}
@@ -232,11 +232,11 @@
 									unlink( wp_upload_dir()['basedir'] . '/acfcs/' . $file_name );
 								}
 								if ( count( $_POST['file_name'] ) == 1 ) {
-									$this->acfcs_errors()->add( 'success_file_deleted', __( 'File "' . $file_name . '" successfully deleted.', 'rankings-import' ) );
+									$this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
 
 									return;
 								} else {
-									$this->acfcs_errors()->add( 'success_files_deleted', __( 'Files successfully deleted.', 'rankings-import' ) );
+									$this->acfcs_errors()->add( 'success_files_deleted', esc_html__( 'Files successfully deleted.', 'acf-city-selector' ) );
 
 									return;
 								}
@@ -254,7 +254,7 @@
 				if ( isset( $_POST["import_raw_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["import_raw_nonce"], 'import-raw-nonce' ) ) {
 						// @TODO: Throw error
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 						return;
 					} else {
 
@@ -262,7 +262,7 @@
 					        // verify data
 						    $verify_data = acfcs_verify_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
-							    $this->acfcs_errors()->add( 'success_csv_valid', __( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
+							    $this->acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
                             }
 
                         } elseif ( isset( $_POST[ 'import' ]) ) {
@@ -306,7 +306,7 @@
 			public function acfcs_import_preset_countries() {
 				if ( isset( $_POST["import_actions_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["import_actions_nonce"], 'import-actions-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 						return;
 					} else {
 
@@ -336,7 +336,7 @@
 			public function acfcs_truncate_table() {
 				if ( isset( $_POST["truncate_table_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["truncate_table_nonce"], 'truncate-table-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 						return;
 					} else {
 
@@ -346,7 +346,7 @@
 								global $wpdb;
 								$prefix = $wpdb->get_blog_prefix();
 								$wpdb->query( 'TRUNCATE TABLE ' . $prefix . 'cities' );
-								$this->acfcs_errors()->add( 'success_table_truncated', __( 'All cities are deleted.', 'acf-city-selector' ) );
+								$this->acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
 
 							}
 						}
@@ -361,7 +361,7 @@
 			public function acfcs_preserve_settings() {
 				if ( isset( $_POST["preserve_settings_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["preserve_settings_nonce"], 'preserve-settings-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 
 						return;
 					} else {
@@ -371,7 +371,7 @@
 						} else {
 							delete_option( 'acfcs_preserve_settings' );
 						}
-						$this->acfcs_errors()->add( 'success_settings_saved', __( 'Settings saved', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'success_settings_saved', esc_html__( 'Settings saved', 'acf-city-selector' ) );
 					}
 				}
 			}
@@ -404,14 +404,14 @@
 								$prefix     = false;
 							} elseif ( strpos( $code, 'error' ) !== false ) {
 								$span_class = 'notice-error ';
-								$prefix     = esc_html( __( 'Warning', 'action-logger' ) );
+								$prefix     = esc_html__( 'Warning', 'action-logger' );
 							} elseif ( strpos( $code, 'info' ) !== false ) {
 								$span_class = 'notice-info ';
 								$prefix     = false;
 							} else {
 								$error      = true;
 								$span_class = 'notice-error ';
-								$prefix     = esc_html( __( 'Error', 'action-logger' ) );
+								$prefix     = esc_html__( 'Error', 'action-logger' );
 							}
 						}
 						echo '<div class="notice ' . $span_class . 'is-dismissible">';
@@ -423,7 +423,7 @@
 							}
 							echo $message;
 							echo '</div>';
-							echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html( __( 'Dismiss this notice', 'action-logger' ) ) . '</span></button>';
+							echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'action-logger' ) . '</span></button>';
 						}
 						echo '</div>';
 					}
@@ -467,7 +467,7 @@
 			 * Admin menu
 			 */
 			public static function acfcs_admin_menu() {
-				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">Settings</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">Go Pro</a></p>';
+				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a></p>';
 
 			}
 

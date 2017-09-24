@@ -34,7 +34,7 @@
 			if ( $field['show_labels'] == 1 ) {
 				$items[] = '-';
 			} else {
-				$items[] = __( 'Select country', 'acf-city-selector' );
+				$items[] = esc_html__( 'Select country', 'acf-city-selector' );
 			}
 		}
 		foreach ( $db as $data ) {
@@ -101,7 +101,7 @@
 		$items                    = array();
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
-		$items[0]['states']       = __( 'Select provence/state', 'acf-city-selector' );
+		$items[0]['states']       = esc_html__( 'Select provence/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
@@ -152,7 +152,7 @@
 			}
 			$items                 = array();
 			$items[0]['id']        = "";
-			$items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
+			$items[0]['city_name'] = esc_html__( 'Select city', 'acf-city-selector' );
 			$i                     = 1;
 
 			foreach ( $db as $data ) {

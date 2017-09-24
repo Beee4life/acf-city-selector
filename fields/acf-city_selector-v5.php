@@ -80,8 +80,8 @@
 					'type'         => 'radio',
 					'choices'      => $select_options,
 					'layout'       => 'horizontal',
-					'label'        => __( 'Show labels', 'acf-city-selector' ),
-					'instructions' => __( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
+					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 					'name'         => 'show_labels'
 				) );
 
@@ -139,7 +139,7 @@
 
                 <div class="cs_cities">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityNameAscii" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
@@ -259,7 +259,7 @@
 
 				// Advanced usage
 				if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' ) {
-					$valid = __( 'You didn\'t select a city', 'acf-city-selector' );
+					$valid = esc_html__( 'You didn\'t select a city', 'acf-city-selector' );
 				}
 
 				// return

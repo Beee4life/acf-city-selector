@@ -39,4 +39,4 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, st
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Vianden", "na", "n/a", "LU", "Luxembourg");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Wiltz", "na", "n/a", "LU", "Luxembourg");
 
-<?php $this->acfcs_errors()->add( 'success_cities_imported_luxembourg', __( 'Successfully imported 11 cities for Luxembourg.', 'acf-city-selector' ) ); ?>
+<?php $this->acfcs_errors()->add( 'success_cities_imported_luxembourg', esc_html__( 'Successfully imported 11 cities for Luxembourg.', 'acf-city-selector' ) ); ?>
