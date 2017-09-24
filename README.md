@@ -70,6 +70,7 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 
 * Wordpress 4.8.2.
 * Advanced Custom Fields Pro 5.6.2
+* NOT TESTED on the free ACF version (yet)
 
 #### To Do
 * [X] - Store values properly
@@ -81,7 +82,7 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 * [X] - Add Belgian cities/provences (in progress)
 * [X] - Add Luxembourg cities/provences
 * [X] - Test on Mac Chrome
-* [ ] - Load values when editing post
+* [X] - Load values when editing post
 * [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [ ] - Return state/provence name
 * [ ] - Add lazy/fancy loading (ajax) - optional
@@ -116,15 +117,17 @@ The plugin contains the following languages:
 ### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
-`add_filter('remove_donate_nag', '__return_true');`
+`add_filter('remove_acfcs_donate_nag', '__return_true');`
 
 ### Support
 
-Support is welcome since I haven't fixed a few issues. You're welcome to fork it and create a pull request.
+If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
 
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
+
+Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
 
 ### Changelog
 

@@ -8,11 +8,6 @@
 
     if (country.length) {
 
-        // get_field( 'sd_city_selector' )
-        // if has value, split array in 3 values
-        // $country, $state, $city
-        // else country.change
-
         country.change(function() {
 
             console.log('-= Country selected');
@@ -91,6 +86,48 @@
             callback(response);
         });
     }
+
+    // Load select states when editing a post
+    function admin_post_edit_load_states() {
+        get_states(city_selector_vars.countryCode, function(response) {
+
+            var obj          = JSON.parse(response);
+            var len          = obj.length;
+            var $stateValues = '';
+
+            $("select[name*='stateCode']").fadeIn();
+            for (i = 0; i < len; i++) {
+                var mystate = obj[i];
+
+                $stateValues += '<option value="'+mystate.country_code+'-'+mystate.state_code+'">'+mystate.states+'</option>';
+
+            }
+            $("select[name*='stateCode']").append($stateValues);
+
+        });
+    }
+
+    // Load select cities when editing a post
+    function admin_post_edit_load_cities() {
+        // $("select[name*='cityNameAscii']").hide();
+        get_cities(city_selector_vars.stateCode, function(response) {
+
+            var obj          = JSON.parse(response);
+            var len          = obj.length;
+            var $cityValues = '';
+
+            $("select[name*='cityNameAscii']").fadeIn();
+            for (i = 0; i < len; i++) {
+                var mycity = obj[i];
+                $cityValues += '<option value="'+mycity.city_name+'">'+mycity.city_name+'</option>';
+            }
+            $("select[name*='cityNameAscii']").append($cityValues);
+
+        });
+    }
+
+    admin_post_edit_load_states();
+    admin_post_edit_load_cities();
 
 })(jQuery);
 

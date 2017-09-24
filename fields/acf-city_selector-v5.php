@@ -98,16 +98,26 @@
 			 */
 			function render_field( $field ) {
 
-				// field output in form
-				$countrycode = $field['value']['countryCode'];
+                // field output in form
+                $countrycode = $field[ 'value' ][ 'countryCode' ];
+                $countries   = populate_country_select( '', $field );
+                $stateCode   = $field[ 'value' ][ 'stateCode' ];
+                $cityName    = $field[ 'value' ][ 'cityNameAscii' ];
+                $states      = get_states( $countrycode );
+                $stateName   = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false;
 				?>
                 <div class="cs_countries">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php _e( 'Select country', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
-						<?php
+                        <?php if ( $countrycode != null ) { ?>
+                            <optgroup label="<?php esc_html_e( 'Current option', 'acf-city-selector' ); ?>">
+                                <option value="<?php echo $countrycode; ?>"><?php echo $countries[ $countrycode ]; ?></option>
+                            </optgroup>
+                        <?php
+                        }
                             foreach ( populate_country_select( '', $field ) as $key => $country ) {
                                 if ( $countrycode == $key ) {
                                     $selected = ' selected';
@@ -124,10 +134,14 @@
 
                 <div class="cs_provences">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php _e( 'Select provence/state', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select provence/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect"></select>
+                    <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
+                        <optgroup label="<?php esc_html_e( 'Current option', 'acf-city-selector' ); ?>">
+                            <option value="<?php echo $stateCode; ?>"><?php echo $stateName; ?></option>
+                        </optgroup>
+                    </select>
                 </div>
 
                 <div class="cs_cities">
@@ -135,7 +149,11 @@
                         <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityNameAscii" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect"></select>
+                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
+                        <optgroup label="<?php _e( 'Current option', 'acf-city-selector' ); ?>">
+                            <option value="<?php echo $cityName; ?>"><?php echo $cityName; ?></option>
+                        </optgroup>
+                    </select>
                 </div>
 				<?php
 			}
@@ -160,6 +178,19 @@
 				// register & include JS
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
+
+				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
+					$post_meta = get_post_meta( get_the_ID(), 'test_acf', 1 );
+					if ( ! empty( $post_meta) ) {
+
+						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+							'countryCode' => $post_meta[ 'countryCode' ],
+							'stateCode'   => $post_meta[ 'stateCode' ],
+						) );
+
+                    }
+
+				}
 
 				// register & include CSS
 				wp_register_style( 'acf-city-selector-css', "{$url}assets/css/acf-city-selector.css", array( 'acf-input' ), $version );

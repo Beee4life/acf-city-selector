@@ -216,14 +216,14 @@
 
 					    if ( isset( $_POST[ 'verify' ]) ) {
 					        // verify data
-						    $verify_data = verify_csv_data( $_POST['raw_csv_import'] );
+						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    $this->acfcs_errors()->add( 'success_csv_valid', __( 'Congratulations, your csv data seems valid.', 'acf-city-selector' ) );
                             }
 
                         } elseif ( isset( $_POST[ 'import' ]) ) {
                             // verify data
-						    $verify_data = verify_csv_data( $_POST['raw_csv_import'] );
+						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    // import data
                                 global $wpdb;
