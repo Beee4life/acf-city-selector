@@ -110,18 +110,14 @@
 					<?php if ( $field['show_labels'] == 1 ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-                    <?php
-                        // echo '<pre>'; var_dump($countrycode); echo '</pre>';
-                        // exit;
-                    ?>
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
-                        <?php foreach ( populate_country_select( '', $field ) as $key => $country ) {
-                                if ( $countrycode == $key ) {
-                                    $selected = " selected=\"selected\"";
-                                } else {
-                                    $selected = false;
-                                }
+                        <?php
+	                        $populate_countries = populate_country_select( '', $field );
+	                        $first_item = ( $field['show_labels'] == 1 ) ? '' : esc_html__( 'Select country', 'acf-city-selector' );
+	                        array_unshift( $populate_countries, $first_item );
+                            foreach ( $populate_countries as $key => $country ) {
+	                            $selected = ( $countrycode == $key ) ? " selected=\"selected\"" : false;
 							?>
                             <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
 						<?php } ?>
@@ -139,7 +135,7 @@
 
                 <div class="cs_cities">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php _e( 'Select city', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityNameAscii" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
@@ -161,11 +157,9 @@
 			 */
 
 			function input_admin_head() {
-				// vars
 				$url     = $this->settings['url'];
 				$version = $this->settings['version'];
 
-				// register & include JS
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
 
