@@ -104,11 +104,12 @@
 		$items                    = array();
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
-		$items[0]['states']       = __( 'Select provence/state', 'acf-city-selector' );
+		$items[0]['states']       = "";
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
         // if == 1, $items[0]['states'] = '-';
+        // __( 'Select provence/state', 'acf-city-selector' )
 
 		foreach ( $db as $data ) {
 			$items[ $i ]['country_code'] = $data->country_code;
@@ -118,7 +119,7 @@
 			} else {
 				$items[ $i ]['states'] = $data->country;
 			}
-			$i ++;
+			$i++;
 		}
 		ob_clean();
 		echo json_encode( $items );
@@ -155,7 +156,8 @@
 			}
 			$items                 = array();
 			$items[0]['id']        = "";
-			$items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
+			// $items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
+			$items[0]['city_name'] = "";
 			$i                     = 1;
 
 			foreach ( $db as $data ) {
