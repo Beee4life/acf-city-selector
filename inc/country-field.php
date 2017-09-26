@@ -31,18 +31,21 @@
 
 		$items = array();
 		if ( null == $selectedCountry ) {
-			if ( $field['show_labels'] == 1 ) {
-				$items[] = '-';
-			} else {
-				$items[] = __( 'Select country', 'acf-city-selector' );
-			}
+			// if ( $field['show_labels'] == 1 ) {
+			// 	$items[] = '';
+			// } else {
+			// 	$items[] = __( 'Select country', 'acf-city-selector' );
+			// }
 		}
+		// echo '<pre>'; var_dump($db); echo '</pre>'; exit;
 		foreach ( $db as $data ) {
+			// echo '<pre>'; var_dump($data); echo '</pre>'; exit;
 			$items[ $data->country_code ] = $data->country;
 		}
 		if ( count( $items ) > 1 ) {
 			// TO DO: print countries to file to index for translation
 		}
+		// echo '<pre>'; var_dump($items); echo '</pre>'; exit;
 
 		return $items;
 	}
