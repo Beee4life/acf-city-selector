@@ -132,7 +132,7 @@
         });
     }
 
-    if( typeof city_selector_vars !== "undefined" ) {
+    if(typeof city_selector_vars !== "undefined") {
         admin_post_edit_load_states();
         admin_post_edit_load_cities();
     }
