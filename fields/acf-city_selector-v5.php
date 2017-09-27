@@ -22,7 +22,7 @@
 			 */
 			function __construct( $settings ) {
 
-				$this->name     = 'sd_city_selector';
+				$this->name     = 'acf_city_selector';
 				$this->label    = 'City Selector';
 				$this->category = 'choice';
 				$this->defaults = array(
