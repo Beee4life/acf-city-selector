@@ -48,7 +48,7 @@
 
 				// actions
 				add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
-				add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4 (not done)
+				add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4 (not done yet)
 				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
 				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
@@ -57,12 +57,12 @@
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
 
 				// always load, move to $this->
-				add_action( 'init',                         array( $this, 'acfcs_truncate_table' ) );
-				add_action( 'init',                         array( $this, 'acfcs_import_preset_countries' ) );
-				add_action( 'init',                         array( $this, 'acfcs_import_raw_data' ) );
 				add_action( 'init',                         array( $this, 'acfcs_upload_csv_file' ) );
-				add_action( 'init',                         array( $this, 'acfcs_preserve_settings' ) );
 				add_action( 'init',                         array( $this, 'acfcs_do_something_with_file' ) );
+				add_action( 'init',                         array( $this, 'acfcs_import_raw_data' ) );
+				add_action( 'init',                         array( $this, 'acfcs_import_preset_countries' ) );
+				add_action( 'init',                         array( $this, 'acfcs_preserve_settings' ) );
+				add_action( 'init',                         array( $this, 'acfcs_truncate_table' ) );
 
 				// always load
 				$this->acfcs_admin_menu();
@@ -258,13 +258,13 @@
 					} else {
 
 					    if ( isset( $_POST[ 'verify' ]) ) {
-						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
+						    $verify_data = acfcs_verify_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    $this->acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
                             }
 
                         } elseif ( isset( $_POST[ 'import' ]) ) {
-						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
+						    $verify_data = acfcs_verify_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    // import data
                                 global $wpdb;

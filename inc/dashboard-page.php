@@ -19,16 +19,14 @@
 
             <?php echo acf_plugin_city_selector::acfcs_admin_menu(); ?>
 
-            <p><?php esc_html_e( 'On this page you can find some helpful info about the ACF City Selector plugin as well as some settings.', 'acf-city-selector' ); ?></p>
-
             <!-- left part -->
             <div class="admin_left">
 
-                <h2><?php esc_html_e( 'Upload a csv file', 'acf-city-selector' ); ?></h2>
+                <h2><?php esc_html_e( 'Upload a CSV file', 'acf-city-selector' ); ?></h2>
                 <form enctype="multipart/form-data" method="post">
                     <input name="upload_csv_nonce" type="hidden" value="<?php echo wp_create_nonce( 'upload-csv-nonce' ); ?>" />
                     <input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
-                    <label for="file_upload">Choose a (csv) file to upload</label>
+                    <label for="file_upload">Choose a (CSV) file to upload</label>
                     <input name="csv_upload" type="file" accept=".csv" />
                     <br /><br />
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload file', 'acf-city-selector' ); ?>" />
@@ -72,7 +70,7 @@
 				            <?php
 			            }
 			            if ( false == $has_files && '.DS_Store' != $file_index[0] ) {
-				            echo '<ul><li>' . esc_html__( 'No files uploaded', 'acf-city-selector' ) . '</li></ul>';
+				            echo '<ul><li>' . esc_html__( 'No files uploaded (yet).', 'acf-city-selector' ) . '</li></ul>';
 			            }
 			            echo '</ul>';
 		            }

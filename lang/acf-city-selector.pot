@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-24 05:48+0200\n"
+"POT-Creation-Date: 2017-09-27 03:42+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -16,9 +16,9 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:129 acf-city-selector.php:257
-#: acf-city-selector.php:309 acf-city-selector.php:339
-#: acf-city-selector.php:364
+#: acf-city-selector.php:129 acf-city-selector.php:256
+#: acf-city-selector.php:306 acf-city-selector.php:336
+#: acf-city-selector.php:361
 msgid "Something went wrong, please try again."
 msgstr ""
 
@@ -57,48 +57,53 @@ msgstr ""
 msgid "Files successfully deleted."
 msgstr ""
 
-#: acf-city-selector.php:265
+#: acf-city-selector.php:263
 msgid "Congratulations, your CSV data seems valid."
 msgstr ""
 
-#: acf-city-selector.php:295
+#: acf-city-selector.php:292
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr ""
 
-#: acf-city-selector.php:349
+#: acf-city-selector.php:346
 msgid "All cities are deleted."
 msgstr ""
 
-#: acf-city-selector.php:374
+#: acf-city-selector.php:371
 msgid "Settings saved"
 msgstr ""
 
-#: acf-city-selector.php:407
+#: acf-city-selector.php:404
 msgid "Warning"
 msgstr ""
 
-#: acf-city-selector.php:414
+#: acf-city-selector.php:411
 msgid "Error"
 msgstr ""
 
-#: acf-city-selector.php:426
+#: acf-city-selector.php:423
 msgid "Dismiss this notice"
 msgstr ""
 
-#: acf-city-selector.php:459 acf-city-selector.php:470
+#: acf-city-selector.php:455 acf-city-selector.php:468
 msgid "Settings"
 msgstr ""
 
-#: acf-city-selector.php:470
-msgid "Dashboard"
-msgstr ""
-
-#: acf-city-selector.php:470 inc/pro-page.php:25
+#: acf-city-selector.php:466 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr ""
 
-#: acf-city-selector.php:516
+#: acf-city-selector.php:468
+msgid "Dashboard"
+msgstr ""
+
+#: acf-city-selector.php:503
+#, php-format
+msgid "%s says \"Thank you\""
+msgstr ""
+
+#: acf-city-selector.php:514
 #, php-format
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
@@ -123,19 +128,20 @@ msgstr ""
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:111 inc/country-field.php:37
+#: fields/acf-city_selector-v5.php:106 fields/acf-city_selector-v5.php:121
+#: inc/country-field.php:37
 msgid "Select country"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:133 inc/country-field.php:104
+#: fields/acf-city_selector-v5.php:140
 msgid "Select provence/state"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:142 inc/country-field.php:155
+#: fields/acf-city_selector-v5.php:149
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:262
+#: fields/acf-city_selector-v5.php:266
 msgid "You didn't select a city"
 msgstr ""
 
@@ -150,24 +156,24 @@ msgstr ""
 
 #: inc/admin-right.php:5
 #, php-format
-msgid "<a href=\"%s\" target=\"_blank\">Click here</a> for a demo on my own website."
+msgid "<a href=\"%s\" target=\"_blank\">Click here</a> for our website."
 msgstr ""
 
-#: inc/admin-right.php:9
-msgid "About Beee"
-msgstr ""
-
-#: inc/admin-right.php:10
-#, php-format
-msgid "If you need a Wordpress designer/coder to do work on your site, hit me up <a href=\"%s\">here</a>."
-msgstr ""
-
-#: inc/admin-right.php:15
+#: inc/admin-right.php:11
 #, php-format
 msgid "If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s."
 msgstr ""
 
-#: inc/admin-right.php:20
+#: inc/admin-right.php:16
+msgid "About Beee"
+msgstr ""
+
+#: inc/admin-right.php:17
+#, php-format
+msgid "If you need a Wordpress designer/coder for a project, contact me on me %s."
+msgstr ""
+
+#: inc/admin-right.php:22
 msgid "If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it."
 msgstr ""
 
@@ -179,131 +185,135 @@ msgstr ""
 msgid "ACF City Selector"
 msgstr ""
 
-#: inc/dashboard-page.php:22
-msgid "On this page you can find some helpful info about the ACF City Selector plugin as well as some settings."
+#: inc/dashboard-page.php:25
+msgid "Upload a CSV file"
 msgstr ""
 
-#: inc/dashboard-page.php:27
-msgid "Upload a csv file"
-msgstr ""
-
-#: inc/dashboard-page.php:34
+#: inc/dashboard-page.php:32
 msgid "Upload file"
 msgstr ""
 
-#: inc/dashboard-page.php:38
+#: inc/dashboard-page.php:36
 msgid "Select a file to import"
 msgstr ""
 
-#: inc/dashboard-page.php:66
+#: inc/dashboard-page.php:64
 msgid "Verify selected file(s)"
 msgstr ""
 
-#: inc/dashboard-page.php:67
+#: inc/dashboard-page.php:65
 msgid "Import selected file(s)"
 msgstr ""
 
-#: inc/dashboard-page.php:68
+#: inc/dashboard-page.php:66
 msgid "Remove selected file(s)"
 msgstr ""
 
-#: inc/dashboard-page.php:75
-msgid "No files uploaded"
+#: inc/dashboard-page.php:73
+msgid "No files uploaded (yet)."
 msgstr ""
 
-#: inc/dashboard-page.php:82
+#: inc/dashboard-page.php:80
 msgid "Import raw CSV data"
 msgstr ""
 
-#: inc/dashboard-page.php:84
+#: inc/dashboard-page.php:82
 msgid "Make sure the cursor is ON the last line (after the last character), NOT on a new line."
 msgstr ""
 
-#: inc/dashboard-page.php:86
+#: inc/dashboard-page.php:84
 msgid "This is seen as a new entry and creates an error !!!"
 msgstr ""
 
-#: inc/dashboard-page.php:99
+#: inc/dashboard-page.php:97
 msgid "Verify CSV data"
 msgstr ""
 
-#: inc/dashboard-page.php:100
+#: inc/dashboard-page.php:98
 msgid "Import CSV data"
 msgstr ""
 
 #: inc/help-tabs.php:25
-msgid "Import data"
+msgid "Import CSV from file"
 msgstr ""
 
 #: inc/help-tabs.php:28
-msgid "On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin."
+msgid "On this page you can import a CSV file which contains cities to import."
 msgstr ""
 
-#: inc/help-tabs.php:29
-msgid "You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won't work."
-msgstr ""
-
-#: inc/help-tabs.php:30
-msgid "The required order is \"City,State code,State,Country code,Country\"."
-msgstr ""
-
-#: inc/help-tabs.php:34
-msgid "Field"
-msgstr ""
-
-#: inc/help-tabs.php:35
-msgid "What to enter"
+#: inc/help-tabs.php:33
+msgid "Import raw data"
 msgstr ""
 
 #: inc/help-tabs.php:36
-msgid "Note"
+msgid "On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin."
 msgstr ""
 
-#: inc/help-tabs.php:41
-msgid "City"
+#: inc/help-tabs.php:37
+msgid "You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won't work."
+msgstr ""
+
+#: inc/help-tabs.php:38
+msgid "The required order is \"City,State code,State,Country code,Country\"."
 msgstr ""
 
 #: inc/help-tabs.php:42
+msgid "Field"
+msgstr ""
+
+#: inc/help-tabs.php:43
+msgid "What to enter"
+msgstr ""
+
+#: inc/help-tabs.php:44
+msgid "Note"
+msgstr ""
+
+#: inc/help-tabs.php:49
+msgid "City"
+msgstr ""
+
+#: inc/help-tabs.php:50
 msgid "full name"
 msgstr ""
 
-#: inc/help-tabs.php:46
+#: inc/help-tabs.php:54
 msgid "State code"
 msgstr ""
 
-#: inc/help-tabs.php:47
+#: inc/help-tabs.php:55
 msgid "state abbreviation"
 msgstr ""
 
-#: inc/help-tabs.php:48 inc/help-tabs.php:58
+#: inc/help-tabs.php:56 inc/help-tabs.php:66
 msgid "exactly 2 characters"
 msgstr ""
 
-#: inc/help-tabs.php:51
+#: inc/help-tabs.php:59
 msgid "State"
 msgstr ""
 
-#: inc/help-tabs.php:52
+#: inc/help-tabs.php:60
 msgid "full state name"
 msgstr ""
 
-#: inc/help-tabs.php:56
+#: inc/help-tabs.php:64
 msgid "Country code"
 msgstr ""
 
-#: inc/help-tabs.php:57
+#: inc/help-tabs.php:65
 msgid "country abbreviation"
 msgstr ""
 
-#: inc/help-tabs.php:61 inc/pro-page.php:42
+#: inc/help-tabs.php:69 inc/pro-page.php:42
 msgid "Country"
 msgstr ""
 
-#: inc/help-tabs.php:62
+#: inc/help-tabs.php:70
 msgid "full country name"
 msgstr ""
 
-#: inc/help-tabs.php:72
+#: inc/help-tabs.php:80
 msgid "Author's website"
 msgstr ""
 
@@ -351,64 +361,59 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: inc/settings-page.php:22
-#, php-format
-msgid "On this page you can find some helpful info about the %s plugin as well as some settings."
-msgstr ""
-
-#: inc/settings-page.php:30
+#: inc/settings-page.php:28
 msgid "Import countries"
 msgstr ""
 
-#: inc/settings-page.php:31
+#: inc/settings-page.php:29
 msgid "Here you can (re-)import all cities for the individual countries listed below."
 msgstr ""
 
-#: inc/settings-page.php:35
-msgid "Import cities in Holland/The Netherlands"
+#: inc/settings-page.php:33
+msgid "Import all cities in Holland/The Netherlands"
 msgstr ""
 
-#: inc/settings-page.php:40
-msgid "Import cities in Belgium"
+#: inc/settings-page.php:38
+msgid "Import all cities in Belgium"
 msgstr ""
 
-#: inc/settings-page.php:45
-msgid "Import cities in Luxembourg"
+#: inc/settings-page.php:43
+msgid "Import all cities in Luxembourg"
 msgstr ""
 
-#: inc/settings-page.php:48
+#: inc/settings-page.php:46
 msgid "Import selected countries"
 msgstr ""
 
-#: inc/settings-page.php:57
+#: inc/settings-page.php:54
 msgid "Clear the database"
 msgstr ""
 
-#: inc/settings-page.php:58
+#: inc/settings-page.php:55
 msgid "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start."
 msgstr ""
 
-#: inc/settings-page.php:62
+#: inc/settings-page.php:59
 msgid "Delete all cities from the database"
 msgstr ""
 
-#: inc/settings-page.php:65
+#: inc/settings-page.php:62
 msgid "Nuke 'em"
 msgstr ""
 
-#: inc/settings-page.php:73
+#: inc/settings-page.php:70
 msgid "Save data"
 msgstr ""
 
-#: inc/settings-page.php:74
+#: inc/settings-page.php:71
 msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to save all your cities/settings."
 msgstr ""
 
-#: inc/settings-page.php:80
+#: inc/settings-page.php:77
 msgid "Preserve settings on plugin deletion"
 msgstr ""
 
-#: inc/settings-page.php:84
+#: inc/settings-page.php:81
 msgid "Save settings"
 msgstr ""
 

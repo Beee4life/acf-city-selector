@@ -19,8 +19,6 @@
 
 			<?php echo acf_plugin_city_selector::acfcs_admin_menu(); ?>
 
-            <p><?php esc_html_e( 'On this page you can find import options for the \'ACF City Selector\' plugin.', 'acf-city-selector' ); ?></p>
-
             <!-- left part -->
             <div class="admin_left">
 
@@ -47,7 +45,6 @@
 
                     <input name="" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected countries', 'acf-city-selector' ); ?>" />
                 </form>
-
 
                 <br /><hr />
 
