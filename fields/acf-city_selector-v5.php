@@ -103,8 +103,8 @@
                 }
                 $countries   = populate_country_select( '', $field );
                 if ( $countries ) {
-	                $first_item = ( $field['show_labels'] == 1 ) ? '-' : esc_html__( 'Select country', 'acf-city-selector' );
-	                array_unshift( $countries, $first_item );
+	                // $first_item = ( $field['show_labels'] == 1 ) ? '-' : esc_html__( 'Select country', 'acf-city-selector' );
+	                // array_unshift( $countries, $first_item );
 
                 }
 				if ( isset( $countrycode ) && 0 != $countrycode ) {

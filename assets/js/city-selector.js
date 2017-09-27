@@ -6,6 +6,8 @@
     var country = $("select[name*='countryCode']");
     var state   = $("select[name*='stateCode']");
 
+    console.log(country.length);
+
     if (country.length) {
 
         country.change(function() {

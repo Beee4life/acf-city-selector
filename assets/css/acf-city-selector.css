@@ -96,11 +96,7 @@ img.donateimg {
 
 .wrap .error {
     padding: 10px 0 10px 15px;
-}
-
-.wrap .notice {
-    border-left: 4px solid #dc3232;
-    margin:      5px 0 15px;
+    border-left: 4px solid #ffffff;
 }
 
 .wrap .notice-success {
