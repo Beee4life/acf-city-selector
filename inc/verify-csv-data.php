@@ -4,7 +4,7 @@
 	 * @param bool $csv_data
 	 * @return array|bool
 	 */
-	function verify_raw_csv_data( $csv_data = false ) {
+	function acfcs_verify_csv_data( $csv_data = false ) {
 
 		if ( false != $csv_data ) {
 
@@ -13,8 +13,6 @@
 			} else {
 				$lines = explode( "\n", $csv_data );
 			}
-
-			// echo '<pre>'; var_dump($lines); echo '</pre>'; exit;
 
 			$validated_csv    = array();
 			$line_number      = 0;
@@ -75,12 +73,12 @@
 	 * Read file and spit out an array
 	 * @return array|bool
 	 */
-	function read_file_only( $file_name = false ) {
+	function acfcs_read_file_only( $file_name = false ) {
 
 		$csv_array = array();
 		if ( false != $file_name ) {
 
-			$file_location = plugin_dir_path(__FILE__ ) . 'uploads/' . $file_name;
+			$file_location = wp_upload_dir()['basedir'] . '/acfcs/' . $file_name;
 			if ( ( $handle = fopen( $file_location, "r" ) ) !== false ) {
 				$line_number = 0;
 
