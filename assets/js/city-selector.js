@@ -6,12 +6,9 @@
     var country = $("select[name*='countryCode']");
     var state   = $("select[name*='stateCode']");
 
-    /* JSON populate Region/State Listbox */
     if (country.length) {
 
         country.change(function() {
-
-            console.log('-= Country selected');
 
             var $this = $(this);
 
@@ -35,12 +32,9 @@
         });
     }
 
-    /* JSON populate Cities Listbox */
     if (state.length) {
 
         state.change(function() {
-
-            console.log('-= State selected');
 
             var $this = $(this);
 
@@ -74,8 +68,6 @@
     }
 
     function get_cities(stateCODE, callback) {
-
-        // console.log(stateCODE);
 
         var data = {
             action: 'get_cities_call',
