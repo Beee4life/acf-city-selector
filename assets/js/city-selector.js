@@ -1,8 +1,12 @@
 // JS File for Country Field
 (function($) {
 
+    console.log('-= HIT ACF CS');
+
     var country = $("select[name*='countryCode']");
     var state   = $("select[name*='stateCode']");
+
+    console.log(country);
 
     if (country.length) {
 
