@@ -64,9 +64,6 @@
 			*/
 
 			function create_options( $field ) {
-				// defaults?
-				/*
-				*/
 				$field = array_merge($this->defaults, $field);
 
 				// key is needed in the field names to correctly save the data
@@ -88,7 +85,7 @@
                         <?php
                             do_action('acf/create_field', array(
                                 'type'         => 'radio',
-                                'name'         => 'fields['.$key.'][show_labels]',
+                                'name'         => 'fields[' . $key . '][show_labels]',
                                 'choices'      => $select_options,
                                 'value'        => $field['show_labels'],
                                 'layout'       => 'horizontal',
@@ -115,20 +112,16 @@
 			*/
 
 			function create_field( $field ) {
-				// defaults?
-				/*
-				*/
 				$field = array_merge($this->defaults, $field);
 
 				// create Field HTML
 				if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
 					$countrycode = $field[ 'value' ][ 'countryCode' ];
 				}
-				$countries   = populate_country_select( '', $field );
+				$countries = populate_country_select( '', $field );
 				if ( $countries ) {
 					// $first_item = ( $field['show_labels'] == 1 ) ? '-' : esc_html__( 'Select country', 'acf-city-selector' );
 					// array_unshift( $countries, $first_item );
-
 				}
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
@@ -194,8 +187,7 @@
 
 			function input_admin_enqueue_scripts() {
 
-				// vars
-				$url     = $this->settings['url'];
+			    $url     = $this->settings['url'];
 				$version = $this->settings['version'];
 
 				// register & include JS
