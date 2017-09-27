@@ -31,12 +31,12 @@
 				$this->label    = 'City Selector';
 				$this->category = 'Choice';
 				$this->defaults = array(
-					'country_name'  => '',
-					'city_name'     => '',
-					'provence_name' => 0,
-					'country_id'    => 0,
-					'city_id'       => 0,
-					'provence_id'   => '',
+					// 'country_name'  => '',
+					// 'city_name'     => '',
+					// 'province_name' => 0,
+					// 'country_id'    => 0,
+					// 'city_id'       => 0,
+					// 'province_id'   => '',
 					'show_labels'   => 1
 				);
 
@@ -66,8 +66,8 @@
 			function create_options( $field ) {
 				// defaults?
 				/*
-				$field = array_merge($this->defaults, $field);
 				*/
+				$field = array_merge($this->defaults, $field);
 
 				// key is needed in the field names to correctly save the data
 				$key = $field['name'];
@@ -77,22 +77,23 @@
 					0 => __( 'No', 'acf-city-selector' )
 				);
 
-
 				// Create Field Options HTML
 				?>
                 <tr class="field_option field_option_<?php echo $this->name; ?>">
                     <td class="label">
                         <label><?php esc_html_e("Show labels",'acf-city-selector'); ?></label>
+                        <p class="description"><?php esc_html_e( 'Show field labels above the dropdown menus', 'acf-city-selector' ); ?></p>
                     </td>
                     <td>
                         <?php
                             do_action('acf/create_field', array(
                                 'type'         => 'radio',
+                                'name'         => 'fields['.$key.'][show_labels]',
                                 'choices'      => $select_options,
+                                'value'        => $field['show_labels'],
                                 'layout'       => 'horizontal',
-                                'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
-                                'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
-                                'name'         => 'show_labels'
+                                // 'label'        => esc_html__( 'Show labels', 'acf-city-selector' ), // needed ?
+                                // 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ), // needed ?
                             ));
                         ?>
                     </td>
@@ -117,8 +118,7 @@
 				// defaults?
 				/*
 				*/
-				// $field = array_merge($this->defaults, $field);
-				// echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+				$field = array_merge($this->defaults, $field);
 
 				// create Field HTML
 				if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
@@ -158,9 +158,9 @@
                     </select>
                 </div>
 
-                <div class="cs_provences">
+                <div class="cs_provinces">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select provence/state', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
@@ -268,7 +268,7 @@
 			/*
 			*  load_value()
 			*
-				*  This filter is applied to the $value after it is loaded from the db
+			*  This filter is applied to the $value after it is loaded from the db
 			*
 			*  @type	filter
 			*  @since	3.6
