@@ -145,7 +145,7 @@ msgid "Select country"
 msgstr "Selecteer een land"
 
 #: fields/acf-city_selector-v5.php:140
-msgid "Select provence/state"
+msgid "Select province/state"
 msgstr "Selecteer een provincie/staat"
 
 #: fields/acf-city_selector-v5.php:149
@@ -403,7 +403,7 @@ msgid "Country packages"
 msgstr "Land pakketten"
 
 #: inc/pro-page.php:43
-msgid "states/provences"
+msgid "states/province"
 msgstr "staten/provincies"
 
 #: inc/pro-page.php:44

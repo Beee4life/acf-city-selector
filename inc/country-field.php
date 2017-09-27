@@ -105,12 +105,12 @@
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
 		$items[0]['states']       = "";
-		// $items[0]['states']       = esc_html__( 'Select provence/state', 'acf-city-selector' );
+		// $items[0]['states']       = esc_html__( 'Select province/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
         // if == 1, $items[0]['states'] = '-';
-        // __( 'Select provence/state', 'acf-city-selector' )
+        // __( 'Select province/state', 'acf-city-selector' )
 
 		foreach ( $db as $data ) {
 			$items[ $i ]['country_code'] = $data->country_code;

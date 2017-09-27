@@ -40,7 +40,7 @@
                     <thead>
                     <tr>
                         <th><?php esc_html_e( 'Country', 'acf-city-selector' ); ?></th>
-                        <th># <?php esc_html_e( 'states/provences', 'acf-city-selector' ); ?></th>
+                        <th># <?php esc_html_e( 'states/provinces', 'acf-city-selector' ); ?></th>
                         <th># <?php esc_html_e( 'cities', 'acf-city-selector' ); ?></th>
                         <th><?php esc_html_e( 'Price', 'acf-city-selector' ); ?></th>
                         <th><?php esc_html_e( 'Order', 'acf-city-selector' ); ?></th>

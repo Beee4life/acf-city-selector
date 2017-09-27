@@ -26,12 +26,12 @@
 				$this->label    = 'City Selector';
 				$this->category = 'choice';
 				$this->defaults = array(
-					'country_name'  => '',
-					'city_name'     => '',
-					'provence_name' => 0,
-					'country_id'    => 0,
-					'city_id'       => 0,
-					'provence_id'   => '',
+					// 'country_name'  => '',
+					// 'city_name'     => '',
+					// 'province_name' => 0,
+					// 'country_id'    => 0,
+					// 'city_id'       => 0,
+					// 'province_id'   => '',
 					'show_labels'   => 1
 				);
 
@@ -78,11 +78,12 @@
 				);
 				acf_render_field_setting( $field, array(
 					'type'         => 'radio',
+					'name'         => 'show_labels',
 					'choices'      => $select_options,
+					'value'        => $field['show_labels'],
 					'layout'       => 'horizontal',
 					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
 					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
-					'name'         => 'show_labels'
 				) );
 
 			}
@@ -135,9 +136,9 @@
                     </select>
                 </div>
 
-                <div class="cs_provences">
+                <div class="cs_provinces">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select provence/state', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">

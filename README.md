@@ -10,7 +10,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Description
 
-This plugin allows you to select a city, based on country and provence/state in an ACF Field Group.
+This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
 
 ![Screenshot ACF City Selector](http://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
@@ -80,9 +80,9 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 * [X] - Drop tables on plugin deletion
 * [X] - Add settings page
 * [X] - Add settings page option to truncate table
-* [X] - Add Dutch cities/provences
-* [X] - Add Belgian cities/provences (in progress)
-* [X] - Add Luxembourg cities/provences
+* [X] - Add Dutch cities/provinces
+* [X] - Add Belgian cities/provinces (in progress)
+* [X] - Add Luxembourg cities/provinces
 * [X] - Test on Mac Chrome
 * [X] - Load values when editing post
 * [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
