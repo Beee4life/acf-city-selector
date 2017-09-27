@@ -1,8 +1,6 @@
 // JS File for Country Field
 (function($) {
 
-    console.log('-= ACF City Selector reached ');
-
     var country = $("select[name*='countryCode']");
     var state   = $("select[name*='stateCode']");
 
