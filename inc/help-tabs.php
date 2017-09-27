@@ -25,7 +25,45 @@
 				'title'   => esc_html__( 'Import CSV from file', 'acf-city-selector' ),
 				'content' =>
 					// '<h5>Import CSV from file</h5>
-					'<p>' . esc_html__( 'On this page you can import a CSV file which contains cities to import.', 'acf-city-selector' ) . '</p>'
+					'<p>' . esc_html__( 'On this page you can import a CSV file which contains cities to import.', 'acf-city-selector' ) . '</p>
+					<p>' . esc_html__( 'You can only upload *.csv files.', 'acf-city-selector' ) . '</p>
+					<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'acf-city-selector' ) . '</p>
+					<table class="" cellpadding="0" cellspacing="0">
+					<thead>
+					<tr>
+					<th>' . esc_html__( 'Field', 'acf-city-selector' ) . '</th>
+					<th>' . esc_html__( 'What to enter', 'acf-city-selector' ) . '</th>
+					<th>' . esc_html__( 'Note', 'acf-city-selector' ) . '</th>
+					</tr>					
+					</thead>
+					<tbody>
+					<tr>
+					<td>' . esc_html__( 'City', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'full name', 'acf-city-selector' ) . '</td>
+					<td>&nbsp;</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'State code', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'state abbreviation', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'exactly 2 characters', 'acf-city-selector' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'State', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'full state name', 'acf-city-selector' ) . '</td>
+					<td>&nbsp;</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'Country code', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'country abbreviation', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'exactly 2 characters', 'acf-city-selector' ) . '</td>
+					</tr>
+					<tr>
+					<td>' . esc_html__( 'Country', 'acf-city-selector' ) . '</td>
+					<td>' . esc_html__( 'full country name', 'acf-city-selector' ) . '</td>
+					<td>&nbsp;</td>
+					</tr>
+					</tbody>
+					</table>'
 			) );
 
 			$screen->add_help_tab( array(
