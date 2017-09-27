@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-27 03:48+0200\n"
+"POT-Creation-Date: 2017-09-27 04:09+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -242,7 +242,7 @@ msgid "On this page you can import a CSV file which contains cities to import."
 msgstr ""
 
 #: inc/help-tabs.php:29
-msgid "You can only import *.csv files."
+msgid "You can only upload *.csv files."
 msgstr ""
 
 #: inc/help-tabs.php:30 inc/help-tabs.php:76

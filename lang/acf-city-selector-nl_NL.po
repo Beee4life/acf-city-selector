@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-27 03:48+0200\n"
-"PO-Revision-Date: 2017-09-27 03:48+0200\n"
+"POT-Creation-Date: 2017-09-27 04:09+0200\n"
+"PO-Revision-Date: 2017-09-27 04:09+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -173,6 +173,10 @@ msgstr ""
 #, php-format
 msgid "<a href=\"%s\" target=\"_blank\">Click here</a> for our website."
 msgstr "<a href=“%s” target=“_blank”>Klik hier</a> voor onze website."
+
+#: inc/admin-right.php:10
+msgid "Support"
+msgstr "Ondersteuning"
 
 #: inc/admin-right.php:11
 #, php-format
