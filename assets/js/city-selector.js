@@ -31,8 +31,6 @@
                 $("select[name*='stateCode']").append($stateValues);
 
             });
-
-            /* JSON populate Region/State Listbox */
         });
     }
 
@@ -58,9 +56,7 @@
                 $("select[name*='cityNameAscii']").append($cityValues);
 
             });
-
         });
-    /* JSON populate Cities Listbox */
     }
 
     function get_states(countryCODE, callback) {
@@ -126,7 +122,7 @@
         });
     }
 
-    if(typeof city_selector_vars != "undefined") {
+    if( typeof city_selector_vars !== "undefined" ) {
         admin_post_edit_load_states();
         admin_post_edit_load_cities();
     }
