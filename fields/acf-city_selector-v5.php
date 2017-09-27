@@ -80,8 +80,8 @@
 					'type'         => 'radio',
 					'choices'      => $select_options,
 					'layout'       => 'horizontal',
-					'label'        => __( 'Show labels', 'acf-city-selector' ),
-					'instructions' => __( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
+					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 					'name'         => 'show_labels'
 				) );
 

@@ -31,11 +31,11 @@
 
 		$items = array();
 		if ( null == $selectedCountry ) {
-			// if ( $field['show_labels'] == 1 ) {
-			// 	$items[] = '';
-			// } else {
-			// 	$items[] = __( 'Select country', 'acf-city-selector' );
-			// }
+			if ( $field['show_labels'] == 1 ) {
+				$items[] = '-';
+			} else {
+				$items[] = esc_html__( 'Select country', 'acf-city-selector' );
+			}
 		}
 		// echo '<pre>'; var_dump($db); echo '</pre>'; exit;
 		foreach ( $db as $data ) {
@@ -105,6 +105,7 @@
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
 		$items[0]['states']       = "";
+		// $items[0]['states']       = esc_html__( 'Select provence/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
@@ -156,7 +157,7 @@
 			}
 			$items                 = array();
 			$items[0]['id']        = "";
-			// $items[0]['city_name'] = __( 'Select city', 'acf-city-selector' );
+			// $items[0]['city_name'] = esc_html__( 'Select city', 'acf-city-selector' );
 			$items[0]['city_name'] = "";
 			$i                     = 1;
 

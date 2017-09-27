@@ -1193,4 +1193,4 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, st
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Zuienkerke", "WV", "West Vlaanderen", "BE", "Belgium");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name_ascii, state_code, states, country_code, country ) VALUES ("Zwevegem", "WV", "West Vlaanderen", "BE", "Belgium");
 
-<?php $this->acfcs_errors()->add( 'success_cities_imported_belgium', __( 'Successfully imported 1166 cities for Belgium.', 'acf-city-selector' ) ); ?>
+<?php $this->acfcs_errors()->add( 'success_cities_imported_belgium', esc_html__( 'Successfully imported 1166 cities for Belgium.', 'acf-city-selector' ) ); ?>
