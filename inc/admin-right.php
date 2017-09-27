@@ -7,14 +7,14 @@
 
     <hr />
 
-    <h3>Support</h3>
+    <h3><?php esc_html_e( 'Support', 'acf-city-selector' ); ?></h3>
     <p><?php echo sprintf( esc_html__( 'If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s.', 'acf-city-selector' ), '<a href="https://github.com/Beee4life/acf-city-selector/issues" target="_blank">Github</a>' ); ?>
     </p>
 
     <hr />
 
     <h3><?php esc_html_e( 'About Beee', 'acf-city-selector' ); ?></h3>
-    <p><?php echo sprintf( __( 'If you need a Wordpress designer/coder for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="http://www.berryplasman.com">berryplasman.com</a>' ); ?></p>
+    <p><?php echo sprintf( __( 'If you need a Wordpress designer/coder for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="http://www.berryplasman.com/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin">berryplasman.com</a>' ); ?></p>
 
     <hr />
 

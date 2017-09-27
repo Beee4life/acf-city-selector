@@ -137,7 +137,7 @@
 						if (move_uploaded_file($_FILES['csv_upload']['tmp_name'], $target_file)) {
 
 							// file uploaded succeeded
-							$this->acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( 'File "%s" is successfully uploaded and now shows under \'Select files to import\'', 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
+							$this->acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
 
 							return;
 
@@ -148,7 +148,6 @@
 
 							return;
 						}
-
 					}
 				}
 			}
@@ -169,7 +168,7 @@
 						// nonce ok + verified
 
 						if ( ! isset( $_POST[ 'file_name' ] ) ) {
-							$this->acfcs_errors()->add( 'error_no_file_selected', esc_html__( 'You didn\'t select a file.', 'acf-city-selector' ) );
+							$this->acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
 
 							return;
 						}
@@ -253,7 +252,7 @@
 			public function acfcs_import_raw_data() {
 				if ( isset( $_POST["import_raw_nonce"] ) ) {
 					if ( ! wp_verify_nonce( $_POST["import_raw_nonce"], 'import-raw-nonce' ) ) {
-						$this->acfcs_errors()->add( 'error_no_nonce_match', __( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+						$this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 						return;
 					} else {
 
@@ -500,7 +499,7 @@
 			}
 
 			$id       = 'donate-acf-cs';
-			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">' . sprintf( __( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
+			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">' . sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
 			$callback = 'show_donate_meta_box';
 			$screens  = array();
 			$context  = 'side';
