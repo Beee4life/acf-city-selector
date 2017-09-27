@@ -9,7 +9,7 @@
 	Text Domain:    acf-city-selector
 	License:        GPLv2 or later
 	License URI:    https://www.gnu.org/licenses/gpl.html
-	Contributors:   Fabrizio Sabato - http://deskema.it
+	Contributors:   Jarah de Jong
 	*/
 
 	// exit if accessed directly
@@ -39,49 +39,43 @@
 				);
 
 				// set text domain
-				// info: https://codex.wordpress.org/Function_Reference/load_plugin_textdomain
 				load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 				$plugin = plugin_basename( __FILE__ );
 
-				register_activation_hook( __FILE__,         array( $this, 'acfcs_plugin_activation' ) );
-				register_deactivation_hook( __FILE__,       array( $this, 'acfcs_plugin_deactivation' ) );
+				register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
+				register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
 				// actions
 				add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
 				add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4 (not done)
 				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
-				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_page' ) );
-				add_action( 'admin_menu',                   array( $this, 'acfcs_add_settings_page' ) );
-				add_action( 'admin_menu',                   array( $this, 'acfcs_add_pro_page' ) );
+				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
 
+				// filters
+				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
+
+				// always load, move to $this->
 				add_action( 'init',                         array( $this, 'acfcs_trucate_db' ) );
 				add_action( 'init',                         array( $this, 'acfcs_import_preset_countries' ) );
 				add_action( 'init',                         array( $this, 'acfcs_import_raw_data' ) );
 				add_action( 'init',                         array( $this, 'acfcs_preserve_settings' ) );
 
-				// filters
-				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
-
 				// always load
-				$this->acfcs_load_admin_pages();
-				// $this->acfcs_load_admin_page();
-				// $this->acfcs_load_settings_page();
-				// $this->acfcs_load_pro_page();
 				$this->acfcs_admin_menu();
+				$this->acfcs_load_admin_pages();
 
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
 				include( 'inc/verify-csv-data.php' );
 			}
 
-
 			/*
 			 * Do stuff upon plugin activation
 			 */
 			public function acfcs_plugin_activation() {
-				// $this->acfcs_create_fill_db();
+				$this->acfcs_create_fill_db();
 			}
 
 			/*
@@ -106,29 +100,8 @@
 			 * Load admin page
 			 */
 			public function acfcs_load_admin_pages() {
-				include( 'inc/admin-page.php' );
+				include( 'inc/dashboard-page.php' );
 				include( 'inc/settings-page.php' );
-				include( 'inc/pro-page.php' );
-			}
-
-			/*
-			 * Load admin page
-			 */
-			public function acfcs_load_admin_page() {
-				include( 'inc/admin-page.php' );
-			}
-
-			/*
-			 * Load settings page
-			 */
-			public function acfcs_load_settings_page() {
-				include( 'inc/settings-page.php' );
-			}
-
-			/*
-			 * Load pro page
-			 */
-			public function acfcs_load_pro_page() {
 				include( 'inc/pro-page.php' );
 			}
 
@@ -215,14 +188,12 @@
 					} else {
 
 					    if ( isset( $_POST[ 'verify' ]) ) {
-					        // verify data
 						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    $this->acfcs_errors()->add( 'success_csv_valid', __( 'Congratulations, your csv data seems valid.', 'acf-city-selector' ) );
                             }
 
                         } elseif ( isset( $_POST[ 'import' ]) ) {
-                            // verify data
 						    $verify_data = verify_raw_csv_data( $_POST['raw_csv_import'] );
 						    if ( false != $verify_data ) {
 							    // import data
@@ -256,6 +227,8 @@
 			}
 
 			/**
+			 * Error function
+			 *
 			 * @return WP_Error
 			 */
 			public static function acfcs_errors() {
@@ -290,7 +263,7 @@
 								$prefix     = esc_html( __( 'Error', 'action-logger' ) );
 							}
 						}
-						echo '<div class="notice ' . $span_class . 'is-dismissible">';
+						echo '<div class="error notice ' . $span_class . 'is-dismissible">';
 						foreach( $codes as $code ) {
 							$message = acf_plugin_city_selector::acfcs_errors()->get_error_message( $code );
 							echo '<div class="">';
@@ -318,7 +291,6 @@
 			 */
 			public function acfcs_include_field_types( $version = false ) {
 
-				// support empty $version
 				if ( ! $version ) {
 					$version = 4;
 				}
@@ -340,7 +312,7 @@
 
 
 			/*
-			 * Adds a page in the settings menu
+			 * Admin menu
 			 */
 			public static function acfcs_admin_menu() {
 				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">Dashboard</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">Settings</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">Go Pro</a></p>';
@@ -348,23 +320,11 @@
 			}
 
 			/*
-			 * Adds a page in the settings menu
+			 * Adds admin pages
 			 */
-			public function acfcs_add_admin_page() {
+			public function acfcs_add_admin_pages() {
 				add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
-			}
-
-			/*
-			 * Adds a (hidden) settings page
-			 */
-			public function acfcs_add_settings_page() {
 				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
-			}
-
-			/*
-			 * Adds a (hidden) pro page
-			 */
-			public function acfcs_add_pro_page() {
 				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
 			}
 

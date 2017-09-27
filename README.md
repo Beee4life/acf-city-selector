@@ -12,13 +12,15 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 This plugin allows you to select a city, based on country and provence/state in an ACF Field Group.
 
-![Screenshot ACF City Selector](http://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.jpg)
+![Screenshot ACF City Selector](http://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
 It creates a new 'field type' for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will get a new option to choose called `City Selector`.
 
-Add it, give it a name and add a unique field name. We recommend something like `$wpdb->prefix_city_selector`.
-
-Update/save the Field Group.
+* Add the field.
+* Choose any name you want.
+* **!!!** The key MUST be exactly `acf_city_selector` (a fix for this is in the making).
+* Set any other values as you see fit.
+* Save/publish the Field Group.
 
 ### Usage
 
