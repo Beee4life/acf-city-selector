@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-27 03:41+0200\n"
-"PO-Revision-Date: 2017-09-27 03:42+0200\n"
+"POT-Creation-Date: 2017-09-27 03:48+0200\n"
+"PO-Revision-Date: 2017-09-27 03:48+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -238,7 +238,7 @@ msgstr "Verwijder geselecteerde bestand(en)"
 msgid "No files uploaded (yet)."
 msgstr "Nog geen bestanden ge-upload."
 
-#: inc/dashboard-page.php:80
+#: inc/dashboard-page.php:80 inc/help-tabs.php:71
 msgid "Import raw CSV data"
 msgstr "Importeer ruwe CSV data"
 
@@ -270,11 +270,74 @@ msgstr "Importeer CSV data van bestand"
 msgid "On this page you can import a CSV file which contains cities to import."
 msgstr "Op deze pagina kun je CSV data die steden bevat importeren."
 
-#: inc/help-tabs.php:33
-msgid "Import raw data"
-msgstr "Importeer ruwe CSV data"
+#: inc/help-tabs.php:29
+msgid "You can only upload *.csv files."
+msgstr "Je kunt alleen *.csv bestanden uploaden."
 
-#: inc/help-tabs.php:36
+#: inc/help-tabs.php:30 inc/help-tabs.php:76
+msgid "The required order is \"City,State code,State,Country code,Country\"."
+msgstr ""
+"De verplichten volgorde is “Stad,Staat/provincie code (afkorting),Staat/"
+"provincie,Land code (afkorting),Land”."
+
+#: inc/help-tabs.php:34 inc/help-tabs.php:80
+msgid "Field"
+msgstr "Veld"
+
+#: inc/help-tabs.php:35 inc/help-tabs.php:81
+msgid "What to enter"
+msgstr "Wat in te vullen"
+
+#: inc/help-tabs.php:36 inc/help-tabs.php:82
+msgid "Note"
+msgstr "Notitie"
+
+#: inc/help-tabs.php:41 inc/help-tabs.php:87
+msgid "City"
+msgstr "Stad"
+
+#: inc/help-tabs.php:42 inc/help-tabs.php:88
+msgid "full name"
+msgstr "volledige naam"
+
+#: inc/help-tabs.php:46 inc/help-tabs.php:92
+msgid "State code"
+msgstr "Staat/provincie code"
+
+#: inc/help-tabs.php:47 inc/help-tabs.php:93
+msgid "state abbreviation"
+msgstr "staat/provincie afkorting"
+
+#: inc/help-tabs.php:48 inc/help-tabs.php:58 inc/help-tabs.php:94
+#: inc/help-tabs.php:104
+msgid "exactly 2 characters"
+msgstr "precies 2 karakters"
+
+#: inc/help-tabs.php:51 inc/help-tabs.php:97
+msgid "State"
+msgstr "Staat/provincie"
+
+#: inc/help-tabs.php:52 inc/help-tabs.php:98
+msgid "full state name"
+msgstr "volledige naam"
+
+#: inc/help-tabs.php:56 inc/help-tabs.php:102
+msgid "Country code"
+msgstr "Land code"
+
+#: inc/help-tabs.php:57 inc/help-tabs.php:103
+msgid "country abbreviation"
+msgstr "land afkorting"
+
+#: inc/help-tabs.php:61 inc/help-tabs.php:107 inc/pro-page.php:42
+msgid "Country"
+msgstr "Land"
+
+#: inc/help-tabs.php:62 inc/help-tabs.php:108
+msgid "full country name"
+msgstr "volledige land naam"
+
+#: inc/help-tabs.php:74
 msgid ""
 "On this page you can import cities. You can select cities from The "
 "Netherlands, Belgium and Luxembourg which come included in the plugin."
@@ -282,7 +345,7 @@ msgstr ""
 "Op deze pagina kan je steden importeren. Je kan steden kiezen uit Nederland, "
 "België en Luxemburg, welke ingesloten zijn in de plugin."
 
-#: inc/help-tabs.php:37
+#: inc/help-tabs.php:75
 msgid ""
 "You can also import raw csv data, but this has to be formatted (and ordered) "
 "in a certain way, otherwise it won't work."
@@ -290,69 +353,7 @@ msgstr ""
 "Je kunt ook ‘raw’ CSV data importeren maar dit moet volgens een bepaald "
 "format en in een bepaalde volgorde, anders werkt het niet."
 
-#: inc/help-tabs.php:38
-msgid "The required order is \"City,State code,State,Country code,Country\"."
-msgstr ""
-"De verplichten volgorde is “Stad,Staat/provincie code (afkorting),Staat/"
-"provincie,Land code (afkorting),Land”."
-
-#: inc/help-tabs.php:42
-msgid "Field"
-msgstr "Veld"
-
-#: inc/help-tabs.php:43
-msgid "What to enter"
-msgstr "Wat in te vullen"
-
-#: inc/help-tabs.php:44
-msgid "Note"
-msgstr "Notitie"
-
-#: inc/help-tabs.php:49
-msgid "City"
-msgstr "Stad"
-
-#: inc/help-tabs.php:50
-msgid "full name"
-msgstr "volledige naam"
-
-#: inc/help-tabs.php:54
-msgid "State code"
-msgstr "Staat/provincie code"
-
-#: inc/help-tabs.php:55
-msgid "state abbreviation"
-msgstr "staat/provincie afkorting"
-
-#: inc/help-tabs.php:56 inc/help-tabs.php:66
-msgid "exactly 2 characters"
-msgstr "precies 2 karakters"
-
-#: inc/help-tabs.php:59
-msgid "State"
-msgstr "Staat/provincie"
-
-#: inc/help-tabs.php:60
-msgid "full state name"
-msgstr "volledige naam"
-
-#: inc/help-tabs.php:64
-msgid "Country code"
-msgstr "Land code"
-
-#: inc/help-tabs.php:65
-msgid "country abbreviation"
-msgstr "land afkorting"
-
-#: inc/help-tabs.php:69 inc/pro-page.php:42
-msgid "Country"
-msgstr "Land"
-
-#: inc/help-tabs.php:70
-msgid "full country name"
-msgstr "volledige land naam"
-
-#: inc/help-tabs.php:80
+#: inc/help-tabs.php:118
 msgid "Author's website"
 msgstr "Auteur’s website"
 
@@ -514,6 +515,9 @@ msgstr "Je hebt succesvol 11 steden in Luxemburg geïmporteerd."
 #: lib/import_nl.php:2479
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
+
+#~ msgid "Import raw data"
+#~ msgstr "Importeer ruwe CSV data"
 
 #~ msgid ""
 #~ "On this page you can find some helpful info about the ACF City Selector "

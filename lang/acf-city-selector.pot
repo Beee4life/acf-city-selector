@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-27 03:42+0200\n"
+"POT-Creation-Date: 2017-09-27 03:48+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -213,7 +213,7 @@ msgstr ""
 msgid "No files uploaded (yet)."
 msgstr ""
 
-#: inc/dashboard-page.php:80
+#: inc/dashboard-page.php:80 inc/help-tabs.php:71
 msgid "Import raw CSV data"
 msgstr ""
 
@@ -241,79 +241,80 @@ msgstr ""
 msgid "On this page you can import a CSV file which contains cities to import."
 msgstr ""
 
-#: inc/help-tabs.php:33
-msgid "Import raw data"
+#: inc/help-tabs.php:29
+msgid "You can only import *.csv files."
 msgstr ""
 
-#: inc/help-tabs.php:36
-msgid "On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin."
-msgstr ""
-
-#: inc/help-tabs.php:37
-msgid "You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won't work."
-msgstr ""
-
-#: inc/help-tabs.php:38
+#: inc/help-tabs.php:30 inc/help-tabs.php:76
 msgid "The required order is \"City,State code,State,Country code,Country\"."
 msgstr ""
 
-#: inc/help-tabs.php:42
+#: inc/help-tabs.php:34 inc/help-tabs.php:80
 msgid "Field"
 msgstr ""
 
-#: inc/help-tabs.php:43
+#: inc/help-tabs.php:35 inc/help-tabs.php:81
 msgid "What to enter"
 msgstr ""
 
-#: inc/help-tabs.php:44
+#: inc/help-tabs.php:36 inc/help-tabs.php:82
 msgid "Note"
 msgstr ""
 
-#: inc/help-tabs.php:49
+#: inc/help-tabs.php:41 inc/help-tabs.php:87
 msgid "City"
 msgstr ""
 
-#: inc/help-tabs.php:50
+#: inc/help-tabs.php:42 inc/help-tabs.php:88
 msgid "full name"
 msgstr ""
 
-#: inc/help-tabs.php:54
+#: inc/help-tabs.php:46 inc/help-tabs.php:92
 msgid "State code"
 msgstr ""
 
-#: inc/help-tabs.php:55
+#: inc/help-tabs.php:47 inc/help-tabs.php:93
 msgid "state abbreviation"
 msgstr ""
 
-#: inc/help-tabs.php:56 inc/help-tabs.php:66
+#: inc/help-tabs.php:48 inc/help-tabs.php:58 inc/help-tabs.php:94
+#: inc/help-tabs.php:104
 msgid "exactly 2 characters"
 msgstr ""
 
-#: inc/help-tabs.php:59
+#: inc/help-tabs.php:51 inc/help-tabs.php:97
 msgid "State"
 msgstr ""
 
-#: inc/help-tabs.php:60
+#: inc/help-tabs.php:52 inc/help-tabs.php:98
 msgid "full state name"
 msgstr ""
 
-#: inc/help-tabs.php:64
+#: inc/help-tabs.php:56 inc/help-tabs.php:102
 msgid "Country code"
 msgstr ""
 
-#: inc/help-tabs.php:65
+#: inc/help-tabs.php:57 inc/help-tabs.php:103
 msgid "country abbreviation"
 msgstr ""
 
-#: inc/help-tabs.php:69 inc/pro-page.php:42
+#: inc/help-tabs.php:61 inc/help-tabs.php:107 inc/pro-page.php:42
 msgid "Country"
 msgstr ""
 
-#: inc/help-tabs.php:70
+#: inc/help-tabs.php:62 inc/help-tabs.php:108
 msgid "full country name"
 msgstr ""
 
-#: inc/help-tabs.php:80
+#: inc/help-tabs.php:74
+msgid "On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin."
+msgstr ""
+
+#: inc/help-tabs.php:75
+msgid "You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won't work."
+msgstr ""
+
+#: inc/help-tabs.php:118
 msgid "Author's website"
 msgstr ""
 
