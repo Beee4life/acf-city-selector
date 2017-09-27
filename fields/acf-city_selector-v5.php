@@ -107,7 +107,6 @@
 	                array_unshift( $countries, $first_item );
 
                 }
-                // echo '<pre>'; var_dump($field['value']); echo '</pre>'; exit;
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
@@ -263,12 +262,9 @@
 
 
 			    if ( 1 == $field['required'] ) {
-
-				    // Advanced usage
 				    if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' || $value['cityNameAscii'] == 0 ) {
 					    $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
 				    }
-
                 }
 
 				// return
