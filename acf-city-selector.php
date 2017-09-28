@@ -516,7 +516,7 @@
 			 * Adds CSS on the admin side
 			 */
 			public function acfcs_add_css() {
-				wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
+				wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), array( 'acf-input' ) );
 			}
 		}
 
