@@ -78,7 +78,9 @@
 			 * Do stuff upon plugin activation
 			 */
 			public function acfcs_plugin_activation() {
-				$this->acfcs_create_fill_db();
+				if ( false == get_option( 'acfcs_preserve_settings' ) ) {
+					$this->acfcs_create_fill_db();
+				}
 			}
 
 			/*

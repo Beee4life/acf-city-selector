@@ -26,7 +26,7 @@ I took a piece of code by [Fabrizio Sabato](https://github.com/fab01) and custom
 
 = Plugin website =
 
-http://www.berryplasman.com/wordpress/acf-city-selector
+http://acfcs.berryplasman.com
 
 == Installation ==
 
@@ -42,4 +42,4 @@ A. Please report any bugs/questions to: https://github.com/Beee4life/acf-city-se
 
 Credit
 Fabrizio Sabato for the idea (http://www.deskema.it)
-Jara de Jong (http://www.inquota.nl)
+Jarah de Jong for fixing the Javascript (http://www.inquota.nl)
