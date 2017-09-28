@@ -12,7 +12,7 @@
 
     ?>
 
-		<div class="wrap">
+		<div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
 
             <h1><?php esc_html_e( 'ACF City Selector', 'acf-city-selector' ); ?></h1>
@@ -46,7 +46,7 @@
 				            ?>
                             <form method="post">
                                 <input name="select_file_nonce" type="hidden" value="<?php echo wp_create_nonce( 'select-file-nonce' ); ?>" />
-                                <table class="uploaded_files" cellpadding="0" cellspacing="0">
+                                <table class="uploaded_files" cellpadding="0" cellspacing="0" border="0">
 						            <?php
 							            foreach( $file_index as $file_name ) {
 								            if ( '.DS_Store' != $file_name && '.' != $file_name && '..' != $file_name ) {
@@ -77,10 +77,10 @@
                 ?>
                 <br /><hr />
 
-                <h2><?php esc_html_e( 'Import raw CSV data', 'acf-city-selector' ); ?></h2>
+                <h2><?php esc_html_e( 'Import CSV data (from clipboard)', 'acf-city-selector' ); ?></h2>
                 <p>
-	                <?php esc_html_e( 'Make sure the cursor is ON the last line (after the last character), NOT on a new line.', 'acf-city-selector' ); ?>
-                    <br />
+	                <?php esc_html_e( 'Here you can paste CSV data from your clipboard.', 'acf-city-selector' ); ?>
+                    <?php esc_html_e( 'Make sure the cursor is ON the last line (after the last character), NOT on a new line.', 'acf-city-selector' ); ?>
 	                <?php esc_html_e( 'This is seen as a new entry and creates an error !!!', 'acf-city-selector' ); ?>
                 </p>
                 <?php

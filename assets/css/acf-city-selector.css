@@ -3,19 +3,17 @@
  *  Version: 1.0
  */
 
-.acf-field-sd-city-selector div {
+/* edit post screens */
+.acf-field-acf-city-selector div.dropdown-box {
+    margin-bottom: 1em;
+}
+
+.acf-field-acf-city-selector span.acf-input-header {
+    display:       block;
     margin-bottom: 10px;
 }
 
-.acf-field-sd-city-selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 5px;
-}
-
-/*
- * admin style
- */
-
+/* admin pages */
 .admin_left, .admin_right {
     padding:               20px;
     border:                1px solid #cccccc;
@@ -29,58 +27,39 @@
     margin-right: 5%;
 }
 
-.admin_left input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.admin_left h2 {
-    margin: 0 0 1em 0;
-}
-
-.admin_left th,
-.admin_left td {
-    padding: 5px 3em 5px 0;
-}
-
-.admin_left th {
-    text-align: left;
-}
-
-.admin_left td {
-    border-top: 1px solid #444444;
-}
-
 .admin_right {
     float:     left;
     max-width: 25%;
 }
 
-.admin_right h3 {
+.acfcs input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.acfcs h2,
+.acfcs h3 {
     margin: 0 0 1em 0;
 }
 
-#contextual-help-columns h5 {
-    margin-top: 10px;
+.acfcs table.uploaded_files {
+    min-width: 25%;
+    max-width: 50%;
 }
 
-#contextual-help-columns th,
-#contextual-help-columns td {
-    padding: 5px 3em 5px 0;
-}
-
-#contextual-help-columns th {
+.acfcs th {
     text-align: left;
 }
 
-#contextual-help-columns td {
+.acfcs td {
     border-top: 1px solid #444444;
 }
 
-.acfcs-admin-menu a {
-    text-decoration: none;
+.acfcs th,
+.acfcs td {
+    padding: 5px 3em 5px 0;
 }
 
-hr {
+.acfcs hr {
     background:    #CCCCCC;
     width:         100%;
     height:        1px;
@@ -88,21 +67,73 @@ hr {
     margin-bottom: 1em;
 }
 
-img.donateimg {
+.acfcs img.donate_img {
     float:        left;
     margin-top:   3px;
     margin-right: 10px;
 }
 
-.wrap .error {
+/* errors */
+.acfcs .error {
     padding: 10px 0 10px 15px;
-    border-left: 4px solid #ffffff;
+    /*border-left: 4px solid #ffffff;*/
 }
 
-.wrap .notice-success {
+.acfcs .notice-success {
     border-left-color: #43bc71;
 }
 
-.wrap .notice-warning {
+.acfcs .notice-success {
+    border-left-color: #43bc71;
+}
+
+.acfcs .notice-warning {
     border-left-color: #ff9000;
+}
+
+/* admin menu */
+.acfcs .acfcs-admin-menu a {
+    text-decoration: none;
+}
+
+/* help menus */
+.contextual-help-tabs {
+    width: 170px;
+}
+
+#contextual-help-back {
+    left: 170px;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap h5 {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin-bottom: 0.5em;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap h5:first-child {
+    -webkit-margin-before: 0.75em;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap p {
+    -webkit-margin-before: 0;
+    margin: 0.5em 0 0.5em 0;
+}
+
+#contextual-help-columns .contextual-help-sidebar p {
+    /*-webkit-margin-before: 0;*/
+    margin: 1em 0 0.5em 0;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap th,
+#contextual-help-columns .contextual-help-tabs-wrap td {
+    padding: 5px 3em 5px 0;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap th {
+    text-align: left;
+}
+
+#contextual-help-columns .contextual-help-tabs-wrap td {
+    border-top: 1px solid #444444;
 }

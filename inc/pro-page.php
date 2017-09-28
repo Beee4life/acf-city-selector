@@ -12,7 +12,7 @@
 
     ?>
 
-		<div class="wrap">
+		<div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
 
             <h1><?php esc_html_e( 'ACF City Selector Settings', 'acf-city-selector' ); ?></h1>
