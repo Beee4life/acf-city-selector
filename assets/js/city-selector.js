@@ -21,7 +21,7 @@
                     for (i = 0; i < len; i++) {
                         var mystate = obj[i];
 
-                        $stateValues += '<option value="' + mystate.country_code + '-' + mystate.state_code + '">' + mystate.states + '</option>';
+                        $stateValues += '<option value="' + mystate.country_code + '-' + mystate.state_code + '">' + mystate.state_name + '</option>';
 
                     }
                     $("select[name*='stateCode']").append($stateValues);
@@ -95,7 +95,7 @@
                     } else {
                         var selected = false;
                     }
-                    $stateValues += '<option value="' + mystate.country_code + '-' + mystate.state_code + '"' + selected + '>' + mystate.states + '</option>';
+                    $stateValues += '<option value="' + mystate.country_code + '-' + mystate.state_code + '"' + selected + '>' + mystate.state_name + '</option>';
 
                 }
                 $("select[name*='stateCode']").append($stateValues);

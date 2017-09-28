@@ -68,12 +68,12 @@
         $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
             WHERE country_code = '%s'
             group by state_code
-            order by states ASC",  $country_code );
+            order by state_name ASC",  $country_code );
 
         $db = $wpdb->get_results( $sql );
 
         foreach ( $db as $data ) {
-            $items[ $data->state_code ] = $data->states;
+            $items[ $data->state_code ] = $data->state_name;
         }
         return $items;
     }
@@ -95,28 +95,28 @@
         $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
         WHERE country_code = '%s'
         group by state_code
-        order by states ASC",  $country_code );
+        order by state_name ASC",  $country_code );
 
         $db = $wpdb->get_results( $sql );
 
 		$items                    = array();
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
-		// $items[0]['states']       = "";
-		$items[0]['states']       = esc_html__( 'Select province/state', 'acf-city-selector' );
+		// $items[0]['state_name']       = "";
+		$items[0]['state_name']       = esc_html__( 'Select province/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
-        // if == 1, $items[0]['states'] = '-';
+        // if == 1, $items[0]['state_name'] = '-';
         // __( 'Select province/state', 'acf-city-selector' )
 
 		foreach ( $db as $data ) {
 			$items[ $i ]['country_code'] = $data->country_code;
 			$items[ $i ]['state_code']   = $data->state_code;
-			if ( $data->states != 'N/A' ) {
-				$items[ $i ]['states'] = $data->states;
+			if ( $data->state_name != 'N/A' ) {
+				$items[ $i ]['state_name'] = $data->state_name;
 			} else {
-				$items[ $i ]['states'] = $data->country;
+				$items[ $i ]['state_name'] = $data->country;
 			}
 			$i++;
 		}

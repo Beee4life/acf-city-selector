@@ -116,7 +116,7 @@
 					id int(6) unsigned NOT NULL auto_increment,
 					city_name varchar(50) NULL,
 					state_code varchar(2) NULL,
-					states varchar(50) NULL,
+					state_name varchar(50) NULL,
 					country_code varchar(2) NULL,
 					country varchar(50) NULL,
 					PRIMARY KEY (id)
@@ -128,7 +128,7 @@
 			}
 
 			/*
-			 * Check if folder exists
+			 * Check if (upload) folder exists
 			 */
 			public function acfcs_check_uploads_folder() {
 
@@ -149,7 +149,7 @@
 
 
 			/*
-			 * Import preset countries
+			 * Upload CSV file
 			 */
 			public function acfcs_upload_csv_file() {
 				if ( isset( $_POST["upload_csv_nonce"] ) ) {
@@ -234,11 +234,11 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name' => $city,
-										'state_code'      => $state_abbr,
-										'states'          => $state,
-										'country_code'    => $country_abbr,
-										'country'         => $country,
+										'city_name'    => $city,
+										'state_code'   => $state_abbr,
+										'state_name'   => $state,
+										'country_code' => $country_abbr,
+										'country'      => $country,
 									);
 
 									global $wpdb;
@@ -308,11 +308,11 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name' => $city,
-										'state_code'      => $state_abbr,
-										'states'          => $state,
-										'country_code'    => $country_abbr,
-										'country'         => $country,
+										'city_name'    => $city,
+										'state_code'   => $state_abbr,
+										'state_name'   => $state,
+										'country_code' => $country_abbr,
+										'country'      => $country,
 									);
 
 									global $wpdb;
@@ -360,6 +360,7 @@
 					}
 				}
 			}
+
 
 			/*
 			 * Truncate cities table
@@ -503,6 +504,7 @@
 				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
 			}
 
+
 			/*
 			 * Adds admin pages
 			 */
@@ -511,6 +513,7 @@
 				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
 			}
+
 
 			/*
 			 * Adds CSS on the admin side
