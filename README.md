@@ -39,7 +39,10 @@ Echo as follows:
 
     $city_selector = get_field('field_name');
     echo 'I live in ' . $city_selector['cityNameAscii'];
-    echo 'which is in ' . substr( $city_selector['stateCode'], 3 ); // this strips the country code and the dash
+    echo 'which is in ' . substr( $city_selector['stateCode'], 3 ); // this strips the first 3 characters
+    echo ' which lies in the country: ' . $city_selector['countryCode'];
+
+This outputs: "I live in Amsterdam which is in the state NH which lies in the country NL".
 
 ### Impact
 
@@ -48,9 +51,9 @@ Echo as follows:
 
 ### Cities
 
-The plugin will come with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed, when it reaches version 1.0. Now only all cities in the Netherlands are included.
+The plugin will come with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed.
 
-You can also add more countries yourself, through a simple excel sheet which is included in the plugin and can be found in the import folder.
+You can also add more countries yourself, through SQL or CSV import. There's a simple excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
@@ -62,17 +65,15 @@ I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't as
 
 ### Disclaimer
 
-This plugin is not finished yet. Using it, is at your own risk. If you do, keep the following in mind.
-
-* You have to set the city each time you update, since it doesn't load stored values (yet)
+This plugin is as good as finished for its firs release. Using it, is at your own risk. If you do, keep the following in mind.
 
 * If you deactivate the plugin and reactivate it again, all cities are inserted again (but there's a truncate table option now).
 
 ### Tested on
 
-* Wordpress 4.8.2.
+* Wordpress 4.8.2
+* Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.6.2
-* NOT TESTED on the free ACF version (yet)
 
 #### To Do
 * [X] - Store values properly
@@ -83,22 +84,22 @@ This plugin is not finished yet. Using it, is at your own risk. If you do, keep 
 * [X] - Add Dutch cities/provinces
 * [X] - Add Belgian cities/provinces (in progress)
 * [X] - Add Luxembourg cities/provinces
-* [X] - Test on Mac Chrome
+* [X] - Tested on Mac Chrome
 * [X] - Load values when editing post
+* [X] - Add settings page option to import countries from CSV
 * [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
 * [ ] - Return state/provence name
 * [ ] - Add lazy/fancy loading (ajax) - optional
-* [ ] - Add settings page option to import countries from CSV
 * [ ] - Add translations for English country names - optional
-* [ ] - Test on Mac Firefox
-* [ ] - Test on Mac Safari
-* [ ] - Test on PC Chrome
-* [ ] - Test on PC Firefox
-* [ ] - Test on PC Safari
-* [ ] - Test on iPhone Chrome
-* [ ] - Test on iPhone Safari
-* [ ] - Test on iPad Chrome
-* [ ] - Test on iPad Safari
+* [ ] - Tested on Mac Firefox
+* [ ] - Tested on Mac Safari
+* [ ] - Tested on PC Chrome
+* [ ] - Tested on PC Firefox
+* [ ] - Tested on PC Safari
+* [ ] - Tested on iPhone Chrome
+* [ ] - Tested on iPhone Safari
+* [ ] - Tested on iPad Chrome
+* [ ] - Tested on iPad Safari
 
 ### Installation
 
