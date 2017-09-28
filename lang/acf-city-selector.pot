@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-28 04:23+0200\n"
+"POT-Creation-Date: 2017-09-29 01:32+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -16,94 +16,94 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:129 acf-city-selector.php:255
-#: acf-city-selector.php:305 acf-city-selector.php:335
-#: acf-city-selector.php:360
+#: acf-city-selector.php:157 acf-city-selector.php:283
+#: acf-city-selector.php:339 acf-city-selector.php:371
+#: acf-city-selector.php:397
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: acf-city-selector.php:140
+#: acf-city-selector.php:169
 #, php-format
 msgid "File '%s' is successfully uploaded and now shows under 'Select files to import'"
 msgstr ""
 
-#: acf-city-selector.php:147
+#: acf-city-selector.php:176
 msgid "Upload failed. Please try again."
 msgstr ""
 
-#: acf-city-selector.php:164
+#: acf-city-selector.php:193
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: acf-city-selector.php:171
+#: acf-city-selector.php:199
 msgid "You didn't select a file."
 msgstr ""
 
-#: acf-city-selector.php:187
+#: acf-city-selector.php:215
 msgid "Congratulations, there appear to be no errors in your CSV."
 msgstr ""
 
-#: acf-city-selector.php:221
+#: acf-city-selector.php:249
 #, php-format
 msgid "YAY ! %d lines are imported."
 msgstr ""
 
-#: acf-city-selector.php:234
+#: acf-city-selector.php:262
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr ""
 
-#: acf-city-selector.php:238
+#: acf-city-selector.php:266
 msgid "Files successfully deleted."
 msgstr ""
 
-#: acf-city-selector.php:262
+#: acf-city-selector.php:291
 msgid "Congratulations, your CSV data seems valid."
 msgstr ""
 
-#: acf-city-selector.php:291
+#: acf-city-selector.php:322
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr ""
 
-#: acf-city-selector.php:345
+#: acf-city-selector.php:382
 msgid "All cities are deleted."
 msgstr ""
 
-#: acf-city-selector.php:370
+#: acf-city-selector.php:407
 msgid "Settings saved"
 msgstr ""
 
-#: acf-city-selector.php:403
+#: acf-city-selector.php:441
 msgid "Warning"
 msgstr ""
 
-#: acf-city-selector.php:410
+#: acf-city-selector.php:448
 msgid "Error"
 msgstr ""
 
-#: acf-city-selector.php:422
+#: acf-city-selector.php:460
 msgid "Dismiss this notice"
 msgstr ""
 
-#: acf-city-selector.php:454 acf-city-selector.php:467
+#: acf-city-selector.php:491 acf-city-selector.php:504
 msgid "Settings"
 msgstr ""
 
-#: acf-city-selector.php:465 inc/pro-page.php:25
+#: acf-city-selector.php:502 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr ""
 
-#: acf-city-selector.php:467
+#: acf-city-selector.php:504
 msgid "Dashboard"
 msgstr ""
 
-#: acf-city-selector.php:502
+#: acf-city-selector.php:540
 #, php-format
 msgid "%s says \"Thank you\""
 msgstr ""
 
-#: acf-city-selector.php:513
+#: acf-city-selector.php:551
 #, php-format
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
@@ -116,29 +116,40 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:81 fields/acf-city_selector-v5.php:85
+#: fields/acf-city_selector-v4.php:81 fields/acf-city_selector-v5.php:86
 msgid "Show labels"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:82 fields/acf-city_selector-v5.php:86
+#: fields/acf-city_selector-v4.php:82 fields/acf-city_selector-v5.php:87
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:137 fields/acf-city_selector-v5.php:122
-#: inc/country-field.php:37
+#: fields/acf-city_selector-v4.php:137
 msgid "Select country"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:156 fields/acf-city_selector-v5.php:141
+#: fields/acf-city_selector-v4.php:156
 msgid "Select province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:165 fields/acf-city_selector-v5.php:150
+#: fields/acf-city_selector-v4.php:165
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:302 fields/acf-city_selector-v5.php:267
+#: fields/acf-city_selector-v4.php:312 fields/acf-city_selector-v5.php:274
 msgid "You didn't select a city"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:118 inc/country-field.php:37
+msgid "Select a country"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:139 inc/country-field.php:102
+msgid "Select a province/state"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:148 inc/country-field.php:157
+msgid "Select a city"
 msgstr ""
 
 #: inc/admin-right.php:3
@@ -386,59 +397,59 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: inc/settings-page.php:28
+#: inc/settings-page.php:27
 msgid "Import countries"
 msgstr ""
 
-#: inc/settings-page.php:29
+#: inc/settings-page.php:28
 msgid "Here you can (re-)import all cities for the individual countries listed below."
 msgstr ""
 
-#: inc/settings-page.php:33
-msgid "Import all cities in Holland/The Netherlands"
-msgstr ""
-
-#: inc/settings-page.php:38
+#: inc/settings-page.php:31
 msgid "Import all cities in Belgium"
 msgstr ""
 
-#: inc/settings-page.php:43
+#: inc/settings-page.php:35
 msgid "Import all cities in Luxembourg"
 msgstr ""
 
-#: inc/settings-page.php:46
+#: inc/settings-page.php:39
+msgid "Import all cities in Holland/The Netherlands"
+msgstr ""
+
+#: inc/settings-page.php:41
 msgid "Import selected countries"
 msgstr ""
 
-#: inc/settings-page.php:54
+#: inc/settings-page.php:48
 msgid "Clear the database"
 msgstr ""
 
-#: inc/settings-page.php:55
+#: inc/settings-page.php:49
 msgid "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start."
 msgstr ""
 
-#: inc/settings-page.php:59
+#: inc/settings-page.php:52
 msgid "Delete all cities from the database"
 msgstr ""
 
-#: inc/settings-page.php:62
+#: inc/settings-page.php:54
 msgid "Nuke 'em"
 msgstr ""
 
-#: inc/settings-page.php:70
+#: inc/settings-page.php:61
 msgid "Save data"
 msgstr ""
 
-#: inc/settings-page.php:71
+#: inc/settings-page.php:62
 msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to preserve this data upon deletion."
 msgstr ""
 
-#: inc/settings-page.php:77
+#: inc/settings-page.php:67
 msgid "Preserve settings on plugin deletion"
 msgstr ""
 
-#: inc/settings-page.php:81
+#: inc/settings-page.php:70
 msgid "Save settings"
 msgstr ""
 
@@ -462,14 +473,14 @@ msgstr ""
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""
 
-#: lib/import_be.php:1196
+#: lib/import_be.php:1168
 msgid "Successfully imported 1166 cities for Belgium."
 msgstr ""
 
-#: lib/import_lux.php:42
-msgid "Successfully imported 11 cities for Luxembourg."
+#: lib/import_lux.php:14
+msgid "Successfully imported 12 cities for Luxembourg."
 msgstr ""
 
-#: lib/import_nl.php:2479
+#: lib/import_nl.php:2451
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr ""
