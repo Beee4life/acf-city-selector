@@ -65,9 +65,9 @@ I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't as
 
 ### Disclaimer
 
-This plugin is as good as finished for its firs release. Using it, is at your own risk. If you do, keep the following in mind.
+This plugin is as good as finished for its first release. Using it, is still at your own risk. If you do, keep the following in mind.
 
-* If you deactivate the plugin and reactivate it again, all cities are inserted again (but there's a truncate table option now).
+* If you deactivate the plugin and reactivate it again, all cities are inserted again EXCEPT if the setting 'Preserve data is checked. If you didn't have this option checked, you can empty the entire table and then re-import the necessary countries.
 
 ### Tested on
 
