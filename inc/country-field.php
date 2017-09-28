@@ -37,7 +37,6 @@
 				$items[] = esc_html__( 'Select country', 'acf-city-selector' );
 			}
 		}
-		// echo '<pre>'; var_dump($db); echo '</pre>'; exit;
 		foreach ( $db as $data ) {
 			// echo '<pre>'; var_dump($data); echo '</pre>'; exit;
 			$items[ $data->country_code ] = $data->country;
@@ -45,7 +44,6 @@
 		if ( count( $items ) > 1 ) {
 			// TO DO: print countries to file to index for translation
 		}
-		// echo '<pre>'; var_dump($items); echo '</pre>'; exit;
 
 		return $items;
 	}
@@ -104,8 +102,8 @@
 		$items                    = array();
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
-		$items[0]['states']       = "";
-		// $items[0]['states']       = esc_html__( 'Select province/state', 'acf-city-selector' );
+		// $items[0]['states']       = "";
+		$items[0]['states']       = esc_html__( 'Select province/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
@@ -157,8 +155,8 @@
 			}
 			$items                 = array();
 			$items[0]['id']        = "";
-			$items[0]['city_name'] = "";
-			// $items[0]['city_name'] = esc_html__( 'Select city', 'acf-city-selector' );
+			// $items[0]['city_name'] = "";
+			$items[0]['city_name'] = esc_html__( 'Select city', 'acf-city-selector' );
 			$i                     = 1;
 
 			foreach ( $db as $data ) {
