@@ -68,6 +68,7 @@
 				$this->acfcs_admin_menu();
 				$this->acfcs_load_admin_pages();
 				$this->acfcs_check_uploads_folder();
+				// $this->acfcs_check_table();
 
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
@@ -94,11 +95,36 @@
 			 * Prepare database upon plugin activation
 			 */
 			public function acfcs_create_fill_db() {
+				$this->acfcs_check_table();
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 				ob_start();
+				global $wpdb;
 				require_once( 'lib/prepare-tables.php' );
 				$sql = ob_get_clean();
 				dbDelta( $sql );
+			}
+
+			/*
+			 * Check if table exists
+			 */
+			public function acfcs_check_table() {
+				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+				ob_start();
+				global $wpdb;
+				?>
+				CREATE TABLE IF NOT EXISTS <?php echo $wpdb->prefix; ?>cities (
+					id int(6) unsigned NOT NULL auto_increment,
+					city_name varchar(50) NULL,
+					state_code varchar(2) NULL,
+					states varchar(50) NULL,
+					country_code varchar(2) NULL,
+					country varchar(50) NULL,
+					PRIMARY KEY (id)
+				);
+				<?php
+				$sql = ob_get_clean();
+				dbDelta( $sql );
+
 			}
 
 			/*
@@ -208,7 +234,7 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name_ascii' => $city,
+										'city_name' => $city,
 										'state_code'      => $state_abbr,
 										'states'          => $state,
 										'country_code'    => $country_abbr,
@@ -282,7 +308,7 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name_ascii' => $city,
+										'city_name' => $city,
 										'state_code'      => $state_abbr,
 										'states'          => $state,
 										'country_code'    => $country_abbr,
@@ -319,14 +345,14 @@
 							require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 							ob_start();
 							global $wpdb;
-							if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
-								require_once( 'lib/import_nl.php' );
-							}
 							if ( isset( $_POST['import_be'] ) && 1 == $_POST["import_be"] ) {
 								require_once( 'lib/import_be.php' );
 							}
 							if ( isset( $_POST['import_lux'] ) && 1 == $_POST["import_lux"] ) {
 								require_once( 'lib/import_lux.php' );
+							}
+							if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
+								require_once( 'lib/import_nl.php' );
 							}
 							$sql = ob_get_clean();
 							dbDelta( $sql );

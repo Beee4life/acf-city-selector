@@ -18,7 +18,7 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 * Add the field.
 * Choose any name you want.
-* **!!!** The key MUST be exactly `acf_city_selector` (a fix for this is in the making).
+* **!!!** The key MUST be exactly `acf_city_selector` otherwise your stored values won't load. We're looking for a fix already.
 * Set any other values as you see fit.
 * Save/publish the Field Group.
 
@@ -31,14 +31,14 @@ The values are stored in an array, containing 3 values, which looks like this:
       string(2) "NL"
       ["stateCode"]=>
       string(5) "NL-NH"
-      ["cityNameAscii"]=>
+      ["cityName"]=>
       string(9) "Amsterdam"
     }
 
 Echo as follows:
 
     $city_selector = get_field('field_name');
-    echo 'I live in ' . $city_selector['cityNameAscii'];
+    echo 'I live in ' . $city_selector['cityName'];
     echo 'which is in ' . substr( $city_selector['stateCode'], 3 ); // this strips the first 3 characters
     echo ' which lies in the country: ' . $city_selector['countryCode'];
 

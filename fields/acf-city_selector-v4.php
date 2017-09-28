@@ -126,7 +126,7 @@
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
-						$cityName  = $field['value']['cityNameAscii'];
+						$cityName  = $field['value']['cityName'];
 					}
 					$states    = get_states( $countrycode );
 				}
@@ -164,8 +164,8 @@
 					<?php if ( $field['show_labels'] == 1 ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-                    <label for="cityNameAscii" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
+                    <label for="cityName" class="screen-reader-text"></label>
+                    <select name="acf[<?php echo $field['key']; ?>][cityName]" id="cityName" class="countrySelect">
                     </select>
                 </div>
 				<?php
@@ -197,11 +197,11 @@
 				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
 					$post_meta = get_post_meta( get_the_ID(), 'acf_city_selector', 1 );
 
-					if ( ! empty( $post_meta['cityNameAscii'] ) ) {
+					if ( ! empty( $post_meta['cityName'] ) ) {
 						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
 							'countryCode'   => $post_meta['countryCode'],
 							'stateCode'     => $post_meta['stateCode'],
-							'cityNameAscii' => $post_meta['cityNameAscii'],
+							'cityName' => $post_meta['cityName'],
 						) );
 					}
 				}
@@ -298,7 +298,7 @@
 			function update_value( $value, $post_id, $field ) {
 
 				if ( 1 == $field['required'] ) {
-					if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' || $value['cityNameAscii'] == 0 ) {
+					if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select city' || $value['cityName'] == 0 ) {
 						$valid = __( 'You didn\'t select a city', 'acf-city-selector' );
 					}
 				}

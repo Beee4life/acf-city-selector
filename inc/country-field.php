@@ -143,14 +143,14 @@
 				$db = $wpdb->get_results( "
                 SELECT * FROM " . $wpdb->prefix . "cities
                 WHERE country_code = '" . $country_code . "'
-                order by city_name_ascii ASC
+                order by city_name ASC
             " );
 			} else {
 				$db = $wpdb->get_results( "
                 SELECT * FROM " . $wpdb->prefix . "cities
                 WHERE state_code = '" . $state_code . "'
                 AND country_code='" . $country_code . "'
-                order by city_name_ascii ASC
+                order by city_name ASC
             " );
 			}
 			$items                 = array();
@@ -161,7 +161,7 @@
 
 			foreach ( $db as $data ) {
 				$items[ $i ]['id']        = $data->state_code;
-				$items[ $i ]['city_name'] = $data->city_name_ascii;
+				$items[ $i ]['city_name'] = $data->city_name;
 				$i ++;
 			}
 			ob_clean();

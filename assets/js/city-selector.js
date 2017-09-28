@@ -17,7 +17,7 @@
                     var $stateValues = '';
 
                     $("select[name*='stateCode']").empty();
-                    $("select[name*='cityNameAscii']").empty();
+                    $("select[name*='cityName']").empty();
                     for (i = 0; i < len; i++) {
                         var mystate = obj[i];
 
@@ -42,12 +42,12 @@
                     var len = obj.length;
                     var $cityValues = '';
 
-                    $("select[name*='cityNameAscii']").empty();
+                    $("select[name*='cityName']").empty();
                     for (i = 0; i < len; i++) {
                         var mycity = obj[i];
                         $cityValues += '<option value="' + mycity.city_name + '">' + mycity.city_name + '</option>';
                     }
-                    $("select[name*='cityNameAscii']").append($cityValues);
+                    $("select[name*='cityName']").append($cityValues);
 
                 });
             });
@@ -105,15 +105,15 @@
 
         // Load select cities when editing a post
         function admin_post_edit_load_cities() {
-            // $("select[name*='cityNameAscii']").hide();
+            // $("select[name*='cityName']").hide();
             get_cities(city_selector_vars.stateCode, function (response) {
 
-                var stored_city = city_selector_vars.cityNameAscii;
+                var stored_city = city_selector_vars.cityName;
                 var obj = JSON.parse(response);
                 var len = obj.length;
                 var $cityValues = '';
 
-                $("select[name*='cityNameAscii']").fadeIn();
+                $("select[name*='cityName']").fadeIn();
                 for (i = 0; i < len; i++) {
                     var mycity = obj[i];
                     if (mycity.city_name == stored_city) {
@@ -123,7 +123,7 @@
                     }
                     $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
                 }
-                $("select[name*='cityNameAscii']").append($cityValues);
+                $("select[name*='cityName']").append($cityValues);
 
             });
         }
