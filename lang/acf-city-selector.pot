@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-28 03:37+0200\n"
+"POT-Creation-Date: 2017-09-28 04:23+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -431,7 +431,7 @@ msgid "Save data"
 msgstr ""
 
 #: inc/settings-page.php:71
-msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to save all your cities/settings."
+msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to preserve this data upon deletion."
 msgstr ""
 
 #: inc/settings-page.php:77
