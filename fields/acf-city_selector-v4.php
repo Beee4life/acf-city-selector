@@ -126,9 +126,9 @@
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
-						$cityName  = $field['value']['cityName'];
+						$cityName = $field['value']['cityName'];
 					}
-					$states    = get_states( $countrycode );
+					$states = get_states( $countrycode );
 				}
 				$stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false;
 				?>
@@ -141,12 +141,12 @@
 						<?php
 							foreach ( $countries as $key => $country ) {
 								if ( isset( $countrycode ) ) {
-									$selected = ( $countrycode == $key ) ? " selected=\"selected\"" : false;
+									$selected = ( $countrycode === $key ) ? " selected=\"selected\"" : false;
 								} else {
 									$selected = false;
 								}
 								?>
-                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
+                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>>XZ <?php echo $country; ?></option>
 							<?php } ?>
                     </select>
                 </div>

@@ -103,26 +103,28 @@
                 if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
                 }
-                $countries   = populate_country_select( '', $field );
+                $countries = populate_country_select( '', $field );
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
-						$cityName  = $field['value']['cityName'];
+						$cityName = $field['value']['cityName'];
                     }
-					$states    = get_states( $countrycode );
+					$states = get_states( $countrycode );
 				}
                 $stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false;
 				?>
                 <div class="dropdown-box cs-countries">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select country', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
                         <?php
+	                        // echo '<pre>'; var_dump($countries); echo '</pre>'; exit;
                             foreach ( $countries as $key => $country ) {
                                 if ( isset( $countrycode ) ) {
-	                                $selected = ( $countrycode == $key ) ? " selected=\"selected\"" : false;
+	                                $selected = ( $countrycode === $key ) ? " selected=\"selected\"" : false;
+	                                // $selected = false;
                                 } else {
 	                                $selected = false;
                                 }
@@ -134,7 +136,7 @@
 
                 <div class="dropdown-box cs-provinces">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select province/state', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
@@ -143,7 +145,7 @@
 
                 <div class="dropdown-box cs-cities">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select city', 'acf-city-selector' ); ?></span>
+                        <span class="acf-input-header"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityName" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][cityName]" id="cityName" class="countrySelect">
