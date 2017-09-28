@@ -18,7 +18,7 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 * Add the field.
 * Choose any name you want.
-* **!!!** The key MUST be exactly `acf_city_selector` otherwise your stored values won't load. We're looking for a fix already.
+* Choose any key you want.
 * Set any other values as you see fit.
 * Save/publish the Field Group.
 

@@ -82,6 +82,7 @@
 					'choices'      => $select_options,
 					'value'        => $field['show_labels'],
 					'layout'       => 'horizontal',
+					// @TODO: check if these 2 below are needed
 					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
 					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 				) );
@@ -171,26 +172,35 @@
 				wp_enqueue_script( 'acf-city-selector-js' );
 
 				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
-					$post_meta = get_post_meta( get_the_ID(), 'acf_city_selector', 1 );
+					$fields     = get_field_objects( get_the_ID() );
+					$field_name = 'acf_city_selector';
+					if ( is_array( $fields ) && count( $fields ) > 0 ) {
+					    foreach( $fields as $field ) {
+					        if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
+					            $field_name = $field['name'];
+					            break;
+                            }
+                        }
+                    }
+					$post_meta = get_post_meta( get_the_ID(), $field_name, 1 );
 
 					if ( ! empty( $post_meta['cityName'] ) ) {
 						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-							'countryCode'   => $post_meta['countryCode'],
-							'stateCode'     => $post_meta['stateCode'],
-							'cityName' => $post_meta['cityName'],
+							'countryCode' => $post_meta['countryCode'],
+							'stateCode'   => $post_meta['stateCode'],
+							'cityName'    => $post_meta['cityName'],
 						) );
                     }
 				}
 
-				// register & include CSS
-				wp_register_style( 'acf-city-selector-css', "{$url}assets/css/acf-city-selector.css", array( 'acf-input' ), $version );
-				wp_enqueue_style( 'acf-city-selector-css' );
 			}
 
 			/*
 			 * load_value()
 			 *
 			 * This filter is applied to the $value after it is loaded from the db
+			 * This returns false if no country/state is selected (but empty values are stored)
+			 * @TODO: fix save empty value
 			 *
 			 * @type    filter
 			 * @param   $value (mixed) the value found in the database
@@ -198,9 +208,10 @@
 			 * @param   $field (array) the field array holding all the field options
 			 * @return  $value
 			 */
-			// function load_value( $value, $post_id, $field ) {
-			//     return $value;
-			// }
+			function load_value( $value, $post_id, $field ) {
+			    // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+			    return $value;
+			}
 
 
 			/*
@@ -255,7 +266,6 @@
 			 * @return  $valid
 			 */
 			function validate_value( $valid, $value, $field, $input ) {
-
 
 			    if ( 1 == $field['required'] ) {
 				    if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select city' || $value['cityName'] == 0 ) {
