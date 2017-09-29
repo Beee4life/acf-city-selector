@@ -279,8 +279,10 @@
 			 */
 			function validate_value( $valid, $value, $field, $input ) {
 
+			    // echo '<pre>'; var_dump($value); echo '</pre>'; exit;
+
 			    if ( 1 == $field['required'] ) {
-				    if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select city' || $value['cityName'] == 0 ) {
+				    if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select a city' ) {
 					    $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
 				    }
                 }
