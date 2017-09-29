@@ -4,7 +4,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Version
 
-0.1 (beta)
+0.1
 
 ### Description
 
@@ -20,7 +20,7 @@ Around October 1, 2017
 
 ### Disclaimer
 
-This plugin is not finished yet !!!! Using it, is at your own risk. If you do, keep the following in mind:
+This plugin is not finished yet !!!! Using it, is at your own risk. 
 
-* You have to set the city each time you update, since it doesn't load stored values (yet) or you can place it behind conditional logic to avoid storing empty values (fix is done, needs merging)
-* If you deactivate the plugin and reactivate it again, all cities are inserted again (but there's a truncate table option now).
+Download the latest branche [here](https://github.com/Beee4life/acf-city-selector/tree/check-before-live).
+
