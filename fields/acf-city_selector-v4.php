@@ -284,7 +284,18 @@
 			*/
 
 			function load_value( $value, $post_id, $field ) {
-				// Note: This function can be removed if not used
+
+				global $wpdb;
+				$country_code = $value['countryCode'];
+				if ( strlen( $country_code ) == 2 ) {
+					$table                = $wpdb->prefix . 'cities';
+					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
+					$country              = $row->country;
+					$state_name           = $row->state_name;
+					$value['stateName']   = $state_name;
+					$value['countryName'] = $country;
+				}
+
 				return $value;
 			}
 
