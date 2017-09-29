@@ -24,14 +24,8 @@
 
 				$this->name     = 'acf_city_selector';
 				$this->label    = 'City Selector';
-				$this->category = 'choice';
+				$this->category = 'Choice';
 				$this->defaults = array(
-					// 'country_name'  => '',
-					// 'city_name'     => '',
-					// 'province_name' => 0,
-					// 'country_id'    => 0,
-					// 'city_id'       => 0,
-					// 'province_id'   => '',
 					'show_labels'   => 1
 				);
 
@@ -237,7 +231,7 @@
 			 * @return  $value
 			 */
 			// function update_value( $value, $post_id, $field ) {
-			//     return $value;
+             //    return $value;
 			// }
 
 
