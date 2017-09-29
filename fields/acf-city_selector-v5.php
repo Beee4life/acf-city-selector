@@ -120,11 +120,9 @@
                     <label for="countryCode" class="screen-reader-text"></label>
                     <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
                         <?php
-	                        // echo '<pre>'; var_dump($countries); echo '</pre>'; exit;
                             foreach ( $countries as $key => $country ) {
                                 if ( isset( $countrycode ) ) {
 	                                $selected = ( $countrycode === $key ) ? " selected=\"selected\"" : false;
-	                                // $selected = false;
                                 } else {
 	                                $selected = false;
                                 }
