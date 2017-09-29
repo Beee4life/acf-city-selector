@@ -82,8 +82,8 @@
             get_states(city_selector_vars.countryCode, function (response) {
 
                 var stored_state = city_selector_vars.stateCode;
-                var obj = JSON.parse(response);
-                var len = obj.length;
+                var obj          = JSON.parse(response);
+                var len          = obj.length;
                 var $stateValues = '';
 
                 $("select[name*='stateCode']").fadeIn();
@@ -109,8 +109,8 @@
             get_cities(city_selector_vars.stateCode, function (response) {
 
                 var stored_city = city_selector_vars.cityName;
-                var obj = JSON.parse(response);
-                var len = obj.length;
+                var obj         = JSON.parse(response);
+                var len         = obj.length;
                 var $cityValues = '';
 
                 $("select[name*='cityName']").fadeIn();
