@@ -31,13 +31,7 @@
 				$this->label    = 'City Selector';
 				$this->category = 'Choice';
 				$this->defaults = array(
-					// 'country_name'  => '',
-					// 'city_name'     => '',
-					// 'province_name' => 0,
-					// 'country_id'    => 0,
-					// 'city_id'       => 0,
-					// 'province_id'   => '',
-					'show_labels'   => 1
+					'show_labels' => 1
 				);
 
 				// do not delete!
@@ -110,6 +104,7 @@
 			*/
 
 			function create_field( $field ) {
+
 				$field = array_merge($this->defaults, $field);
 
 				// create Field HTML
@@ -117,10 +112,6 @@
 					$countrycode = $field[ 'value' ][ 'countryCode' ];
 				}
 				$countries = populate_country_select( '', $field );
-				if ( $countries ) {
-					// $first_item = ( $field['show_labels'] == 1 ) ? '-' : esc_html__( 'Select country', 'acf-city-selector' );
-					// array_unshift( $countries, $first_item );
-				}
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
@@ -189,7 +180,7 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
-				wp_register_script( 'acf-input-city_selector', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
+				wp_register_script( 'acf-input-city_selector', "{$url}assets/js/city-selector.js", '', $version );
 				wp_enqueue_script( 'acf-input-city_selector' );
 
 				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
@@ -208,9 +199,9 @@
 
 					if ( ! empty( $post_meta['cityName'] ) ) {
 						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-							'countryCode'   => $post_meta['countryCode'],
-							'stateCode'     => $post_meta['stateCode'],
-							'cityName' => $post_meta['cityName'],
+							'countryCode' => $post_meta['countryCode'],
+							'stateCode'   => $post_meta['stateCode'],
+							'cityName'    => $post_meta['cityName'],
 						) );
 					}
 				}
@@ -315,9 +306,9 @@
 			*
 			*  @return	$value - the modified value
 			*/
-			// function update_value( $value, $post_id, $field ) {
-			// 	return $value;
-			// }
+			function update_value( $value, $post_id, $field ) {
+				return $value;
+			}
 
 
 			/*
