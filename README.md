@@ -22,5 +22,5 @@ Around October 1, 2017
 
 This plugin is not finished yet !!!! Using it, is at your own risk. 
 
-Download the latest branche [here](https://github.com/Beee4life/acf-city-selector/tree/check-before-live).
+Download the latest branche [here](https://github.com/Beee4life/acf-city-selector/archive/check-before-live.zip).
 
