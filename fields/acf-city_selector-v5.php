@@ -82,7 +82,6 @@
 					'choices'      => $select_options,
 					'value'        => $field['show_labels'],
 					'layout'       => 'horizontal',
-					// @TODO: check if these 2 below are needed
 					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
 					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 				) );

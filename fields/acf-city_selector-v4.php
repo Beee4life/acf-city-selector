@@ -89,8 +89,6 @@
                                 'choices'      => $select_options,
                                 'value'        => $field['show_labels'],
                                 'layout'       => 'horizontal',
-                                // 'label'        => esc_html__( 'Show labels', 'acf-city-selector' ), // needed ?
-                                // 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ), // needed ?
                             ));
                         ?>
                     </td>
@@ -146,7 +144,7 @@
 									$selected = false;
 								}
 								?>
-                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>>XZ <?php echo $country; ?></option>
+                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
 							<?php } ?>
                     </select>
                 </div>
@@ -199,6 +197,7 @@
 					$field_name = 'acf_city_selector';
 					if ( is_array( $fields ) && count( $fields ) > 0 ) {
 						foreach( $fields as $field ) {
+						    // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
 							if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
 								$field_name = $field['name'];
 								break;
@@ -320,7 +319,7 @@
 			function update_value( $value, $post_id, $field ) {
 
 				if ( 1 == $field['required'] ) {
-					if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select city' || $value['cityName'] == 0 ) {
+					if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select a city' || $value['cityNameAscii'] == 0 ) {
 						$valid = __( 'You didn\'t select a city', 'acf-city-selector' );
 					}
 				}
