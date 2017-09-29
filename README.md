@@ -4,7 +4,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Version
 
-0.1 (beta)
+0.1
 
 ## Here's how it works
 
@@ -19,12 +19,12 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 * Add the field.
 * Choose any name you want.
 * Choose any key you want.
-* Set any other values as you see fit.
+* Select whether to show labels above the input fields (default = yes)
 * Save/publish the Field Group.
 
 ### Usage
 
-The values are stored in an array, containing 3 values, which looks like this:
+The values are stored in an array and it returns 5 values, which looks like this:
 
     array(5) {
       ["countryCode"]=>
@@ -50,8 +50,7 @@ This outputs: "I live in Amsterdam which is in the state Noord-Holland (NH) whic
 
 ### Impact
 
-* The plugin adds a database table named `$wpdb->prefix_cities` upon plugin activation.
-* The plugin removes the database table named `$wpdb->prefix_cities` upon plugin deletion through the admin panel. Deleting by FTP won't delete the table !
+The plugin adds a database table named `{$wpdb->prefix_}cities` upon plugin activation.
 
 ### Cities
 
@@ -89,8 +88,8 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * [X] - Tested on Mac Chrome
 * [X] - Load values when editing post
 * [X] - Add settings page option to import countries from CSV
-* [ ] - Prevent values being inserted again when plugin is re-activated (without being deleted)
-* [ ] - Return state/provence name
+* [X] - Prevent values being inserted again when plugin is re-activated (without being deleted)
+* [X] - Return state/provence name
 * [ ] - Add lazy/fancy loading (ajax) - optional
 * [ ] - Add translations for English country names - optional
 * [ ] - Tested on Mac Firefox
