@@ -100,7 +100,7 @@
 			 */
 			function render_field( $field ) {
 
-                if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
+			    if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
                 }
                 $countries = populate_country_select( '', $field );
@@ -219,6 +219,7 @@
 					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
 					$country              = $row->country;
 					$state_name           = $row->state_name;
+					$value['stateCode']   = substr( $value['stateCode'], 3 );
 					$value['stateName']   = $state_name;
 					$value['countryName'] = $country;
 				}
