@@ -1,9 +1,9 @@
 <?php
 	/*
-	Plugin Name:    ACF City Selector (almost finished)
+	Plugin Name:    ACF City Selector
 	Plugin URI:     http://berryplasman.com/wordpress/acf-city-selector
 	Description:    An extension for ACF which allows you to select a city based on country and province/state.
-	Version:        0.1 (beta)
+	Version:        0.1
 	Author:         Beee
 	Author URI:     http://berryplasman.com
 	Text Domain:    acf-city-selector
