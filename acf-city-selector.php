@@ -52,6 +52,7 @@
 				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
 				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
+				add_action( 'save_post',                    array( $this, 'acfcs_before_save' ), 10, 3 );
 
 				// filters
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
@@ -126,6 +127,43 @@
 				dbDelta( $sql );
 
 			}
+
+			/**
+             * Force update_post_meta in v4 because values are not saved
+             *
+			 * @param $post_id
+			 * @param $post
+			 * @param $update
+			 */
+			public function acfcs_before_save( $post_id, $post, $update ) {
+
+				// bail early if no ACF data
+				if ( ! isset( $_POST['acf'] ) ) {
+					return;
+				}
+
+				// only run with v4
+				if ( 4 == get_option( 'acf_version' ) ) {
+
+					$field_name = '';
+					$fields     = $_POST['acf'];
+					$new_value  = '';
+					if ( is_array( $fields ) && count( $fields ) > 0 ) {
+						foreach( $fields as $key => $value ) {
+							$field = get_field_object( $key );
+							if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
+								$field_name = $field['name'];
+								$new_value  = $value;
+								break;
+							}
+						}
+					}
+
+					// store data in $field_name
+					update_post_meta( $post_id, $field_name, $new_value );
+				}
+			}
+
 
 			/*
 			 * Check if (upload) folder exists
@@ -478,6 +516,7 @@
 
 				if ( ! $version ) {
 					$version = 4;
+					update_option( 'acf_version', 4 );
 				}
 
 				// include
