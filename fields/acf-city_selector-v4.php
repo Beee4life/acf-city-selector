@@ -292,6 +292,7 @@
 					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
 					$country              = $row->country;
 					$state_name           = $row->state_name;
+					$value['stateCode']   = substr( $value['stateCode'], 3 );
 					$value['stateName']   = $state_name;
 					$value['countryName'] = $country;
 				}
