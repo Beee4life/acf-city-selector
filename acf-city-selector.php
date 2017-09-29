@@ -52,6 +52,7 @@
 				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
 				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
+				add_action( 'save_post',                    array( $this, 'acfcs_before_save' ), 10, 3 );
 
 				// filters
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
@@ -68,6 +69,7 @@
 				$this->acfcs_admin_menu();
 				$this->acfcs_load_admin_pages();
 				$this->acfcs_check_uploads_folder();
+				// $this->acfcs_check_table();
 
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
@@ -94,15 +96,77 @@
 			 * Prepare database upon plugin activation
 			 */
 			public function acfcs_create_fill_db() {
+				$this->acfcs_check_table();
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 				ob_start();
+				global $wpdb;
 				require_once( 'lib/prepare-tables.php' );
 				$sql = ob_get_clean();
 				dbDelta( $sql );
 			}
 
 			/*
-			 * Check if folder exists
+			 * Check if table exists
+			 */
+			public function acfcs_check_table() {
+				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+				ob_start();
+				global $wpdb;
+				?>
+				CREATE TABLE IF NOT EXISTS <?php echo $wpdb->prefix; ?>cities (
+					id int(6) unsigned NOT NULL auto_increment,
+					city_name varchar(50) NULL,
+					state_code varchar(2) NULL,
+					state_name varchar(50) NULL,
+					country_code varchar(2) NULL,
+					country varchar(50) NULL,
+					PRIMARY KEY (id)
+				);
+				<?php
+				$sql = ob_get_clean();
+				dbDelta( $sql );
+
+			}
+
+			/**
+             * Force update_post_meta in v4 because values are not saved
+             *
+			 * @param $post_id
+			 * @param $post
+			 * @param $update
+			 */
+			public function acfcs_before_save( $post_id, $post, $update ) {
+
+				// bail early if no ACF data
+				if ( ! isset( $_POST['acf'] ) ) {
+					return;
+				}
+
+				// only run with v4
+				if ( 4 == get_option( 'acf_version' ) ) {
+
+					$field_name = '';
+					$fields     = $_POST['acf'];
+					$new_value  = '';
+					if ( is_array( $fields ) && count( $fields ) > 0 ) {
+						foreach( $fields as $key => $value ) {
+							$field = get_field_object( $key );
+							if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
+								$field_name = $field['name'];
+								$new_value  = $value;
+								break;
+							}
+						}
+					}
+
+					// store data in $field_name
+					update_post_meta( $post_id, $field_name, $new_value );
+				}
+			}
+
+
+			/*
+			 * Check if (upload) folder exists
 			 */
 			public function acfcs_check_uploads_folder() {
 
@@ -123,7 +187,7 @@
 
 
 			/*
-			 * Import preset countries
+			 * Upload CSV file
 			 */
 			public function acfcs_upload_csv_file() {
 				if ( isset( $_POST["upload_csv_nonce"] ) ) {
@@ -208,11 +272,11 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name_ascii' => $city,
-										'state_code'      => $state_abbr,
-										'states'          => $state,
-										'country_code'    => $country_abbr,
-										'country'         => $country,
+										'city_name'    => $city,
+										'state_code'   => $state_abbr,
+										'state_name'   => $state,
+										'country_code' => $country_abbr,
+										'country'      => $country,
 									);
 
 									global $wpdb;
@@ -282,11 +346,11 @@
 									$country      = $line[4];
 
 									$city_row = array(
-										'city_name_ascii' => $city,
-										'state_code'      => $state_abbr,
-										'states'          => $state,
-										'country_code'    => $country_abbr,
-										'country'         => $country,
+										'city_name'    => $city,
+										'state_code'   => $state_abbr,
+										'state_name'   => $state,
+										'country_code' => $country_abbr,
+										'country'      => $country,
 									);
 
 									global $wpdb;
@@ -319,14 +383,14 @@
 							require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 							ob_start();
 							global $wpdb;
-							if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
-								require_once( 'lib/import_nl.php' );
-							}
 							if ( isset( $_POST['import_be'] ) && 1 == $_POST["import_be"] ) {
 								require_once( 'lib/import_be.php' );
 							}
 							if ( isset( $_POST['import_lux'] ) && 1 == $_POST["import_lux"] ) {
 								require_once( 'lib/import_lux.php' );
+							}
+							if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
+								require_once( 'lib/import_nl.php' );
 							}
 							$sql = ob_get_clean();
 							dbDelta( $sql );
@@ -334,6 +398,7 @@
 					}
 				}
 			}
+
 
 			/*
 			 * Truncate cities table
@@ -451,6 +516,7 @@
 
 				if ( ! $version ) {
 					$version = 4;
+					update_option( 'acf_version', 4 );
 				}
 
 				// include
@@ -477,6 +543,7 @@
 				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
 			}
 
+
 			/*
 			 * Adds admin pages
 			 */
@@ -485,6 +552,7 @@
 				add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 				add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
 			}
+
 
 			/*
 			 * Adds CSS on the admin side

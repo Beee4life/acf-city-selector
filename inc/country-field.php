@@ -34,15 +34,11 @@
 			if ( $field['show_labels'] == 1 ) {
 				$items[] = '-';
 			} else {
-				$items[] = esc_html__( 'Select country', 'acf-city-selector' );
+				$items[] = esc_html__( 'Select a country', 'acf-city-selector' );
 			}
 		}
 		foreach ( $db as $data ) {
-			// echo '<pre>'; var_dump($data); echo '</pre>'; exit;
 			$items[ $data->country_code ] = $data->country;
-		}
-		if ( count( $items ) > 1 ) {
-			// TO DO: print countries to file to index for translation
 		}
 
 		return $items;
@@ -65,15 +61,18 @@
 
         $items = array();
 
-        $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
+        $sql = $wpdb->prepare( "
+            SELECT * 
+            FROM " . $wpdb->prefix . "cities
             WHERE country_code = '%s'
             group by state_code
-            order by states ASC",  $country_code );
+            order by state_name ASC",  $country_code
+        );
 
         $db = $wpdb->get_results( $sql );
 
         foreach ( $db as $data ) {
-            $items[ $data->state_code ] = $data->states;
+            $items[ $data->state_code ] = $data->state_name;
         }
         return $items;
     }
@@ -92,31 +91,34 @@
 
 		global $wpdb;
 
-        $sql = $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "cities
-        WHERE country_code = '%s'
-        group by state_code
-        order by states ASC",  $country_code );
+        $sql = $wpdb->prepare( "
+            SELECT * 
+            FROM " . $wpdb->prefix . "cities
+            WHERE country_code = '%s'
+            group by state_code
+            order by state_name ASC",  $country_code
+        );
 
         $db = $wpdb->get_results( $sql );
 
 		$items                    = array();
 		$items[0]['country_code'] = "";
 		$items[0]['state_code']   = "";
-		// $items[0]['states']       = "";
-		$items[0]['states']       = esc_html__( 'Select province/state', 'acf-city-selector' );
+		// $items[0]['state_name']   = "";
+		$items[0]['state_name']   = esc_html__( 'Select a province/state', 'acf-city-selector' );
 		$i                        = 1;
 
         // @TODO: check if $field['show_labels'] == 1
-        // if == 1, $items[0]['states'] = '-';
-        // __( 'Select province/state', 'acf-city-selector' )
+        // if == 1, $items[0]['state_name'] = '-';
+        // __( 'Select a province/state', 'acf-city-selector' )
 
 		foreach ( $db as $data ) {
 			$items[ $i ]['country_code'] = $data->country_code;
 			$items[ $i ]['state_code']   = $data->state_code;
-			if ( $data->states != 'N/A' ) {
-				$items[ $i ]['states'] = $data->states;
+			if ( $data->state_name != 'N/A' ) {
+				$items[ $i ]['state_name'] = $data->state_name;
 			} else {
-				$items[ $i ]['states'] = $data->country;
+				$items[ $i ]['state_name'] = $data->country;
 			}
 			$i++;
 		}
@@ -141,27 +143,29 @@
 
 			if ( $state_code == '00' ) {
 				$db = $wpdb->get_results( "
-                SELECT * FROM " . $wpdb->prefix . "cities
+                SELECT * 
+                FROM " . $wpdb->prefix . "cities
                 WHERE country_code = '" . $country_code . "'
-                order by city_name_ascii ASC
+                order by city_name ASC
             " );
 			} else {
 				$db = $wpdb->get_results( "
-                SELECT * FROM " . $wpdb->prefix . "cities
+                SELECT * 
+                FROM " . $wpdb->prefix . "cities
                 WHERE state_code = '" . $state_code . "'
                 AND country_code='" . $country_code . "'
-                order by city_name_ascii ASC
+                order by city_name ASC
             " );
 			}
 			$items                 = array();
 			$items[0]['id']        = "";
 			// $items[0]['city_name'] = "";
-			$items[0]['city_name'] = esc_html__( 'Select city', 'acf-city-selector' );
+			$items[0]['city_name'] = esc_html__( 'Select a city', 'acf-city-selector' );
 			$i                     = 1;
 
 			foreach ( $db as $data ) {
 				$items[ $i ]['id']        = $data->state_code;
-				$items[ $i ]['city_name'] = $data->city_name_ascii;
+				$items[ $i ]['city_name'] = $data->city_name;
 				$i ++;
 			}
 			ob_clean();

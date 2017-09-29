@@ -18,7 +18,7 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 * Add the field.
 * Choose any name you want.
-* **!!!** The key MUST be exactly `acf_city_selector` (a fix for this is in the making).
+* Choose any key you want.
 * Set any other values as you see fit.
 * Save/publish the Field Group.
 
@@ -26,23 +26,27 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 The values are stored in an array, containing 3 values, which looks like this:
 
-    array(3) {
+    array(5) {
       ["countryCode"]=>
       string(2) "NL"
       ["stateCode"]=>
-      string(5) "NL-NH"
-      ["cityNameAscii"]=>
+      string(5) "NH"
+      ["cityName"]=>
       string(9) "Amsterdam"
+      ["stateName"]=>
+      string(13) "Noord-Holland"
+      ["countryName"]=>
+      string(11) "Netherlands"
     }
 
 Echo as follows:
 
     $city_selector = get_field('field_name');
-    echo 'I live in ' . $city_selector['cityNameAscii'];
-    echo 'which is in ' . substr( $city_selector['stateCode'], 3 ); // this strips the first 3 characters
-    echo ' which lies in the country: ' . $city_selector['countryCode'];
+    echo 'I live in ' . $city_selector['cityName'];
+    echo 'which is in ' . city_selector['stateName'] . ' (' . city_selector['stateCode'] . ')'; 
+    echo ' which lies in the country: ' . $city_selector['country'] . ' (' . $city_selector['countryCode'] . ')';
 
-This outputs: "I live in Amsterdam which is in the state NH which lies in the country NL".
+This outputs: "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
 
 ### Impact
 
@@ -59,9 +63,7 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 ### Compatibility
 
-This ACF field type is compatible/tested with ACF 5.
-
-I didn't look at the compatibility for ACF 4, nor will I any time soon. Don't assume it will work, it won't. Just leave it until it's compatible or update to v5/Pro.
+This ACF field type is compatible/tested with ACF 4 (Free) as well as ACF 5 (Pro).
 
 ### Disclaimer
 

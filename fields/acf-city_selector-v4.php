@@ -31,13 +31,7 @@
 				$this->label    = 'City Selector';
 				$this->category = 'Choice';
 				$this->defaults = array(
-					// 'country_name'  => '',
-					// 'city_name'     => '',
-					// 'province_name' => 0,
-					// 'country_id'    => 0,
-					// 'city_id'       => 0,
-					// 'province_id'   => '',
-					'show_labels'   => 1
+					'show_labels' => 1
 				);
 
 				// do not delete!
@@ -89,8 +83,6 @@
                                 'choices'      => $select_options,
                                 'value'        => $field['show_labels'],
                                 'layout'       => 'horizontal',
-                                // 'label'        => esc_html__( 'Show labels', 'acf-city-selector' ), // needed ?
-                                // 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ), // needed ?
                             ));
                         ?>
                     </td>
@@ -112,6 +104,7 @@
 			*/
 
 			function create_field( $field ) {
+
 				$field = array_merge($this->defaults, $field);
 
 				// create Field HTML
@@ -119,20 +112,16 @@
 					$countrycode = $field[ 'value' ][ 'countryCode' ];
 				}
 				$countries = populate_country_select( '', $field );
-				if ( $countries ) {
-					// $first_item = ( $field['show_labels'] == 1 ) ? '-' : esc_html__( 'Select country', 'acf-city-selector' );
-					// array_unshift( $countries, $first_item );
-				}
 				if ( isset( $countrycode ) && 0 != $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
-						$cityName  = $field['value']['cityNameAscii'];
+						$cityName = $field['value']['cityName'];
 					}
-					$states    = get_states( $countrycode );
+					$states = get_states( $countrycode );
 				}
 				$stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false;
 				?>
-                <div class="cs_countries">
+                <div class="dropdown-box cs-countries">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
@@ -141,7 +130,7 @@
 						<?php
 							foreach ( $countries as $key => $country ) {
 								if ( isset( $countrycode ) ) {
-									$selected = ( $countrycode == $key ) ? " selected=\"selected\"" : false;
+									$selected = ( $countrycode === $key ) ? " selected=\"selected\"" : false;
 								} else {
 									$selected = false;
 								}
@@ -151,7 +140,7 @@
                     </select>
                 </div>
 
-                <div class="cs_provinces">
+                <div class="dropdown-box cs-provinces">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
@@ -160,12 +149,12 @@
                     </select>
                 </div>
 
-                <div class="cs_cities">
+                <div class="dropdown-box cs-cities">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-                    <label for="cityNameAscii" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][cityNameAscii]" id="cityNameAscii" class="countrySelect">
+                    <label for="cityName" class="screen-reader-text"></label>
+                    <select name="acf[<?php echo $field['key']; ?>][cityName]" id="cityName" class="countrySelect">
                     </select>
                 </div>
 				<?php
@@ -191,20 +180,31 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
-				wp_register_script( 'acf-input-city_selector', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
-				wp_enqueue_script( 'acf-input-city_selector' );
-
-				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
-					$post_meta = get_post_meta( get_the_ID(), 'acf_city_selector', 1 );
-
-					if ( ! empty( $post_meta['cityNameAscii'] ) ) {
-						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-							'countryCode'   => $post_meta['countryCode'],
-							'stateCode'     => $post_meta['stateCode'],
-							'cityNameAscii' => $post_meta['cityNameAscii'],
-						) );
-					}
-				}
+				// wp_register_script( 'acf-input-city-selector', "{$url}assets/js/city-selector.js", '', $version );
+				// wp_enqueue_script( 'acf-input-city-selector' );
+				//
+				// if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
+				// 	$fields     = get_field_objects( get_the_ID() );
+				// 	$field_name = 'acf_city_selector';
+				// 	if ( is_array( $fields ) && count( $fields ) > 0 ) {
+				// 		foreach( $fields as $field ) {
+				// 		    // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+				// 			if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
+				// 				$field_name = $field['name'];
+				// 				break;
+				// 			}
+				// 		}
+				// 	}
+				// 	$post_meta = get_post_meta( get_the_ID(), $field_name, 1 );
+				//
+				// 	if ( ! empty( $post_meta['cityName'] ) ) {
+				// 		wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+				// 			'countryCode' => $post_meta['countryCode'],
+				// 			'stateCode'   => $post_meta['stateCode'],
+				// 			'cityName'    => $post_meta['cityName'],
+				// 		) );
+				// 	}
+				// }
 
 			}
 
@@ -221,6 +221,35 @@
 			*  @date	23/01/13
 			*/
 			function input_admin_head() {
+
+				$url     = $this->settings['url'];
+				$version = $this->settings['version'];
+
+				// register & include JS
+				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
+				wp_enqueue_script( 'acf-city-selector-js' );
+
+				if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
+					$fields     = get_field_objects( get_the_ID() );
+					$field_name = 'acf_city_selector';
+					if ( is_array( $fields ) && count( $fields ) > 0 ) {
+						foreach( $fields as $field ) {
+							if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
+								$field_name = $field['name'];
+								break;
+							}
+						}
+					}
+					$post_meta = get_post_meta( get_the_ID(), $field_name, 1 );
+
+					if ( ! empty( $post_meta['cityName'] ) ) {
+						wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+							'countryCode' => $post_meta['countryCode'],
+							'stateCode'   => $post_meta['stateCode'],
+							'cityName'    => $post_meta['cityName'],
+						) );
+					}
+				}
 			}
 
 
@@ -274,7 +303,19 @@
 			*/
 
 			function load_value( $value, $post_id, $field ) {
-				// Note: This function can be removed if not used
+
+				global $wpdb;
+				$country_code = $value['countryCode'];
+				if ( strlen( $country_code ) == 2 ) {
+					$table                = $wpdb->prefix . 'cities';
+					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
+					$country              = $row->country;
+					$state_name           = $row->state_name;
+					$value['stateCode']   = substr( $value['stateCode'], 3 );
+					$value['stateName']   = $state_name;
+					$value['countryName'] = $country;
+				}
+
 				return $value;
 			}
 
@@ -294,15 +335,7 @@
 			*
 			*  @return	$value - the modified value
 			*/
-
 			function update_value( $value, $post_id, $field ) {
-
-				if ( 1 == $field['required'] ) {
-					if ( ! isset( $value['cityNameAscii'] ) || $value['cityNameAscii'] == 'Select city' || $value['cityNameAscii'] == 0 ) {
-						$valid = __( 'You didn\'t select a city', 'acf-city-selector' );
-					}
-				}
-
 				return $value;
 			}
 

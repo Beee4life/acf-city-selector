@@ -4,7 +4,19 @@
  */
 
 /* edit post screens */
-.acf-field-acf-city-selector div.dropdown-box {
+/* v4 */
+
+#acf-acf_city_selector .dropdown-box {
+    margin-bottom: 1em;
+}
+
+#acf-acf_city_selector span.acf-input-header {
+    display:       block;
+    margin-bottom: 10px;
+}
+
+/* v5 */
+.acf-field-acf-city-selector .dropdown-box {
     margin-bottom: 1em;
 }
 
@@ -12,6 +24,7 @@
     display:       block;
     margin-bottom: 10px;
 }
+
 
 /* admin pages */
 .admin_left, .admin_right {
