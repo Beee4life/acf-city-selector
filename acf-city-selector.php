@@ -143,7 +143,7 @@
 				}
 
 				// only run with v4
-				if ( 4 == get_option( 'acf_version' ) ) {
+				if ( 5 > get_option( 'acf_version' ) ) {
 
 					$field_name = '';
 					$fields     = $_POST['acf'];
@@ -516,7 +516,6 @@
 
 				if ( ! $version ) {
 					$version = 4;
-					update_option( 'acf_version', 4 );
 				}
 
 				// include
