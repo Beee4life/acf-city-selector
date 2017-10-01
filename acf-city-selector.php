@@ -69,7 +69,7 @@
 				$this->acfcs_admin_menu();
 				$this->acfcs_load_admin_pages();
 				$this->acfcs_check_uploads_folder();
-				// $this->acfcs_check_table();
+				$this->acfcs_check_table();
 
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
