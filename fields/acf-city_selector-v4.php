@@ -225,6 +225,8 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
+				wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/validation.js", ( __FILE__ ), array( 'acf-input' ) );
+				wp_enqueue_script( 'acf-custom-validation' );
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
 
