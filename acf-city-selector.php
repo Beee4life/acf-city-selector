@@ -54,9 +54,6 @@
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
 				add_action( 'save_post',                    array( $this, 'acfcs_before_save' ), 10, 3 );
 
-				// filters
-				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
-
 				// always load, move to $this->
 				add_action( 'init',                         array( $this, 'acfcs_upload_csv_file' ) );
 				add_action( 'init',                         array( $this, 'acfcs_do_something_with_file' ) );
@@ -64,6 +61,9 @@
 				add_action( 'init',                         array( $this, 'acfcs_import_preset_countries' ) );
 				add_action( 'init',                         array( $this, 'acfcs_preserve_settings' ) );
 				add_action( 'init',                         array( $this, 'acfcs_truncate_table' ) );
+
+				// filters
+				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
 
 				// always load
 				$this->acfcs_admin_menu();
