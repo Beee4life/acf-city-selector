@@ -35,7 +35,7 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
       string(9) "Amsterdam"
     }
 
-The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation.
+The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since we format this value on return.
 
 We override the return value so you get more return info and properly formatted (stateCode). 5 values are returned:
 
@@ -63,7 +63,7 @@ This outputs: "I live in Amsterdam which is in the state Noord-Holland (NH) whic
 
 ### Impact
 
-The plugin adds a database table named `{$wpdb->prefix_}cities` upon plugin activation and imports cities from 3 countries.
+The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
 
 ### Cities
 
@@ -90,7 +90,6 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * Advanced Custom Fields Pro 5.6.3
 
 #### To Do
-* [ ] - Add translations for English country names - optional
 * [ ] - Tested on Mac Firefox
 * [ ] - Tested on Mac Safari
 * [ ] - Tested on PC Chrome
