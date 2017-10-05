@@ -24,7 +24,20 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 ### Usage
 
-The values are stored in an array and it returns 5 values, which looks like this:
+3 values are stored in an array: 
+
+    array(3) {
+      ["countryCode"]=>
+      string(2) "NL"
+      ["stateCode"]=>
+      string(5) "NL-NH"
+      ["cityName"]=>
+      string(9) "Amsterdam"
+    }
+
+The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation.
+
+We override the return value so you get more return info and properly formatted (stateCode). 5 values are returned:
 
     array(5) {
       ["countryCode"]=>
@@ -39,7 +52,7 @@ The values are stored in an array and it returns 5 values, which looks like this
       string(11) "Netherlands"
     }
 
-Echo as follows:
+Echo it as follows:
 
     $city_selector = get_field('field_name');
     echo 'I live in ' . $city_selector['cityName'];
@@ -50,11 +63,11 @@ This outputs: "I live in Amsterdam which is in the state Noord-Holland (NH) whic
 
 ### Impact
 
-The plugin adds a database table named `{$wpdb->prefix_}cities` upon plugin activation.
+The plugin adds a database table named `{$wpdb->prefix_}cities` upon plugin activation and imports cities from 3 countries.
 
 ### Cities
 
-The plugin will come with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed.
+The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed.
 
 You can also add more countries yourself, through SQL or CSV import. There's a simple excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
@@ -74,23 +87,9 @@ This plugin is as good as finished for its first release. Using it, is still at 
 
 * Wordpress 4.8.2
 * Advanced Custom Fields 4.4.12
-* Advanced Custom Fields Pro 5.6.2
+* Advanced Custom Fields Pro 5.6.3
 
 #### To Do
-* [X] - Store values properly
-* [X] - Validate values upon empty
-* [X] - Drop tables on plugin deletion
-* [X] - Add settings page
-* [X] - Add settings page option to truncate table
-* [X] - Add Dutch cities/provinces
-* [X] - Add Belgian cities/provinces (in progress)
-* [X] - Add Luxembourg cities/provinces
-* [X] - Tested on Mac Chrome
-* [X] - Load values when editing post
-* [X] - Add settings page option to import countries from CSV
-* [X] - Prevent values being inserted again when plugin is re-activated (without being deleted)
-* [X] - Return state/provence name
-* [ ] - Add lazy/fancy loading (ajax) - optional
 * [ ] - Add translations for English country names - optional
 * [ ] - Tested on Mac Firefox
 * [ ] - Tested on Mac Safari
