@@ -111,7 +111,7 @@
                         <span class="acf-input-header"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="countryCode" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][countryCode]" id="countryCode" class="countrySelect">
+                    <select name="<?php echo $field['name']; ?>[countryCode]" id="countryCode" class="countrySelect">
                         <?php
                             foreach ( $countries as $key => $country ) {
                                 if ( isset( $countrycode ) ) {
@@ -130,7 +130,7 @@
                         <span class="acf-input-header"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][stateCode]" id="stateCode" class="countrySelect">
+                    <select name="<?php echo $field['name']; ?>[stateCode]" id="stateCode" class="countrySelect">
                     </select>
                 </div>
 
@@ -139,7 +139,7 @@
                         <span class="acf-input-header"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
                     <label for="cityName" class="screen-reader-text"></label>
-                    <select name="acf[<?php echo $field['key']; ?>][cityName]" id="cityName" class="countrySelect">
+                    <select name="<?php echo $field['name']; ?>[cityName]" id="cityName" class="countrySelect">
                     </select>
                 </div>
 				<?php
