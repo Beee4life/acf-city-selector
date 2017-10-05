@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-29 01:32+0200\n"
+"POT-Creation-Date: 2017-10-05 16:55+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -16,140 +16,140 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:157 acf-city-selector.php:283
-#: acf-city-selector.php:339 acf-city-selector.php:371
-#: acf-city-selector.php:397
+#: acf-city-selector.php:195 acf-city-selector.php:321
+#: acf-city-selector.php:377 acf-city-selector.php:409
+#: acf-city-selector.php:435
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: acf-city-selector.php:169
+#: acf-city-selector.php:207
 #, php-format
 msgid "File '%s' is successfully uploaded and now shows under 'Select files to import'"
 msgstr ""
 
-#: acf-city-selector.php:176
+#: acf-city-selector.php:214
 msgid "Upload failed. Please try again."
 msgstr ""
 
-#: acf-city-selector.php:193
+#: acf-city-selector.php:231
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: acf-city-selector.php:199
+#: acf-city-selector.php:237
 msgid "You didn't select a file."
 msgstr ""
 
-#: acf-city-selector.php:215
+#: acf-city-selector.php:253
 msgid "Congratulations, there appear to be no errors in your CSV."
 msgstr ""
 
-#: acf-city-selector.php:249
+#: acf-city-selector.php:287
 #, php-format
-msgid "YAY ! %d lines are imported."
+msgid "Congratulations. You have successfully imported %d lines."
 msgstr ""
 
-#: acf-city-selector.php:262
+#: acf-city-selector.php:300
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr ""
 
-#: acf-city-selector.php:266
+#: acf-city-selector.php:304
 msgid "Files successfully deleted."
 msgstr ""
 
-#: acf-city-selector.php:291
+#: acf-city-selector.php:329
 msgid "Congratulations, your CSV data seems valid."
 msgstr ""
 
-#: acf-city-selector.php:322
+#: acf-city-selector.php:360
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr ""
 
-#: acf-city-selector.php:382
+#: acf-city-selector.php:420
 msgid "All cities are deleted."
 msgstr ""
 
-#: acf-city-selector.php:407
+#: acf-city-selector.php:445
 msgid "Settings saved"
 msgstr ""
 
-#: acf-city-selector.php:441
+#: acf-city-selector.php:479
 msgid "Warning"
 msgstr ""
 
-#: acf-city-selector.php:448
+#: acf-city-selector.php:486
 msgid "Error"
 msgstr ""
 
-#: acf-city-selector.php:460
+#: acf-city-selector.php:498
 msgid "Dismiss this notice"
 msgstr ""
 
-#: acf-city-selector.php:491 acf-city-selector.php:504
+#: acf-city-selector.php:529 acf-city-selector.php:542
 msgid "Settings"
 msgstr ""
 
-#: acf-city-selector.php:502 inc/pro-page.php:25
+#: acf-city-selector.php:540 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr ""
 
-#: acf-city-selector.php:504
+#: acf-city-selector.php:542
 msgid "Dashboard"
 msgstr ""
 
-#: acf-city-selector.php:540
+#: acf-city-selector.php:578
 #, php-format
 msgid "%s says \"Thank you\""
 msgstr ""
 
-#: acf-city-selector.php:551
+#: acf-city-selector.php:589
 #, php-format
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:73 fields/acf-city_selector-v5.php:76
+#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:70
 msgid "Yes"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:77
+#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:71
 msgid "No"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:81 fields/acf-city_selector-v5.php:86
+#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:79
 msgid "Show labels"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:82 fields/acf-city_selector-v5.php:87
+#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:80
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:137
+#: fields/acf-city_selector-v4.php:125
 msgid "Select country"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:156
+#: fields/acf-city_selector-v4.php:144
 msgid "Select province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:165
+#: fields/acf-city_selector-v4.php:153
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:312 fields/acf-city_selector-v5.php:274
-msgid "You didn't select a city"
-msgstr ""
-
-#: fields/acf-city_selector-v5.php:118 inc/country-field.php:37
+#: fields/acf-city_selector-v5.php:111 inc/country-field.php:37
 msgid "Select a country"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:139 inc/country-field.php:102
+#: fields/acf-city_selector-v5.php:130 inc/country-field.php:108
 msgid "Select a province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:148 inc/country-field.php:157
+#: fields/acf-city_selector-v5.php:139 inc/country-field.php:163
 msgid "Select a city"
+msgstr ""
+
+#: fields/acf-city_selector-v5.php:287
+msgid "You didn't select a city"
 msgstr ""
 
 #: inc/admin-right.php:3

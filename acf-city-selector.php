@@ -284,7 +284,7 @@
 
 								}
 
-								$this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'YAY ! %d lines are imported.', 'acf-city-selector' ), $line_number ) );
+								$this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities.', 'acf-city-selector' ), $line_number ) );
 
 								return;
 							}

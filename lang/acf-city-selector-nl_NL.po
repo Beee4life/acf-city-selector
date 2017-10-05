@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-09-29 01:32+0200\n"
-"PO-Revision-Date: 2017-09-29 01:33+0200\n"
+"POT-Creation-Date: 2017-10-05 16:55+0200\n"
+"PO-Revision-Date: 2017-10-05 16:55+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,13 +16,13 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:157 acf-city-selector.php:283
-#: acf-city-selector.php:339 acf-city-selector.php:371
-#: acf-city-selector.php:397
+#: acf-city-selector.php:195 acf-city-selector.php:321
+#: acf-city-selector.php:377 acf-city-selector.php:409
+#: acf-city-selector.php:435
 msgid "Something went wrong, please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: acf-city-selector.php:169
+#: acf-city-selector.php:207
 #, php-format
 msgid ""
 "File '%s' is successfully uploaded and now shows under 'Select files to "
@@ -31,83 +31,83 @@ msgstr ""
 "Het bestand “%s” is succesvol ge-upload en is nu zichtbaar onder ‘Select "
 "bestanden om te importeren’"
 
-#: acf-city-selector.php:176
+#: acf-city-selector.php:214
 msgid "Upload failed. Please try again."
 msgstr "Upload mislukt. Probeer het aub opnieuw."
 
-#: acf-city-selector.php:193
+#: acf-city-selector.php:231
 msgid "Something went wrong. Please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: acf-city-selector.php:199
+#: acf-city-selector.php:237
 msgid "You didn't select a file."
 msgstr "Je hebt geen bestand gekozen."
 
-#: acf-city-selector.php:215
+#: acf-city-selector.php:253
 msgid "Congratulations, there appear to be no errors in your CSV."
 msgstr "Gefeliciteerd, er schijnen geen fouten in je CSV voor te komen."
 
-#: acf-city-selector.php:249
+#: acf-city-selector.php:287
 #, php-format
-msgid "YAY ! %d lines are imported."
-msgstr "YAY ! %d regels zijn geïmporteerd."
+msgid "Congratulations. You have successfully imported %d cities."
+msgstr "Gefeliciteerd, je hebt %d steden geïmporteerd."
 
-#: acf-city-selector.php:262
+#: acf-city-selector.php:300
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr "File “%s” is succesvol verwijderd."
 
-#: acf-city-selector.php:266
+#: acf-city-selector.php:304
 msgid "Files successfully deleted."
 msgstr "Bestanden succesvol verwijderd."
 
-#: acf-city-selector.php:291
+#: acf-city-selector.php:329
 msgid "Congratulations, your CSV data seems valid."
 msgstr "Gefeliciteerd, je CSV data lijkt geen fouten te bevatten."
 
-#: acf-city-selector.php:322
+#: acf-city-selector.php:360
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr "Gefeliciteerd, je hebt %d stad geïmporteerd."
 
-#: acf-city-selector.php:382
+#: acf-city-selector.php:420
 msgid "All cities are deleted."
 msgstr "Alle steden zijn verwijderd."
 
-#: acf-city-selector.php:407
+#: acf-city-selector.php:445
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: acf-city-selector.php:441
+#: acf-city-selector.php:479
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: acf-city-selector.php:448
+#: acf-city-selector.php:486
 msgid "Error"
 msgstr "Fout"
 
-#: acf-city-selector.php:460
+#: acf-city-selector.php:498
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: acf-city-selector.php:491 acf-city-selector.php:504
+#: acf-city-selector.php:529 acf-city-selector.php:542
 msgid "Settings"
 msgstr "Instellingen"
 
-#: acf-city-selector.php:502 inc/pro-page.php:25
+#: acf-city-selector.php:540 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr "Go Pro"
 
-#: acf-city-selector.php:504
+#: acf-city-selector.php:542
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: acf-city-selector.php:540
+#: acf-city-selector.php:578
 #, php-format
 msgid "%s says \"Thank you\""
 msgstr "%s zegt “Bedankt”"
 
-#: acf-city-selector.php:551
+#: acf-city-selector.php:589
 #, php-format
 msgid ""
 "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
@@ -119,49 +119,49 @@ msgstr ""
 "overweegt. Dit motiveert mij weer om de plugin te verbeteren in mijn vrije "
 "tijd."
 
-#: fields/acf-city_selector-v4.php:73 fields/acf-city_selector-v5.php:76
+#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:70
 msgid "Yes"
 msgstr "Ja"
 
-#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:77
+#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:71
 msgid "No"
 msgstr "Nee"
 
-#: fields/acf-city_selector-v4.php:81 fields/acf-city_selector-v5.php:86
+#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:79
 msgid "Show labels"
 msgstr "Toon labels"
 
-#: fields/acf-city_selector-v4.php:82 fields/acf-city_selector-v5.php:87
+#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:80
 msgid "Show field labels above the dropdown menus"
 msgstr "Labels tonen boven de dropdown menu’s"
 
-#: fields/acf-city_selector-v4.php:137
+#: fields/acf-city_selector-v4.php:125
 msgid "Select country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v4.php:156
+#: fields/acf-city_selector-v4.php:144
 msgid "Select province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v4.php:165
+#: fields/acf-city_selector-v4.php:153
 msgid "Select city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city_selector-v4.php:312 fields/acf-city_selector-v5.php:274
-msgid "You didn't select a city"
-msgstr "Je hebt geen stad gekozen"
-
-#: fields/acf-city_selector-v5.php:118 inc/country-field.php:37
+#: fields/acf-city_selector-v5.php:111 inc/country-field.php:37
 msgid "Select a country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v5.php:139 inc/country-field.php:102
+#: fields/acf-city_selector-v5.php:130 inc/country-field.php:108
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v5.php:148 inc/country-field.php:157
+#: fields/acf-city_selector-v5.php:139 inc/country-field.php:163
 msgid "Select a city"
 msgstr "Selecteer een stad"
+
+#: fields/acf-city_selector-v5.php:287
+msgid "You didn't select a city"
+msgstr "Je hebt geen stad gekozen"
 
 #: inc/admin-right.php:3
 msgid "About the plugin"
@@ -566,6 +566,9 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 #: lib/import_nl.php:2451
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
+
+#~ msgid "YAY ! %d lines are imported."
+#~ msgstr "YAY ! %d regels zijn geïmporteerd."
 
 #~ msgid "Choice"
 #~ msgstr "Keuze"
