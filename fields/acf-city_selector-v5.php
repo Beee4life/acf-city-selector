@@ -212,12 +212,15 @@
 
 				global $wpdb;
 				$country_code = $value['countryCode'];
-				if ( strlen( $country_code ) == 2 ) {
+				if ( '0' != $country_code ) {
+					$state_code = substr( $value['stateCode'], 3 );
+				}
+				if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
 					$table                = $wpdb->prefix . 'cities';
-					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
+					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
 					$country              = $row->country;
 					$state_name           = $row->state_name;
-					$value['stateCode']   = substr( $value['stateCode'], 3 );
+					$value['stateCode']   = $state_code;
 					$value['stateName']   = $state_name;
 					$value['countryName'] = $country;
 				}
