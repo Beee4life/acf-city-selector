@@ -279,7 +279,7 @@
 			 */
 			function validate_value( $valid, $value, $field, $input ) {
 
-			    if ( 1 == $field['required'] ) {
+                if ( 1 == $field['required'] ) {
 				    if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select a city' ) {
 					    $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
 				    }

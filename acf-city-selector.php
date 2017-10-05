@@ -64,6 +64,7 @@
 
 				// filters
 				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
+				// add_filter( 'acf/load_value/type=acf_city_selector',  array( $this, 'acfcs_load_value' ), 10, 3 );
 
 				// always load
 				$this->acfcs_admin_menu();
@@ -75,6 +76,25 @@
 				include( 'inc/country-field.php' );
 				include( 'inc/verify-csv-data.php' );
 			}
+
+			public function acfcs_load_value( $value, $post_id, $field ) {
+
+				global $wpdb;
+				$country_code = $value['countryCode'];
+				$state_code = substr( $value['stateCode'], 3 );
+				if ( strlen( $country_code ) == 2 ) {
+					$table                = $wpdb->prefix . 'cities';
+					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+					$country              = $row->country;
+					$state_name           = $row->state_name;
+					$value['stateCode']   = $state_code;
+					$value['stateName']   = $state_name;
+					$value['countryName'] = $country;
+				}
+
+				return $value;
+
+            }
 
 			/*
 			 * Do stuff upon plugin activation
