@@ -6,11 +6,11 @@
 /* edit post screens */
 /* v4 */
 
-#acf-city_selector .dropdown-box {
+.field_type-acf_city_selector .dropdown-box {
     margin-bottom: 1em;
 }
 
-#acf-city_selector span.acf-input-header {
+.field_type-acf_city_selector span.acf-input-header {
     display:       block;
     margin-bottom: 10px;
 }
