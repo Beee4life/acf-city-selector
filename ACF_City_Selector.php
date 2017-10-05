@@ -1,7 +1,7 @@
 <?php
 	/*
 	Plugin Name:    ACF City Selector
-	Plugin URI:     http://berryplasman.com/wordpress/acf-city-selector
+	Plugin URI:     http://acfcs.berryplasman.com
 	Description:    An extension for ACF which allows you to select a city based on country and province/state.
 	Version:        0.1
 	Author:         Beee
@@ -18,9 +18,9 @@
 	}
 
 	// check if class already exists
-	if ( ! class_exists( 'acf_plugin_city_selector' ) ) :
+	if ( ! class_exists( 'ACF_City_Selector' ) ) :
 
-		class acf_plugin_city_selector {
+		class ACF_City_Selector {
 
 			/*
 			 * __construct
@@ -71,6 +71,7 @@
 				$this->acfcs_check_uploads_folder();
 				$this->acfcs_check_table();
 
+				include( 'inc/donate-box.php' );
 				include( 'inc/help-tabs.php' );
 				include( 'inc/country-field.php' );
 				include( 'inc/verify-csv-data.php' );
@@ -103,7 +104,9 @@
 				require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 				ob_start();
 				global $wpdb;
-				require_once( 'lib/prepare-tables.php' );
+                require_once( 'lib/import_nl.php' );
+                require_once( 'lib/import_be.php' );
+                require_once( 'lib/import_lux.php' );
 				$sql = ob_get_clean();
 				dbDelta( $sql );
 			}
@@ -469,8 +472,8 @@
 			 * Displays error messages from form submissions
 			 */
 			public static function acfcs_show_admin_notices() {
-				if ( $codes = acf_plugin_city_selector::acfcs_errors()->get_error_codes() ) {
-					if ( is_wp_error( acf_plugin_city_selector::acfcs_errors() ) ) {
+				if ( $codes = ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
+					if ( is_wp_error( ACF_City_Selector::acfcs_errors() ) ) {
 
 						// Loop error codes and display errors
 						$error      = false;
@@ -494,7 +497,7 @@
 						}
 						echo '<div class="error notice ' . $span_class . 'is-dismissible">';
 						foreach ( $codes as $code ) {
-							$message = acf_plugin_city_selector::acfcs_errors()->get_error_message( $code );
+							$message = ACF_City_Selector::acfcs_errors()->get_error_message( $code );
 							echo '<div class="">';
 							if ( true == $prefix ) {
 								echo '<strong>' . $prefix . ':</strong> ';
@@ -569,31 +572,8 @@
 		}
 
 		// initialize
-		new acf_plugin_city_selector();
+		new ACF_City_Selector();
 
 
 		// class_exists check
 	endif;
-
-	if ( ! function_exists( 'acfcs_donate_meta_box' ) ) {
-		function acfcs_donate_meta_box() {
-			if ( apply_filters( 'remove_acfcs_donate_nag', false ) ) {
-				return;
-			}
-
-			$id       = 'donate-acf-cs';
-			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">' . sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
-			$callback = 'show_donate_meta_box';
-			$screens  = array();
-			$context  = 'side';
-			$priority = 'low';
-			add_meta_box( $id, $title, $callback, $screens, $context, $priority );
-
-		} // end function donate_meta_box
-		add_action( 'add_meta_boxes', 'acfcs_donate_meta_box' );
-
-		function show_donate_meta_box() {
-			echo '<p style="margin-bottom: 0;">' . sprintf( __( 'Thank you for installing the \'City Selector\' plugin. I hope you enjoy it. Please <a href="%s" target="_blank">consider a donation</a> if you do, so I can continue to improve it even more.', 'acf-city-selector' ), esc_url( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL' ) ) . '</p>';
-		}
-	} // end if !function_exists
-

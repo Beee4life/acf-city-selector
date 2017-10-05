@@ -90,15 +90,15 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * Advanced Custom Fields Pro 5.6.3
 
 #### To Do
-* [ ] - Tested on Mac Firefox
-* [ ] - Tested on Mac Safari
-* [ ] - Tested on PC Chrome
-* [ ] - Tested on PC Firefox
-* [ ] - Tested on PC Safari
-* [ ] - Tested on iPhone Chrome
-* [ ] - Tested on iPhone Safari
-* [ ] - Tested on iPad Chrome
-* [ ] - Tested on iPad Safari
+* [ ] - Test on Mac Firefox
+* [ ] - Test on Mac Safari
+* [ ] - Test on PC Chrome
+* [ ] - Test on PC Firefox
+* [ ] - Test on PC Safari
+* [ ] - Test on iPhone Chrome
+* [ ] - Test on iPhone Safari
+* [ ] - Test on iPad Chrome
+* [ ] - Test on iPad Safari
 
 ### Installation
 

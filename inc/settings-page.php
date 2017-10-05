@@ -8,7 +8,7 @@
 			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
-		acf_plugin_city_selector::acfcs_show_admin_notices();
+		ACF_City_Selector::acfcs_show_admin_notices();
 
 		?>
 
@@ -17,7 +17,7 @@
 
             <h1><?php esc_html_e( 'ACF City Selector Settings', 'acf-city-selector' ); ?></h1>
 
-			<?php echo acf_plugin_city_selector::acfcs_admin_menu(); ?>
+			<?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
 
             <!-- left part -->
             <div class="admin_left">

@@ -28,12 +28,12 @@
 				if ( count( $line ) != $column_benchmark ) {
 					// length of a line if not correct
 					if ( count( $line ) < $column_benchmark ) {
-						acf_plugin_city_selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d.', 'acf-city-selector' ), $line_number ) );
+						ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d.', 'acf-city-selector' ), $line_number ) );
 
 						return false;
 
 					} elseif ( count( $line ) > $column_benchmark ) {
-						acf_plugin_city_selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d.', 'acf-city-selector' ), $line_number ) );
+						ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d.', 'acf-city-selector' ), $line_number ) );
 
 						return false;
 
@@ -45,14 +45,14 @@
                     $element_counter++;
                     if ( $element_counter == 2 ) {
                     	if ( 2 != strlen( $element ) ) {
-		                    acf_plugin_city_selector::acfcs_errors()->add( 'error_wrong_state_length', sprintf( esc_html__( 'The length of the state abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
+		                    ACF_City_Selector::acfcs_errors()->add( 'error_wrong_state_length', sprintf( esc_html__( 'The length of the state abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
 		                    return false;
 	                    }
                     }
                     if ( $element_counter == 4 ) {
 	                    if ( 2 != strlen( $element ) ) {
-		                    acf_plugin_city_selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
+		                    ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
 		                    return false;
 	                    }
