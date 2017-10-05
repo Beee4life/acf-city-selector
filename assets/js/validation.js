@@ -5,12 +5,15 @@
         // vars
         $field = $(field);
 
-        console.log('VALIDATION');
-
-        // set validation to false on this field
         if ($field.find('select#countryCode').val() === '0') {
+            $field.data('validation', false);
+        }
+        if ($field.find('select#stateCode').val() === '-') {
+            $field.data('validation', false);
+        }
+        if ($field.find('select#cityName').val() === 'Select a city') {
             $field.data('validation', false);
         }
 
     });
-});
+})(jQuery);
