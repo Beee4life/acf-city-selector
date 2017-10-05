@@ -52,7 +52,7 @@
 				add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
 				add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 				add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-				add_action( 'save_post',                    array( $this, 'acfcs_before_save' ), 10, 3 );
+				// add_action( 'save_post',                    array( $this, 'acfcs_before_save' ), 10, 3 );
 
 				// always load, move to $this->
 				add_action( 'init',                         array( $this, 'acfcs_upload_csv_file' ) );
@@ -129,7 +129,7 @@
 			}
 
 			/**
-             * Force update_post_meta in v4 because values are not saved
+             * Force update_post_meta in v4 because values are not saved (probably not needed anymore)
              *
 			 * @param $post_id
 			 * @param $post
