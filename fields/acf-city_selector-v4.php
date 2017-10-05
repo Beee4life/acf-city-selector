@@ -37,7 +37,6 @@
 				// do not delete!
 				parent::__construct();
 
-
 				// settings
 				$this->settings = $settings;
 
@@ -339,6 +338,13 @@
 			*/
 			function update_value( $value, $post_id, $field ) {
 
+				if ( 1 == $field['required'] ) {
+					if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select a city' ) {
+						// $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
+					}
+				}
+
+				// return
 				return $value;
 			}
 
