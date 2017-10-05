@@ -76,6 +76,7 @@
 				include( 'inc/verify-csv-data.php' );
 			}
 
+
 			/*
 			 * Do stuff upon plugin activation
 			 */
@@ -85,12 +86,14 @@
 				}
 			}
 
+
 			/*
 			 * Do stuff upon plugin activation
 			 */
 			public function acfcs_plugin_deactivation() {
 			    // nothing yet
 			}
+
 
 			/*
 			 * Prepare database upon plugin activation
@@ -104,6 +107,7 @@
 				$sql = ob_get_clean();
 				dbDelta( $sql );
 			}
+
 
 			/*
 			 * Check if table exists
@@ -127,6 +131,7 @@
 				dbDelta( $sql );
 
 			}
+
 
 			/**
              * Force update_post_meta in v4 because values are not saved (probably not needed anymore)
@@ -175,6 +180,7 @@
 					mkdir( $target_folder, 0755 );
 				}
 			}
+
 
 			/*
 			 * Load admin pages
@@ -521,6 +527,7 @@
 				// include
 				include_once( 'fields/acf-city_selector-v' . $version . '.php' );
 			}
+
 
 			/*
 			 * Add settings link on plugin page

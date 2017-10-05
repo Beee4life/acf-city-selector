@@ -5,7 +5,7 @@
         die;
     }
 
-    // drop the database table
+    // drop table
     if ( false == get_option( 'acfcs_preserve_settings' ) ) {
 	    global $wpdb;
 	    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
