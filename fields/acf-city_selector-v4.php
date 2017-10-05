@@ -253,39 +253,6 @@
 
 
 			/*
-			*  field_group_admin_enqueue_scripts()
-			*
-			*  This action is called in the admin_enqueue_scripts action on the edit screen where your field is edited.
-			*  Use this action to add CSS + JavaScript to assist your create_field_options() action.
-			*
-			*  $info	http://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
-			*  @type	action
-			*  @since	3.6
-			*  @date	23/01/13
-			*/
-			function field_group_admin_enqueue_scripts() {
-				// Note: This function can be removed if not used
-			}
-
-
-			/*
-			*  field_group_admin_head()
-			*
-			*  This action is called in the admin_head action on the edit screen where your field is edited.
-			*  Use this action to add CSS and JavaScript to assist your create_field_options() action.
-			*
-			*  @info	http://codex.wordpress.org/Plugin_API/Action_Reference/admin_head
-			*  @type	action
-			*  @since	3.6
-			*  @date	23/01/13
-			*/
-
-			function field_group_admin_head() {
-				// Note: This function can be removed if not used
-			}
-
-
-			/*
 			*  load_value()
 			*
 			*  This filter is applied to the $value after it is loaded from the db
@@ -337,14 +304,19 @@
 			*/
 			function update_value( $value, $post_id, $field ) {
 
-				if ( 1 == $field['required'] ) {
-					if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select a city' ) {
-						// $valid = __( 'You didn\'t select a city', 'acf-city-selector' );
-					}
-				}
+			    if ( 1 == $field['required'] ) {
+					if ( $value['countryCode'] == 0 ) {
 
-				// return
-				return $value;
+						acf_plugin_city_selector::acfcs_errors()->add( 'error_no_city', esc_html__( "You didn't select a city", 'acf-city-selector' ) );
+						return;
+
+					} else {
+
+						// return
+						return $value;
+
+                    }
+				}
 			}
 
 
@@ -417,46 +389,6 @@
 				return $value;
 			}
 
-
-			/*
-			*  load_field()
-			*
-			*  This filter is applied to the $field after it is loaded from the database
-			*
-			*  @type	filter
-			*  @since	3.6
-			*  @date	23/01/13
-			*
-			*  @param	$field - the field array holding all the field options
-			*
-			*  @return	$field - the field array holding all the field options
-			*/
-
-			function load_field( $field ) {
-				// Note: This function can be removed if not used
-				return $field;
-			}
-
-
-			/*
-			*  update_field()
-			*
-			*  This filter is applied to the $field before it is saved to the database
-			*
-			*  @type	filter
-			*  @since	3.6
-			*  @date	23/01/13
-			*
-			*  @param	$field - the field array holding all the field options
-			*  @param	$post_id - the field group ID (post_type = acf)
-			*
-			*  @return	$field - the modified field
-			*/
-
-			function update_field( $field, $post_id ) {
-				// Note: This function can be removed if not used
-				return $field;
-			}
 
 		}
 
