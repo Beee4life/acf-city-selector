@@ -112,7 +112,7 @@
 				}
 				$countries = populate_country_select( '', $field );
 				$states    = false;
-				if ( isset( $countrycode ) && 0 !== $countrycode ) {
+				if ( isset( $countrycode ) && '0' !== $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
 					if ( '-' != $stateCode ) {
 						$cityName = $field['value']['cityName'];
@@ -225,7 +225,7 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
-				wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/validation.js", ( __FILE__ ), array( 'acf-input' ) );
+				wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/validation.js", array( 'acf-input' ), $version );
 				wp_enqueue_script( 'acf-custom-validation' );
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
@@ -274,8 +274,10 @@
 
 				global $wpdb;
 				$country_code = $value['countryCode'];
-				$state_code   = substr( $value['stateCode'], 3 );
-				if ( strlen( $country_code ) == 2 ) {
+				if ( '0' != $country_code ) {
+				    $state_code = substr( $value['stateCode'], 3 );
+				}
+				if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
 					$table                = $wpdb->prefix . 'cities';
 					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
 					$country              = $row->country;
@@ -305,22 +307,9 @@
 			*  @return	$value - the modified value
 			*/
 			function update_value( $value, $post_id, $field ) {
-
-			    if ( 1 == $field['required'] ) {
-					if ( $value['countryCode'] == 0 ) {
-
-						acf_plugin_city_selector::acfcs_errors()->add( 'error_no_city', esc_html__( "You didn't select a city", 'acf-city-selector' ) );
-						return;
-
-					} else {
-
-						// return
-						return $value;
-
-                    }
-				}
+				// return
+				return $value;
 			}
-
 
 			/*
 			*  format_value()
