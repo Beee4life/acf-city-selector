@@ -303,19 +303,18 @@
 
 			function load_value( $value, $post_id, $field ) {
 
-				// global $wpdb;
-				// $country_code = $value['countryCode'];
-				// if ( strlen( $country_code ) == 2 ) {
-				// 	$table                = $wpdb->prefix . 'cities';
-				// 	$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
-				// 	$country              = $row->country;
-				// 	$state_name           = $row->state_name;
-				// 	$value['stateCode']   = substr( $value['stateCode'], 3 );
-				// 	$value['stateName']   = $state_name;
-				// 	$value['countryName'] = $country;
-				// }
-
-				// echo '<pre>'; var_dump($value); echo '</pre>'; exit;
+				global $wpdb;
+				$country_code = $value['countryCode'];
+				$state_code   = substr( $value['stateCode'], 3 );
+				if ( strlen( $country_code ) == 2 ) {
+					$table                = $wpdb->prefix . 'cities';
+					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+					$country              = $row->country;
+					$state_name           = $row->state_name;
+					$value['stateCode']   = $state_code;
+					$value['stateName']   = $state_name;
+					$value['countryName'] = $country;
+				}
 
 				return $value;
 			}
@@ -398,20 +397,22 @@
 			function format_value_for_api( $value, $post_id, $field ) {
 				// defaults?
 			    /*
-				*/
 				$field = array_merge($this->defaults, $field);
+				*/
 
-				global $wpdb;
-				$country_code = $value['countryCode'];
-				if ( strlen( $country_code ) == 2 ) {
-					$table                = $wpdb->prefix . 'cities';
-					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code'" );
-					$country              = $row->country;
-					$state_name           = $row->state_name;
-					$value['stateCode']   = substr( $value['stateCode'], 3 );
-					$value['stateName']   = $state_name;
-					$value['countryName'] = $country;
-				}
+				// global $wpdb;
+				// $country_code = $value['countryCode'];
+				// $state_code   = substr( $value['stateCode'], 3 );
+				// echo '<pre>'; var_dump($value['stateCode']); echo '</pre>'; exit;
+				// if ( strlen( $country_code ) == 2 ) {
+				// 	$table                = $wpdb->prefix . 'cities';
+				// 	$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+				// 	$country              = $row->country;
+				// 	$state_name           = $row->state_name;
+				// 	$value['stateCode']   = $state_code;
+				// 	$value['stateName']   = $state_name;
+				// 	$value['countryName'] = $country;
+				// }
 
 				return $value;
 			}
