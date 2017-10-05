@@ -179,6 +179,8 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
+				// wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/field-validation.js", array( 'acf-input' ), $version );
+				// wp_enqueue_script( 'acf-custom-validation' );
 				// wp_register_script( 'acf-input-city-selector', "{$url}assets/js/city-selector.js", '', $version );
 				// wp_enqueue_script( 'acf-input-city-selector' );
 				//
@@ -225,7 +227,7 @@
 				$version = $this->settings['version'];
 
 				// register & include JS
-				wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/validation.js", array( 'acf-input' ), $version );
+				wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/field-validation.js", array( 'acf-input' ), $version );
 				wp_enqueue_script( 'acf-custom-validation' );
 				wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
 				wp_enqueue_script( 'acf-city-selector-js' );
@@ -287,56 +289,6 @@
 					$value['countryName'] = $country;
 				}
 
-				return $value;
-			}
-
-
-			/*
-			*  update_value()
-			*
-			*  This filter is applied to the $value before it is updated in the db
-			*
-			*  @type	filter
-			*  @since	3.6
-			*  @date	23/01/13
-			*
-			*  @param	$value - the value which will be saved in the database
-			*  @param	$post_id - the $post_id of which the value will be saved
-			*  @param	$field - the field array holding all the field options
-			*
-			*  @return	$value - the modified value
-			*/
-			function update_value( $value, $post_id, $field ) {
-				// return
-				return $value;
-			}
-
-			/*
-			*  format_value()
-			*
-			*  This filter is applied to the $value after it is loaded from the db and before it is passed to the create_field action
-			*
-			*  @type	filter
-			*  @since	3.6
-			*  @date	23/01/13
-			*
-			*  @param	$value	- the value which was loaded from the database
-			*  @param	$post_id - the $post_id from which the value was loaded
-			*  @param	$field	- the field array holding all the field options
-			*
-			*  @return	$value	- the modified value
-			*/
-
-			function format_value( $value, $post_id, $field ) {
-				// defaults?
-				/*
-				$field = array_merge($this->defaults, $field);
-				*/
-
-				// perhaps use $field['preview_size'] to alter the $value?
-
-
-				// Note: This function can be removed if not used
 				return $value;
 			}
 
