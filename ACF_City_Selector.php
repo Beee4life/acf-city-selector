@@ -120,7 +120,7 @@
 				ob_start();
 				global $wpdb;
 				?>
-				CREATE TABLE IF NOT EXISTS <?php echo $wpdb->prefix; ?>cities (
+				CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
 					id int(6) unsigned NOT NULL auto_increment,
 					city_name varchar(50) NULL,
 					state_code varchar(2) NULL,
