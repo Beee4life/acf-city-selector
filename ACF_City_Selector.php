@@ -41,8 +41,6 @@
 				// set text domain
 				load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
-				$plugin = plugin_basename( __FILE__ );
-
 				register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
 				register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
@@ -63,7 +61,7 @@
 				add_action( 'init',                         array( $this, 'acfcs_truncate_table' ) );
 
 				// filters
-				add_filter( "plugin_action_links_$plugin",  array( $this, 'acfcs_settings_link' ) );
+				add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ),  array( $this, 'acfcs_settings_link' ) );
 
 				// always load
 				$this->acfcs_admin_menu();
