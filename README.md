@@ -20,7 +20,7 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 
 ### Expected launch date
 
-Around October 1, 2017
+Around November 1, 2017
 
 ### Disclaimer
 
