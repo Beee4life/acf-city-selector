@@ -24,7 +24,7 @@ http://acfcs.berryplasman.com
 
 ### Disclaimer
 
-This plugin is not finished yet !!!! Using it, is at your own risk. 
+This plugin is not finished yet !!!! Using it, is at your own risk (although I don't expect anything will break). 
 
 Download the latest branche [here](https://github.com/Beee4life/acf-city-selector/archive/check-before-live.zip).
 
