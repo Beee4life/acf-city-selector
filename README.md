@@ -6,10 +6,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 0.1
 
-### Website
-
-http://acfcs.berryplasman.com
-
 ### Description
 
 This plugin allows you to select a city, based on country and provence/state in an ACF Field Group.
@@ -21,6 +17,10 @@ It creates a new 'field type' for you to choose when you're creating an ACF Fiel
 ### Expected launch date
 
 Around November 1, 2017
+
+### Website
+
+http://acfcs.berryplasman.com
 
 ### Disclaimer
 
