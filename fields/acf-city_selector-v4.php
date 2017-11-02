@@ -87,6 +87,29 @@
                     </td>
                 </tr>
 				<?php
+                    $countries = array(
+                        ''   => 'No default country',
+                        'BE' => 'Belgium',
+                        'LU' => 'Luxembourg',
+                        'NL' => 'Netherlands',
+                    );
+                ?>
+                <tr class="field_option field_option_<?php echo $this->name; ?>">
+                    <td class="label">
+                        <label><?php esc_html_e("Set default country",'acf-city-selector'); ?></label>
+                    </td>
+                    <td>
+						<?php
+							do_action('acf/create_field', array(
+								'type'         => 'select',
+								'name'         => 'fields[' . $key . '][default_country]',
+								'choices'      => $countries,
+								'value'        => $field['default_country'],
+							));
+						?>
+                    </td>
+                </tr>
+				<?php
 			}
 
 
