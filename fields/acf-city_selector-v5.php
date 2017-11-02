@@ -80,8 +80,7 @@
 					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 				) );
 
-				// echo '<pre>'; var_dump($field); echo '</pre>'; exit;
-
+				// @TODO: get countries from db
 				$countries = array(
 					''   => 'No default country',
 					'BE' => 'Belgium',

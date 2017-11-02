@@ -87,6 +87,7 @@
                     </td>
                 </tr>
 				<?php
+				    // @TODO: get countries from db
                     $countries = array(
                         ''   => 'No default country',
                         'BE' => 'Belgium',
