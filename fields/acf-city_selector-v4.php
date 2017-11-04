@@ -76,13 +76,13 @@
                     </td>
                     <td>
                         <?php
-                            do_action('acf/create_field', array(
-                                'type'         => 'radio',
-                                'name'         => 'fields[' . $key . '][show_labels]',
-                                'choices'      => $select_options,
-                                'value'        => $field['show_labels'],
-                                'layout'       => 'horizontal',
-                            ));
+	                        do_action( 'acf/create_field', array(
+		                        'type'    => 'radio',
+		                        'name'    => 'fields[' . $key . '][show_labels]',
+		                        'choices' => $select_options,
+		                        'value'   => $field['show_labels'],
+		                        'layout'  => 'horizontal',
+	                        ) );
                         ?>
                     </td>
                 </tr>
@@ -102,10 +102,10 @@
                     <td>
 						<?php
 							do_action('acf/create_field', array(
-								'type'         => 'select',
-								'name'         => 'fields[' . $key . '][default_country]',
-								'choices'      => $countries,
-								'value'        => $field['default_country'],
+								'type'    => 'select',
+								'name'    => 'fields[' . $key . '][default_country]',
+								'choices' => $countries,
+								'value'   => $field['default_country'],
 							));
 						?>
                     </td>
@@ -302,6 +302,8 @@
 				$country_code = $value['countryCode'];
 				if ( '0' != $country_code ) {
 				    $state_code = substr( $value['stateCode'], 3 );
+				} else {
+					$value = false;
 				}
 				if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
 					$table                = $wpdb->prefix . 'cities';
@@ -359,12 +361,9 @@
 
 		}
 
-
 		// initialize
 		new acf_field_city_selector( $this->settings );
 
-
-		// class_exists check
-	endif;
+	endif; // class_exists check
 
 ?>
