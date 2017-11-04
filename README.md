@@ -6,6 +6,14 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 0.1
 
+### Installation
+
+1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
+2. Activate the `ACF City Selector` plugin via the plugins admin page.
+3. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
+4. (optional) Import new cities with help of the included excel sheet.
+5. Please refer to the description for more info regarding the field type settings.
+
 ## Here's how it works
 
 ### Description
@@ -59,8 +67,10 @@ Echo it as follows:
     echo 'which is in ' . city_selector['stateName'] . ' (' . city_selector['stateCode'] . ')'; 
     echo ' which lies in the country: ' . $city_selector['country'] . ' (' . $city_selector['countryCode'] . ')';
 
-This outputs: "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
+This outputs:
 
+    "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
+        
 ### Impact
 
 The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
@@ -72,6 +82,8 @@ The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembour
 You can also add more countries yourself, through SQL or CSV import. There's a simple excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
+
+We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACF CS website](http://acfcs.berryplasman.com).
 
 ### Compatibility
 
@@ -85,9 +97,9 @@ This plugin is as good as finished for its first release. Using it, is still at 
 
 ### Tested on
 
-* Wordpress 4.8.2
+* Wordpress 4.9-RC1-42115
 * Advanced Custom Fields 4.4.12
-* Advanced Custom Fields Pro 5.6.3
+* Advanced Custom Fields Pro 5.6.4
 
 #### To Do
 * [ ] - Test on Mac Firefox
@@ -99,14 +111,6 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * [ ] - Test on iPhone Safari
 * [ ] - Test on iPad Chrome
 * [ ] - Test on iPad Safari
-
-### Installation
-
-1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
-2. Activate the `ACF City Selector` plugin via the plugins admin page.
-3. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
-4. (optional) Import new cities with help of the included excel sheet.
-5. Please refer to the description for more info regarding the field type settings.
 
 ### Contents
 
