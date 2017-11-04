@@ -14,13 +14,11 @@ Make sure all your code is clean:
 
 [How Can I Contribute?](#how-can-i-contribute)
   * [Reporting Bugs](#reporting-bugs)
-  * [Suggesting Enhancements](#suggesting-enhancements)
-  * [Your First Code Contribution](#your-first-code-contribution)
   * [Pull Requests](#pull-requests)
 
-## How Can I Contribute?
+<a name="how-can-i-contribute">## How Can I Contribute?
 
-### Reporting Bugs
+<a name="reporting-bugs">### Reporting Bugs
 
 This section guides you through submitting a bug report for the ACF City Selector. Following these guidelines helps maintainers and the community understand your report :pencil:, reproduce the behavior :computer: :computer:, and find related reports :mag_right:.
 
@@ -28,7 +26,7 @@ Before creating bug reports, please check [this list](#before-submitting-a-bug-r
 
 > **Note:** If you find a **Closed** issue that seems like it is the same thing that you're experiencing, open a new issue and include a link to the original issue in the body of your new one.
 
-#### Before Submitting A Bug Report
+<a name="before-submitting-a-bug-report">#### Before Submitting A Bug Report
 
 * **Check the [debugging guide](https://codex.wordpress.org/Debugging_in_WordPress).** You might be able to find the cause of the problem and fix things yourself. 
 
@@ -43,16 +41,25 @@ Explain the problem and include additional details to help maintainers reproduce
 * **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
 * **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
 * **Explain which behavior you expected to see instead and why.**
-* **Include screenshots and animated GIFs** which show you following the described steps and clearly demonstrate the problem. If you use the keyboard while following the steps, **record the GIF with the [Keybinding Resolver](https://github.com/atom/keybinding-resolver) shown**. You can use [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
+* **Include screenshots and animated GIFs** which show you following the described steps and clearly demonstrate the problem. You can use [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
 * Please include a debug/error log.
 * **If the problem wasn't triggered by a specific action**, describe what you were doing before the problem happened and share more information using the guidelines below.
 
 Provide more context by answering these questions:
 
-* **Did the problem start happening recently** (e.g. after updating to a new version of Atom) or was this always a problem?
+* **Did the problem start happening recently** (e.g. after updating to a new version) or was this always a problem?
 * **Can you reliably reproduce the issue?** If not, provide details about how often the problem happens and under which conditions it normally happens.
 
 Include details about your configuration and environment:
 
 * **Which versions are you using?** Please include WP version, ACF CS version and possibly other plugins which might be involved in the issue.
 * **What OS are you using**?
+
+### Pull Requests
+
+* Read [GitHub's help page](https://help.github.com/articles/creating-a-pull-request/) about Creating a pull request
+* Fill in [the required template](PULL_REQUEST_TEMPLATE.md)
+* Do not include issue numbers in the PR title
+* Include screenshots and animated GIFs in your pull request whenever possible.
+* Document new code 
+* End all files with a newline
