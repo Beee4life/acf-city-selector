@@ -165,7 +165,7 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_na
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schiphol", "NH", "Noord-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schiphol-Rijk", "NH", "Noord-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schoorl", "NH", "Noord-Holland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Graveland", "NH", "Noord-Holland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Graveland", "NH", "Noord-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sijbekarspel", "NH", "Noord-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Maarten", "NH", "Noord-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Maartensbrug", "NH", "Noord-Holland", "NL", "Netherlands");
@@ -381,8 +381,8 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_na
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schipluiden", "ZH", "Zuid-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schoonhoven", "ZH", "Zuid-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schoonrewoerd", "ZH", "Zuid-Holland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Gravendeel", "ZH", "Zuid-Holland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Gravenzande", "ZH", "Zuid-Holland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Gravendeel", "ZH", "Zuid-Holland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Gravenzande", "ZH", "Zuid-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Simonshaven", "ZH", "Zuid-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sliedrecht", "ZH", "Zuid-Holland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sommelsdijk", "ZH", "Zuid-Holland", "NL", "Netherlands");
@@ -1972,11 +1972,11 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_na
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schore", "ZE", "Zeeland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Serooskerke Schouwen", "ZE", "Zeeland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Serooskerke Walcheren", "ZE", "Zeeland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Gravenpolder", "ZE", "Zeeland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Heer Abtskerke", "ZE", "Zeeland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Heer Arendskerke", "ZE", "Zeeland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Heer Hendrikskinderen", "ZE", "Zeeland", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Heerenhoek", "ZE", "Zeeland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Gravenpolder", "ZE", "Zeeland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Heer Abtskerke", "ZE", "Zeeland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Heer Arendskerke", "ZE", "Zeeland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Heer Hendrikskinderen", "ZE", "Zeeland", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Heerenhoek", "ZE", "Zeeland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Annaland", "ZE", "Zeeland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Jansteen", "ZE", "Zeeland", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Kruis Sint", "ZE", "Zeeland", "NL", "Netherlands");
@@ -2148,7 +2148,7 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_na
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schalkhaar", "OV", "Overijssel", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Scheerwolde", "OV", "Overijssel", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Schuinesloot", "OV", "Overijssel", "NL", "Netherlands");
-INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s-Heerenbroek", "OV", "Overijssel", "NL", "Netherlands");
+INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("'s Heerenbroek", "OV", "Overijssel", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sibculo", "OV", "Overijssel", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Sint Jansklooster", "OV", "Overijssel", "NL", "Netherlands");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("Slagharen", "OV", "Overijssel", "NL", "Netherlands");
