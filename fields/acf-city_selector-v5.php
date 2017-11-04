@@ -210,11 +210,13 @@
 			 */
 			function load_value( $value, $post_id, $field ) {
 
-				global $wpdb;
+			    global $wpdb;
 				$country_code = $value['countryCode'];
 				if ( '0' != $country_code ) {
 					$state_code = substr( $value['stateCode'], 3 );
-				}
+				} else {
+				    $value = false;
+                }
 				if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
 					$table                = $wpdb->prefix . 'cities';
 					$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
