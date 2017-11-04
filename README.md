@@ -14,8 +14,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 4. (optional) Import new cities with help of the included excel sheet.
 5. Please refer to the description for more info regarding the field type settings.
 
-## Here's how it works
-
 ### Description
 
 This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
@@ -89,11 +87,13 @@ We have created several country packages (csv files) especially for this plugin.
 
 This ACF field type is compatible/tested with ACF 4 (Free) as well as ACF 5 (Pro).
 
-### Disclaimer
+### Contents
 
-This plugin is as good as finished for its first release. Using it, is still at your own risk. If you do, keep the following in mind.
-
-* If you deactivate the plugin and reactivate it again, all cities are inserted again EXCEPT if the setting 'Preserve data is checked. If you didn't have this option checked, you can empty the entire table and then re-import the necessary countries.
+The plugin contains the following languages:
+* php
+* javascript / jquery
+* sql
+* css
 
 ### Tested on
 
@@ -102,6 +102,7 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * Advanced Custom Fields Pro 5.6.4
 
 #### To Do
+
 * [ ] - Test on Mac Firefox
 * [ ] - Test on Mac Safari
 * [ ] - Test on PC Chrome
@@ -112,26 +113,22 @@ This plugin is as good as finished for its first release. Using it, is still at 
 * [ ] - Test on iPad Chrome
 * [ ] - Test on iPad Safari
 
-### Contents
+### Support
 
-The plugin contains the following languages:
-* php
-* javascript / jquery
-* sql
-* css
+If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
 
 ### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
 `add_filter('remove_acfcs_donate_nag', '__return_true');`
 
-### Support
-
-If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
-
 ### Website
 
-http://acfcs.berryplasman.com
+http://acfcs.berryplasman.com (not for support)
+
+### Disclaimer
+
+This plugin is not 100% finished yet. It most likely won't break anything but use caution, just in case. 
 
 ### Credit
 
