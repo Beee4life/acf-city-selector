@@ -24,7 +24,7 @@
 
 				$this->name     = 'acf_city_selector';
 				$this->label    = 'City Selector';
-				$this->category = 'Choice';
+				$this->category = __( 'Choice', 'acf-city-selector' );
 				$this->defaults = array(
 					'show_labels' => 1
 				);
