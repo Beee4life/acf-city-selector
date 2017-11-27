@@ -24,9 +24,9 @@
 
 				$this->name     = 'acf_city_selector';
 				$this->label    = 'City Selector';
-				$this->category = 'Choice';
+				$this->category = __( 'Choice', 'acf-city-selector' );
 				$this->defaults = array(
-					'show_labels'   => 1
+					'show_labels' => 1
 				);
 
 				/*
@@ -78,6 +78,22 @@
 					'layout'       => 'horizontal',
 					'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
 					'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+				) );
+
+				// @TODO: get countries from db
+				$countries = array(
+					''   => 'No default country',
+					'BE' => 'Belgium',
+					'LU' => 'Luxembourg',
+					'NL' => 'Netherlands',
+				);
+				acf_render_field_setting( $field, array(
+					'type'         => 'select',
+					'name'         => 'select_country',
+					'choices'      => $countries,
+					'value'        => $field['select_country'],
+					'label'        => esc_html__( 'Set default country', 'acf-city-selector' ),
+					// 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
 				) );
 
 			}

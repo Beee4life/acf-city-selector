@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2017-10-05 16:55+0200\n"
-"PO-Revision-Date: 2017-10-05 16:55+0200\n"
+"POT-Creation-Date: 2017-11-27 20:49+0100\n"
+"PO-Revision-Date: 2017-11-27 20:49+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -16,13 +16,13 @@ msgstr ""
 "esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: acf-city-selector.php:195 acf-city-selector.php:321
-#: acf-city-selector.php:377 acf-city-selector.php:409
-#: acf-city-selector.php:435
+#: ACF_City_Selector.php:202 ACF_City_Selector.php:328
+#: ACF_City_Selector.php:384 ACF_City_Selector.php:416
+#: ACF_City_Selector.php:442
 msgid "Something went wrong, please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: acf-city-selector.php:207
+#: ACF_City_Selector.php:214
 #, php-format
 msgid ""
 "File '%s' is successfully uploaded and now shows under 'Select files to "
@@ -31,93 +31,80 @@ msgstr ""
 "Het bestand “%s” is succesvol ge-upload en is nu zichtbaar onder ‘Select "
 "bestanden om te importeren’"
 
-#: acf-city-selector.php:214
+#: ACF_City_Selector.php:221
 msgid "Upload failed. Please try again."
 msgstr "Upload mislukt. Probeer het aub opnieuw."
 
-#: acf-city-selector.php:231
+#: ACF_City_Selector.php:238
 msgid "Something went wrong. Please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: acf-city-selector.php:237
+#: ACF_City_Selector.php:244
 msgid "You didn't select a file."
 msgstr "Je hebt geen bestand gekozen."
 
-#: acf-city-selector.php:253
+#: ACF_City_Selector.php:260
 msgid "Congratulations, there appear to be no errors in your CSV."
 msgstr "Gefeliciteerd, er schijnen geen fouten in je CSV voor te komen."
 
-#: acf-city-selector.php:287
+#: ACF_City_Selector.php:294
 #, php-format
 msgid "Congratulations. You have successfully imported %d cities."
 msgstr "Gefeliciteerd, je hebt %d steden geïmporteerd."
 
-#: acf-city-selector.php:300
+#: ACF_City_Selector.php:307
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr "File “%s” is succesvol verwijderd."
 
-#: acf-city-selector.php:304
+#: ACF_City_Selector.php:311
 msgid "Files successfully deleted."
 msgstr "Bestanden succesvol verwijderd."
 
-#: acf-city-selector.php:329
+#: ACF_City_Selector.php:336
 msgid "Congratulations, your CSV data seems valid."
 msgstr "Gefeliciteerd, je CSV data lijkt geen fouten te bevatten."
 
-#: acf-city-selector.php:360
+#: ACF_City_Selector.php:367
 #, php-format
 msgid "Congratulations, you imported %d city."
 msgstr "Gefeliciteerd, je hebt %d stad geïmporteerd."
 
-#: acf-city-selector.php:420
+#: ACF_City_Selector.php:427
 msgid "All cities are deleted."
 msgstr "Alle steden zijn verwijderd."
 
-#: acf-city-selector.php:445
+#: ACF_City_Selector.php:452
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: acf-city-selector.php:479
+#: ACF_City_Selector.php:486
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: acf-city-selector.php:486
+#: ACF_City_Selector.php:493
 msgid "Error"
 msgstr "Fout"
 
-#: acf-city-selector.php:498
+#: ACF_City_Selector.php:505
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: acf-city-selector.php:529 acf-city-selector.php:542
+#: ACF_City_Selector.php:537 ACF_City_Selector.php:550
 msgid "Settings"
 msgstr "Instellingen"
 
-#: acf-city-selector.php:540 inc/pro-page.php:25
+#: ACF_City_Selector.php:548 inc/pro-page.php:25
 msgid "Go Pro"
 msgstr "Go Pro"
 
-#: acf-city-selector.php:542
+#: ACF_City_Selector.php:550
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: acf-city-selector.php:578
-#, php-format
-msgid "%s says \"Thank you\""
-msgstr "%s zegt “Bedankt”"
-
-#: acf-city-selector.php:589
-#, php-format
-msgid ""
-"Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
-"Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, "
-"so I can continue to improve it even more."
-msgstr ""
-"Bedankt voor het installeren van de ‘Stad Kiezer’ plugin. Als je er plezier "
-"van hebt, hoop ik dat je een <a href=“%s” target=“_blank”>kleine donatie</a> "
-"overweegt. Dit motiveert mij weer om de plugin te verbeteren in mijn vrije "
-"tijd."
+#: fields/acf-city_selector-v4.php:32 fields/acf-city_selector-v5.php:27
+msgid "Choice"
+msgstr "Keuze"
 
 #: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:70
 msgid "Yes"
@@ -135,31 +122,35 @@ msgstr "Toon labels"
 msgid "Show field labels above the dropdown menus"
 msgstr "Labels tonen boven de dropdown menu’s"
 
-#: fields/acf-city_selector-v4.php:125
+#: fields/acf-city_selector-v4.php:100 fields/acf-city_selector-v5.php:95
+msgid "Set default country"
+msgstr "Stel een standaard land in"
+
+#: fields/acf-city_selector-v4.php:149
 msgid "Select country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v4.php:144
+#: fields/acf-city_selector-v4.php:168
 msgid "Select province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v4.php:153
+#: fields/acf-city_selector-v4.php:177
 msgid "Select city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city_selector-v5.php:111 inc/country-field.php:37
+#: fields/acf-city_selector-v5.php:127 inc/country-field.php:37
 msgid "Select a country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v5.php:130 inc/country-field.php:108
+#: fields/acf-city_selector-v5.php:146 inc/country-field.php:108
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v5.php:139 inc/country-field.php:163
+#: fields/acf-city_selector-v5.php:155 inc/country-field.php:163
 msgid "Select a city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city_selector-v5.php:287
+#: fields/acf-city_selector-v5.php:305
 msgid "You didn't select a city"
 msgstr "Je hebt geen stad gekozen"
 
@@ -276,6 +267,23 @@ msgstr "Verifieer CSV data"
 #: inc/dashboard-page.php:98
 msgid "Import CSV data"
 msgstr "Importeer CSV data"
+
+#: inc/donate-box.php:9
+#, php-format
+msgid "%s says \"Thank you\""
+msgstr "%s zegt “Bedankt”"
+
+#: inc/donate-box.php:20
+#, php-format
+msgid ""
+"Thank you for installing the 'City Selector' plugin. I hope you enjoy it. "
+"Please <a href=\"%s\" target=\"_blank\">consider a donation</a> if you do, "
+"so I can continue to improve it even more."
+msgstr ""
+"Bedankt voor het installeren van de ‘Stad Kiezer’ plugin. Als je er plezier "
+"van hebt, hoop ik dat je een <a href=“%s” target=“_blank”>kleine donatie</a> "
+"overweegt. Dit motiveert mij weer om de plugin te verbeteren in mijn vrije "
+"tijd."
 
 #: inc/help-tabs.php:25
 msgid "Import CSV from file"
@@ -569,9 +577,6 @@ msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
 #~ msgid "YAY ! %d lines are imported."
 #~ msgstr "YAY ! %d regels zijn geïmporteerd."
-
-#~ msgid "Choice"
-#~ msgstr "Keuze"
 
 #~ msgid "Import raw data"
 #~ msgstr "Importeer ruwe CSV data"
