@@ -96,7 +96,7 @@
             FROM " . $wpdb->prefix . "cities
             WHERE country_code = '%s'
             group by state_code
-            order by state_name ASC",  $country_code
+            order by state_name ASC", $country_code
         );
 
         $db = $wpdb->get_results( $sql );
