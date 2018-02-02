@@ -125,8 +125,9 @@
 					state_name varchar(50) NULL,
 					country_code varchar(2) NULL,
 					country varchar(50) NULL,
-					PRIMARY KEY (id)
-				);
+					PRIMARY KEY  (id)
+				)
+                COLLATE <?php echo $wpdb->collate; ?>;
 				<?php
 				$sql = ob_get_clean();
 				dbDelta( $sql );

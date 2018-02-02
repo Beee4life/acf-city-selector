@@ -4,7 +4,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Version
 
-0.1
+0.2
 
 ### Installation
 
@@ -81,7 +81,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACF CS website](http://acfcs.berryplasman.com).
+We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](http://acfcs.berryplasman.com).
 
 ### Compatibility
 
@@ -97,9 +97,9 @@ The plugin contains the following languages:
 
 ### Tested on
 
-* Wordpress 4.9-RC1-42115
+* Wordpress 4.9.2
 * Advanced Custom Fields 4.4.12
-* Advanced Custom Fields Pro 5.6.4
+* Advanced Custom Fields Pro 5.6.6
 
 #### To Do
 
@@ -138,4 +138,5 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 ### Changelog
 
-Nothing yet, still developing...
+0.2
+Added database collation
