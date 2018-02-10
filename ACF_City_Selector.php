@@ -3,7 +3,7 @@
 	Plugin Name:    ACF City Selector
 	Plugin URI:     http://acfcs.berryplasman.com
 	Description:    An extension for ACF which allows you to select a city based on country and province/state.
-	Version:        0.1
+	Version:        0.3
 	Author:         Beee
 	Author URI:     http://berryplasman.com
 	Text Domain:    acf-city-selector
@@ -33,7 +33,7 @@
 			public function __construct() {
 
 				$this->settings = array(
-					'version' => '0.1',
+					'version' => '0.3',
 					'url'     => plugin_dir_url( __FILE__ ),
 					'path'    => plugin_dir_path( __FILE__ )
 				);
@@ -260,6 +260,8 @@
 							if ( false != $verified_data ) {
 								$this->acfcs_errors()->add( 'success_no_errors_in_csv', esc_html__( 'Congratulations, there appear to be no errors in your CSV.', 'acf-city-selector' ) );
 
+								do_action( 'acfcs_after_success_verify' );
+
 								return;
 							}
 
@@ -293,6 +295,8 @@
 								}
 
 								$this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities.', 'acf-city-selector' ), $line_number ) );
+
+								do_action( 'acfcs_after_success_import' );
 
 								return;
 							}
@@ -367,6 +371,8 @@
 								}
 								$this->acfcs_errors()->add( 'success_cities_imported', sprintf( _n( 'Congratulations, you imported %d city.', 'Congratulations, you imported %d cities.', $line_number, 'acf-city-selector' ), $line_number ) );
 
+								do_action( 'acfcs_after_success_import_raw' );
+
 								return;
 
 							}
@@ -393,12 +399,15 @@
 							global $wpdb;
 							if ( isset( $_POST['import_be'] ) && 1 == $_POST["import_be"] ) {
 								require_once( 'lib/import_be.php' );
+								do_action( 'acfcs_after_success_import_be' );
 							}
 							if ( isset( $_POST['import_lux'] ) && 1 == $_POST["import_lux"] ) {
 								require_once( 'lib/import_lux.php' );
+								do_action( 'acfcs_after_success_import_lu' );
 							}
 							if ( isset( $_POST['import_nl'] ) && 1 == $_POST["import_nl"] ) {
 								require_once( 'lib/import_nl.php' );
+								do_action( 'acfcs_after_success_import_nl' );
 							}
 							$sql = ob_get_clean();
 							dbDelta( $sql );
@@ -426,6 +435,8 @@
 								$prefix = $wpdb->get_blog_prefix();
 								$wpdb->query( 'TRUNCATE TABLE ' . $prefix . 'cities' );
 								$this->acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
+
+								do_action( 'acfcs_after_success_nuke' );
 
 							}
 						}
