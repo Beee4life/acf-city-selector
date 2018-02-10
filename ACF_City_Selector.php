@@ -91,6 +91,7 @@
 			 */
 			public function acfcs_plugin_deactivation() {
 			    // nothing yet
+                // @TODO: delete any settings
 			}
 
 
