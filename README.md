@@ -83,6 +83,18 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](http://acfcs.berryplasman.com).
 
+### Hooks
+
+There are a few hooks available to add your own custom actions. 
+
+* acfcs_after_success_verify - hooks after successful csv verification
+* acfcs_after_success_import - hooks after successful csv import
+* acfcs_after_success_import_raw - hooks after successful raw csv import
+* acfcs_after_success_import_be - hooks after importing preset country Belgium
+* acfcs_after_success_import_lu - hooks after importing preset country Luxembourg
+* acfcs_after_success_import_nl - hooks after importing preset country Netherlands
+* acfcs_after_success_nuke - hooks after truncating the table
+
 ### Compatibility
 
 This ACF field type is compatible/tested with ACF 4 (Free) as well as ACF 5 (Pro).
@@ -97,9 +109,9 @@ The plugin contains the following languages:
 
 ### Tested on
 
-* Wordpress 4.9.2
+* Wordpress 4.9.4
 * Advanced Custom Fields 4.4.12
-* Advanced Custom Fields Pro 5.6.6
+* Advanced Custom Fields Pro 5.6.8
 
 #### To Do
 
@@ -137,6 +149,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
 
 ### Changelog
+
+0.3
+Added hooks for import/delete actions
 
 0.2
 Added database collation

@@ -2,7 +2,7 @@
 Contributors: beee4life
 Tags: acf, custom, field, fields, custom field, custom fields, edit
 Requires at least: 3.6.0
-Tested up to: 4.9.2
+Tested up to: 4.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,5 +41,5 @@ http://acfcs.berryplasman.com
 A. Please report any bugs/questions to: https://github.com/Beee4life/acf-city-selector/issues
 
 Credit
-Fabrizio Sabato for the idea (http://www.deskema.it)
 Jarah de Jong for fixing the Javascript (http://www.inquota.nl)
+Fabrizio Sabato for the idea (http://www.deskema.it)
