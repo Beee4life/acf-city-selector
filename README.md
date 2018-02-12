@@ -4,7 +4,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Version
 
-0.2
+0.3
 
 ### Installation
 
