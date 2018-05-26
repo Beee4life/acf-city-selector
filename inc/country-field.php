@@ -24,10 +24,10 @@
 
 		global $wpdb;
 		$db = $wpdb->get_results( "
-        SELECT * FROM " . $wpdb->prefix . "cities
-        group by country_code
-        order by country ASC
-    " );
+            SELECT * FROM " . $wpdb->prefix . "cities
+            group by country_code
+            order by country ASC
+        " );
 
 		$items = array();
 		if ( null == $selectedCountry ) {
