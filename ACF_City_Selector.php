@@ -558,7 +558,7 @@
 			 * Admin menu
 			 */
 			public static function acfcs_admin_menu() {
-				$gopro = ( defined( 'ENV' ) && ENV == 'dev' ) ? ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>' : false;
+				$gopro = ( defined( 'ENV' ) && ENV == 'development' ) ? ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>' : false;
 
 				return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
 			}
