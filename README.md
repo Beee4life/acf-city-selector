@@ -4,7 +4,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 ### Version
 
-0.3
+0.4
 
 ### Installation
 
@@ -149,6 +149,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
 
 ### Changelog
+
+0.4
+Internationalised all cities/states/countries
 
 0.3
 Added hooks for import/delete actions
