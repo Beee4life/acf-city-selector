@@ -2448,4 +2448,4 @@ INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_na
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("<?php _e( "Zevenbergschen Hoek Dri", "acfcs" ); ?>", "NB", "<?php _e( "Noord-Brabant", "acfcs" ); ?>", "NL", "<?php _e( "Netherlands", "acfcs" ); ?>");
 INSERT INTO <?php echo $wpdb->prefix; ?>cities ( city_name, state_code, state_name, country_code, country ) VALUES ("<?php _e( "Zundert", "acfcs" ); ?>", "NB", "<?php _e( "Noord-Brabant", "acfcs" ); ?>", "NL", "<?php _e( "Netherlands", "acfcs" ); ?>");
 
-<?php $this->acfcs_errors()->add( 'success_cities_imported_<?php _e( "Netherlands", "acfcs" ); ?>', esc_html__( 'Successfully imported 2449 cities for the <?php _e( "Netherlands", "acfcs" ); ?>.', 'acf-city-selector' ) ); ?>
+<?php $this->acfcs_errors()->add( 'success_cities_imported_netherlands', esc_html__( 'Successfully imported 2449 cities for the Netherlands.', 'acf-city-selector' ) ); ?>
