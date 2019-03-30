@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2019-02-24 20:57+0100\n"
-"PO-Revision-Date: 2019-02-24 20:57+0100\n"
+"POT-Creation-Date: 2019-03-30 15:37+0100\n"
+"PO-Revision-Date: 2019-03-30 15:38+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -2034,7 +2034,7 @@ msgstr ""
 #: lib/prepare-tables.php:2583 lib/prepare-tables.php:2584
 #: lib/prepare-tables.php:2585 lib/prepare-tables.php:2586
 msgid "Bruxelles"
-msgstr ""
+msgstr "Brussel"
 
 #: lib/import_be.php:98 lib/prepare-tables.php:2547
 msgid "Ass. Commiss. Communau. Française"
@@ -5712,10 +5712,8 @@ msgid "Nokere"
 msgstr ""
 
 #: lib/import_be.php:816 lib/prepare-tables.php:3265
-#, fuzzy
-#| msgid "Nuke 'em"
 msgid "Nukerke"
-msgstr "Nuke alles"
+msgstr ""
 
 #: lib/import_be.php:817 lib/prepare-tables.php:3266
 msgid "Okegem"
@@ -6401,10 +6399,8 @@ msgid "Nieuwrode"
 msgstr ""
 
 #: lib/import_be.php:959 lib/prepare-tables.php:3408
-#, fuzzy
-#| msgid "Settings"
 msgid "Oetingen"
-msgstr "Instellingen"
+msgstr ""
 
 #: lib/import_be.php:960 lib/prepare-tables.php:3409
 msgid "Oorbeek"
@@ -10466,10 +10462,8 @@ msgid "Waarland"
 msgstr ""
 
 #: lib/import_nl.php:199 lib/prepare-tables.php:199
-#, fuzzy
-#| msgid "Order"
 msgid "Warder"
-msgstr "Bestel"
+msgstr ""
 
 #: lib/import_nl.php:200 lib/prepare-tables.php:200
 msgid "Warmenhuizen"
@@ -11478,10 +11472,8 @@ msgid "Waal"
 msgstr ""
 
 #: lib/import_nl.php:410 lib/prepare-tables.php:410
-#, fuzzy
-#| msgid "Order"
 msgid "Waarder"
-msgstr "Bestel"
+msgstr ""
 
 #: lib/import_nl.php:411 lib/prepare-tables.php:411
 msgid "Waddinxveen"
@@ -12398,20 +12390,16 @@ msgid "Eerste Exloermond"
 msgstr ""
 
 #: lib/import_nl.php:575 lib/prepare-tables.php:575
-#, fuzzy
-#| msgid "Yes"
 msgid "Ees"
-msgstr "Ja"
+msgstr ""
 
 #: lib/import_nl.php:576 lib/prepare-tables.php:576
 msgid "Eesergroen"
 msgstr ""
 
 #: lib/import_nl.php:577 lib/prepare-tables.php:577
-#, fuzzy
-#| msgid "Save settings"
 msgid "Eeserveen"
-msgstr "Instellingen opslaan"
+msgstr ""
 
 #: lib/import_nl.php:578 lib/prepare-tables.php:578
 msgid "Eext Eext"
@@ -12986,10 +12974,8 @@ msgid "Witteveen"
 msgstr ""
 
 #: lib/import_nl.php:721 lib/prepare-tables.php:721
-#, fuzzy
-#| msgid "Yes"
 msgid "Yde"
-msgstr "Ja"
+msgstr ""
 
 #: lib/import_nl.php:722 lib/prepare-tables.php:722
 msgid "Zandberg DR"
@@ -15021,10 +15007,8 @@ msgid "Warfstermolen"
 msgstr ""
 
 #: lib/import_nl.php:1137 lib/prepare-tables.php:1137
-#, fuzzy
-#| msgid "Warning"
 msgid "Warns"
-msgstr "Waarschuwing"
+msgstr ""
 
 #: lib/import_nl.php:1138 lib/prepare-tables.php:1138
 msgid "Warstiens"
@@ -15834,10 +15818,8 @@ msgid "Gameren"
 msgstr ""
 
 #: lib/import_nl.php:1271 lib/prepare-tables.php:1271
-#, fuzzy
-#| msgid "Order"
 msgid "Garderen"
-msgstr "Bestel"
+msgstr ""
 
 #: lib/import_nl.php:1272 lib/prepare-tables.php:1272
 msgid "Geesteren GLD"
@@ -16604,10 +16586,8 @@ msgid "Wadenoijen"
 msgstr ""
 
 #: lib/import_nl.php:1464 lib/prepare-tables.php:1464
-#, fuzzy
-#| msgid "Warning"
 msgid "Wageningen"
-msgstr "Waarschuwing"
+msgstr ""
 
 #: lib/import_nl.php:1465 lib/prepare-tables.php:1465
 msgid "Wamel"
@@ -16932,10 +16912,8 @@ msgstr ""
 #: lib/prepare-tables.php:1694 lib/prepare-tables.php:1695
 #: lib/prepare-tables.php:1696 lib/prepare-tables.php:1697
 #: lib/prepare-tables.php:1698
-#, fuzzy
-#| msgid "Warning"
 msgid "Groningen"
-msgstr "Waarschuwing"
+msgstr ""
 
 #: lib/import_nl.php:1505 lib/prepare-tables.php:1505
 msgid "Aduard"
@@ -18218,10 +18196,8 @@ msgid "Ottersum"
 msgstr ""
 
 #: lib/import_nl.php:1828 lib/prepare-tables.php:1828
-#, fuzzy
-#| msgid "Warning"
 msgid "Panningen"
-msgstr "Waarschuwing"
+msgstr ""
 
 #: lib/import_nl.php:1829 lib/prepare-tables.php:1829
 msgid "Papenhoven"
@@ -21162,11 +21138,7 @@ msgid "Zundert"
 msgstr ""
 
 #: lib/import_nl.php:2451
-#, fuzzy
-#| msgid "Successfully imported 2449 cities for the Netherlands."
-msgid ""
-"Successfully imported 2449 cities for the <?php esc_html_e( \"Netherlands\", "
-"\"acfcs\" ); ?>."
+msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
 #~ msgid "YAY ! %d lines are imported."
