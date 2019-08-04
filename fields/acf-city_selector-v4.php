@@ -110,7 +110,7 @@
 				if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
 					$countrycode = $field[ 'value' ][ 'countryCode' ];
 				}
-				$countries = populate_country_select( '', $field );
+				$countries = populate_country_select( $field, '' );
 				$states    = false;
 				if ( isset( $countrycode ) && '0' !== $countrycode ) {
 					$stateCode = $field['value']['stateCode'];
