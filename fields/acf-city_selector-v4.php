@@ -129,7 +129,7 @@
 						<?php
 							foreach ( $countries as $key => $country ) {
 								if ( isset( $countrycode ) ) {
-									$selected = ( $countrycode === $key ) ? " selected=\"selected\"" : false;
+									$selected = ( $countrycode === $key ) ? ' selected="selected"' : false;
 								} else {
 									$selected = false;
 								}
