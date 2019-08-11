@@ -182,6 +182,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 ### Changelog
 
 0.6
+* Translate more strings
 * Fix import errors for Luxembourg
 * DRY import code
 
