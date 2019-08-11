@@ -1,3 +1,3 @@
 <?php include( 'cities_nl.php' ); ?>
 <?php include( 'cities_be.php' ); ?>
-<?php include( 'cities_lu.php' ); ?>
+<?php include( 'cities_lux.php' ); ?>
