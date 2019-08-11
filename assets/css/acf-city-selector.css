@@ -7,146 +7,153 @@
 /* v4 */
 
 .field_type-acf_city_selector .dropdown-box {
-    margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .field_type-acf_city_selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 10px;
+	display:       block;
+	margin-bottom: 10px;
 }
 
 /* v5 */
 .acf-field-acf-city-selector .dropdown-box {
-    margin-bottom: 1em;
+	margin-bottom: 1em;
 }
 
 .acf-field-acf-city-selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 10px;
+	display:       block;
+	margin-bottom: 10px;
 }
 
 
 /* admin pages */
 .admin_left, .admin_right {
-    padding:               20px;
-    border:                1px solid #cccccc;
-    -moz-border-radius:    8px;
-    -webkit-border-radius: 8px;
+	padding:               20px;
+	border:                1px solid #cccccc;
+	-moz-border-radius:    8px;
+	-webkit-border-radius: 8px;
 }
 
 .admin_left {
-    float:        left;
-    width:        60%;
-    margin-right: 5%;
+	float:        left;
+	width:        60%;
+	margin-right: 5%;
 }
 
 .admin_right {
-    float:     left;
-    max-width: 25%;
+	float:     left;
+	max-width: 25%;
 }
 
 .acfcs input[type="checkbox"] {
-    margin-right: 10px;
+	margin-right: 10px;
 }
 
 .acfcs h2,
 .acfcs h3 {
-    margin: 0 0 1em 0;
+	margin: 0 0 1em 0;
+}
+
+.acfcs table {
+	border:          0;
+	border-spacing:  0;
+	border-collapse: collapse;
+	width:           100%;
 }
 
 .acfcs table.uploaded_files {
-    min-width: 25%;
-    max-width: 50%;
+	min-width: 25%;
+	max-width: 50%;
 }
 
 .acfcs th {
-    text-align: left;
+	text-align: left;
 }
 
 .acfcs td {
-    border-top: 1px solid #444444;
+	border-top: 1px solid #444444;
 }
 
 .acfcs th,
 .acfcs td {
-    padding: 5px 3em 5px 0;
+	padding: 5px 3em 5px 0;
 }
 
 .acfcs hr {
-    background:    #CCCCCC;
-    width:         100%;
-    height:        1px;
-    border:        0;
-    margin-bottom: 1em;
+	background:    #CCCCCC;
+	width:         100%;
+	height:        1px;
+	border:        0;
+	margin-bottom: 1em;
 }
 
 .acfcs img.donate_img {
-    float:        left;
-    margin-top:   3px;
-    margin-right: 10px;
+	float:        left;
+	margin-top:   3px;
+	margin-right: 10px;
 }
 
 /* errors */
 .acfcs .error {
-    padding: 10px 0 10px 15px;
-    /*border-left: 4px solid #ffffff;*/
+	padding: 10px 0 10px 15px;
+	/*border-left: 4px solid #ffffff;*/
 }
 
 .acfcs .notice-success {
-    border-left-color: #43bc71;
+	border-left-color: #43bc71;
 }
 
 .acfcs .notice-success {
-    border-left-color: #43bc71;
+	border-left-color: #43bc71;
 }
 
 .acfcs .notice-warning {
-    border-left-color: #ff9000;
+	border-left-color: #ff9000;
 }
 
 /* admin menu */
 .acfcs .acfcs-admin-menu a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 /* help menus */
 .contextual-help-tabs {
-    width: 170px;
+	width: 170px;
 }
 
 #contextual-help-back {
-    left: 170px;
+	left: 170px;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap h5 {
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    margin-bottom: 0.5em;
+	-webkit-margin-before: 0;
+	-webkit-margin-after:  0;
+	margin-bottom:         0.5em;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap h5:first-child {
-    -webkit-margin-before: 0.75em;
+	-webkit-margin-before: 0.75em;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap p {
-    -webkit-margin-before: 0;
-    margin: 0.5em 0 0.5em 0;
+	-webkit-margin-before: 0;
+	margin:                0.5em 0 0.5em 0;
 }
 
 #contextual-help-columns .contextual-help-sidebar p {
-    /*-webkit-margin-before: 0;*/
-    margin: 1em 0 0.5em 0;
+	/*-webkit-margin-before: 0;*/
+	margin: 1em 0 0.5em 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap th,
 #contextual-help-columns .contextual-help-tabs-wrap td {
-    padding: 5px 3em 5px 0;
+	padding: 5px 3em 5px 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap th {
-    text-align: left;
+	text-align: left;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap td {
-    border-top: 1px solid #444444;
+	border-top: 1px solid #444444;
 }
