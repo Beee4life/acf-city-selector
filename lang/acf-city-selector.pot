@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2019-08-04 22:47+0200\n"
+"POT-Creation-Date: 2019-08-11 18:17+0200\n"
 "PO-Revision-Date: 2016-11-27 04:33+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -510,7 +510,7 @@ msgstr ""
 #: lib/cities_be.php:88 lib/cities_be.php:89 lib/cities_be.php:90
 #: lib/cities_be.php:91 lib/cities_be.php:92 lib/cities_be.php:93
 #: lib/cities_be.php:94 lib/cities_be.php:95 lib/cities_be.php:96
-msgid "Antwerpen"
+msgid "Antwerp"
 msgstr ""
 
 #: lib/cities_be.php:1 lib/cities_be.php:2 lib/cities_be.php:3
@@ -1310,12 +1310,8 @@ msgstr ""
 msgid "Belgische Senaat"
 msgstr ""
 
-#: lib/cities_be.php:100
-msgid "Brussel"
-msgstr ""
-
 #: lib/cities_be.php:101
-msgid "Brussel (Laken)"
+msgid "Bruxelles (Laken)"
 msgstr ""
 
 #: lib/cities_be.php:102
@@ -4902,7 +4898,7 @@ msgid "Brucargo"
 msgstr ""
 
 #: lib/cities_be.php:903
-msgid "Brussel X-Luchthaven Remailing"
+msgid "Bruxelles X-Luchthaven Remailing"
 msgstr ""
 
 #: lib/cities_be.php:904
@@ -8078,7 +8074,7 @@ msgid "Den Bommel"
 msgstr ""
 
 #: lib/cities_nl.php:261
-msgid "Den Haag"
+msgid "The Hague"
 msgstr ""
 
 #: lib/cities_nl.php:262
