@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.6
+0.8
 
 <a name="description"></a>
 ### Description
@@ -180,6 +180,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.8
+* Fix incorrect version
 
 0.7
 * Change indentation from spaces to tabs
