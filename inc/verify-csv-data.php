@@ -41,26 +41,26 @@
 				}
 
 				$element_counter = 0;
-                foreach( $line as $element ) {
-                    $element_counter++;
-                    if ( $element_counter == 2 ) {
-                    	if ( 2 != strlen( $element ) ) {
-		                    ACF_City_Selector::acfcs_errors()->add( 'error_wrong_state_length', sprintf( esc_html__( 'The length of the state abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
+				foreach( $line as $element ) {
+					$element_counter++;
+					if ( $element_counter == 2 ) {
+						if ( 2 != strlen( $element ) ) {
+							ACF_City_Selector::acfcs_errors()->add( 'error_wrong_state_length', sprintf( esc_html__( 'The length of the state abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
-		                    return false;
-	                    }
-                    }
-                    if ( $element_counter == 4 ) {
-	                    if ( 2 != strlen( $element ) ) {
-		                    ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
+							return false;
+						}
+					}
+					if ( $element_counter == 4 ) {
+						if ( 2 != strlen( $element ) ) {
+							ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
-		                    return false;
-	                    }
-                    }
-                }
+							return false;
+						}
+					}
+				}
 
-                // all good
-                $validated_csv[] = $line;
+				// all good
+				$validated_csv[] = $line;
 			}
 
 			return $validated_csv;

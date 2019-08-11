@@ -181,7 +181,11 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.7
+* Change indentation from spaces to tabs
+
 0.6
+* Translate more strings
 * Fix import errors for Luxembourg
 * DRY import code
 

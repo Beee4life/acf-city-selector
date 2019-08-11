@@ -9,8 +9,6 @@
 	 */
 	function acfcs_help_tabs( $old_help, $screen_id, $screen ) {
 
-		// echo '<pre>'; var_dump($screen_id); echo '</pre>'; exit;
-
 		$screen_array = array(
 			'settings_page_acfcs-options',
 			'settings_page_acfcs-settings',
@@ -28,13 +26,13 @@
 					<p>' . esc_html__( 'On this page you can import a CSV file which contains cities to import.', 'acf-city-selector' ) . '</p>
 					<p>' . esc_html__( 'You can only upload *.csv files.', 'acf-city-selector' ) . '</p>
 					<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'acf-city-selector' ) . '</p>
-					<table class="" cellpadding="0" cellspacing="0">
+					<table class="">
 					<thead>
 					<tr>
 					<th>' . esc_html__( 'Field', 'acf-city-selector' ) . '</th>
 					<th>' . esc_html__( 'What to enter', 'acf-city-selector' ) . '</th>
 					<th>' . esc_html__( 'Note', 'acf-city-selector' ) . '</th>
-					</tr>					
+					</tr>
 					</thead>
 					<tbody>
 					<tr>
@@ -74,13 +72,13 @@
 					<p>' . esc_html__( 'On this page you can import cities. You can select cities from The Netherlands, Belgium and Luxembourg which come included in the plugin.', 'acf-city-selector' ) . '</p>
 					<p>' . esc_html__( 'You can also import raw csv data, but this has to be formatted (and ordered) in a certain way, otherwise it won\'t work.', 'acf-city-selector' ) . '</p>
 					<p>' . esc_html__( 'The required order is "City,State code,State,Country code,Country".', 'acf-city-selector' ) . '</p>
-					<table class="" cellpadding="0" cellspacing="0">
+					<table class="">
 					<thead>
 					<tr>
 					<th>' . esc_html__( 'Field', 'acf-city-selector' ) . '</th>
 					<th>' . esc_html__( 'What to enter', 'acf-city-selector' ) . '</th>
 					<th>' . esc_html__( 'Note', 'acf-city-selector' ) . '</th>
-					</tr>					
+					</tr>
 					</thead>
 					<tbody>
 					<tr>

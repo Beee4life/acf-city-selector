@@ -6,7 +6,7 @@
 			}
 
 			$id       = 'donate-acf-cs';
-			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank">' . sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
+			$title    = '<a style="text-decoration: none; font-size: 1em;" href="https://github.com/beee4life" target="_blank" rel="noopener">' . sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' ) . '</a>';
 			$callback = 'show_donate_meta_box';
 			$screens  = array();
 			$context  = 'side';
