@@ -38,7 +38,7 @@
             }
         }
         foreach ( $db as $data ) {
-            $items[ $data->country_code ] = $data->country;
+            $items[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
         }
 
         return $items;
