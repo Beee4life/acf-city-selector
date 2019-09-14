@@ -2,7 +2,7 @@
     /*
      * Content for the settings page
      */
-    function acfcs_cities() {
+    function acfcs_search() {
 
         if ( ! current_user_can( 'manage_options' ) ) {
             wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
@@ -34,13 +34,14 @@
                 ];
             }
             
-            // echo '<pre>'; var_dump($countries); echo '</pre>'; exit;
-            
             // if there is more than 1 country, place NL on top
             if ( count( $countries ) > 1 ) {
+                // get locale
+                // get locale code
+                
+                
                 $array_key_nl = false;
                 $counter = 1;
-                // echo '<pre>'; var_dump($countries); echo '</pre>'; exit;
                 foreach ( $countries as $key => $country ) {
                     if ( $counter == 1 ) {
                         $first_array_key = $key;
@@ -49,9 +50,8 @@
                         $array_key_nl = $key;
                     }
                 }
-                
                 if ( false != $array_key_nl ) {
-                    acfcs_move_array_element( $countries, $array_key_nl, 0 );
+                    ACF_City_Selector::acfcs_move_array_element( $countries, $array_key_nl, 0 );
                 }
             }
             
@@ -78,7 +78,7 @@
             }
         }
         
-        if ( isset( $_GET[ 'acfcs-search' ] ) ) {
+        if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
             $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
             $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
@@ -131,13 +131,14 @@
                     </small>
                 </div>
     
-                <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities&acfcs-search' ); ?>" method="POST">
+                <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
+                    <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
                         <?php if ( count( $countries ) > 1 ) { ?>
                             <div class="acfcs__search-criteria acfcs__search-criteria--country">
                                 <label>
                                     <select name="acfcs_country" class="">
-                                        <option value=""><?php _e( 'Select a country', 'acfcs' ); ?></option>
+                                        <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
                                         <?php foreach( $countries as $country ) { ?>
                                             <option value="<?php echo $country[ 'code' ]; ?>"><?php echo $country[ 'name' ]; ?></option>
                                         <?php } ?>
@@ -153,7 +154,7 @@
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
                             <label>
                                 <select name="acfcs_state" class="">
-                                    <option value=""><?php _e( 'Select a state', 'acfcs' ); ?></option>
+                                    <option value=""><?php _e( 'Select a state', 'acf-city-selector' ); ?></option>
                                     <?php foreach( $states as $state ) { ?>
                                         <?php
                                             $selected = false;
@@ -173,7 +174,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
                             <label>
-                                <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Free search', 'acfcs' ); ?>">
+                                <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Free search', 'acf-city-selector' ); ?>">
                             </label>
                         </div>
     
@@ -182,7 +183,7 @@
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
                             <label>
                                 <select name="acfcs_limit" class="">
-                                    <option value="0"><?php esc_html_e( 'Limit', 'acfcs' ); ?></option>
+                                    <option value="0"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></option>
                                     <?php
                                         $limits = [ 10, 20, 50, 100 ];
                                         foreach( $limits as $limit ) {
@@ -201,11 +202,15 @@
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
                 </form>
                 
-                <?php if ( ! empty( $cities ) ) { ?>
+                <?php if ( isset( $_GET[ 'acfcs-search' ] ) && empty( $cities ) ) { ?>
+                    <p>
+                        <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
+                    </p>
+                <?php } elseif ( ! empty( $cities ) ) { ?>
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">
-                            <p><?php echo $result_count; ?> <?php esc_html_e( 'results',  'acfcs' ); ?></p>
+                            <p><?php echo $result_count; ?> <?php esc_html_e( 'results',  'acf-city-selector' ); ?></p>
                             <table class="acfcs__table acfcs__table--search">
                                 <thead>
                                 <tr>
@@ -237,7 +242,7 @@
                                             <?php echo $city->state_name; ?>
                                         </td>
                                         <td>
-                                            <?php _e( $city->country, 'acfcs' ); ?>
+                                            <?php _e( $city->country, 'acf-city-selector' ); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
