@@ -58,21 +58,17 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
+                add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 
                 // filters
-                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array(
-                    $this,
-                    'acfcs_settings_link'
-                ) );
+                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
                 
+                include( 'inc/acfcs-donate-box.php' );
                 include( 'inc/acfcs-functions.php' );
+                include( 'inc/acfcs-help-tabs.php' );
                 include( 'inc/country-field.php' );
-                include( 'inc/donate-box.php' );
-                include( 'inc/help-tabs.php' );
-                
-                add_action( 'plugins_loaded', array( $this, 'acfcs_change_plugin_order' ), 5 );
-                add_action( 'plugins_loaded', array( $this, 'acfcs_check_for_acf' ), 6 );
-                
+
                 // add_action( 'admin_init',                   array( $this, 'test_this' ) );
             }
     
@@ -354,9 +350,6 @@
                                 $this->acfcs_errors()->add( 'success_cities_imported', sprintf( _n( 'Congratulations, you imported 1 city.', 'Congratulations, you imported %d cities.', $line_number, 'acf-city-selector' ), $line_number ) );
                                 
                                 do_action( 'acfcs_after_success_import_raw' );
-                                
-                                return;
-                                
                             }
                         }
                     }
@@ -368,8 +361,8 @@
              * Import preset countries
              */
             public function acfcs_import_preset_countries() {
-                if ( isset( $_POST[ "import_actions_nonce" ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ "import_actions_nonce" ], 'import-actions-nonce' ) ) {
+                if ( isset( $_POST[ "acfcs_import_actions_nonce" ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ "acfcs_import_actions_nonce" ], 'acfcs-import-actions-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
                         
                         return;
@@ -403,8 +396,8 @@
              * Truncate cities table
              */
             public function acfcs_truncate_table() {
-                if ( isset( $_POST[ "truncate_table_nonce" ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ "truncate_table_nonce" ], 'truncate-table-nonce' ) ) {
+                if ( isset( $_POST[ "acfcs_truncate_table_nonce" ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ "acfcs_truncate_table_nonce" ], 'acfcs-truncate-table-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
                         
                         return;
@@ -431,8 +424,8 @@
              * Preserve settings
              */
             public function acfcs_preserve_settings() {
-                if ( isset( $_POST[ "preserve_settings_nonce" ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ "preserve_settings_nonce" ], 'preserve-settings-nonce' ) ) {
+                if ( isset( $_POST[ "acfcs_preserve_settings_nonce" ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ "acfcs_preserve_settings_nonce" ], 'acfcs-preserve-settings-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
                         
                         return;
