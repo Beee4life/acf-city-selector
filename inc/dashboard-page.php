@@ -26,7 +26,7 @@
 				<form enctype="multipart/form-data" method="post">
 					<input name="upload_csv_nonce" type="hidden" value="<?php echo wp_create_nonce( 'upload-csv-nonce' ); ?>" />
 					<input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
-					<label for="file_upload">Choose a (CSV) file to upload</label>
+					<label for="file_upload"><?php _e( 'Choose a (CSV) file to upload', 'acfcs' ); ?></label>
 					<input name="csv_upload" type="file" accept=".csv" />
 					<br /><br />
 					<input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload file', 'acf-city-selector' ); ?>" />
