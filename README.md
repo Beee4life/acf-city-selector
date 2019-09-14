@@ -17,13 +17,12 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Website](#website)
 - [Disclaimer](#disclaimer)
 - [Credit](#credit)
-- [TO DO](#todo)
 - [Changelog](#changelog)
 
 <a name="version"></a>
 ### Version
 
-0.8
+0.9
 
 <a name="description"></a>
 ### Description
@@ -105,7 +104,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](http://acfcs.berryplasman.com).
+We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="hooks"></a>
 ### Hooks
@@ -146,7 +145,7 @@ If you want to remove the donation box in ACF, add the following line to functio
 <a name="website"></a>
 ### Website
 
-http://acfcs.berryplasman.com (not for support)
+https://acfcs.berryplasman.com (not for support)
 
 <a name="disclaimer"></a>
 ### Disclaimer
@@ -164,19 +163,6 @@ This plugin doesn't work yet in the following field types, when adding more than
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
 Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
-
-<a name="todo"></a>
-#### To Do
-
-* [ ] - Test on Mac Firefox
-* [ ] - Test on Mac Safari
-* [ ] - Test on PC Chrome
-* [ ] - Test on PC Firefox
-* [ ] - Test on PC Safari
-* [ ] - Test on iPhone Chrome
-* [ ] - Test on iPhone Safari
-* [ ] - Test on iPad Chrome
-* [ ] - Test on iPad Safari
 
 <a name="changelog"></a>
 ### Changelog
