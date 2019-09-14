@@ -181,6 +181,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.9
+* added a search page to manuallly remove cities from the database
+
 0.8
 * Fix incorrect version
 
