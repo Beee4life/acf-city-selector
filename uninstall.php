@@ -7,11 +7,11 @@
 
     // drop table
     if ( false == get_option( 'acfcs_preserve_settings' ) ) {
-	    global $wpdb;
-	    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
+        global $wpdb;
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
 
-	    $target_folder = wp_upload_dir()['basedir'] . '/acfcs';
-	    rmdir( $target_folder );
+        $target_folder = wp_upload_dir()['basedir'] . '/acfcs';
+        rmdir( $target_folder );
     }
 
 ?>

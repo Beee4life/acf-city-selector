@@ -89,7 +89,7 @@
             if ( false != $search_criteria_state ) {
                 $where[] .= "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
-                $where[] = "country_code = " . $search_criteria_country;
+                $where[] = "country_code = '" . $search_criteria_country . "'";
             }
             if ( false != $searched_term ) {
                 $search[] = 'state_name LIKE "%' . $searched_term . '%"';
@@ -133,20 +133,22 @@
     
                 <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities&acfcs-search' ); ?>" method="POST">
                     <?php if ( count( $countries ) > 0 ) { ?>
-                        <div class="acfcs__search-criteria acfcs__search-criteria--country">
-                            <label>
-                                <select name="acfcs_country" class="">
-                                    <option value=""><?php _e( 'Select a country', 'acfcs' ); ?></option>
-                                    <?php foreach( $countries as $country ) { ?>
-                                        <option value="<?php echo $country[ 'code' ]; ?>"><?php echo $country[ 'name' ]; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </label>
-                        </div>
+                        <?php if ( count( $countries ) > 1 ) { ?>
+                            <div class="acfcs__search-criteria acfcs__search-criteria--country">
+                                <label>
+                                    <select name="acfcs_country" class="">
+                                        <option value=""><?php _e( 'Select a country', 'acfcs' ); ?></option>
+                                        <?php foreach( $countries as $country ) { ?>
+                                            <option value="<?php echo $country[ 'code' ]; ?>"><?php echo $country[ 'name' ]; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </label>
+                            </div>
     
-                        <div class="acfcs__search-criteria acfcs__search-criteria--or">
-                            <small>OR</small>
-                        </div>
+                            <div class="acfcs__search-criteria acfcs__search-criteria--or">
+                                <small>OR</small>
+                            </div>
+                        <?php } ?>
     
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
                             <label>
