@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2019-09-14 18:12+0200\n"
+"POT-Creation-Date: 2019-09-14 18:25+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -141,7 +141,7 @@ msgid "Select city"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:110 inc/country-field.php:37
-#: inc/search-page.php:139
+#: inc/search-page.php:140
 msgid "Select a country"
 msgstr ""
 
@@ -258,12 +258,12 @@ msgstr ""
 msgid "Import CSV data"
 msgstr ""
 
-#: inc/donate-box.php:9
+#: inc/donate-box.php:12
 #, php-format
 msgid "%s says \"Thank you\""
 msgstr ""
 
-#: inc/donate-box.php:20
+#: inc/donate-box.php:23
 #, php-format
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" rel=\"noopener\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
@@ -296,7 +296,7 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
-#: inc/help-tabs.php:39 inc/help-tabs.php:85 inc/search-page.php:214
+#: inc/help-tabs.php:39 inc/help-tabs.php:85 inc/search-page.php:220
 msgid "City"
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr ""
 msgid "exactly 2 characters"
 msgstr ""
 
-#: inc/help-tabs.php:49 inc/help-tabs.php:95 inc/search-page.php:217
+#: inc/help-tabs.php:49 inc/help-tabs.php:95 inc/search-page.php:223
 msgid "State"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgid "country abbreviation"
 msgstr ""
 
 #: inc/help-tabs.php:59 inc/help-tabs.php:105 inc/pro-page.php:42
-#: inc/search-page.php:220
+#: inc/search-page.php:226
 msgid "Country"
 msgstr ""
 
@@ -422,31 +422,35 @@ msgstr ""
 msgid "Search for cities"
 msgstr ""
 
-#: inc/search-page.php:154
+#: inc/search-page.php:156
 msgid "Select a state"
 msgstr ""
 
-#: inc/search-page.php:174
+#: inc/search-page.php:176
 msgid "Free search"
 msgstr ""
 
-#: inc/search-page.php:183
+#: inc/search-page.php:185
 msgid "Limit"
 msgstr ""
 
-#: inc/search-page.php:199
+#: inc/search-page.php:201
 msgid "Search"
 msgstr ""
 
 #: inc/search-page.php:206
+msgid "No resutls"
+msgstr ""
+
+#: inc/search-page.php:212
 msgid "results"
 msgstr ""
 
-#: inc/search-page.php:211
+#: inc/search-page.php:217
 msgid "Select"
 msgstr ""
 
-#: inc/search-page.php:244
+#: inc/search-page.php:250
 msgid "Delete selected"
 msgstr ""
 
