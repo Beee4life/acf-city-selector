@@ -15,10 +15,10 @@
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
 
-            <h1><?php esc_html_e( 'ACF City Selector Settings', 'acf-city-selector' ); ?></h1>
+            <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
-
+    
             <!-- left part -->
             <div class="admin_left">
 
@@ -73,7 +73,7 @@
             </div><!-- end .admin_left -->
 
             <?php include( 'admin-right.php' ); ?>
-
+            
         </div><!-- end .wrap -->
         <?php
     }

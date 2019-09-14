@@ -25,9 +25,10 @@
     margin-bottom: 10px;
 }
 
-
 /* admin pages */
 .admin_left, .admin_right {
+    background:            white;
+    box-sizing:            border-box;
     padding:               20px;
     border:                1px solid #cccccc;
     -moz-border-radius:    8px;
@@ -35,14 +36,13 @@
 }
 
 .admin_left {
-    float:        left;
-    width:        60%;
-    margin-right: 5%;
-    position:     relative;
+    float:    left;
+    position: relative;
+    width:    70%;
 }
 
 .admin_right {
-    float:     left;
+    float:     right;
     max-width: 25%;
 }
 
@@ -55,34 +55,25 @@
     margin: 0 0 1em 0;
 }
 
-.acfcs table {
-    border:          0;
-    border-spacing:  0;
-    border-collapse: collapse;
-    width:           100%;
+.acfcs__section {
+    border-top:     1px solid #cccccc;
+    margin-top:     1.5em;
+    padding-top:    1.5em;
+    padding-bottom: 1.5em;
 }
 
-.acfcs table.uploaded_files {
-    min-width: 25%;
-    max-width: 50%;
+.acfcs__section:first-child {
+    border-top:  0;
+    margin-top:  0;
+    padding-top: 0;
 }
 
-.acfcs table.acfcs__table--search {
-    margin-top:    1em;
-    margin-bottom: 1em;
+.acfcs__section--preview-form {
+    padding-bottom: 0;
 }
 
-.acfcs th {
-    text-align: left;
-}
-
-.acfcs td {
-    border-top: 1px solid #444444;
-}
-
-.acfcs th,
-.acfcs td {
-    padding: 5px 3em 5px 0;
+.acfcs__section--results {
+    margin-top: 2em;
 }
 
 .acfcs__search-criteria {
@@ -105,6 +96,49 @@
     margin-right: 0.5em;
 }
 
+.acfcs table.acfcs__table {
+    border:          0;
+    border-spacing:  0;
+    border-collapse: collapse;
+    width:           100%;
+}
+
+.acfcs table.acfcs__table--uploaded {
+    margin-bottom: 1em;
+    max-width:     60%;
+}
+
+.acfcs table.acfcs__table--search {
+    margin-top:    1em;
+    margin-bottom: 1em;
+}
+
+.acfcs table.acfcs__table--preview-form {
+    max-width: 60%;
+}
+
+.acfcs table.acfcs__table th {
+    text-align: left;
+}
+
+.acfcs table.acfcs__table th,
+.acfcs table.acfcs__table td {
+    padding: 5px 3em 5px 0;
+}
+
+.acfcs table.acfcs__table td {
+    border-top: 1px solid #444444;
+}
+
+.acfcs table.acfcs__table--uploaded td {
+    padding-top: 1em;
+}
+
+.acfcs table.acfcs__table td.submit {
+    padding-right: 0;
+    text-align:    right;
+}
+
 .acfcs hr {
     background:    #CCCCCC;
     width:         100%;
@@ -113,10 +147,11 @@
     margin-bottom: 1em;
 }
 
-.acfcs img.donate_img {
-    float:        left;
-    margin-top:   3px;
-    margin-right: 10px;
+.acfcs img.acfcs__donate {
+    float:         left;
+    margin-top:    3px;
+    margin-right:  10px;
+    margin-bottom: 10px;
 }
 
 /* errors */

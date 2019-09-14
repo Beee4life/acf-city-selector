@@ -15,7 +15,6 @@
         $cities                  = [];
         $countries               = [];
         $search_criteria_state   = false;
-        $search_criteria_country = false;
         $searched_term           = false;
         $selected_limit          = false;
         
@@ -116,11 +115,11 @@
 
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
-
-            <h1><?php esc_html_e( 'ACF City Selector', 'acf-city-selector' ); ?></h1>
+    
+            <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
-
+    
             <!-- left part -->
             <div class="admin_left">
 
@@ -174,7 +173,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
                             <label>
-                                <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Free search', 'acf-city-selector' ); ?>">
+                                <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
                             </label>
                         </div>
     
@@ -187,10 +186,7 @@
                                     <?php
                                         $limits = [ 10, 20, 50, 100 ];
                                         foreach( $limits as $limit ) {
-                                            $selected = false;
-                                            if ( $limit == $selected_limit ) {
-                                                $selected = ' selected="selected"';
-                                            }
+                                            $selected = ( $limit == $selected_limit ) ? ' selected' : false;
                                             echo '<option value="' . $limit . '" ' . $selected . '>' . $limit . '</option>';
                                         }
                                     ?>
@@ -218,6 +214,9 @@
                                         <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
+                                        <?php esc_html_e( 'Row ID', 'acf-city-selector' ); ?>
+                                    </th>
+                                    <th>
                                         <?php esc_html_e( 'City', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
@@ -232,8 +231,11 @@
                                     <tr>
                                         <td>
                                             <label>
-                                                <input name="row_id[]" type="checkbox" value="<?php echo $city->id; ?> <?php echo $city->city_name; ?>"> <?php echo $city->id; ?>
+                                                <input name="row_id[]" type="checkbox" value="<?php echo $city->id; ?> <?php echo $city->city_name; ?>">
                                             </label>
+                                        </td>
+                                        <td>
+                                            <?php echo $city->id; ?>
                                         </td>
                                         <td>
                                             <?php echo $city->city_name; ?>
@@ -249,15 +251,15 @@
                             </table>
     
                             <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Delete selected', 'acf-city-selector' ); ?>" />
-                        </form>
-                        
-                    </div>
+                        </div>
+                    </form>
+                    
                 <?php } ?>
 
             </div><!-- end .admin_left -->
 
             <?php include( 'admin-right.php' ); ?>
-
+        
         </div><!-- end .wrap -->
         <?php
     }
