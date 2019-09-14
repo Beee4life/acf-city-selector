@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.8
+    Version:        0.9
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -33,7 +33,7 @@
             public function __construct() {
                 
                 $this->settings = array(
-                    'version' => '0.8',
+                    'version' => '0.9',
                     'url'     => plugin_dir_url( __FILE__ ),
                     'path'    => plugin_dir_path( __FILE__ )
                 );
@@ -73,7 +73,7 @@
                 
                 include( 'inc/country-field.php' );
                 include( 'inc/donate-box.php' );
-                include( 'inc/functions.php' );
+                // include( 'inc/functions.php' );
                 include( 'inc/help-tabs.php' );
                 include( 'inc/verify-csv-data.php' );
                 
@@ -99,7 +99,7 @@
                 if ( false !== $acf_key && false !== $acfcs_key ) {
                     if ( $acfcs_key < $acf_key ) {
                         // error_log('HIT');
-                        acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
+                        $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
                         update_option( 'active_plugins', $active_plugins, true );
                     }
                 }
@@ -637,13 +637,24 @@
                         $gopro = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
                     }
                     if ( false != $show_search ) {
-                        $search = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-cities">' . esc_html__( 'City Overview', 'acf-city-selector' ) . '</a>';
+                        $search = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-search">' . esc_html__( 'City Overview', 'acf-city-selector' ) . '</a>';
                     }
                 }
                 
                 return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-options">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a> | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $search . $gopro . '</p>';
             }
-            
+    
+            /**
+             * Move array element to specific position
+             *
+             * @param $array
+             * @param $from_index
+             * @param $to_index
+             */
+            public static function acfcs_move_array_element( &$array, $from_index, $to_index ) {
+                $out = array_splice( $array, $from_index, 1 );
+                array_splice( $array, $to_index, 0, $out );
+            }
             
             /*
              * Adds admin pages
@@ -651,7 +662,7 @@
             public function acfcs_add_admin_pages() {
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-options', 'acfcs_options' );
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
-                add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-cities', 'acfcs_cities' );
+                add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-pro', 'acfcs_pro' );
             }
             
@@ -660,7 +671,7 @@
              * Adds CSS on the admin side
              */
             public function acfcs_add_css() {
-                wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ) );
+                wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), '', $this->settings[ 'version' ] );
             }
         }
         
