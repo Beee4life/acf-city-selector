@@ -14,7 +14,7 @@
     <hr />
 
     <h3><?php esc_html_e( 'About Beee', 'acf-city-selector' ); ?></h3>
-    <p><?php echo sprintf( __( 'If you need a Wordpress designer/coder for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="http://www.berryplasman.com/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin">berryplasman.com</a>' ); ?></p>
+    <p><?php echo sprintf( __( 'If you need a Wordpress designer/coder for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="https://berryplasman.com/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin">berryplasman.com</a>' ); ?></p>
 
     <hr />
 
