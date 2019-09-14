@@ -1,11 +1,14 @@
 <?php
-    
+    /**
+     * Checks if there any cities in the database
+     *
+     * @return bool
+     */
     function acfcs_has_cities() {
         global $wpdb;
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
-            group by country_code
-            order by country ASC
+            LIMIT 5
         " );
         
         if ( count( $results ) > 0 ) {
@@ -16,6 +19,11 @@
         
     }
     
+    /**
+     * Checks if files are uploaded
+     *
+     * @return array
+     */
     function acfcs_check_if_files() {
         
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
@@ -38,6 +46,8 @@
     }
     
     /**
+     * Convert data from an uploaded CSV file to an array
+     *
      * @param        $file_name
      * @param string $delimiter
      * @param bool   $verify
@@ -186,6 +196,7 @@
 
     /**
      * Read file and spit out an array
+     * @TODO: probably delete ?
      *
      * @return array|bool
      */
@@ -193,8 +204,8 @@
 
         $csv_array = array();
         if ( false != $file_name ) {
-
-            $file_location = wp_upload_dir()['basedir'] . '/acfcs/' . $file_name;
+    
+            $file_location = wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name;
             if ( ( $handle = fopen( $file_location, "r" ) ) !== false ) {
                 $line_number = 0;
 
