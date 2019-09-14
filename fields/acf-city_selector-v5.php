@@ -157,16 +157,17 @@
              */
 
             function input_admin_head() {
-                $url     = $this->settings['url'];
-                $version = $this->settings['version'];
+    
+                $url     = $this->settings[ 'url' ];
+                $version = $this->settings[ 'version' ];
 
                 wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
                 wp_enqueue_script( 'acf-city-selector-js' );
-
-                if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' || isset( $_GET['id'] ) ) {
-
-                    if ( isset( $_GET['id'] ) ) {
-                        $post_id = $_GET['id'];
+    
+                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) ) {
+    
+                    if ( isset( $_GET[ 'id' ] ) ) {
+                        $post_id = $_GET[ 'id' ];
                     } else {
                         $post_id = get_the_ID();
                     }
@@ -175,23 +176,22 @@
                     $field_name = 'acf_city_selector';
                     if ( is_array( $fields ) && count( $fields ) > 0 ) {
                         foreach( $fields as $field ) {
-                            if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
-                                $field_name = $field['name'];
+                            if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                                $field_name = $field[ 'name' ];
                                 break;
                             }
                         }
                     }
-                    $post_meta = get_post_meta( $post_id, $field_name, 1 );
-
-                    if ( ! empty( $post_meta['cityName'] ) ) {
+                    $post_meta = get_post_meta( $post_id, $field_name, true );
+    
+                    if ( ! empty( $post_meta[ 'cityName' ] ) ) {
                         wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                            'countryCode' => $post_meta['countryCode'],
-                            'stateCode'   => $post_meta['stateCode'],
-                            'cityName'    => $post_meta['cityName'],
+                            'countryCode' => $post_meta[ 'countryCode' ],
+                            'stateCode'   => $post_meta[ 'stateCode' ],
+                            'cityName'    => $post_meta[ 'cityName' ],
                         ) );
                     }
                 }
-
             }
 
             /*
@@ -231,44 +231,6 @@
 
 
             /*
-             * update_value()
-             *
-             * This filter is applied to the $value before it is saved in the db
-             *
-             * @type    filter
-             * @param   $value (mixed) the value found in the database
-             * @param   $post_id (mixed) the $post_id from which the value was loaded
-             * @param   $field (array) the field array holding all the field options
-             * @return  $value
-             */
-            // function update_value( $value, $post_id, $field ) {
-             //    return $value;
-            // }
-
-
-            /*
-             * format_value()
-             *
-             * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-             *
-             * @type    filter
-             * @param   $value (mixed) the value which was loaded from the database
-             * @param   $post_id (mixed) the $post_id from which the value was loaded
-             * @param   $field (array) the field array holding all the field options
-             * @return  $value (mixed) the modified value
-             */
-            // function format_value( $value, $post_id, $field ) {
-            //     // bail early if no value
-            //     if( empty( $value ) ) {
-            //         return $value;
-            //     }
-
-            //     // return
-            //     return $value;
-            // }
-
-
-            /*
              * validate_value()
              *
              * This filter is used to perform validation on the value prior to saving.
@@ -289,65 +251,8 @@
                     }
                 }
 
-                // return
                 return $valid;
-
             }
-
-
-            /*
-             * delete_value()
-             *
-             * This action is fired after a value has been deleted from the db.
-             * Please note that saving a blank value is treated as an update, not a delete
-             *
-             * @type    action
-             * @param   $post_id (mixed) the $post_id from which the value was deleted
-             * @param   $key (string) the $meta_key which the value was deleted
-             * @return  n/a
-             */
-            // function delete_value( $post_id, $key ) {
-            // }
-
-
-            /*
-             * load_field()
-             *
-             * This filter is applied to the $field after it is loaded from the database
-             *
-             * @type    filter
-             * @param   $field (array) the field array holding all the field options
-             * @return  $field
-             */
-            // function load_field( $field ) {
-            //     return $field;
-            // }
-
-            /*
-             * update_field()
-             *
-             * This filter is applied to the $field before it is saved to the database
-             *
-             * @type    filter
-             * @param   $field (array) the field array holding all the field options
-             * @return  $field
-             */
-            // function update_field( $field ) {
-            //     return $field;
-            // }
-
-
-            /*
-             * delete_field()
-             *
-             * This action is fired after a field is deleted from the database
-             *
-             * @type    action
-             * @param   $field (array) the field array holding all the field options
-             * @return  n/a
-             */
-            // function delete_field( $field ) {
-            // }
 
 
             /*
@@ -374,11 +279,9 @@
 
                 return $countries;
             }
-
         }
 
         // initialize
         new acf_field_city_selector( $this->settings );
 
     endif; // class_exists check
-

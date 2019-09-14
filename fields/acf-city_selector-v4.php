@@ -222,34 +222,41 @@
             *  @date	23/01/13
             */
             function input_admin_head() {
-
-                $url     = $this->settings['url'];
-                $version = $this->settings['version'];
+    
+                $url     = $this->settings[ 'url' ];
+                $version = $this->settings[ 'version' ];
 
                 // register & include JS
                 wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/field-validation.js", array( 'acf-input' ), $version );
                 wp_enqueue_script( 'acf-custom-validation' );
                 wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
                 wp_enqueue_script( 'acf-city-selector-js' );
-
-                if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
-                    $fields     = get_field_objects( get_the_ID() );
+    
+                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
+    
+                    if ( isset( $_GET[ 'id' ] ) ) {
+                        $post_id = $_GET[ 'id' ];
+                    } else {
+                        $post_id = get_the_ID();
+                    }
+    
+                    $fields     = get_field_objects( $post_id );
                     $field_name = 'acf_city_selector';
                     if ( is_array( $fields ) && count( $fields ) > 0 ) {
                         foreach( $fields as $field ) {
-                            if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
-                                $field_name = $field['name'];
+                            if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                                $field_name = $field[ 'name' ];
                                 break;
                             }
                         }
                     }
-                    $post_meta = get_post_meta( get_the_ID(), $field_name, 1 );
-
-                    if ( ! empty( $post_meta['cityName'] ) ) {
+                    $post_meta = get_post_meta( $post_id, $field_name, true );
+    
+                    if ( ! empty( $post_meta[ 'cityName' ] ) ) {
                         wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                            'countryCode' => $post_meta['countryCode'],
-                            'stateCode'   => $post_meta['stateCode'],
-                            'cityName'    => $post_meta['cityName'],
+                            'countryCode' => $post_meta[ 'countryCode' ],
+                            'stateCode'   => $post_meta[ 'stateCode' ],
+                            'cityName'    => $post_meta[ 'cityName' ],
                         ) );
                     }
                 }
@@ -291,48 +298,6 @@
 
                 return $value;
             }
-
-
-            /*
-            *  format_value_for_api()
-            *
-            *  This filter is applied to the $value after it is loaded from the db and before it is passed back to the API functions such as the_field
-            *
-            *  @type	filter
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	$value	- the value which was loaded from the database
-            *  @param	$post_id - the $post_id from which the value was loaded
-            *  @param	$field	- the field array holding all the field options
-            *
-            *  @return	$value	- the modified value
-            */
-
-            function format_value_for_api( $value, $post_id, $field ) {
-                // defaults?
-                /*
-                $field = array_merge($this->defaults, $field);
-                */
-
-                // global $wpdb;
-                // $country_code = $value['countryCode'];
-                // $state_code   = substr( $value['stateCode'], 3 );
-                // echo '<pre>'; var_dump($value['stateCode']); echo '</pre>'; exit;
-                // if ( strlen( $country_code ) == 2 ) {
-                // 	$table                = $wpdb->prefix . 'cities';
-                // 	$row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
-                // 	$country              = $row->country;
-                // 	$state_name           = $row->state_name;
-                // 	$value['stateCode']   = $state_code;
-                // 	$value['stateName']   = $state_name;
-                // 	$value['countryName'] = $country;
-                // }
-
-                return $value;
-            }
-
-
         }
 
 
@@ -342,5 +307,3 @@
 
         // class_exists check
     endif;
-
-?>
