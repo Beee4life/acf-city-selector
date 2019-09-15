@@ -11,7 +11,7 @@
         ACF_City_Selector::acfcs_show_admin_notices();
         
         $show_raw_import = 0;
-    ?>
+        ?>
 
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
@@ -20,7 +20,6 @@
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
 
-            <!-- left part -->
             <div class="admin_left">
 
                 <div class="acfcs__section">
@@ -39,8 +38,6 @@
                 <?php
                     $file_index = acfcs_check_if_files();
                     if ( $file_index ) {
-
-                        $has_files = false;
                         if ( 0 < count( $file_index ) ) {
                             ?>
                             <div class="acfcs__section">
@@ -79,7 +76,7 @@
                                                     </select>
                                                 </label>
                                             </td>
-                                            <td class="xhidden">
+                                            <td>
                                                 <label>
                                                     <select name="acfcs_max_lines" id="acfcs_max_lines">
                                                         <option value=""><?php esc_html_e( 'All', 'acf-city-selector' ); ?></option>
@@ -135,12 +132,11 @@
                         </form>
                     </div>
                 <?php } ?>
-                
-            </div><!-- end .admin_left -->
+            </div>
 
             <?php include( 'admin-right.php' ); ?>
 
-        </div><!-- end .wrap -->
+        </div>
         <?php
     }
 

@@ -16,7 +16,6 @@
         } else {
             return false;
         }
-        
     }
     
     /**
@@ -42,7 +41,6 @@
         }
         
         return [];
-        
     }
     
     /**
@@ -183,8 +181,6 @@
                         }
                     }
                 }
-
-                // all good
                 $validated_data[] = $line_array;
             }
 

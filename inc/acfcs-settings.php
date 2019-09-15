@@ -19,7 +19,6 @@
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
     
-            <!-- left part -->
             <div class="admin_left">
 
                 <form method="post" action="">
@@ -69,12 +68,11 @@
                     </p>
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Save settings', 'acf-city-selector' ); ?>" />
                 </form>
-
-            </div><!-- end .admin_left -->
+            </div>
 
             <?php include( 'admin-right.php' ); ?>
             
-        </div><!-- end .wrap -->
+        </div>
         <?php
     }
 

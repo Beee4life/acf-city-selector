@@ -120,7 +120,6 @@
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
     
-            <!-- left part -->
             <div class="admin_left">
 
                 <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
@@ -253,14 +252,12 @@
                             <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Delete selected', 'acf-city-selector' ); ?>" />
                         </div>
                     </form>
-                    
                 <?php } ?>
-
-            </div><!-- end .admin_left -->
+            </div>
 
             <?php include( 'admin-right.php' ); ?>
         
-        </div><!-- end .wrap -->
+        </div>
         <?php
     }
 
