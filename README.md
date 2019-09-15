@@ -140,7 +140,7 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 ### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
-`add_filter('remove_acfcs_donate_nag', '__return_true');`
+`add_filter('acfcs_remove_donate_nag', '__return_true');`
 
 <a name="website"></a>
 ### Website
