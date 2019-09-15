@@ -500,7 +500,6 @@
                     if ( is_wp_error( ACF_City_Selector::acfcs_errors() ) ) {
                         
                         // Loop error codes and display errors
-                        $error      = false;
                         $span_class = false;
                         $prefix     = false;
                         foreach ( $codes as $code ) {
@@ -514,7 +513,6 @@
                                 $span_class = 'notice--info ';
                                 $prefix     = false;
                             } else {
-                                $error      = true;
                                 $span_class = 'notice--error ';
                                 $prefix     = esc_html__( 'Error', 'action-logger' );
                             }
@@ -551,7 +549,6 @@
                     $version = 4;
                 }
                 
-                // include
                 include_once( 'fields/acf-city_selector-v' . $version . '.php' );
             }
             
@@ -571,32 +568,26 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
+                $file_index   = acfcs_check_if_files();
                 $gopro        = false;
+                $has_cities   = acfcs_has_cities();
                 $preview      = false;
                 $search       = false;
-                $show_gopro   = true;
-                $show_preview = true;
-                $show_search  = true;
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
+                $show_gopro   = false;
     
-                    $has_cities = acfcs_has_cities();
-                    $file_index = acfcs_check_if_files();
-                    if ( $file_index ) {
-                        if ( false != $show_preview ) {
-                            $preview = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
-                        }
-                    }
-                    if ( false != $show_gopro ) {
-                        $gopro = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
-                    }
-                    if ( true == $has_cities ) {
-                        if ( false != $show_search ) {
-                            $search = ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
-                        }
-                    }
+                if ( true == $has_cities ) {
+                    $search = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
+                }
+
+                if ( $file_index ) {
+                    $preview = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
+                }
+
+                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_gopro ) {
+                    $gopro = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
                 }
                 
-                return '<p class="acfcs-admin-menu"><a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>' . $search . $preview . ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
+                return '<p class="acfcs-admin-menu"><a href="' . admin_url() . 'options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>' . $search . $preview . ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
             }
     
             /**
