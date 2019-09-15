@@ -63,9 +63,14 @@
 }
 
 .acfcs__section:first-child {
-    border-top:  0;
-    margin-top:  0;
-    padding-top: 0;
+    border-top:     0;
+    margin-top:     0;
+    padding-top:    0;
+    padding-bottom: 0;
+}
+
+.acfcs__section--subscription {
+    padding-bottom: 0;
 }
 
 .acfcs__section--preview-form {
@@ -103,18 +108,19 @@
     width:           100%;
 }
 
+.acfcs table.acfcs__table--packages,
+.acfcs table.acfcs__table--preview-form,
+.acfcs table.acfcs__table--uploaded {
+    max-width: 60%;
+}
+
 .acfcs table.acfcs__table--uploaded {
     margin-bottom: 1em;
-    max-width:     60%;
 }
 
 .acfcs table.acfcs__table--search {
     margin-top:    1em;
     margin-bottom: 1em;
-}
-
-.acfcs table.acfcs__table--preview-form {
-    max-width: 60%;
 }
 
 .acfcs table.acfcs__table th {
