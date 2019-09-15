@@ -1,5 +1,4 @@
-# OS generated files #
-######################
+# local files
 .DS_Store
 ._*
 .Spotlight-V100
@@ -8,3 +7,6 @@
 # Development
 .idea/**
 *.sublime-*
+
+# Misc
+test-data
