@@ -18,6 +18,8 @@
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
+            
+            <?php $show_pro_subscription = true; ?>
     
             <div class="admin_left">
     
@@ -27,15 +29,16 @@
                     <p><?php esc_html_e( "We have more countries available. You can either buy a seperate country packages or get a Pro subscription and get every new update when we'll make a new country available.", 'acf-city-selector' ); ?></p>
                 </div>
     
-                <div class="acfcs__section acfcs__section--subscription">
-                    <h2><?php esc_html_e( 'Pro subscription', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( "Buy once and get all coming countries for free !!! One price for all packages.", 'acf-city-selector' ); ?></p>
-                    <p><?php esc_html_e( "Order now !!!", 'acf-city-selector' ); ?></p>
-                    <?php // @TODO: add link to acfcs site ?>
-                </div>
+                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_pro_subscription ) { ?>
+                    <div class="acfcs__section acfcs__section--subscription">
+                        <h2><?php esc_html_e( 'Pro subscription', 'acf-city-selector' ); ?></h2>
+                        <p><?php esc_html_e( "Buy once and get all coming countries for free !!! One price for all packages.", 'acf-city-selector' ); ?></p>
+                        <p><?php esc_html_e( "Order now !!!", 'acf-city-selector' ); ?></p>
+                        <?php // @TODO: add link to acfcs site ?>
+                    </div>
+                <?php } ?>
     
                 <div class="acfcs__section">
-                    
                     <?php
                         $packages = [
                             [
@@ -75,8 +78,8 @@
                         <thead>
                         <tr>
                             <th><?php esc_html_e( 'Country', 'acf-city-selector' ); ?></th>
-                            <th># <?php esc_html_e( 'states/provinces', 'acf-city-selector' ); ?></th>
-                            <th># <?php esc_html_e( 'cities', 'acf-city-selector' ); ?></th>
+                            <th># <?php esc_html_e( 'States/Provinces', 'acf-city-selector' ); ?></th>
+                            <th># <?php esc_html_e( 'Cities', 'acf-city-selector' ); ?></th>
                             <th><?php esc_html_e( 'Price', 'acf-city-selector' ); ?></th>
                             <th><?php esc_html_e( 'Order', 'acf-city-selector' ); ?></th>
                         </tr>
