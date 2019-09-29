@@ -85,20 +85,13 @@
     display: inline-block;
 }
 
-.acfcs__search-criteria--or {
-    margin: 0 0.25em;
+.acfcs__search-criteria--limit {
+    margin-right: 1em;
 }
 
-.acfcs__search-criteria--state {
-    margin-right: 0.5em;
-}
-
-.acfcs__search-criteria--search {
-    margin-right: 0.5em;
-}
-
+.acfcs__search-criteria--or,
 .acfcs__search-criteria--plus {
-    margin-right: 0.5em;
+    margin: 0 0.5em;
 }
 
 .acfcs table.acfcs__table {
