@@ -49,6 +49,7 @@
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
                 add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
+                
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
@@ -58,12 +59,14 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
-                
+                add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
+    
                 include( 'inc/acfcs-donate-box.php' );
                 include( 'inc/acfcs-functions.php' );
                 include( 'inc/acfcs-help-tabs.php' );
@@ -562,8 +565,25 @@
                 
                 return $links;
             }
+    
+    
+            public function acfcs_meta_links( $links, $file ) {
+        
+                if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
+                    $new_links = array(
+                        'documentation' => '<a href="">Documentation</a>',
+                    );
+                    if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
+                        $new_links[ 'gopro' ] = '<a href="' . admin_url() . '">Go Pro</a>';
+                    }
             
-            
+                    $links = array_merge( $links, $new_links );
+                }
+        
+                return $links;
+            }
+
+
             /*
              * Admin menu
              */
