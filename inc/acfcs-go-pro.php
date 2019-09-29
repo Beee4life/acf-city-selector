@@ -43,30 +43,30 @@
                         $packages = [
                             [
                                 'country' => __( 'Canada', 'acf-city-selector' ),
-                                'states'  => '',
+                                'states'  => 14,
                                 'cities'  => 3018,
-                                'price'   => '',
+                                'price'   => 5,
                                 'link'    => '#',
                             ],
                             [
                                 'country' => __( 'France', 'acf-city-selector' ),
-                                'states'  => '',
+                                'states'  => 96,
                                 'cities'  => 13529,
-                                'price'   => '',
+                                'price'   => 15,
                                 'link'    => '#',
                             ],
                             [
                                 'country' => __( 'Germany', 'acf-city-selector' ),
-                                'states'  => '',
+                                'states'  => 16,
                                 'cities'  => 9716,
-                                'price'   => '',
+                                'price'   => 10,
                                 'link'    => '#',
                             ],
                             [
                                 'country' => __( 'Switzerland', 'acf-city-selector' ),
-                                'states'  => '',
+                                'states'  => 26,
                                 'cities'  => 1528,
-                                'price'   => '',
+                                'price'   => 5,
                                 'link'    => '#',
                             ],
                         ];
@@ -88,9 +88,9 @@
                         <?php foreach( $packages as $package ) { ?>
                             <tr>
                                 <td><?php echo $package[ 'country' ]; ?></td>
-                                <td>#</td>
+                                <td><?php echo $package[ 'states' ]; ?></td>
                                 <td><?php echo $package[ 'cities' ]; ?></td>
-                                <td>$ xx,-</td>
+                                <td>&euro; <?php echo $package[ 'price' ]; ?>,00</td>
                                 <td><a href="<?php echo $package[ 'link' ]; ?>">link</a></td>
                             </tr>
                         <?php } ?>
