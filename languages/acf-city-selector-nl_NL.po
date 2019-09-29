@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2019-09-15 02:22+0200\n"
-"PO-Revision-Date: 2019-09-15 02:23+0200\n"
+"POT-Creation-Date: 2019-09-29 04:15+0200\n"
+"PO-Revision-Date: 2019-09-29 04:15+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:104
+#: ACF_City_Selector.php:107
 #, php-format
 msgid ""
 "\"%s\" is not activated. This plugin <strong>must</strong> be activated, "
@@ -26,13 +26,13 @@ msgstr ""
 "\"%s\" is niet actief. Deze plugin <strong>moet</strong> actief zijn, anders "
 "werkt \"%s\" niet. Activeer hem <a href=\"%s\">hier</a>."
 
-#: ACF_City_Selector.php:191 ACF_City_Selector.php:311
-#: ACF_City_Selector.php:366 ACF_City_Selector.php:401
-#: ACF_City_Selector.php:429 ACF_City_Selector.php:451
+#: ACF_City_Selector.php:194 ACF_City_Selector.php:314
+#: ACF_City_Selector.php:369 ACF_City_Selector.php:404
+#: ACF_City_Selector.php:432 ACF_City_Selector.php:454
 msgid "Something went wrong, please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: ACF_City_Selector.php:204
+#: ACF_City_Selector.php:207
 #, php-format
 msgid ""
 "File '%s' is successfully uploaded and now shows under 'Select files to "
@@ -41,87 +41,87 @@ msgstr ""
 "Het bestand “%s” is succesvol ge-upload en is nu zichtbaar onder ‘Select "
 "bestanden om te importeren’"
 
-#: ACF_City_Selector.php:211
+#: ACF_City_Selector.php:214
 msgid "Upload failed. Please try again."
 msgstr "Upload mislukt. Probeer het aub opnieuw."
 
-#: ACF_City_Selector.php:228
+#: ACF_City_Selector.php:231
 msgid "Something went wrong. Please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: ACF_City_Selector.php:235
+#: ACF_City_Selector.php:238
 msgid "You didn't select a file."
 msgstr "Je hebt geen bestand gekozen."
 
-#: ACF_City_Selector.php:249
+#: ACF_City_Selector.php:252
 msgid "Congratulations, there appear to be no errors in your CSV."
 msgstr "Gefeliciteerd, er lijken geen fouten in je CSV voor te komen."
 
-#: ACF_City_Selector.php:285
+#: ACF_City_Selector.php:288
 #, php-format
 msgid "Congratulations. You have successfully imported %d cities."
 msgstr "Gefeliciteerd, je hebt %d steden geïmporteerd."
 
-#: ACF_City_Selector.php:297
+#: ACF_City_Selector.php:300
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr "File “%s” is succesvol verwijderd."
 
-#: ACF_City_Selector.php:320
+#: ACF_City_Selector.php:323
 msgid "Congratulations, your CSV data seems valid."
 msgstr "Gefeliciteerd, je CSV data lijkt geen fouten te bevatten."
 
-#: ACF_City_Selector.php:350
+#: ACF_City_Selector.php:353
 #, php-format
 msgid "Congratulations, you imported 1 city."
 msgid_plural "Congratulations, you imported %d cities."
 msgstr[0] "Gefeliciteerd, je hebt 1 stad geïmporteerd."
 msgstr[1] "Gefeliciteerd, je hebt %d steden geïmporteerd."
 
-#: ACF_City_Selector.php:412
+#: ACF_City_Selector.php:415
 msgid "All cities are deleted."
 msgstr "Alle steden zijn verwijderd."
 
-#: ACF_City_Selector.php:439
+#: ACF_City_Selector.php:442
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: ACF_City_Selector.php:476
+#: ACF_City_Selector.php:479
 #, php-format
 msgid "You have deleted the city %s."
 msgid_plural "You have deleted the following cities: %s."
 msgstr[0] "Je hebt stad %s verwijderd."
 msgstr[1] "Je hebt de volgende steden verwijderd: %s."
 
-#: ACF_City_Selector.php:511
+#: ACF_City_Selector.php:514
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: ACF_City_Selector.php:517
+#: ACF_City_Selector.php:520
 msgid "Error"
 msgstr "Fout"
 
-#: ACF_City_Selector.php:529
+#: ACF_City_Selector.php:532
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: ACF_City_Selector.php:560 ACF_City_Selector.php:590
+#: ACF_City_Selector.php:563 ACF_City_Selector.php:610
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ACF_City_Selector.php:579 inc/acfcs-search.php:197
+#: ACF_City_Selector.php:599 inc/acfcs-search.php:197
 msgid "Search"
 msgstr "Zoeken"
 
-#: ACF_City_Selector.php:583
+#: ACF_City_Selector.php:603
 msgid "Preview"
 msgstr "Preview"
 
-#: ACF_City_Selector.php:587 inc/acfcs-go-pro.php:27
+#: ACF_City_Selector.php:607 inc/acfcs-go-pro.php:27
 msgid "Go Pro"
 msgstr "Go Pro"
 
-#: ACF_City_Selector.php:590
+#: ACF_City_Selector.php:610
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -362,7 +362,7 @@ msgstr "Land pakketten"
 
 #: inc/acfcs-go-pro.php:80 inc/acfcs-help-tabs.php:59
 #: inc/acfcs-help-tabs.php:105 inc/acfcs-preview.php:117
-#: inc/acfcs-search.php:225
+#: inc/acfcs-search.php:226
 msgid "Country"
 msgstr "Land"
 
@@ -413,7 +413,7 @@ msgid "Note"
 msgstr "Notitie"
 
 #: inc/acfcs-help-tabs.php:39 inc/acfcs-help-tabs.php:85
-#: inc/acfcs-preview.php:113 inc/acfcs-search.php:219
+#: inc/acfcs-preview.php:113 inc/acfcs-search.php:220
 msgid "City"
 msgstr "Stad"
 
@@ -436,7 +436,7 @@ msgid "exactly 2 characters"
 msgstr "precies 2 karakters"
 
 #: inc/acfcs-help-tabs.php:49 inc/acfcs-help-tabs.php:95
-#: inc/acfcs-preview.php:115 inc/acfcs-search.php:222
+#: inc/acfcs-preview.php:115 inc/acfcs-search.php:223
 msgid "State"
 msgstr "Staat/provincie"
 
@@ -554,7 +554,7 @@ msgstr ""
 "Of er zijn errors in je CSV of er is geen data aanwezig. Verifieer dit "
 "bestand op het <a href=\"%s\">dashboard</a>."
 
-#: inc/acfcs-search.php:125
+#: inc/acfcs-search.php:130
 msgid "Search for cities"
 msgstr "Zoek naar steden"
 
@@ -574,19 +574,19 @@ msgstr "Limiet"
 msgid "No results, please try again."
 msgstr "Geen resultaten, probeer het aub nog een keer."
 
-#: inc/acfcs-search.php:208
+#: inc/acfcs-search.php:209
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:213
-msgid "Select"
-msgstr "Selecteer"
-
-#: inc/acfcs-search.php:216
+#: inc/acfcs-search.php:214
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:252
+#: inc/acfcs-search.php:217
+msgid "Select"
+msgstr "Selecteer"
+
+#: inc/acfcs-search.php:253
 msgid "Delete selected"
 msgstr ""
 
@@ -676,10 +676,10 @@ msgstr ""
 #: inc/admin-right.php:5
 #, php-format
 msgid ""
-"<a href=\"%s\" rel=\"noopener\" target=\"_blank\">Click here</a> for our "
+"<a href=\"%s\" rel=\"noopener\" target=\"_blank\">Click here</a> for my "
 "website."
 msgstr ""
-"<a href=\"%s\" rel=\"noopener\" target=\"_blank\">Klik hier</a> voor onze "
+"<a href=\"%s\" rel=\"noopener\" target=\"_blank\">Klik hier</a> voor mijn "
 "website."
 
 #: inc/admin-right.php:9
