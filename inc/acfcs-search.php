@@ -145,7 +145,7 @@
                             </div>
     
                             <div class="acfcs__search-criteria acfcs__search-criteria--or">
-                                <small>OR</small>
+                                <small><?php esc_html_e( 'OR', 'acf-city-selector' ); ?></small>
                             </div>
                         <?php } ?>
     
