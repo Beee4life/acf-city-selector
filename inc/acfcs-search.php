@@ -18,6 +18,7 @@
         $searched_term           = false;
         $selected_limit          = false;
         
+        // generate search criteria
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
             group by country_code
@@ -37,13 +38,11 @@
             if ( count( $countries ) > 1 ) {
                 // get locale
                 // get locale code
-                
+    
                 $array_key_nl = false;
-                $counter = 1;
+                $counter      = 1;
                 foreach ( $countries as $key => $country ) {
-                    if ( $counter == 1 ) {
-                        $first_array_key = $key;
-                    }
+                    // @TODO: only when lang is set to nl
                     if ( 'NL' == $country[ 'code' ] ) {
                         $array_key_nl = $key;
                     }
@@ -63,7 +62,7 @@
                             group by state_code
                             order by state_name ASC
                         " );
-                    // @TODO: check if results contain France
+                    // @TODO: check if results contain France, if sort by LENGTH(column_name), column_name
     
                     if ( count( $results ) > 0 ) {
                         foreach ( $results as $data ) {
@@ -77,6 +76,7 @@
             }
         }
         
+        // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
             $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
@@ -96,7 +96,7 @@
                 $search[] = 'city_name LIKE "%' . $searched_term . '%"';
                 $where[] = implode( ' OR ', $search );
             }
-            if ( '0' != $selected_limit ) {
+            if ( false != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
             
@@ -115,8 +115,9 @@
             
             $result_count = count( $cities );
         }
+        
+        // output
         ?>
-
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
     
@@ -201,6 +202,7 @@
                         <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
                     </p>
                 <?php } elseif ( ! empty( $cities ) ) { ?>
+                    <?php // output results ?>
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">
