@@ -127,11 +127,6 @@
             <div class="admin_left">
 
                 <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
-                <div>
-                    <small>
-<!--                        Select only 1 criteria.-->
-                    </small>
-                </div>
     
                 <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
