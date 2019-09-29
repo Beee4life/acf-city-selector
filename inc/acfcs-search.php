@@ -38,7 +38,6 @@
                 // get locale
                 // get locale code
                 
-                
                 $array_key_nl = false;
                 $counter = 1;
                 foreach ( $countries as $key => $country ) {
@@ -64,6 +63,7 @@
                             group by state_code
                             order by state_name ASC
                         " );
+                    // @TODO: check if results contain France
     
                     if ( count( $results ) > 0 ) {
                         foreach ( $results as $data ) {
@@ -86,7 +86,7 @@
             $where                   = [];
             
             if ( false != $search_criteria_state ) {
-                $where[] .= "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
+                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
                 $where[] = "country_code = '" . $search_criteria_country . "'";
             }
@@ -100,12 +100,16 @@
                 $search_limit = "LIMIT " . $selected_limit;
             }
             
-            $where = implode( ' AND ', $where );
+            if ( ! empty( $where ) ) {
+                $where = "WHERE " . implode( ' AND ', $where );
+            } else {
+                $where = false;
+            }
             
             $cities = $wpdb->get_results("SELECT *
                 FROM " . $wpdb->prefix . "cities
-                WHERE " . $where . "
-                order by country ASC
+                " . $where . "
+                order by country ASC, state_name ASC
                 " . $search_limit . "
             " );
             
@@ -210,10 +214,10 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
+                                        <?php esc_html_e( 'Row ID', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
-                                        <?php esc_html_e( 'Row ID', 'acf-city-selector' ); ?>
+                                        <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
                                         <?php esc_html_e( 'City', 'acf-city-selector' ); ?>
@@ -229,12 +233,12 @@
                                 <?php foreach( $cities as $city ) { ?>
                                     <tr>
                                         <td>
+                                            <?php echo $city->id; ?>
+                                        </td>
+                                        <td>
                                             <label>
                                                 <input name="row_id[]" type="checkbox" value="<?php echo $city->id; ?> <?php echo $city->city_name; ?>">
                                             </label>
-                                        </td>
-                                        <td>
-                                            <?php echo $city->id; ?>
                                         </td>
                                         <td>
                                             <?php echo $city->city_name; ?>
