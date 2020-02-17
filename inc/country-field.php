@@ -78,6 +78,33 @@
     }
 
     /*
+     * Get cities by related State Code or Country Code (IF State code == "00" or States == 'N/A')
+     *
+     * @return JSON Object
+     */
+    function get_cities( $country_code = false, $state_code = false ) {
+
+        global $wpdb;
+
+        $items = array();
+
+        $sql = $wpdb->prepare( "
+            SELECT *
+            FROM " . $wpdb->prefix . "cities
+            WHERE country_code = '%s'
+            AND state_code = '".$state_code."'
+            order by city_name ASC", $country_code
+        );
+
+        $db = $wpdb->get_results( $sql );
+
+        foreach ( $db as $data ) {
+            $items[ $data->id ] = $data->city_name;
+        }
+        return $items;
+    }
+
+    /*
      * Get states by related Country Code
      *
      * @param bool $country_code
