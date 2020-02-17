@@ -105,12 +105,13 @@
 				}
 				$stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false;
 				?>
+				
 				<div class="dropdown-box cs-countries">
 					<?php if ( $field['show_labels'] == 1 ) { ?>
 						<span class="acf-input-header"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-					<label for="countryCode" class="screen-reader-text"></label>
-					<select name="<?php echo $field['name']; ?>[countryCode]" id="countryCode" class="countrySelect">
+					<label for="<?php echo $field['name']; ?>[countryCode]" class="screen-reader-text"></label>
+					<select name="<?php echo $field['name']; ?>[countryCode]" id="<?php echo str_replace("]", "", str_replace('[', "", $field['name'])); ?>countryCode" class="countrySelect">
 						<?php
 							foreach ( $countries as $key => $country ) {
 								if ( isset( $countrycode ) ) {
@@ -128,8 +129,16 @@
 					<?php if ( $field['show_labels'] == 1 ) { ?>
 						<span class="acf-input-header"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-					<label for="stateCode" class="screen-reader-text"></label>
-					<select name="<?php echo $field['name']; ?>[stateCode]" id="stateCode" class="countrySelect">
+					<label for="<?php echo $field['name']; ?>[stateCode]" class="screen-reader-text"></label>
+					<select name="<?php echo $field['name']; ?>[stateCode]" id="<?php echo str_replace("]", "", str_replace('[', "", $field['name'])); ?>stateCode" class="countrySelect">
+						<?php $states = get_states( $countrycode ); ?>
+						<?php if ($states): ?>
+							<?php foreach ($states as $state_key => $state_value): ?>
+								<option value="<?php echo "$countrycode-$state_key"; ?>" <?php echo $state_key == $field['value']['stateCode'] ? 'selected' : ''; ?>>
+									<?php echo "$state_value"; ?>
+								</option>
+							<?php endforeach ?>
+						<?php endif ?>
 					</select>
 				</div>
 
@@ -137,8 +146,16 @@
 					<?php if ( $field['show_labels'] == 1 ) { ?>
 						<span class="acf-input-header"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></span>
 					<?php } ?>
-					<label for="cityName" class="screen-reader-text"></label>
-					<select name="<?php echo $field['name']; ?>[cityName]" id="cityName" class="countrySelect">
+					<?php $cities = get_cities( $countrycode, $field['value']['stateCode'] ); ?>
+					<label for="<?php echo $field['name']; ?>[cityName]" class="screen-reader-text"></label>
+					<select name="<?php echo $field['name']; ?>[cityName]" id="<?php echo str_replace("]", "", str_replace('[', "", $field['name'])); ?>cityName" class="countrySelect">
+						<?php if ($cities): ?>
+							<?php foreach ($cities as $city_key => $city_value): ?>
+								<option value="<?php echo "$city_value"; ?>" <?php echo $city_value == $field['value']['cityName'] ? 'selected': ''; ?>>
+									<?php echo "$city_value"; ?>
+								</option>
+							<?php endforeach ?>
+						<?php endif ?>
 					</select>
 				</div>
 				<?php
