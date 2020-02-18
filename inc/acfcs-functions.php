@@ -26,7 +26,6 @@
     function acfcs_check_if_files() {
 
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
-        error_log($target_dir);
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
 

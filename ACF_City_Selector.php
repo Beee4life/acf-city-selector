@@ -89,7 +89,6 @@
                 $acf_key        = array_search( 'advanced-custom-fields-pro/acf.php', $active_plugins );
                 if ( false !== $acf_key && false !== $acfcs_key ) {
                     if ( $acfcs_key < $acf_key ) {
-                        // error_log('HIT');
                         $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
                         update_option( 'active_plugins', $active_plugins, true );
                     }
