@@ -11,17 +11,17 @@
     License URI:    https://www.gnu.org/licenses/gpl.html
     Contributors:   Jarah de Jong
     */
-    
+
     // exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
-    
+
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) :
-        
+
         class ACF_City_Selector {
-            
+
             /*
              * __construct
              *
@@ -31,25 +31,25 @@
              * @return  n/a
              */
             public function __construct() {
-                
+
                 $this->settings = array(
                     'version' => '0.9',
                     'url'     => plugin_dir_url( __FILE__ ),
                     'path'    => plugin_dir_path( __FILE__ )
                 );
-                
+
                 // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-                
+
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
                 register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
-                
+
                 // actions
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
                 add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
-                
+
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
@@ -59,14 +59,14 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
-                
+
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
-                
+
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
                 add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
-    
+
                 include( 'inc/acfcs-donate-box.php' );
                 include( 'inc/acfcs-functions.php' );
                 include( 'inc/acfcs-help-tabs.php' );
@@ -74,12 +74,12 @@
 
                 // add_action( 'admin_init',                   array( $this, 'test_this' ) );
             }
-    
-    
+
+
             public function test_this() {
             }
-    
-    
+
+
             /**
              * Change plugin order so ACFCS loads after ACF
              */
@@ -95,8 +95,8 @@
                     }
                 }
             }
-    
-    
+
+
             /**
              * Check if ACF is active and if not add an admin notice
              */
@@ -112,8 +112,8 @@
                     });
                 }
             }
-    
-    
+
+
             /*
              * Do stuff upon plugin activation
              */
@@ -122,8 +122,8 @@
                     $this->acfcs_create_fill_db();
                 }
             }
-            
-            
+
+
             /*
              * Do stuff upon plugin activation
              */
@@ -131,8 +131,8 @@
                 // nothing yet
                 // @TODO: delete any settings
             }
-            
-            
+
+
             /*
              * Prepare database upon plugin activation
              */
@@ -147,8 +147,8 @@
                 $sql = ob_get_clean();
                 dbDelta( $sql );
             }
-            
-            
+
+
             /*
              * Check if table exists
              */
@@ -170,10 +170,10 @@
                 <?php
                 $sql = ob_get_clean();
                 dbDelta( $sql );
-                
+
             }
-            
-            
+
+
             /*
              * Check if (upload) folder exists
              */
@@ -183,8 +183,8 @@
                     mkdir( $target_folder, 0755 );
                 }
             }
-            
-            
+
+
             /*
              * Upload CSV file
              */
@@ -192,70 +192,70 @@
                 if ( isset( $_POST[ "acfcs_upload_csv_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_upload_csv_nonce" ], 'acfcs-upload-csv-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
-                        
+
                     } else {
-                        
+
                         $this->acfcs_check_uploads_folder();
                         $target_dir  = wp_upload_dir()[ 'basedir' ] . '/acfcs/';
                         $target_file = $target_dir . basename( $_FILES[ 'csv_upload' ][ 'name' ] );
-                        
+
                         if ( move_uploaded_file( $_FILES[ 'csv_upload' ][ 'tmp_name' ], $target_file ) ) {
-                            
+
                             // file uploaded succeeded
                             $this->acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
-                            
+
                             return;
-                            
+
                         } else {
-                            
+
                             // file upload failed
                             $this->acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
-                            
+
                             return;
                         }
                     }
                 }
             }
-            
-            
+
+
             /**
              * Read uploaded file for verification or import
              * Delete file is also included in this function
              */
             public function acfcs_do_something_with_file() {
-                
+
                 if ( isset( $_POST[ "acfcs_select_file_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_select_file_nonce" ], 'acfcs-select-file-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong. Please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
-                        
+
                     } else {
-                        
+
                         if ( ! isset( $_POST[ 'acfcs_file_name' ] ) ) {
                             $this->acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
-                            
+
                             return;
                         }
-                        
+
                         $file_name = $_POST[ 'acfcs_file_name' ];
                         $delimiter = ! empty( $_POST[ 'delimiter' ] ) ? $_POST[ 'delimiter' ] : ',';
                         $import    = isset( $_POST[ 'import' ] ) ? true : false;
                         $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                         $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
-                        
+
                         if ( true === $verify ) {
                             $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
                             if ( isset( $csv_array[ 'data' ] ) ) {
                                 $this->acfcs_errors()->add( 'success_no_errors_in_csv', esc_html__( 'Congratulations, there appear to be no errors in your CSV.', 'acf-city-selector' ) );
-                                
+
                                 do_action( 'acfcs_after_success_verify' );
-                                
+
                                 return;
                             }
-                            
+
                         } elseif ( true === $import ) {
 
                             // import data
@@ -265,13 +265,13 @@
                                 $line_number = 0;
                                 foreach ( $csv_array[ 'data' ] as $line ) {
                                     $line_number++;
-                                    
+
                                     $city         = $line[ 0 ];
                                     $state_abbr   = $line[ 1 ];
                                     $state        = $line[ 2 ];
                                     $country_abbr = $line[ 3 ];
                                     $country      = $line[ 4 ];
-                                    
+
                                     $city_row = array(
                                         'city_name'    => $city,
                                         'state_code'   => $state_abbr,
@@ -279,21 +279,21 @@
                                         'country_code' => $country_abbr,
                                         'country'      => $country,
                                     );
-                                    
+
                                     global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
-                                    
+
                                 }
-                                
+
                                 $this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities.', 'acf-city-selector' ), $line_number ) );
-                                
+
                                 do_action( 'acfcs_after_success_import' );
-                                
+
                                 return;
                             }
-                            
+
                         } elseif ( true === $remove ) {
-                            
+
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
                                 unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
@@ -303,8 +303,8 @@
                     }
                 }
             }
-            
-            
+
+
             /*
              * Import raw csv data
              */
@@ -312,32 +312,32 @@
                 if ( isset( $_POST[ "acfcs_import_raw_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_import_raw_nonce" ], 'acfcs-import-raw-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
                     } else {
-                        
+
                         $verified_data = acfcs_verify_csv_data( $_POST[ 'acfcs_raw_csv_import' ] );
-                        
+
                         if ( isset( $_POST[ 'verify' ] ) ) {
                             if ( false != $verified_data ) {
                                 $this->acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
                             }
-                            
+
                         } elseif ( isset( $_POST[ 'import' ] ) ) {
-                            
+
                             if ( false != $verified_data ) {
                                 // import data
                                 global $wpdb;
                                 $line_number = 0;
                                 foreach ( $verified_data as $line ) {
                                     $line_number++;
-                                    
+
                                     $city         = $line[ 0 ];
                                     $state_abbr   = $line[ 1 ];
                                     $state        = $line[ 2 ];
                                     $country_abbr = $line[ 3 ];
                                     $country      = $line[ 4 ];
-                                    
+
                                     $city_row = array(
                                         'city_name'    => $city,
                                         'state_code'   => $state_abbr,
@@ -345,21 +345,21 @@
                                         'country_code' => $country_abbr,
                                         'country'      => $country,
                                     );
-                                    
+
                                     global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
-                                    
+
                                 }
                                 $this->acfcs_errors()->add( 'success_cities_imported', sprintf( _n( 'Congratulations, you imported 1 city.', 'Congratulations, you imported %d cities.', $line_number, 'acf-city-selector' ), $line_number ) );
-                                
+
                                 do_action( 'acfcs_after_success_import_raw' );
                             }
                         }
                     }
                 }
             }
-            
-            
+
+
             /*
              * Import preset countries
              */
@@ -367,10 +367,10 @@
                 if ( isset( $_POST[ "acfcs_import_actions_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_import_actions_nonce" ], 'acfcs-import-actions-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
                     } else {
-                        
+
                         if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
                             require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
                             ob_start();
@@ -393,8 +393,8 @@
                     }
                 }
             }
-            
-            
+
+
             /*
              * Truncate cities table
              */
@@ -402,27 +402,27 @@
                 if ( isset( $_POST[ "acfcs_truncate_table_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_truncate_table_nonce" ], 'acfcs-truncate-table-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
                     } else {
-                        
+
                         if ( isset( $_POST[ 'delete_cities' ] ) ) {
                             if ( isset( $_POST[ 'delete_cities' ] ) && 1 == $_POST[ "delete_cities" ] ) {
-                                
+
                                 global $wpdb;
                                 $prefix = $wpdb->get_blog_prefix();
                                 $wpdb->query( 'TRUNCATE TABLE ' . $prefix . 'cities' );
                                 $this->acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
-                                
+
                                 do_action( 'acfcs_after_success_nuke' );
-                                
+
                             }
                         }
                     }
                 }
             }
-            
-            
+
+
             /*
              * Preserve settings
              */
@@ -430,10 +430,10 @@
                 if ( isset( $_POST[ "acfcs_preserve_settings_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_preserve_settings_nonce" ], 'acfcs-preserve-settings-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                        
+
                         return;
                     } else {
-                        
+
                         if ( isset( $_POST[ 'preserve_settings' ] ) ) {
                             update_option( 'acfcs_preserve_settings', 1, true );
                         } else {
@@ -443,8 +443,8 @@
                     }
                 }
             }
-    
-    
+
+
             /*
              * Delete rows manually
              */
@@ -452,10 +452,10 @@
                 if ( isset( $_POST[ "acfcs_delete_row_nonce" ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ "acfcs_delete_row_nonce" ], 'acfcs-delete-row-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                
+
                         return;
                     } else {
-                        
+
                         global $wpdb;
                         if ( is_array( $_POST[ 'row_id' ] ) ) {
                             // echo '<pre>'; var_dump($_POST[ 'row_id' ]); echo '</pre>'; exit;
@@ -464,7 +464,7 @@
                                 $ids[]    = $split[ 0 ];
                                 $cities[] = $split[ 1 ];
                             }
-                            
+
                             $cities = implode( ', ', $cities );
                             $row_ids = implode( ',', $ids );
                             $amount = $wpdb->query(
@@ -482,8 +482,8 @@
                     }
                 }
             }
-    
-    
+
+
             /**
              * Error function
              *
@@ -491,17 +491,17 @@
              */
             public static function acfcs_errors() {
                 static $wp_error; // Will hold global variable safely
-                
+
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
-            
+
             /**
              * Displays error messages from form submissions
              */
             public static function acfcs_show_admin_notices() {
                 if ( $codes = ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
                     if ( is_wp_error( ACF_City_Selector::acfcs_errors() ) ) {
-                        
+
                         // Loop error codes and display errors
                         $span_class = false;
                         $prefix     = false;
@@ -535,8 +535,8 @@
                     }
                 }
             }
-            
-            
+
+
             /*
              * include_field_types
              *
@@ -547,28 +547,28 @@
              * @return  n/a
              */
             public function acfcs_include_field_types( $version = false ) {
-                
+
                 if ( ! $version ) {
                     $version = 4;
                 }
-                
+
                 include_once( 'fields/acf-city_selector-v' . $version . '.php' );
             }
-            
-            
+
+
             /*
              * Add settings link on plugin page
              */
             public function acfcs_settings_link( $links ) {
                 $settings_link = '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
                 array_unshift( $links, $settings_link );
-                
+
                 return $links;
             }
-    
-    
+
+
             public function acfcs_meta_links( $links, $file ) {
-        
+
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
                     $new_links = array(
                         'documentation' => '<a href="">Documentation</a>',
@@ -576,10 +576,10 @@
                     if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
                         $new_links[ 'gopro' ] = '<a href="' . admin_url() . '">Go Pro</a>';
                     }
-            
+
                     $links = array_merge( $links, $new_links );
                 }
-        
+
                 return $links;
             }
 
@@ -594,22 +594,22 @@
                 $preview      = false;
                 $search       = false;
                 $show_gopro   = false;
-    
+
                 if ( true == $has_cities ) {
                     $search = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
                 }
 
-                if ( $file_index ) {
+                if ( ! empty ( $file_index ) ) {
                     $preview = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
                 if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_gopro ) {
                     $gopro = ' | <a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
                 }
-                
+
                 return '<p class="acfcs-admin-menu"><a href="' . admin_url() . 'options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>' . $search . $preview . ' | <a href="' . site_url() . '/wp-admin/options-general.php?page=acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' . $gopro . '</p>';
             }
-    
+
             /**
              * Move array element to specific position
              *
@@ -621,12 +621,12 @@
                 $out = array_splice( $array, $from_index, 1 );
                 array_splice( $array, $to_index, 0, $out );
             }
-            
+
             /*
              * Adds admin pages
              */
             public function acfcs_add_admin_pages() {
-    
+
                 include( 'inc/acfcs-dashboard.php' );
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
                 include( 'inc/acfcs-preview.php' );
@@ -638,8 +638,8 @@
                 include( 'inc/acfcs-go-pro.php' );
                 add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-go-pro', 'acfcs_go_pro' );
             }
-            
-            
+
+
             /*
              * Adds CSS on the admin side
              */
@@ -647,10 +647,10 @@
                 wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), '', $this->settings[ 'version' ] );
             }
         }
-        
+
         // initialize
         new ACF_City_Selector();
-        
-        
+
+
         // class_exists check
     endif;

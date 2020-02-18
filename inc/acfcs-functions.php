@@ -10,39 +10,43 @@
             FROM " . $wpdb->prefix . "cities
             LIMIT 5
         " );
-        
+
         if ( count( $results ) > 0 ) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     /**
      * Checks if files are uploaded
      *
      * @return array
      */
     function acfcs_check_if_files() {
-        
+
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
-        $file_index = scandir( $target_dir );
-        
-        if ( is_array( $file_index ) ) {
-            $actual_files = [];
-            foreach ( $file_index as $file ) {
-                if ( '.DS_Store' != $file && '.' != $file && '..' != $file ) {
-                    $actual_files[] = $file;
+        error_log($target_dir);
+        if ( is_dir( $target_dir ) ) {
+            $file_index = scandir( $target_dir );
+
+            if ( is_array( $file_index ) ) {
+                $actual_files = [];
+                foreach ( $file_index as $file ) {
+                    if ( '.DS_Store' != $file && '.' != $file && '..' != $file ) {
+                        $actual_files[] = $file;
+                    }
+                }
+                if ( ! empty( $actual_files ) ) {
+                    return $actual_files;
                 }
             }
-            if ( ! empty( $actual_files ) ) {
-                return $actual_files;
-            }
         }
-        
+
+
         return [];
     }
-    
+
     /**
      * Convert data from an uploaded CSV file to an array
      *
@@ -54,7 +58,7 @@
      * @return array|bool
      */
     function acfcs_csv_to_array( $file_name, $delimiter = ",", $verify = false ) {
-    
+
         $csv_array   = [];
         $empty_array = false;
         $new_array   = [];
@@ -65,14 +69,14 @@
             while ( ( $csv_line = fgetcsv( $handle, 1000, "{$delimiter}" ) ) !== false ) {
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
-                
+
                 // if column count doesn't match benchmark
                 if ( count( $csv_line ) != $column_benchmark ) {
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html( __( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' ) );
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( __( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
-                        
+
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
                         $error_message = esc_html( __( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' ) );
@@ -84,9 +88,9 @@
                     }
                     // delete file
                     unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
-                    
+
                 }
-                
+
                 if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
                     $empty_array = true;
                     $new_array   = [];
@@ -94,10 +98,10 @@
                     // create a new array for each row
                     $new_line = [];
                     foreach ( $csv_line as $item ) {
-                        
+
                         if ( strlen( $item ) > $value_length ) {
                             ACF_City_Selector::acfcs_errors()->add( 'error_too_long_value', esc_html( sprintf( __( "The value '%s' is too long.", "acf-city-selector" ), $item ) ) );
-                            
+
                             return false;
                         }
                         $new_line[] = $item;
@@ -108,7 +112,7 @@
                 }
             }
             fclose( $handle );
-            
+
             /**
              * Don't add data if there are any errors. This to prevent rows which had no error from outputting
              * on the preview page.
@@ -117,11 +121,11 @@
                 $csv_array[ 'data' ] = array_values( $new_array );
             }
         }
-        
+
         return $csv_array;
     }
-    
-    
+
+
     /**
      * Verify raw csv import
      *
@@ -144,11 +148,11 @@
 
             foreach ( $lines as $line ) {
                 $line_number++;
-                
+
                 if ( ! is_array( $csv_data ) ) {
                     $line_array = explode( ",", $line );
                 }
-                
+
                 if ( count( $line_array ) != $column_benchmark ) {
                     // length of a line is not correct
                     if ( count( $line_array ) < $column_benchmark ) {
@@ -200,7 +204,7 @@
 
         $csv_array = array();
         if ( false != $file_name ) {
-    
+
             $file_location = wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name;
             if ( ( $handle = fopen( $file_location, "r" ) ) !== false ) {
                 $line_number = 0;
@@ -211,7 +215,7 @@
                 }
                 fclose( $handle );
             }
-    
+
             return $csv_array;
         }
 

@@ -1,10 +1,10 @@
 <?php
-    
+
     /**
      * Content for the settings page
      */
     function acfcs_preview_page() {
-        
+
         if ( ! current_user_can( 'manage_options' ) ) {
             wp_die( esc_html__( 'Sorry, you do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
@@ -12,9 +12,9 @@
 
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br/></div>
-    
+
             <h1>ACF City Selector</h1>
-            
+
             <?php
                 ACF_City_Selector::acfcs_show_admin_notices();
 
@@ -25,15 +25,15 @@
                 $file_name  = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
                 $max_lines  = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : false;
             ?>
-    
+
             <div class="admin_left">
-                <?php if ( $file_index ) { ?>
+                <?php if ( ! empty( $file_index ) ) { ?>
                     <h2><?php esc_html_e( 'Preview data', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
                     <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
-    
+
                     <div class="acfcs__section acfcs__section--preview-form">
-        
+
                         <form name="select-preview-file" id="settings-form" action="" method="post">
                             <table class="acfcs__table acfcs__table--preview-form">
                                 <thead>
@@ -60,7 +60,7 @@
                                             </select>
                                         </label>
                                     </td>
-    
+
                                     <td>
                                         <?php $delimiters = [ ",", ";" ]; ?>
                                         <label>
@@ -72,7 +72,7 @@
                                             </select>
                                         </label>
                                     </td>
-    
+
                                     <td class="xhidden">
                                         <?php $amounts = [ 5, 10, 25, 50, 100, 250, 500, 1000 ]; ?>
                                         <label>
@@ -85,7 +85,7 @@
                                             </select>
                                         </label>
                                     </td>
-    
+
                                     <td class="submit">
                                         <input type="submit" class="button button-primary" value="<?php esc_html_e( 'View this file', 'acf-city-selector' ); ?>"/>
                                     </td>
@@ -94,16 +94,16 @@
                             </table>
                         </form>
                     </div>
-    
+
                 <?php } else { ?>
                     <p><?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?></p>
                 <?php } ?>
-    
+
                 <?php
                     // Get imported data
                     if ( $file_name ) {
                         $csv_info = acfcs_csv_to_array( $file_name, $delimiter, true );
-                        
+
                         echo '<div class="acfcs__section acfcs__section--results">';
                         if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
                             echo '<h2>' . __( 'CSV contents', 'acf-city-selector' ) . '</h2>';
