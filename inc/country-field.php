@@ -156,15 +156,15 @@
                 order by city_name ASC
             " );
             }
-            $items                 = array();
-            $items[0]['id']        = "";
-            $items[0]['city_name'] = esc_html__( 'Select a city', 'acf-city-selector' );
-            $i                     = 1;
+            $items                     = array();
+            $items[ 0 ][ 'id' ]        = "";
+            $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+            $i                         = 1;
 
             foreach ( $db as $data ) {
-                $items[ $i ]['id']        = $data->state_code;
-                $items[ $i ]['city_name'] = $data->city_name;
-                $i ++;
+                $items[ $i ][ 'id' ]        = $data->state_code;
+                $items[ $i ][ 'city_name' ] = $data->city_name;
+                $i++;
             }
             echo json_encode( $items );
             die();
