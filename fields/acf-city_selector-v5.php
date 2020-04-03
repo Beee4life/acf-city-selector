@@ -91,7 +91,7 @@
 			 * @return  n/a
 			 */
 			function render_field( $field ) {
-
+				$countrycode = null;
 				if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
 					$countrycode = $field[ 'value' ][ 'countryCode' ];
 				}
