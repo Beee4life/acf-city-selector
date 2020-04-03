@@ -154,7 +154,6 @@ http://acfcs.berryplasman.com (not for support)
 This plugin is not 100% finished yet. It most likely won't break anything but use caution, just in case.
 
 This plugin doesn't work yet in the following field types, when adding more than 1 instance:
-* repeater
 * group
 * flexible content 
 
@@ -180,6 +179,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.9
+* Fix repeater
 
 0.8
 * Fix incorrect version
