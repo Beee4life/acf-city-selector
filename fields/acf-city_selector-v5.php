@@ -25,7 +25,7 @@
                 $this->label    = 'City Selector';
                 $this->category = 'Choice';
                 $this->defaults = array(
-                    'show_labels'   => 1
+                    'show_labels' => 1,
                 );
 
                 /*
@@ -73,7 +73,7 @@
                     'type'         => 'radio',
                     'name'         => 'show_labels',
                     'choices'      => $select_options,
-                    'value'        => $field['show_labels'],
+                    'value'        => $field[ 'show_labels' ],
                     'layout'       => 'horizontal',
                     'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
@@ -97,9 +97,9 @@
                 }
                 $countries = populate_country_select( $field, '' );
                 if ( isset( $countrycode ) && 0 != $countrycode ) {
-                    $stateCode = $field['value']['stateCode'];
+                    $stateCode = $field[ 'value' ][ 'stateCode' ];
                     if ( '-' != $stateCode ) {
-                        $cityName = $field['value']['cityName'];
+                        $cityName = $field[ 'value' ][ 'cityName' ];
                     }
                     $states = get_states( $countrycode );
                 }
@@ -158,10 +158,11 @@
 
             function input_admin_head() {
 
-                $url     = $this->settings[ 'url' ];
-                $version = $this->settings[ 'version' ];
+                $field_name     = 'acf_city_selector'; // default name
+                $plugin_url     = $this->settings[ 'url' ];
+                $plugin_version = $this->settings[ 'version' ];
 
-                wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", array( 'acf-input' ), $version );
+                wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
 
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) ) {
@@ -172,28 +173,26 @@
                         $post_id = get_the_ID();
                     }
 
-                    if ( false !== $post_id ) {
-
-                    }
-                    $field_name = 'acf_city_selector'; // default name
-                    $fields     = get_field_objects( $post_id );
-                    if ( is_array( $fields ) && count( $fields ) > 0 ) {
-                        foreach( $fields as $field ) {
-                            // check if name is overridden
-                            if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                                $field_name = $field[ 'name' ];
-                                break;
+                    if ( isset( $post_id ) && false !== $post_id ) {
+                        $fields     = get_field_objects( $post_id );
+                        if ( is_array( $fields ) && count( $fields ) > 0 ) {
+                            foreach( $fields as $field ) {
+                                // check if field_name is overridden
+                                if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                                    $field_name = $field[ 'name' ];
+                                    break;
+                                }
                             }
                         }
-                    }
-                    $post_meta = get_post_meta( $post_id, $field_name, true );
+                        $post_meta = get_post_meta( $post_id, $field_name, true );
 
-                    if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                        wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                            'countryCode' => $post_meta[ 'countryCode' ],
-                            'stateCode'   => $post_meta[ 'stateCode' ],
-                            'cityName'    => $post_meta[ 'cityName' ],
-                        ) );
+                        if ( ! empty( $post_meta[ 'cityName' ] ) ) {
+                            wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+                                'countryCode' => $post_meta[ 'countryCode' ],
+                                'stateCode'   => $post_meta[ 'stateCode' ],
+                                'cityName'    => $post_meta[ 'cityName' ],
+                            ) );
+                        }
                     }
                 }
             }
@@ -213,13 +212,13 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                $country_code = $value['countryCode'];
+                $country_code = $value[ 'countryCode' ];
                 if ( '0' != $country_code ) {
-                    $state_code = substr( $value['stateCode'], 3 );
+                    $state_code = substr( $value[ 'stateCode' ], 3 );
                 } else {
                     $value = false;
                 }
-                if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
+                if ( strlen( $country_code ) == 2 && ( isset( $value[ 'stateCode' ] ) && '-' != $value[ 'stateCode' ] ) && ( isset( $value[ 'cityName' ] ) && 'Select a city' != $value[ 'cityName' ] ) ) {
                     global $wpdb;
                     $table                = $wpdb->prefix . 'cities';
                     $row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
@@ -249,8 +248,8 @@
              */
             function validate_value( $valid, $value, $field, $input ) {
 
-                if ( 1 == $field['required'] ) {
-                    if ( ! isset( $value['cityName'] ) || $value['cityName'] == 'Select a city' ) {
+                if ( 1 == $field[ 'required' ] ) {
+                    if ( ! isset( $value[ 'cityName' ] ) || $value[ 'cityName' ] == 'Select a city' ) {
                         $valid = __( "You didn't select a city", "acf-city-selector" );
                     }
                 }
