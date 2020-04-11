@@ -72,11 +72,6 @@
                 include( 'inc/acfcs-help-tabs.php' );
                 include( 'inc/country-field.php' );
 
-                // add_action( 'admin_init',                   array( $this, 'test_this' ) );
-            }
-
-
-            public function test_this() {
             }
 
 
@@ -568,15 +563,14 @@
 
             public function acfcs_meta_links( $links, $file ) {
 
+                $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
-                    $new_links = array(
-                        'documentation' => '<a href="">Documentation</a>',
-                    );
+                    $new_links = [];
                     if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                        $new_links[ 'gopro' ] = '<a href="' . admin_url() . '">Go Pro</a>';
+                        $new_links[ 'gopro' ] = '<a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro' . '">Go Pro</a>';
                     }
-
-                    $links = array_merge( $links, $new_links );
+                    $new_links[] = $visit_plugin_link;
+                    $links       = array_merge( $links, $new_links );
                 }
 
                 return $links;
@@ -588,7 +582,7 @@
              */
             public static function acfcs_admin_menu() {
                 $file_index   = acfcs_check_if_files();
-                $gopro        = false;
+                $gopro        = true;
                 $has_cities   = acfcs_has_cities();
                 $preview      = false;
                 $search       = false;
@@ -643,7 +637,7 @@
              * Adds CSS on the admin side
              */
             public function acfcs_add_css() {
-                wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), '', $this->settings[ 'version' ] );
+                wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), [], $this->settings[ 'version' ] );
             }
         }
 
