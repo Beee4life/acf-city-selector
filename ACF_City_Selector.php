@@ -33,9 +33,10 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version' => '0.9',
-                    'url'     => plugin_dir_url( __FILE__ ),
-                    'path'    => plugin_dir_path( __FILE__ )
+                    'version'       => '0.9',
+                    'url'           => plugin_dir_url( __FILE__ ),
+                    'path'          => plugin_dir_path( __FILE__ ),
+                    'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                 );
 
                 // set text domain
@@ -172,7 +173,7 @@
              * Check if (upload) folder exists
              */
             public function acfcs_check_uploads_folder() {
-                $target_folder = wp_upload_dir()[ 'basedir' ] . '/acfcs/';
+                $target_folder = $this->settings[ 'upload_folder' ];
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
                 }
@@ -183,8 +184,8 @@
              * Upload CSV file
              */
             public function acfcs_upload_csv_file() {
-                if ( isset( $_POST[ "acfcs_upload_csv_nonce" ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ "acfcs_upload_csv_nonce" ], 'acfcs-upload-csv-nonce' ) ) {
+                if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_upload_csv_nonce' ], 'acfcs-upload-csv-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 
                         return;
@@ -192,8 +193,7 @@
                     } else {
 
                         $this->acfcs_check_uploads_folder();
-                        $target_dir  = wp_upload_dir()[ 'basedir' ] . '/acfcs/';
-                        $target_file = $target_dir . basename( $_FILES[ 'csv_upload' ][ 'name' ] );
+                        $target_file = $this->settings[ 'upload_folder' ] . basename( $_FILES[ 'csv_upload' ][ 'name' ] );
 
                         if ( move_uploaded_file( $_FILES[ 'csv_upload' ][ 'tmp_name' ], $target_file ) ) {
 
@@ -220,8 +220,8 @@
              */
             public function acfcs_do_something_with_file() {
 
-                if ( isset( $_POST[ "acfcs_select_file_nonce" ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ "acfcs_select_file_nonce" ], 'acfcs-select-file-nonce' ) ) {
+                if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_select_file_nonce' ], 'acfcs-select-file-nonce' ) ) {
                         $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong. Please try again.', 'acf-city-selector' ) );
 
                         return;
@@ -254,7 +254,6 @@
 
                             // import data
                             $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
-                            // echo '<pre>'; var_dump($csv_array); echo '</pre>'; exit;
                             if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
                                 $line_number = 0;
                                 foreach ( $csv_array[ 'data' ] as $line ) {
@@ -290,7 +289,7 @@
 
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
-                                unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                                unlink( $this->settings[ 'upload_folder' ] . $file_name );
                                 $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
                             }
                         }
