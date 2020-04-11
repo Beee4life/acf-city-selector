@@ -167,7 +167,7 @@
             *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
             *  Use this action to add CSS + JavaScript to assist your create_field() action.
             *
-            *  $info	http://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
+            *  $info	https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
             *  @type	action
             *  @since	3.6
             *  @date	23/01/13
@@ -216,13 +216,13 @@
             *  This action is called in the admin_head action on the edit screen where your field is created.
             *  Use this action to add CSS and JavaScript to assist your create_field() action.
             *
-            *  @info	http://codex.wordpress.org/Plugin_API/Action_Reference/admin_head
+            *  @info	https://codex.wordpress.org/Plugin_API/Action_Reference/admin_head
             *  @type	action
             *  @since	3.6
             *  @date	23/01/13
             */
             function input_admin_head() {
-    
+
                 $url     = $this->settings[ 'url' ];
                 $version = $this->settings[ 'version' ];
 
@@ -231,15 +231,15 @@
                 wp_enqueue_script( 'acf-custom-validation' );
                 wp_register_script( 'acf-city-selector-js', "{$url}assets/js/city-selector.js", '', $version );
                 wp_enqueue_script( 'acf-city-selector-js' );
-    
+
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
-    
+
                     if ( isset( $_GET[ 'id' ] ) ) {
                         $post_id = $_GET[ 'id' ];
                     } else {
                         $post_id = get_the_ID();
                     }
-    
+
                     $fields     = get_field_objects( $post_id );
                     $field_name = 'acf_city_selector';
                     if ( is_array( $fields ) && count( $fields ) > 0 ) {
@@ -251,7 +251,7 @@
                         }
                     }
                     $post_meta = get_post_meta( $post_id, $field_name, true );
-    
+
                     if ( ! empty( $post_meta[ 'cityName' ] ) ) {
                         wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
                             'countryCode' => $post_meta[ 'countryCode' ],

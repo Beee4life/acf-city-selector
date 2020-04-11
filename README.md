@@ -1,6 +1,6 @@
 # ACF City Selector Field
 
-Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](http://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
+Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
 
 ## Index
 - [Version](#version)
@@ -29,7 +29,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
 
-![Screenshot ACF City Selector](http://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
+![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
 It creates a new `field type` for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will find a new option (category: "Choice") to choose called `City Selector`.
 
