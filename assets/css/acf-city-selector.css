@@ -205,6 +205,10 @@
     margin: 1em 0 0.5em 0;
 }
 
+#contextual-help-columns .contextual-help-tabs-wrap table {
+    border-spacing: 0;
+}
+
 #contextual-help-columns .contextual-help-tabs-wrap th,
 #contextual-help-columns .contextual-help-tabs-wrap td {
     padding: 5px 3em 5px 0;
