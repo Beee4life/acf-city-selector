@@ -1,13 +1,13 @@
 {
 	"name"       : "beee4life/acf-city-selector",
 	"description": ".",
-	"homepage"   : "http://berryplasman.com/wordpress/acf-city-selector",
+	"homepage"   : "https://acfcs.berryplasman.com",
 	"type"       : "wordpress-plugin",
 	"license"    : "GPL-2.0+",
 	"authors"    : [
 		{
 			"name"    : "Berry Plasman",
-			"homepage": "http://www.berryplasman.com/"
+			"homepage": "https://berryplasman.com"
 		}
 	],
 	"require": {

@@ -1,6 +1,6 @@
 # ACF City Selector Field
 
-Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](http://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
+Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
 
 ## Index
 - [Version](#version)
@@ -17,20 +17,19 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Website](#website)
 - [Disclaimer](#disclaimer)
 - [Credit](#credit)
-- [TO DO](#todo)
 - [Changelog](#changelog)
 
 <a name="version"></a>
 ### Version
 
-0.8
+0.9
 
 <a name="description"></a>
 ### Description
 
 This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
 
-![Screenshot ACF City Selector](http://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
+![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
 It creates a new `field type` for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will find a new option (category: "Choice") to choose called `City Selector`.
 
@@ -105,7 +104,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](http://acfcs.berryplasman.com).
+We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="hooks"></a>
 ### Hooks
@@ -141,12 +140,12 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 ### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
-`add_filter('remove_acfcs_donate_nag', '__return_true');`
+`add_filter('acfcs_remove_donate_nag', '__return_true');`
 
 <a name="website"></a>
 ### Website
 
-http://acfcs.berryplasman.com (not for support)
+https://acfcs.berryplasman.com
 
 <a name="disclaimer"></a>
 ### Disclaimer
@@ -165,21 +164,11 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
 
-<a name="todo"></a>
-#### To Do
-
-* [ ] - Test on Mac Firefox
-* [ ] - Test on Mac Safari
-* [ ] - Test on PC Chrome
-* [ ] - Test on PC Firefox
-* [ ] - Test on PC Safari
-* [ ] - Test on iPhone Chrome
-* [ ] - Test on iPhone Safari
-* [ ] - Test on iPad Chrome
-* [ ] - Test on iPad Safari
-
 <a name="changelog"></a>
 ### Changelog
+
+0.9
+* added a search page to manuallly remove cities from the database
 
 0.8
 * Fix incorrect version

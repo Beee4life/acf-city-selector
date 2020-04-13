@@ -26,7 +26,7 @@ I took a piece of code by [Fabrizio Sabato](https://github.com/fab01) and custom
 
 = Plugin website =
 
-http://acfcs.berryplasman.com
+https://acfcs.berryplasman.com
 
 == Installation ==
 
@@ -41,5 +41,5 @@ http://acfcs.berryplasman.com
 A. Please report any bugs/questions to: https://github.com/Beee4life/acf-city-selector/issues
 
 Credit
-Jarah de Jong for fixing the Javascript (http://www.inquota.nl)
+Jarah de Jong for fixing the Javascript (https://www.inquota.nl)
 Fabrizio Sabato for the idea (http://www.deskema.it)
