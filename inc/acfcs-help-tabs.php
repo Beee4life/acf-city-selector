@@ -107,7 +107,6 @@
                         </tbody>
                         </table>'
                 ) );
-
             }
 
             if ( 'settings_page_acfcs-settings' == $screen->id ) {
@@ -122,7 +121,6 @@
                         <p>' . esc_html__( 'If you select preserve settings, all values will not be deleted from the database when the plugin is deleted.', 'acf-city-selector' ) . '</p>'
                 ) );
             }
-
 
             get_current_screen()->set_help_sidebar(
                 '<p><strong>' . esc_html__( 'Author\'s website', 'acf-city-selector' ) . '</strong></p>

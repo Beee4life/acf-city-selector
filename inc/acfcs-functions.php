@@ -192,31 +192,3 @@
 
         return false;
     }
-
-    /**
-     * Read file and spit out an array
-     * @TODO: probably delete ?
-     *
-     * @return array|bool
-     */
-    function acfcs_read_file_only( $file_name = false ) {
-
-        $csv_array = array();
-        if ( false != $file_name ) {
-
-            $file_location = wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name;
-            if ( ( $handle = fopen( $file_location, "r" ) ) !== false ) {
-                $line_number = 0;
-
-                while (($csv_line = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                    $line_number++;
-                    $csv_array[] = $csv_line;
-                }
-                fclose( $handle );
-            }
-
-            return $csv_array;
-        }
-
-        return false;
-    }

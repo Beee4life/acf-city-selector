@@ -100,7 +100,7 @@
                         </div>
                 <?php } ?>
 
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_raw_import ) { ?>
+                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_raw_import ) { ?>
                     <div class="acfcs__section">
 
                         <h2><?php esc_html_e( 'Import CSV data (from clipboard)', 'acf-city-selector' ); ?></h2>

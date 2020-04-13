@@ -14,30 +14,30 @@
 
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
-    
+
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
-            
-            <?php $show_pro_subscription = true; ?>
-    
+
+            <?php $show_pro_subscription = false; ?>
+
             <div class="admin_left">
-    
+
                 <div class="acfcs__section">
                     <h2><?php esc_html_e( 'Go Pro', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( "Default the plugin comes with 3 languages included, namely the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!", 'acf-city-selector' ); ?></p>
+                    <p><?php esc_html_e( 'Default the plugin comes with 3 languages included, namely the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!', 'acf-city-selector' ); ?></p>
                     <p><?php esc_html_e( "We have more countries available. You can either buy a seperate country packages or get a Pro subscription and get every new update when we'll make a new country available.", 'acf-city-selector' ); ?></p>
                 </div>
-    
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_pro_subscription ) { ?>
+
+                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_pro_subscription ) { ?>
                     <div class="acfcs__section acfcs__section--subscription">
                         <h2><?php esc_html_e( 'Pro subscription', 'acf-city-selector' ); ?></h2>
-                        <p><?php esc_html_e( "Buy once and get all coming countries for free !!! One price for all packages.", 'acf-city-selector' ); ?></p>
-                        <p><?php esc_html_e( "Order now !!!", 'acf-city-selector' ); ?></p>
+                        <p><?php esc_html_e( 'Buy once and get all coming countries for free !!! One price for all packages.', 'acf-city-selector' ); ?></p>
+                        <p><?php esc_html_e( 'Order now !!!', 'acf-city-selector' ); ?></p>
                         <?php // @TODO: add link to acfcs site ?>
                     </div>
                 <?php } ?>
-    
+
                 <div class="acfcs__section">
                     <?php
                         $packages = [
@@ -71,9 +71,9 @@
                             ],
                         ];
                     ?>
-                    
+
                     <h2><?php esc_html_e( 'Country packages', 'acf-city-selector' ); ?></h2>
-    
+
                     <table class="acfcs__table acfcs__table--packages">
                         <thead>
                         <tr>
@@ -91,7 +91,7 @@
                                 <td><?php echo $package[ 'states' ]; ?></td>
                                 <td><?php echo $package[ 'cities' ]; ?></td>
                                 <td>&euro; <?php echo $package[ 'price' ]; ?>,00</td>
-                                <td><a href="<?php echo $package[ 'link' ]; ?>">link</a></td>
+                                <td><a href="<?php echo $package[ 'link' ]; ?>"><?php esc_html_e( 'link', 'acf-city-selector' ); ?></a></td>
                             </tr>
                         <?php } ?>
                         </tbody>
@@ -100,7 +100,7 @@
             </div>
 
             <?php include( 'admin-right.php' ); ?>
-            
+
         </div>
         <?php
     }

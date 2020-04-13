@@ -201,8 +201,8 @@
 }
 
 #contextual-help-columns .contextual-help-sidebar p {
-    /*-webkit-margin-before: 0;*/
-    margin: 1em 0 0.5em 0;
+    -webkit-margin-before: 0;
+    margin:                1em 0 0.5em 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap table {

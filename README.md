@@ -145,7 +145,7 @@ If you want to remove the donation box in ACF, add the following line to functio
 <a name="website"></a>
 ### Website
 
-https://acfcs.berryplasman.com (not for support)
+https://acfcs.berryplasman.com
 
 <a name="disclaimer"></a>
 ### Disclaimer
