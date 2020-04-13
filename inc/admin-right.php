@@ -2,7 +2,7 @@
 
     <h3><?php esc_html_e( 'About the plugin', 'acf-city-selector' ); ?></h3>
     <p><?php echo sprintf( esc_html__( 'This plugin is an extension for %s. I built it because there was no properly working plugin which did this.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" rel="noopener" target="_blank">Advanced Custom Fields</a>' ); ?>
-    <p><?php echo sprintf( __( '<a href="%s" rel="noopener" target="_blank">Click here</a> for my website.', 'acf-city-selector' ), 'https://acfcs.berryplasman.com/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin' ); ?></p>
+    <p><?php echo sprintf( __( '<a href="%s" rel="noopener" target="_blank">Click here</a> for the official website.', 'acf-city-selector' ), 'https://acfcs.berryplasman.com/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin' ); ?></p>
 
     <hr />
 
