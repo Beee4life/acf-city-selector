@@ -1,6 +1,6 @@
 <?php
     /*
-     * Content for the settings page
+     * Content for the search page
      */
     function acfcs_search() {
 
@@ -17,14 +17,14 @@
         $search_criteria_state   = false;
         $searched_term           = false;
         $selected_limit          = false;
-        
-        // generate search criteria
+
+        // get cities by country
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
             group by country_code
             order by country ASC
         " );
-        
+
         // if there is at least 1 country
         if ( count( $results ) > 0 ) {
             foreach ( $results as $data ) {
@@ -33,16 +33,14 @@
                     'name' => $data->country,
                 ];
             }
-            
+
             // if there is more than 1 country, place NL on top
             if ( count( $countries ) > 1 ) {
                 // get locale
                 // get locale code
-    
+
                 $array_key_nl = false;
-                $counter      = 1;
                 foreach ( $countries as $key => $country ) {
-                    // @TODO: only when lang is set to nl
                     if ( 'NL' == $country[ 'code' ] ) {
                         $array_key_nl = $key;
                     }
@@ -51,7 +49,7 @@
                     ACF_City_Selector::acfcs_move_array_element( $countries, $array_key_nl, 0 );
                 }
             }
-            
+
             // get states for these countries
             if ( ! empty( $countries ) ) {
                 $states = [];
@@ -63,7 +61,7 @@
                             order by state_name ASC
                         " );
                     // @TODO: check if results contain France, if sort by LENGTH(column_name), column_name
-    
+
                     if ( count( $results ) > 0 ) {
                         foreach ( $results as $data ) {
                             $states[] = array(
@@ -75,7 +73,7 @@
                 }
             }
         }
-        
+
         // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
@@ -84,7 +82,7 @@
             $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
             $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
             $where                   = [];
-            
+
             if ( false != $search_criteria_state ) {
                 $where[] = "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
@@ -99,36 +97,36 @@
             if ( false != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
-            
+
             if ( ! empty( $where ) ) {
                 $where = "WHERE " . implode( ' AND ', $where );
             } else {
                 $where = false;
             }
-            
+
             $cities = $wpdb->get_results("SELECT *
                 FROM " . $wpdb->prefix . "cities
                 " . $where . "
                 order by country ASC, state_name ASC
                 " . $search_limit . "
             " );
-            
+
             $result_count = count( $cities );
         }
-        
+
         // output
         ?>
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
-    
+
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
-    
+
             <div class="admin_left">
 
                 <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
-    
+
                 <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
@@ -143,12 +141,12 @@
                                     </select>
                                 </label>
                             </div>
-    
+
                             <div class="acfcs__search-criteria acfcs__search-criteria--or">
                                 <small><?php esc_html_e( 'OR', 'acf-city-selector' ); ?></small>
                             </div>
                         <?php } ?>
-    
+
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
                             <label>
                                 <select name="acfcs_state" class="">
@@ -167,7 +165,7 @@
                                 </select>
                             </label>
                         </div>
-    
+
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
@@ -175,7 +173,7 @@
                                 <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
                             </label>
                         </div>
-    
+
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
@@ -193,10 +191,10 @@
                             </label>
                         </div>
                     <?php } ?>
-                    
+
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
                 </form>
-                
+
                 <?php if ( isset( $_GET[ 'acfcs-search' ] ) && empty( $cities ) ) { ?>
                     <p>
                         <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
@@ -249,7 +247,7 @@
                                     </tr>
                                 <?php } ?>
                             </table>
-    
+
                             <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Delete selected', 'acf-city-selector' ); ?>" />
                         </div>
                     </form>
@@ -257,7 +255,7 @@
             </div>
 
             <?php include( 'admin-right.php' ); ?>
-        
+
         </div>
         <?php
     }
