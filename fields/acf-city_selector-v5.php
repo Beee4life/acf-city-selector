@@ -94,15 +94,15 @@
 
                 if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
+                    if ( 0 != $countrycode ) {
+                        $stateCode = $field[ 'value' ][ 'stateCode' ];
+                        if ( '-' != $stateCode ) {
+                            $cityName = $field[ 'value' ][ 'cityName' ];
+                        }
+                        $states = get_states( $countrycode );
+                    }
                 }
                 $countries = populate_country_select( $field, '' );
-                if ( isset( $countrycode ) && 0 != $countrycode ) {
-                    $stateCode = $field[ 'value' ][ 'stateCode' ];
-                    if ( '-' != $stateCode ) {
-                        $cityName = $field[ 'value' ][ 'cityName' ];
-                    }
-                    $states = get_states( $countrycode );
-                }
                 $stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // ???
                 ?>
                 <div class="dropdown-box cs-countries">
