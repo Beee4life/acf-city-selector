@@ -103,14 +103,16 @@
                     }
                 }
                 $countries = populate_country_select( $field, '' );
-                $stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // ???
+                $show_labels = $field[ 'show_labels' ];
+                $stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // why needed ?
                 ?>
                 <div class="dropdown-box cs-countries">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
+                    <?php $field_name = $field[ 'name' ]; ?>
+                    <?php if ( 1 == $show_labels ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></span>
                     <?php } ?>
                     <label for="countryCode" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[countryCode]" id="countryCode" class="countrySelect">
+                    <select name="<?php echo $field_name; ?>[countryCode]" id="countryCode" class="countrySelect">
                         <?php
                             foreach ( $countries as $key => $country ) {
                                 if ( isset( $countrycode ) ) {
@@ -125,20 +127,20 @@
                 </div>
 
                 <div class="dropdown-box cs-provinces">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
+                    <?php if ( 1 == $show_labels ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></span>
                     <?php } ?>
                     <label for="stateCode" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[stateCode]" id="stateCode" class="countrySelect">
+                    <select name="<?php echo $field_name; ?>[stateCode]" id="stateCode" class="countrySelect">
                     </select>
                 </div>
 
                 <div class="dropdown-box cs-cities">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
+                    <?php if ( 1 == $show_labels ) { ?>
                         <span class="acf-input-header"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></span>
                     <?php } ?>
                     <label for="cityName" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[cityName]" id="cityName" class="countrySelect">
+                    <select name="<?php echo $field_name; ?>[cityName]" id="cityName" class="countrySelect">
                     </select>
                 </div>
                 <?php
