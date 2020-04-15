@@ -101,7 +101,7 @@
                         $states = get_states( $countrycode );
                     }
                 }
-                $countries   = populate_country_select( $field, '' );
+                $countries   = acfcs_populate_country_select( $field, '' );
                 $field_id    = $field[ 'id' ];
                 $field_name  = $field[ 'name' ];
                 $show_labels = $field[ 'show_labels' ];

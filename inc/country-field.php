@@ -20,7 +20,7 @@
      *
      * @return array
      */
-    function populate_country_select( $field, $selectedCountry = null ) {
+    function acfcs_populate_country_select( $field, $selectedCountry = null ) {
 
         global $wpdb;
         $db = $wpdb->get_results( "
