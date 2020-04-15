@@ -105,7 +105,7 @@
                 $field_id    = $field[ 'id' ];
                 $field_name  = $field[ 'name' ];
                 $show_labels = $field[ 'show_labels' ];
-                $stateName   = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // why needed ?
+                $stateName   = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // why was this needed ?
                 ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( 1 == $show_labels ) { ?>
