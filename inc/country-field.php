@@ -86,11 +86,12 @@
     function get_states_call( $country_code = false ) {
 
         if ( ! $country_code ) {
-            $country_code = $_POST[ 'country_code' ];
+            if ( isset( $_POST[ 'country_code' ] ) ) {
+                $country_code = $_POST[ 'country_code' ];
+            }
         }
 
         global $wpdb;
-
         $sql = $wpdb->prepare( "
             SELECT *
             FROM " . $wpdb->prefix . "cities
@@ -99,7 +100,7 @@
             order by state_name ASC", $country_code
         );
 
-        $db_results                   = $wpdb->get_results( $sql );
+        $query_results                = $wpdb->get_results( $sql );
         $items                        = array();
         $items[ 0 ][ 'country_code' ] = "";
         $items[ 0 ][ 'state_code' ]   = "";
@@ -110,7 +111,7 @@
         // if == 1, $items[0]['state_name'] = '-';
         // __( 'Select a province/state', 'acf-city-selector' )
 
-        foreach ( $db_results as $data ) {
+        foreach ( $query_results as $data ) {
             $items[ $i ][ 'country_code' ] = $data->country_code;
             $items[ $i ][ 'state_code' ]   = $data->state_code;
             if ( $data->state_name != 'N/A' ) {
