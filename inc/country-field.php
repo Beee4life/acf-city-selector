@@ -123,6 +123,8 @@
         echo json_encode( $items );
         die();
     }
+    add_action( 'wp_ajax_get_states_call', 'get_states_call' );
+    add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 
     /*
      * Get cities by related State Code or Country Code (IF State code == "00" or States == 'N/A')
@@ -131,43 +133,43 @@
      */
     function get_cities_call() {
 
-        if ( trim( $_POST[ 'row_code' ] ) ) {
-            $codes        = explode( '-', $_POST[ 'row_code' ] );
-            $country_code = $codes[ 0 ];
-            $state_code   = $codes[ 1 ];
-            global $wpdb;
+        if ( isset( $_POST[ 'row_code' ] ) ) {
+            if ( trim( $_POST[ 'row_code' ] ) ) {
+                $codes        = explode( '-', $_POST[ 'row_code' ] );
+                $country_code = $codes[ 0 ];
+                $state_code   = $codes[ 1 ];
+                global $wpdb;
 
-            if ( $state_code == '00' ) {
-                $db = $wpdb->get_results( "
-                SELECT *
-                FROM " . $wpdb->prefix . "cities
-                WHERE country_code = '" . $country_code . "'
-                order by city_name ASC
-            " );
-            } else {
-                $db = $wpdb->get_results( "
-                SELECT *
-                FROM " . $wpdb->prefix . "cities
-                WHERE state_code = '" . $state_code . "'
-                AND country_code='" . $country_code . "'
-                order by city_name ASC
-            " );
-            }
-            $items                     = array();
-            $items[ 0 ][ 'id' ]        = '';
-            $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
-            $i                         = 1;
+                if ( $state_code == '00' ) {
+                    $db = $wpdb->get_results( "
+                    SELECT *
+                    FROM " . $wpdb->prefix . "cities
+                    WHERE country_code = '" . $country_code . "'
+                    order by city_name ASC
+                " );
+                } else {
+                    $db = $wpdb->get_results( "
+                    SELECT *
+                    FROM " . $wpdb->prefix . "cities
+                    WHERE state_code = '" . $state_code . "'
+                    AND country_code='" . $country_code . "'
+                    order by city_name ASC
+                " );
+                }
+                $items                     = array();
+                $items[ 0 ][ 'id' ]        = '';
+                $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+                $i                         = 1;
 
-            foreach ( $db as $data ) {
-                $items[ $i ][ 'id' ]        = $data->state_code;
-                $items[ $i ][ 'city_name' ] = $data->city_name;
-                $i++;
+                foreach ( $db as $data ) {
+                    $items[ $i ][ 'id' ]        = $data->state_code;
+                    $items[ $i ][ 'city_name' ] = $data->city_name;
+                    $i++;
+                }
+                echo json_encode( $items );
+                die();
             }
-            echo json_encode( $items );
-            die();
         }
     }
-    add_action( 'wp_ajax_get_states_call', 'get_states_call' );
-    add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
     add_action( 'wp_ajax_get_cities_call', 'get_cities_call' );
     add_action( 'wp_ajax_nopriv_get_cities_call', 'get_cities_call' );
