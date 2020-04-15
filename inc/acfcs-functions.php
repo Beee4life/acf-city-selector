@@ -1,4 +1,31 @@
 <?php
+
+    /*
+     * Get all countries from the database
+     *
+     * @return array
+     */
+    function acfcs_get_countries() {
+        global $wpdb;
+        $countries_db = $wpdb->get_results( "
+            SELECT DISTINCT *
+            FROM " . $wpdb->prefix . "cities
+            group by country
+            order by country ASC
+        " );
+
+        $countries = array();
+        foreach ( $countries_db as $country ) {
+            if ( trim( $country->country ) == '' ) {
+                continue;
+            }
+            $countries[ $country->id ] = $country->country;
+        }
+
+        return $countries;
+    }
+
+
     /**
      * Checks if there any cities in the database
      *
