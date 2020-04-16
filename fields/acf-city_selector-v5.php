@@ -91,6 +91,9 @@
              * @return  n/a
              */
             function render_field( $field ) {
+
+                // echo '<pre>'; var_dump($this->settings); echo '</pre>'; exit;
+
                 if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
                     if ( 0 != $countrycode ) {
@@ -113,10 +116,8 @@
                     <?php } ?>
                     <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
-                        <?php
-                            foreach ( $countries as $key => $country ) {
-                                $selected = ( isset( $countrycode ) ) ? ( $countrycode === $key ) ? ' selected="selected"' : false : false;
-                            ?>
+                        <?php foreach ( $countries as $key => $country ) { ?>
+                        <?php $selected = ( isset( $countrycode ) ) ? ( $countrycode === $key ) ? ' selected="selected"' : false : false; ?>
                             <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
                         <?php } ?>
                     </select>
@@ -292,7 +293,7 @@
             */
             function update_value( $value, $post_id, $field ) {
 
-                $value[ 'field_name' ] = $field[ 'key' ];
+                // $value[ 'field_name' ] = $field[ 'key' ];
 
                 return $value;
             }
