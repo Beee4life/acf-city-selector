@@ -4,7 +4,7 @@
     jQuery(document).ready(function() {
 
         jQuery(".acf-input .button").click(function () {
-            var event = $(this).data('event'); // add-row
+            var event = $(this).data('event');
             if ( 'add-row' === event ) {
                 // @TODO: get unique_ID
                 var unique_ID = '';
@@ -86,7 +86,6 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
-                // var select_states = $("select[name*='stateCode']");
                 for (i = 0; i < city_selector_vars.length; i++ ) {
                     var instance_count = i;
                     get_states(city_selector_vars[i].countryCode, '', function (response) {
@@ -119,7 +118,7 @@
                     var stored_state = city_selector_vars.stateCode;
                     var obj          = JSON.parse(response);
                     var len          = obj.length;
-                    var select_state = $("select[name*='stateCode']"); // @TODO: use field_name into select_state
+                    var select_state = $("select[name*='stateCode']");
                     var $stateValues = '';
 
                     select_state.fadeIn();
@@ -146,7 +145,6 @@
         function admin_post_edit_load_cities() {
 
             if ( true === Array.isArray(city_selector_vars) ) {
-                // var select_cities = $("select[name*='cityName']");
                 for (i = 0; i < city_selector_vars.length; i++) {
                     var instance_count = i;
 
