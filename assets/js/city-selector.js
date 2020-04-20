@@ -5,15 +5,15 @@
 
         // var countries = $('select[name*="countryCode"]');
         // console.log(countries);
-        var state = $('select[name*="stateCode"]');
 
         // console.log(countries.val());
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event'); // add-row
             if ( 'add-row' === event ) {
-                // change_dropdowns();
-                // console.log('reinit');
-                change_dropdowns( 'acfcloneindex' );
+                // @TODO: get unique_ID
+                var unique_ID = '';
+                // @TODO: change_dropdowns( unique_ID );
+                change_dropdowns( unique_ID );
             }
         });
 
@@ -21,25 +21,18 @@
          * Change dropdowns
          */
         function change_dropdowns( $instance ) {
-            // console.log($instance);
+            var state = $('select[name*="stateCode"]');
             if (typeof $instance === "undefined") {
                 $countries = $('select[name*="countryCode"]');
             } else {
-                console.log($instance);
-                if ( 'acfcloneindex' !== $instance ) {
-                    $instance = 'row-' + $instance;
-                }
                 $countries = $('select[name*="' + $instance + '"][name*="countryCode"]');
             }
+            console.log($countries);
             var countries = $countries;
-            console.log(countries);
             if (countries.length) {
 
-                // $( countries ).change(function() {
-                // countries.on('change', function () {
-                $countries.change(function() {
+                countries.on('change', function () {
                     // doesn't get hit on change in repeater
-                    console.log('HIT change countries');
 
                     var $this = $(this);
                     var field_name = $this.attr('name');
