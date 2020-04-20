@@ -28,7 +28,6 @@
                 countries.on('change', function () {
 
                     var $this = $(this);
-                    var field_id = $this.attr('id');
                     var field_name = $this.attr('name');
                     var field_name_country_code = $this.attr('name');
                     var field_name_state_code = field_name_country_code.replace( 'countryCode', 'stateCode' );
@@ -57,7 +56,6 @@
 
                 state.on('change', function () {
                     var $this = $(this);
-                    var field_id = $this.attr('id');
                     var field_name = $this.attr('name');
                     var field_name_city = field_name.replace( 'stateCode', 'cityName' );
 
@@ -84,22 +82,19 @@
          */
         function admin_post_edit_load_states() {
 
-            // console.log(city_selector_vars);
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
-
+                var select_states = $("select[name*='stateCode']");
                 for (i = 0; i < city_selector_vars.length; i++ ) {
-                    var counter = 0;
+                    var instance_count = i;
                     get_states(city_selector_vars[i].countryCode, '', function (response) {
-                        // i returns total (inside this function), not interation, donno why
-                        var stored_state = city_selector_vars[counter].stateCode;
-                        // console.log(stored_state);
                         var obj          = JSON.parse(response);
                         var len          = obj.length;
                         var $stateValues = '';
-                        var select_state = $("select[name*='stateCode']");
+                        var select_state = $('select[name*="row-' + instance_count + '"][name*="stateCode"]');
+                        var stored_state = city_selector_vars[instance_count].stateCode;
 
-                        select_state.fadeIn(); // @TODO: target correct (or next) dropdown
+                        select_state.fadeIn();
                         for (i = 0; i < len; i++) {
                             var state = obj[i];
                             var current_state = state.country_code + '-' + state.state_code;
@@ -111,8 +106,7 @@
                             var selected = $selected;
                             $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
                         }
-                        select_state.append($stateValues); // adds last iteration values to all state dropdowns
-                        counter++;
+                        select_state.append($stateValues);
                     });
                 }
 
@@ -150,45 +144,22 @@
         function admin_post_edit_load_cities() {
 
             if ( true === Array.isArray(city_selector_vars) ) {
-                // console.log('do repeater stuff');
-                // console.log(city_selector_vars);
                 var select_cities = $("select[name*='cityName']");
-                // console.log(select_cities);
-                // console.log('Amount dropdowns: ' + select_cities.length);
-
-                var csv_len = city_selector_vars.length
-                // console.log(len);
-                var $cityValues = '';
-                for (i = 0; i < csv_len; i++) {
-                    // console.log(city_selector_vars[i].stateCode);
-                    // console.log(select_cities[i]);
-                    var instance = select_cities[i];
+                for (i = 0; i < city_selector_vars.length; i++) {
                     var instance_count = i;
 
                     get_cities(city_selector_vars[i].stateCode, function (response) {
 
-                        // console.log(response);
                         var obj         = JSON.parse(response);
-                        // console.log(obj);
                         var len         = obj.length;
-                        // console.log(len);
                         var $cityValues = '';
-                        // console.log(instance_count);
-
-                        // console.log(select_instance_dropdowns);
-                        var select_city = $('select[name*="row-' + instance_count + '"]','select[name*="cityName"]');
-                        console.log('City length: ' + select_city.length);
-                        console.log(select_city);
+                        var select_city = $('select[name*="row-' + instance_count + '"][name*="cityName"]');
                         var stored_city = city_selector_vars[instance_count].cityName;
-                        // console.log(stored_city);
 
                         select_city.fadeIn();
                         for (i = 0; i < len; i++) {
-                            // console.log(i);
                             var mycity = obj[i];
-                            // console.log(mycity);
                             if (mycity.city_name === stored_city) {
-                                // console.log(mycity.city_name)
                                 $selected = ' selected="selected"';
                             } else {
                                 $selected = '';
@@ -212,6 +183,7 @@
                     console.log('City length: ' + select_city.length);
                     console.log(select_city); // jQuery.fn.init
                     var stored_city = city_selector_vars.cityName;
+                    console.log(stored_city);
 
                     select_city.fadeIn();
                     for (i = 0; i < len; i++) {
