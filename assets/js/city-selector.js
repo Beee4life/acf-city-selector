@@ -3,7 +3,6 @@
 
     jQuery(document).ready(function() {
 
-        // console.log(countries.val());
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event'); // add-row
             if ( 'add-row' === event ) {
@@ -24,7 +23,6 @@
             } else {
                 $countries = $('select[name*="' + $instance + '"][name*="countryCode"]');
             }
-            console.log($countries);
             var countries = $countries;
             if (countries.length) {
 
