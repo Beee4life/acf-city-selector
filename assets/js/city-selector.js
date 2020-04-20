@@ -9,8 +9,11 @@
         // console.log(countries.val());
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event'); // add-row
-            var countries = $('select[name*="countryCode"]');
-            console.log(countries);
+            if ( 'add-row' === event ) {
+                // change_dropdowns();
+                console.log('reinit');
+            }
+            // var countries = $('select[name*="countryCode"]');
             // reinit function because new elements have been added
         });
 
@@ -53,7 +56,6 @@
             if (state.length) {
 
                 state.on('change', function () {
-
                     var $this = $(this);
                     var field_id = $this.attr('id');
                     var field_name = $this.attr('name');
@@ -146,28 +148,86 @@
          * Load select cities when editing a post
          */
         function admin_post_edit_load_cities() {
-            get_cities(city_selector_vars.stateCode, function (response) {
 
-                var obj         = JSON.parse(response);
-                var len         = obj.length;
+            if ( true === Array.isArray(city_selector_vars) ) {
+                // console.log('do repeater stuff');
+                // console.log(city_selector_vars);
+                var select_cities = $("select[name*='cityName']");
+                // console.log(select_cities);
+                // console.log('Amount dropdowns: ' + select_cities.length);
+
+                var csv_len = city_selector_vars.length
+                // console.log(len);
                 var $cityValues = '';
-                var select_city = $("select[name*='cityName']");
-                var stored_city = city_selector_vars.cityName;
+                for (i = 0; i < csv_len; i++) {
+                    // console.log(city_selector_vars[i].stateCode);
+                    // console.log(select_cities[i]);
+                    var instance = select_cities[i];
+                    var instance_count = i;
 
-                select_city.fadeIn();
-                for (i = 0; i < len; i++) {
-                    var mycity = obj[i];
-                    if (mycity.city_name === stored_city) {
-                        $selected = ' selected="selected"';
-                    } else {
-                        $selected = '';
-                    }
-                    var selected = $selected;
-                    $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                    get_cities(city_selector_vars[i].stateCode, function (response) {
+
+                        // console.log(response);
+                        var obj         = JSON.parse(response);
+                        // console.log(obj);
+                        var len         = obj.length;
+                        // console.log(len);
+                        var $cityValues = '';
+                        // console.log(instance_count);
+
+                        // console.log(select_instance_dropdowns);
+                        var select_city = $('select[name*="row-' + instance_count + '"]','select[name*="cityName"]');
+                        console.log('City length: ' + select_city.length);
+                        console.log(select_city);
+                        var stored_city = city_selector_vars[instance_count].cityName;
+                        // console.log(stored_city);
+
+                        select_city.fadeIn();
+                        for (i = 0; i < len; i++) {
+                            // console.log(i);
+                            var mycity = obj[i];
+                            // console.log(mycity);
+                            if (mycity.city_name === stored_city) {
+                                // console.log(mycity.city_name)
+                                $selected = ' selected="selected"';
+                            } else {
+                                $selected = '';
+                            }
+                            var selected = $selected;
+                            $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                        }
+                        select_city.append($cityValues);
+
+                    });
                 }
-                select_city.append($cityValues);
 
-            });
+            } else {
+
+                get_cities(city_selector_vars.stateCode, function (response) {
+
+                    var obj         = JSON.parse(response);
+                    var len         = obj.length;
+                    var $cityValues = '';
+                    var select_city = $("select[name*='cityName']");
+                    console.log('City length: ' + select_city.length);
+                    console.log(select_city); // jQuery.fn.init
+                    var stored_city = city_selector_vars.cityName;
+
+                    select_city.fadeIn();
+                    for (i = 0; i < len; i++) {
+                        var mycity = obj[i];
+                        if (mycity.city_name === stored_city) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        var selected = $selected;
+                        $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                    }
+                    select_city.append($cityValues);
+
+                });
+            }
         }
 
         /**
