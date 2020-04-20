@@ -91,9 +91,6 @@
              * @return  n/a
              */
             function render_field( $field ) {
-
-                // echo '<pre>'; var_dump($this->settings); echo '</pre>'; exit;
-
                 if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
                     if ( 0 != $countrycode ) {
@@ -274,7 +271,7 @@
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = $state_name;
                     $value[ 'countryName' ] = $country;
-                    // @TODO: add field_name
+                    // $value[ 'fieldName' ]   = $field[ 'key' ];
                 }
 
                 return $value;
