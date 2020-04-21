@@ -20,7 +20,7 @@
      *
      * @return array
      */
-    function acfcs_populate_country_select( $field, $selectedCountry = null ) {
+    function acfcs_populate_country_select( $field ) {
 
         global $wpdb;
         $db = $wpdb->get_results( "
@@ -29,13 +29,11 @@
             order by country ASC
         " );
 
-        $items = array();
-        if ( null == $selectedCountry ) {
-            if ( $field['show_labels'] == 1 ) {
-                $items[] = '-';
-            } else {
-                $items[] = esc_html__( 'Select a country', 'acf-city-selector' );
-            }
+        $items = [];
+        if ( $field['show_labels'] == 1 ) {
+            $items[] = '-';
+        } else {
+            $items[] = esc_html__( 'Select a country', 'acf-city-selector' );
         }
         foreach ( $db as $data ) {
             $items[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
@@ -53,28 +51,62 @@
      */
     function get_states( $country_code = false ) {
 
-        if ( ! $country_code ) {
-            $country_code = $_POST['country_code'];
+        if ( ! $country_code && isset( $_POST[ 'country_code' ] ) ) {
+            $country_code = $_POST[ 'country_code' ];
         }
 
         global $wpdb;
 
         $items = array();
 
-        $sql = $wpdb->prepare( "
-            SELECT *
-            FROM " . $wpdb->prefix . "cities
-            WHERE country_code = '%s'
-            group by state_code
-            order by state_name ASC",  $country_code
-        );
+        if ( false !== $country_code ) {
+            $sql = $wpdb->prepare( "
+                SELECT *
+                FROM " . $wpdb->prefix . "cities
+                WHERE country_code = '%s'
+                group by state_code
+                order by state_name ASC",  $country_code
+            );
+            $db = $wpdb->get_results( $sql );
 
-        $db = $wpdb->get_results( $sql );
+            foreach ( $db as $data ) {
+                $items[ $country_code . '-' . $data->state_code ] = $data->state_name;
+            }
+        }
+        return $items;
+    }
+
+    /**
+     * Create an array with cities for a certain country and possibly state
+     *
+     * @param bool $country_code
+     * @param bool $state_code
+     */
+    function get_cities( $country_code = false, $state_code = false ) {
+
+        if ( ! $country_code ) {
+            // all cities
+        }
+
+        global $wpdb;
+        $items = array();
+        $query = "SELECT * FROM " . $wpdb->prefix . "cities";
+        if ( $country_code ) {
+            $query .= " WHERE country_code = '{$country_code}'";
+        }
+        if ( $state_code ) {
+            $query .= " WHERE state_code = '{$country_code}-{$state_code}'";
+        }
+        $query .= " group by state_code";
+        $query .= " order by state_name ASC";
+        $db    = $wpdb->get_results( $query );
 
         foreach ( $db as $data ) {
             $items[ $data->state_code ] = $data->state_name;
         }
+
         return $items;
+
     }
 
     /*
@@ -135,12 +167,21 @@
     function get_cities_call() {
 
         if ( isset( $_POST[ 'row_code' ] ) ) {
+            // @TODO: check if i need trim
             if ( trim( $_POST[ 'row_code' ] ) ) {
-                $codes        = explode( '-', $_POST[ 'row_code' ] );
-                $country_code = $codes[ 0 ];
-                $state_code   = $codes[ 1 ];
+                $country_code = false;
+                $state_code   = false;
+                if ( 5 == strlen( $_POST[ 'row_code' ] ) ) {
+                    $codes        = explode( '-', $_POST[ 'row_code' ] );
+                    $country_code = $codes[ 0 ];
+                    $state_code   = $codes[ 1 ];
+                } elseif ( 2 == strlen( $_POST[ 'row_code' ] ) ) {
+                    $state_code   = $_POST[ 'row_code' ];
+                }
+
                 global $wpdb;
 
+                // @TODO: look into when it's '00'
                 if ( $state_code == '00' ) {
                     $db = $wpdb->get_results( "
                     SELECT *
@@ -148,7 +189,7 @@
                     WHERE country_code = '" . $country_code . "'
                     order by city_name ASC
                 " );
-                } else {
+                } elseif ( false !== $state_code && false !== $country_code ) {
                     $db = $wpdb->get_results( "
                     SELECT *
                     FROM " . $wpdb->prefix . "cities
@@ -156,12 +197,13 @@
                     AND country_code='" . $country_code . "'
                     order by city_name ASC
                 " );
+                } elseif ( false !== $country_code ) {
+                    // @TODO: create fallback
                 }
                 $items                     = array();
                 $items[ 0 ][ 'id' ]        = '';
                 $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
                 $i                         = 1;
-
                 foreach ( $db as $data ) {
                     $items[ $i ][ 'id' ]        = $data->state_code;
                     $items[ $i ][ 'city_name' ] = $data->city_name;

@@ -6,10 +6,20 @@
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event');
             if ( 'add-row' === event ) {
-                // @TODO: get unique_ID
+                console.log('click add row');
+
+                // @TODO: get unique_ID from added row
                 var unique_ID = '';
                 // @TODO: change_dropdowns( unique_ID );
                 change_dropdowns( unique_ID );
+
+                // rest is for test only
+                $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
+                var countries = $countries;
+                // console.log(countries);
+                countries.on('change', function () {
+                    console.log('change');
+                });
             }
         });
 
@@ -21,13 +31,15 @@
             if (typeof $instance === "undefined") {
                 $countries = $('select[name*="countryCode"]');
             } else {
-                $countries = $('select[name*="' + $instance + '"][name*="countryCode"]');
+                // $countries = $('select[name*="' + $instance + '"][name*="countryCode"]');
+                $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
             }
             var countries = $countries;
             if (countries.length) {
 
                 countries.on('change', function () {
-                    // doesn't get hit on change in repeater
+                    console.log('HIT countries change');
+                    // doesn't get hit if no rows are present and a row is added
 
                     var $this = $(this);
                     var field_name = $this.attr('name');
@@ -61,7 +73,7 @@
                     var field_name = $this.attr('name');
                     var field_name_city = field_name.replace( 'stateCode', 'cityName' );
 
-                    get_cities($(this).val(), function (response) {
+                    get_cities( '', $(this).val(), function (response) {
                         var $cityValues = '';
                         var obj = JSON.parse(response);
                         var len = obj.length;
@@ -86,6 +98,8 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
+                // console.log(city_selector_vars);
+
                 for (i = 0; i < city_selector_vars.length; i++ ) {
                     var instance_count = i;
                     get_states(city_selector_vars[i].countryCode, '', function (response) {
@@ -98,7 +112,7 @@
                         select_state.fadeIn();
                         for (i = 0; i < len; i++) {
                             var state = obj[i];
-                            var current_state = state.country_code + '-' + state.state_code;
+                            var current_state = state.state_code;
                             if (current_state === stored_state) {
                                 $selected = ' selected="selected"';
                             } else {
@@ -147,8 +161,9 @@
             if ( true === Array.isArray(city_selector_vars) ) {
                 for (i = 0; i < city_selector_vars.length; i++) {
                     var instance_count = i;
-
-                    get_cities(city_selector_vars[i].stateCode, function (response) {
+                    // console.log(city_selector_vars[i].countryCode);
+                    // console.log(city_selector_vars[i].stateCode);
+                    get_cities(city_selector_vars[i].countryCode, city_selector_vars[i].stateCode, function (response) {
 
                         var obj         = JSON.parse(response);
                         var len         = obj.length;
@@ -174,7 +189,7 @@
 
             } else {
 
-                get_cities(city_selector_vars.stateCode, function (response) {
+                get_cities(city_selector_vars.countryCode, city_selector_vars.stateCode, function (response) {
 
                     var obj         = JSON.parse(response);
                     var len         = obj.length;
@@ -221,10 +236,12 @@
         /**
          * Get cities
          *
+         *
+         * @param countryCode
          * @param stateCode
          * @param callback
          */
-        function get_cities(stateCode, callback) {
+        function get_cities(countryCode, stateCode, callback) {
             var data = {
                 action: 'get_cities_call',
                 row_code: stateCode

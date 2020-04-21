@@ -91,21 +91,29 @@
              * @return  n/a
              */
             function render_field( $field ) {
-                if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
-                    $countrycode = $field[ 'value' ][ 'countryCode' ];
-                    if ( 0 != $countrycode ) {
-                        $stateCode = $field[ 'value' ][ 'stateCode' ];
-                        if ( '-' != $stateCode ) {
-                            $cityName = $field[ 'value' ][ 'cityName' ];
-                        }
-                        $states = get_states( $countrycode );
-                    }
+
+                if ( strpos( $field[ 'parent' ], 'group' ) !== false ) {
+                    // single
+                    $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                    $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+                } else {
+                    // repeater
+                    $post_id          = get_the_ID();
+                    $strip_last_char  = substr( $field[ 'prefix' ], 0, -1 );
+                    $index            = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
+                    $repeater_name    = 'city_selector_repeater'; // @TODO: make function to get this dynamically
+                    $meta_key         = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                    $post_meta        = get_post_meta( $post_id, $meta_key, true );
+                    $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
+                    $selected_state   = ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : false;
+                    $selected_city    = ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : false;
                 }
+
                 $countries   = acfcs_populate_country_select( $field );
                 $field_id    = $field[ 'id' ];
                 $field_name  = $field[ 'name' ];
                 $show_labels = $field[ 'show_labels' ];
-                $stateName   = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // why was this needed again ?
                 ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( 1 == $show_labels ) { ?>
@@ -114,7 +122,7 @@
                     <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                         <?php foreach ( $countries as $key => $country ) { ?>
-                        <?php $selected = ( isset( $countrycode ) ) ? ( $countrycode === $key ) ? ' selected="selected"' : false : false; ?>
+                            <?php $selected = ( isset( $selected_country ) ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
                             <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
                         <?php } ?>
                     </select>
@@ -126,7 +134,10 @@
                     <?php } ?>
                     <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
-                        <!-- content will be dynamically generated -->
+                        <?php
+                            error_log('Selected state: '.$selected_state);
+                            // if no country is stored, content will be dynamically generated on.change countries
+                        ?>
                     </select>
                 </div>
 
@@ -136,7 +147,10 @@
                     <?php } ?>
                     <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
-                        <!-- content will be dynamically generated -->
+                        <?php
+                            error_log('Selected city: '.$selected_city);
+                            // if no country is stored, content will be dynamically generated on.change countries
+                        ?>
                     </select>
                 </div>
                 <?php
@@ -208,13 +222,11 @@
 
                             if ( isset( $post_meta ) && ! empty( $post_meta ) ) {
                                 foreach( $post_meta as $meta ) {
-                                    if ( ! empty( $meta[ 'cityName' ] ) ) {
-                                        $meta_values[] = array(
-                                            'countryCode' => $meta[ 'countryCode' ],
-                                            'stateCode'   => $meta[ 'stateCode' ],
-                                            'cityName'    => $meta[ 'cityName' ],
-                                        );
-                                    }
+                                    $meta_values[] = array(
+                                        'countryCode' => ( isset( $meta[ 'countryCode' ] ) ) ? $meta[ 'countryCode' ] : '',
+                                        'stateCode'   => ( isset( $meta[ 'stateCode' ] ) ) ? $meta[ 'stateCode' ] : '',
+                                        'cityName'    => ( isset( $meta[ 'cityName' ] ) ) ? $meta[ 'cityName' ] : '',
+                                    );
                                 }
                                 if ( isset( $meta_values ) ) {
                                     wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
@@ -225,13 +237,11 @@
                             if ( isset( $field_name ) ) {
                                 $post_meta = get_post_meta( $post_id, $field_name, true );
 
-                                if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                                    wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                                        'countryCode' => $post_meta[ 'countryCode' ],
-                                        'stateCode'   => $post_meta[ 'stateCode' ],
-                                        'cityName'    => $post_meta[ 'cityName' ],
-                                    ) );
-                                }
+                                wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+                                    'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'counntryCode' ] : '',
+                                    'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
+                                    'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
+                                ) );
                             }
                         }
                     }
@@ -243,7 +253,6 @@
              *
              * This filter is applied to the $value after it is loaded from the db
              * This returns false if no country/state is selected (but empty values are stored)
-             * @TODO: fix save empty value
              *
              * @type    filter
              * @param   $value (mixed) the value found in the database
@@ -290,6 +299,7 @@
             */
             function update_value( $value, $post_id, $field ) {
 
+                // @TODO: fix save empty value for countryCode, stateName and cityName
                 // $value[ 'field_name' ] = $field[ 'key' ];
 
                 return $value;
