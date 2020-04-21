@@ -100,12 +100,18 @@
                         // repeater
                         $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
                         $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
-                        $repeater_name   = 'city_selector_repeater'; // @TODO: make function to get this dynamically
-                        $meta_key        = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                        $field_object    = get_field_objects( get_the_ID() );
+                        if ( is_array( $field_object ) ) {
+                            $repeater_name = array_keys( $field_object )[ 0 ];
+                            $meta_key      = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                        }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                         // group
-                        $group_name = 'acf_group'; // @TODO: make function to get this dynamically
-                        $meta_key   = $group_name . '_' . $field[ '_name' ];
+                        $field_object = get_field_objects( get_the_ID() );
+                        if ( is_array( $field_object ) ) {
+                            $group_name = array_keys( $field_object )[ 0 ];
+                            $meta_key   = $group_name . '_' . $field[ '_name' ];
+                        }
                     }
                     if ( isset( $meta_key ) ) {
                         $post_meta = get_post_meta( get_the_ID(), $meta_key, true );
@@ -137,7 +143,7 @@
                     <?php } ?>
                     <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
-                        <?php // content will be dynamically generated on.change countries ?>
+                        <?php // content will be dynamically generated ?>
                     </select>
                 </div>
 
@@ -147,7 +153,7 @@
                     <?php } ?>
                     <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text"></label>
                     <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
-                        <?php // content will be dynamically generated on.change countries ?>
+                        <?php // content will be dynamically generated ?>
                     </select>
                 </div>
                 <?php
@@ -196,8 +202,6 @@
                                         $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
                                         break;
                                     }
-                                    if ( isset( $repeater_name ) ) {
-                                    }
                                 } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
                                     if ( ! empty( $field['value'] ) ) {
                                         foreach( $field['value'] as $key => $values ) {
@@ -212,23 +216,6 @@
                                     }
                                 }
                             }
-
-                            // if no $field_name is set, check inside repeaters
-                            // if ( ! isset( $field_name ) ) {
-                            //     foreach( $fields as $field ) {
-                            //         if ( $field[ 'type' ] == 'repeater' ) {
-                            //             $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                            //             if ( false !== $array_key ) {
-                            //                 $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
-                            //                 $repeater_name      = $field[ 'name' ];
-                            //                 break;
-                            //             }
-                            //         }
-                            //     }
-                            //     if ( isset( $repeater_name ) ) {
-                            //         $repeater_count = get_post_meta( $post_id, $repeater_name, true );
-                            //     }
-                            // }
                         }
 
                         if ( isset( $repeater_count ) && 0 < $repeater_count ) {
