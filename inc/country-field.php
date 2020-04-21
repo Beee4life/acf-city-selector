@@ -30,7 +30,7 @@
         " );
 
         $items = [];
-        if ( $field['show_labels'] == 1 ) {
+        if ( $field[ 'show_labels' ] == 1 ) {
             $items[] = '-';
         } else {
             $items[] = esc_html__( 'Select a country', 'acf-city-selector' );
@@ -73,6 +73,7 @@
                 $items[ $country_code . '-' . $data->state_code ] = $data->state_name;
             }
         }
+
         return $items;
     }
 
@@ -83,10 +84,6 @@
      * @param bool $state_code
      */
     function get_cities( $country_code = false, $state_code = false ) {
-
-        if ( ! $country_code ) {
-            // all cities
-        }
 
         global $wpdb;
         $items = array();
@@ -110,7 +107,7 @@
     }
 
     /*
-     * Get states by related Country Code
+     * Get states by country code
      *
      * @param bool $country_code
      * @return JSON Object
@@ -160,7 +157,7 @@
     add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 
     /*
-     * Get cities by related State Code or Country Code (IF State code == "00" or States == 'N/A')
+     * Get cities by state code or country code (IF state code == "00" or states == 'N/A')
      *
      * @return JSON Object
      */

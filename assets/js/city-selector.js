@@ -6,20 +6,9 @@
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event');
             if ( 'add-row' === event ) {
-                console.log('click add row');
-
-                // @TODO: get unique_ID from added row
-                var unique_ID = '';
-                // @TODO: change_dropdowns( unique_ID );
-                change_dropdowns( unique_ID );
-
-                // rest is for test only
-                $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
-                var countries = $countries;
-                console.log(countries);
-                countries.on('change', function () {
-                    console.log('change country after add row');
-                });
+                setTimeout(function() {
+                    change_dropdowns($('select[name*="countryCode"]'));
+                },0);
             }
         });
 
@@ -27,28 +16,23 @@
          * Change dropdowns
          */
         function change_dropdowns( $instance ) {
+
             var state = $('select[name*="stateCode"]');
             if (typeof $instance === "undefined") {
                 $countries = $('select[name*="countryCode"]');
             } else {
-                // $countries = $('select[name*="' + $instance + '"][name*="countryCode"]');
-                $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
+                $countries = $instance;
             }
+
             var countries = $countries;
-            // console.log(countries);
             if (countries.length) {
-
                 countries.on('change', function () {
-                    // console.log('HIT countries change');
-                    // doesn't get hit if no rows are present and a row is added
-
                     var $this = $(this);
-                    var field_name = $this.attr('name');
                     var field_name_country_code = $this.attr('name');
                     var field_name_state_code = field_name_country_code.replace( 'countryCode', 'stateCode' );
                     var field_name_city = field_name_country_code.replace( 'countryCode', 'cityName' );
 
-                    get_states($(this).val(), field_name, function (response) {
+                    get_states($(this).val(), function (response) {
                         var obj = JSON.parse(response);
                         var len = obj.length;
                         var select_state = $('select[name="' + field_name_state_code + '"]');
@@ -66,7 +50,7 @@
                 });
             }
 
-            // if there are any selects with name*=stateCode when document.ready
+            // if there are any selects with name*=stateCode
             if (state.length) {
 
                 state.on('change', function () {
@@ -99,21 +83,20 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
-                // console.log(city_selector_vars);
-
                 for (i = 0; i < city_selector_vars.length; i++ ) {
-                    var instance_count = i;
-                    get_states(city_selector_vars[i].countryCode, '', function (response) {
+                    var instance_count = 0;
+                    get_states(city_selector_vars[i].countryCode, function (response) {
                         var obj          = JSON.parse(response);
                         var len          = obj.length;
                         var $stateValues = '';
                         var select_state = $('select[name*="row-' + instance_count + '"][name*="stateCode"]');
                         var stored_state = city_selector_vars[instance_count].stateCode;
+                        var stored_country = city_selector_vars[instance_count].countryCode;
 
                         select_state.fadeIn();
-                        for (i = 0; i < len; i++) {
-                            var state = obj[i];
-                            var current_state = state.state_code;
+                        for (j = 0; j < len; j++) {
+                            var state = obj[j];
+                            var current_state = stored_country + '-' + state.state_code;
                             if (current_state === stored_state) {
                                 $selected = ' selected="selected"';
                             } else {
@@ -123,13 +106,13 @@
                             $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
                         }
                         select_state.append($stateValues);
+                        instance_count++;
                     });
                 }
 
             } else {
                 // single
-                get_states(city_selector_vars.countryCode, '', function (response) {
-
+                get_states(city_selector_vars.countryCode, function (response) {
                     var stored_state = city_selector_vars.stateCode;
                     var obj          = JSON.parse(response);
                     var len          = obj.length;
@@ -140,10 +123,9 @@
                     for (i = 0; i < len; i++) {
                         var state = obj[i];
                         var current_state = state.country_code + '-' + state.state_code;
+                        $selected = '';
                         if (current_state === stored_state) {
                             $selected = ' selected="selected"';
-                        } else {
-                            $selected = '';
                         }
                         var selected = $selected;
                         $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
@@ -161,11 +143,8 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 for (i = 0; i < city_selector_vars.length; i++) {
-                    var instance_count = i;
-                    // console.log(city_selector_vars[i].countryCode);
-                    // console.log(city_selector_vars[i].stateCode);
+                    var instance_count = 0;
                     get_cities(city_selector_vars[i].countryCode, city_selector_vars[i].stateCode, function (response) {
-
                         var obj         = JSON.parse(response);
                         var len         = obj.length;
                         var $cityValues = '';
@@ -175,23 +154,21 @@
                         select_city.fadeIn();
                         for (i = 0; i < len; i++) {
                             var mycity = obj[i];
+                            $selected = '';
                             if (mycity.city_name === stored_city) {
                                 $selected = ' selected="selected"';
-                            } else {
-                                $selected = '';
                             }
                             var selected = $selected;
                             $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
                         }
                         select_city.append($cityValues);
-
+                        instance_count++;
                     });
                 }
 
             } else {
 
                 get_cities(city_selector_vars.countryCode, city_selector_vars.stateCode, function (response) {
-
                     var obj         = JSON.parse(response);
                     var len         = obj.length;
                     var $cityValues = '';
@@ -219,14 +196,12 @@
          * Get states
          *
          * @param countryCode
-         * @param field_name
          * @param callback
          */
-        function get_states(countryCode, field_name, callback) {
+        function get_states(countryCode, callback) {
             var data = {
                 action: 'get_states_call',
-                country_code: countryCode,
-                field_name: field_name
+                country_code: countryCode
             };
 
             $.post(ajaxurl, data, function (response) {
