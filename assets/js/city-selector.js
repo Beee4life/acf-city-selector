@@ -18,7 +18,7 @@
                 var countries = $countries;
                 console.log(countries);
                 countries.on('change', function () {
-                    console.log('change');
+                    console.log('change country after add row');
                 });
             }
         });
@@ -35,11 +35,11 @@
                 $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
             }
             var countries = $countries;
-            console.log(countries);
+            // console.log(countries);
             if (countries.length) {
 
                 countries.on('change', function () {
-                    console.log('HIT countries change');
+                    // console.log('HIT countries change');
                     // doesn't get hit if no rows are present and a row is added
 
                     var $this = $(this);
