@@ -17,14 +17,15 @@
          */
         function change_dropdowns( $instance ) {
 
-            var state = $('select[name*="stateCode"]');
             if (typeof $instance === "undefined") {
                 $countries = $('select[name*="countryCode"]');
             } else {
                 $countries = $instance;
             }
-
             var countries = $countries;
+            var state = $('select[name*="stateCode"]');
+
+            // if there are any selects with name*=stateCode
             if (countries.length) {
                 countries.on('change', function () {
                     var $this = $(this);
@@ -52,13 +53,12 @@
 
             // if there are any selects with name*=stateCode
             if (state.length) {
-
                 state.on('change', function () {
                     var $this = $(this);
                     var field_name = $this.attr('name');
                     var field_name_city = field_name.replace( 'stateCode', 'cityName' );
 
-                    get_cities( '', $(this).val(), function (response) {
+                    get_cities( $(this).val(), function (response) {
                         var $cityValues = '';
                         var obj = JSON.parse(response);
                         var len = obj.length;
@@ -144,12 +144,13 @@
             if ( true === Array.isArray(city_selector_vars) ) {
                 for (i = 0; i < city_selector_vars.length; i++) {
                     var instance_count = 0;
-                    get_cities(city_selector_vars[i].countryCode, city_selector_vars[i].stateCode, function (response) {
+                    get_cities(city_selector_vars[i].stateCode, function (response) {
                         var obj         = JSON.parse(response);
                         var len         = obj.length;
                         var $cityValues = '';
                         var select_city = $('select[name*="row-' + instance_count + '"][name*="cityName"]');
                         var stored_city = city_selector_vars[instance_count].cityName;
+                        // console.log(stored_city);
 
                         select_city.fadeIn();
                         for (i = 0; i < len; i++) {
@@ -168,7 +169,7 @@
 
             } else {
 
-                get_cities(city_selector_vars.countryCode, city_selector_vars.stateCode, function (response) {
+                get_cities(city_selector_vars.stateCode, function (response) {
                     var obj         = JSON.parse(response);
                     var len         = obj.length;
                     var $cityValues = '';
@@ -212,12 +213,10 @@
         /**
          * Get cities
          *
-         *
-         * @param countryCode
          * @param stateCode
          * @param callback
          */
-        function get_cities(countryCode, stateCode, callback) {
+        function get_cities(stateCode, callback) {
             var data = {
                 action: 'get_cities_call',
                 row_code: stateCode
