@@ -16,7 +16,7 @@
                 // rest is for test only
                 $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
                 var countries = $countries;
-                // console.log(countries);
+                console.log(countries);
                 countries.on('change', function () {
                     console.log('change');
                 });
@@ -35,6 +35,7 @@
                 $countries = $('select[name*="countryCode"]'); // gets acfcloneindex when empty
             }
             var countries = $countries;
+            console.log(countries);
             if (countries.length) {
 
                 countries.on('change', function () {
