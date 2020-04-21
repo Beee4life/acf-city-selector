@@ -238,7 +238,7 @@
                                 $post_meta = get_post_meta( $post_id, $field_name, true );
 
                                 wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                                    'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'counntryCode' ] : '',
+                                    'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
                                     'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
                                     'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
                                 ) );
