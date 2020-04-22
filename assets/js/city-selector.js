@@ -95,12 +95,11 @@
 
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
+                            $selected = '';
                             var state = obj[j];
                             var current_state = stored_country + '-' + state.state_code;
                             if (current_state === stored_state) {
                                 $selected = ' selected="selected"';
-                            } else {
-                                $selected = '';
                             }
                             var selected = $selected;
                             $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
@@ -121,9 +120,9 @@
 
                     select_state.fadeIn();
                     for (i = 0; i < len; i++) {
+                        $selected = '';
                         var state = obj[i];
                         var current_state = state.country_code + '-' + state.state_code;
-                        $selected = '';
                         if (current_state === stored_state) {
                             $selected = ' selected="selected"';
                         }
@@ -150,12 +149,11 @@
                         var $cityValues = '';
                         var select_city = $('select[name*="row-' + instance_count + '"][name*="cityName"]');
                         var stored_city = city_selector_vars[instance_count].cityName;
-                        // console.log(stored_city);
 
                         select_city.fadeIn();
                         for (i = 0; i < len; i++) {
-                            var mycity = obj[i];
                             $selected = '';
+                            var mycity = obj[i];
                             if (mycity.city_name === stored_city) {
                                 $selected = ' selected="selected"';
                             }
@@ -178,11 +176,10 @@
 
                     select_city.fadeIn();
                     for (i = 0; i < len; i++) {
+                        $selected = '';
                         var mycity = obj[i];
                         if (mycity.city_name === stored_city) {
                             $selected = ' selected="selected"';
-                        } else {
-                            $selected = '';
                         }
                         var selected = $selected;
                         $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
