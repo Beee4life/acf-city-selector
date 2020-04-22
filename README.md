@@ -22,7 +22,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.9
+0.10-beta
 
 <a name="description"></a>
 ### Description
@@ -34,9 +34,7 @@ This plugin allows you to select a city, based on country and province/state in 
 It creates a new `field type` for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will find a new option (category: "Choice") to choose called `City Selector`.
 
 * Add the field.
-* Choose any name you want.
-* Choose any key you want.
-* Select whether to show labels above the input fields (default = yes)
+* Select whether to show labels above the input fields (default = yes).
 * Save/publish the Field Group.
 
 <a name="installation"></a>
@@ -104,7 +102,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-We have created several country packages (csv files) especially for this plugin. These files are ready to go and can be imported without right away. These will be made available for a small fee soon, through the [ACFCS website](https://acfcs.berryplasman.com).
+We have created several country packages (csv files) especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="hooks"></a>
 ### Hooks
@@ -119,17 +117,19 @@ There are a few hooks available to add your own custom actions.
 * acfcs_after_success_import_nl - hooks after importing preset country Netherlands
 * acfcs_after_success_nuke - hooks after truncating the table
 
+More can be expected.
+
 <a name="compatibility"></a>
 ### Compatibility
 
-This ACF field type is compatible/tested with ACF 4 (Free) as well as ACF 5 (Pro).
+This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version, but we won't be putting any more time in it. Just buy the Pro version. It's worth every penny !
 
 <a name="tested"></a>
 ### Tested on
 
-* Wordpress 5.2.2
+* Wordpress 5.4
 * Advanced Custom Fields 4.4.12
-* Advanced Custom Fields Pro 5.8.2
+* Advanced Custom Fields Pro 5.8.9
 
 <a name="support"></a>
 ### Support
@@ -152,23 +152,24 @@ https://acfcs.berryplasman.com
 
 This plugin is not 100% finished yet. It most likely won't break anything but use caution, just in case.
 
-This plugin doesn't work yet in the following field types, when adding more than 1 instance:
-* repeater
-* group
-* flexible content 
+This plugin hasn't been tested yet in flexible content blocks, so no promises there. 
 
 <a name="credit"></a>
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of it.
+Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of (most of) the JS.
 
 <a name="changelog"></a>
 ### Changelog
 
+0.10-beta
+* Made the field available in repeaters
+* Made the field available in groups
+
 0.9
-* added a search page to manuallly remove cities from the database
+* Added a search page to manuallly remove cities from the database
 
 0.8
 * Fix incorrect version
