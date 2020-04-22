@@ -112,10 +112,10 @@
             } else {
                 // single
                 get_states(city_selector_vars.countryCode, function (response) {
-                    var stored_state = city_selector_vars.stateCode;
                     var obj          = JSON.parse(response);
                     var len          = obj.length;
                     var select_state = $("select[name*='stateCode']");
+                    var stored_state = city_selector_vars.stateCode;
                     var $stateValues = '';
 
                     select_state.fadeIn();
