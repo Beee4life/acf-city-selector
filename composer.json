@@ -1,16 +1,22 @@
 {
-	"name"       : "beee4life/acf-city-selector",
-	"description": ".",
-	"homepage"   : "https://acfcs.berryplasman.com",
-	"type"       : "wordpress-plugin",
-	"license"    : "GPL-2.0+",
-	"authors"    : [
-		{
-			"name"    : "Berry Plasman",
-			"homepage": "https://berryplasman.com"
-		}
-	],
-	"require": {
-		"composer/installers": "~1.0"
-	}
+  "name":         "beee4life/acf-city-selector",
+  "description":  ".",
+  "homepage":     "https://acfcs.berryplasman.com",
+  "type":         "wordpress-plugin",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "git@github.com:Beee4life/acf-city-selector.git"
+    }
+  ],
+  "license":      "GPL-2.0+",
+  "authors":      [
+    {
+      "name":     "Berry Plasman",
+      "homepage": "https://berryplasman.com"
+    }
+  ],
+  "require":      {
+    "composer/installers": "~1.0"
+  }
 }
