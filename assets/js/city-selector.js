@@ -83,10 +83,15 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
+                // console.log(city_selector_vars);
                 for (i = 0; i < city_selector_vars.length; i++ ) {
                     var instance_count = 0;
+                    // console.log(i);
                     get_states(city_selector_vars[i].countryCode, function (response) {
+                        console.log(response);
+                        // console.log(city_selector_vars[instance_count].countryCode);
                         var obj          = JSON.parse(response);
+                        var array        = jQuery.makeArray( obj )
                         var len          = obj.length;
                         var $stateValues = '';
                         var select_state = $('select[name*="row-' + instance_count + '"][name*="stateCode"]');
@@ -97,7 +102,7 @@
                         for (j = 0; j < len; j++) {
                             $selected = '';
                             var state = obj[j];
-                            var current_state = stored_country + '-' + state.state_code;
+                            var current_state = state.country_code + '-' + state.state_code;
                             if (current_state === stored_state) {
                                 $selected = ' selected="selected"';
                             }
@@ -197,12 +202,15 @@
          * @param callback
          */
         function get_states(countryCode, callback) {
+            // console.log(countryCode);
             var data = {
                 action: 'get_states_call',
                 country_code: countryCode
             };
 
             $.post(ajaxurl, data, function (response) {
+                // here the wrong response first shows
+                // console.log(data.country_code);
                 callback(response);
             });
         }
@@ -216,10 +224,13 @@
         function get_cities(stateCode, callback) {
             var data = {
                 action: 'get_cities_call',
-                row_code: stateCode
+                state_code: stateCode
             };
 
             $.post(ajaxurl, data, function (response) {
+                // here the wrong response first shows
+                // console.log(data.state_code);
+                // console.log(response);
                 callback(response);
             });
         }
