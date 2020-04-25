@@ -163,17 +163,17 @@
      */
     function get_cities_call() {
 
-        if ( isset( $_POST[ 'row_code' ] ) ) {
+        if ( isset( $_POST[ 'state_code' ] ) ) {
             // @TODO: check if i need trim
-            if ( trim( $_POST[ 'row_code' ] ) ) {
+            if ( trim( $_POST[ 'state_code' ] ) ) {
                 $country_code = false;
                 $state_code   = false;
-                if ( 5 == strlen( $_POST[ 'row_code' ] ) ) {
-                    $codes        = explode( '-', $_POST[ 'row_code' ] );
+                if ( 5 == strlen( $_POST[ 'state_code' ] ) ) {
+                    $codes        = explode( '-', $_POST[ 'state_code' ] );
                     $country_code = $codes[ 0 ];
                     $state_code   = $codes[ 1 ];
-                } elseif ( 2 == strlen( $_POST[ 'row_code' ] ) ) {
-                    $state_code   = $_POST[ 'row_code' ];
+                } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
+                    $state_code   = $_POST[ 'state_code' ];
                 }
 
                 global $wpdb;
