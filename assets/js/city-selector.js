@@ -89,7 +89,7 @@
                     // console.log(i);
                     // console.log(city_selector_vars[instance_count].countryCode);
                     get_states(city_selector_vars[i].countryCode, function (response) {
-                        console.log(response);
+                        // console.log(response);
                         var obj          = JSON.parse(response);
                         var array        = jQuery.makeArray( obj )
                         var len          = obj.length;
@@ -208,9 +208,11 @@
                 country_code: countryCode
             };
 
+            console.log('Passed} country code: ' + data.country_code);
             $.post(ajaxurl, data, function (response) {
                 // here the wrong response first shows
-                // console.log(data.country_code);
+                console.log('Returned country code; ' + data.country_code); // sometimes order gets changed
+                console.log('Response: ' + response);
                 callback(response);
             });
         }
