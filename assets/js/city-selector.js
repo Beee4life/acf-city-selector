@@ -87,9 +87,9 @@
                 for (i = 0; i < city_selector_vars.length; i++ ) {
                     var instance_count = 0;
                     // console.log(i);
+                    // console.log(city_selector_vars[instance_count].countryCode);
                     get_states(city_selector_vars[i].countryCode, function (response) {
                         console.log(response);
-                        // console.log(city_selector_vars[instance_count].countryCode);
                         var obj          = JSON.parse(response);
                         var array        = jQuery.makeArray( obj )
                         var len          = obj.length;
