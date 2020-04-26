@@ -1,6 +1,5 @@
 // JS File for Country Field
 (function($) {
-
     jQuery(document).ready(function() {
 
         jQuery(".acf-input .button").click(function () {
@@ -83,13 +82,9 @@
 
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
-                // console.log(city_selector_vars);
                 for (i = 0; i < city_selector_vars.length; i++ ) {
                     var instance_count = 0;
-                    // console.log(i);
-                    // console.log(city_selector_vars[instance_count].countryCode);
-                    get_states(city_selector_vars[i].countryCode, function (response) {
-                        // console.log(response);
+                    get_states(city_selector_vars[i].countryCode, (response)=> {
                         var obj          = JSON.parse(response);
                         var array        = jQuery.makeArray( obj )
                         var len          = obj.length;
@@ -148,7 +143,7 @@
             if ( true === Array.isArray(city_selector_vars) ) {
                 for (i = 0; i < city_selector_vars.length; i++) {
                     var instance_count = 0;
-                    get_cities(city_selector_vars[i].stateCode, function (response) {
+                    get_cities(city_selector_vars[i].stateCode, (response)=> {
                         var obj         = JSON.parse(response);
                         var len         = obj.length;
                         var $cityValues = '';
@@ -202,17 +197,12 @@
          * @param callback
          */
         function get_states(countryCode, callback) {
-            // console.log(countryCode);
-            var data = {
+            const state_data = {
                 action: 'get_states_call',
                 country_code: countryCode
             };
 
-            console.log('Passed} country code: ' + data.country_code);
-            $.post(ajaxurl, data, function (response) {
-                // here the wrong response first shows
-                console.log('Returned country code; ' + data.country_code); // sometimes order gets changed
-                console.log('Response: ' + response);
+            $.post(ajaxurl, state_data, (response)=> {
                 callback(response);
             });
         }
@@ -224,15 +214,12 @@
          * @param callback
          */
         function get_cities(stateCode, callback) {
-            var data = {
+            const city_data = {
                 action: 'get_cities_call',
                 state_code: stateCode
             };
 
-            $.post(ajaxurl, data, function (response) {
-                // here the wrong response first shows
-                // console.log(data.state_code);
-                // console.log(response);
+            $.post(ajaxurl, city_data, (response)=> {
                 callback(response);
             });
         }
