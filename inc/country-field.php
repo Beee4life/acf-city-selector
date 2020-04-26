@@ -42,6 +42,7 @@
         return $items;
     }
 
+
     /**
      * Create an array with states based on a Country Code.
      *
@@ -112,12 +113,13 @@
      * @param bool $country_code
      * @return JSON Object
      */
-    function get_states_call( $country_code = false ) {
-
-        if ( ! $country_code ) {
+    function get_states_call( $data = false ) {
+        if ( ! isset( $data[ 'country_code' ] ) ) {
             if ( isset( $_POST[ 'country_code' ] ) ) {
                 $country_code = $_POST[ 'country_code' ];
             }
+        } else {
+            $country_code = $data[ 'country_code' ];
         }
 
         global $wpdb;
@@ -151,7 +153,7 @@
             $i++;
         }
         echo json_encode( $items );
-        die();
+        wp_die();
     }
     add_action( 'wp_ajax_get_states_call', 'get_states_call' );
     add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
@@ -207,7 +209,7 @@
                     $i++;
                 }
                 echo json_encode( $items );
-                die();
+                wp_die();
             }
         }
     }
