@@ -79,7 +79,34 @@
          * Load select states when editing a post
          */
         function admin_post_edit_load_states() {
+            // console.log('HIT1');
+            if (true === Array.isArray(city_selector_vars)) {
+                // preparing the response array
+                const response_states = []
+                for (i = 0; i < city_selector_vars.length; i++) {
+                    // try - catch to handle errors
+                    try {
+                        // await the response
+                        const d = get_states(city_selector_vars[i].countryCode);
+                        // add response to the response array
+                        response_states.push(d)
+                        // console.log(response_states);
+                    } catch (err) {
+                        // handle error
+                        console.log(err)
+                    }
+                }
+                // return the array - in order!
+                // console.log(response_states);
 
+                for (i = 0; i < city_selector_vars.length; i++ ) {
+                    console.log(response_states[i]);
+                }
+
+                // return response_states
+            }
+
+            /*
             if ( true === Array.isArray(city_selector_vars) ) {
                 // repeater
                 for (i = 0; i < city_selector_vars.length; i++ ) {
@@ -133,6 +160,7 @@
 
                 });
             }
+            */
         }
 
         /**
@@ -202,9 +230,11 @@
                 country_code: countryCode
             };
 
-            $.post(ajaxurl, state_data, (response)=> {
-                callback(response);
-            });
+            return new Promise((resolve, reject) => {
+                $.post(ajaxurl, state_data, (response) => {
+                    resolve(response);
+                });
+            })
         }
 
         /**
@@ -219,9 +249,11 @@
                 state_code: stateCode
             };
 
-            $.post(ajaxurl, city_data, (response)=> {
-                callback(response);
-            });
+            return new Promise((resolve, reject) => {
+                $.post(ajaxurl, city_data, (response) => {
+                    resolve(response);
+                });
+            })
         }
 
         /**
