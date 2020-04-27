@@ -78,8 +78,7 @@
         /**
          * Load select states when editing a post
          */
-        async function admin_post_edit_load_states() {
-            // console.log('HIT1');
+        function admin_post_edit_load_states() {
             if (true === Array.isArray(city_selector_vars)) {
                 // preparing the response array
                 const response_states = []
@@ -87,39 +86,24 @@
                     // try - catch to handle errors
                     try {
                         // await the response
-                        const d = await get_states(city_selector_vars[i].countryCode);
+                        const d = get_states(city_selector_vars[i].countryCode);
                         // add response to the response array
                         response_states.push(d)
-                        // console.log(response_states);
                     } catch (err) {
                         // handle error
-                        // console.log(err)
+                        console.log(err)
                     }
                 }
-                // return the array - in order!
-                // console.log(response_states);
+                console.log(response_states);
 
+                var instance_count = 0;
                 for (i = 0; i < city_selector_vars.length; i++ ) {
-                    console.log(response_states[i]);
-                }
-
-                // return response_states
-            }
-
-            /*
-            if ( true === Array.isArray(city_selector_vars) ) {
-                // repeater
-                for (i = 0; i < city_selector_vars.length; i++ ) {
-                    var instance_count = 0;
-                    get_states(city_selector_vars[i].countryCode, (response)=> {
-                        var obj          = JSON.parse(response);
-                        var array        = jQuery.makeArray( obj )
+                    Promise.resolve(response_states[i]).then((jsonResults) => {
+                        var obj          = JSON.parse(jsonResults);
                         var len          = obj.length;
                         var $stateValues = '';
                         var select_state = $('select[name*="row-' + instance_count + '"][name*="stateCode"]');
                         var stored_state = city_selector_vars[instance_count].stateCode;
-                        var stored_country = city_selector_vars[instance_count].countryCode;
-
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -135,32 +119,7 @@
                         instance_count++;
                     });
                 }
-
-            } else {
-                // single
-                get_states(city_selector_vars.countryCode, function (response) {
-                    var obj          = JSON.parse(response);
-                    var len          = obj.length;
-                    var select_state = $("select[name*='stateCode']");
-                    var stored_state = city_selector_vars.stateCode;
-                    var $stateValues = '';
-
-                    select_state.fadeIn();
-                    for (i = 0; i < len; i++) {
-                        $selected = '';
-                        var state = obj[i];
-                        var current_state = state.country_code + '-' + state.state_code;
-                        if (current_state === stored_state) {
-                            $selected = ' selected="selected"';
-                        }
-                        var selected = $selected;
-                        $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
-                    }
-                    select_state.append($stateValues);
-
-                });
             }
-            */
         }
 
         /**
