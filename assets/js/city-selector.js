@@ -78,7 +78,7 @@
         /**
          * Load select states when editing a post
          */
-        function admin_post_edit_load_states() {
+        async function admin_post_edit_load_states() {
             // console.log('HIT1');
             if (true === Array.isArray(city_selector_vars)) {
                 // preparing the response array
@@ -87,20 +87,20 @@
                     // try - catch to handle errors
                     try {
                         // await the response
-                        const d = get_states(city_selector_vars[i].countryCode);
+                        const d = await get_states(city_selector_vars[i].countryCode);
                         // add response to the response array
                         response_states.push(d)
                         // console.log(response_states);
                     } catch (err) {
                         // handle error
-                        console.log(err)
+                        // console.log(err)
                     }
                 }
                 // return the array - in order!
                 // console.log(response_states);
 
                 for (i = 0; i < city_selector_vars.length; i++ ) {
-                    console.log(response_states[i]);
+                    // console.log(response_states[i]);
                 }
 
                 // return response_states
