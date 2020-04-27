@@ -100,7 +100,7 @@
                 // console.log(response_states);
 
                 for (i = 0; i < city_selector_vars.length; i++ ) {
-                    // console.log(response_states[i]);
+                    console.log(response_states[i]);
                 }
 
                 // return response_states
