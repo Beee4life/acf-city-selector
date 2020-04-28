@@ -138,10 +138,6 @@
         $items[ 0 ][ 'state_name' ]   = esc_html__( 'Select a province/state', 'acf-city-selector' );
         $i                            = 1;
 
-        // @TODO: check if $field['show_labels'] == 1
-        // if == 1, $items[0]['state_name'] = '-';
-        // __( 'Select a province/state', 'acf-city-selector' )
-
         foreach ( $query_results as $data ) {
             $items[ $i ][ 'country_code' ] = $data->country_code;
             $items[ $i ][ 'state_code' ]   = $data->state_code;
@@ -180,7 +176,7 @@
 
                 global $wpdb;
 
-                // @TODO: look into when it's '00'
+                // @TODO: look into when/why it's '00'
                 if ( $state_code == '00' ) {
                     $db = $wpdb->get_results( "
                     SELECT *
