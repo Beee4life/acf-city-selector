@@ -49,7 +49,7 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 <a name="usage"></a>
 ### Usage
 
-3 values are stored in an array: 
+When the field is used a single field, 3 values are stored in an array: 
 
     array(3) {
       ["countryCode"]=>
@@ -58,6 +58,30 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
       string(5) "NL-NH"
       ["cityName"]=>
       string(9) "Amsterdam"
+    }
+
+
+When the field is used in repeater field, the values are stored in a multidimensional array:
+ 
+    array(2) {
+      [0]=>
+      array(3) {
+        ["countryCode"]=>
+        string(2) "BE"
+        ["stateCode"]=>
+        string(5) "BE-BR"
+        ["cityName"]=>
+        string(10) "Anderlecht"
+      }
+      [1]=>
+      array(3) {
+        ["countryCode"]=>
+        string(2) "NL"
+        ["stateCode"]=>
+        string(5) "NL-FL"
+        ["cityName"]=>
+        string(6) "Almere"
+      }
     }
 
 The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since we format this value on return.
@@ -150,16 +174,22 @@ https://acfcs.berryplasman.com
 <a name="disclaimer"></a>
 ### Disclaimer
 
-This plugin is not 100% finished yet. It most likely won't break anything but use caution, just in case.
+This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-This plugin hasn't been tested yet in flexible content blocks, so no promises there. 
+This plugin hasn't been tested yet in the following situations, so we can't provide any guarantee here. 
+* as a single/repeater field in flexible content blocks
+* as a repeater field in groups
+* multiple instances in groups
+* as a single/repeater field on a user page
+
+We will try to look into these soon.
 
 <a name="credit"></a>
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of (most of) the JS.
+Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of the JS basics.
 
 <a name="changelog"></a>
 ### Changelog

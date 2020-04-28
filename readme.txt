@@ -41,5 +41,5 @@ https://acfcs.berryplasman.com
 A. Please report any bugs/questions to: https://github.com/Beee4life/acf-city-selector/issues
 
 Credit
+Fabrizio Sabato for the idea (http://deskema.it)
 Jarah de Jong for fixing the Javascript (https://www.inquota.nl)
-Fabrizio Sabato for the idea (http://www.deskema.it)
