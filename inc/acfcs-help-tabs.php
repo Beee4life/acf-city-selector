@@ -62,6 +62,7 @@
                         </table>'
                 ) );
 
+                /*
                 $screen->add_help_tab( array(
                     'id'      => 'import-raw',
                     'title'   => esc_html__( 'Import raw CSV data', 'acf-city-selector' ),
@@ -107,6 +108,7 @@
                         </tbody>
                         </table>'
                 ) );
+                 */
             }
 
             if ( 'settings_page_acfcs-settings' == $screen->id ) {
