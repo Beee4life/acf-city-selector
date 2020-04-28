@@ -169,14 +169,14 @@ If you want to remove the donation box in ACF, add the following line to functio
 <a name="website"></a>
 ### Website
 
-https://acfcs.berryplasman.com
+[acfcs.berryplasman.com](https://acfcs.berryplasman.com)
 
 <a name="disclaimer"></a>
 ### Disclaimer
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-This plugin hasn't been tested yet/isn't working yet in the following situations. 
+This plugin hasn't been tested yet in the following situations. 
 * multiple single field instances
 * as a single/repeater field in flexible content blocks
 * as a repeater field in groups
