@@ -454,14 +454,12 @@
                                 $cities[] = $split[ 1 ];
                             }
 
-                            $cities = implode( ', ', $cities );
+                            $cities  = implode( ', ', $cities );
                             $row_ids = implode( ',', $ids );
-                            $amount = $wpdb->query(
-                                "
+                            $amount  = $wpdb->query("
                                 DELETE FROM " . $wpdb->prefix . "cities
                                 WHERE id IN (" . $row_ids . ")
-                                "
-                            );
+                            ");
 
                             if ( $amount > 0 ) {
                                 $row_count = count( $ids );
@@ -568,7 +566,7 @@
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
                     $new_links[ 'documentation' ] = '<a href="https://acfcs.berryplasman.com/documentation">Documentation</a>';
                     if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                        // $new_links[ 'gopro' ] = '<a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro' . '">Go Pro</a>';
+                        $new_links[ 'gopro' ] = '<a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro' . '">Go Pro</a>';
                     }
                     $new_links[] = $visit_plugin_link;
                     $links       = array_merge( $links, $new_links );
