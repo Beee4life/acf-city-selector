@@ -586,7 +586,7 @@
                 $preview    = false;
                 $search     = false;
                 $settings   = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
-                $show_gopro = true;
+                $show_gopro = false;
 
                 if ( true === acfcs_has_cities() ) {
                     $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
@@ -597,7 +597,7 @@
                 }
 
                 if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_gopro ) {
-                    // $gopro = ' | <a href="' . $admin_url . 'acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
+                    $gopro = ' | <a href="' . $admin_url . 'acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
                 }
 
                 return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $gopro . '</p>';
