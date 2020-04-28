@@ -26,37 +26,91 @@
 
             // if there are any selects with name*=stateCode
             if (countries.length) {
+                // console.log('YES country length');
                 countries.on('change', function () {
+                    // console.log('country change');
                     var $this = $(this);
                     var field_name_country_code = $this.attr('name');
+                    var country_code = $this.val();
+                    // console.log(field_name_country_code);
                     var field_name_state_code = field_name_country_code.replace( 'countryCode', 'stateCode' );
+                    // console.log(field_name_state_code);
                     var field_name_city = field_name_country_code.replace( 'countryCode', 'cityName' );
+                    // console.log(field_name_city);
 
-                    get_states($(this).val(), function (response) {
-                        var obj = JSON.parse(response);
-                        var len = obj.length;
-                        var select_state = $('select[name="' + field_name_state_code + '"]');
-                        var $stateValues = '';
+                    const response_states = []
+                    try {
+                        // await the response
+                        const d = get_states(country_code);
+                        // add response to the response array
+                        response_states.push(d)
+                        // console.log(response_states);
+                    } catch (err) {
+                        // handle error
+                        console.log(err)
+                    }
 
-                        select_state.empty();
-                        $('select[name="' + field_name_city + '"]').empty();
-                        for (i = 0; i < len; i++) {
-                            var mystate = obj[i];
-                            $stateValues += '<option value="' + mystate.country_code + '-' + mystate.state_code + '">' + mystate.state_name + '</option>';
+                    Promise.all(response_states).then(function(jsonResults) {
+                        for (i = 0; i < jsonResults.length; i++) {
+                            var obj          = JSON.parse(jsonResults[i]);
+                            var len          = obj.length;
+                            var $stateValues = '';
+                            var select_state = $("select[name*='stateCode']");
+
+                            select_state.fadeIn();
+                            for (j = 0; j < len; j++) {
+                                $selected = '';
+                                var state = obj[j];
+                                $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '">' + state.state_name + '</option>';
+                            }
+                            select_state.append($stateValues);
                         }
-                        select_state.append($stateValues);
-
                     });
                 });
             }
 
             // if there are any selects with name*=stateCode
             if (state.length) {
+                // console.log('YES state length');
                 state.on('change', function () {
+                    // console.log('state change');
                     var $this = $(this);
-                    var field_name = $this.attr('name');
-                    var field_name_city = field_name.replace( 'stateCode', 'cityName' );
+                    var state_code = $this.val();
+                    // var field_name = $this.attr('name');
+                    // var field_name_city = field_name.replace( 'stateCode', 'cityName' );
+                    // console.log(state_code);
 
+                    const response_cities = []
+                    try {
+                        // await the response
+                        // console.log(state_code);
+                        const d = get_cities(state_code);
+                        // add response to the response array
+                        response_cities.push(d)
+                        // console.log(response_cities);
+                    } catch (err) {
+                        // handle error
+                        console.log(err)
+                    }
+
+                    Promise.all(response_cities).then(function(jsonResults) {
+                        for (i = 0; i < jsonResults.length; i++) {
+                            var obj         = JSON.parse(jsonResults);
+                            var len         = obj.length;
+                            var $cityValues = '';
+                            var select_city = $("select[name*='cityName']");
+                            console.log(select_city);
+
+                            select_city.fadeIn();
+                            for (j = 0; j < len; j++) {
+                                var city = obj[j];
+                                $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                            }
+                            console.log($cityValues);
+                            select_city.append($cityValues);
+                        }
+                    });
+                    /*
                     get_cities( $(this).val(), function (response) {
                         var $cityValues = '';
                         var obj = JSON.parse(response);
@@ -71,6 +125,7 @@
                         select_city.append($cityValues);
 
                     });
+                    */
                 });
             }
         }
