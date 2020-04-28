@@ -94,16 +94,15 @@
                         console.log(err)
                     }
                 }
-                console.log(response_states);
 
-                var instance_count = 0;
-                for (i = 0; i < city_selector_vars.length; i++ ) {
-                    Promise.resolve(response_states[i]).then((jsonResults) => {
-                        var obj          = JSON.parse(jsonResults);
-                        var len          = obj.length;
+                Promise.all(response_states).then(function(jsonResults) {
+                    var state_instance_count = 0;
+                    for (i = 0; i < jsonResults.length; i++) {
+                        var obj = JSON.parse(jsonResults[i]);
+                        var len = obj.length;
                         var $stateValues = '';
-                        var select_state = $('select[name*="row-' + instance_count + '"][name*="stateCode"]');
-                        var stored_state = city_selector_vars[instance_count].stateCode;
+                        var select_state = $('select[name*="row-' + state_instance_count + '"][name*="stateCode"]');
+                        var stored_state = city_selector_vars[state_instance_count].stateCode;
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -116,9 +115,32 @@
                             $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
                         }
                         select_state.append($stateValues);
-                        instance_count++;
-                    });
-                }
+                        state_instance_count++;
+                    }
+                });
+
+            } else {
+
+                get_cities(city_selector_vars.stateCode, function (response) {
+                    var obj         = JSON.parse(response);
+                    var len         = obj.length;
+                    var $cityValues = '';
+                    var select_city = $("select[name*='cityName']");
+                    var stored_city = city_selector_vars.cityName;
+
+                    select_city.fadeIn();
+                    for (i = 0; i < len; i++) {
+                        $selected = '';
+                        var mycity = obj[i];
+                        if (mycity.city_name === stored_city) {
+                            $selected = ' selected="selected"';
+                        }
+                        var selected = $selected;
+                        $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                    }
+                    select_city.append($cityValues);
+
+                });
             }
         }
 
@@ -126,31 +148,46 @@
          * Load select cities when editing a post
          */
         function admin_post_edit_load_cities() {
-
             if ( true === Array.isArray(city_selector_vars) ) {
+                const response_cities = []
                 for (i = 0; i < city_selector_vars.length; i++) {
-                    var instance_count = 0;
-                    get_cities(city_selector_vars[i].stateCode, (response)=> {
-                        var obj         = JSON.parse(response);
-                        var len         = obj.length;
+                    // try - catch to handle errors
+                    try {
+                        // await the response
+                        const d = get_cities(city_selector_vars[i].stateCode);
+                        // add response to the response array
+                        response_cities.push(d)
+                    } catch (err) {
+                        // handle error
+                        console.log(err)
+                    }
+                }
+
+                Promise.all(response_cities).then(function(jsonResults) {
+                    var city_instance_count = 0;
+                    for (i = 0; i < jsonResults.length; i++) {
+                        var obj = JSON.parse(jsonResults[i]);
+                        var len = obj.length;
                         var $cityValues = '';
-                        var select_city = $('select[name*="row-' + instance_count + '"][name*="cityName"]');
-                        var stored_city = city_selector_vars[instance_count].cityName;
+                        var select_city = $('select[name*="row-' + city_instance_count + '"][name*="cityName"]');
+                        var stored_city = city_selector_vars[city_instance_count].cityName;
 
                         select_city.fadeIn();
-                        for (i = 0; i < len; i++) {
+                        for (j = 0; j < len; j++) {
                             $selected = '';
-                            var mycity = obj[i];
-                            if (mycity.city_name === stored_city) {
+                            var city = obj[j];
+                            var city_name = city.city_name;
+                            if (city_name === stored_city) {
                                 $selected = ' selected="selected"';
                             }
                             var selected = $selected;
-                            $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                            $cityValues += '<option value="' + city_name + '"' + selected + '>' + city_name + '</option>';
                         }
                         select_city.append($cityValues);
-                        instance_count++;
-                    });
-                }
+                        city_instance_count++;
+                    }
+
+                });
 
             } else {
 
