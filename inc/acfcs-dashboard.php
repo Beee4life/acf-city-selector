@@ -100,9 +100,10 @@
                         </div>
                 <?php } ?>
 
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_raw_import ) { ?>
+                <?php if ( false != $show_raw_import ) { ?>
+                    <?php $placeholder = "Amsterdam,NH,Noord-Holland,NL,Netherlands\nRotterdam,ZH,Zuid-Holland,NL,Netherlands"; ?>
+                    <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? $_POST[ 'raw_csv_import' ] : false; ?>
                     <div class="acfcs__section">
-
                         <h2><?php esc_html_e( 'Import CSV data (from clipboard)', 'acf-city-selector' ); ?></h2>
                         <p>
                             <?php esc_html_e( 'Here you can paste CSV data from your clipboard.', 'acf-city-selector' ); ?>
@@ -111,16 +112,10 @@
                             <br />
                             <?php esc_html_e( 'This is seen as a new entry and creates an error !!!', 'acf-city-selector' ); ?>
                         </p>
-                        <?php
-                            $submitted_raw_data = false;
-                            if ( isset( $_POST[ 'raw_csv_import' ] ) ) {
-                                $submitted_raw_data = $_POST[ 'raw_csv_import' ];
-                            }
-                        ?>
                         <form method="post">
                             <input name="acfcs_import_raw_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-import-raw-nonce' ); ?>" />
                             <label>
-                                <textarea name="acfcs_raw_csv_import" id="raw-import" rows="5" cols="100" placeholder="Amsterdam,NH,Noord-Holland,NL,Netherlands"><?php echo $submitted_raw_data; ?></textarea>
+                                <textarea name="acfcs_raw_csv_import" id="raw-import" rows="5" cols="100" placeholder="<?php echo $placeholder; ?>"><?php echo $submitted_raw_data; ?></textarea>
                             </label>
                             <br />
                             <input name="verify" type="submit" class="button button-primary" value="<?php esc_html_e( 'Verify CSV data', 'acf-city-selector' ); ?>" />
