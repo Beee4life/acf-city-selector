@@ -545,8 +545,8 @@
              * Add settings link on plugin page
              */
             public function acfcs_settings_link( $links ) {
-                $settings_link = '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                array_unshift( $links, $settings_link );
+                $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
+                $links         = array_merge( $settings_link, $links );
 
                 return $links;
             }
