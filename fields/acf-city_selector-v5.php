@@ -194,6 +194,7 @@
 
                     if ( isset( $post_id ) && false !== $post_id ) {
                         $fields = get_field_objects( $post_id );
+                        // get the field name for acfcs
                         if ( is_array( $fields ) && count( $fields ) > 0 ) {
                             foreach( $fields as $field ) {
                                 // check if field_name is overridden
@@ -224,6 +225,7 @@
                             }
                         }
 
+                        // get and localize post_meta
                         if ( isset( $repeater_count ) && 0 < $repeater_count ) {
                             for( $i = 0; $i < $repeater_count; $i++ ) {
                                 $repeater_field_name = $repeater_name . '_' . $i . '_' . $city_selector_name;
