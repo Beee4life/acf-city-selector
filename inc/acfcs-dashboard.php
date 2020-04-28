@@ -10,7 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $show_raw_import = 0;
+        $show_raw_import = 1;
         ?>
 
         <div class="wrap acfcs">
@@ -100,7 +100,7 @@
                         </div>
                 <?php } ?>
 
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_raw_import ) { ?>
+                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_raw_import ) { ?>
                     <div class="acfcs__section">
 
                         <h2><?php esc_html_e( 'Import CSV data (from clipboard)', 'acf-city-selector' ); ?></h2>
