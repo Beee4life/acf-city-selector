@@ -73,7 +73,7 @@
                                         </label>
                                     </td>
 
-                                    <td class="xhidden">
+                                    <td>
                                         <?php $amounts = [ 5, 10, 25, 50, 100, 250, 500, 1000 ]; ?>
                                         <label>
                                             <select name="acfcs_max_lines" id="acfcs_max_lines">
@@ -136,7 +136,7 @@
                             echo '</table>';
                         } else {
                             echo '<p class="error_notice">';
-                            echo sprintf( __( 'You either have errors in your CSV or there is no data. Verify this file on the <a href="%s">dashboard</a>.', 'acf-city-selector' ), admin_url( 'admin.php?page=' ) . 'csv2wp-dashboard' );
+                            echo sprintf( esc_html__( 'You either have errors in your CSV or there is no data. Verify this file on the <a href="%s">dashboard</a>.', 'acf-city-selector' ), admin_url( 'admin.php?page=' ) . 'csv2wp-dashboard' );
                             echo '</p>';
                         }
                         echo '</div>';
