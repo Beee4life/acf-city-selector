@@ -10,7 +10,39 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-    ?>
+        $packages = [
+            [
+                'country' => __( 'Canada', 'acf-city-selector' ),
+                'states'  => 14,
+                'cities'  => 3018,
+                'price'   => 5,
+                'link'    => '#',
+            ],
+            [
+                'country' => __( 'France', 'acf-city-selector' ),
+                'states'  => 96,
+                'cities'  => 13529,
+                'price'   => 15,
+                'link'    => '#',
+            ],
+            [
+                'country' => __( 'Germany', 'acf-city-selector' ),
+                'states'  => 16,
+                'cities'  => 9716,
+                'price'   => 10,
+                'link'    => '#',
+            ],
+            [
+                'country' => __( 'Switzerland', 'acf-city-selector' ),
+                'states'  => 26,
+                'cities'  => 1528,
+                'price'   => 5,
+                'link'    => '#',
+            ],
+        ];
+        $show_pro_subscription = false;
+        ?>
+
 
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
@@ -19,7 +51,6 @@
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
 
-            <?php $show_pro_subscription = false; ?>
 
             <div class="admin_left">
 
@@ -39,39 +70,6 @@
                 <?php } ?>
 
                 <div class="acfcs__section">
-                    <?php
-                        $packages = [
-                            [
-                                'country' => __( 'Canada', 'acf-city-selector' ),
-                                'states'  => 14,
-                                'cities'  => 3018,
-                                'price'   => 5,
-                                'link'    => '#',
-                            ],
-                            [
-                                'country' => __( 'France', 'acf-city-selector' ),
-                                'states'  => 96,
-                                'cities'  => 13529,
-                                'price'   => 15,
-                                'link'    => '#',
-                            ],
-                            [
-                                'country' => __( 'Germany', 'acf-city-selector' ),
-                                'states'  => 16,
-                                'cities'  => 9716,
-                                'price'   => 10,
-                                'link'    => '#',
-                            ],
-                            [
-                                'country' => __( 'Switzerland', 'acf-city-selector' ),
-                                'states'  => 26,
-                                'cities'  => 1528,
-                                'price'   => 5,
-                                'link'    => '#',
-                            ],
-                        ];
-                    ?>
-
                     <h2><?php esc_html_e( 'Country packages', 'acf-city-selector' ); ?></h2>
 
                     <table class="acfcs__table acfcs__table--packages">
