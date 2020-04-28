@@ -121,25 +121,38 @@
 
             } else {
 
-                get_cities(city_selector_vars.stateCode, function (response) {
-                    var obj         = JSON.parse(response);
-                    var len         = obj.length;
-                    var $cityValues = '';
-                    var select_city = $("select[name*='cityName']");
-                    var stored_city = city_selector_vars.cityName;
+                const response_states = [];
+                try {
+                    // await the response
+                    const d = get_states(city_selector_vars.countryCode);
+                    // add response to the response array
+                    response_states.push(d)
+                } catch (err) {
+                    // handle error
+                    console.log(err)
+                }
 
-                    select_city.fadeIn();
-                    for (i = 0; i < len; i++) {
-                        $selected = '';
-                        var mycity = obj[i];
-                        if (mycity.city_name === stored_city) {
-                            $selected = ' selected="selected"';
+                Promise.all(response_states).then(function(jsonResults) {
+                    for (i = 0; i < jsonResults.length; i++) {
+                        var obj          = JSON.parse(jsonResults[i]);
+                        var len          = obj.length;
+                        var $stateValues = '';
+                        var select_state = $("select[name*='stateCode']");
+                        var stored_state = city_selector_vars.stateCode;
+
+                        select_state.fadeIn();
+                        for (j = 0; j < len; j++) {
+                            $selected = '';
+                            var state = obj[j];
+                            var current_state = state.country_code + '-' + state.state_code;
+                            if (current_state === stored_state) {
+                                $selected = ' selected="selected"';
+                            }
+                            var selected = $selected;
+                            $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '"' + selected + '>' + state.state_name + '</option>';
                         }
-                        var selected = $selected;
-                        $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                        select_state.append($stateValues);
                     }
-                    select_city.append($cityValues);
-
                 });
             }
         }
@@ -191,24 +204,38 @@
 
             } else {
 
-                get_cities(city_selector_vars.stateCode, function (response) {
-                    var obj         = JSON.parse(response);
-                    var len         = obj.length;
-                    var $cityValues = '';
-                    var select_city = $("select[name*='cityName']");
-                    var stored_city = city_selector_vars.cityName;
+                const response_cities = [];
+                try {
+                    // await the response
+                    const d = get_cities(city_selector_vars.stateCode);
+                    // add response to the response array
+                    response_cities.push(d)
+                } catch (err) {
+                    // handle error
+                    console.log(err)
+                }
 
-                    select_city.fadeIn();
-                    for (i = 0; i < len; i++) {
-                        $selected = '';
-                        var mycity = obj[i];
-                        if (mycity.city_name === stored_city) {
-                            $selected = ' selected="selected"';
+                Promise.all(response_cities).then(function(jsonResults) {
+                    for (i = 0; i < jsonResults.length; i++) {
+                        var obj = JSON.parse(jsonResults[i]);
+                        var len = obj.length;
+                        var $cityValues = '';
+                        var select_city = $('select[name*="cityName"]');
+                        var stored_city = city_selector_vars.cityName;
+
+                        select_city.fadeIn();
+                        for (j = 0; j < len; j++) {
+                            $selected = '';
+                            var city = obj[j];
+                            var city_name = city.city_name;
+                            if (city_name === stored_city) {
+                                $selected = ' selected="selected"';
+                            }
+                            var selected = $selected;
+                            $cityValues += '<option value="' + city_name + '"' + selected + '>' + city_name + '</option>';
                         }
-                        var selected = $selected;
-                        $cityValues += '<option value="' + mycity.city_name + '"' + selected + '>' + mycity.city_name + '</option>';
+                        select_city.append($cityValues);
                     }
-                    select_city.append($cityValues);
 
                 });
             }
