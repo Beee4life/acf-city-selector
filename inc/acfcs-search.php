@@ -36,9 +36,6 @@
 
             // if there is more than 1 country, place NL on top
             if ( count( $countries ) > 1 ) {
-                // get locale
-                // get locale code
-
                 $array_key_nl = false;
                 foreach ( $countries as $key => $country ) {
                     if ( 'NL' == $country[ 'code' ] ) {
@@ -84,6 +81,7 @@
             $where                   = [];
 
             if ( false != $search_criteria_state ) {
+                // @TODO: change state code to max 3
                 $where[] = "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
                 $where[] = "country_code = '" . $search_criteria_country . "'";
@@ -130,6 +128,7 @@
                 <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
+                        <?php // if there's only 1 country, no need to add country dropdown ?>
                         <?php if ( count( $countries ) > 1 ) { ?>
                             <div class="acfcs__search-criteria acfcs__search-criteria--country">
                                 <label>
@@ -200,7 +199,7 @@
                         <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
                     </p>
                 <?php } elseif ( ! empty( $cities ) ) { ?>
-                    <?php // output results ?>
+                    <?php // results output here ?>
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">
