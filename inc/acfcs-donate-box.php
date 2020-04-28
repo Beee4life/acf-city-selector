@@ -8,15 +8,10 @@
                 return;
             }
 
-            $id       = 'acfcs-donate';
-            $title    = sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' );
-            $callback = 'acfcs_show_donate_meta_box';
-            $screens  = array();
-            $context  = 'side';
-            $priority = 'low';
-            add_meta_box( $id, $title, $callback, $screens, $context, $priority );
+            $title = sprintf( esc_html__( '%s says "Thank you"', 'acf-city-selector' ), 'Beee' );
+            add_meta_box( 'acfcs-donate', $title, 'acfcs_show_donate_meta_box', [], 'side', 'low' );
 
-        } // end function donate_meta_box
+        }
         add_action( 'add_meta_boxes', 'acfcs_donate_meta_box' );
 
         /**
