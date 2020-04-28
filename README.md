@@ -177,6 +177,7 @@ https://acfcs.berryplasman.com
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
 This plugin hasn't been tested yet in the following situations, so we can't provide any guarantee here. 
+* multiple single field instances
 * as a single/repeater field in flexible content blocks
 * as a repeater field in groups
 * multiple instances in groups
