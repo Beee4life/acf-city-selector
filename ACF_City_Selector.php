@@ -289,6 +289,7 @@
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
                                 unlink( $this->settings[ 'upload_folder' ] . $file_name );
+                                // @TODO: add if for success
                                 $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
                             }
                         }
@@ -447,7 +448,6 @@
 
                         global $wpdb;
                         if ( is_array( $_POST[ 'row_id' ] ) ) {
-                            // echo '<pre>'; var_dump($_POST[ 'row_id' ]); echo '</pre>'; exit;
                             foreach( $_POST[ 'row_id' ] as $row ) {
                                 $split    = explode( ' ', $row, 2 );
                                 $ids[]    = $split[ 0 ];
