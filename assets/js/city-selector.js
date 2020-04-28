@@ -26,25 +26,17 @@
 
             // if there are any selects with name*=stateCode
             if (countries.length) {
-                // console.log('YES country length');
                 countries.on('change', function () {
-                    // console.log('country change');
                     var $this = $(this);
                     var field_name_country_code = $this.attr('name');
                     var country_code = $this.val();
-                    // console.log(field_name_country_code);
-                    var field_name_state_code = field_name_country_code.replace( 'countryCode', 'stateCode' );
-                    // console.log(field_name_state_code);
-                    var field_name_city = field_name_country_code.replace( 'countryCode', 'cityName' );
-                    // console.log(field_name_city);
-
                     const response_states = []
+
                     try {
                         // await the response
                         const d = get_states(country_code);
                         // add response to the response array
                         response_states.push(d)
-                        // console.log(response_states);
                     } catch (err) {
                         // handle error
                         console.log(err)
@@ -71,23 +63,16 @@
 
             // if there are any selects with name*=stateCode
             if (state.length) {
-                // console.log('YES state length');
                 state.on('change', function () {
-                    // console.log('state change');
                     var $this = $(this);
                     var state_code = $this.val();
-                    // var field_name = $this.attr('name');
-                    // var field_name_city = field_name.replace( 'stateCode', 'cityName' );
-                    // console.log(state_code);
-
                     const response_cities = []
+
                     try {
                         // await the response
-                        // console.log(state_code);
                         const d = get_cities(state_code);
                         // add response to the response array
                         response_cities.push(d)
-                        // console.log(response_cities);
                     } catch (err) {
                         // handle error
                         console.log(err)
@@ -99,33 +84,15 @@
                             var len         = obj.length;
                             var $cityValues = '';
                             var select_city = $("select[name*='cityName']");
-                            console.log(select_city);
 
                             select_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
                                 $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
                             }
-                            console.log($cityValues);
                             select_city.append($cityValues);
                         }
                     });
-                    /*
-                    get_cities( $(this).val(), function (response) {
-                        var $cityValues = '';
-                        var obj = JSON.parse(response);
-                        var len = obj.length;
-                        var select_city = $("select[name='" + field_name_city + "']");
-
-                        select_city.empty();
-                        for (i = 0; i < len; i++) {
-                            var mycity = obj[i];
-                            $cityValues += '<option value="' + mycity.city_name + '">' + mycity.city_name + '</option>';
-                        }
-                        select_city.append($cityValues);
-
-                    });
-                    */
                 });
             }
         }
