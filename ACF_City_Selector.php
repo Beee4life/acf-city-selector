@@ -636,7 +636,7 @@
 
                 if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
                     // include( 'inc/acfcs-go-pro.php' );
-                    // add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-go-pro', 'acfcs_go_pro' );
+                    // add_submenu_page( null, 'Go Pro', 'Go Pro', 'manage_options', 'acfcs-go-pro', 'acfcs_go_pro' );
                 }
             }
 
