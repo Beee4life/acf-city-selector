@@ -27,10 +27,13 @@
             // if there are any selects with name*=stateCode
             if (countries.length) {
                 countries.on('change', function () {
-                    var $this = $(this);
-                    var field_name_country_code = $this.attr('name');
-                    var country_code = $this.val();
                     const response_states = []
+                    var $this = $(this);
+                    var country_code = $this.val();
+                    var country_field_id = $this.attr('id');
+                    var city_field_id = country_field_id.replace( 'countryCode', 'cityName' );
+                    var changed_city = $('select[id="' + city_field_id + '"]');
+                    changed_city.empty();
 
                     try {
                         // await the response
@@ -49,6 +52,7 @@
                             var $stateValues = '';
                             var select_state = $("select[name*='stateCode']");
 
+                            select_state.empty();
                             select_state.fadeIn();
                             for (j = 0; j < len; j++) {
                                 $selected = '';
@@ -85,6 +89,7 @@
                             var $cityValues = '';
                             var select_city = $("select[name*='cityName']");
 
+                            select_city.empty();
                             select_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
@@ -125,6 +130,8 @@
                         var $stateValues = '';
                         var select_state = $('select[name*="row-' + state_instance_count + '"][name*="stateCode"]');
                         var stored_state = city_selector_vars[state_instance_count].stateCode;
+
+                        select_state.empty();
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -162,6 +169,7 @@
                         var select_state = $("select[name*='stateCode']");
                         var stored_state = city_selector_vars.stateCode;
 
+                        select_state.empty();
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -207,6 +215,7 @@
                         var select_city = $('select[name*="row-' + city_instance_count + '"][name*="cityName"]');
                         var stored_city = city_selector_vars[city_instance_count].cityName;
 
+                        select_city.empty();
                         select_city.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -245,6 +254,7 @@
                         var select_city = $('select[name*="cityName"]');
                         var stored_city = city_selector_vars.cityName;
 
+                        select_city.empty();
                         select_city.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
