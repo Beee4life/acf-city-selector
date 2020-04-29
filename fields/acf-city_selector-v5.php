@@ -91,32 +91,43 @@
              */
             function render_field( $field ) {
 
-                if ( strpos( $field[ 'parent' ], 'group' ) !== false ) {
-                    // single
-                    $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                } else {
-                    // repeater + group
-                    if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
-                        // repeater
-                        $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
-                        $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
-                        $field_object    = get_field_objects( get_the_ID() );
-                        if ( is_array( $field_object ) ) {
-                            $repeater_name = array_keys( $field_object )[ 0 ];
-                            $meta_key      = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
+                    // repeater
+                    $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
+                    $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
+                    $field_object    = get_field_objects( get_the_ID() );
+                    if ( is_array( $field_object ) ) {
+                        $repeater_name = array_keys( $field_object )[ 0 ];
+                        $meta_key      = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                        if ( isset( $meta_key ) ) {
+                            $post_meta = get_post_meta( get_the_ID(), $meta_key, true );
                         }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                        $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
+                    }
+                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                    // single or group
+
+                    /**
+                     * Why is 24 set as length ?
+                     * Because the length of a single $field['name'] = 24.
+                     * The length of a group $field['name'] = 45.
+                     *
+                     * repeater $field[ 'name' ] = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
+                     * single $field[ 'name' ]   = acf[field_5e950320fef17] (24)
+                     */
+                    if ( 24 < strlen( $field[ 'name' ] ) ) {
                         // group
                         $field_object = get_field_objects( get_the_ID() );
                         if ( is_array( $field_object ) ) {
-                            $group_name = array_keys( $field_object )[ 0 ];
-                            $meta_key   = $group_name . '_' . $field[ '_name' ];
+                            $group_name       = array_keys( $field_object )[ 0 ];
+                            $meta_key         = $group_name . '_' . $field[ '_name' ];
+                            $post_meta        = get_post_meta( get_the_ID(), $meta_key, true );
+                            $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                         }
+                    } else {
+                        // single
+                        $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
                     }
-                    if ( isset( $meta_key ) ) {
-                        $post_meta = get_post_meta( get_the_ID(), $meta_key, true );
-                    }
-                    $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                 }
 
                 $countries   = acfcs_populate_country_select( $field );
