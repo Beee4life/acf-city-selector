@@ -22,7 +22,7 @@
 
             <div class="admin_left">
 
-                <div class="acfcs__section">
+                <div class="acfcs__section acfcs__section--upload-csv">
 
                     <h2><?php esc_html_e( 'Upload a CSV file', 'acf-city-selector' ); ?></h2>
                     <form enctype="multipart/form-data" method="post">
@@ -38,7 +38,7 @@
                 <?php
                     $file_index = acfcs_check_if_files();
                     if ( ! empty( $file_index ) ) { ?>
-                        <div class="acfcs__section">
+                        <div class="acfcs__section acfcs__section--process-file">
                             <h2><?php esc_html_e( 'Select a file to import', 'acf-city-selector' ); ?></h2>
 
                             <form method="post">
@@ -103,7 +103,7 @@
                 <?php if ( false != $show_raw_import ) { ?>
                     <?php $placeholder = "Amsterdam,NH,Noord-Holland,NL,Netherlands\nRotterdam,ZH,Zuid-Holland,NL,Netherlands"; ?>
                     <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? $_POST[ 'raw_csv_import' ] : false; ?>
-                    <div class="acfcs__section">
+                    <div class="acfcs__section acfcs__section--raw-import">
                         <h2><?php esc_html_e( 'Import CSV data (from clipboard)', 'acf-city-selector' ); ?></h2>
                         <p>
                             <?php esc_html_e( 'Here you can paste CSV data from your clipboard.', 'acf-city-selector' ); ?>

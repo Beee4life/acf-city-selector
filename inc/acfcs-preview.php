@@ -32,7 +32,7 @@
                     <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
                     <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
 
-                    <div class="acfcs__section acfcs__section--preview-form">
+                    <div class="acfcs__section acfcs__section--preview">
 
                         <form name="select-preview-file" id="settings-form" action="" method="post">
                             <table class="acfcs__table acfcs__table--preview-form">
