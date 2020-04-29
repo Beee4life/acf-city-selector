@@ -4,16 +4,6 @@
  */
 
 /* edit post screens */
-/* v4 */
-.field_type-acf_city_selector .dropdown-box {
-    margin-bottom: 1em;
-}
-
-.field_type-acf_city_selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 10px;
-}
-
 /* v5 */
 .acf-field-acf-city-selector .dropdown-box {
     margin-bottom: 1em;
@@ -25,7 +15,8 @@
 }
 
 /* admin pages */
-.admin_left, .admin_right {
+.admin_left,
+.admin_right {
     background:            white;
     box-sizing:            border-box;
     padding:               20px;
@@ -220,3 +211,14 @@
 #contextual-help-columns .contextual-help-tabs-wrap td {
     border-top: 1px solid #444444;
 }
+
+/* v4, not actively supported anymore */
+.field_type-acf_city_selector .dropdown-box {
+    margin-bottom: 1em;
+}
+
+.field_type-acf_city_selector span.acf-input-header {
+    display:       block;
+    margin-bottom: 10px;
+}
+
