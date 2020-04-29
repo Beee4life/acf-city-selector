@@ -178,11 +178,11 @@ This plugin is not 100% finished yet. It won't break anything but be on the look
 
 This plugin hasn't been tested yet in the following situations. 
 * multiple single field instances
+* multiple single field instances in groups
 * as a single/repeater field in flexible content blocks
 * as a repeater field in groups
-* multiple instances in groups
 * as a single/repeater field on a user page
-* as a repeater field in a front-end form
+* most front-end usage
 
 We will try to look into these soon.
 
