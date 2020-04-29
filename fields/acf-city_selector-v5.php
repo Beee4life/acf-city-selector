@@ -130,7 +130,7 @@
                             <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
                         </span>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text"></label>
+                    <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                         <?php foreach ( $countries as $key => $country ) { ?>
                             <?php $selected = ( isset( $selected_country ) ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
@@ -145,7 +145,7 @@
                             <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
                         </span>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text"></label>
+                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></label>
                     <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
                         <?php // content will be dynamically generated ?>
                     </select>
@@ -157,7 +157,7 @@
                             <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
                         </span>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text"></label>
+                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></label>
                     <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
                         <?php // content will be dynamically generated ?>
                     </select>
