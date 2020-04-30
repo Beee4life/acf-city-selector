@@ -1,16 +1,14 @@
 /**
  *  CSS for the ACF City Selector plugin
- *  Version: 1.0
  */
 
-/* edit post screens */
 /* v5 */
+/* edit post screens */
 .acf-field-acf-city-selector .dropdown-box {
     margin-bottom: 1em;
 }
 
-.acf-field-acf-city-selector span.acf-input-header {
-    display:       block;
+.acf-field-acf-city-selector .acf-input-header {
     margin-bottom: 10px;
 }
 
@@ -213,6 +211,7 @@
 }
 
 /* v4, not actively supported anymore */
+/* edit post screens */
 .field_type-acf_city_selector .dropdown-box {
     margin-bottom: 1em;
 }
