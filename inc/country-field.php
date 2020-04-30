@@ -1,6 +1,6 @@
 <?php
 
-    /**
+    /*
      * Set admin-ajax.php on the front side (by default it is available only for Backend)
      */
     function city_selector_ajaxurl() {
