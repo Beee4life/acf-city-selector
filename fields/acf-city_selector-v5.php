@@ -1,5 +1,4 @@
 <?php
-
     // exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
@@ -58,12 +57,6 @@
              */
             function render_field_settings( $field ) {
 
-                /*
-                 * acf_render_field_setting
-                 *
-                 * This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-                 * Please note that you must also have a matching $defaults value for the field name (show_labels)
-                 */
                 $select_options = array(
                     1 => __( 'Yes', 'acf-city-selector' ),
                     0 => __( 'No', 'acf-city-selector' )
@@ -92,7 +85,7 @@
             function render_field( $field ) {
 
                 if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
-                    // repeater
+                    // if $field[ 'name' ] contains 'row' it's a repeater field
                     $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
                     $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
                     $field_object    = get_field_objects( get_the_ID() );
@@ -105,12 +98,13 @@
                         $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                     }
                 } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                    // single or group
+                    // else it's a single or group field
 
                     /**
                      * Why is 24 set as length ?
                      * Because the length of a single $field['name'] = 24.
                      * The length of a group $field['name'] = 45.
+                     * So if it's bigger than 24, it's a group name.
                      *
                      * group = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
                      * single   = acf[field_5e950320fef17] (24)
