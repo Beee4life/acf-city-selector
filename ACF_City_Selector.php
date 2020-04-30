@@ -649,6 +649,5 @@
         // initialize
         new ACF_City_Selector();
 
-
-        // class_exists check
+    // class_exists check
     endif;
