@@ -135,7 +135,9 @@
                             <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
                         </div>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></label>
+                    <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
+                    </label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                         <?php foreach ( $countries as $key => $country ) { ?>
                             <?php $selected = ( isset( $selected_country ) ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
@@ -150,7 +152,9 @@
                             <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
                         </div>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></label>
+                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                    </label>
                     <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
                         <?php // content will be dynamically generated ?>
                     </select>
@@ -162,7 +166,9 @@
                             <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
                         </div>
                     <?php } ?>
-                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></label>
+                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                    </label>
                     <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
                         <?php // content will be dynamically generated ?>
                     </select>
@@ -282,6 +288,7 @@
                 $country_code = '';
                 if ( isset( $value[ 'countryCode' ]) ) {
                     $country_code = $value[ 'countryCode' ];
+                    // @TODO: check when it can be '0'
                     if ( '0' != $country_code && isset( $value[ 'stateCode' ] ) ) {
                         $state_code = substr( $value[ 'stateCode' ], 3 );
                     } else {
@@ -314,7 +321,7 @@
              *  @return	$value
             */
             function update_value( $value, $post_id, $field ) {
-                // @TODO: fix save empty value for countryCode, stateName and cityName
+                // @TODO: check and maybe fix save empty value for countryCode, stateName and cityName
                 return $value;
             }
 
