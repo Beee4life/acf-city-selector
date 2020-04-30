@@ -69,7 +69,6 @@
             }
         }
 
-
         return [];
     }
 
@@ -91,7 +90,7 @@
         if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
-            $value_length     = 254;
+            $value_length     = 254; // @TODO: add filter for this
             while ( ( $csv_line = fgetcsv( $handle, 1000, "{$delimiter}" ) ) !== false ) {
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
@@ -124,7 +123,6 @@
                     // create a new array for each row
                     $new_line = [];
                     foreach ( $csv_line as $item ) {
-
                         if ( strlen( $item ) > $value_length ) {
                             ACF_City_Selector::acfcs_errors()->add( 'error_too_long_value', esc_html( sprintf( __( "The value '%s' is too long.", "acf-city-selector" ), $item ) ) );
 
