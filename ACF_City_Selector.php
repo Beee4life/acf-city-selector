@@ -296,7 +296,7 @@
 
 
             /*
-             * Import raw csv data (not in use yet)
+             * Import raw csv data
              */
             public function acfcs_import_raw_data() {
                 if ( isset( $_POST[ 'acfcs_import_raw_nonce' ] ) ) {
