@@ -26,9 +26,6 @@
              * __construct
              *
              * This function will setup the class functionality
-             *
-             * @param   n/a
-             * @return  n/a
              */
             public function __construct() {
 
