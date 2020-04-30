@@ -20,7 +20,7 @@
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) :
 
-        /**
+        /*
          * Main class
          */
         class ACF_City_Selector {
@@ -76,7 +76,7 @@
             }
 
 
-            /**
+            /*
              * Change plugin order so ACFCS loads after ACF
              */
             public function acfcs_change_plugin_order() {
@@ -92,7 +92,7 @@
             }
 
 
-            /**
+            /*
              * Check if ACF is active and if not add an admin notice
              */
             public function acfcs_check_for_acf() {
@@ -213,7 +213,7 @@
             }
 
 
-            /**
+            /*
              * Read uploaded file for verification or import
              * Delete file is also included in this function
              */
@@ -471,7 +471,7 @@
             }
 
 
-            /**
+            /*
              * Error function
              *
              * @return WP_Error
@@ -482,7 +482,7 @@
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
 
-            /**
+            /*
              * Displays error messages from form submissions
              */
             public static function acfcs_show_admin_notices() {
@@ -524,14 +524,12 @@
             }
 
 
-            /*
+            /**
              * include_field_types
              *
              * This function will include the field type class
              *
-             * @type    function
-             * @param   $version (int) major ACF version. Defaults to false
-             * @return  n/a
+             * @param bool $version (int) major ACF version. Defaults to false
              */
             public function acfcs_include_field_types( $version = false ) {
                 if ( ! $version ) {
