@@ -64,7 +64,7 @@ array(3) {
 
 When the field is used in repeater field, the values are stored in a multidimensional array:
 
-``` 
+```php 
 array(2) {
   [0]=>
   array(3) {
@@ -90,26 +90,29 @@ array(2) {
 The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
 
 The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
-
-    array(5) {
-      ["countryCode"]=>
-      string(2) "NL"
-      ["stateCode"]=>
-      string(5) "NH"
-      ["cityName"]=>
-      string(9) "Amsterdam"
-      ["stateName"]=>
-      string(13) "Noord-Holland"
-      ["countryName"]=>
-      string(11) "Netherlands"
-    }
+```php
+array(5) {
+  ["countryCode"]=>
+  string(2) "NL"
+  ["stateCode"]=>
+  string(5) "NH"
+  ["cityName"]=>
+  string(9) "Amsterdam"
+  ["stateName"]=>
+  string(13) "Noord-Holland"
+  ["countryName"]=>
+  string(11) "Netherlands"
+}
+```
 
 Echo it as follows:
 
-    $city_selector = get_field('field_name');
-    echo 'I live in ' . $city_selector['cityName'];
-    echo 'which is in ' . city_selector['stateName'] . ' (' . city_selector['stateCode'] . ')'; 
-    echo ' which lies in the country: ' . $city_selector['country'] . ' (' . $city_selector['countryCode'] . ')';
+```php
+$city_selector = get_field('field_name');
+echo 'I live in ' . $city_selector['cityName'];
+echo 'which is in ' . city_selector['stateName'] . ' (' . city_selector['stateCode'] . ')'; 
+echo ' which lies in the country: ' . $city_selector['country'] . ' (' . $city_selector['countryCode'] . ')';
+```
 
 This outputs:
 
