@@ -51,39 +51,41 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 ### Usage
 
 When the field is used a single field, 3 values are stored in an array: 
-
-    array(3) {
-      ["countryCode"]=>
-      string(2) "NL"
-      ["stateCode"]=>
-      string(5) "NL-NH"
-      ["cityName"]=>
-      string(9) "Amsterdam"
-    }
-
+```php
+array(3) {
+  ["countryCode"]=>
+  string(2) "NL"
+  ["stateCode"]=>
+  string(5) "NL-NH"
+  ["cityName"]=>
+  string(9) "Amsterdam"
+}
+```
 
 When the field is used in repeater field, the values are stored in a multidimensional array:
- 
-    array(2) {
-      [0]=>
-      array(3) {
-        ["countryCode"]=>
-        string(2) "BE"
-        ["stateCode"]=>
-        string(5) "BE-BR"
-        ["cityName"]=>
-        string(10) "Anderlecht"
-      }
-      [1]=>
-      array(3) {
-        ["countryCode"]=>
-        string(2) "NL"
-        ["stateCode"]=>
-        string(5) "NL-FL"
-        ["cityName"]=>
-        string(6) "Almere"
-      }
-    }
+
+``` 
+array(2) {
+  [0]=>
+  array(3) {
+    ["countryCode"]=>
+    string(2) "BE"
+    ["stateCode"]=>
+    string(5) "BE-BR"
+    ["cityName"]=>
+    string(10) "Anderlecht"
+  }
+  [1]=>
+  array(3) {
+    ["countryCode"]=>
+    string(2) "NL"
+    ["stateCode"]=>
+    string(5) "NL-FL"
+    ["cityName"]=>
+    string(6) "Almere"
+  }
+}
+```
 
 The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
 
