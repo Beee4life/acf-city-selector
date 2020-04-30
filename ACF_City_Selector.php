@@ -20,6 +20,9 @@
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) :
 
+        /**
+         * Main class
+         */
         class ACF_City_Selector {
 
             /*
