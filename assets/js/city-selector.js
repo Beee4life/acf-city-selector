@@ -32,7 +32,9 @@
                     var country_code = $this.val();
                     var country_field_id = $this.attr('id');
                     var state_field_id = country_field_id.replace( 'countryCode', 'stateCode' );
+                    var city_field_id = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state = $('select[id="' + state_field_id + '"]');
+                    var changed_city = $('select[id="' + city_field_id + '"]');
                     changed_state.empty();
 
                     try {
@@ -93,7 +95,7 @@
                             // var select_city = $("select[name*='cityName']");
 
                             // select_city.empty();
-                            changed_city.empty();
+                            // changed_city.empty();
                             changed_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
@@ -135,7 +137,7 @@
                         var select_state = $('select[name*="row-' + state_instance_count + '"][name*="stateCode"]');
                         var stored_state = city_selector_vars[state_instance_count].stateCode;
 
-                        select_state.empty();
+                        // select_state.empty();
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -173,7 +175,7 @@
                         var select_state = $("select[name*='stateCode']");
                         var stored_state = city_selector_vars.stateCode;
 
-                        select_state.empty();
+                        // select_state.empty();
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -219,7 +221,7 @@
                         var select_city = $('select[name*="row-' + city_instance_count + '"][name*="cityName"]');
                         var stored_city = city_selector_vars[city_instance_count].cityName;
 
-                        select_city.empty();
+                        // select_city.empty();
                         select_city.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
@@ -258,7 +260,7 @@
                         var select_city = $('select[name*="cityName"]');
                         var stored_city = city_selector_vars.cityName;
 
-                        select_city.empty();
+                        // select_city.empty();
                         select_city.fadeIn();
                         for (j = 0; j < len; j++) {
                             $selected = '';
