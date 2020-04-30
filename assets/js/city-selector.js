@@ -31,9 +31,9 @@
                     var $this = $(this);
                     var country_code = $this.val();
                     var country_field_id = $this.attr('id');
-                    var city_field_id = country_field_id.replace( 'countryCode', 'cityName' );
-                    var changed_city = $('select[id="' + city_field_id + '"]');
-                    changed_city.empty();
+                    var state_field_id = country_field_id.replace( 'countryCode', 'stateCode' );
+                    var changed_state = $('select[id="' + state_field_id + '"]');
+                    changed_state.empty();
 
                     try {
                         // await the response
@@ -50,16 +50,16 @@
                             var obj          = JSON.parse(jsonResults[i]);
                             var len          = obj.length;
                             var $stateValues = '';
-                            var select_state = $("select[name*='stateCode']");
+                            // var select_state = $("select[name*='stateCode']");
 
-                            select_state.empty();
-                            select_state.fadeIn();
+                            // select_state.empty();
+                            changed_state.fadeIn();
                             for (j = 0; j < len; j++) {
                                 $selected = '';
                                 var state = obj[j];
                                 $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '">' + state.state_name + '</option>';
                             }
-                            select_state.append($stateValues);
+                            changed_state.append($stateValues);
                         }
                     });
                 });
@@ -68,9 +68,12 @@
             // if there are any selects with name*=stateCode
             if (state.length) {
                 state.on('change', function () {
+                    const response_cities = []
                     var $this = $(this);
                     var state_code = $this.val();
-                    const response_cities = []
+                    var state_field_id = $this.attr('id');
+                    var city_field_id = state_field_id.replace( 'stateCode', 'cityName' );
+                    var changed_city = $('select[id="' + city_field_id + '"]');
 
                     try {
                         // await the response
@@ -87,15 +90,16 @@
                             var obj         = JSON.parse(jsonResults);
                             var len         = obj.length;
                             var $cityValues = '';
-                            var select_city = $("select[name*='cityName']");
+                            // var select_city = $("select[name*='cityName']");
 
-                            select_city.empty();
-                            select_city.fadeIn();
+                            // select_city.empty();
+                            changed_city.empty();
+                            changed_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
                                 $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
                             }
-                            select_city.append($cityValues);
+                            changed_city.append($cityValues);
                         }
                     });
                 });
