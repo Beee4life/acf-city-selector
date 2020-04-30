@@ -10,6 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
+        // @TODO: get from website through json
         $packages = [
             [
                 'country' => __( 'Canada', 'acf-city-selector' ),
@@ -101,4 +102,3 @@
         </div>
         <?php
     }
-
