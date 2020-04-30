@@ -12,10 +12,11 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Hooks](#hooks)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
-- [Support](#support)
 - [Remove donation notice](#removedonation)
+- [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
+- [To do](#todo)
 - [Credit](#credit)
 - [Changelog](#changelog)
 
@@ -84,9 +85,9 @@ When the field is used in repeater field, the values are stored in a multidimens
       }
     }
 
-The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since we format this value on return.
+The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
 
-We override the return value so you get more return info and properly formatted (stateCode). 5 values are returned:
+The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
 
     array(5) {
       ["countryCode"]=>
@@ -126,7 +127,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-We have created several country packages (csv files) especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
+There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="hooks"></a>
 ### Hooks
@@ -151,20 +152,20 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested on
 
-* Wordpress 5.4
+* Wordpress 5.4.1
 * Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.8.9
-
-<a name="support"></a>
-### Support
-
-If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
 
 <a name="removedonation"></a>
 ### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
 `add_filter('acfcs_remove_donate_nag', '__return_true');`
+
+<a name="support"></a>
+### Support
+
+If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
 
 <a name="website"></a>
 ### Website
@@ -184,7 +185,13 @@ This plugin hasn't been tested yet in the following situations.
 * as a single/repeater field on a user page
 * most front-end usage
 
-We will try to look into these soon.
+<a name="todo"></a>
+### TODO
+
+The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
+- change length of state code to 3 characters
+- add select2 to dropdowns (including a search like with a post object field) 
+- setting a default country
 
 <a name="credit"></a>
 ### Credit
