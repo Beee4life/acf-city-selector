@@ -112,8 +112,8 @@
                      * Because the length of a single $field['name'] = 24.
                      * The length of a group $field['name'] = 45.
                      *
-                     * repeater $field[ 'name' ] = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
-                     * single $field[ 'name' ]   = acf[field_5e950320fef17] (24)
+                     * group = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
+                     * single   = acf[field_5e950320fef17] (24)
                      */
                     if ( 24 < strlen( $field[ 'name' ] ) ) {
                         // group
