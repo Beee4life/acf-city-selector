@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-01 02:56+0200\n"
+"POT-Creation-Date: 2020-05-01 03:00+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -105,7 +105,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:590 inc/acfcs-search.php:202
+#: ACF_City_Selector.php:590 inc/acfcs-search.php:203
 msgid "Search"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgid "Select city"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:135 fields/acf-city_selector-v5.php:139
-#: inc/acfcs-search.php:144 inc/country-field.php:36
+#: inc/acfcs-search.php:145 inc/country-field.php:36
 msgid "Select a country"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid "Country packages"
 msgstr ""
 
 #: inc/acfcs-go-pro.php:78 inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
-#: inc/acfcs-search.php:231
+#: inc/acfcs-search.php:232
 msgid "Country"
 msgstr ""
 
@@ -376,7 +376,7 @@ msgid "Note"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:225
+#: inc/acfcs-search.php:226
 msgid "City"
 msgstr ""
 
@@ -397,7 +397,7 @@ msgid "exactly 2 characters"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:42 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:228
+#: inc/acfcs-search.php:229
 msgid "State"
 msgstr ""
 
@@ -486,43 +486,47 @@ msgstr ""
 msgid "You either have errors in your CSV or there is no data. Verify this file on the <a href=\"%s\">dashboard</a>."
 msgstr ""
 
-#: inc/acfcs-search.php:134
+#: inc/acfcs-search.php:20
+msgid "United States"
+msgstr ""
+
+#: inc/acfcs-search.php:135
 msgid "Search for cities"
 msgstr ""
 
-#: inc/acfcs-search.php:153
+#: inc/acfcs-search.php:154
 msgid "OR"
 msgstr ""
 
-#: inc/acfcs-search.php:160
+#: inc/acfcs-search.php:161
 msgid "Select a state"
 msgstr ""
 
-#: inc/acfcs-search.php:180
+#: inc/acfcs-search.php:181
 msgid "Search term"
 msgstr ""
 
-#: inc/acfcs-search.php:189
+#: inc/acfcs-search.php:190
 msgid "Limit"
 msgstr ""
 
-#: inc/acfcs-search.php:207
+#: inc/acfcs-search.php:208
 msgid "No results, please try again."
 msgstr ""
 
-#: inc/acfcs-search.php:214
+#: inc/acfcs-search.php:215
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:219
+#: inc/acfcs-search.php:220
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:222
+#: inc/acfcs-search.php:223
 msgid "Select"
 msgstr ""
 
-#: inc/acfcs-search.php:258
+#: inc/acfcs-search.php:259
 msgid "Delete selected"
 msgstr ""
 

@@ -17,6 +17,7 @@
         $search_criteria_state   = false;
         $searched_term           = false;
         $selected_limit          = false;
+        $united_states           = __( 'United States', 'acf-city-selector' );
 
         // get cities by country
         $results = $wpdb->get_results( "SELECT *

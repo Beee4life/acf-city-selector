@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-01 02:56+0200\n"
-"PO-Revision-Date: 2020-05-01 02:59+0200\n"
+"POT-Creation-Date: 2020-05-01 03:00+0200\n"
+"PO-Revision-Date: 2020-05-01 03:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -113,7 +113,7 @@ msgstr "Instellingen"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ACF_City_Selector.php:590 inc/acfcs-search.php:202
+#: ACF_City_Selector.php:590 inc/acfcs-search.php:203
 msgid "Search"
 msgstr "Zoeken"
 
@@ -154,7 +154,7 @@ msgid "Select city"
 msgstr "Selecteer een stad"
 
 #: fields/acf-city_selector-v5.php:135 fields/acf-city_selector-v5.php:139
-#: inc/acfcs-search.php:144 inc/country-field.php:36
+#: inc/acfcs-search.php:145 inc/country-field.php:36
 msgid "Select a country"
 msgstr "Selecteer een land"
 
@@ -362,7 +362,7 @@ msgid "Country packages"
 msgstr "Land pakketten"
 
 #: inc/acfcs-go-pro.php:78 inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
-#: inc/acfcs-search.php:231
+#: inc/acfcs-search.php:232
 msgid "Country"
 msgstr "Land"
 
@@ -413,7 +413,7 @@ msgid "Note"
 msgstr "Notitie"
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:225
+#: inc/acfcs-search.php:226
 msgid "City"
 msgstr "Stad"
 
@@ -434,7 +434,7 @@ msgid "exactly 2 characters"
 msgstr "precies 2 karakters"
 
 #: inc/acfcs-help-tabs.php:42 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:228
+#: inc/acfcs-search.php:229
 msgid "State"
 msgstr "Staat/provincie"
 
@@ -551,43 +551,47 @@ msgstr ""
 "Of er zijn errors in je CSV of er is geen data aanwezig. Verifieer dit "
 "bestand op het <a href=\"%s\">dashboard</a>."
 
-#: inc/acfcs-search.php:134
+#: inc/acfcs-search.php:20
+msgid "United States"
+msgstr "Verenigde Staten"
+
+#: inc/acfcs-search.php:135
 msgid "Search for cities"
 msgstr "Zoek naar steden"
 
-#: inc/acfcs-search.php:153
+#: inc/acfcs-search.php:154
 msgid "OR"
 msgstr "OF"
 
-#: inc/acfcs-search.php:160
+#: inc/acfcs-search.php:161
 msgid "Select a state"
 msgstr "Selecteer een provincie/staat"
 
-#: inc/acfcs-search.php:180
+#: inc/acfcs-search.php:181
 msgid "Search term"
 msgstr "Zoekterm"
 
-#: inc/acfcs-search.php:189
+#: inc/acfcs-search.php:190
 msgid "Limit"
 msgstr "Limiet"
 
-#: inc/acfcs-search.php:207
+#: inc/acfcs-search.php:208
 msgid "No results, please try again."
 msgstr "Geen resultaten, probeer het aub nog een keer."
 
-#: inc/acfcs-search.php:214
+#: inc/acfcs-search.php:215
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:219
+#: inc/acfcs-search.php:220
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:222
+#: inc/acfcs-search.php:223
 msgid "Select"
 msgstr "Selecteer"
 
-#: inc/acfcs-search.php:258
+#: inc/acfcs-search.php:259
 msgid "Delete selected"
 msgstr ""
 
