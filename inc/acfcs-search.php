@@ -30,20 +30,28 @@
             foreach ( $results as $data ) {
                 $countries[] = [
                     'code' => $data->country_code,
-                    'name' => $data->country,
+                    'name' => __( $data->country, 'acf-city-selector' ),
                 ];
             }
 
-            // if there is more than 1 country, place NL on top
+            // if there is more than 1 country, place default language/country on top
             if ( count( $countries ) > 1 ) {
-                $array_key_nl = false;
-                foreach ( $countries as $key => $country ) {
-                    if ( 'NL' == $country[ 'code' ] ) {
-                        $array_key_nl = $key;
+                $language_code = get_option( 'WPLANG' );
+                if ( false != $language_code ) {
+                    if ( 2 == strlen( $language_code ) ) {
+                        $country_code = $language_code;
+                    } else {
+                        $country_code = substr( $language_code, 3, 2 );
                     }
-                }
-                if ( false != $array_key_nl ) {
-                    ACF_City_Selector::acfcs_move_array_element( $countries, $array_key_nl, 0 );
+
+                    foreach ( $countries as $key => $country ) {
+                        if ( $country_code == $country[ 'code' ] ) {
+                            $array_key = $key;
+                        }
+                    }
+                    if ( isset( $array_key ) ) {
+                        ACF_City_Selector::acfcs_move_array_element( $countries, $array_key, 0 );
+                    }
                 }
             }
 
@@ -63,7 +71,7 @@
                         foreach ( $results as $data ) {
                             $states[] = array(
                                 'state' => $data->country_code . '-' . $data->state_code,
-                                'name'  => $data->state_name,
+                                'name' => __( $data->country, 'acf-city-selector' ),
                             );
                         }
                     }
@@ -135,7 +143,7 @@
                                     <select name="acfcs_country" class="">
                                         <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
                                         <?php foreach( $countries as $country ) { ?>
-                                            <option value="<?php echo $country[ 'code' ]; ?>"><?php echo $country[ 'name' ]; ?></option>
+                                            <option value="<?php echo $country[ 'code' ]; ?>"><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
                                         <?php } ?>
                                     </select>
                                 </label>
@@ -159,7 +167,7 @@
                                                 }
                                             }
                                         ?>
-                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo $state[ 'name' ]; ?></option>
+                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
                                     <?php } ?>
                                 </select>
                             </label>
@@ -241,7 +249,7 @@
                                             <?php echo $city->state_name; ?>
                                         </td>
                                         <td>
-                                            <?php _e( $city->country, 'acf-city-selector' ); ?>
+                                            <?php echo __( $city->country, 'acf-city-selector' ); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
