@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-04-29 20:55+0200\n"
+"POT-Creation-Date: 2020-05-01 02:56+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -97,39 +97,39 @@ msgstr ""
 msgid "Dismiss this notice"
 msgstr ""
 
-#: ACF_City_Selector.php:548 ACF_City_Selector.php:588
+#: ACF_City_Selector.php:546 ACF_City_Selector.php:586
 msgid "Settings"
 msgstr ""
 
-#: ACF_City_Selector.php:584
+#: ACF_City_Selector.php:582
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:592 inc/acfcs-search.php:194
+#: ACF_City_Selector.php:590 inc/acfcs-search.php:202
 msgid "Search"
 msgstr ""
 
-#: ACF_City_Selector.php:596
+#: ACF_City_Selector.php:594
 msgid "Preview"
 msgstr ""
 
-#: ACF_City_Selector.php:600 inc/acfcs-go-pro.php:57
+#: ACF_City_Selector.php:598 inc/acfcs-go-pro.php:58
 msgid "Go Pro"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:68
+#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:61
 msgid "Yes"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:69
+#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:62
 msgid "No"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:77
+#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:70
 msgid "Show labels"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:78
+#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:71
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
@@ -145,20 +145,22 @@ msgstr ""
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:130 inc/acfcs-search.php:136
-#: inc/country-field.php:36
+#: fields/acf-city_selector-v5.php:135 fields/acf-city_selector-v5.php:139
+#: inc/acfcs-search.php:144 inc/country-field.php:36
 msgid "Select a country"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:145 inc/country-field.php:138
+#: fields/acf-city_selector-v5.php:152 fields/acf-city_selector-v5.php:156
+#: inc/country-field.php:138
 msgid "Select a province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:157 inc/country-field.php:200
+#: fields/acf-city_selector-v5.php:166 fields/acf-city_selector-v5.php:170
+#: inc/country-field.php:200
 msgid "Select a city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:334
+#: fields/acf-city_selector-v5.php:346
 msgid "You didn't select a city"
 msgstr ""
 
@@ -249,107 +251,107 @@ msgstr ""
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" rel=\"noopener\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
 
-#: inc/acfcs-functions.php:103 inc/acfcs-functions.php:108
+#: inc/acfcs-functions.php:102 inc/acfcs-functions.php:107
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr ""
 
-#: inc/acfcs-functions.php:104
+#: inc/acfcs-functions.php:103
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:113
+#: inc/acfcs-functions.php:112
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:129
+#: inc/acfcs-functions.php:127
 #, php-format
 msgid "The value '%s' is too long."
 msgstr ""
 
-#: inc/acfcs-functions.php:185
+#: inc/acfcs-functions.php:183
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:190
+#: inc/acfcs-functions.php:188
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:201
+#: inc/acfcs-functions.php:199
 #, php-format
 msgid "The length of the state abbreviation on line %d is incorrect."
 msgstr ""
 
-#: inc/acfcs-functions.php:208
+#: inc/acfcs-functions.php:206
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""
 
-#: inc/acfcs-go-pro.php:15
+#: inc/acfcs-go-pro.php:16
 msgid "Canada"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:22
+#: inc/acfcs-go-pro.php:23
 msgid "France"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:29
+#: inc/acfcs-go-pro.php:30
 msgid "Germany"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:36
+#: inc/acfcs-go-pro.php:37
 msgid "Switzerland"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:58
+#: inc/acfcs-go-pro.php:59
 msgid "Default the plugin comes with 3 languages included, namely the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:59
-msgid "We have more countries available. You can either buy a seperate packages for each country you need."
-msgstr ""
-
-#: inc/acfcs-go-pro.php:64
-msgid "Pro subscription"
+#: inc/acfcs-go-pro.php:60
+msgid "We have more countries available. You can buy a seperate packages for each country you need."
 msgstr ""
 
 #: inc/acfcs-go-pro.php:65
-msgid "Buy once and get all coming countries for free !!! One price for all packages."
+msgid "Pro subscription"
 msgstr ""
 
 #: inc/acfcs-go-pro.php:66
+msgid "Buy once and get all coming countries for free !!! One price for all packages."
+msgstr ""
+
+#: inc/acfcs-go-pro.php:67
 msgid "Order now !!!"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:72
+#: inc/acfcs-go-pro.php:73
 msgid "Country packages"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:77 inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
-#: inc/acfcs-search.php:223
+#: inc/acfcs-go-pro.php:78 inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
+#: inc/acfcs-search.php:231
 msgid "Country"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:78
+#: inc/acfcs-go-pro.php:79
 msgid "States/Provinces"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:79
+#: inc/acfcs-go-pro.php:80
 msgid "Cities"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:80
+#: inc/acfcs-go-pro.php:81
 msgid "Price"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:81
+#: inc/acfcs-go-pro.php:82
 msgid "Order"
 msgstr ""
 
-#: inc/acfcs-go-pro.php:91
+#: inc/acfcs-go-pro.php:92
 msgid "link"
 msgstr ""
 
@@ -374,7 +376,7 @@ msgid "Note"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:217
+#: inc/acfcs-search.php:225
 msgid "City"
 msgstr ""
 
@@ -395,7 +397,7 @@ msgid "exactly 2 characters"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:42 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:220
+#: inc/acfcs-search.php:228
 msgid "State"
 msgstr ""
 
@@ -484,43 +486,43 @@ msgstr ""
 msgid "You either have errors in your CSV or there is no data. Verify this file on the <a href=\"%s\">dashboard</a>."
 msgstr ""
 
-#: inc/acfcs-search.php:126
+#: inc/acfcs-search.php:134
 msgid "Search for cities"
 msgstr ""
 
-#: inc/acfcs-search.php:145
+#: inc/acfcs-search.php:153
 msgid "OR"
 msgstr ""
 
-#: inc/acfcs-search.php:152
+#: inc/acfcs-search.php:160
 msgid "Select a state"
 msgstr ""
 
-#: inc/acfcs-search.php:172
+#: inc/acfcs-search.php:180
 msgid "Search term"
 msgstr ""
 
-#: inc/acfcs-search.php:181
+#: inc/acfcs-search.php:189
 msgid "Limit"
 msgstr ""
 
-#: inc/acfcs-search.php:199
+#: inc/acfcs-search.php:207
 msgid "No results, please try again."
 msgstr ""
 
-#: inc/acfcs-search.php:206
+#: inc/acfcs-search.php:214
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:211
+#: inc/acfcs-search.php:219
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:214
+#: inc/acfcs-search.php:222
 msgid "Select"
 msgstr ""
 
-#: inc/acfcs-search.php:250
+#: inc/acfcs-search.php:258
 msgid "Delete selected"
 msgstr ""
 
@@ -604,12 +606,12 @@ msgid "If you need support for this plugin or if you have some good suggestions 
 msgstr ""
 
 #: inc/admin-right.php:14
-msgid "About Beee"
+msgid "About me"
 msgstr ""
 
 #: inc/admin-right.php:15
 #, php-format
-msgid "If you need a Wordpress designer/coder for a project, contact me on me %s."
+msgid "If you need someone for custom Wordpress coding for a project, contact me on me %s."
 msgstr ""
 
 #: inc/admin-right.php:21
@@ -13215,7 +13217,7 @@ msgid "Spankeren"
 msgstr ""
 
 #: lib/cities_nl.php:1421
-msgid "Spijk Gem.Gem. Lingewaal"
+msgid "Spijk Gem Lingewaal"
 msgstr ""
 
 #: lib/cities_nl.php:1422
