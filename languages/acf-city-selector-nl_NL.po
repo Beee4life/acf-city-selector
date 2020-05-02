@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-01 03:00+0200\n"
-"PO-Revision-Date: 2020-05-01 13:33+0200\n"
+"POT-Creation-Date: 2020-05-02 18:31+0200\n"
+"PO-Revision-Date: 2020-05-02 18:31+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -710,6 +710,10 @@ msgid ""
 "If you need someone for custom Wordpress coding for a project, contact me on "
 "me %s."
 msgstr "Als je iemand zoekt voor custom Wordpress coding, contact me op %s."
+
+#: inc/admin-right.php:15
+msgid "my website"
+msgstr "mijn website"
 
 #: inc/admin-right.php:21
 msgid ""

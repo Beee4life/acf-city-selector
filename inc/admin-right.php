@@ -12,7 +12,7 @@
     <hr />
 
     <h3><?php esc_html_e( 'About me', 'acf-city-selector' ); ?></h3>
-    <p><?php echo sprintf( __( 'If you need someone for custom Wordpress coding for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="https://berryplasman.com/contact/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin">my website</a>' ); ?></p>
+    <p><?php echo sprintf( __( 'If you need someone for custom Wordpress coding for a project, contact me on me %s.', 'acf-city-selector' ), '<a href="https://berryplasman.com/contact/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin">' . __( 'my website', 'acf-city-selector' ) . '</a>' ); ?></p>
 
     <hr />
 
