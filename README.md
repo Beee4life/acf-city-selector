@@ -184,11 +184,11 @@ This plugin is not 100% finished yet. It won't break anything but be on the look
 
 This plugin hasn't been tested yet in the following situations. 
 * multiple single field instances
-* multiple single field instances in groups
-* as a single/repeater field in flexible content blocks
-* as a repeater field in groups
-* as a single/repeater field on a user page
-* most front-end usage
+* multiple single field instances in a group field
+* as a single field or in a repeater field inside a flexible content block
+* in a repeater field in groups
+* as a single field or in a repeater field on a user page
+* most front-end usage (except single use)
 
 <a name="todo"></a>
 ### TODO
