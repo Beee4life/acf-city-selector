@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-02 18:32+0200\n"
+"POT-Creation-Date: 2020-05-02 18:38+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -592,7 +592,7 @@ msgstr ""
 
 #: inc/admin-right.php:4
 #, php-format
-msgid "This plugin is an extension for %s. I built it because there was no properly working plugin which did this."
+msgid "This plugin is an extension for %s. I built it because there was no properly working plugin which offered what I needed."
 msgstr ""
 
 #: inc/admin-right.php:5
