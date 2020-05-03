@@ -195,20 +195,43 @@
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
 
-                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) ) {
+                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) || defined('IS_PROFILE_PAGE') ) {
+                    $activate = false;
 
-                    if ( isset( $_GET[ 'id' ] ) ) {
-                        $post_id = $_GET[ 'id' ];
+                    if ( isset( $_GET[ 'user_id' ] ) ) {
+                        $activate = true;
+                        $user_id  = $_GET[ 'user_id' ];
+                    } elseif ( isset( $_GET[ 'id' ] ) ) {
+                        // this is for my custom project
+                        $activate = true;
+                        $post_id  = $_GET[ 'id' ];
+                    } elseif ( isset( $_GET[ 'post' ] ) ) {
+                        $post_id = $_GET[ 'post' ];
+                        $type    = get_post_type( $post_id );
+                        if ( 'acf-field-group' == $type ) {
+                            $activate = true;
+                        }
                     } else {
-                        $post_id = get_the_ID();
+                        $activate = true;
+                        if ( defined( 'IS_PROFILE_PAGE' ) ) {
+                            $user_id = get_current_user_id();
+                        } else {
+                            $post_id = get_the_ID();
+                        }
                     }
 
-                    if ( isset( $post_id ) && false !== $post_id ) {
-                        $fields = get_field_objects( $post_id );
-                        // get the field name for acfcs
-                        if ( is_array( $fields ) && count( $fields ) > 0 ) {
+                    if ( false != $activate ) {
+                        if ( isset( $user_id ) && false !== $user_id ) {
+                            $fields = get_field_objects( 'user_' . $user_id );
+                        } elseif ( isset( $post_id ) && false !== $post_id ) {
+                            $fields = get_field_objects( $post_id );
+                        }
+
+                        /*
+                         * Get the field['name'] for the City Selector field
+                         */
+                        if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
                             foreach( $fields as $field ) {
-                                // check if field_name is overridden
                                 if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                                     $field_name = $field[ 'name' ];
                                     break;
@@ -221,8 +244,8 @@
                                         break;
                                     }
                                 } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                                    if ( ! empty( $field['value'] ) ) {
-                                        foreach( $field['value'] as $key => $values ) {
+                                    if ( ! empty( $field[ 'value' ] ) ) {
+                                        foreach( $field[ 'value' ] as $key => $values ) {
                                             if ( is_array( $values ) ) {
                                                 $index = array_key_exists( 'countryCode', $values );
                                                 if ( true === $index ) {
@@ -236,7 +259,9 @@
                             }
                         }
 
-                        // get and localize post_meta
+                        /*
+                         * Get and localize post_meta
+                         */
                         if ( isset( $repeater_count ) && 0 < $repeater_count ) {
                             for( $i = 0; $i < $repeater_count; $i++ ) {
                                 $repeater_field_name = $repeater_name . '_' . $i . '_' . $city_selector_name;
@@ -251,21 +276,26 @@
                                         'cityName'    => ( isset( $meta[ 'cityName' ] ) ) ? $meta[ 'cityName' ] : '',
                                     );
                                 }
-                                if ( isset( $meta_values ) ) {
-                                    wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
-                                }
                             }
 
                         } else {
                             if ( isset( $field_name ) ) {
-                                $post_meta = get_post_meta( $post_id, $field_name, true );
-
-                                wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                                    'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
-                                    'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
-                                    'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
-                                ) );
+                                if ( isset( $user_id ) ) {
+                                    $post_meta = get_user_meta( $user_id, $field_name, true );
+                                } else {
+                                    $post_meta = get_post_meta( $post_id, $field_name, true );
+                                }
+                                if ( ! empty( $post_meta[ 'cityName' ] ) ) {
+                                    $meta_values[] = array(
+                                        'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
+                                        'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
+                                        'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
+                                    );
+                                }
                             }
+                        }
+                        if ( isset( $meta_values ) ) {
+                            wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
                         }
                     }
                 }
