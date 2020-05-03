@@ -183,6 +183,7 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
 This plugin doesn't work (yet) in the following situations:
+* multiple single fields on 1 page
 * as a repeater field in groups
 * as a single field inside a flexible content block
 * as a repeater field inside a flexible content block
@@ -190,6 +191,7 @@ This plugin doesn't work (yet) in the following situations:
 This plugin hasn't been tested yet in the following situations: 
 * as a single or repeater field on a user page
 * most front-end usage (except single use)
+* with the Gutenberg editor (and don't hold your breath either)
 
 <a name="todo"></a>
 ### TODO
