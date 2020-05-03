@@ -1,4 +1,31 @@
 <?php
+
+    /*
+     * Get all countries from the database
+     *
+     * @return array
+     */
+    function acfcs_get_countries() {
+        global $wpdb;
+        $countries_db = $wpdb->get_results( "
+            SELECT DISTINCT *
+            FROM " . $wpdb->prefix . "cities
+            group by country
+            order by country ASC
+        " );
+
+        $countries = array();
+        foreach ( $countries_db as $country ) {
+            if ( trim( $country->country ) == '' ) {
+                continue;
+            }
+            $countries[ $country->id ] = $country->country;
+        }
+
+        return $countries;
+    }
+
+
     /**
      * Checks if there any cities in the database
      *
@@ -42,7 +69,6 @@
             }
         }
 
-
         return [];
     }
 
@@ -64,7 +90,7 @@
         if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
-            $value_length     = 254;
+            $value_length     = 254; // @TODO: add filter for this
             while ( ( $csv_line = fgetcsv( $handle, 1000, "{$delimiter}" ) ) !== false ) {
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
@@ -97,7 +123,6 @@
                     // create a new array for each row
                     $new_line = [];
                     foreach ( $csv_line as $item ) {
-
                         if ( strlen( $item ) > $value_length ) {
                             ACF_City_Selector::acfcs_errors()->add( 'error_too_long_value', esc_html( sprintf( __( "The value '%s' is too long.", "acf-city-selector" ), $item ) ) );
 

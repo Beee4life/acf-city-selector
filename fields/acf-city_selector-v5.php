@@ -1,10 +1,8 @@
 <?php
-
     // exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
-
 
     // check if class already exists
     if ( ! class_exists( 'acf_field_city_selector' ) ) :
@@ -59,12 +57,6 @@
              */
             function render_field_settings( $field ) {
 
-                /*
-                 * acf_render_field_setting
-                 *
-                 * This function will create a setting for your field. Simply pass the $field parameter and an array of field settings.
-                 * Please note that you must also have a matching $defaults value for the field name (show_labels)
-                 */
                 $select_options = array(
                     1 => __( 'Yes', 'acf-city-selector' ),
                     0 => __( 'No', 'acf-city-selector' )
@@ -92,53 +84,93 @@
              */
             function render_field( $field ) {
 
-                if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
-                    $countrycode = $field[ 'value' ][ 'countryCode' ];
-                }
-                $countries = populate_country_select( $field, '' );
-                if ( isset( $countrycode ) && 0 != $countrycode ) {
-                    $stateCode = $field[ 'value' ][ 'stateCode' ];
-                    if ( '-' != $stateCode ) {
-                        $cityName = $field[ 'value' ][ 'cityName' ];
+                if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
+                    // if $field[ 'name' ] contains 'row' it's a repeater field
+                    $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
+                    $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
+                    $field_object    = get_field_objects( get_the_ID() );
+                    if ( is_array( $field_object ) ) {
+                        $repeater_name = array_keys( $field_object )[ 0 ];
+                        $meta_key      = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
+                        if ( isset( $meta_key ) ) {
+                            $post_meta = get_post_meta( get_the_ID(), $meta_key, true );
+                        }
+                        $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                     }
-                    $states = get_states( $countrycode );
+                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                    // else it's a single or group field
+
+                    /**
+                     * Why is 24 set as length ?
+                     * Because the length of a single $field['name'] = 24.
+                     * The length of a group $field['name'] = 45.
+                     * So if it's bigger than 24, it's a group name.
+                     *
+                     * group = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
+                     * single   = acf[field_5e950320fef17] (24)
+                     */
+                    if ( 24 < strlen( $field[ 'name' ] ) ) {
+                        // group
+                        $field_object = get_field_objects( get_the_ID() );
+                        if ( is_array( $field_object ) ) {
+                            $group_name       = array_keys( $field_object )[ 0 ];
+                            $meta_key         = $group_name . '_' . $field[ '_name' ];
+                            $post_meta        = get_post_meta( get_the_ID(), $meta_key, true );
+                            $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
+                        }
+                    } else {
+                        // single
+                        $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                    }
                 }
-                $stateName = ! empty( $states ) ? $states[ substr( $stateCode, 3 ) ] : false; // ???
+
+                $countries   = acfcs_populate_country_select( $field );
+                $field_id    = $field[ 'id' ];
+                $field_name  = $field[ 'name' ];
+                $show_labels = $field[ 'show_labels' ];
                 ?>
                 <div class="dropdown-box cs-countries">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?></span>
+                    <?php if ( 1 == $show_labels ) { ?>
+                        <div class="acf-input-header">
+                            <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
+                        </div>
                     <?php } ?>
-                    <label for="countryCode" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[countryCode]" id="countryCode" class="countrySelect">
-                        <?php
-                            foreach ( $countries as $key => $country ) {
-                                if ( isset( $countrycode ) ) {
-                                    $selected = ( $countrycode === $key ) ? ' selected="selected"' : false;
-                                } else {
-                                    $selected = false;
-                                }
-                            ?>
+                    <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
+                    </label>
+                    <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
+                        <?php foreach ( $countries as $key => $country ) { ?>
+                            <?php $selected = ( isset( $selected_country ) ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
                             <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
                         <?php } ?>
                     </select>
                 </div>
 
                 <div class="dropdown-box cs-provinces">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?></span>
+                    <?php if ( 1 == $show_labels ) { ?>
+                        <div class="acf-input-header">
+                            <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                        </div>
                     <?php } ?>
-                    <label for="stateCode" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[stateCode]" id="stateCode" class="countrySelect">
+                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                    </label>
+                    <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
+                        <?php // content will be dynamically generated ?>
                     </select>
                 </div>
 
                 <div class="dropdown-box cs-cities">
-                    <?php if ( $field[ 'show_labels' ] == 1 ) { ?>
-                        <span class="acf-input-header"><?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?></span>
+                    <?php if ( 1 == $show_labels ) { ?>
+                        <div class="acf-input-header">
+                            <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                        </div>
                     <?php } ?>
-                    <label for="cityName" class="screen-reader-text"></label>
-                    <select name="<?php echo $field[ 'name' ]; ?>[cityName]" id="cityName" class="countrySelect">
+                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
+                        <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                    </label>
+                    <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
+                        <?php // content will be dynamically generated ?>
                     </select>
                 </div>
                 <?php
@@ -155,43 +187,113 @@
              * @param   n/a
              * @return  n/a
              */
-
             function input_admin_head() {
 
-                $field_name     = 'acf_city_selector'; // default name
                 $plugin_url     = $this->settings[ 'url' ];
                 $plugin_version = $this->settings[ 'version' ];
 
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
 
-                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) ) {
+                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) || defined('IS_PROFILE_PAGE') ) {
+                    $activate = false;
 
-                    if ( isset( $_GET[ 'id' ] ) ) {
-                        $post_id = $_GET[ 'id' ];
+                    if ( isset( $_GET[ 'user_id' ] ) ) {
+                        $activate = true;
+                        $user_id  = $_GET[ 'user_id' ];
+                    } elseif ( isset( $_GET[ 'id' ] ) ) {
+                        // this is for my custom project
+                        $activate = true;
+                        $post_id  = $_GET[ 'id' ];
+                    } elseif ( isset( $_GET[ 'post' ] ) ) {
+                        $post_id = $_GET[ 'post' ];
+                        if ( 'acf-field-group' != get_post_type( $post_id ) ) {
+                            $activate = true;
+                        }
                     } else {
-                        $post_id = get_the_ID();
+                        $activate = true;
+                        if ( defined( 'IS_PROFILE_PAGE' ) ) {
+                            $user_id = get_current_user_id();
+                        } else {
+                            $post_id = get_the_ID();
+                        }
                     }
 
-                    if ( isset( $post_id ) && false !== $post_id ) {
-                        $fields     = get_field_objects( $post_id );
-                        if ( is_array( $fields ) && count( $fields ) > 0 ) {
+                    if ( false != $activate ) {
+                        if ( isset( $user_id ) && false !== $user_id ) {
+                            $fields = get_field_objects( 'user_' . $user_id );
+                        } elseif ( isset( $post_id ) && false !== $post_id ) {
+                            $fields = get_field_objects( $post_id );
+                        }
+
+                        /*
+                         * Get the field['name'] for the City Selector field
+                         */
+                        if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
                             foreach( $fields as $field ) {
-                                // check if field_name is overridden
                                 if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                                     $field_name = $field[ 'name' ];
                                     break;
+                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
+                                    $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
+                                    if ( false !== $array_key ) {
+                                        $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
+                                        $repeater_name      = $field[ 'name' ];
+                                        $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
+                                        break;
+                                    }
+                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
+                                    if ( ! empty( $field[ 'value' ] ) ) {
+                                        foreach( $field[ 'value' ] as $key => $values ) {
+                                            if ( is_array( $values ) ) {
+                                                $index = array_key_exists( 'countryCode', $values );
+                                                if ( true === $index ) {
+                                                    $field_name = $field[ 'name' ] . '_' . $key;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-                        $post_meta = get_post_meta( $post_id, $field_name, true );
 
-                        if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                            wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                                'countryCode' => $post_meta[ 'countryCode' ],
-                                'stateCode'   => $post_meta[ 'stateCode' ],
-                                'cityName'    => $post_meta[ 'cityName' ],
-                            ) );
+                        /*
+                         * Get and localize post_meta
+                         */
+                        if ( isset( $repeater_count ) && 0 < $repeater_count ) {
+                            for( $i = 0; $i < $repeater_count; $i++ ) {
+                                $repeater_field_name = $repeater_name . '_' . $i . '_' . $city_selector_name;
+                                $post_meta[]         = get_post_meta( $post_id, $repeater_field_name, true );
+                            }
+
+                            if ( isset( $post_meta ) && ! empty( $post_meta ) ) {
+                                foreach( $post_meta as $meta ) {
+                                    $meta_values[] = array(
+                                        'countryCode' => ( isset( $meta[ 'countryCode' ] ) ) ? $meta[ 'countryCode' ] : '',
+                                        'stateCode'   => ( isset( $meta[ 'stateCode' ] ) ) ? $meta[ 'stateCode' ] : '',
+                                        'cityName'    => ( isset( $meta[ 'cityName' ] ) ) ? $meta[ 'cityName' ] : '',
+                                    );
+                                }
+                            }
+                        } else {
+                            if ( isset( $field_name ) ) {
+                                if ( isset( $user_id ) ) {
+                                    $post_meta = get_user_meta( $user_id, $field_name, true );
+                                } elseif ( isset( $post_id ) ) {
+                                    $post_meta = get_post_meta( $post_id, $field_name, true );
+                                }
+                                if ( ! empty( $post_meta[ 'cityName' ] ) ) {
+                                    $meta_values = array(
+                                        'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
+                                        'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
+                                        'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
+                                    );
+                                }
+                            }
+                        }
+                        if ( isset( $meta_values ) ) {
+                            wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
                         }
                     }
                 }
@@ -202,7 +304,6 @@
              *
              * This filter is applied to the $value after it is loaded from the db
              * This returns false if no country/state is selected (but empty values are stored)
-             * @TODO: fix save empty value
              *
              * @type    filter
              * @param   $value (mixed) the value found in the database
@@ -212,26 +313,45 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                $country_code = $value[ 'countryCode' ];
-                if ( '0' != $country_code ) {
-                    $state_code = substr( $value[ 'stateCode' ], 3 );
-                } else {
-                    $value = false;
+                $country_code = '';
+                if ( isset( $value[ 'countryCode' ]) ) {
+                    $country_code = $value[ 'countryCode' ];
+                    // @TODO: check when it can be '0'
+                    if ( '0' != $country_code && isset( $value[ 'stateCode' ] ) ) {
+                        $state_code = substr( $value[ 'stateCode' ], 3 );
+                    } else {
+                        $value = false;
+                    }
                 }
                 if ( strlen( $country_code ) == 2 && ( isset( $value[ 'stateCode' ] ) && '-' != $value[ 'stateCode' ] ) && ( isset( $value[ 'cityName' ] ) && 'Select a city' != $value[ 'cityName' ] ) ) {
                     global $wpdb;
-                    $table                = $wpdb->prefix . 'cities';
-                    $row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
-                    $country              = $row->country;
-                    $state_name           = $row->state_name;
-                    $value['stateCode']   = $state_code;
-                    $value['stateName']   = $state_name;
-                    $value['countryName'] = $country;
+                    $table                  = $wpdb->prefix . 'cities';
+                    $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+                    $country                = $row->country;
+                    $state_name             = $row->state_name;
+                    $value[ 'stateCode' ]   = $state_code;
+                    $value[ 'stateName' ]   = $state_name;
+                    $value[ 'countryName' ] = $country;
                 }
 
                 return $value;
             }
 
+
+            /*
+             *  update_value()
+             *
+             *  This filter is applied to the $value before it is saved in the db
+             *
+             *  @param	$value (mixed) the value found in the database
+             *  @param	$post_id (mixed) the $post_id from which the value was loaded
+             *  @param	$field (array) the field array holding all the field options
+             *  @return	$value
+            */
+            function update_value( $value, $post_id, $field ) {
+                // @TODO: check and maybe fix save empty value for countryCode, stateName and cityName
+                return $value;
+            }
 
             /*
              * validate_value()
@@ -255,32 +375,6 @@
                 }
 
                 return $valid;
-            }
-
-
-            /*
-             * Get Countries
-             *
-             * Get all countries from the database
-             */
-            public function _acf_get_countries() {
-                global $wpdb;
-                $countries_db = $wpdb->get_results( "
-                    SELECT DISTINCT *
-                    FROM " . $wpdb->prefix . "cities
-                    group by country
-                    order by country ASC
-                " );
-
-                $countries = array();
-                foreach ( $countries_db as $country ) {
-                    if ( trim( $country->country ) == '' ) {
-                        continue;
-                    }
-                    $countries[ $country->id ] = $country->country;
-                }
-
-                return $countries;
             }
         }
 

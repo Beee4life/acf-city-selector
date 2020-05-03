@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.9
+    Version:        0.10
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -20,20 +20,20 @@
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) :
 
+        /*
+         * Main class
+         */
         class ACF_City_Selector {
 
             /*
              * __construct
              *
              * This function will setup the class functionality
-             *
-             * @param   n/a
-             * @return  n/a
              */
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.9',
+                    'version'       => '0.10',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
@@ -76,7 +76,7 @@
             }
 
 
-            /**
+            /*
              * Change plugin order so ACFCS loads after ACF
              */
             public function acfcs_change_plugin_order() {
@@ -92,7 +92,7 @@
             }
 
 
-            /**
+            /*
              * Check if ACF is active and if not add an admin notice
              */
             public function acfcs_check_for_acf() {
@@ -124,7 +124,6 @@
              */
             public function acfcs_plugin_deactivation() {
                 // nothing yet
-                // @TODO: delete any settings
             }
 
 
@@ -214,7 +213,7 @@
             }
 
 
-            /**
+            /*
              * Read uploaded file for verification or import
              * Delete file is also included in this function
              */
@@ -222,7 +221,7 @@
 
                 if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ 'acfcs_select_file_nonce' ], 'acfcs-select-file-nonce' ) ) {
-                        $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong. Please try again.', 'acf-city-selector' ) );
+                        $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 
                         return;
 
@@ -290,6 +289,7 @@
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
                                 unlink( $this->settings[ 'upload_folder' ] . $file_name );
+                                // @TODO: add if for success
                                 $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
                             }
                         }
@@ -299,7 +299,7 @@
 
 
             /*
-             * Import raw csv data (not in use yet)
+             * Import raw csv data
              */
             public function acfcs_import_raw_data() {
                 if ( isset( $_POST[ 'acfcs_import_raw_nonce' ] ) ) {
@@ -448,21 +448,18 @@
 
                         global $wpdb;
                         if ( is_array( $_POST[ 'row_id' ] ) ) {
-                            // echo '<pre>'; var_dump($_POST[ 'row_id' ]); echo '</pre>'; exit;
                             foreach( $_POST[ 'row_id' ] as $row ) {
                                 $split    = explode( ' ', $row, 2 );
                                 $ids[]    = $split[ 0 ];
                                 $cities[] = $split[ 1 ];
                             }
 
-                            $cities = implode( ', ', $cities );
+                            $cities  = implode( ', ', $cities );
                             $row_ids = implode( ',', $ids );
-                            $amount = $wpdb->query(
-                                "
+                            $amount  = $wpdb->query("
                                 DELETE FROM " . $wpdb->prefix . "cities
                                 WHERE id IN (" . $row_ids . ")
-                                "
-                            );
+                            ");
 
                             if ( $amount > 0 ) {
                                 $row_count = count( $ids );
@@ -474,7 +471,7 @@
             }
 
 
-            /**
+            /*
              * Error function
              *
              * @return WP_Error
@@ -485,7 +482,7 @@
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
 
-            /**
+            /*
              * Displays error messages from form submissions
              */
             public static function acfcs_show_admin_notices() {
@@ -527,20 +524,20 @@
             }
 
 
-            /*
+            /**
              * include_field_types
              *
              * This function will include the field type class
              *
-             * @type    function
-             * @param   $version (int) major ACF version. Defaults to false
-             * @return  n/a
+             * @param bool $version (int) major ACF version. Defaults to false
              */
             public function acfcs_include_field_types( $version = false ) {
                 if ( ! $version ) {
+                    // @TODO: add error because there's no support for v4 (anymore)
                     $version = 4;
+                } else {
+                    include_once( 'fields/acf-city_selector-v' . $version . '.php' );
                 }
-                include_once( 'fields/acf-city_selector-v' . $version . '.php' );
             }
 
 
@@ -548,8 +545,8 @@
              * Add settings link on plugin page
              */
             public function acfcs_settings_link( $links ) {
-                $settings_link = '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                array_unshift( $links, $settings_link );
+                $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
+                $links         = array_merge( $settings_link, $links );
 
                 return $links;
             }
@@ -568,11 +565,8 @@
                 $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
                     $new_links[ 'documentation' ] = '<a href="https://acfcs.berryplasman.com/documentation">Documentation</a>';
-                    if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                        // $new_links[ 'gopro' ] = '<a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro' . '">Go Pro</a>';
-                    }
-                    $new_links[] = $visit_plugin_link;
-                    $links       = array_merge( $links, $new_links );
+                    $new_links[]                  = $visit_plugin_link;
+                    $links                        = array_merge( $links, $new_links );
                 }
 
                 return $links;
@@ -585,11 +579,9 @@
             public static function acfcs_admin_menu() {
                 $admin_url  = admin_url( 'options-general.php?page=' );
                 $dashboard  = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                $gopro      = false;
                 $preview    = false;
                 $search     = false;
                 $settings   = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
-                $show_gopro = true;
 
                 if ( true === acfcs_has_cities() ) {
                     $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
@@ -599,11 +591,7 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_gopro ) {
-                    $gopro = ' | <a href="' . $admin_url . 'acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
-                }
-
-                return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $gopro . '</p>';
+                return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
             }
 
             /**
@@ -636,11 +624,6 @@
                     include( 'inc/acfcs-search.php' );
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
-
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                    include( 'inc/acfcs-go-pro.php' );
-                    add_submenu_page( null, 'Pro', 'Pro', 'manage_options', 'acfcs-go-pro', 'acfcs_go_pro' );
-                }
             }
 
 
@@ -655,6 +638,5 @@
         // initialize
         new ACF_City_Selector();
 
-
-        // class_exists check
+    // class_exists check
     endif;

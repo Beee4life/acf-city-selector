@@ -1,32 +1,20 @@
 /**
  *  CSS for the ACF City Selector plugin
- *  Version: 1.0
  */
 
-/* edit post screens */
-/* v4 */
-
-.field_type-acf_city_selector .dropdown-box {
-    margin-bottom: 1em;
-}
-
-.field_type-acf_city_selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 10px;
-}
-
 /* v5 */
+/* edit post screens */
 .acf-field-acf-city-selector .dropdown-box {
     margin-bottom: 1em;
 }
 
-.acf-field-acf-city-selector span.acf-input-header {
-    display:       block;
+.acf-field-acf-city-selector .acf-input-header {
     margin-bottom: 10px;
 }
 
 /* admin pages */
-.admin_left, .admin_right {
+.admin_left,
+.admin_right {
     background:            white;
     box-sizing:            border-box;
     padding:               20px;
@@ -221,3 +209,15 @@
 #contextual-help-columns .contextual-help-tabs-wrap td {
     border-top: 1px solid #444444;
 }
+
+/* v4, not actively supported anymore */
+/* edit post screens */
+.field_type-acf_city_selector .dropdown-box {
+    margin-bottom: 1em;
+}
+
+.field_type-acf_city_selector span.acf-input-header {
+    display:       block;
+    margin-bottom: 10px;
+}
+
