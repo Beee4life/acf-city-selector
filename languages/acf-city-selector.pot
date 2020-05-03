@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-02 18:38+0200\n"
+"POT-Creation-Date: 2020-05-03 23:04+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -97,24 +97,20 @@ msgstr ""
 msgid "Dismiss this notice"
 msgstr ""
 
-#: ACF_City_Selector.php:546 ACF_City_Selector.php:586
+#: ACF_City_Selector.php:548 ACF_City_Selector.php:584
 msgid "Settings"
 msgstr ""
 
-#: ACF_City_Selector.php:582
+#: ACF_City_Selector.php:581
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:590 inc/acfcs-search.php:203
+#: ACF_City_Selector.php:587 inc/acfcs-search.php:203
 msgid "Search"
 msgstr ""
 
-#: ACF_City_Selector.php:594
+#: ACF_City_Selector.php:591
 msgid "Preview"
-msgstr ""
-
-#: ACF_City_Selector.php:598 inc/acfcs-go-pro.php:58
-msgid "Go Pro"
 msgstr ""
 
 #: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:61
@@ -146,26 +142,25 @@ msgid "Select city"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:135 fields/acf-city_selector-v5.php:139
-#: inc/acfcs-search.php:145 inc/country-field.php:36
+#: inc/acfcs-search.php:145 inc/country-field.php:37
 msgid "Select a country"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:152 fields/acf-city_selector-v5.php:156
-#: inc/country-field.php:138
+#: inc/country-field.php:139
 msgid "Select a province/state"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:166 fields/acf-city_selector-v5.php:170
-#: inc/country-field.php:200
+#: inc/country-field.php:201
 msgid "Select a city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:346
+#: fields/acf-city_selector-v5.php:373
 msgid "You didn't select a city"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:8 inc/acfcs-go-pro.php:8 inc/acfcs-search.php:8
-#: inc/acfcs-settings.php:8
+#: inc/acfcs-dashboard.php:8 inc/acfcs-search.php:8 inc/acfcs-settings.php:8
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
@@ -290,71 +285,6 @@ msgstr ""
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""
 
-#: inc/acfcs-go-pro.php:16
-msgid "Canada"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:23
-msgid "France"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:30
-msgid "Germany"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:37
-msgid "Switzerland"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:59
-msgid "Default the plugin comes with 3 languages included, namely the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:60
-msgid "We have more countries available. You can buy a seperate packages for each country you need."
-msgstr ""
-
-#: inc/acfcs-go-pro.php:65
-msgid "Pro subscription"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:66
-msgid "Buy once and get all coming countries for free !!! One price for all packages."
-msgstr ""
-
-#: inc/acfcs-go-pro.php:67
-msgid "Order now !!!"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:73
-msgid "Country packages"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:78 inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
-#: inc/acfcs-search.php:232
-msgid "Country"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:79
-msgid "States/Provinces"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:80
-msgid "Cities"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:81
-msgid "Price"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:82
-msgid "Order"
-msgstr ""
-
-#: inc/acfcs-go-pro.php:92
-msgid "link"
-msgstr ""
-
 #: inc/acfcs-help-tabs.php:19
 msgid "On this page you can import cities by either CSV file or raw (pasted) CSV data."
 msgstr ""
@@ -411,6 +341,11 @@ msgstr ""
 
 #: inc/acfcs-help-tabs.php:48
 msgid "country abbreviation"
+msgstr ""
+
+#: inc/acfcs-help-tabs.php:53 inc/acfcs-preview.php:117
+#: inc/acfcs-search.php:232
+msgid "Country"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:54

@@ -221,7 +221,7 @@
 
                 if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
                     if ( ! wp_verify_nonce( $_POST[ 'acfcs_select_file_nonce' ], 'acfcs-select-file-nonce' ) ) {
-                        $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong. Please try again.', 'acf-city-selector' ) );
+                        $this->acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 
                         return;
 

@@ -158,7 +158,7 @@
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
                             <label>
                                 <select name="acfcs_state" class="">
-                                    <option value=""><?php _e( 'Select a state', 'acf-city-selector' ); ?></option>
+                                    <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
                                     <?php foreach( $states as $state ) { ?>
                                         <?php
                                             $selected = false;
