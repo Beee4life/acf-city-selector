@@ -207,8 +207,7 @@
                         $post_id  = $_GET[ 'id' ];
                     } elseif ( isset( $_GET[ 'post' ] ) ) {
                         $post_id = $_GET[ 'post' ];
-                        $type    = get_post_type( $post_id );
-                        if ( 'acf-field-group' == $type ) {
+                        if ( 'acf-field-group' != get_post_type( $post_id ) ) {
                             $activate = true;
                         }
                     } else {
@@ -282,11 +281,11 @@
                             if ( isset( $field_name ) ) {
                                 if ( isset( $user_id ) ) {
                                     $post_meta = get_user_meta( $user_id, $field_name, true );
-                                } else {
+                                } elseif ( isset( $post_id ) ) {
                                     $post_meta = get_post_meta( $post_id, $field_name, true );
                                 }
                                 if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                                    $meta_values[] = array(
+                                    $meta_values = array(
                                         'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
                                         'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
                                         'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
