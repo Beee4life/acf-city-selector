@@ -189,7 +189,7 @@ This plugin doesn't work (yet) in the following situations:
 * as a repeater field inside a flexible content block
 
 This plugin hasn't been tested yet in the following situations: 
-* as a single or repeater field on a user page
+* as a repeater field on a user page
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either)
 
@@ -211,6 +211,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.10
+* Made the field available on user pages
+
 0.10-beta
 * Made the field available in repeaters
 * Made the field available in groups
@@ -220,6 +223,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.8
 * Fix incorrect version
+* Removed deprecated filter contextual_help
 
 0.7
 * Change indentation from spaces to tabs
