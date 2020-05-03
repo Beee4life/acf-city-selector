@@ -62,6 +62,9 @@
                                 $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '">' + state.state_name + '</option>';
                             }
                             changed_state.append($stateValues);
+                            // @TODO: translate string
+                            $select_city = '<option value="">Select a province/state first</option>';
+                            changed_city.append($select_city);
                         }
                     });
                 });
