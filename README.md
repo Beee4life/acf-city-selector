@@ -182,12 +182,13 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-This plugin hasn't been tested yet in the following situations. 
-* multiple single field instances
-* multiple single field instances in a group field
-* as a single field or in a repeater field inside a flexible content block
-* in a repeater field in groups
-* as a single field or in a repeater field on a user page
+This plugin doesn't work (yet) in the following situations:
+* as a repeater field in groups
+* as a single field inside a flexible content block
+* as a repeater field inside a flexible content block
+
+This plugin hasn't been tested yet in the following situations: 
+* as a single or repeater field on a user page
 * most front-end usage (except single use)
 
 <a name="todo"></a>
