@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-03 23:08+0200\n"
-"PO-Revision-Date: 2020-05-03 23:09+0200\n"
+"POT-Creation-Date: 2020-05-03 23:09+0200\n"
+"PO-Revision-Date: 2020-05-03 23:12+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -152,7 +152,7 @@ msgid "Select a country"
 msgstr "Selecteer een land"
 
 #: fields/acf-city_selector-v5.php:152 fields/acf-city_selector-v5.php:156
-#: inc/country-field.php:139
+#: inc/acfcs-search.php:161 inc/country-field.php:139
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
@@ -482,10 +482,6 @@ msgstr "Zoek naar steden"
 #: inc/acfcs-search.php:154
 msgid "OR"
 msgstr "OF"
-
-#: inc/acfcs-search.php:161
-msgid "Select a state"
-msgstr "Selecteer een provincie/staat"
 
 #: inc/acfcs-search.php:181
 msgid "Search term"
@@ -17597,6 +17593,9 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 #: lib/import_nl.php:2
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
+
+#~ msgid "Select a state"
+#~ msgstr "Selecteer een provincie/staat"
 
 #~ msgid "Something went wrong. Please try again."
 #~ msgstr "Er ging iets fout, probeer het aub nog een keer."
