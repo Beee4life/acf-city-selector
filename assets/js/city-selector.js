@@ -24,7 +24,9 @@
             var countries = $countries;
             var state = $('select[name*="stateCode"]');
 
-            // if there are any selects with name*=countryCode
+            /**
+             * If there are any selects with name*=countryCode
+             */
             if (countries.length) {
                 countries.on('change', function () {
                     const response_states = []
@@ -35,16 +37,8 @@
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
-
-                    try {
-                        // await the response
-                        const d = get_states(country_code);
-                        // add response to the response array
-                        response_states.push(d)
-                    } catch (err) {
-                        // handle error
-                        console.log(err)
-                    }
+                    const d = get_states(country_code);
+                    response_states.push(d)
 
                     Promise.all(response_states).then(function(jsonResults) {
                         for (i = 0; i < jsonResults.length; i++) {
@@ -79,16 +73,8 @@
                     var state_field_id = $this.attr('id');
                     var city_field_id = state_field_id.replace( 'stateCode', 'cityName' );
                     var changed_city = $('select[id="' + city_field_id + '"]');
-
-                    try {
-                        // await the response
-                        const d = get_cities(state_code);
-                        // add response to the response array
-                        response_cities.push(d)
-                    } catch (err) {
-                        // handle error
-                        console.log(err)
-                    }
+                    const d = get_cities(state_code);
+                    response_cities.push(d)
 
                     Promise.all(response_cities).then(function(jsonResults) {
                         for (i = 0; i < jsonResults.length; i++) {
@@ -117,16 +103,8 @@
                 // preparing the response array
                 const response_states = []
                 for (i = 0; i < city_selector_vars.length; i++) {
-                    // try - catch to handle errors
-                    try {
-                        // await the response
-                        const d = get_states(city_selector_vars[i].countryCode);
-                        // add response to the response array
-                        response_states.push(d)
-                    } catch (err) {
-                        // handle error
-                        console.log(err)
-                    }
+                    const d = get_states(city_selector_vars[i].countryCode);
+                    response_states.push(d)
                 }
 
                 Promise.all(response_states).then(function(jsonResults) {
@@ -157,15 +135,8 @@
             } else {
 
                 const response_states = [];
-                try {
-                    // await the response
-                    const d = get_states(city_selector_vars.countryCode);
-                    // add response to the response array
-                    response_states.push(d)
-                } catch (err) {
-                    // handle error
-                    console.log(err)
-                }
+                const d = get_states(city_selector_vars.countryCode);
+                response_states.push(d)
 
                 Promise.all(response_states).then(function(jsonResults) {
                     for (i = 0; i < jsonResults.length; i++) {
@@ -199,16 +170,8 @@
             if ( true === Array.isArray(city_selector_vars) ) {
                 const response_cities = []
                 for (i = 0; i < city_selector_vars.length; i++) {
-                    // try - catch to handle errors
-                    try {
-                        // await the response
-                        const d = get_cities(city_selector_vars[i].stateCode);
-                        // add response to the response array
-                        response_cities.push(d)
-                    } catch (err) {
-                        // handle error
-                        console.log(err)
-                    }
+                    const d = get_cities(city_selector_vars[i].stateCode);
+                    response_cities.push(d)
                 }
 
                 Promise.all(response_cities).then(function(jsonResults) {
@@ -240,15 +203,8 @@
             } else {
 
                 const response_cities = [];
-                try {
-                    // await the response
-                    const d = get_cities(city_selector_vars.stateCode);
-                    // add response to the response array
-                    response_cities.push(d)
-                } catch (err) {
-                    // handle error
-                    console.log(err)
-                }
+                const d = get_cities(city_selector_vars.stateCode);
+                response_cities.push(d)
 
                 Promise.all(response_cities).then(function(jsonResults) {
                     for (i = 0; i < jsonResults.length; i++) {
