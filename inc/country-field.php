@@ -11,6 +11,7 @@
         <?php
     }
     add_action( 'wp_head', 'city_selector_ajaxurl' );
+    add_action( 'login_head', 'city_selector_ajaxurl' );
 
     /**
      * Fill the countries select
@@ -199,13 +200,15 @@
                 $items[ 0 ][ 'id' ]        = '';
                 $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
                 $i                         = 1;
-                foreach ( $db as $data ) {
-                    $items[ $i ][ 'id' ]        = $data->state_code;
-                    $items[ $i ][ 'city_name' ] = $data->city_name;
-                    $i++;
+                if ( isset( $db ) && is_array( $db ) ) {
+                    foreach ( $db as $data ) {
+                        $items[ $i ][ 'id' ]        = $data->state_code;
+                        $items[ $i ][ 'city_name' ] = $data->city_name;
+                        $i++;
+                    }
+                    echo json_encode( $items );
+                    wp_die();
                 }
-                echo json_encode( $items );
-                wp_die();
             }
         }
     }
