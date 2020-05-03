@@ -533,9 +533,11 @@
              */
             public function acfcs_include_field_types( $version = false ) {
                 if ( ! $version ) {
+                    // @TODO: add error because there's no support for v4 (anymore)
                     $version = 4;
+                } else {
+                    include_once( 'fields/acf-city_selector-v' . $version . '.php' );
                 }
-                include_once( 'fields/acf-city_selector-v' . $version . '.php' );
             }
 
 
