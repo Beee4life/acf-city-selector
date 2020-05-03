@@ -276,7 +276,6 @@
                                     );
                                 }
                             }
-
                         } else {
                             if ( isset( $field_name ) ) {
                                 if ( isset( $user_id ) ) {
@@ -369,7 +368,6 @@
              */
             function validate_value( $valid, $value, $field, $input ) {
 
-                // @TODO: fix save empty value for countryCode, stateName and cityName
                 if ( 1 == $field[ 'required' ] ) {
                     if ( ! isset( $value[ 'cityName' ] ) || $value[ 'cityName' ] == 'Select a city' ) {
                         $valid = __( "You didn't select a city", "acf-city-selector" );
