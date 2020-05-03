@@ -565,11 +565,8 @@
                 $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
                     $new_links[ 'documentation' ] = '<a href="https://acfcs.berryplasman.com/documentation">Documentation</a>';
-                    if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                        // $new_links[ 'gopro' ] = '<a href="' . admin_url() . 'options-general.php?page=acfcs-go-pro' . '">Go Pro</a>';
-                    }
-                    $new_links[] = $visit_plugin_link;
-                    $links       = array_merge( $links, $new_links );
+                    $new_links[]                  = $visit_plugin_link;
+                    $links                        = array_merge( $links, $new_links );
                 }
 
                 return $links;
@@ -582,11 +579,9 @@
             public static function acfcs_admin_menu() {
                 $admin_url  = admin_url( 'options-general.php?page=' );
                 $dashboard  = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                $gopro      = false;
                 $preview    = false;
                 $search     = false;
                 $settings   = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
-                $show_gopro = false;
 
                 if ( true === acfcs_has_cities() ) {
                     $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
@@ -596,11 +591,7 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false != $show_gopro ) {
-                    $gopro = ' | <a href="' . $admin_url . 'acfcs-go-pro">' . esc_html__( 'Go Pro', 'acf-city-selector' ) . '</a>';
-                }
-
-                return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $gopro . '</p>';
+                return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
             }
 
             /**
@@ -632,11 +623,6 @@
                 if ( true == acfcs_has_cities() ) {
                     include( 'inc/acfcs-search.php' );
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
-                }
-
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                    // include( 'inc/acfcs-go-pro.php' );
-                    // add_submenu_page( null, 'Go Pro', 'Go Pro', 'manage_options', 'acfcs-go-pro', 'acfcs_go_pro' );
                 }
             }
 
