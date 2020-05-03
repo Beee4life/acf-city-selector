@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.10-beta
+0.10
 
 <a name="description"></a>
 ### Description
@@ -41,16 +41,17 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 <a name="installation"></a>
 ### Installation
 
+1. Download the [latest release](https://github.com/Beee4life/acf-city-selector/archive/master.zip).
 1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
-2. Activate the `ACF City Selector` plugin via the plugins admin page.
-3. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
-4. (optional) Import new cities with help of the included excel sheet.
-5. Please refer to the description for more info regarding the field type settings.
+1. Activate the `ACF City Selector` plugin via the plugins admin page.
+1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
+1. (optional) Import new cities with help of the included excel sheet.
 
 <a name="usage"></a>
 ### Usage
 
 When the field is used a single field, 3 values are stored in an array: 
+
 ```php
 array(3) {
   ["countryCode"]=>
@@ -116,7 +117,9 @@ echo ' which lies in the country: ' . $city_selector['country'] . ' (' . $city_s
 
 This outputs:
 
-    "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
+```
+"I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
+```
         
 <a name="impact"></a>
 ### Impact
