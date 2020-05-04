@@ -45,6 +45,8 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
 1. Activate the `ACF City Selector` plugin via the plugins admin page.
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
+1. Select if you want to show labels
+1. Select if you want a default country
 1. (optional) Import new cities with help of the included excel sheet.
 
 <a name="usage"></a>
@@ -215,7 +217,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 ### Changelog
 
 0.14
-* ...
+* added the option to set a default country
 
 0.13
 * Forgot to change version

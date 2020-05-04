@@ -61,6 +61,19 @@
                     'value'        => $field[ 'show_labels' ],
                 ) );
 
+                $select = [
+                    '' => __( 'Select a default country', 'acf-city-selector' ),
+                ];
+                $countries = array_merge( $select, acfcs_get_countries() );
+                acf_render_field_setting( $field, array(
+                    'choices'      => $countries,
+                    // 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Default country', 'acf-city-selector' ),
+                    // 'layout'       => 'horizontal',
+                    'name'         => 'default_country',
+                    'type'         => 'select',
+                ) );
+
             }
 
             /*
@@ -74,6 +87,7 @@
              */
             function render_field( $field ) {
 
+                $default_country = false;
                 if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
                     // if $field[ 'name' ] contains 'row' it's a repeater field
                     $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
@@ -114,10 +128,11 @@
                     }
                 }
 
-                $countries   = acfcs_populate_country_select( $field );
-                $field_id    = $field[ 'id' ];
-                $field_name  = $field[ 'name' ];
-                $show_labels = $field[ 'show_labels' ];
+                $countries       = acfcs_populate_country_select( $field );
+                $field_id        = $field[ 'id' ];
+                $field_name      = $field[ 'name' ];
+                $show_labels     = $field[ 'show_labels' ];
+                $default_country = $field[ 'default_country' ];
                 ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( 1 == $show_labels ) { ?>
@@ -130,7 +145,8 @@
                     </label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                         <?php foreach ( $countries as $key => $country ) { ?>
-                            <?php $selected = ( isset( $selected_country ) ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
+                            <?php $selected = ( false !== $selected_country ) ? ( $selected_country === $key ) ? ' selected="selected"' : false : false; ?>
+                            <?php $selected = ( false === $selected ) ? ( false !== $default_country ) ? ' selected="selected"' : false : $selected; ?>
                             <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
                         <?php } ?>
                     </select>
