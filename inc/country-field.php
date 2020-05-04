@@ -202,8 +202,7 @@
                         SELECT *
                         FROM " . $wpdb->prefix . "cities
                         WHERE state_code = '%s'
-                        AND country_code='%s'
-                        GROUP BY state_code
+                            AND country_code='%s'
                         ORDER BY city_name ASC", $state_code, $country_code
                     );
                     $results = $wpdb->get_results( $sql );
