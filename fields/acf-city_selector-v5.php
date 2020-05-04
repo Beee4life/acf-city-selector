@@ -27,16 +27,6 @@
                 );
 
                 /*
-                 * Keep for now
-                 * l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
-                 * var message = acf._e('city_selector', 'error');
-                 */
-
-                // $this->l10n = array(
-                //     'error' => __('Error! Please enter a higher value', 'acf-city-selector'),
-                // );
-
-                /*
                  *  settings (array) Store plugin settings (url, path, version) as a reference for later use with assets
                  */
                 $this->settings = $settings;
@@ -62,13 +52,13 @@
                     0 => __( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
-                    'type'         => 'radio',
-                    'name'         => 'show_labels',
                     'choices'      => $select_options,
-                    'value'        => $field[ 'show_labels' ],
-                    'layout'       => 'horizontal',
-                    'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
+                    'layout'       => 'horizontal',
+                    'name'         => 'show_labels',
+                    'type'         => 'radio',
+                    'value'        => $field[ 'show_labels' ],
                 ) );
 
             }
