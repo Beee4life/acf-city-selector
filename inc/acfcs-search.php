@@ -103,8 +103,7 @@
             $where                   = [];
 
             if ( false != $search_criteria_state ) {
-                // @TODO: change state code to max 3
-                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
+                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
                 $where[] = "country_code = '" . $search_criteria_country . "'";
             }

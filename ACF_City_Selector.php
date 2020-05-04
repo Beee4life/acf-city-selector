@@ -63,7 +63,7 @@
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_sync_init' ) );
+                add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
@@ -114,7 +114,7 @@
             /**
              * Add admin notice when ACF version < 5
              */
-            public function acfcs_sync_init() {
+            public function acfcs_check_acf_version() {
                 if ( ! function_exists( 'get_plugins' ) ) {
                     require_once ABSPATH . 'wp-admin/includes/plugin.php';
                 }
@@ -177,7 +177,7 @@
                 CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
                 id int(6) unsigned NOT NULL auto_increment,
                 city_name varchar(50) NULL,
-                state_code varchar(2) NULL,
+                state_code varchar(3) NULL,
                 state_name varchar(50) NULL,
                 country_code varchar(2) NULL,
                 country varchar(50) NULL,
@@ -556,7 +556,6 @@
              */
             public function acfcs_include_field_types( $version = false ) {
                 if ( ! $version ) {
-                    // @TODO: add error because there's no support for v4 (anymore)
                     $version = 4;
                 } else {
                     include_once( 'fields/acf-city_selector-v' . $version . '.php' );
