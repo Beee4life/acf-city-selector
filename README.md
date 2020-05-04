@@ -214,6 +214,10 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.11
+* Fixed select values in admin state search
+* Added natural sorting for French 'arrondisements'
+
 0.10
 * Made the field available on user pages
 * Dropped inclusion for v4.
