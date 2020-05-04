@@ -33,7 +33,7 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.11',
+                    'version'       => '0.12',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
