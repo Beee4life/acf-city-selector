@@ -10,7 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $show_raw_import = 1;
+        $show_raw_import = true;
         ?>
 
         <div class="wrap acfcs">

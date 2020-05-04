@@ -19,7 +19,7 @@
             if ( trim( $country->country ) == '' ) {
                 continue;
             }
-            $countries[ $country->id ] = $country->country;
+            $countries[ strtolower( $country->country_code ) ] = $country->country;
         }
 
         return $countries;
