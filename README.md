@@ -214,6 +214,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.14
+* ...
+
 0.13
 * Forgot to change version
 
