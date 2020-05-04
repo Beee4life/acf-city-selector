@@ -63,6 +63,7 @@
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
+                add_action( 'plugins_loaded',               array( $this, 'acfcs_sync_init' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
@@ -105,6 +106,27 @@
                             esc_url( admin_url( 'plugins.php?s=acf&plugin_status=inactive' ) ) );
                         echo '</p></div>';
                     });
+                }
+            }
+
+
+            /**
+             * Add admin notice when ACF version < 5
+             */
+            public function acfcs_sync_init() {
+                if ( ! function_exists( 'get_plugins' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
+                $plugins = get_plugins();
+
+                if ( isset( $plugins[ 'advanced-custom-fields-pro/acf.php' ] ) ) {
+                    if ( $plugins[ 'advanced-custom-fields-pro/acf.php' ][ 'Version' ] < 5 && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
+                        add_action( 'admin_notices', function () {
+                            echo '<div class="error"><p>';
+                            echo sprintf( __( '<b>Warning</b>: The "%s" plugin will not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ), 'City Selector', 'Advanced Custom Fields' );
+                            echo '</p></div>';
+                        } );
+                    }
                 }
             }
 
@@ -590,8 +612,9 @@
                 if ( ! empty ( acfcs_check_if_files() ) ) {
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
+                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
 
-                return '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
+                return $menu;
             }
 
             /**
