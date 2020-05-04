@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.12
+0.13
 
 <a name="description"></a>
 ### Description
@@ -213,6 +213,12 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.13
+* Forgot to change version
+
+0.12
+* Hotfix to remove an incorrect SQL statement
 
 0.11
 * Fixed select values in admin state search
