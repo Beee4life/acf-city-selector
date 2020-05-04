@@ -60,7 +60,10 @@
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
-                    // @TODO: open optgroup
+                    $states[] = array(
+                        'state' => 'open_optgroup',
+                        'name'  => acfcs_get_country_name( $country[ 'code' ] ),
+                    );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
                         $order = "ORDER BY LENGTH(state_name), state_name";
@@ -82,7 +85,10 @@
                             );
                         }
                     }
-                    // @TODO: close optgroup
+                    $states[] = array(
+                        'state' => 'close_optgroup',
+                        'name'  => '',
+                    );
                 }
             }
         }
@@ -175,7 +181,15 @@
                                                 }
                                             }
                                         ?>
-                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
+                                        <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
+                                            <optgroup label="<?php echo $state[ 'name' ]; ?>">
+                                        <?php } ?>
+                                        <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
+                                            <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
+                                        <?php } ?>
+                                        <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
+                                            </optgroup>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
                             </label>
