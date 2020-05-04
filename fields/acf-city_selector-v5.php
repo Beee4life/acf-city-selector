@@ -61,13 +61,12 @@
                     'value'        => $field[ 'show_labels' ],
                 ) );
 
-                $country_vars[ 'show_labels' ] = 0;
-                $countries                     = acfcs_get_countries( $country_vars );
+                $field_vars[ 'show_labels' ] = 0;
+                $countries                   = acfcs_get_countries( $field_vars );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
-                    // 'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+                    'instructions' => esc_html__( 'Pre-select a default country when creating a new post or adding a new row in a repeater', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Default country', 'acf-city-selector' ),
-                    // 'layout'       => 'horizontal',
                     'name'         => 'default_country',
                     'type'         => 'select',
                 ) );
