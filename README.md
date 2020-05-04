@@ -187,6 +187,11 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
+The default country setting only works for the following situations: 
+* in a single field
+* in a repeater field
+* in a group
+
 This plugin doesn't work (yet) in the following situations:
 * multiple single fields on 1 page
 * as a repeater field in groups
@@ -217,7 +222,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 ### Changelog
 
 0.14
-* added the option to set a default country
+* added the option to set a default country (for single fields/in groups/in repeaters)
 
 0.13
 * Forgot to change version
