@@ -60,6 +60,7 @@
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
+                    // @TODO: open optgroup
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
                         $order = "ORDER BY LENGTH(state_name), state_name";
@@ -77,10 +78,11 @@
                         foreach ( $results as $data ) {
                             $states[] = array(
                                 'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name' => __( $data->state_name, 'acf-city-selector' ) . ' (' . $data->country_code . ')',
+                                'name'  => __( $data->state_name, 'acf-city-selector' ) . ' (' . $data->country_code . ')',
                             );
                         }
                     }
+                    // @TODO: close optgroup
                 }
             }
         }
