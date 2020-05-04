@@ -60,19 +60,24 @@
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
-                    $results = $wpdb->get_results(
-                        "SELECT * FROM " . $wpdb->prefix . "cities
-                            WHERE country_code = '" . $country[ 'code' ] . "'
-                            group by state_code
-                            order by state_name ASC
-                        " );
-                    // @TODO: check if results contain France, if sort by LENGTH(column_name), column_name
+                    $order = 'ORDER BY state_name ASC';
+                    if ( 'FR' == $country[ 'code' ] ) {
+                        $order = "ORDER BY LENGTH(state_name), state_name";
+                    }
+                    $sql = $wpdb->prepare( "
+                        SELECT *
+                        FROM " . $wpdb->prefix . "cities
+                        WHERE country_code = '%s'
+                        GROUP BY state_code
+                        " . $order, $country_code
+                    );
+                    $results = $wpdb->get_results( $sql );
 
                     if ( count( $results ) > 0 ) {
                         foreach ( $results as $data ) {
                             $states[] = array(
-                                'state' => $data->country_code . '-' . $data->state_code,
-                                'name' => __( $data->country, 'acf-city-selector' ),
+                                'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
+                                'name' => __( $data->state_name, 'acf-city-selector' ) . ' (' . $data->country_code . ')',
                             );
                         }
                     }
