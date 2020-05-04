@@ -56,10 +56,11 @@
 
         if ( ! $country_code && isset( $_POST[ 'country_code' ] ) ) {
             $country_code = $_POST[ 'country_code' ];
+        } else {
+            error_log('test hit');
         }
 
         global $wpdb;
-
         $items = array();
 
         if ( false !== $country_code ) {
