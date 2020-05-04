@@ -217,3 +217,24 @@
 
         return false;
     }
+
+    /**
+     * Get country name by country code
+     *
+     * @param $country_code
+     *
+     * @return mixed
+     */
+    function acfcs_get_country_name( $country_code ) {
+
+        if ( false != $country_code ) {
+            global $wpdb;
+            $country = $wpdb->get_row( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '{$country_code}'" );
+            if ( isset( $country->country ) ) {
+                return $country->country;
+            }
+        }
+
+        return $country_code;
+
+    }
