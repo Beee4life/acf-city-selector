@@ -12,6 +12,8 @@
 
         $target_folder = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         rmdir( $target_folder );
+
+        // @TODO: remove any settings
     }
 
 ?>
