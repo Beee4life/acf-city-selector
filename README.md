@@ -231,6 +231,8 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
+* changed state length to 3 charcters for Australia and some other countries
+* added optgroups to the state dropdown in the admin search
 
 0.13
 * Forgot to change version
