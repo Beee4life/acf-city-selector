@@ -493,22 +493,30 @@
                         return;
                     } else {
 
-                        if ( ! empty( $_POST[ 'delete_country' ] ) ) {
+                        if ( empty( $_POST[ 'delete_country' ] ) ) {
+                            ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
+
+                            return;
+                        } else {
                             $country_names_and = false;
                             foreach( $_POST[ 'delete_country' ] as $country_code ) {
                                 $country_names[] = acfcs_get_country_name( $country_code );
                             }
                             if ( ! empty( $country_names ) ) {
                                 $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
-                                $country_names_and    = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
+                                if ( 1 < count( $country_names ) ) {
+                                    $country_names_and = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
+                                } else {
+                                    $country_names_and = $country_names_quotes;
+                                }
                             }
 
                             global $wpdb;
                             $country_string = strtoupper( "'" . implode( "', '", $_POST[ 'delete_country' ] ) . "'" );
                             $query          = "DELETE FROM sb_cities WHERE country_code IN ({$country_string})";
-                            $result = $wpdb->query( $query );
+                            $result         = $wpdb->query( $query );
                             if ( $result > 0 ) {
-                                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed the cities for %s.', 'acf-city-selector' ), $country_names_and ) );
+                                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
                             }
                         }
                     }
@@ -543,6 +551,9 @@
                                 $prefix     = false;
                             } elseif ( strpos( $code, 'error' ) !== false ) {
                                 $span_class = 'notice--error ';
+                                $prefix     = esc_html__( 'Error', 'action-logger' );
+                            } elseif ( strpos( $code, 'warning' ) !== false ) {
+                                $span_class = 'notice--warning ';
                                 $prefix     = esc_html__( 'Warning', 'action-logger' );
                             } elseif ( strpos( $code, 'info' ) !== false ) {
                                 $span_class = 'notice--info ';
