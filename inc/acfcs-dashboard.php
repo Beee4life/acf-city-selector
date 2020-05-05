@@ -59,8 +59,9 @@
                                                     <?php if ( count( $file_index ) > 1 ) { ?>
                                                         <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
                                                     <?php } ?>
-                                                    <?php foreach ( $file_index as $file ) { ?>
-                                                        <option value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                                                    <?php foreach ( $file_index as $file_name ) { ?>
+                                                        <?php $selected = ( $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
+                                                        <option value="<?php echo $file_name; ?>"<?php echo $selected; ?>><?php echo $file_name; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </label>
