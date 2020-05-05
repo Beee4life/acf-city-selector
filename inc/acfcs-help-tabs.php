@@ -35,7 +35,7 @@
                         <tr>
                         <td>' . esc_html__( 'State code', 'acf-city-selector' ) . '</td>
                         <td>' . esc_html__( 'state abbreviation', 'acf-city-selector' ) . '</td>
-                        <td>' . esc_html__( 'exactly 3 characters', 'acf-city-selector' ) . '</td>
+                        <td>' . esc_html__( 'max 3 characters', 'acf-city-selector' ) . '</td>
                         </tr>
                         <tr>
                         <td>' . esc_html__( 'State', 'acf-city-selector' ) . '</td>
@@ -45,7 +45,6 @@
                         <tr>
                         <td>' . esc_html__( 'Country code', 'acf-city-selector' ) . '</td>
                         <td>' . esc_html__( 'country abbreviation', 'acf-city-selector' ) . '</td>
-                        <!-- TODO: change this to 3 -->
                         <td>' . esc_html__( 'exactly 2 characters', 'acf-city-selector' ) . '</td>
                         </tr>
                         <tr>
