@@ -266,7 +266,7 @@
                         if ( true === $verify ) {
                             $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
                             if ( isset( $csv_array[ 'data' ] ) ) {
-                                $this->acfcs_errors()->add( 'success_no_errors_in_csv', esc_html__( 'Congratulations, there appear to be no errors in your CSV.', 'acf-city-selector' ) );
+                                $this->acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
 
                                 do_action( 'acfcs_after_success_verify' );
 
@@ -282,26 +282,19 @@
                                 foreach ( $csv_array[ 'data' ] as $line ) {
                                     $line_number++;
 
-                                    $city         = $line[ 0 ];
-                                    $state_abbr   = $line[ 1 ];
-                                    $state        = $line[ 2 ];
-                                    $country_abbr = $line[ 3 ];
-                                    $country      = $line[ 4 ];
-
                                     $city_row = array(
-                                        'city_name'    => $city,
-                                        'state_code'   => $state_abbr,
-                                        'state_name'   => $state,
-                                        'country_code' => $country_abbr,
-                                        'country'      => $country,
+                                        'city_name'    => $line[ 0 ],
+                                        'state_code'   => $line[ 1 ],
+                                        'state_name'   => $line[ 2 ],
+                                        'country_code' => $line[ 3 ],
+                                        'country'      => $line[ 4 ],
                                     );
 
                                     global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
-
                                 }
 
-                                $this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities.', 'acf-city-selector' ), $line_number ) );
+                                $this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
 
                                 do_action( 'acfcs_after_success_import' );
 
@@ -349,18 +342,12 @@
                                 foreach ( $verified_data as $line ) {
                                     $line_number++;
 
-                                    $city         = $line[ 0 ];
-                                    $state_abbr   = $line[ 1 ];
-                                    $state        = $line[ 2 ];
-                                    $country_abbr = $line[ 3 ];
-                                    $country      = $line[ 4 ];
-
                                     $city_row = array(
-                                        'city_name'    => $city,
-                                        'state_code'   => $state_abbr,
-                                        'state_name'   => $state,
-                                        'country_code' => $country_abbr,
-                                        'country'      => $country,
+                                        'city_name'    => $line[ 0 ],
+                                        'state_code'   => $line[ 1 ],
+                                        'state_name'   => $line[ 2 ],
+                                        'country_code' => $line[ 3 ],
+                                        'country'      => $line[ 4 ],
                                     );
 
                                     global $wpdb;
