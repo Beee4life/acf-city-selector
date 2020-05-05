@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-05 14:02+0200\n"
-"PO-Revision-Date: 2020-05-05 14:04+0200\n"
+"POT-Creation-Date: 2020-05-05 20:32+0200\n"
+"PO-Revision-Date: 2020-05-05 20:32+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -369,8 +369,8 @@ msgid "state abbreviation"
 msgstr "staat/provincie afkorting"
 
 #: inc/acfcs-help-tabs.php:38
-msgid "exactly 3 characters"
-msgstr "precies 3 karakters"
+msgid "max 3 characters"
+msgstr "max 3 karakters"
 
 #: inc/acfcs-help-tabs.php:41 inc/acfcs-preview.php:115
 #: inc/acfcs-search.php:249
@@ -389,32 +389,32 @@ msgstr "Land code"
 msgid "country abbreviation"
 msgstr "land afkorting"
 
-#: inc/acfcs-help-tabs.php:49
+#: inc/acfcs-help-tabs.php:48
 msgid "exactly 2 characters"
 msgstr "precies 2 karakters"
 
-#: inc/acfcs-help-tabs.php:52 inc/acfcs-preview.php:117
+#: inc/acfcs-help-tabs.php:51 inc/acfcs-preview.php:117
 #: inc/acfcs-search.php:252
 msgid "Country"
 msgstr "Land"
 
-#: inc/acfcs-help-tabs.php:53
+#: inc/acfcs-help-tabs.php:52
 msgid "full country name"
 msgstr "volledige land naam"
 
-#: inc/acfcs-help-tabs.php:61
+#: inc/acfcs-help-tabs.php:60
 msgid "Import CSV from file"
 msgstr "Importeer CSV data van bestand"
 
-#: inc/acfcs-help-tabs.php:65
+#: inc/acfcs-help-tabs.php:64
 msgid "You can only upload *.csv files."
 msgstr "Je kunt alleen *.csv bestanden uploaden."
 
-#: inc/acfcs-help-tabs.php:71
+#: inc/acfcs-help-tabs.php:70
 msgid "Import raw CSV data"
 msgstr "Importeer ruwe CSV data"
 
-#: inc/acfcs-help-tabs.php:75
+#: inc/acfcs-help-tabs.php:74
 msgid ""
 "Raw CSV data has to be formatted (and ordered) in a certain way, otherwise "
 "it won't work."
@@ -422,11 +422,11 @@ msgstr ""
 "‘Raw’ CSV data moet in een bepaalde structuur geformatteerd worden en in een "
 "bepaalde volgorde, anders werkt het niet."
 
-#: inc/acfcs-help-tabs.php:83
+#: inc/acfcs-help-tabs.php:82
 msgid "Import preset countries"
 msgstr "Importeer geïnstalleerde landen"
 
-#: inc/acfcs-help-tabs.php:85
+#: inc/acfcs-help-tabs.php:84
 msgid ""
 "On this page you can (re-)import the countries which come with the plugin "
 "when it's installed; Netherlands, Belgium and Luxembourg (if needed)."
@@ -434,7 +434,7 @@ msgstr ""
 "Op deze pagina kan je steden (opnieuw) importeren. Je kan steden kiezen uit "
 "Nederland, België en Luxemburg, welke ingesloten zijn in de plugin."
 
-#: inc/acfcs-help-tabs.php:87
+#: inc/acfcs-help-tabs.php:86
 msgid ""
 "There's also an option to delete all cities, which can be helpful if you "
 "activate the plugin a second time. Right now all cities are imported again "
@@ -446,7 +446,7 @@ msgstr ""
 "als je de plugin opnieuw activeert. Dit gebeurt ook als alle steden nog "
 "aanwezig zijn in de database uit een vorige activatie."
 
-#: inc/acfcs-help-tabs.php:89
+#: inc/acfcs-help-tabs.php:88
 msgid ""
 "If you select preserve settings, all values will not be deleted from the "
 "database when the plugin is deleted."
@@ -454,7 +454,7 @@ msgstr ""
 "Als je de optie data bewaren inschakelt, worden alle steden bewaard als de "
 "plugin wordt verwijderd."
 
-#: inc/acfcs-help-tabs.php:94
+#: inc/acfcs-help-tabs.php:93
 msgid "Author's website"
 msgstr "Auteur’s website"
 
