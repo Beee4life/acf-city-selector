@@ -4,10 +4,22 @@
         exit;
     }
 
-    // check if class already exists
     if ( ! class_exists( 'acf_field_city_selector' ) ) :
 
+        /**
+         * Main class
+         */
         class acf_field_city_selector extends acf_field {
+
+            /*
+             * Function index
+             * - construct( $settings )
+             * - render_field_settings( $field )
+             * - render_field( $field )
+             * - input_admin_head()
+             * - load_value( $value, $post_id, $field )
+             * - validate_value( $valid, $value, $field, $input )
+             */
 
             /*
              *  __construct
@@ -25,10 +37,6 @@
                 $this->defaults = array(
                     'show_labels' => 1,
                 );
-
-                /*
-                 *  settings (array) Store plugin settings (url, path, version) as a reference for later use with assets
-                 */
                 $this->settings = $settings;
 
                 // do not delete!
@@ -99,7 +107,7 @@
                         $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                     }
                 } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                    // else it's a single or group field
+                    // if $field[ 'name' ] doesn't contain 'row' it's a single or group field
 
                     /**
                      * Why is 24 set as length ?
@@ -111,7 +119,7 @@
                      * single   = acf[field_5e950320fef17] (24)
                      */
                     if ( 24 < strlen( $field[ 'name' ] ) ) {
-                        // group
+                        // Group
                         $field_object = get_field_objects( get_the_ID() );
                         if ( is_array( $field_object ) ) {
                             $group_name       = array_keys( $field_object )[ 0 ];
@@ -120,7 +128,7 @@
                             $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
                         }
                     } else {
-                        // single
+                        // Single
                         $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
                     }
                 }
@@ -296,7 +304,7 @@
                         }
 
                         /*
-                         * Get and localize post_meta
+                         * Get post_meta
                          */
                         if ( isset( $repeater_count ) && 0 < $repeater_count ) {
                             for( $i = 0; $i < $repeater_count; $i++ ) {
@@ -329,6 +337,9 @@
                                 }
                             }
                         }
+                        /*
+                         * Localize post_meta
+                         */
                         if ( isset( $meta_values ) ) {
                             wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
                         }
@@ -350,45 +361,25 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                $country_code = '';
-                if ( isset( $value[ 'countryCode' ]) ) {
-                    $country_code = $value[ 'countryCode' ];
-                    // @TODO: check when it can be '0'
-                    if ( '0' != $country_code && isset( $value[ 'stateCode' ] ) ) {
-                        $state_code = substr( $value[ 'stateCode' ], 3 );
-                    } else {
-                        $value = false;
-                    }
+                if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) {
+                    error_log( 'countryCode == 0' );
                 }
-                if ( strlen( $country_code ) == 2 && ( isset( $value[ 'stateCode' ] ) && '-' != $value[ 'stateCode' ] ) && ( isset( $value[ 'cityName' ] ) && 'Select a city' != $value[ 'cityName' ] ) ) {
+
+                $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
+                $state_code   = ( isset( $value[ 'stateCode' ] ) ) ? substr( $value[ 'stateCode' ], 3 ) : false;
+
+                if ( strlen( $country_code ) == 2 && '-' != $value[ 'stateCode' ] ) {
                     global $wpdb;
                     $table                  = $wpdb->prefix . 'cities';
                     $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
-                    $country                = $row->country;
-                    $state_name             = $row->state_name;
                     $value[ 'stateCode' ]   = $state_code;
-                    $value[ 'stateName' ]   = $state_name;
-                    $value[ 'countryName' ] = $country;
+                    $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
+                    $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
                 }
 
                 return $value;
             }
 
-
-            /*
-             *  update_value()
-             *
-             *  This filter is applied to the $value before it is saved in the db
-             *
-             *  @param	$value (mixed) the value found in the database
-             *  @param	$post_id (mixed) the $post_id from which the value was loaded
-             *  @param	$field (array) the field array holding all the field options
-             *  @return	$value
-            */
-            function update_value( $value, $post_id, $field ) {
-                // @TODO: check and maybe fix save empty value for countryCode, stateName and cityName
-                return $value;
-            }
 
             /*
              * validate_value()
