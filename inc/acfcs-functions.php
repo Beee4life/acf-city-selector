@@ -7,7 +7,7 @@
      *
      * @return array
      */
-    function acfcs_get_countries( $field = [] ) {
+    function acfcs_get_countries( $show_first = false, $show_labels = false ) {
 
         global $wpdb;
         $results = $wpdb->get_results( "
@@ -17,14 +17,32 @@
         " );
 
         $countries = [];
-        if ( isset( $field[ 'show_labels' ] ) && $field[ 'show_labels' ] == 1 ) {
-            $countries[ '' ] = '-';
-        } else {
-            $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
+        if ( false !== $show_first ) {
+            if ( false !== $show_labels ) {
+                $countries[ '' ] = '-';
+            } else {
+                $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
+            }
         }
         foreach ( $results as $data ) {
             $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
         }
+
+        return $countries;
+    }
+
+
+    /**
+     * Create an array with states based on a country code
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    function acfcs_populate_country_select( $field = [] ) {
+
+        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
+        $countries   = acfcs_get_countries( true, $show_labels );
 
         return $countries;
     }
