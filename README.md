@@ -157,22 +157,22 @@ There are a few actions available to add your own custom actions.
 ### Filters
 
 ```php
-function acfcs_delimiter( $string ) {
-    return $your_delimiter;
+function acfcs_delimiter( $default_value ) {
+    return $default_value;
 }
 add_filter( 'acfcs_delimiter', 'acfcs_delimiter', 11 );
 ```
 
-`$your_delimiter` must be a string with one of the following delimiters: `,` `;` `|`.
+The returned `$default_value` must be a string with one of the following delimiters: `,` `;` `|`.
 
-Find all hooks and filters [here](https://acfcs.berryplasman.com/documentation/hooks/).
+Find all hooks [here](https://acfcs.berryplasman.com/documentation/hooks/).
 
 <a name="functions"></a>
 ### Functions
 
 A few custom functions are available for you to easily retrieve data.
 
-Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/functions/).
 
 <a name="compatibility"></a>
 ### Compatibility
