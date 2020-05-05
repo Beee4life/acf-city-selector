@@ -66,31 +66,31 @@
     }
 
     /**
-     * Create an array with cities for a certain country and possibly state (not used by plugin)
+     * Create an array with cities for a certain country/state with row id as index (not used by plugin)
      *
      * @param bool $country_code
      * @param bool $state_code
+     *
+     * @return array
      */
-    function get_cities( $country_code = false, $state_code = false ) {
+    function acfcs_get_cities( $country_code = false, $state_code = false ) {
 
         global $wpdb;
-        $items = array();
+        $cities = array();
         $query = "SELECT * FROM " . $wpdb->prefix . "cities";
-        if ( $country_code ) {
+        if ( $country_code && $state_code ) {
+            $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+        } elseif ( $country_code ) {
             $query .= " WHERE country_code = '{$country_code}'";
         }
-        if ( $state_code ) {
-            $query .= " WHERE state_code = '{$country_code}-{$state_code}'";
-        }
-        $query   .= " group by state_code";
-        $query   .= " order by state_name ASC";
+        $query   .= " order by state_name, city_name ASC";
         $results = $wpdb->get_results( $query );
 
         foreach ( $results as $data ) {
-            $items[ $data->state_code ] = $data->state_name;
+            $cities[ $data->id ] = $data->city_name;
         }
 
-        return $items;
+        return $cities;
 
     }
 
