@@ -156,7 +156,8 @@
                                     <select name="acfcs_country" class="">
                                         <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
                                         <?php foreach( $countries as $country ) { ?>
-                                            <option value="<?php echo $country[ 'code' ]; ?>"><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
+                                            <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                            <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
                                         <?php } ?>
                                     </select>
                                 </label>
@@ -172,18 +173,11 @@
                                 <select name="acfcs_state" class="">
                                     <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
                                     <?php foreach( $states as $state ) { ?>
-                                        <?php
-                                            $selected = false;
-                                            if ( false != $search_criteria_state ) {
-                                                if ( $state[ 'state' ] == $search_criteria_state ) {
-                                                    $selected = ' selected="selected"';
-                                                }
-                                            }
-                                        ?>
                                         <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
                                             <optgroup label="<?php echo $state[ 'name' ]; ?>">
                                         <?php } ?>
                                         <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
+                                            <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
                                             <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
                                         <?php } ?>
                                         <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
