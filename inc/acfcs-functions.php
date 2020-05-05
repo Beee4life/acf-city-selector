@@ -1,28 +1,126 @@
 <?php
 
-    /*
-     * Get all countries from the database
+    /**
+     * Create an array with available countries from db
+     *
+     * @param array $field
      *
      * @return array
      */
-    function acfcs_get_countries() {
+    function acfcs_get_countries( $field = [] ) {
+
         global $wpdb;
-        $countries_db = $wpdb->get_results( "
-            SELECT DISTINCT *
-            FROM " . $wpdb->prefix . "cities
+        $results = $wpdb->get_results( "
+            SELECT * FROM " . $wpdb->prefix . "cities
             group by country
             order by country ASC
         " );
 
-        $countries = array();
-        foreach ( $countries_db as $country ) {
-            if ( trim( $country->country ) == '' ) {
-                continue;
-            }
-            $countries[ strtolower( $country->country_code ) ] = $country->country;
+        $countries = [];
+        if ( isset( $field[ 'show_labels' ] ) && $field[ 'show_labels' ] == 1 ) {
+            $countries[ '' ] = '-';
+        } else {
+            $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
+        }
+        foreach ( $results as $data ) {
+            $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
         }
 
         return $countries;
+    }
+
+
+    /**
+     * Create an array with states based on a country code
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    function acfcs_get_states( $field = [] ) {
+
+        if ( ! empty( $field[ 'default_country' ] ) ) {
+            $country_code = strtoupper( $field[ 'default_country' ] );
+        } else {
+            error_log('ERROR hit');
+        }
+
+        global $wpdb;
+        if ( isset( $country_code ) ) {
+            $sql = $wpdb->prepare( "
+                SELECT *
+                FROM " . $wpdb->prefix . "cities
+                WHERE country_code = '%s'
+                GROUP BY state_code
+                ORDER BY state_name ASC",  $country_code
+            );
+            $results = $wpdb->get_results( $sql );
+
+            $states = array();
+            foreach ( $results as $data ) {
+                $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
+            }
+        }
+
+        return $states;
+    }
+
+    /**
+     * Create an array with cities for a certain country/state with row id as index (not used by plugin)
+     *
+     * @param bool $country_code
+     * @param bool $state_code
+     *
+     * @return array
+     */
+    function acfcs_get_cities( $country_code = false, $state_code = false ) {
+
+        global $wpdb;
+        $cities = array();
+        $query = "SELECT * FROM " . $wpdb->prefix . "cities";
+        if ( $country_code && $state_code ) {
+            $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+        } elseif ( $country_code ) {
+            $query .= " WHERE country_code = '{$country_code}'";
+        }
+        $query   .= " order by state_name, city_name ASC";
+        $results = $wpdb->get_results( $query );
+
+        foreach ( $results as $data ) {
+            $cities[ $data->id ] = [
+                'id'    => $data->id,
+                'city_name' => $data->city_name,
+            ];
+            if ( false != $state_code ) {
+                $cities[ $data->id ][ 'state_code' ] = $state_code;
+                $cities[ $data->id ][ 'state_name' ] = $data->state_name;
+            }
+        }
+
+        return $cities;
+
+    }
+
+
+    /**
+     * Get country name by country code (used in search)
+     *
+     * @param $country_code
+     *
+     * @return mixed
+     */
+    function acfcs_get_country_name( $country_code = false ) {
+
+        if ( false != $country_code ) {
+            global $wpdb;
+            $country = $wpdb->get_row( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '{$country_code}'" );
+            if ( isset( $country->country ) ) {
+                return $country->country;
+            }
+        }
+
+        return $country_code;
+
     }
 
 
@@ -35,7 +133,7 @@
         global $wpdb;
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
-            LIMIT 5
+            LIMIT 2
         " );
 
         if ( count( $results ) > 0 ) {

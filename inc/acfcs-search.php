@@ -60,7 +60,10 @@
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
-                    // @TODO: open optgroup
+                    $states[] = array(
+                        'state' => 'open_optgroup',
+                        'name'  => acfcs_get_country_name( $country[ 'code' ] ),
+                    );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
                         $order = "ORDER BY LENGTH(state_name), state_name";
@@ -82,7 +85,10 @@
                             );
                         }
                     }
-                    // @TODO: close optgroup
+                    $states[] = array(
+                        'state' => 'close_optgroup',
+                        'name'  => '',
+                    );
                 }
             }
         }
@@ -97,8 +103,7 @@
             $where                   = [];
 
             if ( false != $search_criteria_state ) {
-                // @TODO: change state code to max 3
-                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 2) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
+                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
             } elseif ( false != $search_criteria_country ) {
                 $where[] = "country_code = '" . $search_criteria_country . "'";
             }
@@ -121,7 +126,7 @@
             $cities = $wpdb->get_results("SELECT *
                 FROM " . $wpdb->prefix . "cities
                 " . $where . "
-                order by country ASC, state_name ASC
+                order by country ASC, state_name ASC, city_name ASC
                 " . $search_limit . "
             " );
 
@@ -175,7 +180,15 @@
                                                 }
                                             }
                                         ?>
-                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
+                                        <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
+                                            <optgroup label="<?php echo $state[ 'name' ]; ?>">
+                                        <?php } ?>
+                                        <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
+                                            <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
+                                        <?php } ?>
+                                        <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
+                                            </optgroup>
+                                        <?php } ?>
                                     <?php } ?>
                                 </select>
                             </label>

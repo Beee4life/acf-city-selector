@@ -10,6 +10,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Impact](#impact)
 - [Cities](#cities)
 - [Hooks](#hooks)
+- [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
 - [Remove donation notice](#removedonation)
@@ -45,6 +46,8 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
 1. Activate the `ACF City Selector` plugin via the plugins admin page.
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
+1. Select if you want to show labels
+1. Select if you want a default country
 1. (optional) Import new cities with help of the included excel sheet.
 
 <a name="usage"></a>
@@ -137,10 +140,10 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
-<a name="hooks"></a>
-### Hooks
+<a name="actions"></a>
+### Actions
 
-There are a few hooks available to add your own custom actions. 
+There are a few actions available to add your own custom actions. 
 
 * acfcs_after_success_verify - hooks after successful csv verification
 * acfcs_after_success_import - hooks after successful csv import
@@ -150,7 +153,14 @@ There are a few hooks available to add your own custom actions.
 * acfcs_after_success_import_nl - hooks after importing preset country Netherlands
 * acfcs_after_success_nuke - hooks after truncating the table
 
-More can be expected.
+Find all actions [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+
+<a name="functions"></a>
+### Functions
+
+A few custom functions are available for you to easily retrieve data.
+
+Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
 
 <a name="compatibility"></a>
 ### Compatibility
@@ -185,6 +195,11 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
+The default country setting works for the following situations: 
+* in a single field
+* in a repeater field
+* in a group
+
 This plugin doesn't work (yet) in the following situations:
 * multiple single fields on 1 page
 * as a repeater field in groups
@@ -213,6 +228,11 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.14
+* added the option to set a default country (for single fields/in groups/in repeaters)
+* changed state length to 3 charcters for Australia and some other countries
+* added optgroups to the state dropdown in the admin search
 
 0.13
 * Forgot to change version
