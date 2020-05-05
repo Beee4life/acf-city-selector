@@ -47,7 +47,6 @@
                     <h2><?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ); ?></p>
                     <?php $countries = acfcs_get_countries(); ?>
-                    <?php array_shift( $countries ); ?>
                     <ul>
                         <?php foreach( $countries as $key => $value ) { ?>
                             <li>
