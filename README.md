@@ -187,7 +187,7 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-The default country setting only works for the following situations: 
+The default country setting works for the following situations: 
 * in a single field
 * in a repeater field
 * in a group
