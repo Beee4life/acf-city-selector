@@ -19,47 +19,46 @@
      * @param bool $country_code
      * @return JSON Object
      */
-    function get_states_call( $data = false ) {
-        if ( ! isset( $data[ 'country_code' ] ) ) {
-            if ( isset( $_POST[ 'country_code' ] ) ) {
-                $country_code = $_POST[ 'country_code' ];
+    function get_states_call() {
+
+        if ( isset( $_POST[ 'country_code' ] ) ) {
+            global $wpdb;
+            $country_code = $_POST[ 'country_code' ];
+            $order        = 'ORDER BY state_name ASC';
+            if ( 'FR' == $country_code ) {
+                $order = "ORDER BY LENGTH(state_name), state_name";
             }
-        } else {
-            $country_code = $data[ 'country_code' ];
-        }
+            $sql = $wpdb->prepare( "
+                SELECT *
+                FROM " . $wpdb->prefix . "cities
+                WHERE country_code = '%s'
+                GROUP BY state_code
+                " . $order, $country_code
+            );
 
-        global $wpdb;
-        $order = 'ORDER BY state_name ASC';
-        if ( 'FR' == $country_code ) {
-            $order = "ORDER BY LENGTH(state_name), state_name";
-        }
-        $sql = $wpdb->prepare( "
-            SELECT *
-            FROM " . $wpdb->prefix . "cities
-            WHERE country_code = '%s'
-            GROUP BY state_code
-            " . $order, $country_code
-        );
+            $query_results                 = $wpdb->get_results( $sql );
+            $items                         = array();
+            $items[ 0 ][ 'country_code' ]  = '';
+            $items[ 0 ][ 'country_state' ] = '';
+            $items[ 0 ][ 'state_code' ]    = '';
+            $items[ 0 ][ 'state_name' ]    = esc_html__( 'Select a province/state', 'acf-city-selector' );
+            $i                             = 1;
 
-        $query_results                = $wpdb->get_results( $sql );
-        $items                        = array();
-        $items[ 0 ][ 'country_code' ] = "";
-        $items[ 0 ][ 'state_code' ]   = "";
-        $items[ 0 ][ 'state_name' ]   = esc_html__( 'Select a province/state', 'acf-city-selector' );
-        $i                            = 1;
-
-        foreach ( $query_results as $data ) {
-            $items[ $i ][ 'country_code' ] = $data->country_code;
-            $items[ $i ][ 'state_code' ]   = $data->state_code;
-            if ( $data->state_name != 'N/A' ) {
-                $items[ $i ][ 'state_name' ] = $data->state_name;
-            } else {
-                $items[ $i ][ 'state_name' ] = $data->country;
+            foreach ( $query_results as $data ) {
+                $items[ $i ][ 'country_code' ] = $data->country_code;
+                $items[ $i ][ 'state_code' ]   = $data->state_code;
+                if ( $data->state_name != 'N/A' ) {
+                    $items[ $i ][ 'state_name' ]    = $data->state_name;
+                    $items[ $i ][ 'country_state' ] = $data->country_code . '-' . $data->state_code;
+                } else {
+                    $items[ $i ][ 'state_name' ]    = $data->country;
+                    $items[ $i ][ 'country_state' ] = $data->country_code . '-' . $data->state_code;
+                }
+                $i++;
             }
-            $i++;
+            echo json_encode( $items );
+            wp_die();
         }
-        echo json_encode( $items );
-        wp_die();
     }
     add_action( 'wp_ajax_get_states_call', 'get_states_call' );
     add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
@@ -76,7 +75,7 @@
             if ( trim( $_POST[ 'state_code' ] ) ) {
                 $country_code = false;
                 $state_code   = false;
-                if ( 5 == strlen( $_POST[ 'state_code' ] ) ) {
+                if ( 4 <= strlen( $_POST[ 'state_code' ] ) ) {
                     $codes        = explode( '-', $_POST[ 'state_code' ] );
                     $country_code = $codes[ 0 ];
                     $state_code   = $codes[ 1 ];
@@ -93,6 +92,7 @@
 
                 // @TODO: look into when/why it's '00'
                 if ( $state_code == '00' ) {
+                    error_log("state_code == '00'");
                     $sql = $wpdb->prepare( "
                         SELECT *
                         FROM " . $wpdb->prefix . "cities

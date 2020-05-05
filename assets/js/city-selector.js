@@ -37,7 +37,7 @@
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
-                    const d = get_states(country_code);
+                    const d               = get_states(country_code);
                     response_states.push(d)
 
                     Promise.all(response_states).then(function(jsonResults) {
@@ -53,7 +53,7 @@
                             for (j = 0; j < len; j++) {
                                 $selected = '';
                                 var state = obj[j];
-                                $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '">' + state.state_name + '</option>';
+                                $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                             }
                             changed_state.append($stateValues);
                             // @TODO: translate string
@@ -73,6 +73,7 @@
                     var state_field_id = $this.attr('id');
                     var city_field_id = state_field_id.replace( 'stateCode', 'cityName' );
                     var changed_city = $('select[id="' + city_field_id + '"]');
+                    console.log(state_code);
                     const d = get_cities(state_code);
                     response_cities.push(d)
 
