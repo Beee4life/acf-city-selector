@@ -49,17 +49,18 @@
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
-                add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 
+                add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_delete_countries' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_do_something_with_file' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_import_preset_countries' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
@@ -487,6 +488,40 @@
                             if ( $amount > 0 ) {
                                 $row_count = count( $ids );
                                 $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $row_count, 'acf-city-selector' ), $cities ) );
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            /*
+             * Delete countries manually
+             */
+            public function acfcs_delete_countries() {
+                if ( isset( $_POST[ 'acfcs_remove_countries_nonce' ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_remove_countries_nonce' ], 'acfcs-remove-countries-nonce' ) ) {
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+
+                        return;
+                    } else {
+
+                        if ( ! empty( $_POST[ 'delete_country' ] ) ) {
+                            $country_names_and = false;
+                            foreach( $_POST[ 'delete_country' ] as $country_code ) {
+                                $country_names[] = acfcs_get_country_name( $country_code );
+                            }
+                            if ( ! empty( $country_names ) ) {
+                                $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
+                                $country_names_and    = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
+                            }
+
+                            global $wpdb;
+                            $country_string = strtoupper( "'" . implode( "', '", $_POST[ 'delete_country' ] ) . "'" );
+                            $query          = "DELETE FROM sb_cities WHERE country_code IN ({$country_string})";
+                            $result = $wpdb->query( $query );
+                            if ( $result > 0 ) {
+                                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed the cities for %s.', 'acf-city-selector' ), $country_names_and ) );
                             }
                         }
                     }

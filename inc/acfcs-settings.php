@@ -43,6 +43,25 @@
                 <br /><hr />
 
                 <form method="post" action="">
+                    <input name="acfcs_remove_countries_nonce" value="<?php echo wp_create_nonce( 'acfcs-remove-countries-nonce' ); ?>" type="hidden" />
+                    <h2><?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?></h2>
+                    <p><?php esc_html_e( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ); ?></p>
+                    <?php $countries = acfcs_get_countries(); ?>
+                    <?php array_shift( $countries ); ?>
+                    <ul>
+                        <?php foreach( $countries as $key => $value ) { ?>
+                            <li>
+                                <label for="delete_<?php echo strtolower( $key ); ?>" class="screen-reader-text"></label>
+                                <input type="checkbox" name="delete_country[]" id="delete_<?php echo strtolower( $key ); ?>" value="<?php echo strtolower( $key ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                    <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Delete selected countries', 'acf-city-selector' ); ?>" />
+                </form>
+
+                <br /><hr />
+
+                <form method="post" action="">
                     <input name="acfcs_truncate_table_nonce" value="<?php echo wp_create_nonce( 'acfcs-truncate-table-nonce' ); ?>" type="hidden" />
                     <h2><?php esc_html_e( 'Clear the database', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ); ?></p>
