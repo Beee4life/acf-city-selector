@@ -140,7 +140,7 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
-<a name="actions"></a>
+<a name="hooks"></a>
 ### Actions
 
 There are a few actions available to add your own custom actions. 
@@ -153,7 +153,19 @@ There are a few actions available to add your own custom actions.
 * acfcs_after_success_import_nl - hooks after importing preset country Netherlands
 * acfcs_after_success_nuke - hooks after truncating the table
 
-Find all actions [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+
+### Filters
+
+```php
+function acfcs_delimiter( $string ) {
+    return $your_delimiter;
+}
+add_filter( 'acfcs_delimiter', 'acfcs_delimiter', 11 );
+```
+
+`$your_delimiter` must be a string with one of the following delimiters: `,` `;` `|`.
+
+Find all hooks and filters [here](https://acfcs.berryplasman.com/documentation/hooks/).
 
 <a name="functions"></a>
 ### Functions
@@ -228,6 +240,12 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.15
+* added the option to delete a country at once through the admin pages
+* pre-select verified file on dashboard
+* pre-select search values on search page
+* added a filter to set a default delimiter
 
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
