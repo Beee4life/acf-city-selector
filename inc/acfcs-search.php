@@ -126,7 +126,7 @@
             $cities = $wpdb->get_results("SELECT *
                 FROM " . $wpdb->prefix . "cities
                 " . $where . "
-                order by country ASC, state_name ASC
+                order by country ASC, state_name ASC, city_name ASC
                 " . $search_limit . "
             " );
 
