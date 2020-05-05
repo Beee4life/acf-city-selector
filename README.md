@@ -10,6 +10,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Impact](#impact)
 - [Cities](#cities)
 - [Hooks](#hooks)
+- [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
 - [Remove donation notice](#removedonation)
@@ -139,10 +140,10 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
-<a name="hooks"></a>
-### Hooks
+<a name="actions"></a>
+### Actions
 
-There are a few hooks available to add your own custom actions. 
+There are a few actions available to add your own custom actions. 
 
 * acfcs_after_success_verify - hooks after successful csv verification
 * acfcs_after_success_import - hooks after successful csv import
@@ -152,7 +153,14 @@ There are a few hooks available to add your own custom actions.
 * acfcs_after_success_import_nl - hooks after importing preset country Netherlands
 * acfcs_after_success_nuke - hooks after truncating the table
 
-More can be expected.
+Find all actions [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+
+<a name="functions"></a>
+### Functions
+
+A few custom functions are available for you to easily retrieve data.
+
+Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
 
 <a name="compatibility"></a>
 ### Compatibility
