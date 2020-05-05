@@ -93,25 +93,28 @@
      */
     function acfcs_get_cities( $country_code = false, $state_code = false ) {
 
-        global $wpdb;
-        $cities = array();
-        $query = "SELECT * FROM " . $wpdb->prefix . "cities";
-        if ( $country_code && $state_code ) {
-            $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
-        } elseif ( $country_code ) {
-            $query .= " WHERE country_code = '{$country_code}'";
-        }
-        $query   .= " order by state_name, city_name ASC";
-        $results = $wpdb->get_results( $query );
+        $cities = [];
+        if ( false !== $country_code ) {
+            global $wpdb;
+            $cities = array();
+            $query = "SELECT * FROM " . $wpdb->prefix . "cities";
+            if ( $country_code && $state_code ) {
+                $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+            } elseif ( $country_code ) {
+                $query .= " WHERE country_code = '{$country_code}'";
+            }
+            $query   .= " order by state_name, city_name ASC";
+            $results = $wpdb->get_results( $query );
 
-        foreach ( $results as $data ) {
-            $cities[ $data->id ] = [
-                'id'    => $data->id,
-                'city_name' => $data->city_name,
-            ];
-            if ( false != $state_code ) {
-                $cities[ $data->id ][ 'state_code' ] = $state_code;
-                $cities[ $data->id ][ 'state_name' ] = $data->state_name;
+            foreach ( $results as $data ) {
+                $cities[ $data->id ] = [
+                    'id'    => $data->id,
+                    'city_name' => $data->city_name,
+                ];
+                if ( false != $state_code ) {
+                    $cities[ $data->id ][ 'state_code' ] = $state_code;
+                    $cities[ $data->id ][ 'state_name' ] = $data->state_name;
+                }
             }
         }
 
