@@ -168,6 +168,10 @@
     border-left-color: #ff9000;
 }
 
+.acfcs .notice--info {
+    border-left-color: #00a0d2;
+}
+
 /* admin menu */
 .acfcs .acfcs-admin-menu a {
     text-decoration: none;
