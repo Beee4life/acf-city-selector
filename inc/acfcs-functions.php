@@ -102,7 +102,7 @@
      *
      * @return mixed
      */
-    function acfcs_get_country_name( $country_code ) {
+    function acfcs_get_country_name( $country_code = false ) {
 
         if ( false != $country_code ) {
             global $wpdb;
@@ -126,7 +126,7 @@
         global $wpdb;
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
-            LIMIT 5
+            LIMIT 2
         " );
 
         if ( count( $results ) > 0 ) {
