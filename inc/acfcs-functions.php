@@ -87,7 +87,14 @@
         $results = $wpdb->get_results( $query );
 
         foreach ( $results as $data ) {
-            $cities[ $data->id ] = $data->city_name;
+            $cities[ $data->id ] = [
+                'id'    => $data->id,
+                'city_name' => $data->city_name,
+            ];
+            if ( false != $state_code ) {
+                $cities[ $data->id ][ 'state_code' ] = $state_code;
+                $cities[ $data->id ][ 'state_name' ] = $data->state_name;
+            }
         }
 
         return $cities;
