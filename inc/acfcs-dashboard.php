@@ -60,18 +60,20 @@
                                                         <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
                                                     <?php } ?>
                                                     <?php foreach ( $file_index as $file_name ) { ?>
-                                                        <?php $selected = ( $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
+                                                        <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
                                                         <option value="<?php echo $file_name; ?>"<?php echo $selected; ?>><?php echo $file_name; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </label>
                                         </td>
                                         <td>
+                                            <?php $delimiters = [ ",", ";", "|" ]; ?>
                                             <label>
                                                 <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                    <option value=",">,</option>
-                                                    <option value=";">;</option>
-                                                    <option value="|">|</option>
+                                                    <?php foreach( $delimiters as $delimiter ) { ?>
+                                                        <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                                        <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </label>
                                         </td>
