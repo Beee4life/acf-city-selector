@@ -146,7 +146,7 @@
 
 
     /**
-     * Checks if there any cities in the database
+     * Checks if there any cities in the database (for page availability)
      *
      * @return bool
      */
