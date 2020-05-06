@@ -18,7 +18,7 @@
 
         $countries = [];
         if ( false !== $show_first ) {
-            if ( false !== $show_labels ) {
+            if ( false != $show_labels ) {
                 $countries[ '' ] = '-';
             } else {
                 $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
