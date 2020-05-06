@@ -11,6 +11,8 @@
             }
         });
 
+        // @TODO: catch add layout action (flex content)
+
         /**
          * Change dropdowns
          */
