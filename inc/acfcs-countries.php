@@ -10,7 +10,18 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $packages = acfcs_get_packages();
+        $packages      = [];
+        $rest_packages = acfcs_get_packages();
+        if ( is_array( $rest_packages ) ) {
+            foreach( $rest_packages as $package ) {
+                $package                   = (array) $package;
+                $package[ 'country_name' ] = __( $package[ 'country_name' ], 'acf-city-selector' );
+                $packages[]                = $package;
+            }
+            usort( $packages, function( $a, $b ) {
+                return $a[ 'country_name' ] <=> $b[ 'country_name' ];
+            } );
+        }
         ?>
 
 
@@ -49,13 +60,13 @@
                         <?php if ( is_array( $packages ) ) { ?>
                             <?php $total_price = 0; ?>
                             <?php foreach( $packages as $package ) { ?>
-                                <?php $total_price = $total_price + $package->price; ?>
+                                <?php $total_price = $total_price + $package[ 'price' ]; ?>
                                 <tr>
-                                    <td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/img/flags/' . $package->country_code . '.png'; ?>" alt="" /></td>
-                                    <td><?php echo __( $package->country_name, 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $package->number_states; ?></td>
-                                    <td><?php echo $package->number_cities; ?></td>
-                                    <td>&euro; <?php echo $package->price; ?>,00</td>
+                                    <td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
+                                    <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
+                                    <td><?php echo $package[ 'number_states' ]; ?></td>
+                                    <td><?php echo $package[ 'number_cities' ]; ?></td>
+                                    <td>&euro; <?php echo $package[ 'price' ]; ?>,00</td>
                                 </tr>
                             <?php } ?>
                         <?php } ?>
@@ -67,7 +78,7 @@
                     </p>
 
                     <p>
-                        <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary">Get your country now !</a>
+                        <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary"><?php echo __( 'Get your country now', 'acf-city-selector' ); ?> !</a>
                     </p>
 
                 </div>
