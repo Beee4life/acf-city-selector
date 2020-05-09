@@ -62,12 +62,12 @@
                                     </td>
 
                                     <td>
-                                        <?php $delimiters = [ ",", ";" ]; ?>
+                                        <?php $delimiters = [ ",", ";", "|" ]; ?>
                                         <label>
                                             <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                <?php foreach( $delimiters as $limiter ) { ?>
-                                                    <?php $selected_delimiter = ( $delimiter == $limiter ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $limiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $limiter; ?></option>
+                                                <?php foreach( $delimiters as $delimiter ) { ?>
+                                                    <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                                    <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </label>

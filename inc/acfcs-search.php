@@ -14,10 +14,10 @@
         global $wpdb;
         $cities                  = [];
         $countries               = [];
-        $search_criteria_state   = false;
+        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
+        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
         $searched_term           = false;
         $selected_limit          = false;
-        $united_states           = __( 'United States', 'acf-city-selector' );
 
         // get cities by country
         $results = $wpdb->get_results( "SELECT *
@@ -35,34 +35,13 @@
                 ];
             }
 
-            // if there is more than 1 country, place default language/country on top
-            if ( count( $countries ) > 1 ) {
-                $language_code = get_option( 'WPLANG' );
-                if ( false != $language_code ) {
-                    if ( 2 == strlen( $language_code ) ) {
-                        $country_code = $language_code;
-                    } else {
-                        $country_code = substr( $language_code, 3, 2 );
-                    }
-
-                    foreach ( $countries as $key => $country ) {
-                        if ( $country_code == $country[ 'code' ] ) {
-                            $array_key = $key;
-                        }
-                    }
-                    if ( isset( $array_key ) ) {
-                        ACF_City_Selector::acfcs_move_array_element( $countries, $array_key, 0 );
-                    }
-                }
-            }
-
             // get states for these countries
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
                     $states[] = array(
                         'state' => 'open_optgroup',
-                        'name'  => acfcs_get_country_name( $country[ 'code' ] ),
+                        'name'  => __( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
                     );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
@@ -81,7 +60,7 @@
                         foreach ( $results as $data ) {
                             $states[] = array(
                                 'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name'  => __( $data->state_name, 'acf-city-selector' ) . ' (' . $data->country_code . ')',
+                                'name'  => __( $data->state_name, 'acf-city-selector' ),
                             );
                         }
                     }
@@ -97,8 +76,6 @@
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
             $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
-            $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
-            $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
             $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
             $where                   = [];
 
@@ -146,6 +123,7 @@
 
                 <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
 
+                <?php // Search form ?>
                 <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
@@ -156,7 +134,8 @@
                                     <select name="acfcs_country" class="">
                                         <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
                                         <?php foreach( $countries as $country ) { ?>
-                                            <option value="<?php echo $country[ 'code' ]; ?>"><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
+                                            <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                            <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
                                         <?php } ?>
                                     </select>
                                 </label>
@@ -172,18 +151,11 @@
                                 <select name="acfcs_state" class="">
                                     <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
                                     <?php foreach( $states as $state ) { ?>
-                                        <?php
-                                            $selected = false;
-                                            if ( false != $search_criteria_state ) {
-                                                if ( $state[ 'state' ] == $search_criteria_state ) {
-                                                    $selected = ' selected="selected"';
-                                                }
-                                            }
-                                        ?>
                                         <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
                                             <optgroup label="<?php echo $state[ 'name' ]; ?>">
                                         <?php } ?>
                                         <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
+                                            <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
                                             <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
                                         <?php } ?>
                                         <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
@@ -223,12 +195,13 @@
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
                 </form>
 
-                <?php if ( isset( $_GET[ 'acfcs-search' ] ) && empty( $cities ) ) { ?>
+                <?php // Results output below ?>
+                <?php if ( isset( $_POST[ 'acfcs_search_form' ] ) && empty( $cities ) ) { ?>
                     <p>
+                        <br />
                         <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
                     </p>
                 <?php } elseif ( ! empty( $cities ) ) { ?>
-                    <?php // results output here ?>
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">

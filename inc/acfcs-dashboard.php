@@ -31,7 +31,7 @@
                         <label for="file_upload"><?php _e( 'Choose a (CSV) file to upload', 'acf-city-selector' ); ?></label>
                         <input name="csv_upload" type="file" accept=".csv" />
                         <br /><br />
-                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload file', 'acf-city-selector' ); ?>" />
+                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload CSV', 'acf-city-selector' ); ?>" />
                     </form>
                 </div>
 
@@ -59,18 +59,21 @@
                                                     <?php if ( count( $file_index ) > 1 ) { ?>
                                                         <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
                                                     <?php } ?>
-                                                    <?php foreach ( $file_index as $file ) { ?>
-                                                        <option value="<?php echo $file; ?>"><?php echo $file; ?></option>
+                                                    <?php foreach ( $file_index as $file_name ) { ?>
+                                                        <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
+                                                        <option value="<?php echo $file_name; ?>"<?php echo $selected; ?>><?php echo $file_name; ?></option>
                                                     <?php } ?>
                                                 </select>
                                             </label>
                                         </td>
                                         <td>
+                                            <?php $delimiters = [ ",", ";", "|" ]; ?>
                                             <label>
                                                 <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                    <option value=",">,</option>
-                                                    <option value=";">;</option>
-                                                    <option value="|">|</option>
+                                                    <?php foreach( $delimiters as $delimiter ) { ?>
+                                                        <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                                        <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </label>
                                         </td>
@@ -100,7 +103,7 @@
                         </div>
                 <?php } ?>
 
-                <?php if ( false != $show_raw_import ) { ?>
+                <?php if ( true === $show_raw_import ) { ?>
                     <?php $placeholder = "Amsterdam,NH,Noord-Holland,NL,Netherlands\nRotterdam,ZH,Zuid-Holland,NL,Netherlands"; ?>
                     <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? $_POST[ 'raw_csv_import' ] : false; ?>
                     <div class="acfcs__section acfcs__section--raw-import">

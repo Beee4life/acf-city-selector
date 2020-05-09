@@ -9,11 +9,11 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Usage](#usage)
 - [Impact](#impact)
 - [Cities](#cities)
-- [Hooks](#hooks)
+- [Actions](#actions)
+- [Filters](#filters)
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
-- [Remove donation notice](#removedonation)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.13
+0.15 - released 10.05.20
 
 <a name="description"></a>
 ### Description
@@ -91,7 +91,7 @@ array(2) {
 }
 ```
 
-The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
+The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as one in another country. You won't notice this, since this value is formatted on return.
 
 The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
 ```php
@@ -153,14 +153,18 @@ There are a few actions available to add your own custom actions.
 * acfcs_after_success_import_nl - hooks after importing preset country Netherlands
 * acfcs_after_success_nuke - hooks after truncating the table
 
-Find all actions [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+
+<a name="filters"></a>
+### Filters
+
+Find all hooks [here](https://acfcs.berryplasman.com/documentation/hooks/).
 
 <a name="functions"></a>
 ### Functions
 
 A few custom functions are available for you to easily retrieve data.
 
-Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/actions-functions/).
+Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/functions/).
 
 <a name="compatibility"></a>
 ### Compatibility
@@ -168,14 +172,11 @@ Find all functions and their info [here](https://acfcs.berryplasman.com/document
 This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version, but we won't be putting any more time in it. Just buy the Pro version. It's worth every penny !
 
 <a name="tested"></a>
-### Tested on
+### Tested with
 
 * Wordpress 5.4.1
 * Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.8.9
-
-<a name="removedonation"></a>
-### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
 `add_filter('acfcs_remove_donate_nag', '__return_true');`
@@ -199,12 +200,12 @@ The default country setting works for the following situations:
 * in a single field
 * in a repeater field
 * in a group
+* inside a flexible content block (with 1 ACFCS instance)
 
 This plugin doesn't work (yet) in the following situations:
 * multiple single fields on 1 page
 * as a repeater field in groups
-* as a single field inside a flexible content block
-* as a repeater field inside a flexible content block
+* inside a flexible content block (with more than 1 ACFCS instance)
 
 This plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
@@ -215,9 +216,8 @@ This plugin hasn't been tested yet in the following situations:
 ### TODO
 
 The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
-- change length of state code to 3 characters
 - add select2 to dropdowns (including a search like with a post object field) 
-- setting a default country
+- load (stored) values quicker 
 
 <a name="credit"></a>
 ### Credit
@@ -229,9 +229,18 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 <a name="changelog"></a>
 ### Changelog
 
+0.15
+* added the option to add a single field to flexible content blocks
+* added the option to delete a country at once through the admin pages
+* added a page in the admin which contains which packages are available
+* added a filter to set a default delimiter
+* added a filter to set a different line length
+* 'remember' verified file on dashboard
+* 'remember' search values on search page
+
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
-* changed state length to 3 charcters for Australia and some other countries
+* changed state length to 3 characters for Australia and some other countries
 * added optgroups to the state dropdown in the admin search
 
 0.13

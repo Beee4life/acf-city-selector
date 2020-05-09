@@ -1,8 +1,7 @@
 <?php
-
     // if uninstall.php is not called by WordPress, die
     if ( ! defined('WP_UNINSTALL_PLUGIN' ) ) {
-        die;
+        die();
     }
 
     // drop table
@@ -12,6 +11,6 @@
 
         $target_folder = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         rmdir( $target_folder );
-    }
 
-?>
+        delete_transient( 'acfcs_countries' );
+    }

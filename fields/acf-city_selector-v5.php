@@ -70,7 +70,7 @@
                 ) );
 
                 $field_vars[ 'show_labels' ] = 0;
-                $countries                   = acfcs_get_countries( $field_vars );
+                $countries                   = acfcs_populate_country_select( $field_vars );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
                     'instructions' => esc_html__( 'Pre-select a default country when creating a new post or adding a new row in a repeater', 'acf-city-selector' ),
@@ -133,7 +133,7 @@
                     }
                 }
 
-                $countries         = acfcs_get_countries( $field );
+                $countries         = acfcs_populate_country_select( $field );
                 $default_country   = ( isset( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $field_id          = $field[ 'id' ];
                 $field_name        = $field[ 'name' ];
@@ -299,6 +299,23 @@
                                             }
                                         }
                                     }
+                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
+                                    $flexible_name = $field[ 'name' ];
+                                    if ( ! empty( $field[ 'layouts' ] ) ) {
+                                        $layout_counter = 0;
+                                        foreach( $field[ 'layouts' ] as $layout ) {
+                                            if ( ! empty( $layout[ 'sub_fields' ] ) ) {
+                                                foreach( $layout[ 'sub_fields' ] as $sub_field ) {
+                                                    if ( isset( $sub_field[ 'type' ] ) && $sub_field[ 'type' ] == 'acf_city_selector' ) {
+                                                        $field_name   = $sub_field[ 'name' ];
+                                                        $layout_index = $layout_counter;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            $layout_counter++;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -326,6 +343,10 @@
                                 if ( isset( $user_id ) ) {
                                     $post_meta = get_user_meta( $user_id, $field_name, true );
                                 } elseif ( isset( $post_id ) ) {
+                                    // flexible content
+                                    if ( isset( $flexible_name ) ) {
+                                        $field_name = $flexible_name . '_' . $layout_index  . '_' . $field_name;
+                                    }
                                     $post_meta = get_post_meta( $post_id, $field_name, true );
                                 }
                                 if ( ! empty( $post_meta[ 'cityName' ] ) ) {
@@ -368,7 +389,7 @@
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
                 $state_code   = ( isset( $value[ 'stateCode' ] ) ) ? substr( $value[ 'stateCode' ], 3 ) : false;
 
-                if ( strlen( $country_code ) == 2 && '-' != $value[ 'stateCode' ] ) {
+                if ( strlen( $country_code ) == 2 && ! empty( $stateCode ) ) {
                     global $wpdb;
                     $table                  = $wpdb->prefix . 'cities';
                     $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
@@ -380,6 +401,27 @@
                 return $value;
             }
 
+
+            /*
+            *  update_value()
+            *
+            *  This filter is applied to the $value before it is saved in the db
+            *
+            *  @param	$value (mixed) the value found in the database
+            *  @param	$post_id (mixed) the $post_id from which the value was loaded
+            *  @param	$field (array) the field array holding all the field options
+            *  @return	$value
+            */
+            function update_value( $value, $post_id, $field ) {
+
+                // if nothing is selected, set value to false
+                if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                    $value = false;
+                }
+
+                return $value;
+
+            }
 
             /*
              * validate_value()
@@ -397,7 +439,7 @@
             function validate_value( $valid, $value, $field, $input ) {
 
                 if ( 1 == $field[ 'required' ] ) {
-                    if ( ! isset( $value[ 'cityName' ] ) || $value[ 'cityName' ] == 'Select a city' ) {
+                    if ( ! isset( $value[ 'cityName' ] ) ) {
                         $valid = __( "You didn't select a city", "acf-city-selector" );
                     }
                 }

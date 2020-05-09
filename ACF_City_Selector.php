@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.14
+    Version:        0.15
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -33,11 +33,14 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.14',
+                    'version'       => '0.15',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                 );
+                if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
+                    define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
+                }
 
                 // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -49,21 +52,29 @@
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
-                add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
 
+                add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_delete_countries' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_do_something_with_file' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_import_preset_countries' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
+
+                // Plugin's own actions
+                add_action( 'acfcs_after_success_import',       array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_be',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_lu',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_nl',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_raw',   array( $this, 'acfcs_delete_transients' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
@@ -146,7 +157,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                // nothing yet
+                delete_transient( 'acfcs_countries' );
             }
 
 
@@ -199,6 +210,14 @@
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
                 }
+            }
+
+
+            /**
+             * Delete country transient
+             */
+            public function acfcs_delete_transients() {
+                delete_transient( 'acfcs_countries' );
             }
 
 
@@ -265,7 +284,7 @@
                         if ( true === $verify ) {
                             $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
                             if ( isset( $csv_array[ 'data' ] ) ) {
-                                $this->acfcs_errors()->add( 'success_no_errors_in_csv', esc_html__( 'Congratulations, there appear to be no errors in your CSV.', 'acf-city-selector' ) );
+                                $this->acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
 
                                 do_action( 'acfcs_after_success_verify' );
 
@@ -281,26 +300,19 @@
                                 foreach ( $csv_array[ 'data' ] as $line ) {
                                     $line_number++;
 
-                                    $city         = $line[ 0 ];
-                                    $state_abbr   = $line[ 1 ];
-                                    $state        = $line[ 2 ];
-                                    $country_abbr = $line[ 3 ];
-                                    $country      = $line[ 4 ];
-
                                     $city_row = array(
-                                        'city_name'    => $city,
-                                        'state_code'   => $state_abbr,
-                                        'state_name'   => $state,
-                                        'country_code' => $country_abbr,
-                                        'country'      => $country,
+                                        'city_name'    => $line[ 0 ],
+                                        'state_code'   => $line[ 1 ],
+                                        'state_name'   => $line[ 2 ],
+                                        'country_code' => $line[ 3 ],
+                                        'country'      => $line[ 4 ],
                                     );
 
                                     global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
-
                                 }
 
-                                $this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities.', 'acf-city-selector' ), $line_number ) );
+                                $this->acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'Congratulations. You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
 
                                 do_action( 'acfcs_after_success_import' );
 
@@ -348,18 +360,12 @@
                                 foreach ( $verified_data as $line ) {
                                     $line_number++;
 
-                                    $city         = $line[ 0 ];
-                                    $state_abbr   = $line[ 1 ];
-                                    $state        = $line[ 2 ];
-                                    $country_abbr = $line[ 3 ];
-                                    $country      = $line[ 4 ];
-
                                     $city_row = array(
-                                        'city_name'    => $city,
-                                        'state_code'   => $state_abbr,
-                                        'state_name'   => $state,
-                                        'country_code' => $country_abbr,
-                                        'country'      => $country,
+                                        'city_name'    => $line[ 0 ],
+                                        'state_code'   => $line[ 1 ],
+                                        'state_name'   => $line[ 2 ],
+                                        'country_code' => $line[ 3 ],
+                                        'country'      => $line[ 4 ],
                                     );
 
                                     global $wpdb;
@@ -495,6 +501,48 @@
 
 
             /*
+             * Delete countries manually
+             */
+            public function acfcs_delete_countries() {
+                if ( isset( $_POST[ 'acfcs_remove_countries_nonce' ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_remove_countries_nonce' ], 'acfcs-remove-countries-nonce' ) ) {
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+
+                        return;
+                    } else {
+
+                        if ( empty( $_POST[ 'delete_country' ] ) ) {
+                            ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
+
+                            return;
+                        } else {
+                            $country_names_and = false;
+                            foreach( $_POST[ 'delete_country' ] as $country_code ) {
+                                $country_names[] = acfcs_get_country_name( $country_code );
+                            }
+                            if ( ! empty( $country_names ) ) {
+                                $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
+                                if ( 1 < count( $country_names ) ) {
+                                    $country_names_and = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
+                                } else {
+                                    $country_names_and = $country_names_quotes;
+                                }
+                            }
+
+                            global $wpdb;
+                            $country_string = strtoupper( "'" . implode( "', '", $_POST[ 'delete_country' ] ) . "'" );
+                            $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
+                            $result         = $wpdb->query( $query );
+                            if ( $result > 0 ) {
+                                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            /*
              * Error function
              *
              * @return WP_Error
@@ -521,6 +569,9 @@
                                 $prefix     = false;
                             } elseif ( strpos( $code, 'error' ) !== false ) {
                                 $span_class = 'notice--error ';
+                                $prefix     = esc_html__( 'Error', 'action-logger' );
+                            } elseif ( strpos( $code, 'warning' ) !== false ) {
+                                $span_class = 'notice--warning ';
                                 $prefix     = esc_html__( 'Warning', 'action-logger' );
                             } elseif ( strpos( $code, 'info' ) !== false ) {
                                 $span_class = 'notice--info ';
@@ -586,7 +637,7 @@
 
                 $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
-                    $new_links[ 'documentation' ] = '<a href="https://acfcs.berryplasman.com/documentation">Documentation</a>';
+                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
                     $new_links[]                  = $visit_plugin_link;
                     $links                        = array_merge( $links, $new_links );
                 }
@@ -599,11 +650,13 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
-                $admin_url  = admin_url( 'options-general.php?page=' );
-                $dashboard  = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                $preview    = false;
-                $search     = false;
-                $settings   = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
+                $admin_url      = admin_url( 'options-general.php?page=' );
+                $dashboard      = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
+                $countries      = false;
+                $preview        = false;
+                $search         = false;
+                $settings       = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
+                $show_countries = true;
 
                 if ( true === acfcs_has_cities() ) {
                     $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
@@ -612,7 +665,12 @@
                 if ( ! empty ( acfcs_check_if_files() ) ) {
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
-                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
+
+                if ( true === $show_countries ) {
+                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries"><b>' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</b></a>';
+                }
+
+                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $countries . '</p>';
 
                 return $menu;
             }
@@ -647,6 +705,9 @@
                     include( 'inc/acfcs-search.php' );
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
+
+                include( 'inc/acfcs-countries.php' );
+                add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
             }
 
 

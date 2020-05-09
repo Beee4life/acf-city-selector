@@ -3,10 +3,19 @@
     jQuery(document).ready(function() {
 
         jQuery(".acf-input .button").click(function () {
-            var event = $(this).data('event');
-            if ( 'add-row' === event ) {
+            if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
                     change_dropdowns($('select[name*="countryCode"]'));
+                },0);
+            }
+
+            if ( 'add-layout' === $(this).data('name') ) {
+                setTimeout(function() {
+                    jQuery('.acf-tooltip ul li').on('click','a',function(e){
+                        setTimeout(function() {
+                            change_dropdowns($('select[name*="countryCode"]'));
+                        },0);
+                    });
                 },0);
             }
         });
@@ -37,7 +46,7 @@
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
-                    const d = get_states(country_code);
+                    const d               = get_states(country_code);
                     response_states.push(d)
 
                     Promise.all(response_states).then(function(jsonResults) {
@@ -53,7 +62,7 @@
                             for (j = 0; j < len; j++) {
                                 $selected = '';
                                 var state = obj[j];
-                                $stateValues += '<option value="' + state.country_code + '-' + state.state_code + '">' + state.state_name + '</option>';
+                                $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                             }
                             changed_state.append($stateValues);
                             // @TODO: translate string
