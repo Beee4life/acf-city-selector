@@ -24,7 +24,6 @@
         }
         ?>
 
-
         <div class="wrap acfcs">
             <div id="icon-options-general" class="icon32"><br /></div>
 
