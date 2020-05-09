@@ -9,7 +9,8 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Usage](#usage)
 - [Impact](#impact)
 - [Cities](#cities)
-- [Hooks](#hooks)
+- [Actions](#actions)
+- [Filters](#filters)
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
@@ -90,7 +91,7 @@ array(2) {
 }
 ```
 
-The reason why the state is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
+The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as one in another country. You won't notice this, since this value is formatted on return.
 
 The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
 ```php
@@ -139,7 +140,7 @@ The explanation on how to do this, can be found on the first tab/sheet of the ex
 
 There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
 
-<a name="hooks"></a>
+<a name="actions"></a>
 ### Actions
 
 There are a few actions available to add your own custom actions. 
@@ -153,6 +154,7 @@ There are a few actions available to add your own custom actions.
 * acfcs_after_success_nuke - hooks after truncating the table
 
 
+<a name="filters"></a>
 ### Filters
 
 Find all hooks [here](https://acfcs.berryplasman.com/documentation/hooks/).
