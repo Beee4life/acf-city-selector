@@ -69,6 +69,13 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
 
+                // Plugin's own actions
+                add_action( 'acfcs_after_success_import',       array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_be',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_lu',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_nl',    array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_raw',   array( $this, 'acfcs_delete_transients' ) );
+
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
                 add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
@@ -150,7 +157,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                // nothing yet
+                delete_transient( 'acfcs_countries' );
             }
 
 
@@ -203,6 +210,14 @@
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
                 }
+            }
+
+
+            /**
+             * Delete country transient
+             */
+            public function acfcs_delete_transients() {
+                delete_transient( 'acfcs_countries' );
             }
 
 
