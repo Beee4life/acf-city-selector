@@ -31,7 +31,7 @@
                         <label for="file_upload"><?php _e( 'Choose a (CSV) file to upload', 'acf-city-selector' ); ?></label>
                         <input name="csv_upload" type="file" accept=".csv" />
                         <br /><br />
-                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload file', 'acf-city-selector' ); ?>" />
+                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload CSV', 'acf-city-selector' ); ?>" />
                     </form>
                 </div>
 
