@@ -25,8 +25,11 @@
 
                 <div class="acfcs__section acfcs__section--gopro">
                     <h2><?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( 'Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!', 'acf-city-selector' ); ?></p>
-                    <p><?php esc_html_e( 'We have more countries available. You can buy a seperate packages for each country you need.', 'acf-city-selector' ); ?></p>
+                    <p>
+                        <?php esc_html_e( 'Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
+                        <br />
+                        <?php esc_html_e( 'And now you can !! We have created several \'country packages\' for you to import as is.', 'acf-city-selector' ); ?>
+                    </p>
                 </div>
 
                 <div class="acfcs__section acfcs__section--packages">
@@ -49,7 +52,7 @@
                                 <?php $total_price = $total_price + $package->price; ?>
                                 <tr>
                                     <td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/img/flags/' . $package->country_code . '.png'; ?>" alt="" /></td>
-                                    <td><?php echo $package->country_name; ?></td>
+                                    <td><?php echo __( $package->country_name, 'acf-city-selector' ); ?></td>
                                     <td><?php echo $package->number_states; ?></td>
                                     <td><?php echo $package->number_cities; ?></td>
                                     <td>&euro; <?php echo $package->price; ?>,00</td>
@@ -60,7 +63,7 @@
                     </table>
 
                     <p>
-                        <?php echo __( "More countries will be added... Feel free to request certain countries, if they're not available yet.", 'acf-city-selector' ); ?>
+                        <?php echo sprintf( __( 'More countries will be added soon. Feel free to <a href="%s" target="_blank" rel="noopener">request</a> a country, if it\'s not available (yet).', 'acf-city-selector' ), esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ) ); ?>
                     </p>
 
                     <p>
