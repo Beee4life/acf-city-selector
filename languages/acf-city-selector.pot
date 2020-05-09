@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-09 23:02+0200\n"
+"POT-Creation-Date: 2020-05-09 23:38+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -113,6 +113,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: ACF_City_Selector.php:625
+msgid "Documentation"
+msgstr ""
+
 #: ACF_City_Selector.php:639
 msgid "Dashboard"
 msgstr ""
@@ -194,42 +198,46 @@ msgstr ""
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/acfcs-countries.php:27
+#: inc/acfcs-countries.php:38
 msgid "Get countries"
 msgstr ""
 
-#: inc/acfcs-countries.php:29
+#: inc/acfcs-countries.php:40
 msgid "Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from."
 msgstr ""
 
-#: inc/acfcs-countries.php:31
+#: inc/acfcs-countries.php:42
 msgid "And now you can !! We have created several 'country packages' for you to import as is."
 msgstr ""
 
-#: inc/acfcs-countries.php:36
+#: inc/acfcs-countries.php:47
 msgid "Country packages"
 msgstr ""
 
-#: inc/acfcs-countries.php:42 inc/acfcs-help-tabs.php:51
+#: inc/acfcs-countries.php:53 inc/acfcs-help-tabs.php:51
 #: inc/acfcs-preview.php:117 inc/acfcs-search.php:224
 msgid "Country"
 msgstr ""
 
-#: inc/acfcs-countries.php:43
+#: inc/acfcs-countries.php:54
 msgid "States/Provinces"
 msgstr ""
 
-#: inc/acfcs-countries.php:44
+#: inc/acfcs-countries.php:55
 msgid "Cities"
 msgstr ""
 
-#: inc/acfcs-countries.php:45
+#: inc/acfcs-countries.php:56
 msgid "Price"
 msgstr ""
 
-#: inc/acfcs-countries.php:66
+#: inc/acfcs-countries.php:77
 #, php-format
 msgid "More countries will be added soon. Feel free to <a href=\"%s\" target=\"_blank\" rel=\"noopener\">request</a> a country, if it's not available (yet)."
+msgstr ""
+
+#: inc/acfcs-countries.php:81
+msgid "Get your country now"
 msgstr ""
 
 #: inc/acfcs-dashboard.php:27
@@ -241,7 +249,7 @@ msgid "Choose a (CSV) file to upload"
 msgstr ""
 
 #: inc/acfcs-dashboard.php:34
-msgid "Upload file"
+msgid "Upload CSV"
 msgstr ""
 
 #: inc/acfcs-dashboard.php:42

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-09 23:02+0200\n"
-"PO-Revision-Date: 2020-05-09 23:30+0200\n"
+"POT-Creation-Date: 2020-05-09 23:38+0200\n"
+"PO-Revision-Date: 2020-05-09 23:44+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -125,6 +125,10 @@ msgstr "Verberg deze melding"
 msgid "Settings"
 msgstr "Instellingen"
 
+#: ACF_City_Selector.php:625
+msgid "Documentation"
+msgstr ""
+
 #: ACF_City_Selector.php:639
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -174,6 +178,8 @@ msgid ""
 "Pre-select a default country when creating a new post or adding a new row in "
 "a repeater"
 msgstr ""
+"Selecteer een 'standaard land' wanneer je een nieuwe post maakt of een "
+"nieuwe regel toevoegt in een repeater"
 
 #: fields/acf-city_selector-v5.php:77
 msgid "Default country"
@@ -208,11 +214,11 @@ msgstr "Je hebt geen stad gekozen"
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
 
-#: inc/acfcs-countries.php:27
+#: inc/acfcs-countries.php:38
 msgid "Get countries"
 msgstr "Meer landen"
 
-#: inc/acfcs-countries.php:29
+#: inc/acfcs-countries.php:40
 msgid ""
 "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
 "Netherlands, Luxembourg, but you might want to add more countries to choose "
@@ -221,7 +227,7 @@ msgstr ""
 "Standaard komt de plugin met 3 landen, namelijk de Benelux; België, "
 "Nederland en Luxemburg maar misschien wil je meer landen toevoegen."
 
-#: inc/acfcs-countries.php:31
+#: inc/acfcs-countries.php:42
 msgid ""
 "And now you can !! We have created several 'country packages' for you to "
 "import as is."
@@ -229,34 +235,41 @@ msgstr ""
 "En nu kan dat !! We hebben diverse 'landen pakketten' gemaakt die je 1 op 1 "
 "kan importeren."
 
-#: inc/acfcs-countries.php:36
+#: inc/acfcs-countries.php:47
 msgid "Country packages"
 msgstr "Land pakketten"
 
-#: inc/acfcs-countries.php:42 inc/acfcs-help-tabs.php:51
+#: inc/acfcs-countries.php:53 inc/acfcs-help-tabs.php:51
 #: inc/acfcs-preview.php:117 inc/acfcs-search.php:224
 msgid "Country"
 msgstr "Land"
 
-#: inc/acfcs-countries.php:43
+#: inc/acfcs-countries.php:54
 msgid "States/Provinces"
 msgstr "Staten/Provincies"
 
-#: inc/acfcs-countries.php:44
+#: inc/acfcs-countries.php:55
 msgid "Cities"
 msgstr "Steden"
 
-#: inc/acfcs-countries.php:45
+#: inc/acfcs-countries.php:56
 msgid "Price"
 msgstr "Prijs"
 
-#: inc/acfcs-countries.php:66
+#: inc/acfcs-countries.php:77
 #, php-format
 msgid ""
 "More countries will be added soon. Feel free to <a href=\"%s\" target="
 "\"_blank\" rel=\"noopener\">request</a> a country, if it's not available "
 "(yet)."
 msgstr ""
+"Meer landen worden z.s.m. toegevoegd. Indien je graag een land wil hebben, "
+"dien gerust een <a href=\"%s\" target=\"_blank\" rel=\"noopener\">verzoek</"
+"a> in, indien deze nog niet beschikbaar is."
+
+#: inc/acfcs-countries.php:81
+msgid "Get your country now"
+msgstr "Haal nu jouw land"
 
 #: inc/acfcs-dashboard.php:27
 msgid "Upload a CSV file"
@@ -267,8 +280,8 @@ msgid "Choose a (CSV) file to upload"
 msgstr "Kies een (CSV) bestand om te uploaden"
 
 #: inc/acfcs-dashboard.php:34
-msgid "Upload file"
-msgstr "Upload bestand"
+msgid "Upload CSV"
+msgstr "Upload CSV"
 
 #: inc/acfcs-dashboard.php:42
 msgid "Select a file to import"
@@ -621,7 +634,7 @@ msgstr "Verwijder landen"
 msgid ""
 "Here you can remove a country and all its states and cities from the "
 "database."
-msgstr ""
+msgstr "Hier kan je een land volledig uit de database verwijderen."
 
 #: inc/acfcs-settings.php:58
 msgid "Delete selected countries"
@@ -17682,6 +17695,9 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 #: lib/import_nl.php:2
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
+
+#~ msgid "Upload file"
+#~ msgstr "Upload bestand"
 
 #~ msgid ""
 #~ "We have more countries available. You can buy a seperate packages for "
