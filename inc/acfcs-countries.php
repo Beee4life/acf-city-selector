@@ -10,8 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $packages              = acfcs_get_packages();
-        $show_pro_subscription = false;
+        $packages = acfcs_get_packages();
         ?>
 
 
@@ -61,7 +60,7 @@
                     </table>
 
                     <p>
-                        <?php echo __( "More countries will be added... Feel free to request certain countries, if they're not available yet.", "acf-city-selector" ); ?>
+                        <?php echo __( "More countries will be added... Feel free to request certain countries, if they're not available yet.", 'acf-city-selector' ); ?>
                     </p>
 
                     <p>
