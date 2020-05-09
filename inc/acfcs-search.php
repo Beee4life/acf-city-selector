@@ -12,12 +12,11 @@
 
         // get all countries from database
         global $wpdb;
-        $cities                  = [];
-        $countries               = [];
-        $search_criteria_state   = false;
-        $searched_term           = false;
-        $selected_limit          = false;
-        $united_states           = __( 'United States', 'acf-city-selector' );
+        $cities                = [];
+        $countries             = [];
+        $search_criteria_state = false;
+        $searched_term         = false;
+        $selected_limit        = false;
 
         // get cities by country
         $results = $wpdb->get_results( "SELECT *
@@ -35,34 +34,13 @@
                 ];
             }
 
-            // if there is more than 1 country, place default language/country on top
-            if ( count( $countries ) > 1 ) {
-                $language_code = get_option( 'WPLANG' );
-                if ( false != $language_code ) {
-                    if ( 2 == strlen( $language_code ) ) {
-                        $country_code = $language_code;
-                    } else {
-                        $country_code = substr( $language_code, 3, 2 );
-                    }
-
-                    foreach ( $countries as $key => $country ) {
-                        if ( $country_code == $country[ 'code' ] ) {
-                            $array_key = $key;
-                        }
-                    }
-                    if ( isset( $array_key ) ) {
-                        ACF_City_Selector::acfcs_move_array_element( $countries, $array_key, 0 );
-                    }
-                }
-            }
-
             // get states for these countries
             if ( ! empty( $countries ) ) {
                 $states = [];
                 foreach ( $countries as $country ) {
                     $states[] = array(
                         'state' => 'open_optgroup',
-                        'name'  => acfcs_get_country_name( $country[ 'code' ] ),
+                        'name'  => __( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
                     );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
