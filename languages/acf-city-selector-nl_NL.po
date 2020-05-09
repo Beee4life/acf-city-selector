@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
 "POT-Creation-Date: 2020-05-09 23:38+0200\n"
-"PO-Revision-Date: 2020-05-09 23:44+0200\n"
+"PO-Revision-Date: 2020-05-09 23:45+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -263,9 +263,9 @@ msgid ""
 "\"_blank\" rel=\"noopener\">request</a> a country, if it's not available "
 "(yet)."
 msgstr ""
-"Meer landen worden z.s.m. toegevoegd. Indien je graag een land wil hebben, "
-"dien gerust een <a href=\"%s\" target=\"_blank\" rel=\"noopener\">verzoek</"
-"a> in, indien deze nog niet beschikbaar is."
+"Meer landen worden z.s.m. toegevoegd. Indien je graag een land wilt hebben "
+"die (nog) niet beschikbaar is, dien gerust een <a href=\"%s\" target=\"_blank"
+"\" rel=\"noopener\">verzoek</a> in."
 
 #: inc/acfcs-countries.php:81
 msgid "Get your country now"
@@ -585,7 +585,7 @@ msgstr "Geen resultaten, probeer het aub nog een keer."
 
 #: inc/acfcs-search.php:207
 msgid "results"
-msgstr ""
+msgstr "resultaten"
 
 #: inc/acfcs-search.php:212
 msgid "Row ID"
