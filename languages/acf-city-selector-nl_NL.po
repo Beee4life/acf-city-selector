@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
 "POT-Creation-Date: 2020-05-09 23:02+0200\n"
-"PO-Revision-Date: 2020-05-09 23:03+0200\n"
+"PO-Revision-Date: 2020-05-09 23:05+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -213,25 +213,21 @@ msgid "Get countries"
 msgstr "Meer landen"
 
 #: inc/acfcs-countries.php:29
-#, fuzzy
-#| msgid ""
-#| "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
-#| "Netherlands, Luxembourg, but you might want to add more countries to "
-#| "choose from. And now you can !!!"
 msgid ""
 "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
 "Netherlands, Luxembourg, but you might want to add more countries to choose "
 "from."
 msgstr ""
 "Standaard komt de plugin met 3 landen, namelijk de Benelux; België, "
-"Nederland en Luxemburg maar misschien wil je meer landen toevoegen. En nu "
-"kan dat !!!"
+"Nederland en Luxemburg maar misschien wil je meer landen toevoegen."
 
 #: inc/acfcs-countries.php:31
 msgid ""
 "And now you can !! We have created several 'country packages' for you to "
 "import as is."
 msgstr ""
+"En nu kan dat !! We hebben diverse 'landen pakketten' gemaakt die je 1 op 1 "
+"kan importeren."
 
 #: inc/acfcs-countries.php:36
 msgid "Country packages"
