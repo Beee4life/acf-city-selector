@@ -13,7 +13,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
-- [Remove donation notice](#removedonation)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -24,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.15
+0.15 - released 09.05.20
 
 <a name="description"></a>
 ### Description
@@ -91,7 +90,7 @@ array(2) {
 }
 ```
 
-The reason why the country is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
+The reason why the state is prefixed in the storage is because there can be states/provinces which use the same abbreviation. You won't notice this, since this value is formatted on return.
 
 The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
 ```php
@@ -156,15 +155,6 @@ There are a few actions available to add your own custom actions.
 
 ### Filters
 
-```php
-function acfcs_delimiter( $default_value ) {
-    return $default_value;
-}
-add_filter( 'acfcs_delimiter', 'acfcs_delimiter', 11 );
-```
-
-The returned `$default_value` must be a string with one of the following delimiters: `,` `;` `|`.
-
 Find all hooks [here](https://acfcs.berryplasman.com/documentation/hooks/).
 
 <a name="functions"></a>
@@ -180,14 +170,11 @@ Find all functions and their info [here](https://acfcs.berryplasman.com/document
 This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version, but we won't be putting any more time in it. Just buy the Pro version. It's worth every penny !
 
 <a name="tested"></a>
-### Tested on
+### Tested with
 
 * Wordpress 5.4.1
 * Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.8.9
-
-<a name="removedonation"></a>
-### Remove donation notice
 
 If you want to remove the donation box in ACF, add the following line to functions.php:
 `add_filter('acfcs_remove_donate_nag', '__return_true');`
@@ -215,8 +202,7 @@ The default country setting works for the following situations:
 This plugin doesn't work (yet) in the following situations:
 * multiple single fields on 1 page
 * as a repeater field in groups
-* as a single field inside a flexible content block
-* as a repeater field inside a flexible content block
+* inside a flexible content block
 
 This plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
@@ -228,6 +214,7 @@ This plugin hasn't been tested yet in the following situations:
 
 The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
 - add select2 to dropdowns (including a search like with a post object field) 
+- load (stored) values quicker 
 
 <a name="credit"></a>
 ### Credit
