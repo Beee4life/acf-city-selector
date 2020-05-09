@@ -361,4 +361,3 @@
 
         return $response;
     }
-    add_action( 'init', 'acfcs_get_packages' );
