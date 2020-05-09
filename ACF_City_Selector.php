@@ -38,6 +38,9 @@
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                 );
+                if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
+                    define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
+                }
 
                 // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -619,7 +622,7 @@
 
                 $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
-                    $new_links[ 'documentation' ] = '<a href="https://acfcs.berryplasman.com/documentation">Documentation</a>';
+                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation">Documentation</a>';
                     $new_links[]                  = $visit_plugin_link;
                     $links                        = array_merge( $links, $new_links );
                 }

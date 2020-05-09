@@ -67,7 +67,7 @@
                     </table>
 
                     <p>
-                        <?php echo sprintf( __( 'Click <a href="%s" target="_blank" rel="noopener">here</a> to order a package.', 'acf-city-selector' ), esc_url( 'https://acfcs.berryplasman.com/packages/' ) ); ?>
+                        <?php echo sprintf( __( 'Click <a href="%s" target="_blank" rel="noopener">here</a> to order a package.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/packages/' ) ); ?>
                     </p>
 
                 </div>

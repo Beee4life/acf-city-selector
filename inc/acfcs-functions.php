@@ -339,7 +339,7 @@
     function acfcs_get_packages( $retry = false ) {
         try {
             $handle = curl_init();
-            $url = "https://acfcs.berryplasman.com/wp-json/packages/v1/all";
+            $url    = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
             curl_setopt( $handle, CURLOPT_URL, $url );
             curl_setopt( $handle, CURLOPT_RETURNTRANSFER, true );
             $response = json_decode( curl_exec( $handle ) );
