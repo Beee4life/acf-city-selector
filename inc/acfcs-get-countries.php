@@ -56,23 +56,21 @@
                                     <td>&euro; <?php echo $package->price; ?>,00</td>
                                 </tr>
                             <?php } ?>
-                            <tr>
-                                <td>&nbsp;</td>
-                                <td>All available packages</td>
-                                <td colspan="2">&nbsp;</td>
-                                <td>&euro; <?php echo $total_price; ?>,00</td>
-                            </tr>
                         <?php } ?>
                         </tbody>
                     </table>
 
                     <p>
-                        <?php echo sprintf( __( 'Click <a href="%s" target="_blank" rel="noopener">here</a> to order a package.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/packages/' ) ); ?>
+                        <?php echo __( "More countries will be added... Feel free to request certain countries, if they're not available yet.", "acf-city-selector" ); ?>
+                    </p>
+
+                    <p>
+                        <a href="<?php echo ACFCS_WEBSITE_URL . '/packages/'; ?>" target="_blank" rel="noopener" class="button button-primary">Get your country now !</a>
                     </p>
 
                 </div>
 
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_pro_subscription ) { ?>
+                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && true === $show_pro_subscription ) { ?>
                     <div class="acfcs__section acfcs__section--subscription">
                         <h2><?php esc_html_e( 'All countries', 'acf-city-selector' ); ?></h2>
                         <p><?php esc_html_e( 'Buy all available countries at once ! One price for all packages.', 'acf-city-selector' ); ?></p>
