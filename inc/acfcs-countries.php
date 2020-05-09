@@ -70,14 +70,6 @@
 
                 </div>
 
-                <?php if ( defined( 'WP_TESTING' ) && WP_TESTING == 1 && true === $show_pro_subscription ) { ?>
-                    <div class="acfcs__section acfcs__section--subscription">
-                        <h2><?php esc_html_e( 'All countries', 'acf-city-selector' ); ?></h2>
-                        <p><?php esc_html_e( 'Buy all available countries at once ! One price for all packages.', 'acf-city-selector' ); ?></p>
-                        <p><?php esc_html_e( 'Order now !!!', 'acf-city-selector' ); ?></p>
-                    </div>
-                <?php } ?>
-
             </div>
 
             <?php include( 'admin-right.php' ); ?>
