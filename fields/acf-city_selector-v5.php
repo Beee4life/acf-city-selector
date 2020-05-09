@@ -343,8 +343,8 @@
                                 if ( isset( $user_id ) ) {
                                     $post_meta = get_user_meta( $user_id, $field_name, true );
                                 } elseif ( isset( $post_id ) ) {
+                                    // flexible content
                                     if ( isset( $flexible_name ) ) {
-                                        // flexible content
                                         $field_name = $flexible_name . '_' . $layout_index  . '_' . $field_name;
                                     }
                                     $post_meta = get_post_meta( $post_id, $field_name, true );
