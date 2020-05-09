@@ -1,7 +1,8 @@
 <?php
 
     /**
-     * Create an array with available countries from db
+     * Create an array with available countries from db.
+     * This function makes use of a transient to speed up the process.
      *
      * @param bool $show_first
      * @param bool $show_labels
@@ -70,6 +71,7 @@
         if ( ! empty( $field[ 'default_country' ] ) ) {
             $country_code = strtoupper( $field[ 'default_country' ] );
         } else {
+            // this is here for some testing - will be removed by v1.0.0. at the latest
             error_log('ERROR hit');
         }
 
@@ -120,11 +122,9 @@
                 $cities[ $data->id ] = [
                     'id'    => $data->id,
                     'city_name' => $data->city_name,
+                    'state_code' => $data->state_code,
+                    'state_name' => $data->state_name,
                 ];
-                if ( false != $state_code ) {
-                    $cities[ $data->id ][ 'state_code' ] = $state_code;
-                    $cities[ $data->id ][ 'state_name' ] = $data->state_name;
-                }
             }
         }
 
