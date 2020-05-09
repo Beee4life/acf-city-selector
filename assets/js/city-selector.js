@@ -3,14 +3,12 @@
     jQuery(document).ready(function() {
 
         jQuery(".acf-input .button").click(function () {
-            var event = $(this).data('event');
             if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
                     change_dropdowns($('select[name*="countryCode"]'));
                 },0);
             }
 
-            var name = $(this).data('name');
             if ( 'add-layout' === $(this).data('name') ) {
                 setTimeout(function() {
                     jQuery('.acf-tooltip ul li').on('click','a',function(e){
