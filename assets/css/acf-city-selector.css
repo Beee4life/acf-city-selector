@@ -44,10 +44,9 @@
 }
 
 .acfcs__section {
-    border-top:     1px solid #cccccc;
-    margin-top:     1.5em;
-    padding-top:    1.5em;
-    padding-bottom: 1.5em;
+    border-top:  1px solid #cccccc;
+    margin-top:  1.5em;
+    padding-top: 1.5em;
 }
 
 .acfcs__section:first-child {
