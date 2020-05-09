@@ -3,18 +3,12 @@
     /**
      * Create an array with available countries from db
      *
-     * @param array $field
+     * @param bool $show_first
+     * @param bool $show_labels
      *
      * @return array
      */
     function acfcs_get_countries( $show_first = false, $show_labels = false ) {
-
-        global $wpdb;
-        $results = $wpdb->get_results( '
-            SELECT * FROM ' . $wpdb->prefix . 'cities
-            GROUP BY country
-            ORDER BY country ASC
-        ' );
 
         $countries = [];
         if ( false !== $show_first ) {
@@ -24,8 +18,24 @@
                 $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
             }
         }
-        foreach ( $results as $data ) {
-            $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+
+        $transient = get_transient( 'acfcs_countries' );
+        if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+            global $wpdb;
+            $results = $wpdb->get_results( '
+                SELECT * FROM ' . $wpdb->prefix . 'cities
+                GROUP BY country
+                ORDER BY country ASC
+            ' );
+
+            foreach ( $results as $data ) {
+                $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+            }
+
+            set_transient( 'acfcs_countries', $countries, DAY_IN_SECONDS );
+
+        } else {
+            $countries = array_merge( $countries, $transient );
         }
 
         return $countries;
