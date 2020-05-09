@@ -196,8 +196,9 @@
                 </form>
 
                 <?php // Results output below ?>
-                <?php if ( isset( $_GET[ 'acfcs-search' ] ) && empty( $cities ) ) { ?>
+                <?php if ( isset( $_POST[ 'acfcs_search_form' ] ) && empty( $cities ) ) { ?>
                     <p>
+                        <br />
                         <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
                     </p>
                 <?php } elseif ( ! empty( $cities ) ) { ?>
