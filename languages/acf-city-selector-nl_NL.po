@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-09 21:44+0200\n"
-"PO-Revision-Date: 2020-05-09 21:44+0200\n"
+"POT-Creation-Date: 2020-05-09 23:02+0200\n"
+"PO-Revision-Date: 2020-05-09 23:03+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -186,7 +186,7 @@ msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
 #: fields/acf-city_selector-v5.php:155 fields/acf-city_selector-v5.php:159
-#: inc/acfcs-functions.php:24 inc/acfcs-search.php:135
+#: inc/acfcs-functions.php:19 inc/acfcs-search.php:135
 msgid "Select a country"
 msgstr "Selecteer een land"
 
@@ -212,49 +212,54 @@ msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
 msgid "Get countries"
 msgstr "Meer landen"
 
-#: inc/acfcs-countries.php:28
+#: inc/acfcs-countries.php:29
+#, fuzzy
+#| msgid ""
+#| "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
+#| "Netherlands, Luxembourg, but you might want to add more countries to "
+#| "choose from. And now you can !!!"
 msgid ""
 "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
 "Netherlands, Luxembourg, but you might want to add more countries to choose "
-"from. And now you can !!!"
+"from."
 msgstr ""
 "Standaard komt de plugin met 3 landen, namelijk de Benelux; België, "
 "Nederland en Luxemburg maar misschien wil je meer landen toevoegen. En nu "
 "kan dat !!!"
 
-#: inc/acfcs-countries.php:29
+#: inc/acfcs-countries.php:31
 msgid ""
-"We have more countries available. You can buy a seperate packages for each "
-"country you need."
+"And now you can !! We have created several 'country packages' for you to "
+"import as is."
 msgstr ""
-"We hebben meer landen beschikbaar. Je kan een apart pakket kopen voor elk "
-"land dat je nodig hebt."
 
-#: inc/acfcs-countries.php:33
+#: inc/acfcs-countries.php:36
 msgid "Country packages"
 msgstr "Land pakketten"
 
-#: inc/acfcs-countries.php:39 inc/acfcs-help-tabs.php:51
+#: inc/acfcs-countries.php:42 inc/acfcs-help-tabs.php:51
 #: inc/acfcs-preview.php:117 inc/acfcs-search.php:224
 msgid "Country"
 msgstr "Land"
 
-#: inc/acfcs-countries.php:40
+#: inc/acfcs-countries.php:43
 msgid "States/Provinces"
 msgstr "Staten/Provincies"
 
-#: inc/acfcs-countries.php:41
+#: inc/acfcs-countries.php:44
 msgid "Cities"
 msgstr "Steden"
 
-#: inc/acfcs-countries.php:42
+#: inc/acfcs-countries.php:45
 msgid "Price"
 msgstr "Prijs"
 
-#: inc/acfcs-countries.php:63
+#: inc/acfcs-countries.php:66
+#, php-format
 msgid ""
-"More countries will be added... Feel free to request certain countries, if "
-"they're not available yet."
+"More countries will be added soon. Feel free to <a href=\"%s\" target="
+"\"_blank\" rel=\"noopener\">request</a> a country, if it's not available "
+"(yet)."
 msgstr ""
 
 #: inc/acfcs-dashboard.php:27
@@ -350,36 +355,36 @@ msgstr ""
 "\"_blank\">kleine donatie</a> overweegt. Dit motiveert mij weer om de plugin "
 "te verbeteren in mijn vrije tijd."
 
-#: inc/acfcs-functions.php:217 inc/acfcs-functions.php:222
+#: inc/acfcs-functions.php:227 inc/acfcs-functions.php:232
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr "Aangezien je bestand fouten bevat, is deze verwijderd."
 
-#: inc/acfcs-functions.php:218
+#: inc/acfcs-functions.php:228
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr "Er zijn te weinig kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:227
+#: inc/acfcs-functions.php:237
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr "Er zijn te veel kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:293
+#: inc/acfcs-functions.php:303
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr "Er zijn te weinig kolommen op regel %d."
 
-#: inc/acfcs-functions.php:298
+#: inc/acfcs-functions.php:308
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr "Er zijn te veel kolommen op regel %d."
 
-#: inc/acfcs-functions.php:309
+#: inc/acfcs-functions.php:319
 #, php-format
 msgid "The length of the state abbreviation on line %d is incorrect."
 msgstr "De lengte van de staat/provincie afkorting op regel %d is incorrect."
 
-#: inc/acfcs-functions.php:316
+#: inc/acfcs-functions.php:326
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr "De lengte van de land afkorting op regel %d is incorrect."
@@ -485,6 +490,26 @@ msgid "Australia"
 msgstr "Australië"
 
 #: inc/acfcs-i18n.php:4
+msgid "Canada"
+msgstr ""
+
+#: inc/acfcs-i18n.php:5
+msgid "France"
+msgstr "Frankrijk"
+
+#: inc/acfcs-i18n.php:6
+msgid "Germany"
+msgstr "Duitsland"
+
+#: inc/acfcs-i18n.php:7
+msgid "Spain"
+msgstr "Spanje"
+
+#: inc/acfcs-i18n.php:8
+msgid "Switzerland"
+msgstr "Zwitserland"
+
+#: inc/acfcs-i18n.php:9
 msgid "United States"
 msgstr "Verenigde Staten"
 
@@ -529,7 +554,7 @@ msgstr ""
 "Of er zijn errors in je CSV of er is geen data aanwezig. Verifieer dit "
 "bestand op het <a href=\"%s\">dashboard</a>."
 
-#: inc/acfcs-search.php:125
+#: inc/acfcs-search.php:124
 msgid "Search for cities"
 msgstr "Zoek naar steden"
 
@@ -545,7 +570,7 @@ msgstr "Zoekterm"
 msgid "Limit"
 msgstr "Limiet"
 
-#: inc/acfcs-search.php:200
+#: inc/acfcs-search.php:201
 msgid "No results, please try again."
 msgstr "Geen resultaten, probeer het aub nog een keer."
 
@@ -17662,6 +17687,13 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
+#~ msgid ""
+#~ "We have more countries available. You can buy a seperate packages for "
+#~ "each country you need."
+#~ msgstr ""
+#~ "We hebben meer landen beschikbaar. Je kan een apart pakket kopen voor elk "
+#~ "land dat je nodig hebt."
+
 #, php-format
 #~ msgid "The value '%s' is too long."
 #~ msgstr "De waarde '%s' is te lang."
@@ -17702,15 +17734,6 @@ msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
 #~ msgid "Go Pro"
 #~ msgstr "Go Pro"
-
-#~ msgid "France"
-#~ msgstr "Frankrijk"
-
-#~ msgid "Germany"
-#~ msgstr "Duitsland"
-
-#~ msgid "Switzerland"
-#~ msgstr "Zwitserland"
 
 #~ msgid "Pro subscription"
 #~ msgstr "Pro abonnement"
