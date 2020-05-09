@@ -25,7 +25,7 @@
 
                 <div class="acfcs__section acfcs__section--gopro">
                     <h2><?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( 'Default the plugin comes with 3 languages included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!', 'acf-city-selector' ); ?></p>
+                    <p><?php esc_html_e( 'Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from. And now you can !!!', 'acf-city-selector' ); ?></p>
                     <p><?php esc_html_e( 'We have more countries available. You can buy a seperate packages for each country you need.', 'acf-city-selector' ); ?></p>
                 </div>
 
