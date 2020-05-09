@@ -632,11 +632,13 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
-                $admin_url  = admin_url( 'options-general.php?page=' );
-                $dashboard  = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
-                $preview    = false;
-                $search     = false;
-                $settings   = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
+                $admin_url      = admin_url( 'options-general.php?page=' );
+                $dashboard      = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
+                $countries      = false;
+                $preview        = false;
+                $search         = false;
+                $settings       = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
+                $show_countries = true;
 
                 if ( true === acfcs_has_cities() ) {
                     $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
@@ -645,7 +647,12 @@
                 if ( ! empty ( acfcs_check_if_files() ) ) {
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
-                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . '</p>';
+
+                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_countries ) {
+                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries"><b>' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</b></a>';
+                }
+
+                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $countries . '</p>';
 
                 return $menu;
             }
@@ -679,6 +686,11 @@
                 if ( true == acfcs_has_cities() ) {
                     include( 'inc/acfcs-search.php' );
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
+                }
+
+                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
+                    include( 'inc/acfcs-get-countries.php' );
+                    add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
                 }
             }
 
