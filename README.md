@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.13
+0.15
 
 <a name="description"></a>
 ### Description
@@ -227,9 +227,7 @@ This plugin hasn't been tested yet in the following situations:
 ### TODO
 
 The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
-- change length of state code to 3 characters
 - add select2 to dropdowns (including a search like with a post object field) 
-- setting a default country
 
 <a name="credit"></a>
 ### Credit
@@ -249,7 +247,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
-* changed state length to 3 charcters for Australia and some other countries
+* changed state length to 3 characters for Australia and some other countries
 * added optgroups to the state dropdown in the admin search
 
 0.13
