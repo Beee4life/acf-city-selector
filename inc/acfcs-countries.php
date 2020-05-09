@@ -65,7 +65,7 @@
                     </p>
 
                     <p>
-                        <a href="<?php echo ACFCS_WEBSITE_URL . '/packages/'; ?>" target="_blank" rel="noopener" class="button button-primary">Get your country now !</a>
+                        <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary">Get your country now !</a>
                     </p>
 
                 </div>
@@ -75,7 +75,6 @@
                         <h2><?php esc_html_e( 'All countries', 'acf-city-selector' ); ?></h2>
                         <p><?php esc_html_e( 'Buy all available countries at once ! One price for all packages.', 'acf-city-selector' ); ?></p>
                         <p><?php esc_html_e( 'Order now !!!', 'acf-city-selector' ); ?></p>
-                        <?php // @TODO: add link to acfcs site ?>
                     </div>
                 <?php } ?>
 
