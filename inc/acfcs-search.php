@@ -12,11 +12,12 @@
 
         // get all countries from database
         global $wpdb;
-        $cities                = [];
-        $countries             = [];
-        $search_criteria_state = false;
-        $searched_term         = false;
-        $selected_limit        = false;
+        $cities                  = [];
+        $countries               = [];
+        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
+        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
+        $searched_term           = false;
+        $selected_limit          = false;
 
         // get cities by country
         $results = $wpdb->get_results( "SELECT *
@@ -75,8 +76,6 @@
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
             $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
-            $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
-            $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
             $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
             $where                   = [];
 
