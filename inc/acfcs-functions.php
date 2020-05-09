@@ -10,11 +10,11 @@
     function acfcs_get_countries( $show_first = false, $show_labels = false ) {
 
         global $wpdb;
-        $results = $wpdb->get_results( "
-            SELECT * FROM " . $wpdb->prefix . "cities
-            group by country
-            order by country ASC
-        " );
+        $results = $wpdb->get_results( '
+            SELECT * FROM ' . $wpdb->prefix . 'cities
+            GROUP BY country
+            ORDER BY country ASC
+        ' );
 
         $countries = [];
         if ( false !== $show_first ) {
@@ -97,7 +97,7 @@
         if ( false !== $country_code ) {
             global $wpdb;
             $cities = array();
-            $query = "SELECT * FROM " . $wpdb->prefix . "cities";
+            $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
             if ( $country_code && $state_code ) {
                 $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
             } elseif ( $country_code ) {
@@ -152,10 +152,7 @@
      */
     function acfcs_has_cities() {
         global $wpdb;
-        $results = $wpdb->get_results( "SELECT *
-            FROM " . $wpdb->prefix . "cities
-            LIMIT 2
-        " );
+        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 2 ' );
 
         if ( count( $results ) > 0 ) {
             return true;
@@ -209,8 +206,7 @@
         if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
-            $value_length     = 254; // @TODO: add filter for this
-            while ( ( $csv_line = fgetcsv( $handle, 1000, "{$delimiter}" ) ) !== false ) {
+            while ( ( $csv_line = fgetcsv( $handle, apply_filters( 'acfcs_line_length', 1000 ), "{$delimiter}" ) ) !== false ) {
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
 
@@ -242,11 +238,6 @@
                     // create a new array for each row
                     $new_line = [];
                     foreach ( $csv_line as $item ) {
-                        if ( strlen( $item ) > $value_length ) {
-                            ACF_City_Selector::acfcs_errors()->add( 'error_too_long_value', esc_html( sprintf( __( "The value '%s' is too long.", "acf-city-selector" ), $item ) ) );
-
-                            return false;
-                        }
                         $new_line[] = $item;
                     }
                     if ( ! empty( $new_line ) ) {
