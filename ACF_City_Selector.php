@@ -651,7 +651,7 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 && false !== $show_countries ) {
+                if ( true === $show_countries ) {
                     $countries = ' | <a href="' . $admin_url . 'acfcs-countries"><b>' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</b></a>';
                 }
 
@@ -691,10 +691,8 @@
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
 
-                if ( defined( 'WP_ENV' ) && WP_ENV == 'development' && defined( 'WP_TESTING' ) && WP_TESTING == 1 ) {
-                    include( 'inc/acfcs-get-countries.php' );
-                    add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
-                }
+                include( 'inc/acfcs-countries.php' );
+                add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
             }
 
 
