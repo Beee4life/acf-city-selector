@@ -198,11 +198,12 @@ The default country setting works for the following situations:
 * in a single field
 * in a repeater field
 * in a group
+* inside a flexible content block (with 1 ACFCS instance)
 
 This plugin doesn't work (yet) in the following situations:
 * multiple single fields on 1 page
 * as a repeater field in groups
-* inside a flexible content block
+* inside a flexible content block (with more than 1 ACFCS instance)
 
 This plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
@@ -227,10 +228,13 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 ### Changelog
 
 0.15
+* added the option to add a single field to flexible content blocks
 * added the option to delete a country at once through the admin pages
-* pre-select verified file on dashboard
-* pre-select search values on search page
+* added a page in the admin which contains which packages are available
 * added a filter to set a default delimiter
+* added a filter to set a different line length
+* 'remember' verified file on dashboard
+* 'remember' search values on search page
 
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
