@@ -12,6 +12,16 @@
         });
 
         // @TODO: catch add layout action (flex content)
+        jQuery(".acf-tooltip ul li a").click(function () {
+            console.log('click link');
+            var layout = $(this).data('layout');
+            if ( 'acfcs' === layout ) {
+                console.log('HIT add layout');
+                // setTimeout(function() {
+                //     change_dropdowns($('select[name*="countryCode"]'));
+                // },0);
+            }
+        });
 
         /**
          * Change dropdowns
