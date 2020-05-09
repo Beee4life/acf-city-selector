@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-09 21:35+0200\n"
+"POT-Creation-Date: 2020-05-09 21:44+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:647 inc/acfcs-search.php:217
+#: ACF_City_Selector.php:647 inc/acfcs-search.php:195
 msgid "Search"
 msgstr ""
 
@@ -166,13 +166,13 @@ msgid "Default country"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:147 fields/acf-city_selector-v5.php:183
-#: fields/acf-city_selector-v5.php:187 inc/acfcs-search.php:174
+#: fields/acf-city_selector-v5.php:187 inc/acfcs-search.php:152
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr ""
 
 #: fields/acf-city_selector-v5.php:155 fields/acf-city_selector-v5.php:159
-#: inc/acfcs-functions.php:24 inc/acfcs-search.php:157
+#: inc/acfcs-functions.php:24 inc/acfcs-search.php:135
 msgid "Select a country"
 msgstr ""
 
@@ -211,7 +211,7 @@ msgid "Country packages"
 msgstr ""
 
 #: inc/acfcs-countries.php:39 inc/acfcs-help-tabs.php:51
-#: inc/acfcs-preview.php:117 inc/acfcs-search.php:246
+#: inc/acfcs-preview.php:117 inc/acfcs-search.php:224
 msgid "Country"
 msgstr ""
 
@@ -368,7 +368,7 @@ msgid "Note"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:240
+#: inc/acfcs-search.php:218
 msgid "City"
 msgstr ""
 
@@ -389,7 +389,7 @@ msgid "max 3 characters"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:41 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:243
+#: inc/acfcs-search.php:221
 msgid "State"
 msgstr ""
 
@@ -433,7 +433,11 @@ msgstr ""
 msgid "Author's website"
 msgstr ""
 
-#: inc/acfcs-i18n.php:2 inc/acfcs-search.php:20
+#: inc/acfcs-i18n.php:3
+msgid "Australia"
+msgstr ""
+
+#: inc/acfcs-i18n.php:4
 msgid "United States"
 msgstr ""
 
@@ -470,39 +474,39 @@ msgstr ""
 msgid "You either have errors in your CSV or there is no data. Verify this file on the <a href=\"%s\">dashboard</a>."
 msgstr ""
 
-#: inc/acfcs-search.php:147
+#: inc/acfcs-search.php:125
 msgid "Search for cities"
 msgstr ""
 
-#: inc/acfcs-search.php:167
+#: inc/acfcs-search.php:145
 msgid "OR"
 msgstr ""
 
-#: inc/acfcs-search.php:195
+#: inc/acfcs-search.php:173
 msgid "Search term"
 msgstr ""
 
-#: inc/acfcs-search.php:204
+#: inc/acfcs-search.php:182
 msgid "Limit"
 msgstr ""
 
-#: inc/acfcs-search.php:222
+#: inc/acfcs-search.php:200
 msgid "No results, please try again."
 msgstr ""
 
-#: inc/acfcs-search.php:229
+#: inc/acfcs-search.php:207
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:234
+#: inc/acfcs-search.php:212
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:237
+#: inc/acfcs-search.php:215
 msgid "Select"
 msgstr ""
 
-#: inc/acfcs-search.php:273
+#: inc/acfcs-search.php:251
 msgid "Delete selected"
 msgstr ""
 
