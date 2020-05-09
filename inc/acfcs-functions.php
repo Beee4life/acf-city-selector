@@ -327,3 +327,24 @@
 
         return false;
     }
+
+
+    function acfcs_get_packages( $retry = false ) {
+        try {
+            $handle = curl_init();
+
+            $url = "https://acfcs.berryplasman.com/wp-json/packages/v1/all";
+            curl_setopt( $handle, CURLOPT_URL, $url );
+            curl_setopt( $handle, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
+            // curl_setopt( $handle, CURLOPT_USERPWD, getenv('BCP_IMPORT_USERNAME') . ":" . getenv('BCP_IMPORT_PASSWORD'));
+            curl_setopt( $handle, CURLOPT_RETURNTRANSFER, true );
+            $response = curl_exec( $handle );
+            curl_close( $handle );
+        }
+        catch (\Exception $e) {
+            $response = false;
+        }
+
+        return $response;
+    }
+    add_action( 'init', 'acfcs_get_packages' );
