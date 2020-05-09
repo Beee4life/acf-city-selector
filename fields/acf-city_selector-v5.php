@@ -299,6 +299,23 @@
                                             }
                                         }
                                     }
+                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
+                                    $flexible_name = $field[ 'name' ];
+                                    if ( ! empty( $field[ 'layouts' ] ) ) {
+                                        $layout_counter = 0;
+                                        foreach( $field[ 'layouts' ] as $layout ) {
+                                            if ( ! empty( $layout[ 'sub_fields' ] ) ) {
+                                                foreach( $layout[ 'sub_fields' ] as $sub_field ) {
+                                                    if ( isset( $sub_field[ 'type' ] ) && $sub_field[ 'type' ] == 'acf_city_selector' ) {
+                                                        $field_name   = $sub_field[ 'name' ];
+                                                        $layout_index = $layout_counter;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            $layout_counter++;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -326,6 +343,10 @@
                                 if ( isset( $user_id ) ) {
                                     $post_meta = get_user_meta( $user_id, $field_name, true );
                                 } elseif ( isset( $post_id ) ) {
+                                    if ( isset( $flexible_name ) ) {
+                                        // flexible content
+                                        $field_name = $flexible_name . '_' . $layout_index  . '_' . $field_name;
+                                    }
                                     $post_meta = get_post_meta( $post_id, $field_name, true );
                                 }
                                 if ( ! empty( $post_meta[ 'cityName' ] ) ) {

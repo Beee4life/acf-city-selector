@@ -4,22 +4,21 @@
 
         jQuery(".acf-input .button").click(function () {
             var event = $(this).data('event');
-            if ( 'add-row' === event ) {
+            if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
                     change_dropdowns($('select[name*="countryCode"]'));
                 },0);
             }
-        });
 
-        // @TODO: catch add layout action (flex content)
-        jQuery(".acf-tooltip ul li a").click(function () {
-            console.log('click link');
-            var layout = $(this).data('layout');
-            if ( 'acfcs' === layout ) {
-                console.log('HIT add layout');
-                // setTimeout(function() {
-                //     change_dropdowns($('select[name*="countryCode"]'));
-                // },0);
+            var name = $(this).data('name');
+            if ( 'add-layout' === $(this).data('name') ) {
+                setTimeout(function() {
+                    jQuery('.acf-tooltip ul li').on('click','a',function(e){
+                        setTimeout(function() {
+                            change_dropdowns($('select[name*="countryCode"]'));
+                        },0);
+                    });
+                },0);
             }
         });
 
@@ -85,7 +84,6 @@
                     var state_field_id = $this.attr('id');
                     var city_field_id = state_field_id.replace( 'stateCode', 'cityName' );
                     var changed_city = $('select[id="' + city_field_id + '"]');
-                    console.log(state_code);
                     const d = get_cities(state_code);
                     response_cities.push(d)
 
