@@ -108,6 +108,7 @@
          * Load select states when editing a post
          */
         function admin_post_edit_load_states() {
+
             if (true === Array.isArray(city_selector_vars)) {
                 // preparing the response array
                 const response_states = []
@@ -144,8 +145,26 @@
             } else {
 
                 const response_states = [];
-                const d = get_states(city_selector_vars.countryCode);
-                response_states.push(d)
+                if ( 'object' == typeof city_selector_vars ) {
+                    // flex block
+                    Object.size = function(obj) {
+                        var size = 0, key;
+                        for (key in obj) {
+                            if (obj.hasOwnProperty(key)) size++;
+                        }
+                        return size;
+                    };
+                    var len = Object.size(city_selector_vars);
+                    for( $i = 1; $i <= len ; $i++ ) {
+                        const d = get_states(city_selector_vars[$i].countryCode);
+                        response_states.push(d)
+                    }
+
+                } else {
+                    // single/group
+                    const d = get_states(city_selector_vars.countryCode);
+                    response_states.push(d)
+                }
 
                 Promise.all(response_states).then(function(jsonResults) {
                     for (i = 0; i < jsonResults.length; i++) {
@@ -153,7 +172,13 @@
                         var len          = obj.length;
                         var $stateValues = '';
                         var select_state = $("select[name*='stateCode']");
-                        var stored_state = city_selector_vars.stateCode;
+                        if ( 'object' == typeof city_selector_vars ) {
+                            // @TODO: get selected state code(s) properly
+                            $stored_state = city_selector_vars[1].stateCode;
+                        } else {
+                            $stored_state = city_selector_vars.stateCode;
+                        }
+                        var stored_state = $stored_state;
 
                         select_state.fadeIn();
                         for (j = 0; j < len; j++) {
@@ -212,8 +237,26 @@
             } else {
 
                 const response_cities = [];
-                const d = get_cities(city_selector_vars.stateCode);
-                response_cities.push(d)
+                if ( 'object' == typeof city_selector_vars ) {
+                    // flex block
+                    Object.size = function(obj) {
+                        var size = 0, key;
+                        for (key in obj) {
+                            if (obj.hasOwnProperty(key)) size++;
+                        }
+                        return size;
+                    };
+                    var len = Object.size(city_selector_vars);
+                    for( $i = 1; $i <= len ; $i++ ) {
+                        const d = get_cities(city_selector_vars[$i].stateCode);
+                        response_cities.push(d)
+                    }
+
+                } else {
+                    // single/group
+                    const d = get_cities(city_selector_vars.stateCode);
+                    response_cities.push(d)
+                }
 
                 Promise.all(response_cities).then(function(jsonResults) {
                     for (i = 0; i < jsonResults.length; i++) {
@@ -221,7 +264,13 @@
                         var len = obj.length;
                         var $cityValues = '';
                         var select_city = $('select[name*="cityName"]');
-                        var stored_city = city_selector_vars.cityName;
+                        if ( 'object' == typeof city_selector_vars ) {
+                            // @TODO: get selected city name properly
+                            $stored_city = city_selector_vars[1].cityName;
+                        } else {
+                            $stored_city = city_selector_vars.cityName;
+                        }
+                        var stored_city = $stored_city;
 
                         select_city.fadeIn();
                         for (j = 0; j < len; j++) {
@@ -236,7 +285,6 @@
                         }
                         select_city.append($cityValues);
                     }
-
                 });
             }
         }
