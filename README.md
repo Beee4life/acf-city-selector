@@ -1,8 +1,7 @@
-# ACF City Selector Field
+# ACF City Selector
 
 Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
 
-## Index
 - [Version](#version)
 - [Description](#description)
 - [Installation](#installation)
@@ -24,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.15 - released 10.05.20
+0.16 - released xx.05.20
 
 <a name="description"></a>
 ### Description
@@ -175,11 +174,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 ### Tested with
 
 * Wordpress 5.4.1
-* Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.8.9
-
-If you want to remove the donation box in ACF, add the following line to functions.php:
-`add_filter('acfcs_remove_donate_nag', '__return_true');`
 
 <a name="support"></a>
 ### Support
@@ -216,8 +211,8 @@ This plugin hasn't been tested yet in the following situations:
 ### TODO
 
 The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
-- add select2 to dropdowns (including a search like with a post object field) 
-- load (stored) values quicker 
+- [] load (stored) values quicker (by php instead of jQuery) 
+- [] add select2 to dropdowns (including a search, like with a post object field) 
 
 <a name="credit"></a>
 ### Credit
