@@ -147,12 +147,14 @@
 
                                 $layout_index = 0;
                                 $meta_keys    = [];
-                                foreach( $flexible_content_block_values as $values ) {
-                                    if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
-                                        $field_name                 = $flexible_names[ $values[ 'acf_fc_layout' ] ];
-                                        $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $field_name;
+                                if ( is_array( $flexible_content_block_values ) ) {
+                                    foreach( $flexible_content_block_values as $values ) {
+                                        if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
+                                            $field_name                 = $flexible_names[ $values[ 'acf_fc_layout' ] ];
+                                            $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $field_name;
+                                        }
+                                        $layout_index++;
                                     }
-                                    $layout_index++;
                                 }
                                 if ( ! empty( $meta_keys ) ) {
                                     foreach( $meta_keys as $key => $value ) {
@@ -366,11 +368,13 @@
 
                                     $layout_index = 0;
                                     $meta_keys    = [];
-                                    foreach( $flexible_content_block_values as $values ) {
-                                        if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
-                                            $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $flexible_names[ $values[ 'acf_fc_layout' ] ];
+                                    if ( is_array( $flexible_content_block_values ) ) {
+                                        foreach( $flexible_content_block_values as $values ) {
+                                            if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
+                                                $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $flexible_names[ $values[ 'acf_fc_layout' ] ];
+                                            }
+                                            $layout_index++;
                                         }
-                                        $layout_index++;
                                     }
                                 }
                             }
@@ -415,7 +419,6 @@
                                 }
                             } elseif ( isset( $flexible_name ) ) {
                                 // flexible content
-                                // die('XXX');
                                 if ( isset( $meta_keys ) && is_array( $meta_keys ) && ! empty( $meta_keys ) ) {
                                     foreach( $meta_keys as $key => $value ) {
                                         $meta_values[ $key ] = get_post_meta( $post_id, $value, true );
