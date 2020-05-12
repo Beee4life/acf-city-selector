@@ -29,13 +29,7 @@
          * Change dropdowns
          */
         function change_dropdowns( $instance ) {
-            // if (typeof $instance === "undefined") {
-            //     $countries = $('select[name*="countryCode"]');
-            // } else {
-            //     $countries = $instance;
-            // }
-            $countries = $('select[name*="countryCode"]');
-            var countries = $countries;
+            var countries = $('select[name*="countryCode"]');
             var state = $('select[name*="stateCode"]');
 
             /**
@@ -70,7 +64,7 @@
                                 $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                             }
                             changed_state.append($stateValues);
-                            // @TODO: translate string
+                            // this string 'comes' from fields/acf-city_selector-v5.php
                             var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
                             $select_city = '<option value="">' + i18n_select_city + '</option>';
                             changed_city.append($select_city);
