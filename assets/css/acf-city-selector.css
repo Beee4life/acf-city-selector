@@ -8,6 +8,10 @@
     margin-bottom: 1em;
 }
 
+.acf-field.acf-field-acf-city-selector select {
+    padding: 4px;
+}
+
 .acf-field-acf-city-selector .acf-input-header {
     margin-bottom: 10px;
 }

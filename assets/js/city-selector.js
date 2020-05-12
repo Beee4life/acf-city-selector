@@ -37,6 +37,12 @@
              */
             if (countries.length) {
                 countries.on('change', function () {
+
+                    // @TODO: check if state field is hidden
+                    // console.log(city_selector_vars);
+                    var which_fields = city_selector_vars[ 'which_fields' ];
+                    // console.log(which_fields);
+
                     const response_states = []
                     var $this             = $(this);
                     var country_code      = $this.val();
@@ -45,6 +51,15 @@
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
+
+                    if ( $(which_fields + ':contains("city")') ) {
+                        // don't do state stuff
+                        console.log('no state stuff');
+                    } else if ( $(which_fields + ':contains("state")') ) {
+                        // don't do city stuff
+                        console.log('no city stuff');
+                    }
+
                     const d               = get_states(country_code);
                     response_states.push(d)
 
@@ -76,6 +91,9 @@
             // if there are any selects with name*=stateCode
             if (state.length) {
                 state.on('change', function () {
+
+                    // @TODO: check if city field is hidden
+
                     const response_cities = []
                     var $this = $(this);
                     var state_code = $this.val();

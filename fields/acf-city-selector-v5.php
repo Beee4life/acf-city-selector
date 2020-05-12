@@ -256,6 +256,22 @@
 
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
+
+                // check field settings
+                $all_info = acfcs_get_field_settings();
+                // echo '<pre>'; var_dump($all_info); echo '</pre>'; exit;
+                // die('MISS');
+
+                if ( ! empty( $all_info ) ) {
+                    $show_labels     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : false;
+                    $default_country = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
+                    $which_fields    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : false;
+
+                    wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
+                        'which_fields' => $which_fields,
+                    ) );
+                }
+
             }
 
             /*

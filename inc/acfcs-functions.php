@@ -410,3 +410,99 @@
 
         return $response;
     }
+
+    /**
+     * Return the field settings for a group (for use in js)
+     * @TODO: remove
+     *
+     * @return array
+     */
+    function acfcs_get_field_settings() {
+
+        $activate  = false;
+        $meta_values = [];
+
+        if ( isset( $_GET[ 'user_id' ] ) ) {
+            $activate = true;
+            $user_id  = $_GET[ 'user_id' ];
+        } elseif ( isset( $_GET[ 'post' ] ) ) {
+            $post_id = $_GET[ 'post' ];
+            if ( 'acf-field-group' != get_post_type( $post_id ) ) {
+                $activate = true;
+            }
+        } elseif ( isset( $_GET[ 'id' ] ) ) {
+            // this is for my own project
+            $activate = true;
+            $post_id  = $_GET[ 'id' ];
+        } else {
+            $activate = true;
+            if ( defined( 'IS_PROFILE_PAGE' ) ) {
+                $user_id = get_current_user_id();
+            } else {
+                $post_id = get_the_ID();
+            }
+        }
+
+        if ( false != $activate ) {
+            if ( isset( $user_id ) && false !== $user_id ) {
+                $fields = get_field_objects( 'user_' . $user_id );
+            } elseif ( isset( $post_id ) && false !== $post_id ) {
+                $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
+            }
+
+            /*
+             * Get the field['name'] for the City Selector field
+             */
+            if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
+
+                // echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
+                foreach( $fields as $field ) {
+                    if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
+                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+                        $settings[ 'which_fields' ] = $field[ 'which_fields' ];
+                        break;
+                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
+                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+                        $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
+                        // echo '<pre>'; var_dump($array_key); echo '</pre>'; exit;
+                        if ( false !== $array_key ) {
+                            // $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
+                            $settings[ 'which_fields' ] = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
+                            // $repeater_name      = $field[ 'name' ];
+                            // $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
+                            break;
+                        }
+                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
+                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+                        // get acfcs field_names
+                        $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
+                        if ( false !== $array_key ) {
+                            $settings[ 'which_fields' ] = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
+                            break;
+                        }
+                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
+                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+                        $layouts = $field[ 'layouts' ];
+
+                        foreach( $layouts as $layout ) {
+                            $sub_fields = $layout[ 'sub_fields' ];
+                            foreach( $sub_fields as $subfield ) {
+                                // if type == acfcs, add name to array
+                                if ( 'acf_city_selector' == $subfield[ 'type' ] ) {
+                                    $settings[ $layout[ 'name' ] ][ 'default_country' ] = $subfield[ 'default_country' ];
+                                    $settings[ $layout[ 'name' ] ][ 'show_labels' ]     = $subfield[ 'show_labels' ];
+                                    $settings[ $layout[ 'name' ] ][ 'which_fields' ]    = $subfield[ 'which_fields' ];
+                                    break;
+                                }
+                            }
+                        }
+                        // echo '<pre>'; var_dump($flexible_settings); echo '</pre>'; exit;
+                    }
+                }
+            }
+
+        }
+
+        return $settings;
+
+    }
