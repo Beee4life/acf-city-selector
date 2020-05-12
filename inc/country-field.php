@@ -115,7 +115,7 @@
                 }
                 $items                     = array();
                 $items[ 0 ][ 'id' ]        = '';
-                $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+                $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' ); // shown after state change
                 $i                         = 1;
                 if ( isset( $results ) && is_array( $results ) ) {
                     foreach ( $results as $data ) {
