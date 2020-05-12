@@ -171,33 +171,10 @@
                 $version = $this->settings['version'];
 
                 // register & include JS
-                // wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/field-validation.js", array( 'acf-input' ), $version );
-                // wp_enqueue_script( 'acf-custom-validation' );
-                // wp_register_script( 'acf-input-city-selector', "{$url}assets/js/city-selector.js", '', $version );
-                // wp_enqueue_script( 'acf-input-city-selector' );
-                //
-                // if ( isset( $_GET['action'] ) && $_GET['action'] === 'edit' ) {
-                // 	$fields     = get_field_objects( get_the_ID() );
-                // 	$field_name = 'acf_city_selector';
-                // 	if ( is_array( $fields ) && count( $fields ) > 0 ) {
-                // 		foreach( $fields as $field ) {
-                // 		    // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
-                // 			if ( isset( $field['type' ] ) && $field['type'] == 'acf_city_selector' ) {
-                // 				$field_name = $field['name'];
-                // 				break;
-                // 			}
-                // 		}
-                // 	}
-                // 	$post_meta = get_post_meta( get_the_ID(), $field_name, 1 );
-                //
-                // 	if ( ! empty( $post_meta['cityName'] ) ) {
-                // 		wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', array(
-                // 			'countryCode' => $post_meta['countryCode'],
-                // 			'stateCode'   => $post_meta['stateCode'],
-                // 			'cityName'    => $post_meta['cityName'],
-                // 		) );
-                // 	}
-                // }
+                wp_enqueue_script( 'acf-custom-validation', "{$url}assets/js/field-validation.js", array( 'acf-input' ), $version );
+                wp_enqueue_script( 'acf-custom-validation' );
+                wp_register_script( 'acf-input-city-selector', "{$url}assets/js/city-selector.js", '', $version );
+                wp_enqueue_script( 'acf-input-city-selector' );
 
             }
 
