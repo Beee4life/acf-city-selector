@@ -194,14 +194,12 @@
                 $selected_state    = false;
                 $show_labels       = $field[ 'show_labels' ];
 
-                // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                 if ( is_array( $field[ 'value' ] ) && ! empty( $field[ 'value' ] ) ) {
                     $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
                     $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
                     $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
                 }
 
-                // echo '<pre>'; var_dump($default_country); echo '</pre>'; exit;
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post
                     // Load all states for $default_country
@@ -327,7 +325,6 @@
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) || defined('IS_PROFILE_PAGE') ) {
 
                     // $meta_values = acfcs_get_meta_values();
-                    // echo '<pre>'; var_dump($meta_values); echo '</pre>'; exit;
 
                     /*
                      * Localize post_meta
