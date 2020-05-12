@@ -28,7 +28,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="description"></a>
 ### Description
 
-This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
+This plugin allows you to select a city, based on country and province/state in an ACF Field.
 
 ![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
@@ -168,7 +168,7 @@ Find all functions and their info [here](https://acfcs.berryplasman.com/document
 <a name="compatibility"></a>
 ### Compatibility
 
-This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version, but we won't be putting any more time in it. Just buy the Pro version. It's worth every penny !
+This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version (v4), but we won't be putting any more time in it. Just buy the Pro version. It's worth every cent !
 
 <a name="tested"></a>
 ### Tested with
