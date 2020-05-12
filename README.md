@@ -191,27 +191,20 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-The default country setting works for the following situations: 
+The plugin works in the following situations: 
 * in a single field
 * in a repeater field
-* in a group
-* inside a flexible content block (with 1 ACFCS instance)
+* in a group (as single and repeater)
+* in a flexible content block (as single and repeater)
 
-This plugin doesn't work (yet) in the following situations:
-* multiple single fields on 1 page
-* as a repeater field in groups
-* inside a flexible content block (with more than 1 ACFCS instance)
-
-This plugin hasn't been tested yet in the following situations: 
+The plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
 * most front-end usage (except single use)
-* with the Gutenberg editor (and don't hold your breath either)
+* with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 <a name="todo"></a>
 ### TODO
 
-The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
-- [] load (stored) values quicker (by php instead of jQuery) 
 - [] add select2 to dropdowns (including a search, like with a post object field) 
 
 <a name="credit"></a>
@@ -223,6 +216,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.16
+* made the field work in all field types
 
 0.15
 * added the option to add a single field to flexible content blocks
