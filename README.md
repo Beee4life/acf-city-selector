@@ -168,13 +168,14 @@ Find all functions and their info [here](https://acfcs.berryplasman.com/document
 <a name="compatibility"></a>
 ### Compatibility
 
-This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version (v4), but we won't be putting any more time in it. Just buy the Pro version. It's worth every cent !
+This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version (v4), but we won't be putting any (more) time in it. Just buy the Pro version. It's worth every cent !
 
 <a name="tested"></a>
 ### Tested with
 
 * Wordpress 5.4.1
 * Advanced Custom Fields Pro 5.8.9
+* Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
 ### Support
