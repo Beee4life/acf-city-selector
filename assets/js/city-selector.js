@@ -71,7 +71,7 @@
                             }
                             changed_state.append($stateValues);
                             // @TODO: translate string
-                            $select_city = '<option value="">Select a province/state first</option>';
+                            $select_city = '<option value="">Select a city</option>';
                             changed_city.append($select_city);
                         }
                     });
