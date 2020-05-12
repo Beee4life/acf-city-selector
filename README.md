@@ -209,8 +209,8 @@ This is very random and unpredictable.
 <a name="todo"></a>
 ### TODO
 
-- [] Add select2 to dropdowns (including a search, like with a post object field) 
-- [] Select which fields to use; all, country + state or country + city or state  city 
+- [ ] Add select2 to dropdowns (including a search, like with a post object field) 
+- [ ] Select which fields to use; all, country + state or country + city or state  city 
 
 <a name="credit"></a>
 ### Credit
