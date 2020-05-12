@@ -37,6 +37,16 @@
                 $this->defaults = array(
                     'show_labels' => 1,
                 );
+
+                /*
+                *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
+                *  var message = acf._e('FIELD_NAME', 'error');
+                */
+
+                $this->l10n = array(
+                    'i18n_select_city' => __( 'Select a city', 'acf-city-selector' ), // shown after country change
+                );
+
                 $this->settings = $settings;
 
                 // do not delete!
@@ -92,94 +102,8 @@
              */
             function render_field( $field ) {
 
-                $selected_country = false;
-                $post_id = get_the_ID();
-                // @TODO: remove
-                if ( strpos( $field[ 'name' ], 'xrow' ) !== false ) {
-                    // if $field[ 'name' ] contains 'row' it's a repeater field
-                    $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
-                    $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
-                    $field_object    = get_field_objects( $post_id );
-                    if ( is_array( $field_object ) ) {
-                        $repeater_name = array_keys( $field_object )[ 0 ];
-                        $meta_key      = $repeater_name . '_' . $index . '_' . $field[ '_name' ];
-                        if ( isset( $meta_key ) ) {
-                            $post_meta = get_post_meta( $post_id, $meta_key, true );
-                        }
-                        $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
-                    }
-                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                    error_log('type = flexible_content');
-                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                    // if $field[ 'name' ] doesn't contain 'row' it's a single or group field
-                    /**
-                     * Why is 24 set as length ?
-                     * Because the length of a single $field['name'] = 24.
-                     * The length of a group $field['name'] = 45.
-                     * So if it's bigger than 24, it's a group name.
-                     *
-                     * group            = acf[field_5e9f4b3b50ea2][field_5e9f4b4450ea3] (45)
-                     * single           = acf[field_5e950320fef17] (24)
-                     * flexible content = (60)
-                     */
-                    if ( 100 < strlen( $field[ 'name' ] ) ) {
-                        // Group + Flexible content
-                        $field_object = get_field_objects( $post_id );
-
-                        if ( 45 < strlen( $field[ 'name' ] ) ) {
-                            // Flexible content
-                            if ( is_array( $field_object ) ) {
-                                $flexible_content_name         = array_keys( $field_object )[ 0 ]; // flexible_countries_change
-                                $flexible_content              = get_field_object( $flexible_content_name, $post_id );
-                                $flexible_content_block_values = $flexible_content[ 'value' ];
-                                $flexible_names                = [];
-                                $layouts                       = $flexible_content[ 'layouts' ];
-
-                                foreach( $layouts as $layout ) {
-                                    $sub_fields = $layout[ 'sub_fields' ];
-                                    foreach( $sub_fields as $subfield ) {
-                                        // if type == acfcs, add name to array
-                                        if ( 'acf_city_selector' == $subfield[ 'type' ] ) {
-                                            $flexible_names[ $layout[ 'name' ] ] = $subfield[ 'name' ];
-                                        }
-                                    }
-                                }
-
-                                $layout_index = 0;
-                                $meta_keys    = [];
-                                if ( is_array( $flexible_content_block_values ) ) {
-                                    foreach( $flexible_content_block_values as $values ) {
-                                        if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
-                                            $field_name                 = $flexible_names[ $values[ 'acf_fc_layout' ] ];
-                                            $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $field_name;
-                                        }
-                                        $layout_index++;
-                                    }
-                                }
-                                if ( ! empty( $meta_keys ) ) {
-                                    foreach( $meta_keys as $key => $value ) {
-                                        $post_meta[ $key ]        = get_post_meta( $post_id, $value, true );
-                                        $selected_country[ $key ] = ( isset( $post_meta[ $key ][ 'countryCode' ] ) ) ? $post_meta[ $key ][ 'countryCode' ] : false;
-                                    }
-                                }
-                            }
-                        } else {
-                            // Group
-                            if ( is_array( $field_object ) ) {
-                                $group_name       = array_keys( $field_object )[ 0 ];
-                                $meta_key         = $group_name . '_' . $field[ '_name' ];
-                                $post_meta        = get_post_meta( $post_id, $meta_key, true );
-                                $selected_country = ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : false;
-                            }
-                        }
-
-                    } else {
-                        // Single
-                        $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                    }
-                } else {
-                    error_log('else');
-                }
+                // $selected_country = false;
+                // $post_id = get_the_ID();
 
                 $countries         = acfcs_populate_country_select( $field );
                 $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
@@ -319,19 +243,6 @@
 
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
-
-                // @TODO: remove
-                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) || defined('IS_PROFILE_PAGE') ) {
-
-                    // $meta_values = acfcs_get_meta_values();
-
-                    /*
-                     * Localize post_meta
-                     */
-                    if ( ! empty( $meta_values ) ) {
-                        // wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
-                    }
-                }
             }
 
             /*
