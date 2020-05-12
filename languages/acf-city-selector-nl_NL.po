@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-09 23:38+0200\n"
-"PO-Revision-Date: 2020-05-09 23:45+0200\n"
+"POT-Creation-Date: 2020-05-12 18:37+0200\n"
+"PO-Revision-Date: 2020-05-12 18:37+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n:1,2;_n_noop;_nx_noop;"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:108
+#: ACF_City_Selector.php:115
 #, php-format
 msgid ""
 "\"%s\" is not activated. This plugin <strong>must</strong> be activated, "
@@ -26,7 +26,7 @@ msgstr ""
 "\"%s\" is niet actief. Deze plugin <strong>moet</strong> actief zijn, anders "
 "werkt \"%s\" niet. Activeer hem <a href=\"%s\">hier</a>."
 
-#: ACF_City_Selector.php:131
+#: ACF_City_Selector.php:138
 #, php-format
 msgid ""
 "<b>Warning</b>: The \"%s\" plugin will not work properly (anymore) with %s "
@@ -35,14 +35,14 @@ msgstr ""
 "<b>Waarschuwing</b>: De \"%s\" plugin werkt niet (meer) met %s v4.x. AUB "
 "upgrade naar PRO."
 
-#: ACF_City_Selector.php:215 ACF_City_Selector.php:251
-#: ACF_City_Selector.php:327 ACF_City_Selector.php:376
-#: ACF_City_Selector.php:411 ACF_City_Selector.php:436
-#: ACF_City_Selector.php:458 ACF_City_Selector.php:494
+#: ACF_City_Selector.php:230 ACF_City_Selector.php:266
+#: ACF_City_Selector.php:345 ACF_City_Selector.php:394
+#: ACF_City_Selector.php:429 ACF_City_Selector.php:454
+#: ACF_City_Selector.php:476 ACF_City_Selector.php:512
 msgid "Something went wrong, please try again."
 msgstr "Er ging iets fout, probeer het aub nog een keer."
 
-#: ACF_City_Selector.php:227
+#: ACF_City_Selector.php:242
 #, php-format
 msgid ""
 "File '%s' is successfully uploaded and now shows under 'Select files to "
@@ -51,113 +51,122 @@ msgstr ""
 "Het bestand “%s” is succesvol ge-upload en is nu zichtbaar onder ‘Select "
 "bestanden om te importeren’"
 
-#: ACF_City_Selector.php:234
+#: ACF_City_Selector.php:249
 msgid "Upload failed. Please try again."
 msgstr "Upload mislukt. Probeer het aub opnieuw."
 
-#: ACF_City_Selector.php:258
+#: ACF_City_Selector.php:273
 msgid "You didn't select a file."
 msgstr "Je hebt geen bestand gekozen."
 
-#: ACF_City_Selector.php:272
+#: ACF_City_Selector.php:287
 #, php-format
 msgid "Congratulations, there appear to be no errors in CSV file: \"%s\"."
 msgstr "Gefeliciteerd, er lijken geen fouten te zitten in CSV bestand: \"%s\"."
 
-#: ACF_City_Selector.php:300
+#: ACF_City_Selector.php:315
 #, php-format
 msgid "Congratulations. You have successfully imported %d cities from \"%s\"."
 msgstr "Gefeliciteerd, je hebt %d steden geïmporteerd uit bestand \"%s\"."
 
-#: ACF_City_Selector.php:313
+#: ACF_City_Selector.php:328
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr "File “%s” is succesvol verwijderd."
 
-#: ACF_City_Selector.php:336
+#: ACF_City_Selector.php:330
+#, php-format
+msgid "File \"%s\" is not deleted. Please try again."
+msgstr "Het bestand \"%s\" is niet verwijderd. Probeer het aub opnieuw."
+
+#: ACF_City_Selector.php:354
 msgid "Congratulations, your CSV data seems valid."
 msgstr "Gefeliciteerd, je CSV data lijkt geen fouten te bevatten."
 
-#: ACF_City_Selector.php:360
+#: ACF_City_Selector.php:378
 #, php-format
 msgid "Congratulations, you imported 1 city."
 msgid_plural "Congratulations, you imported %d cities."
 msgstr[0] "Gefeliciteerd, je hebt 1 stad geïmporteerd."
 msgstr[1] "Gefeliciteerd, je hebt %d steden geïmporteerd."
 
-#: ACF_City_Selector.php:421
+#: ACF_City_Selector.php:439
 msgid "All cities are deleted."
 msgstr "Alle steden zijn verwijderd."
 
-#: ACF_City_Selector.php:446
+#: ACF_City_Selector.php:464
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
 
-#: ACF_City_Selector.php:480
+#: ACF_City_Selector.php:498
 #, php-format
 msgid "You have deleted the city %s."
 msgid_plural "You have deleted the following cities: %s."
 msgstr[0] "Je hebt stad %s verwijderd."
 msgstr[1] "Je hebt de volgende steden verwijderd: %s."
 
-#: ACF_City_Selector.php:500
+#: ACF_City_Selector.php:518
 msgid "You didn't select any countries, please try again."
 msgstr "Je hebt geen land(en) gekozen, probeer aub opnieuw."
 
-#: ACF_City_Selector.php:522
+#: ACF_City_Selector.php:540
 #, php-format
 msgid "You have successfully removed all entries for %s."
 msgstr "Je hebt alle steden verwijderd voor %s."
 
-#: ACF_City_Selector.php:557 ACF_City_Selector.php:566
+#: ACF_City_Selector.php:575 ACF_City_Selector.php:584
 msgid "Error"
 msgstr "Fout"
 
-#: ACF_City_Selector.php:560
+#: ACF_City_Selector.php:578
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: ACF_City_Selector.php:578
+#: ACF_City_Selector.php:596
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: ACF_City_Selector.php:606 ACF_City_Selector.php:643
+#: ACF_City_Selector.php:624 ACF_City_Selector.php:661
 msgid "Settings"
 msgstr "Instellingen"
 
-#: ACF_City_Selector.php:625
+#: ACF_City_Selector.php:643
 msgid "Documentation"
 msgstr ""
 
-#: ACF_City_Selector.php:639
+#: ACF_City_Selector.php:657
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ACF_City_Selector.php:647 inc/acfcs-search.php:195
+#: ACF_City_Selector.php:665 inc/acfcs-search.php:195
 msgid "Search"
 msgstr "Zoeken"
 
-#: ACF_City_Selector.php:651
+#: ACF_City_Selector.php:669
 msgid "Preview"
 msgstr "Preview"
 
-#: ACF_City_Selector.php:655
+#: ACF_City_Selector.php:673
 msgid "Get more countries"
 msgstr "Meer landen"
 
-#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:59
+#: assets/js/city-selector.js:74
+msgid "acf_city_selector"
+msgstr ""
+
+#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:69
 msgid "Yes"
 msgstr "Ja"
 
-#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:60
+#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:70
 msgid "No"
 msgstr "Nee"
 
-#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:65
+#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:75
 msgid "Show labels"
 msgstr "Toon labels"
 
-#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:64
+#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:74
 msgid "Show field labels above the dropdown menus"
 msgstr "Labels tonen boven de dropdown menu’s"
 
@@ -173,7 +182,13 @@ msgstr "Selecteer een provincie/staat"
 msgid "Select city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city_selector-v5.php:76
+#: fields/acf-city_selector-v5.php:47 fields/acf-city_selector-v5.php:203
+#: fields/acf-city_selector-v5.php:207 inc/acfcs-functions.php:148
+#: inc/country-field.php:118
+msgid "Select a city"
+msgstr "Selecteer een stad"
+
+#: fields/acf-city_selector-v5.php:86
 msgid ""
 "Pre-select a default country when creating a new post or adding a new row in "
 "a repeater"
@@ -181,31 +196,22 @@ msgstr ""
 "Selecteer een 'standaard land' wanneer je een nieuwe post maakt of een "
 "nieuwe regel toevoegt in een repeater"
 
-#: fields/acf-city_selector-v5.php:77
+#: fields/acf-city_selector-v5.php:87
 msgid "Default country"
 msgstr "Default land"
 
-#: fields/acf-city_selector-v5.php:147 fields/acf-city_selector-v5.php:183
-#: fields/acf-city_selector-v5.php:187 inc/acfcs-search.php:152
+#: fields/acf-city_selector-v5.php:129 fields/acf-city_selector-v5.php:177
+#: fields/acf-city_selector-v5.php:181 inc/acfcs-search.php:152
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city_selector-v5.php:155 fields/acf-city_selector-v5.php:159
-#: inc/acfcs-functions.php:19 inc/acfcs-search.php:135
+#: fields/acf-city_selector-v5.php:149 fields/acf-city_selector-v5.php:153
+#: inc/acfcs-functions.php:67 inc/acfcs-search.php:135
 msgid "Select a country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city_selector-v5.php:207 fields/acf-city_selector-v5.php:211
-#: inc/country-field.php:118
-msgid "Select a city"
-msgstr "Selecteer een stad"
-
-#: fields/acf-city_selector-v5.php:215
-msgid "First select a province/state"
-msgstr "Selecteer eerst een provincie/staat"
-
-#: fields/acf-city_selector-v5.php:443
+#: fields/acf-city_selector-v5.php:322
 msgid "You didn't select a city"
 msgstr "Je hebt geen stad gekozen"
 
@@ -214,11 +220,11 @@ msgstr "Je hebt geen stad gekozen"
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Je hebt niet voldoende rechten om deze pagina te bekijken."
 
-#: inc/acfcs-countries.php:38
+#: inc/acfcs-countries.php:37
 msgid "Get countries"
 msgstr "Meer landen"
 
-#: inc/acfcs-countries.php:40
+#: inc/acfcs-countries.php:39
 msgid ""
 "Default the plugin comes with 3 countries included, the Benelux; Belgium, "
 "Netherlands, Luxembourg, but you might want to add more countries to choose "
@@ -227,7 +233,7 @@ msgstr ""
 "Standaard komt de plugin met 3 landen, namelijk de Benelux; België, "
 "Nederland en Luxemburg maar misschien wil je meer landen toevoegen."
 
-#: inc/acfcs-countries.php:42
+#: inc/acfcs-countries.php:41
 msgid ""
 "And now you can !! We have created several 'country packages' for you to "
 "import as is."
@@ -235,28 +241,28 @@ msgstr ""
 "En nu kan dat !! We hebben diverse 'landen pakketten' gemaakt die je 1 op 1 "
 "kan importeren."
 
-#: inc/acfcs-countries.php:47
+#: inc/acfcs-countries.php:46
 msgid "Country packages"
 msgstr "Land pakketten"
 
-#: inc/acfcs-countries.php:53 inc/acfcs-help-tabs.php:51
-#: inc/acfcs-preview.php:117 inc/acfcs-search.php:224
+#: inc/acfcs-countries.php:52 inc/acfcs-help-tabs.php:51
+#: inc/acfcs-preview.php:117 inc/acfcs-search.php:225
 msgid "Country"
 msgstr "Land"
 
-#: inc/acfcs-countries.php:54
+#: inc/acfcs-countries.php:53
 msgid "States/Provinces"
 msgstr "Staten/Provincies"
 
-#: inc/acfcs-countries.php:55
+#: inc/acfcs-countries.php:54
 msgid "Cities"
 msgstr "Steden"
 
-#: inc/acfcs-countries.php:56
+#: inc/acfcs-countries.php:55
 msgid "Price"
 msgstr "Prijs"
 
-#: inc/acfcs-countries.php:77
+#: inc/acfcs-countries.php:76
 #, php-format
 msgid ""
 "More countries will be added soon. Feel free to <a href=\"%s\" target="
@@ -267,7 +273,7 @@ msgstr ""
 "die (nog) niet beschikbaar is, dien gerust een <a href=\"%s\" target=\"_blank"
 "\" rel=\"noopener\">verzoek</a> in."
 
-#: inc/acfcs-countries.php:81
+#: inc/acfcs-countries.php:80
 msgid "Get your country now"
 msgstr "Haal nu jouw land"
 
@@ -364,36 +370,40 @@ msgstr ""
 "\"_blank\">kleine donatie</a> overweegt. Dit motiveert mij weer om de plugin "
 "te verbeteren in mijn vrije tijd."
 
-#: inc/acfcs-functions.php:227 inc/acfcs-functions.php:232
+#: inc/acfcs-functions.php:108
+msgid "Select a country first"
+msgstr "Selecteer eerst een land"
+
+#: inc/acfcs-functions.php:270 inc/acfcs-functions.php:275
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr "Aangezien je bestand fouten bevat, is deze verwijderd."
 
-#: inc/acfcs-functions.php:228
+#: inc/acfcs-functions.php:271
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr "Er zijn te weinig kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:237
+#: inc/acfcs-functions.php:280
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr "Er zijn te veel kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:303
+#: inc/acfcs-functions.php:346
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr "Er zijn te weinig kolommen op regel %d."
 
-#: inc/acfcs-functions.php:308
+#: inc/acfcs-functions.php:351
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr "Er zijn te veel kolommen op regel %d."
 
-#: inc/acfcs-functions.php:319
+#: inc/acfcs-functions.php:362
 #, php-format
 msgid "The length of the state abbreviation on line %d is incorrect."
 msgstr "De lengte van de staat/provincie afkorting op regel %d is incorrect."
 
-#: inc/acfcs-functions.php:326
+#: inc/acfcs-functions.php:369
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr "De lengte van de land afkorting op regel %d is incorrect."
@@ -425,7 +435,7 @@ msgid "Note"
 msgstr "Notitie"
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:218
+#: inc/acfcs-search.php:219
 msgid "City"
 msgstr "Stad"
 
@@ -446,7 +456,7 @@ msgid "max 3 characters"
 msgstr "max 3 karakters"
 
 #: inc/acfcs-help-tabs.php:41 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:221
+#: inc/acfcs-search.php:222
 msgid "State"
 msgstr "Staat/provincie"
 
@@ -579,23 +589,23 @@ msgstr "Zoekterm"
 msgid "Limit"
 msgstr "Limiet"
 
-#: inc/acfcs-search.php:201
+#: inc/acfcs-search.php:202
 msgid "No results, please try again."
 msgstr "Geen resultaten, probeer het aub nog een keer."
 
-#: inc/acfcs-search.php:207
+#: inc/acfcs-search.php:208
 msgid "results"
 msgstr "resultaten"
 
-#: inc/acfcs-search.php:212
+#: inc/acfcs-search.php:213
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:215
+#: inc/acfcs-search.php:216
 msgid "Select"
 msgstr "Selecteer"
 
-#: inc/acfcs-search.php:251
+#: inc/acfcs-search.php:252
 msgid "Delete selected"
 msgstr ""
 
@@ -17695,6 +17705,9 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 #: lib/import_nl.php:2
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
+
+#~ msgid "First select a province/state"
+#~ msgstr "Selecteer eerst een provincie/staat"
 
 #~ msgid "Upload file"
 #~ msgstr "Upload bestand"
