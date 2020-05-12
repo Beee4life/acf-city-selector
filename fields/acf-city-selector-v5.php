@@ -102,9 +102,6 @@
              */
             function render_field( $field ) {
 
-                // $selected_country = false;
-                // $post_id = get_the_ID();
-
                 $countries         = acfcs_populate_country_select( $field );
                 $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $field_id          = $field[ 'id' ];
@@ -124,8 +121,7 @@
                 }
 
                 if ( false !== $default_country && false == $selected_country ) {
-                    // New post
-                    // Load all states for $default_country
+                    // New post with default country, so load all states for $default_country
                     $first_option   = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
                     $states         = acfcs_populate_state_select( $default_country, $field );
                     $prefill_states = array_merge( $first_option, $states );
@@ -184,7 +180,7 @@
                         <?php
                             if ( ! empty( $prefill_states ) ) {
                                 foreach( $prefill_states as $country_state_code => $label ) {
-                                    $selected = false;
+                                    // $selected = false;
                                     $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
                                     ?>
                                     <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
@@ -210,7 +206,7 @@
                         <?php
                             if ( ! empty( $prefill_cities ) ) {
                                 foreach( $prefill_cities as $city_name => $label ) {
-                                    $selected = false;
+                                    // $selected = false;
                                     $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
                                     ?>
                                     <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
@@ -260,6 +256,7 @@
             function load_value( $value, $post_id, $field ) {
 
                 if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) {
+                    // this is here for some debugging. Most likely it will never 'come up'.
                     error_log( 'countryCode == 0' );
                 }
 
@@ -318,7 +315,11 @@
             function validate_value( $valid, $value, $field, $input ) {
 
                 if ( 1 == $field[ 'required' ] ) {
-                    if ( ! isset( $value[ 'cityName' ] ) ) {
+                    if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                        $valid = __( "You didn't select anything.", "acf-city-selector" );
+                    } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                        $valid = __( "You didn't select a state and city.", "acf-city-selector" );
+                    } elseif ( empty( $value[ 'cityName' ] ) ) {
                         $valid = __( "You didn't select a city", "acf-city-selector" );
                     }
                 }
