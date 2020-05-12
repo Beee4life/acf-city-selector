@@ -122,7 +122,6 @@
                      * single           = acf[field_5e950320fef17] (24)
                      * flexible content = (60)
                      */
-                    // @TODO: replace this with function acfcs_get_meta_values
                     if ( 100 < strlen( $field[ 'name' ] ) ) {
                         // Group + Flexible content
                         $field_object = get_field_objects( $post_id );

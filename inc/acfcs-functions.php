@@ -318,7 +318,7 @@
         if ( false != $csv_data ) {
 
             if ( is_array( $csv_data ) ) {
-                // @TODO: is this still needed since an array is not outputted anymore
+                // @TODO: check if this is still needed since an array is not outputted anymore
                 $lines = $csv_data;
             } else {
                 $lines = explode( "\r\n", $csv_data );
@@ -469,7 +469,7 @@
                             }
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                        $flexible_name                 = $field[ 'name' ]; // @TODO: add to return
+                        $flexible_name                 = $field[ 'name' ];
                         $flexible_content_block_values = $field[ 'value' ];
                         $flexible_names                = [];
                         $flexible_layouts              = $field[ 'layouts' ];

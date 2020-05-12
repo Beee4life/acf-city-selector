@@ -179,7 +179,6 @@
                         var $stateValues = '';
                         var select_state = $("select[name*='stateCode']");
                         if ( 'object' == typeof city_selector_vars ) {
-                            // @TODO: get selected state code(s) properly
                             $stored_state = city_selector_vars[1].stateCode;
                         } else {
                             $stored_state = city_selector_vars.stateCode;
@@ -272,7 +271,6 @@
                         var $cityValues = '';
                         var select_city = $('select[name*="cityName"]');
                         if ( 'object' == typeof city_selector_vars ) {
-                            // @TODO: get selected city name properly
                             $stored_city = city_selector_vars[1].cityName;
                         } else {
                             $stored_city = city_selector_vars.cityName;
