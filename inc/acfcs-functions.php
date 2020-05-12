@@ -1,6 +1,54 @@
 <?php
 
     /**
+     * Create an array with countries
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    function acfcs_populate_country_select( $field = [] ) {
+
+        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
+        $countries   = acfcs_get_countries( true, $show_labels );
+
+        return $countries;
+    }
+
+
+    /**
+     * Create an array with states based on a country code
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    function acfcs_populate_state_select( $country_code = false, $field = [] ) {
+
+        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
+        $countries   = acfcs_get_states( $country_code, true, $show_labels );
+
+        return $countries;
+    }
+
+
+    /**
+     * Create an array with cities for a specific province/state
+     *
+     * @param array $field
+     *
+     * @return array
+     */
+    function acfcs_populate_city_select( $country_code = false, $state_code = false, $field = [] ) {
+
+        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
+        $countries   = acfcs_get_cities( $country_code, $state_code, $show_labels );
+
+        return $countries;
+    }
+
+
+    /**
      * Create an array with available countries from db.
      * This function makes use of a transient to speed up the process.
      *
@@ -50,45 +98,34 @@
      *
      * @return array
      */
-    function acfcs_populate_country_select( $field = [] ) {
+    function acfcs_get_states( $country_code = false, $show_first = false, $show_labels = false ) {
 
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_countries( true, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
-     * Create an array with states based on a country code
-     *
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_get_states( $field = [] ) {
-
-        if ( ! empty( $field[ 'default_country' ] ) ) {
-            $country_code = strtoupper( $field[ 'default_country' ] );
-        } else {
-            // this is here for some testing - will be removed by v1.0.0. at the latest
-            error_log('ERROR hit');
+        $states = [];
+        if ( false !== $show_first ) {
+            if ( false != $show_labels ) {
+                $countries[ '' ] = '-';
+            } else {
+                $countries[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+            }
         }
 
-        global $wpdb;
-        if ( isset( $country_code ) ) {
-            $sql = $wpdb->prepare( "
-                SELECT *
-                FROM " . $wpdb->prefix . "cities
-                WHERE country_code = '%s'
-                GROUP BY state_code
-                ORDER BY state_name ASC",  $country_code
-            );
-            $results = $wpdb->get_results( $sql );
+        // @TODO: add transient
+        if ( false != $country_code ) {
+            global $wpdb;
+            if ( isset( $country_code ) ) {
+                $sql = $wpdb->prepare( "
+                    SELECT *
+                    FROM " . $wpdb->prefix . "cities
+                    WHERE country_code = '%s'
+                    GROUP BY state_code
+                    ORDER BY state_name ASC",  strtoupper( $country_code )
+                );
+                $results = $wpdb->get_results( $sql );
 
-            $states = array();
-            foreach ( $results as $data ) {
-                $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
+                $states = array();
+                foreach ( $results as $data ) {
+                    $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
+                }
             }
         }
 
@@ -96,16 +133,23 @@
     }
 
     /**
-     * Create an array with cities for a certain country/state with row id as index (not used by plugin)
+     * Create an array with cities for a certain country/state
      *
      * @param bool $country_code
      * @param bool $state_code
      *
      * @return array
      */
-    function acfcs_get_cities( $country_code = false, $state_code = false ) {
+    function acfcs_get_cities( $country_code = false, $state_code = false, $show_labels = false ) {
 
         $cities = [];
+        if ( false != $show_labels ) {
+            $cities[ '' ] = '-';
+        } else {
+            $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+        }
+
+        // @TODO: add transient
         if ( false !== $country_code ) {
             global $wpdb;
             $cities = array();
@@ -118,13 +162,14 @@
             $query   .= " order by state_name, city_name ASC";
             $results = $wpdb->get_results( $query );
 
+            $city_counter = 1;
             foreach ( $results as $data ) {
-                $cities[ $data->id ] = [
-                    'id'    => $data->id,
-                    'city_name' => $data->city_name,
-                    'state_code' => $data->state_code,
-                    'state_name' => $data->state_name,
-                ];
+                if ( 1 == $city_counter ) {
+                    $cities[] = $data->city_name;
+                } else {
+                    $cities[ $data->city_name ] = $data->city_name;
+                }
+                $city_counter++;
             }
         }
 
@@ -281,7 +326,7 @@
         if ( false != $csv_data ) {
 
             if ( is_array( $csv_data ) ) {
-                // @TODO: is this still needed since an array is not outputted anymore
+                // @TODO: check if this is still needed since an array is not outputted anymore
                 $lines = $csv_data;
             } else {
                 $lines = explode( "\r\n", $csv_data );

@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.15
+    Version:        0.16
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -33,7 +33,7 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.15',
+                    'version'       => '0.16',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
@@ -323,9 +323,12 @@
 
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
-                                unlink( $this->settings[ 'upload_folder' ] . $file_name );
-                                // @TODO: add if for success
-                                $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                                $delete_result = unlink( $this->settings[ 'upload_folder' ] . $file_name );
+                                if ( true === $delete_result ) {
+                                    $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                                } else {
+                                    $this->acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
+                                }
                             }
                         }
                     }
@@ -609,7 +612,7 @@
                 if ( ! $version ) {
                     $version = 4;
                 } else {
-                    include_once( 'fields/acf-city_selector-v' . $version . '.php' );
+                    include_once( 'fields/acf-city-selector-v' . $version . '.php' );
                 }
             }
 

@@ -1,8 +1,7 @@
-# ACF City Selector Field
+# ACF City Selector
 
 Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
 
-## Index
 - [Version](#version)
 - [Description](#description)
 - [Installation](#installation)
@@ -24,12 +23,12 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.15 - released 10.05.20
+0.16 - released 12.05.20
 
 <a name="description"></a>
 ### Description
 
-This plugin allows you to select a city, based on country and province/state in an ACF Field Group.
+This plugin allows you to select a city, based on country and province/state in an ACF Field.
 
 ![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
@@ -169,17 +168,14 @@ Find all functions and their info [here](https://acfcs.berryplasman.com/document
 <a name="compatibility"></a>
 ### Compatibility
 
-This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version, but we won't be putting any more time in it. Just buy the Pro version. It's worth every penny !
+This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested with the free version (v4), but we won't be putting any (more) time in it. Just buy the Pro version. It's worth every cent !
 
 <a name="tested"></a>
 ### Tested with
 
 * Wordpress 5.4.1
-* Advanced Custom Fields 4.4.12
 * Advanced Custom Fields Pro 5.8.9
-
-If you want to remove the donation box in ACF, add the following line to functions.php:
-`add_filter('acfcs_remove_donate_nag', '__return_true');`
+* Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
 ### Support
@@ -196,28 +192,25 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
-The default country setting works for the following situations: 
+The plugin works in the following situations: 
 * in a single field
 * in a repeater field
-* in a group
-* inside a flexible content block (with 1 ACFCS instance)
+* in a group (as single and repeater)
+* in a flexible content block (as single and repeater)
 
-This plugin doesn't work (yet) in the following situations:
-* multiple single fields on 1 page
-* as a repeater field in groups
-* inside a flexible content block (with more than 1 ACFCS instance)
-
-This plugin hasn't been tested yet in the following situations: 
+The plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
 * most front-end usage (except single use)
-* with the Gutenberg editor (and don't hold your breath either)
+* with the Gutenberg editor (and don't hold your breath either, I hate it)
+
+Sometimes the loading of states/cities, takes a few seconds... Don't know why...
+This is very random and unpredictable.
 
 <a name="todo"></a>
 ### TODO
 
-The things on our 'to do list' to tackle soon (beside aforementioned situations) are the folllowing things, but not necessary in this order:
-- add select2 to dropdowns (including a search like with a post object field) 
-- load (stored) values quicker 
+- [] Add select2 to dropdowns (including a search, like with a post object field) 
+- [] Select which fields to use; all, country + state or country + city or state  city 
 
 <a name="credit"></a>
 ### Credit
@@ -228,6 +221,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.16
+* made the field work in all field types
 
 0.15
 * added the option to add a single field to flexible content blocks
