@@ -202,6 +202,9 @@ The plugin hasn't been tested yet in the following situations:
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
+Sometimes the loading of states/cities, takes a few seconds... Don't know why...
+This is very random and unpredictable.
+
 <a name="todo"></a>
 ### TODO
 
