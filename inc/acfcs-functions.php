@@ -103,29 +103,33 @@
         $states = [];
         if ( false !== $show_first ) {
             if ( false != $show_labels ) {
-                $countries[ '' ] = '-';
+                $states[ '' ] = '-';
             } else {
-                $countries[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
             }
         }
 
-        // @TODO: add transient
         if ( false != $country_code ) {
-            global $wpdb;
-            if ( isset( $country_code ) ) {
-                $sql = $wpdb->prepare( "
+            $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
+            if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+                global $wpdb;
+                if ( isset( $country_code ) ) {
+                    $sql = $wpdb->prepare( "
                     SELECT *
                     FROM " . $wpdb->prefix . "cities
                     WHERE country_code = '%s'
                     GROUP BY state_code
                     ORDER BY state_name ASC",  strtoupper( $country_code )
-                );
-                $results = $wpdb->get_results( $sql );
+                    );
+                    $results = $wpdb->get_results( $sql );
 
-                $states = array();
-                foreach ( $results as $data ) {
-                    $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
+                    $states = array();
+                    foreach ( $results as $data ) {
+                        $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
+                    }
                 }
+            } else {
+                $states = array_merge( $states, $transient );
             }
         }
 
