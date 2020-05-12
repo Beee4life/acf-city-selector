@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-12 18:37+0200\n"
+"POT-Creation-Date: 2020-05-12 19:10+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -138,64 +138,72 @@ msgstr ""
 msgid "Get more countries"
 msgstr ""
 
-#: assets/js/city-selector.js:74
+#: assets/js/city-selector.js:68
 msgid "acf_city_selector"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:66 fields/acf-city_selector-v5.php:69
+#: fields/acf-city-selector-v4.php:66 fields/acf-city-selector-v5.php:69
 msgid "Yes"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:67 fields/acf-city_selector-v5.php:70
+#: fields/acf-city-selector-v4.php:67 fields/acf-city-selector-v5.php:70
 msgid "No"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:74 fields/acf-city_selector-v5.php:75
+#: fields/acf-city-selector-v4.php:74 fields/acf-city-selector-v5.php:75
 msgid "Show labels"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:75 fields/acf-city_selector-v5.php:74
+#: fields/acf-city-selector-v4.php:75 fields/acf-city-selector-v5.php:74
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:117
+#: fields/acf-city-selector-v4.php:117
 msgid "Select country"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:136
+#: fields/acf-city-selector-v4.php:136
 msgid "Select province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v4.php:145
+#: fields/acf-city-selector-v4.php:145
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:47 fields/acf-city_selector-v5.php:203
-#: fields/acf-city_selector-v5.php:207 inc/acfcs-functions.php:148
+#: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:199
+#: fields/acf-city-selector-v5.php:203 inc/acfcs-functions.php:149
 #: inc/country-field.php:118
 msgid "Select a city"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:86
+#: fields/acf-city-selector-v5.php:86
 msgid "Pre-select a default country when creating a new post or adding a new row in a repeater"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:87
+#: fields/acf-city-selector-v5.php:87
 msgid "Default country"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:129 fields/acf-city_selector-v5.php:177
-#: fields/acf-city_selector-v5.php:181 inc/acfcs-search.php:152
+#: fields/acf-city-selector-v5.php:125 fields/acf-city-selector-v5.php:173
+#: fields/acf-city-selector-v5.php:177 inc/acfcs-search.php:152
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:149 fields/acf-city_selector-v5.php:153
+#: fields/acf-city-selector-v5.php:145 fields/acf-city-selector-v5.php:149
 #: inc/acfcs-functions.php:67 inc/acfcs-search.php:135
 msgid "Select a country"
 msgstr ""
 
-#: fields/acf-city_selector-v5.php:322
+#: fields/acf-city-selector-v5.php:319
+msgid "You didn't select anything."
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:321
+msgid "You didn't select a state and city."
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:323
 msgid "You didn't select a city"
 msgstr ""
 
@@ -332,36 +340,36 @@ msgstr ""
 msgid "Select a country first"
 msgstr ""
 
-#: inc/acfcs-functions.php:270 inc/acfcs-functions.php:275
+#: inc/acfcs-functions.php:272 inc/acfcs-functions.php:277
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr ""
 
-#: inc/acfcs-functions.php:271
+#: inc/acfcs-functions.php:273
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:280
+#: inc/acfcs-functions.php:282
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:346
+#: inc/acfcs-functions.php:348
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:351
+#: inc/acfcs-functions.php:353
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:362
+#: inc/acfcs-functions.php:364
 #, php-format
 msgid "The length of the state abbreviation on line %d is incorrect."
 msgstr ""
 
-#: inc/acfcs-functions.php:369
+#: inc/acfcs-functions.php:371
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""
