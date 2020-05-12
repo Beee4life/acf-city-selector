@@ -5,7 +5,7 @@
         jQuery(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
-                    change_dropdowns($('select[name*="countryCode"]'));
+                    change_dropdowns();
                 },0);
             }
 
@@ -13,7 +13,12 @@
                 setTimeout(function() {
                     jQuery('.acf-tooltip ul li').on('click','a',function(e){
                         setTimeout(function() {
-                            change_dropdowns($('select[name*="countryCode"]'));
+                            change_dropdowns();
+                            jQuery(".acf-input .button").click(function () {
+                                setTimeout(function() {
+                                    change_dropdowns();
+                                },0);
+                            });
                         },0);
                     });
                 },0);
@@ -24,12 +29,12 @@
          * Change dropdowns
          */
         function change_dropdowns( $instance ) {
-
-            if (typeof $instance === "undefined") {
-                $countries = $('select[name*="countryCode"]');
-            } else {
-                $countries = $instance;
-            }
+            // if (typeof $instance === "undefined") {
+            //     $countries = $('select[name*="countryCode"]');
+            // } else {
+            //     $countries = $instance;
+            // }
+            $countries = $('select[name*="countryCode"]');
             var countries = $countries;
             var state = $('select[name*="stateCode"]');
 
@@ -106,6 +111,7 @@
 
         /**
          * Load select states when editing a post
+         * @TODO: remove
          */
         function admin_post_edit_load_states() {
 
@@ -199,6 +205,7 @@
 
         /**
          * Load select cities when editing a post
+         * @TODO: remove
          */
         function admin_post_edit_load_cities() {
             if ( true === Array.isArray(city_selector_vars) ) {
@@ -331,8 +338,9 @@
          * Function calls
          */
         if (typeof city_selector_vars !== "undefined") {
-            admin_post_edit_load_states();
-            admin_post_edit_load_cities();
+            // @TODO: remove
+            // admin_post_edit_load_states();
+            // admin_post_edit_load_cities();
         }
         change_dropdowns();
 

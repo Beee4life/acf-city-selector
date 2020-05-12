@@ -94,7 +94,8 @@
 
                 $selected_country = false;
                 $post_id = get_the_ID();
-                if ( strpos( $field[ 'name' ], 'row' ) !== false ) {
+                // @TODO: remove
+                if ( strpos( $field[ 'name' ], 'xrow' ) !== false ) {
                     // if $field[ 'name' ] contains 'row' it's a repeater field
                     $strip_last_char = substr( $field[ 'prefix' ], 0, -1 );
                     $index           = substr( $strip_last_char, 29 ); // 29 => acf[field_xxxxxxxxxxxxx
@@ -111,7 +112,6 @@
                     error_log('type = flexible_content');
                 } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                     // if $field[ 'name' ] doesn't contain 'row' it's a single or group field
-
                     /**
                      * Why is 24 set as length ?
                      * Because the length of a single $field['name'] = 24.
@@ -122,7 +122,8 @@
                      * single           = acf[field_5e950320fef17] (24)
                      * flexible content = (60)
                      */
-                    if ( 24 < strlen( $field[ 'name' ] ) ) {
+                    // @TODO: replace this with function acfcs_get_meta_values
+                    if ( 100 < strlen( $field[ 'name' ] ) ) {
                         // Group + Flexible content
                         $field_object = get_field_objects( $post_id );
 
@@ -182,21 +183,45 @@
                 }
 
                 $countries         = acfcs_populate_country_select( $field );
-                $default_country   = ( isset( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+                $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $field_id          = $field[ 'id' ];
                 $field_name        = $field[ 'name' ];
-                $show_labels       = $field[ 'show_labels' ];
+                $prefill_cities    = [];
                 $prefill_states    = [];
+                $selected_city     = false;
+                $selected_country  = false;
                 $selected_selected = ' selected="selected"';
+                $selected_state    = false;
+                $show_labels       = $field[ 'show_labels' ];
 
-                if ( ! empty( $default_country ) && false == $selected_country ) {
+                // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
+                if ( is_array( $field[ 'value' ] ) && ! empty( $field[ 'value' ] ) ) {
+                    $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                    $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+                }
+
+                // echo '<pre>'; var_dump($default_country); echo '</pre>'; exit;
+                if ( false !== $default_country && false == $selected_country ) {
                     // New post
                     // Load all states for $default_country
                     $first_option   = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
-                    $states         = acfcs_get_states( $field );
+                    $states         = acfcs_populate_state_select( $default_country, $field );
                     $prefill_states = array_merge( $first_option, $states );
+                } elseif ( false != $selected_country ) {
+                    $country_state_code = $field[ 'value' ][ 'stateCode' ];
+                    if ( false !== $selected_country ) {
+                        $prefill_states = acfcs_populate_state_select( $selected_country, $field );
+                    }
+                    if ( $country_state_code ) {
+                        $state_code = $country_state_code;
+                        if ( 3 < strlen( $country_state_code ) ) {
+                            $state_code = substr( $country_state_code, 3, 3 );
+                        }
+                        $prefill_cities = acfcs_populate_city_select( $selected_country, $state_code, $field );
+                    }
                 }
-                ?>
+            ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( 1 == $show_labels ) { ?>
                         <div class="acf-input-header">
@@ -208,19 +233,19 @@
                     </label>
                     <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                         <?php
-                            foreach ( $countries as $key => $country ) {
+                            foreach ( $countries as $country_code => $country ) {
                                 $selected = false;
                                 if ( false !== $selected_country ) {
-                                    if ( $selected_country == $key ) {
+                                    if ( $selected_country == $country_code ) {
                                         $selected = $selected_selected;
                                     }
                                 } elseif ( ! empty( $default_country ) ) {
-                                    if ( $default_country == $key ) {
+                                    if ( $default_country == $country_code ) {
                                         $selected = $selected_selected;
                                     }
                                 }
                             ?>
-                            <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
+                            <option value="<?php echo $country_code; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -237,9 +262,11 @@
                     <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
                         <?php
                             if ( ! empty( $prefill_states ) ) {
-                                foreach( $prefill_states as $scc => $label ) {
+                                foreach( $prefill_states as $country_state_code => $label ) {
+                                    $selected = false;
+                                    $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
                                     ?>
-                                    <option value="<?php echo $scc; ?>"><?php echo $label; ?></option>
+                                    <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
                                     <?php
                                 }
                             } else {
@@ -259,11 +286,19 @@
                         <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
                     </label>
                     <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
-                        <?php if ( ! empty( $prefill_states ) ) { ?>
-                            <option value=""><?php esc_html_e( 'First select a province/state', 'acf-city-selector' ); ?></option>
-                        <?php } else { ?>
-                            <?php // content will be dynamically generated on.change country ?>
-                        <?php } ?>
+                        <?php
+                            if ( ! empty( $prefill_cities ) ) {
+                                foreach( $prefill_cities as $city_name => $label ) {
+                                    $selected = false;
+                                    $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
+                                    ?>
+                                    <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
+                                    <?php
+                                }
+                            } else {
+                                // content will be dynamically generated on.change country
+                            }
+                        ?>
                     </select>
                 </div>
                 <?php
@@ -288,152 +323,17 @@
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
 
+                // @TODO: remove
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' || isset( $_GET[ 'id' ] ) || defined('IS_PROFILE_PAGE') ) {
-                    $activate = false;
 
-                    if ( isset( $_GET[ 'user_id' ] ) ) {
-                        $activate = true;
-                        $user_id  = $_GET[ 'user_id' ];
-                    } elseif ( isset( $_GET[ 'id' ] ) ) {
-                        // this is for my custom project
-                        $activate = true;
-                        $post_id  = $_GET[ 'id' ];
-                    } elseif ( isset( $_GET[ 'post' ] ) ) {
-                        $post_id = $_GET[ 'post' ];
-                        if ( 'acf-field-group' != get_post_type( $post_id ) ) {
-                            $activate = true;
-                        }
-                    } else {
-                        $activate = true;
-                        if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                            $user_id = get_current_user_id();
-                        } else {
-                            $post_id = get_the_ID();
-                        }
-                    }
+                    // $meta_values = acfcs_get_meta_values();
+                    // echo '<pre>'; var_dump($meta_values); echo '</pre>'; exit;
 
-                    if ( false != $activate ) {
-                        if ( isset( $user_id ) && false !== $user_id ) {
-                            $fields = get_field_objects( 'user_' . $user_id );
-                        } elseif ( isset( $post_id ) && false !== $post_id ) {
-                            $fields = get_field_objects( $post_id );
-                        }
-
-                        /*
-                         * Get the field['name'] for the City Selector field
-                         */
-                        if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
-                            foreach( $fields as $field ) {
-                                if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                                    $field_name = $field[ 'name' ];
-                                    break;
-                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
-                                    $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                                    if ( false !== $array_key ) {
-                                        $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
-                                        $repeater_name      = $field[ 'name' ];
-                                        $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
-                                        break;
-                                    }
-                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                                    // get acfcs field_names
-                                    if ( ! empty( $field[ 'value' ] ) ) {
-                                        foreach( $field[ 'value' ] as $key => $values ) {
-                                            if ( is_array( $values ) ) {
-                                                $index = array_key_exists( 'countryCode', $values );
-                                                if ( true === $index ) {
-                                                    $field_name = $field[ 'name' ] . '_' . $key;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                                    $flexible_name                 = $field[ 'name' ];
-                                    $flexible_content_name         = array_keys( $fields )[ 0 ];
-                                    $flexible_content              = get_field_object( $flexible_content_name, $post_id );
-                                    $flexible_content_block_values = $flexible_content[ 'value' ];
-                                    $flexible_names                = [];
-                                    $layouts                       = $flexible_content[ 'layouts' ];
-
-                                    foreach( $layouts as $layout ) {
-                                        $sub_fields = $layout[ 'sub_fields' ];
-                                        foreach( $sub_fields as $subfield ) {
-                                            // if type == acfcs, add name to array
-                                            if ( 'acf_city_selector' == $subfield[ 'type' ] ) {
-                                                $flexible_names[ $layout[ 'name' ] ] = $subfield[ 'name' ];
-                                            }
-                                        }
-                                    }
-
-                                    $layout_index = 0;
-                                    $meta_keys    = [];
-                                    if ( is_array( $flexible_content_block_values ) ) {
-                                        foreach( $flexible_content_block_values as $values ) {
-                                            if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
-                                                $meta_keys[ $layout_index ] = $flexible_content_name . '_' . $layout_index . '_' . $flexible_names[ $values[ 'acf_fc_layout' ] ];
-                                            }
-                                            $layout_index++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        /*
-                         * Get post_meta
-                         */
-                        if ( isset( $repeater_count ) && 0 < $repeater_count ) {
-                            for( $i = 0; $i < $repeater_count; $i++ ) {
-                                $repeater_field_name = $repeater_name . '_' . $i . '_' . $city_selector_name;
-                                $post_meta[]         = get_post_meta( $post_id, $repeater_field_name, true );
-                            }
-
-                            if ( isset( $post_meta ) && ! empty( $post_meta ) ) {
-                                foreach( $post_meta as $meta ) {
-                                    $meta_values[] = array(
-                                        'countryCode' => ( isset( $meta[ 'countryCode' ] ) ) ? $meta[ 'countryCode' ] : '',
-                                        'stateCode'   => ( isset( $meta[ 'stateCode' ] ) ) ? $meta[ 'stateCode' ] : '',
-                                        'cityName'    => ( isset( $meta[ 'cityName' ] ) ) ? $meta[ 'cityName' ] : '',
-                                    );
-                                }
-                            }
-                        } else {
-                            if ( isset( $field_name ) ) {
-                                if ( isset( $user_id ) ) {
-                                    $post_meta = get_user_meta( $user_id, $field_name, true );
-                                } elseif ( isset( $post_id ) ) {
-                                    if ( isset( $flexible_name ) ) {
-                                        // flexible content
-                                    } else {
-                                        // single/group
-                                        $post_meta = get_post_meta( $post_id, $field_name, true );
-                                        if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                                            $meta_values = array(
-                                                'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
-                                                'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
-                                                'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
-                                            );
-                                        }
-                                    }
-                                }
-                            } elseif ( isset( $flexible_name ) ) {
-                                // flexible content
-                                if ( isset( $meta_keys ) && is_array( $meta_keys ) && ! empty( $meta_keys ) ) {
-                                    foreach( $meta_keys as $key => $value ) {
-                                        $meta_values[ $key ] = get_post_meta( $post_id, $value, true );
-                                    }
-                                }
-                            } elseif ( isset( $counter_field_name ) ) {
-
-                            }
-                        }
-                        /*
-                         * Localize post_meta
-                         */
-                        if ( isset( $meta_values ) ) {
-                            wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
-                        }
+                    /*
+                     * Localize post_meta
+                     */
+                    if ( ! empty( $meta_values ) ) {
+                        // wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $meta_values );
                     }
                 }
             }
