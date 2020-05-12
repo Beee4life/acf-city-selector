@@ -1,49 +1,6 @@
 <?php
 
     /**
-     * Create an array with available countries from db.
-     * This function makes use of a transient to speed up the process.
-     *
-     * @param bool $show_first
-     * @param bool $show_labels
-     *
-     * @return array
-     */
-    function acfcs_get_countries( $show_first = false, $show_labels = false ) {
-
-        $countries = [];
-        if ( false !== $show_first ) {
-            if ( false != $show_labels ) {
-                $countries[ '' ] = '-';
-            } else {
-                $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
-            }
-        }
-
-        $transient = get_transient( 'acfcs_countries' );
-        if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
-            global $wpdb;
-            $results = $wpdb->get_results( '
-                SELECT * FROM ' . $wpdb->prefix . 'cities
-                GROUP BY country
-                ORDER BY country ASC
-            ' );
-
-            foreach ( $results as $data ) {
-                $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
-            }
-
-            set_transient( 'acfcs_countries', $countries, DAY_IN_SECONDS );
-
-        } else {
-            $countries = array_merge( $countries, $transient );
-        }
-
-        return $countries;
-    }
-
-
-    /**
      * Create an array with states based on a country code
      *
      * @param array $field
@@ -86,6 +43,49 @@
 
         $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
         $countries   = acfcs_get_cities( $country_code, $state_code, $show_labels );
+
+        return $countries;
+    }
+
+
+    /**
+     * Create an array with available countries from db.
+     * This function makes use of a transient to speed up the process.
+     *
+     * @param bool $show_first
+     * @param bool $show_labels
+     *
+     * @return array
+     */
+    function acfcs_get_countries( $show_first = false, $show_labels = false ) {
+
+        $countries = [];
+        if ( false !== $show_first ) {
+            if ( false != $show_labels ) {
+                $countries[ '' ] = '-';
+            } else {
+                $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
+            }
+        }
+
+        $transient = get_transient( 'acfcs_countries' );
+        if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+            global $wpdb;
+            $results = $wpdb->get_results( '
+                SELECT * FROM ' . $wpdb->prefix . 'cities
+                GROUP BY country
+                ORDER BY country ASC
+            ' );
+
+            foreach ( $results as $data ) {
+                $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+            }
+
+            set_transient( 'acfcs_countries', $countries, DAY_IN_SECONDS );
+
+        } else {
+            $countries = array_merge( $countries, $transient );
+        }
 
         return $countries;
     }
@@ -443,7 +443,6 @@
              */
             if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
 
-                // echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                         $field_name = $field[ 'name' ];
@@ -470,7 +469,6 @@
                             }
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                         $flexible_name                 = $field[ 'name' ]; // @TODO: add to return
                         $flexible_content_block_values = $field[ 'value' ];
                         $flexible_names                = [];
@@ -486,7 +484,6 @@
                                     $flexible_names[ $layout[ 'name' ] ] = $subfield[ 'name' ];
                                 }
                             }
-                            // echo '<pre>'; var_dump($flexible_names); echo '</pre>'; exit;
                         }
 
                         $layout_index = 0;
@@ -499,7 +496,6 @@
                                 $layout_index++;
                             }
                         }
-                        // echo '<pre>'; var_dump($meta_keys); echo '</pre>'; exit;
                     }
                 }
             }
@@ -544,7 +540,6 @@
                         foreach( $meta_keys as $key => $value ) {
                             $meta_values[ $key ] = get_post_meta( $post_id, $value, true );
                         }
-                        // echo '<pre>'; var_dump($meta_values); echo '</pre>'; exit;
                     }
                 }
             }
