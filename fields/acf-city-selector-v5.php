@@ -180,7 +180,6 @@
                         <?php
                             if ( ! empty( $prefill_states ) ) {
                                 foreach( $prefill_states as $country_state_code => $label ) {
-                                    // $selected = false;
                                     $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
                                     ?>
                                     <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
@@ -206,7 +205,6 @@
                         <?php
                             if ( ! empty( $prefill_cities ) ) {
                                 foreach( $prefill_cities as $city_name => $label ) {
-                                    // $selected = false;
                                     $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
                                     ?>
                                     <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
@@ -256,7 +254,8 @@
             function load_value( $value, $post_id, $field ) {
 
                 if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) {
-                    // this is here for some debugging. Most likely it will never 'come up'.
+                    // this is here for some debugging. Most likely it will never 'come up'. Will be removed by 1.0.0 at the latest.
+
                     error_log( 'countryCode == 0' );
                 }
 
