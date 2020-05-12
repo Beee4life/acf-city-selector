@@ -384,6 +384,8 @@
                 // if nothing is selected, set value to false
                 if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
                     $value = false;
+                } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                    $value = false;
                 }
 
                 return $value;
