@@ -35,7 +35,8 @@
                 $this->label    = 'City Selector';
                 $this->category = 'Choice';
                 $this->defaults = array(
-                    'show_labels' => 1,
+                    'show_labels'  => 1,
+                    'which_fields' => 'all',
                 );
 
                 /*
@@ -89,6 +90,20 @@
                     'type'         => 'select',
                 ) );
 
+                $select_fields = array(
+                    'all'           => __( 'All', 'acf-city-selector' ),
+                    'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
+                    'country_city'  => __( 'Country + City', 'acf-city-selector' ),
+                    // 'state_city'    => __( 'Province/state + City', 'acf-city-selector' ),
+                );
+                acf_render_field_setting( $field, array(
+                    'choices'      => $select_fields,
+                    'instructions' => esc_html__( 'Limit which fields are used', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Fields to use', 'acf-city-selector' ),
+                    'name'         => 'which_fields',
+                    'type'         => 'radio',
+                ) );
+
             }
 
             /*
@@ -138,7 +153,7 @@
                         $prefill_cities = acfcs_populate_city_select( $selected_country, $state_code, $field );
                     }
                 }
-            ?>
+                ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( 1 == $show_labels ) { ?>
                         <div class="acf-input-header">
@@ -167,55 +182,59 @@
                     </select>
                 </div>
 
-                <div class="dropdown-box cs-provinces">
-                    <?php if ( 1 == $show_labels ) { ?>
-                        <div class="acf-input-header">
+                <?php if ( 'all' == $field[ 'which_fields' ] || strpos( $field[ 'which_fields' ], 'state' ) !== false ) { ?>
+                    <div class="dropdown-box cs-provinces">
+                        <?php if ( 1 == $show_labels ) { ?>
+                            <div class="acf-input-header">
+                                <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                            </div>
+                        <?php } ?>
+                        <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
                             <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
-                        </div>
-                    <?php } ?>
-                    <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
-                        <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
-                    </label>
-                    <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
-                        <?php
-                            if ( ! empty( $prefill_states ) ) {
-                                foreach( $prefill_states as $country_state_code => $label ) {
-                                    $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
-                                    ?>
-                                    <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                    <?php
+                        </label>
+                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
+                            <?php
+                                if ( ! empty( $prefill_states ) ) {
+                                    foreach( $prefill_states as $country_state_code => $label ) {
+                                        $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
+                                        ?>
+                                        <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
+                                        <?php
+                                    }
+                                } else {
+                                    // content will be dynamically generated on.change country
                                 }
-                            } else {
-                                // content will be dynamically generated on.change country
-                            }
-                        ?>
-                    </select>
-                </div>
+                            ?>
+                        </select>
+                    </div>
+                <?php } ?>
 
-                <div class="dropdown-box cs-cities">
-                    <?php if ( 1 == $show_labels ) { ?>
-                        <div class="acf-input-header">
+                <?php if ( 'all' == $field[ 'which_fields' ] || strpos( $field[ 'which_fields' ], 'city' ) !== false ) { ?>
+                    <div class="dropdown-box cs-cities">
+                        <?php if ( 1 == $show_labels ) { ?>
+                            <div class="acf-input-header">
+                                <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                            </div>
+                        <?php } ?>
+                        <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
                             <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
-                        </div>
-                    <?php } ?>
-                    <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
-                        <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
-                    </label>
-                    <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
-                        <?php
-                            if ( ! empty( $prefill_cities ) ) {
-                                foreach( $prefill_cities as $city_name => $label ) {
-                                    $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
-                                    ?>
-                                    <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                    <?php
+                        </label>
+                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
+                            <?php
+                                if ( ! empty( $prefill_cities ) ) {
+                                    foreach( $prefill_cities as $city_name => $label ) {
+                                        $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
+                                        ?>
+                                        <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
+                                        <?php
+                                    }
+                                } else {
+                                    // content will be dynamically generated on.change country
                                 }
-                            } else {
-                                // content will be dynamically generated on.change country
-                            }
-                        ?>
-                    </select>
-                </div>
+                            ?>
+                        </select>
+                    </div>
+                <?php } ?>
                 <?php
             }
 
