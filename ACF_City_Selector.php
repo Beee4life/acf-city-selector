@@ -323,9 +323,12 @@
 
                             if ( isset( $_POST[ 'acfcs_file_name' ] ) ) {
                                 // delete file
-                                unlink( $this->settings[ 'upload_folder' ] . $file_name );
-                                // @TODO: add if for success
-                                $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                                $delete_result = unlink( $this->settings[ 'upload_folder' ] . $file_name );
+                                if ( true === $delete_result ) {
+                                    $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                                } else {
+                                    $this->acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again', 'acf-city-selector' ), $file_name ) );
+                                }
                             }
                         }
                     }
