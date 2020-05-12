@@ -160,8 +160,14 @@
             $query   .= " order by state_name, city_name ASC";
             $results = $wpdb->get_results( $query );
 
+            $city_counter = 1;
             foreach ( $results as $data ) {
-                $cities[ $data->city_name ] = $data->city_name;
+                if ( 1 == $city_counter ) {
+                    $cities[] = $data->city_name;
+                } else {
+                    $cities[ $data->city_name ] = $data->city_name;
+                }
+                $city_counter++;
             }
         }
 
@@ -397,155 +403,4 @@
         }
 
         return $response;
-    }
-
-    /**
-     * Return the meta values for a post/user
-     * @TODO: remove
-     *
-     * @return array
-     */
-    function acfcs_get_meta_values() {
-
-        $activate  = false;
-        $meta_values = [];
-
-        if ( isset( $_GET[ 'user_id' ] ) ) {
-            $activate = true;
-            $user_id  = $_GET[ 'user_id' ];
-        } elseif ( isset( $_GET[ 'post' ] ) ) {
-            $post_id = $_GET[ 'post' ];
-            if ( 'acf-field-group' != get_post_type( $post_id ) ) {
-                $activate = true;
-            }
-        } elseif ( isset( $_GET[ 'id' ] ) ) {
-            // this is for my own project
-            $activate = true;
-            $post_id  = $_GET[ 'id' ];
-        } else {
-            $activate = true;
-            if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                $user_id = get_current_user_id();
-            } else {
-                $post_id = get_the_ID();
-            }
-        }
-
-        if ( false != $activate ) {
-            if ( isset( $user_id ) && false !== $user_id ) {
-                $fields = get_field_objects( 'user_' . $user_id );
-            } elseif ( isset( $post_id ) && false !== $post_id ) {
-                $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
-            }
-
-            /*
-             * Get the field['name'] for the City Selector field
-             */
-            if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
-
-                foreach( $fields as $field ) {
-                    if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                        $field_name = $field[ 'name' ];
-                        break;
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
-                        $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                        if ( false !== $array_key ) {
-                            $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
-                            $repeater_name      = $field[ 'name' ];
-                            $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
-                            break;
-                        }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                        // get acfcs field_names
-                        if ( ! empty( $field[ 'value' ] ) ) {
-                            foreach( $field[ 'value' ] as $key => $values ) {
-                                if ( is_array( $values ) ) {
-                                    $index = array_key_exists( 'countryCode', $values );
-                                    if ( true === $index ) {
-                                        $field_name = $field[ 'name' ] . '_' . $key;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                        $flexible_name                 = $field[ 'name' ];
-                        $flexible_content_block_values = $field[ 'value' ];
-                        $flexible_names                = [];
-                        $flexible_layouts              = $field[ 'layouts' ];
-
-                        foreach( $flexible_layouts as $layout ) {
-                            $sub_fields = $layout[ 'sub_fields' ];
-                            foreach( $sub_fields as $subfield ) {
-                                // if type == acfcs, add name to array
-                                if ( 'acf_city_selector' == $subfield[ 'type' ] ) {
-                                    // This is to prepare for multiple flex blocks
-                                    // $flexible_names[ $flexible_name ][ $layout[ 'name' ] ] = $subfield[ 'name' ];
-                                    $flexible_names[ $layout[ 'name' ] ] = $subfield[ 'name' ];
-                                }
-                            }
-                        }
-
-                        $layout_index = 0;
-                        $meta_keys    = [];
-                        if ( is_array( $flexible_content_block_values ) ) {
-                            foreach( $flexible_content_block_values as $values ) {
-                                if ( array_key_exists( $values[ 'acf_fc_layout' ], $flexible_names ) ) {
-                                    $meta_keys[ $layout_index ] = $flexible_name . '_' . $layout_index . '_' . $flexible_names[ $values[ 'acf_fc_layout' ] ];
-                                }
-                                $layout_index++;
-                            }
-                        }
-                    }
-                }
-            }
-
-            /*
-             * Get post_meta
-             */
-            if ( isset( $repeater_count ) && 0 < $repeater_count ) {
-                for( $i = 0; $i < $repeater_count; $i++ ) {
-                    $repeater_field_name = $repeater_name . '_' . $i . '_' . $city_selector_name;
-                    $post_meta[]         = get_post_meta( $post_id, $repeater_field_name, true );
-                }
-
-                if ( isset( $post_meta ) && ! empty( $post_meta ) ) {
-                    foreach( $post_meta as $meta ) {
-                        $meta_values[] = array(
-                            'countryCode' => ( isset( $meta[ 'countryCode' ] ) ) ? $meta[ 'countryCode' ] : '',
-                            'stateCode'   => ( isset( $meta[ 'stateCode' ] ) ) ? $meta[ 'stateCode' ] : '',
-                            'cityName'    => ( isset( $meta[ 'cityName' ] ) ) ? $meta[ 'cityName' ] : '',
-                        );
-                    }
-                }
-            } else {
-                if ( isset( $field_name ) ) {
-                    if ( isset( $user_id ) ) {
-                        // user page
-                        $meta_values = get_user_meta( $user_id, $field_name, true );
-                    } elseif ( isset( $post_id ) ) {
-                        // single/group
-                        $post_meta = get_post_meta( $post_id, $field_name, true );
-                        if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                            $meta_values = array(
-                                'countryCode' => ( isset( $post_meta[ 'countryCode' ] ) ) ? $post_meta[ 'countryCode' ] : '',
-                                'stateCode'   => ( isset( $post_meta[ 'stateCode' ] ) ) ? $post_meta[ 'stateCode' ] : '',
-                                'cityName'    => ( isset( $post_meta[ 'cityName' ] ) ) ? $post_meta[ 'cityName' ] : '',
-                            );
-                        }
-                    }
-                } elseif ( isset( $flexible_name ) ) {
-                    // flexible content
-                    if ( isset( $meta_keys ) && is_array( $meta_keys ) && ! empty( $meta_keys ) ) {
-                        foreach( $meta_keys as $key => $value ) {
-                            $meta_values[ $key ] = get_post_meta( $post_id, $value, true );
-                        }
-                    }
-                }
-            }
-
-        }
-
-        return $meta_values;
-
     }
