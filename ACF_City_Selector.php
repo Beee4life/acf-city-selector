@@ -327,7 +327,7 @@
                                 if ( true === $delete_result ) {
                                     $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
                                 } else {
-                                    $this->acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again', 'acf-city-selector' ), $file_name ) );
+                                    $this->acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
                                 }
                             }
                         }
