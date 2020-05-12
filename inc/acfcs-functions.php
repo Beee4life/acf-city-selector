@@ -1,7 +1,7 @@
 <?php
 
     /**
-     * Create an array with states based on a country code
+     * Create an array with countries
      *
      * @param array $field
      *
@@ -33,7 +33,7 @@
 
 
     /**
-     * Create an array with states based on a country code
+     * Create an array with cities for a specific province/state
      *
      * @param array $field
      *
@@ -109,6 +109,7 @@
             }
         }
 
+        // @TODO: add transient
         if ( false != $country_code ) {
             global $wpdb;
             if ( isset( $country_code ) ) {
@@ -148,6 +149,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
+        // @TODO: add transient
         if ( false !== $country_code ) {
             global $wpdb;
             $cities = array();
