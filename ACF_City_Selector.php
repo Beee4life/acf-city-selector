@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.18
+    Version:        0.19
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -33,7 +33,7 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.18',
+                    'version'       => '0.19',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
@@ -57,6 +57,7 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_delete_countries' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_delete_all_transients' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_do_something_with_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_import_preset_countries' ) );
@@ -506,6 +507,28 @@
                                 $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $row_count, 'acf-city-selector' ), $cities ) );
                             }
                         }
+                    }
+                }
+            }
+
+
+            /*
+             * Delete transients
+             */
+            public function acfcs_delete_all_transients() {
+
+                if ( isset( $_POST[ 'acfcs_delete_transients' ] ) ) {
+                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_delete_transients' ], 'acfcs-delete-transients-nonce' ) ) {
+                        $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+
+                        return;
+                    } else {
+                        delete_transient( 'acfcs_countries' );
+                        $countries = acfcs_get_countries();
+                        foreach( $countries as $country_code => $country_name ) {
+                            delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
+                        }
+                        ACF_City_Selector::acfcs_errors()->add( 'success_transients_delete', esc_html__( 'You have successfully removed all transients.', 'acf-city-selector' ) );
                     }
                 }
             }
