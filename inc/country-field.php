@@ -111,7 +111,7 @@
                     );
                     $results = $wpdb->get_results( $sql );
                 } elseif ( false !== $country_code ) {
-                    // @TODO: create fallback
+                    // @TODO: maybe create fallback with all cities for $country_code
                 }
                 $items                     = array();
                 $items[ 0 ][ 'id' ]        = '';
