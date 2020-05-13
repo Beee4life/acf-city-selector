@@ -176,6 +176,15 @@
     text-decoration: none;
 }
 
+.acfcs .acfcs-admin-menu a.current_page {
+    font-weight: bold;
+}
+
+.acfcs .acfcs-admin-menu a.cta {
+    color:       red;
+    font-weight: bold;
+}
+
 /* help menus */
 .contextual-help-tabs {
     width: 170px;
