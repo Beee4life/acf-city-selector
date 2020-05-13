@@ -111,7 +111,6 @@
             }
         }
 
-        // @TODO: add transient
         if ( false != $country_code ) {
 
             $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
@@ -163,7 +162,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        // @TODO: add transient
+        // @TODO: MAYBE add transient
         if ( false !== $country_code ) {
             global $wpdb;
             $cities = array();
