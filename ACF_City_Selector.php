@@ -70,11 +70,13 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
 
                 // Plugin's own actions
-                add_action( 'acfcs_after_success_import',       array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_be',    array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_lu',    array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_nl',    array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_raw',   array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import',           array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_lu',        array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_nuke',      array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_raw',       array( $this, 'acfcs_delete_transients' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
@@ -216,8 +218,12 @@
             /**
              * Delete country transient
              */
-            public function acfcs_delete_transients() {
-                delete_transient( 'acfcs_countries' );
+            public function acfcs_delete_transients( $country_code ) {
+                if ( false != $country_code ) {
+                    delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
+                } else {
+                    delete_transient( 'acfcs_countries' );
+                }
             }
 
 
@@ -240,6 +246,7 @@
 
                             // file uploaded succeeded
                             $this->acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
+                            do_action( 'acfcs_after_success_file_upload' );
 
                             return;
 
@@ -326,6 +333,7 @@
                                 $delete_result = unlink( $this->settings[ 'upload_folder' ] . $file_name );
                                 if ( true === $delete_result ) {
                                     $this->acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                                    do_action( 'acfcs_after_success_file_delete' );
                                 } else {
                                     $this->acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
                                 }
@@ -496,6 +504,7 @@
                             if ( $amount > 0 ) {
                                 $row_count = count( $ids );
                                 $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $row_count, 'acf-city-selector' ), $cities ) );
+                                // @TODO: add remove transient hook
                             }
                         }
                     }
@@ -538,6 +547,7 @@
                             $result         = $wpdb->query( $query );
                             if ( $result > 0 ) {
                                 ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
+                                do_action( 'acfcs_after_success_country_remove' );
                             }
                         }
                     }
@@ -654,23 +664,33 @@
              */
             public static function acfcs_admin_menu() {
                 $admin_url      = admin_url( 'options-general.php?page=' );
-                $dashboard      = '<a href="' . $admin_url . 'acfcs-dashboard">' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
                 $countries      = false;
                 $preview        = false;
                 $search         = false;
-                $settings       = ' | <a href="' . $admin_url . 'acfcs-settings">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
                 $show_countries = true;
+                $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
+
+                if ( isset( $url_array[ 'query' ] ) ) {
+                    $acfcs_subpage = substr( $url_array[ 'query' ], 11 );
+                }
+
+                $current_page = ( isset( $acfcs_subpage ) && 'dashboard' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                $dashboard    = '<a href="' . $admin_url . 'acfcs-dashboard"' . $current_page . '>' . esc_html__( 'Dashboard', 'acf-city-selector' ) . '</a>';
+                $current_page = ( isset( $acfcs_subpage ) && 'settings' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                $settings     = ' | <a href="' . $admin_url . 'acfcs-settings"' . $current_page . '>' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>';
 
                 if ( true === acfcs_has_cities() ) {
-                    $search = ' | <a href="' . $admin_url . 'acfcs-search">' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
+                    $current_page = ( isset( $acfcs_subpage ) && 'search' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    $search = ' | <a href="' . $admin_url . 'acfcs-search"' . $current_page . '>' . esc_html__( 'Search', 'acf-city-selector' ) . '</a>';
                 }
 
                 if ( ! empty ( acfcs_check_if_files() ) ) {
-                    $preview = ' | <a href="' . $admin_url . 'acfcs-preview">' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
+                    $current_page = ( isset( $acfcs_subpage ) && 'preview' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
                 if ( true === $show_countries ) {
-                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries"><b>' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</b></a>';
+                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
                 }
 
                 $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $countries . '</p>';
