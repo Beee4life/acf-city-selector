@@ -427,8 +427,9 @@
      */
     function acfcs_get_field_settings() {
 
-        $activate  = false;
+        $activate    = false;
         $meta_values = [];
+        $settings    = [];
 
         if ( isset( $_GET[ 'user_id' ] ) ) {
             $activate = true;
