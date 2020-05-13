@@ -504,7 +504,6 @@
                             if ( $amount > 0 ) {
                                 $row_count = count( $ids );
                                 $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $row_count, 'acf-city-selector' ), $cities ) );
-                                // @TODO: add remove transient hook
                             }
                         }
                     }
