@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.18 - released 13.05.20
+0.19 - released 14.05.20
 
 <a name="description"></a>
 ### Description
@@ -214,6 +214,10 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.19
+* fixed the newly added state transient because it was overriding the countries transient
+* added an option to delete all transients, if needed
 
 0.18
 * forgot to update version + release date in readme
