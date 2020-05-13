@@ -112,7 +112,6 @@
         }
 
         if ( false != $country_code ) {
-
             $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
             if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
                 $order = 'ORDER BY state_name ASC';
@@ -135,7 +134,7 @@
                     $state_results[ $country_code . '-' . $data->state_code ] = $data->state_name;
                 }
 
-                set_transient( 'acfcs_countries', $state_results, DAY_IN_SECONDS );
+                set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
 
             } else {
                 $states = array_merge( $states, $transient );
