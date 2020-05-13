@@ -77,11 +77,13 @@
                 ORDER BY country ASC
             ' );
 
+            $country_results = [];
             foreach ( $results as $data ) {
-                $countries[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
             }
 
-            set_transient( 'acfcs_countries', $countries, DAY_IN_SECONDS );
+            set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
+            $countries = $country_results;
 
         } else {
             $countries = array_merge( $countries, $transient );
@@ -112,22 +114,28 @@
         if ( false != $country_code ) {
             $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
             if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+                $order = 'ORDER BY state_name ASC';
+                if ( 'FR' == $country_code ) {
+                    $order = "ORDER BY LENGTH(state_name), state_name";
+                }
+
                 global $wpdb;
-                if ( isset( $country_code ) ) {
-                    $sql = $wpdb->prepare( "
+                $sql = $wpdb->prepare( "
                     SELECT *
                     FROM " . $wpdb->prefix . "cities
                     WHERE country_code = '%s'
                     GROUP BY state_code
-                    ORDER BY state_name ASC",  strtoupper( $country_code )
-                    );
-                    $results = $wpdb->get_results( $sql );
+                    " . $order, strtoupper( $country_code )
+                );
+                $results = $wpdb->get_results( $sql );
 
-                    $states = array();
-                    foreach ( $results as $data ) {
-                        $states[ $country_code . '-' . $data->state_code ] = $data->state_name;
-                    }
+                $state_results = array();
+                foreach ( $results as $data ) {
+                    $state_results[ $country_code . '-' . $data->state_code ] = $data->state_name;
                 }
+
+                set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
+
             } else {
                 $states = array_merge( $states, $transient );
             }
@@ -153,7 +161,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        // @TODO: add transient
+        // @TODO: MAYBE add transient
         if ( false !== $country_code ) {
             global $wpdb;
             $cities = array();

@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.16 - released 12.05.20
+0.19 - released 14.05.20
 
 <a name="description"></a>
 ### Description
@@ -144,19 +144,12 @@ There will be several country packages (csv files) available (soon), especially 
 
 There are a few actions available to add your own custom actions. 
 
-* acfcs_after_success_verify - hooks after successful csv verification
-* acfcs_after_success_import - hooks after successful csv import
-* acfcs_after_success_import_raw - hooks after successful raw csv import
-* acfcs_after_success_import_be - hooks after importing preset country Belgium
-* acfcs_after_success_import_lu - hooks after importing preset country Luxembourg
-* acfcs_after_success_import_nl - hooks after importing preset country Netherlands
-* acfcs_after_success_nuke - hooks after truncating the table
-
+Find all actions [here](https://acfcs.berryplasman.com/documentation/hooks/#actions).
 
 <a name="filters"></a>
 ### Filters
 
-Find all hooks [here](https://acfcs.berryplasman.com/documentation/hooks/).
+Find all filters [here](https://acfcs.berryplasman.com/documentation/hooks/#filters).
 
 <a name="functions"></a>
 ### Functions
@@ -221,6 +214,23 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.19
+* fixed the newly added state transient because it was overriding the countries transient
+* added an option to delete all transients, if needed
+
+0.18
+* forgot to update version + release date in readme
+
+0.17
+* changed typo in Dutch translation
+* added 'bolding' to current page in admin menu
+* added a transient for states per country to speed up state retrieval
+* added more hooks 'to hook into'
+    * acfcs_after_success_country_remove
+    * acfcs_after_success_file_upload
+    * acfcs_after_success_file_delete
+    * acfcs_after_success_import_nuke
 
 0.16
 * made the field work in all field types
