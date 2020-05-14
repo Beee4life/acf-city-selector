@@ -37,12 +37,7 @@
              */
             if (countries.length) {
                 countries.on('change', function () {
-
-                    // @TODO: check if state field is hidden
-                    // console.log(city_selector_vars);
-                    var which_fields = city_selector_vars[ 'which_fields' ];
-                    // console.log(which_fields);
-
+                    const response_cities = []
                     const response_states = []
                     var $this             = $(this);
                     var country_code      = $this.val();
@@ -51,54 +46,71 @@
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
+                    var which_fields      = 'all';
 
-                    if ( $(which_fields + ':contains("city")') ) {
-                        // don't do state stuff
-                        console.log('no state stuff');
-                    } else if ( $(which_fields + ':contains("state")') ) {
-                        // don't do city stuff
-                        console.log('no city stuff');
+                    if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                        var which_fields  = city_selector_vars[ 'which_fields' ];
                     }
 
-                    const d               = get_states(country_code);
-                    response_states.push(d)
+                    if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
+                        const d = get_states(country_code);
+                        response_states.push(d)
 
-                    Promise.all(response_states).then(function(jsonResults) {
-                        for (i = 0; i < jsonResults.length; i++) {
-                            var obj          = JSON.parse(jsonResults[i]);
-                            var len          = obj.length;
-                            var $stateValues = '';
+                        Promise.all(response_states).then(function(jsonResults) {
+                            for (i = 0; i < jsonResults.length; i++) {
+                                var obj          = JSON.parse(jsonResults[i]);
+                                var len          = obj.length;
+                                var $stateValues = '';
 
-                            changed_city.empty();
-                            changed_city.fadeIn();
-                            changed_state.empty();
-                            changed_state.fadeIn();
-                            for (j = 0; j < len; j++) {
-                                $selected = '';
-                                var state = obj[j];
-                                $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
+                                changed_city.empty();
+                                changed_city.fadeIn();
+                                changed_state.empty();
+                                changed_state.fadeIn();
+                                for (j = 0; j < len; j++) {
+                                    $selected = '';
+                                    var state = obj[j];
+                                    $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
+                                }
+                                changed_state.append($stateValues);
+                                // this string 'comes' from fields/acf-city-selector-v5.php
+                                var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
+                                $select_city = '<option value="">' + i18n_select_city + '</option>';
+                                changed_city.append($select_city);
                             }
-                            changed_state.append($stateValues);
-                            // this string 'comes' from fields/acf-city-selector-v5.php
-                            var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
-                            $select_city = '<option value="">' + i18n_select_city + '</option>';
-                            changed_city.append($select_city);
-                        }
-                    });
+                        });
+
+                    } else if ( jQuery.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
+                        const d = get_cities(country_code);
+                        response_cities.push(d)
+
+                        Promise.all(response_cities).then(function(jsonResults) {
+                            for (i = 0; i < jsonResults.length; i++) {
+                                var obj         = JSON.parse(jsonResults);
+                                var len         = obj.length;
+                                var $cityValues = '';
+
+                                changed_city.empty();
+                                changed_city.fadeIn();
+                                for (j = 0; j < len; j++) {
+                                    var city = obj[j];
+                                    $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                }
+                                changed_city.append($cityValues);
+                            }
+                        });
+                    }
+
                 });
             }
 
             // if there are any selects with name*=stateCode
             if (state.length) {
                 state.on('change', function () {
-
-                    // @TODO: check if city field is hidden
-
                     const response_cities = []
                     var $this = $(this);
                     var state_code = $this.val();
                     var state_field_id = $this.attr('id');
-                    var city_field_id = state_field_id.replace( 'stateCode', 'cityName' );
+                    var city_field_id = state_field_id.replace('stateCode', 'cityName');
                     var changed_city = $('select[id="' + city_field_id + '"]');
                     const d = get_cities(state_code);
                     response_cities.push(d)
@@ -113,7 +125,7 @@
                             changed_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
-                                $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                $cityValues += '<option value="' + city.id + '">' + city.city_name + '</option>';
                             }
                             changed_city.append($cityValues);
                         }
