@@ -44,14 +44,12 @@
             if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                        error_log('single field');
                         // @TODO: look into multiple (single) fields
                         $settings[ 'default_country' ] = $field[ 'default_country' ];
                         $settings[ 'show_labels' ]     = $field[ 'show_labels' ] ;
                         $settings[ 'which_fields' ]    = $field[ 'which_fields' ];
                         break;
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
-                        error_log('repeater field');
                         // @TODO: look into multiple repeaters
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                         if ( false !== $array_key ) {
@@ -61,7 +59,6 @@
                             break;
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                        error_log('group field');
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                         // @TODO: look into multiple fields - array_search returns first instance only
                         if ( false !== $array_key ) {
@@ -70,7 +67,6 @@
                             $settings[ 'which_fields' ]    = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
                             break;
                         } else {
-                            // check for acf first
                             $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                             if ( false === $array_key ) {
                                 $array_key = array_search( 'repeater', array_column( $field[ 'sub_fields' ], 'type' ) );
