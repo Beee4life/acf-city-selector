@@ -265,10 +265,10 @@
      *
      * @return array|bool
      */
-    function acfcs_csv_to_array( $file_name, $delimiter = ",", $verify = false ) {
+    function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
 
-        $csv_array   = [];
         $empty_array = false;
+        $csv_array   = [];
         $new_array   = [];
         if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
@@ -294,7 +294,9 @@
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html( __( 'There are too many columns on line %d. %s', 'acf-city-selector' ) ), $line_number, $error_message ) );
                     }
                     // delete file
-                    unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                    if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {
+                        unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                    }
 
                 }
 
@@ -318,7 +320,7 @@
              * Don't add data if there are any errors. This to prevent rows which had no error from outputting
              * on the preview page.
              */
-            if ( ! empty( $new_array ) && false == $empty_array ) {
+            if ( ! empty( $new_array ) && false === $empty_array ) {
                 $csv_array[ 'data' ] = array_values( $new_array );
             }
         }
@@ -457,25 +459,17 @@
              */
             if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
 
-                // echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                         $settings[ 'which_fields' ] = $field[ 'which_fields' ];
                         break;
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
-                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                        // echo '<pre>'; var_dump($array_key); echo '</pre>'; exit;
                         if ( false !== $array_key ) {
-                            // $city_selector_name = $field[ 'sub_fields' ][ $array_key ][ 'name' ];
                             $settings[ 'which_fields' ] = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
-                            // $repeater_name      = $field[ 'name' ];
-                            // $repeater_count     = get_post_meta( $post_id, $repeater_name, true );
                             break;
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                         // get acfcs field_names
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                         if ( false !== $array_key ) {
@@ -483,7 +477,6 @@
                             break;
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                        // echo '<pre>'; var_dump($field); echo '</pre>'; exit;
                         $layouts = $field[ 'layouts' ];
 
                         foreach( $layouts as $layout ) {
@@ -498,7 +491,6 @@
                                 }
                             }
                         }
-                        // echo '<pre>'; var_dump($flexible_settings); echo '</pre>'; exit;
                     }
                 }
             }
