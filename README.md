@@ -193,6 +193,7 @@ The plugin works in the following situations:
 
 The plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
+* as a clone field
 * on taxonomy pages
 * on settings pages
 * most front-end usage (except single use)
