@@ -453,6 +453,7 @@
             } elseif ( isset( $post_id ) && false !== $post_id ) {
                 $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
             }
+            echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
 
             /*
              * Get the field['name'] for the City Selector field
