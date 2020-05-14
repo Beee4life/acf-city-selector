@@ -73,22 +73,24 @@
         if ( isset( $_POST[ 'state_code' ] ) ) {
             $country_code = false;
             $state_code   = false;
-            if ( 5 <= strlen( $_POST[ 'state_code' ] ) ) {
+            if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
-            } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
-                // if 2 == strlen( $_POST[ 'state_code' ] ) then it's a country code
-                // get all cities for $_POST[ 'state_code' ]
-                $country_code = $_POST[ 'state_code' ];
-                $state_code   = false;
             } elseif ( strpos( $_POST[ 'state_code' ], 'FR-' ) !== false ) {
                 $country_code = substr( $_POST[ 'state_code' ], 0, 2 );
                 $state_code   = substr( $_POST[ 'state_code' ], 3 );
+            } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
+                // if 2 == strlen( $_POST[ 'state_code' ] ) then it's a country code
+                $country_code = $_POST[ 'state_code' ];
+                $state_code   = false;
+            } else {
+                $codes        = explode( '-', $_POST[ 'state_code' ] );
+                $country_code = $codes[ 0 ];
+                $state_code   = $codes[ 1 ];
             }
 
             global $wpdb;
-
             // @TODO: look into when/why it's '00'
             if ( $state_code == '00' ) {
                 error_log("state_code == '00'");
