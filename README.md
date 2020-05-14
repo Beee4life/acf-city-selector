@@ -207,7 +207,7 @@ This is very random and unpredictable.
 
 - [ ] Add explanation about how the field validation works 
 - [ ] Add select2 to dropdowns (including a search, like with a post object field) 
-- [ ] Select which fields to use; all, country + state or country + city or state  city 
+- [X] Select which fields to use; all, country + state or country + city or state  city 
 
 <a name="credit"></a>
 ### Credit
@@ -221,7 +221,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.21
 * fixed error in verification on preview page + added page back
-* added option to select which fields to use
+* added option to select which fields to use (all/country only/country + state/country + city)
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia
