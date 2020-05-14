@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.20 - released 14.05.20
+0.21 - released xx.05.20
 
 <a name="description"></a>
 ### Description
@@ -214,6 +214,9 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 <a name="changelog"></a>
 ### Changelog
+
+0.21
+* fixed error in verification on preview page + added page back
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia
