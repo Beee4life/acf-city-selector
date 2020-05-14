@@ -93,7 +93,11 @@
                                 changed_city.fadeIn();
                                 for (j = 0; j < len; j++) {
                                     var city = obj[j];
-                                    $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                    if ( j === 0 ) {
+                                        $cityValues += '<option value="">' + city.city_name + '</option>';
+                                    } else {
+                                        $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                    }
                                 }
                                 changed_city.append($cityValues);
                             }
@@ -106,6 +110,9 @@
             // if there are any selects with name*=stateCode
             if (state.length) {
                 state.on('change', function () {
+
+                    // @TODO: add if for when city isn't needed
+
                     const response_cities = []
                     var $this = $(this);
                     var state_code = $this.val();
@@ -125,7 +132,11 @@
                             changed_city.fadeIn();
                             for (j = 0; j < len; j++) {
                                 var city = obj[j];
-                                $cityValues += '<option value="' + city.id + '">' + city.city_name + '</option>';
+                                if ( j === 0 ) {
+                                    $cityValues += '<option value="">' + city.city_name + '</option>';
+                                } else {
+                                    $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                }
                             }
                             changed_city.append($cityValues);
                         }
