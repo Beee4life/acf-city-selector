@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.19
+    Version:        0.20
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -33,7 +33,7 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.19',
+                    'version'       => '0.20',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
@@ -670,8 +670,8 @@
              */
             public function acfcs_meta_links( $links, $file ) {
 
-                $visit_plugin_link = array_pop( $links );
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
+                    $visit_plugin_link            = array_pop( $links );
                     $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
                     $new_links[]                  = $visit_plugin_link;
                     $links                        = array_merge( $links, $new_links );
@@ -707,8 +707,8 @@
                 }
 
                 if ( ! empty ( acfcs_check_if_files() ) ) {
-                    $current_page = ( isset( $acfcs_subpage ) && 'preview' == $acfcs_subpage ) ? ' class="current_page"' : false;
-                    $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
+                    // $current_page = ( isset( $acfcs_subpage ) && 'preview' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    // $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
                 if ( true === $show_countries ) {
@@ -740,8 +740,8 @@
                 include( 'inc/acfcs-dashboard.php' );
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
-                include( 'inc/acfcs-preview.php' );
-                add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
+                // include( 'inc/acfcs-preview.php' );
+                // add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
 
                 include( 'inc/acfcs-settings.php' );
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
