@@ -168,6 +168,9 @@
             $cities = array();
             $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
             if ( $country_code && $state_code ) {
+                if ( 3 < strlen( $state_code ) ) {
+                    $state_code = substr( $state_code, 3 );
+                }
                 $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
             } elseif ( $country_code ) {
                 $query .= " WHERE country_code = '{$country_code}'";
@@ -177,7 +180,7 @@
 
             $city_counter = 1;
             foreach ( $results as $data ) {
-                if ( 1 == $city_counter ) {
+                if ( 1 == $city_counter || __( 'Select a city', 'acf-city-selector' ) == $data->city_name ) {
                     $cities[] = $data->city_name;
                 } else {
                     $cities[ $data->city_name ] = $data->city_name;
