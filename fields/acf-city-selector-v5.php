@@ -92,6 +92,7 @@
 
                 $select_fields = array(
                     'all'           => __( 'All [default]', 'acf-city-selector' ),
+                    'country_only'  => __( 'Country only', 'acf-city-selector' ),
                     'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
                     'country_city'  => __( 'Country + City', 'acf-city-selector' ),
                 );
@@ -130,7 +131,7 @@
 
                 if ( is_array( $field[ 'value' ] ) && ! empty( $field[ 'value' ] ) ) {
                     $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? ( false !== $selected_country ) ? $selected_country . '-' . $field[ 'value' ][ 'stateCode' ] : $field[ 'value' ][ 'stateCode' ] : false;
+                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
                     $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
                 }
 
@@ -140,17 +141,25 @@
                     $states         = acfcs_populate_state_select( $default_country, $field );
                     $prefill_states = array_merge( $first_option, $states );
                 } elseif ( false != $selected_country ) {
-                    $country_state_code = $field[ 'value' ][ 'stateCode' ];
-                    if ( false !== $selected_country ) {
-                        $prefill_states = acfcs_populate_state_select( $selected_country, $field );
-                    }
-                    if ( $country_state_code ) {
-                        $state_code = $country_state_code;
-                        if ( 3 < strlen( $country_state_code ) ) {
-                            $state_code = substr( $country_state_code, 3, 3 );
+                    $which_fields = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : false;
+
+                    // check if cities and/or states are needed
+                    if ( 'all' == $which_fields ) {
+                        if ( false !== $selected_country ) {
+                            $prefill_states = acfcs_populate_state_select( $selected_country, $field );
+                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
+                            $selected_state = $selected_country . '-' . $selected_state;
                         }
-                        $prefill_cities = acfcs_populate_city_select( $selected_country, $state_code, $field );
-                    }
+                    } elseif ( 'country_state' == $which_fields ) {
+                        if ( false !== $selected_country ) {
+                            $prefill_states = acfcs_populate_state_select( $selected_country, $field );
+                            $selected_state = $selected_country . '-' . $selected_state;
+                        }
+                    } elseif ( 'country_city' == $which_fields ) {
+                        if ( false !== $selected_country ) {
+                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
+                        }
+                   }
                 }
                 ?>
                 <div class="dropdown-box cs-countries">
@@ -256,27 +265,28 @@
                 wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-city-selector-js' );
 
-                // @TODO: extend to taxonomy
-                if ( is_singular() || defined( 'IS_PROFILE_PAGE' ) ) {
-                    // check field settings
-                    $all_info = acfcs_get_field_settings();
+                // check field settings
+                $all_info = acfcs_get_field_settings();
 
-                    if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth($all_info) ) {
-                        $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
-                        $load_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : false;
-                    } else {
-                        // @TODO: flexible content + 1 single field
-                        error_log( 'Make a fix for post: ' . get_the_ID() );
-                    }
-                    $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
-
-                    if ( current_user_can( 'manage_options' ) ) {
-                        if ( empty( $all_info ) && 'acf-field-group' != get_post_type( get_the_ID() ) ) {
-                            error_log( 'empty city_selector info' );
+                if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
+                    $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
+                    $load_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : false;
+                } else {
+                    // @TODO: flexible content + 1 single field (?) [different array depth]
+                    global $post;
+                    if ( 91 == $post->post_parent && 95 != $post->ID ) {
+                        if ( 'acf-field-group' != get_post_type( get_the_ID() ) ) {
+                            error_log( 'Make a fix for post: ' . get_the_ID() );
+                            if ( current_user_can( 'manage_options' ) ) {
+                                error_log( 'empty city_selector info' );
+                            }
                         }
                     }
-                    wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $load_vars );
+
                 }
+                $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
+
+                wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $load_vars );
 
             }
 
@@ -327,20 +337,41 @@
             */
             function update_value( $value, $post_id, $field ) {
 
-                // if nothing is selected, set value to false
-                if ( isset( $fields[ 'which_fields' ] ) && 'all' == $fields[ 'which_fields' ] || ! isset( $fields[ 'which_fields' ] ) ) {
-                    if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
-                        // $value = false;
-                    } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
-                        // $value = false;
+                $required = $field[ 'required' ];
+                if ( 0 == $required ) {
+                    if ( isset( $fields[ 'which_fields' ] ) && 'all' == $fields[ 'which_fields' ] || ! isset( $fields[ 'which_fields' ] ) ) {
+                        // if nothing is selected, set value to false
+                        if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_state' == $fields[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_city' == $fields[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        }
                     }
-                } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_state' == $fields[ 'which_fields' ] ) {
-                    if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) ) {
-                        // $value = false;
-                    }
-                } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_city' == $fields[ 'which_fields' ] ) {
-                    if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'cityName' ] ) ) {
-                        // $value = false;
+                } else {
+                    // field == required
+                    if ( isset( $fields[ 'which_fields' ] ) && 'all' == $fields[ 'which_fields' ] || ! isset( $fields[ 'which_fields' ] ) ) {
+                        // if nothing is selected, set value to false
+                        if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        } elseif ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_state' == $fields[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_city' == $fields[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'cityName' ] ) ) {
+                            $value = false;
+                        }
                     }
                 }
 
@@ -366,6 +397,7 @@
                 $no_city = __( "You didn't select a city.", 'acf-city-selector' );
                 if ( 1 == $field[ 'required' ] ) {
                     $nothing       = __( "You didn't select anything.", 'acf-city-selector' );
+                    $no_country    = __( "You didn't select a country.", 'acf-city-selector' );
                     $no_state      = __( "You didn't select a state.", 'acf-city-selector' );
                     $no_state_city = __( "You didn't select a state and city.", 'acf-city-selector' );
 
@@ -376,6 +408,10 @@
                             $valid = $no_state_city;
                         } elseif ( empty( $value[ 'cityName' ] ) ) {
                             $valid = $no_city;
+                        }
+                    } elseif ( 'country_only' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) ) {
+                            $valid = $no_country;
                         }
                     } elseif ( 'country_state' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) ) {
@@ -391,7 +427,7 @@
                         }
                     }
                 } else {
-                    // field not required but we don't want to save empty values
+                    // @TODO: field not required but we don't want to save empty values
                 }
 
                 return $valid;
