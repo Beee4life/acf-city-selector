@@ -1,5 +1,6 @@
 <?php
-
+    // function to check for field values
+    include( 'acfcs-field-settings.php' );
     /**
      * Create an array with countries
      *
@@ -415,89 +416,23 @@
     }
 
     /**
-     * Return the field settings for a group (for use in js)
-     * @TODO: remove
+     * Check depth of array
+     * @param $array
      *
-     * @return array
+     * @return int|mixed
      */
-    function acfcs_get_field_settings() {
+    function acfcs_check_array_depth( $array ) {
+        $max_depth = 1;
 
-        $activate    = false;
-        $meta_values = [];
-        $settings    = [];
+        foreach( $array as $value ) {
+            if ( is_array( $value ) ) {
+                $depth = acfcs_check_array_depth( $value ) + 1;
 
-        if ( isset( $_GET[ 'user_id' ] ) ) {
-            $activate = true;
-            $user_id  = $_GET[ 'user_id' ];
-        } elseif ( isset( $_GET[ 'post' ] ) ) {
-            $post_id = $_GET[ 'post' ];
-            if ( 'acf-field-group' != get_post_type( $post_id ) ) {
-                $activate = true;
-            }
-        } elseif ( isset( $_GET[ 'id' ] ) ) {
-            // this is for my own project
-            $activate = true;
-            $post_id  = $_GET[ 'id' ];
-        } else {
-            $activate = true;
-            if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                $user_id = get_current_user_id();
-            } else {
-                $post_id = get_the_ID();
-            }
-        }
-
-        if ( false != $activate ) {
-            if ( isset( $user_id ) && false !== $user_id ) {
-                $fields = get_field_objects( 'user_' . $user_id );
-            } elseif ( isset( $post_id ) && false !== $post_id ) {
-                $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
-            }
-            echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
-
-            /*
-             * Get the field['name'] for the City Selector field
-             */
-            if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
-
-                foreach( $fields as $field ) {
-                    if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                        $settings[ 'which_fields' ] = $field[ 'which_fields' ];
-                        break;
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
-                        $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                        if ( false !== $array_key ) {
-                            $settings[ 'which_fields' ] = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
-                            break;
-                        }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
-                        // get acfcs field_names
-                        $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
-                        if ( false !== $array_key ) {
-                            $settings[ 'which_fields' ] = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
-                            break;
-                        }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
-                        $layouts = $field[ 'layouts' ];
-
-                        foreach( $layouts as $layout ) {
-                            $sub_fields = $layout[ 'sub_fields' ];
-                            foreach( $sub_fields as $subfield ) {
-                                // if type == acfcs, add name to array
-                                if ( 'acf_city_selector' == $subfield[ 'type' ] ) {
-                                    $settings[ $layout[ 'name' ] ][ 'default_country' ] = $subfield[ 'default_country' ];
-                                    $settings[ $layout[ 'name' ] ][ 'show_labels' ]     = $subfield[ 'show_labels' ];
-                                    $settings[ $layout[ 'name' ] ][ 'which_fields' ]    = $subfield[ 'which_fields' ];
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                if ( $depth > $max_depth ) {
+                    $max_depth = $depth;
                 }
             }
-
         }
 
-        return $settings;
-
+        return $max_depth;
     }
