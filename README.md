@@ -193,6 +193,8 @@ The plugin works in the following situations:
 
 The plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
+* on taxonomy pages
+* on settings pages
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
@@ -202,6 +204,7 @@ This is very random and unpredictable.
 <a name="todo"></a>
 ### TODO
 
+- [ ] Add explanation about how the field validation works 
 - [ ] Add select2 to dropdowns (including a search, like with a post object field) 
 - [ ] Select which fields to use; all, country + state or country + city or state  city 
 
@@ -217,6 +220,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.21
 * fixed error in verification on preview page + added page back
+* added option to select which fields to use
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia
