@@ -26,6 +26,7 @@
             if ( defined( 'IS_PROFILE_PAGE' ) ) {
                 $user_id = get_current_user_id();
             } else {
+                // @TODO: add IF for taxonomy
                 $post_id = get_the_ID();
             }
         }
@@ -36,7 +37,6 @@
             } elseif ( isset( $post_id ) && false !== $post_id ) {
                 $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
             }
-            // echo '<pre>'; var_dump($fields); echo '</pre>'; exit;
 
             /*
              * Get the field settings
@@ -44,7 +44,7 @@
             if ( isset( $fields ) && is_array( $fields ) && count( $fields ) > 0 ) {
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                        // @TODO: look into multiple (single) fields
+                        // @TODO: check for multiple (single) fields
                         $settings[ 'default_country' ] = $field[ 'default_country' ];
                         $settings[ 'show_labels' ]     = $field[ 'show_labels' ] ;
                         $settings[ 'which_fields' ]    = $field[ 'which_fields' ];
@@ -127,7 +127,9 @@
                             }
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'clone' ) {
+                        // @TODO: fix clone
                     } else {
+                        // TODO: maybe fallback ?
                     }
                 }
             }
