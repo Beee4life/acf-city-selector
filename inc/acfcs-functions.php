@@ -86,7 +86,7 @@
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
             $countries = array_merge( $countries, $country_results );
 
-        } else {
+        } elseif ( is_array( $transient ) ) {
             $countries = array_merge( $countries, $transient );
         }
 
@@ -435,4 +435,36 @@
         }
 
         return $max_depth;
+    }
+
+
+    /**
+     * Get country info for debug
+     *
+     * @return array
+     */
+    function acfcs_get_country_info() {
+
+        global $wpdb;
+        $results = $wpdb->get_results( '
+                SELECT country_code FROM ' . $wpdb->prefix . 'cities
+                GROUP BY country_code
+                ORDER BY country_code ASC
+            ' );
+
+        $acfcs_info = [];
+        foreach ( $results as $data ) {
+            $country_code                = $data->country_code;
+            $results                     = $wpdb->get_results( '
+                SELECT * FROM ' . $wpdb->prefix . 'cities
+                WHERE country_code = \'' . $country_code . '\'
+                ORDER BY country_code ASC
+            ' );
+            $acfcs_info[ $country_code ] = [
+                'count' => count( $results ),
+                'name'  => acfcs_get_country_name( $country_code ),
+            ];
+        }
+
+        return $acfcs_info;
     }
