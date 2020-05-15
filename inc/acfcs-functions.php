@@ -109,7 +109,7 @@
             if ( false != $show_labels ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' ); // when does this show
             }
         }
 
@@ -133,7 +133,7 @@
 
                 $state_results = array();
                 foreach ( $results as $data ) {
-                    $state_results[ $country_code . '-' . $data->state_code ] = $data->state_name;
+                    $state_results[ $country_code . '-' . $data->state_code ] = __( $data->state_name, 'acf_city_selector' );
                 }
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
@@ -157,7 +157,7 @@
     function acfcs_get_cities( $country_code = false, $state_code = false, $show_labels = false ) {
 
         $cities = [];
-        if ( false != $show_labels ) {
+        if ( 0 != $show_labels ) {
             $cities[ '' ] = '-';
         } else {
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
@@ -166,7 +166,6 @@
         // @TODO: MAYBE add transient
         if ( false !== $country_code ) {
             global $wpdb;
-            $cities = array();
             $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
             if ( $country_code && $state_code ) {
                 if ( 3 < strlen( $state_code ) ) {
@@ -181,12 +180,11 @@
 
             $city_counter = 1;
             foreach ( $results as $data ) {
-                if ( 1 == $city_counter || __( 'Select a city', 'acf-city-selector' ) == $data->city_name ) {
-                    $cities[] = $data->city_name;
-                } else {
-                    $cities[ $data->city_name ] = $data->city_name;
-                }
+                $city_results[ $data->city_name ] = __( $data->city_name, 'acf_city_selector' );
                 $city_counter++;
+            }
+            if ( isset( $city_results ) ) {
+                $cities = array_merge( $cities, $city_results );
             }
         }
 
