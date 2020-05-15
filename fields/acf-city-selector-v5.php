@@ -145,8 +145,9 @@
                     // check if cities and/or states are needed
                     if ( 'all' == $which_fields ) {
                         if ( false !== $selected_country ) {
-                            $prefill_states = acfcs_populate_state_select( $selected_country, $field );
-                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
+                            $setting[ 'show_labels' ] = 0;
+                            $prefill_states = acfcs_populate_state_select( $selected_country, $setting );
+                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $setting );
                             $selected_state = $selected_country . '-' . $selected_state;
                         }
                     } elseif ( 'country_state' == $which_fields ) {
