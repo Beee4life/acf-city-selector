@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
 "POT-Creation-Date: 2020-05-15 02:25+0200\n"
-"PO-Revision-Date: 2020-05-15 02:27+0200\n"
+"PO-Revision-Date: 2020-05-15 02:31+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -207,7 +207,7 @@ msgstr "Default land"
 
 #: fields/acf-city-selector-v5.php:93
 msgid "All [default]"
-msgstr ""
+msgstr "Alle velden (standaard)"
 
 #: fields/acf-city-selector-v5.php:94
 msgid "Country only"
@@ -223,11 +223,11 @@ msgstr "Land + Stad"
 
 #: fields/acf-city-selector-v5.php:100
 msgid "Limit which fields are used"
-msgstr ""
+msgstr "Beperk welke velden gebruikt worden"
 
 #: fields/acf-city-selector-v5.php:101
 msgid "Fields to use"
-msgstr ""
+msgstr "Velden om te gebruiken"
 
 #: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:196
 #: fields/acf-city-selector-v5.php:200 inc/acfcs-search.php:152
