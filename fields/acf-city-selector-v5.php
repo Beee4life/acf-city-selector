@@ -274,10 +274,12 @@
                 } else {
                     // @TODO: create fallback for other array depths (flexible content + 1 single field ?)
                     global $post;
-                    if ( 91 == $post->post_parent && 95 != $post->ID ) {
-                        // temp log
-                        if ( 'acf-field-group' != get_post_type( get_the_ID() ) ) {
-                            error_log( 'Make a fix for post: ' . get_the_ID() );
+                    if ( isset( $post->post_parent ) && isset( $post->ID ) ) {
+                        if ( 91 == $post->post_parent && 95 != $post->ID ) {
+                            // temp log
+                            if ( 'acf-field-group' != get_post_type( get_the_ID() ) ) {
+                                error_log( 'Make a fix for post: ' . get_the_ID() );
+                            }
                         }
                     }
                 }
