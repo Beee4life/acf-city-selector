@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-15 02:25+0200\n"
+"POT-Creation-Date: 2020-05-15 02:49+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -176,8 +176,8 @@ msgid "Select city"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:223
-#: fields/acf-city-selector-v5.php:227 inc/acfcs-functions.php:162
-#: inc/acfcs-functions.php:183 inc/country-field.php:125
+#: fields/acf-city-selector-v5.php:227 inc/acfcs-functions.php:163
+#: inc/acfcs-functions.php:184 inc/country-field.php:125
 msgid "Select a city"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid "Default country"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:93
-msgid "All [default]"
+msgid "All fields [default]"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:94
@@ -373,35 +373,35 @@ msgstr ""
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" rel=\"noopener\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
 
-#: inc/acfcs-functions.php:111
+#: inc/acfcs-functions.php:112
 msgid "Select a country first"
 msgstr ""
 
-#: inc/acfcs-functions.php:288 inc/acfcs-functions.php:293
+#: inc/acfcs-functions.php:289 inc/acfcs-functions.php:294
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr ""
 
-#: inc/acfcs-functions.php:289
+#: inc/acfcs-functions.php:290
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:298
+#: inc/acfcs-functions.php:299
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:366
+#: inc/acfcs-functions.php:367
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:371
+#: inc/acfcs-functions.php:372
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:382
+#: inc/acfcs-functions.php:383
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""

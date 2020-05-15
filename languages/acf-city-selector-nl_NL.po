@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-15 02:25+0200\n"
-"PO-Revision-Date: 2020-05-15 02:31+0200\n"
+"POT-Creation-Date: 2020-05-15 02:49+0200\n"
+"PO-Revision-Date: 2020-05-15 02:49+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -188,8 +188,8 @@ msgid "Select city"
 msgstr "Selecteer een stad"
 
 #: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:223
-#: fields/acf-city-selector-v5.php:227 inc/acfcs-functions.php:162
-#: inc/acfcs-functions.php:183 inc/country-field.php:125
+#: fields/acf-city-selector-v5.php:227 inc/acfcs-functions.php:163
+#: inc/acfcs-functions.php:184 inc/country-field.php:125
 msgid "Select a city"
 msgstr "Selecteer een stad"
 
@@ -206,8 +206,8 @@ msgid "Default country"
 msgstr "Default land"
 
 #: fields/acf-city-selector-v5.php:93
-msgid "All [default]"
-msgstr "Alle velden (standaard)"
+msgid "All fields [default]"
+msgstr "Alle velden [standaard]"
 
 #: fields/acf-city-selector-v5.php:94
 msgid "Country only"
@@ -415,35 +415,35 @@ msgstr ""
 "\"_blank\">kleine donatie</a> overweegt. Dit motiveert mij weer om de plugin "
 "te verbeteren in mijn vrije tijd."
 
-#: inc/acfcs-functions.php:111
+#: inc/acfcs-functions.php:112
 msgid "Select a country first"
 msgstr "Selecteer eerst een land"
 
-#: inc/acfcs-functions.php:288 inc/acfcs-functions.php:293
+#: inc/acfcs-functions.php:289 inc/acfcs-functions.php:294
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr "Aangezien je bestand fouten bevat, is deze verwijderd."
 
-#: inc/acfcs-functions.php:289
+#: inc/acfcs-functions.php:290
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr "Er zijn te weinig kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:298
+#: inc/acfcs-functions.php:299
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr "Er zijn te veel kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:366
+#: inc/acfcs-functions.php:367
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr "Er zijn te weinig kolommen op regel %d."
 
-#: inc/acfcs-functions.php:371
+#: inc/acfcs-functions.php:372
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr "Er zijn te veel kolommen op regel %d."
 
-#: inc/acfcs-functions.php:382
+#: inc/acfcs-functions.php:383
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr "De lengte van de land afkorting op regel %d is incorrect."
