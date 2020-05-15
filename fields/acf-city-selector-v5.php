@@ -83,7 +83,7 @@
                 $countries                   = acfcs_populate_country_select( $field_vars );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
-                    'instructions' => esc_html__( 'Pre-select a country when creating a new post or adding a new row in a repeater or a layout in flexible content/', 'acf-city-selector' ),
+                    'instructions' => esc_html__( 'Select a default country for a new field', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Default country', 'acf-city-selector' ),
                     'name'         => 'default_country',
                     'type'         => 'select',

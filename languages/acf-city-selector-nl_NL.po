@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-15 02:49+0200\n"
-"PO-Revision-Date: 2020-05-15 02:49+0200\n"
+"POT-Creation-Date: 2020-05-15 20:08+0200\n"
+"PO-Revision-Date: 2020-05-15 20:09+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -187,19 +187,19 @@ msgstr "Selecteer een provincie/staat"
 msgid "Select city"
 msgstr "Selecteer een stad"
 
-#: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:223
-#: fields/acf-city-selector-v5.php:227 inc/acfcs-functions.php:163
-#: inc/acfcs-functions.php:184 inc/country-field.php:125
+#: fields/acf-city-selector-v5.php:36
+msgid "Choice"
+msgstr "Keuze"
+
+#: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:224
+#: fields/acf-city-selector-v5.php:228 inc/acfcs-functions.php:162
+#: inc/country-field.php:112
 msgid "Select a city"
 msgstr "Selecteer een stad"
 
 #: fields/acf-city-selector-v5.php:86
-msgid ""
-"Pre-select a default country when creating a new post or adding a new row in "
-"a repeater"
-msgstr ""
-"Selecteer een 'standaard land' wanneer je een nieuwe post maakt of een "
-"nieuwe regel toevoegt in een repeater"
+msgid "Select a default country for a new field"
+msgstr "Selecteer een standaard land voor een nieuw veld"
 
 #: fields/acf-city-selector-v5.php:87
 msgid "Default country"
@@ -222,41 +222,41 @@ msgid "Country + City"
 msgstr "Land + Stad"
 
 #: fields/acf-city-selector-v5.php:100
-msgid "Limit which fields are used"
-msgstr "Beperk welke velden gebruikt worden"
+msgid "Select which fields are used"
+msgstr "Kies welke velden gebruikt worden"
 
 #: fields/acf-city-selector-v5.php:101
 msgid "Fields to use"
 msgstr "Velden om te gebruiken"
 
-#: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:196
-#: fields/acf-city-selector-v5.php:200 inc/acfcs-search.php:152
+#: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:197
+#: fields/acf-city-selector-v5.php:201 inc/acfcs-search.php:152
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
-#: fields/acf-city-selector-v5.php:167 fields/acf-city-selector-v5.php:171
+#: fields/acf-city-selector-v5.php:168 fields/acf-city-selector-v5.php:172
 #: inc/acfcs-functions.php:68 inc/acfcs-search.php:135
 msgid "Select a country"
 msgstr "Selecteer een land"
 
-#: fields/acf-city-selector-v5.php:400
+#: fields/acf-city-selector-v5.php:403
 msgid "You didn't select a city."
 msgstr "Je hebt geen stad gekozen."
 
-#: fields/acf-city-selector-v5.php:402
+#: fields/acf-city-selector-v5.php:405
 msgid "You didn't select anything."
 msgstr "Je hebt niks geselecteerd."
 
-#: fields/acf-city-selector-v5.php:403
+#: fields/acf-city-selector-v5.php:406
 msgid "You didn't select a country."
 msgstr "Je hebt geen land gekozen."
 
-#: fields/acf-city-selector-v5.php:404
+#: fields/acf-city-selector-v5.php:407
 msgid "You didn't select a state."
 msgstr "Je hebt geen staat/provincie gekozen."
 
-#: fields/acf-city-selector-v5.php:405
+#: fields/acf-city-selector-v5.php:408
 msgid "You didn't select a state and city."
 msgstr "Je hebt geen staat/provincie en een stad gekozen."
 
@@ -415,35 +415,35 @@ msgstr ""
 "\"_blank\">kleine donatie</a> overweegt. Dit motiveert mij weer om de plugin "
 "te verbeteren in mijn vrije tijd."
 
-#: inc/acfcs-functions.php:112
+#: inc/acfcs-functions.php:111
 msgid "Select a country first"
 msgstr "Selecteer eerst een land"
 
-#: inc/acfcs-functions.php:289 inc/acfcs-functions.php:294
+#: inc/acfcs-functions.php:285 inc/acfcs-functions.php:290
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr "Aangezien je bestand fouten bevat, is deze verwijderd."
 
-#: inc/acfcs-functions.php:290
+#: inc/acfcs-functions.php:286
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr "Er zijn te weinig kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:299
+#: inc/acfcs-functions.php:295
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr "Er zijn te veel kolommen op regel %d. %s"
 
-#: inc/acfcs-functions.php:367
+#: inc/acfcs-functions.php:363
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr "Er zijn te weinig kolommen op regel %d."
 
-#: inc/acfcs-functions.php:372
+#: inc/acfcs-functions.php:368
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr "Er zijn te veel kolommen op regel %d."
 
-#: inc/acfcs-functions.php:383
+#: inc/acfcs-functions.php:379
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr "De lengte van de land afkorting op regel %d is incorrect."
@@ -17760,6 +17760,11 @@ msgstr "Je hebt succesvol 12 steden in Luxemburg geïmporteerd."
 msgid "Successfully imported 2449 cities for the Netherlands."
 msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
+#~ msgid ""
+#~ "Pre-select a country when creating a new post or adding a new row in a "
+#~ "repeater or a layout in flexible content/"
+#~ msgstr "Selecteer een 'standaard land' voor een nieuw veld"
+
 #, php-format
 #~ msgid "The length of the state abbreviation on line %d is incorrect."
 #~ msgstr ""
@@ -17861,9 +17866,6 @@ msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
 #~ msgid "YAY ! %d lines are imported."
 #~ msgstr "YAY ! %d regels zijn geïmporteerd."
-
-#~ msgid "Choice"
-#~ msgstr "Keuze"
 
 #~ msgid "Import raw data"
 #~ msgstr "Importeer ruwe CSV data"
