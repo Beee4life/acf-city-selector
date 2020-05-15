@@ -689,7 +689,9 @@
                 $countries      = false;
                 $preview        = false;
                 $search         = false;
+                $info           = false;
                 $show_countries = true;
+                $show_info      = true;
                 $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
 
                 if ( isset( $url_array[ 'query' ] ) ) {
@@ -711,11 +713,16 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
+                if ( true === $show_info ) {
+                    $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
+                }
+
                 if ( true === $show_countries ) {
                     $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
                 }
 
-                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $countries . '</p>';
+                $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $info . $countries . '</p>';
 
                 return $menu;
             }
@@ -750,6 +757,9 @@
                     include( 'inc/acfcs-search.php' );
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
+
+                include( 'inc/acfcs-info.php' );
+                add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
 
                 include( 'inc/acfcs-countries.php' );
                 add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
