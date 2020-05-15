@@ -205,9 +205,9 @@ This is very random and unpredictable.
 <a name="todo"></a>
 ### TODO
 
+- [X] Select which fields to use; all, country + state or country + city or state city 
 - [ ] Add explanation about how the field validation works 
 - [ ] Add select2 to dropdowns (including a search, like with a post object field) 
-- [X] Select which fields to use; all, country + state or country + city or state  city 
 
 <a name="credit"></a>
 ### Credit
@@ -222,6 +222,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 0.21
 * fixed error in verification on preview page + added page back
 * added option to select which fields to use (all/country only/country + state/country + city)
+* added an info page with info for debug/support
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia
