@@ -311,14 +311,14 @@
                 if ( isset( $value[ 'stateCode' ] ) ) {
                     if ( 3 < strlen( $value[ 'stateCode' ] ) ) {
                         $state_code = substr( $value[ 'stateCode' ], 3 );
-                    } elseif ( 2 == strlen( $value[ 'stateCode' ] ) ) {
+                    } elseif ( 1 <= strlen( $value[ 'stateCode' ] ) ) {
                         $state_code = $value[ 'stateCode' ];
                     }
                 } else {
                     $state_code = false;
                 }
 
-                if ( strlen( $country_code ) == 2 && ! empty( $state_code ) ) {
+                if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
                     $table                  = $wpdb->prefix . 'cities';
                     $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
