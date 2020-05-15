@@ -174,9 +174,8 @@
             } elseif ( $country_code ) {
                 $query .= " WHERE country_code = '{$country_code}'";
             }
-            $query   .= " order by state_name, city_name ASC";
-            $results = $wpdb->get_results( $query );
-
+            $query        .= " ORDER BY state_name, city_name ASC";
+            $results      = $wpdb->get_results( $query );
             $city_counter = 1;
             foreach ( $results as $data ) {
                 $city_results[ $data->city_name ] = __( $data->city_name, 'acf_city_selector' );
@@ -269,8 +268,8 @@
      */
     function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
 
-        $empty_array = false;
         $csv_array   = [];
+        $empty_array = false;
         $new_array   = [];
         if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
