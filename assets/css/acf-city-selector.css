@@ -107,6 +107,15 @@
     max-width: 60%;
 }
 
+.acfcs table.acfcs__table--info {
+    margin-bottom: 2em;
+    max-width:     400px;
+}
+
+.acfcs table.acfcs__table--info:last-child {
+    margin-bottom: 0;
+}
+
 .acfcs table.acfcs__table--uploaded {
     margin-bottom: 1em;
 }
