@@ -64,15 +64,13 @@
     add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 
     /*
-     * Get cities by state code or country code (IF state code == "00" or states == 'N/A')
+     * Get cities by state code and/or country code
      *
      * @return JSON Object
      */
     function get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
-            $country_code = false;
-            $state_code   = false;
             if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
@@ -91,18 +89,7 @@
             }
 
             global $wpdb;
-            // @TODO: look into when/why it's '00'
-            if ( $state_code == '00' ) {
-                error_log("state_code == '00'");
-                $sql = $wpdb->prepare( "
-                        SELECT *
-                        FROM " . $wpdb->prefix . "cities
-                        WHERE country_code = '%s'
-                        GROUP BY state_code
-                        ORDER BY city_name ASC", $country_code
-                );
-                $results = $wpdb->get_results( $sql );
-            } elseif ( false !== $state_code && false !== $country_code ) {
+            if ( false !== $state_code && false !== $country_code ) {
                 $sql = $wpdb->prepare( "
                         SELECT *
                         FROM " . $wpdb->prefix . "cities
