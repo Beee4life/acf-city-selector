@@ -70,6 +70,7 @@
         }
 
         $transient = get_transient( 'acfcs_countries' );
+        $transient = [];
         if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
             global $wpdb;
             $results = $wpdb->get_results( '
@@ -84,7 +85,7 @@
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
-            $countries = $country_results;
+            $countries = array_merge( $countries, $country_results );
 
         } else {
             $countries = array_merge( $countries, $transient );
