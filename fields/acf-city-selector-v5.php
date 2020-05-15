@@ -90,7 +90,7 @@
                 ) );
 
                 $select_fields = array(
-                    'all'           => __( 'All [default]', 'acf-city-selector' ),
+                    'all'           => __( 'All fields [default]', 'acf-city-selector' ),
                     'country_only'  => __( 'Country only', 'acf-city-selector' ),
                     'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
                     'country_city'  => __( 'Country + City', 'acf-city-selector' ),
