@@ -43,7 +43,6 @@
                 *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
                 *  var message = acf._e('FIELD_NAME', 'error');
                 */
-
                 $this->l10n = array(
                     'i18n_select_city' => __( 'Select a city', 'acf-city-selector' ), // shown after country change
                 );
@@ -272,17 +271,14 @@
                     $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
                     $load_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : false;
                 } else {
-                    // @TODO: flexible content + 1 single field (?) [different array depth]
+                    // @TODO: create fallback for other array depths (flexible content + 1 single field ?)
                     global $post;
                     if ( 91 == $post->post_parent && 95 != $post->ID ) {
+                        // temp log
                         if ( 'acf-field-group' != get_post_type( get_the_ID() ) ) {
                             error_log( 'Make a fix for post: ' . get_the_ID() );
-                            if ( current_user_can( 'manage_options' ) ) {
-                                error_log( 'empty city_selector info' );
-                            }
                         }
                     }
-
                 }
                 $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
@@ -304,13 +300,20 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) {
-                    // this is here for some debugging. Most likely it will never 'come up'. Will be removed by 1.0.0 at the latest.
-                    error_log( 'countryCode == 0' );
-                }
+                // this is here for some debugging. Most likely it will never 'come up'. Will be removed by 1.0.0 at the latest.
+                if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) { error_log( 'countryCode == 0' ); }
 
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
-                $state_code   = ( isset( $value[ 'stateCode' ] ) ) ? substr( $value[ 'stateCode' ], 3 ) : false;
+
+                if ( isset( $value[ 'stateCode' ] ) ) {
+                    if ( 3 < strlen( $value[ 'stateCode' ] ) ) {
+                        $state_code = substr( $value[ 'stateCode' ], 3 );
+                    } elseif ( 2 == strlen( $value[ 'stateCode' ] ) ) {
+                        $state_code = $value[ 'stateCode' ];
+                    }
+                } else {
+                    $state_code = false;
+                }
 
                 if ( strlen( $country_code ) == 2 && ! empty( $state_code ) ) {
                     global $wpdb;
@@ -426,8 +429,6 @@
                             $valid = $no_city;
                         }
                     }
-                } else {
-                    // @TODO: field not required but we don't want to save empty values
                 }
 
                 return $valid;
