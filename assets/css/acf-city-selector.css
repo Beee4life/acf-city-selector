@@ -30,12 +30,12 @@
 .admin_left {
     float:    left;
     position: relative;
-    width:    70%;
+    width:    75%;
 }
 
 .admin_right {
     float:     right;
-    max-width: 25%;
+    max-width: 22.5%;
 }
 
 .acfcs input[type="checkbox"] {
@@ -101,15 +101,17 @@
     width:           100%;
 }
 
-.acfcs table.acfcs__table--packages,
-.acfcs table.acfcs__table--preview-form,
 .acfcs table.acfcs__table--uploaded {
     max-width: 60%;
 }
 
+.acfcs table.acfcs__table--packages {
+    max-width: 75%;
+}
+
 .acfcs table.acfcs__table--info {
     margin-bottom: 2em;
-    max-width:     400px;
+    max-width:     450px;
 }
 
 .acfcs table.acfcs__table--info:last-child {
