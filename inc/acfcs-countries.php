@@ -37,7 +37,6 @@
                     <h2><?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?></h2>
                     <p>
                         <?php esc_html_e( 'Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
-                        <br />
                         <?php esc_html_e( 'And now you can !! We have created several \'country packages\' for you to import as is.', 'acf-city-selector' ); ?>
                     </p>
                 </div>
