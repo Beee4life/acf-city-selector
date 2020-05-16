@@ -101,6 +101,7 @@
     width:           100%;
 }
 
+.acfcs table.acfcs__table--search,
 .acfcs table.acfcs__table--uploaded {
     max-width: 60%;
 }
@@ -125,6 +126,11 @@
 .acfcs table.acfcs__table--search {
     margin-top:    1em;
     margin-bottom: 1em;
+}
+
+.acfcs table.acfcs__table--search tr td:nth-child(1),
+.acfcs table.acfcs__table--search tr td:nth-child(2) {
+    width: 60px;
 }
 
 .acfcs table.acfcs__table th {
