@@ -239,11 +239,17 @@
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
+            $excluded_files = [
+                '.',
+                '..',
+                '.DS_Store',
+                'debug.json',
+            ];
 
             if ( is_array( $file_index ) ) {
                 $actual_files = [];
                 foreach ( $file_index as $file ) {
-                    if ( '.DS_Store' != $file && '.' != $file && '..' != $file ) {
+                    if ( ! in_array( $file, $excluded_files ) ) {
                         $actual_files[] = $file;
                     }
                 }
