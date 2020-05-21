@@ -214,7 +214,7 @@ This is very random and unpredictable.
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of the JS basics.
+[Jarah de Jong](https://github.com/inquota) helped me out with the JS basics and [John McDonald](https://github.com/mrjohnmc) for the German translation.
 
 <a name="changelog"></a>
 ### Changelog
@@ -224,6 +224,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 * added natural sorting for cities
 * added option to select which fields to use (all/country only/country + state/country + city)
 * added an info page with info for debug/support
+* added German translation
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia
