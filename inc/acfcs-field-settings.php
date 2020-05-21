@@ -72,11 +72,7 @@
                                 $array_key = array_search( 'repeater', array_column( $field[ 'sub_fields' ], 'type' ) );
                                 if ( false === $array_key ) {
                                     $array_key = array_search( 'flexible_content', array_column( $field[ 'sub_fields' ], 'type' ) );
-                                    if ( false === $array_key ) {
-                                        error_log('???');
-                                    } else {
-                                        error_log('flexible_content1');
-                                    }
+                                    // @TODO: finish
                                 } else {
                                     if ( ! empty( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ] ) ) {
                                         $acf_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ], 'type' ) );
