@@ -20,7 +20,6 @@
 
                 echo ACF_City_Selector::acfcs_admin_menu();
 
-                $delimiter  = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : false;
                 $file_index = acfcs_check_if_files();
                 $file_name  = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
                 $max_lines  = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : false;
@@ -102,7 +101,8 @@
                 <?php
                     // Get imported data
                     if ( $file_name ) {
-                        $csv_info = acfcs_csv_to_array( $file_name, $delimiter, true );
+                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : false;
+                        $csv_info  = acfcs_csv_to_array( $file_name, $delimiter, true );
 
                         echo '<div class="acfcs__section acfcs__section--results">';
                         if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {

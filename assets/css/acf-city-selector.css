@@ -8,6 +8,10 @@
     margin-bottom: 1em;
 }
 
+.acf-field.acf-field-acf-city-selector select {
+    padding: 4px;
+}
+
 .acf-field-acf-city-selector .acf-input-header {
     margin-bottom: 10px;
 }
@@ -26,12 +30,12 @@
 .admin_left {
     float:    left;
     position: relative;
-    width:    70%;
+    width:    75%;
 }
 
 .admin_right {
     float:     right;
-    max-width: 25%;
+    max-width: 22.5%;
 }
 
 .acfcs input[type="checkbox"] {
@@ -81,8 +85,8 @@
     padding:       0 0 0 5px;
 }
 
-.acfcs__search-criteria--limit {
-    margin-right: 1em;
+.acfcs__search-criteria--orderby {
+    margin-right: 1.25em;
 }
 
 .acfcs__search-criteria--or,
@@ -97,10 +101,22 @@
     width:           100%;
 }
 
-.acfcs table.acfcs__table--packages,
-.acfcs table.acfcs__table--preview-form,
+.acfcs table.acfcs__table--search,
 .acfcs table.acfcs__table--uploaded {
     max-width: 60%;
+}
+
+.acfcs table.acfcs__table--packages {
+    max-width: 75%;
+}
+
+.acfcs table.acfcs__table--info {
+    margin-bottom: 2em;
+    max-width:     450px;
+}
+
+.acfcs table.acfcs__table--info:last-child {
+    margin-bottom: 0;
 }
 
 .acfcs table.acfcs__table--uploaded {
@@ -110,6 +126,11 @@
 .acfcs table.acfcs__table--search {
     margin-top:    1em;
     margin-bottom: 1em;
+}
+
+.acfcs table.acfcs__table--search tr td:nth-child(1),
+.acfcs table.acfcs__table--search tr td:nth-child(2) {
+    width: 60px;
 }
 
 .acfcs table.acfcs__table th {

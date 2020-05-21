@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.20 - released 14.05.20
+0.21 - released 21.05.20
 
 <a name="description"></a>
 ### Description
@@ -193,6 +193,9 @@ The plugin works in the following situations:
 
 The plugin hasn't been tested yet in the following situations: 
 * as a repeater field on a user page
+* as a clone field
+* on taxonomy pages
+* on settings pages
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
@@ -202,18 +205,26 @@ This is very random and unpredictable.
 <a name="todo"></a>
 ### TODO
 
-- [] Add select2 to dropdowns (including a search, like with a post object field) 
-- [] Select which fields to use; all, country + state or country + city or state  city 
+- [X] Select which fields to use; all, country + state or country + city or state city 
+- [ ] Add explanation about how the field validation works 
+- [ ] Add select2 to dropdowns (including a search, like with a post object field) 
 
 <a name="credit"></a>
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://github.com/inquota) took care of the JS basics.
+[Jarah de Jong](https://github.com/inquota) helped me out with the JS basics and [John McDonald](https://github.com/mrjohnmc) with the German translation.
 
 <a name="changelog"></a>
 ### Changelog
+
+0.21
+* fixed error in verification on preview page + added page back
+* added natural sorting for cities
+* added option to select which fields to use (all/country only/country + state/country + city)
+* added an info page with info for debug/support
+* added German translation
 
 0.20
 * removed a check on length state code which falsed on countries like France, Spain and Australia

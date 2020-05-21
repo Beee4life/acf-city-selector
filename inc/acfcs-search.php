@@ -16,10 +16,12 @@
         $countries               = [];
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
+        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? $_POST[ 'acfcs_orderby' ] : false;
         $searched_term           = false;
         $selected_limit          = false;
 
         // get cities by country
+        // @TODO: replace with function
         $results = $wpdb->get_results( "SELECT *
             FROM " . $wpdb->prefix . "cities
             group by country_code
@@ -90,7 +92,7 @@
                 $search[] = 'city_name LIKE "%' . $searched_term . '%"';
                 $where[] = implode( ' OR ', $search );
             }
-            if ( false != $selected_limit ) {
+            if ( '0' != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
 
@@ -100,14 +102,24 @@
                 $where = false;
             }
 
-            $cities = $wpdb->get_results("SELECT *
+            if ( 'state' == $searched_orderby ) {
+                $orderby = 'ORDER BY state_name ASC, city_name ASC';
+            } else {
+                $orderby = 'ORDER BY city_name ASC, state_name ASC';
+            }
+
+            $sql = "SELECT *
                 FROM " . $wpdb->prefix . "cities
                 " . $where . "
-                order by country ASC, state_name ASC, city_name ASC
+                " . $orderby . "
                 " . $search_limit . "
-            " );
-
-            $result_count = count( $cities );
+            ";
+            $cities = $wpdb->get_results( $sql );
+            foreach( $cities as $city_object ) {
+                $city_array[] = (array) $city_object;
+            }
+            uasort( $city_array, 'acfcs_sort_array_with_quotes' );
+            $result_count = count( $city_array );
         }
 
         // output
@@ -190,6 +202,26 @@
                                 </select>
                             </label>
                         </div>
+
+                        <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
+
+                        <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
+                            <label>
+                                <select name="acfcs_orderby" class="">
+                                    <option value=""><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></option>
+                                    <?php
+                                        $orderby = [
+                                            __( 'City', 'acf-city-selector' ),
+                                            __( 'State', 'acf-city-selector' ),
+                                        ];
+                                        foreach( $orderby as $criterium ) {
+                                            $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
+                                            echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </label>
+                        </div>
                     <?php } ?>
 
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
@@ -226,24 +258,24 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <?php foreach( $cities as $city ) { ?>
+                                <?php foreach( $city_array as $city ) { ?>
                                     <tr>
                                         <td>
-                                            <?php echo $city->id; ?>
+                                            <?php echo $city[ 'id' ]; ?>
                                         </td>
                                         <td>
                                             <label>
-                                                <input name="row_id[]" type="checkbox" value="<?php echo $city->id; ?> <?php echo $city->city_name; ?>">
+                                                <input name="row_id[]" type="checkbox" value="<?php echo $city[ 'id' ]; ?> <?php echo $city[ 'city_name' ]; ?>">
                                             </label>
                                         </td>
                                         <td>
-                                            <?php echo $city->city_name; ?>
+                                            <?php echo $city[ 'city_name' ]; ?>
                                         </td>
                                         <td>
-                                            <?php echo $city->state_name; ?>
+                                            <?php echo $city[ 'state_name' ]; ?>
                                         </td>
                                         <td>
-                                            <?php echo __( $city->country, 'acf-city-selector' ); ?>
+                                            <?php echo __( $city[ 'country' ], 'acf-city-selector' ); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

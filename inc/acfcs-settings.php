@@ -9,7 +9,6 @@
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
-
         ?>
 
         <div class="wrap acfcs">
@@ -63,7 +62,7 @@
                 <form method="post" action="">
                     <input name="acfcs_delete_transients" value="<?php echo wp_create_nonce( 'acfcs-delete-transients-nonce' ); ?>" type="hidden" />
                     <h2><?php esc_html_e( 'Delete transients', 'acf-city-selector' ); ?></h2>
-                    <p><?php esc_html_e( "If you're seeing unexpected results in your dropdowns, try clearing all transients, with this option.", 'acf-city-selector' ); ?></p>
+                    <p><?php esc_html_e( "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option.", 'acf-city-selector' ); ?></p>
                     <p>
                         <label for="delete_transients" class="screen-reader-text"></label>
                         <input type="checkbox" name="delete_transients" id="delete_transients" value="1" /> <?php esc_html_e( 'Delete all transients', 'acf-city-selector' ); ?>
@@ -81,7 +80,7 @@
                         <label for="delete_cities" class="screen-reader-text"></label>
                         <input type="checkbox" name="delete_cities" id="delete_cities" value="1" /> <?php esc_html_e( 'Delete all cities from the database', 'acf-city-selector' ); ?>
                     </p>
-                    <input type="submit" class="button button-primary"  onclick="return confirm( 'Are you sure you want to delete all cities ?' )" value="<?php esc_html_e( "Nuke 'em", 'acf-city-selector' ); ?>" />
+                    <input type="submit" class="button button-primary"  onclick="return confirm( 'Are you sure you want to delete all cities ?' )" value="<?php esc_html_e( 'Delete everything', 'acf-city-selector' ); ?>" />
                 </form>
 
                 <br /><hr />
