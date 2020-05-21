@@ -221,6 +221,7 @@ Since I couldn't fix the Javascript for this plugin, [Jarah de Jong](https://git
 
 0.21
 * fixed error in verification on preview page + added page back
+* added natural sorting for cities
 * added option to select which fields to use (all/country only/country + state/country + city)
 * added an info page with info for debug/support
 
