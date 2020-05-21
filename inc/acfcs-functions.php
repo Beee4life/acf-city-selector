@@ -132,7 +132,7 @@
 
                 $state_results = array();
                 foreach ( $results as $data ) {
-                    $state_results[ $country_code . '-' . $data->state_code ] = __( $data->state_name, 'acf_city_selector' );
+                    $state_results[ $country_code . '-' . $data->state_code ] = __( $data->state_name, 'acf-city-selector' );
                 }
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
@@ -178,7 +178,7 @@
             $results      = $wpdb->get_results( $query );
             $city_counter = 1;
             foreach ( $results as $data ) {
-                $city_results[ $data->city_name ] = __( $data->city_name, 'acf_city_selector' );
+                $city_results[ $data->city_name ] = __( $data->city_name, 'acf-city-selector' );
                 $city_counter++;
             }
             if ( isset( $city_results ) ) {
