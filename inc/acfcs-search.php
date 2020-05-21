@@ -215,8 +215,8 @@
                                             __( 'State', 'acf-city-selector' ),
                                         ];
                                         foreach( $orderby as $criterium ) {
-                                            $selected = ( strtolower( $criterium ) == $searched_orderby ) ? ' selected' : false;
-                                            echo '<option value="' . strtolower( $criterium ) . '" ' . $selected . '>' . $criterium . '</option>';
+                                            $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
+                                            echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
                                         }
                                     ?>
                                 </select>
