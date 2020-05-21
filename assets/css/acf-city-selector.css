@@ -85,8 +85,8 @@
     padding:       0 0 0 5px;
 }
 
-.acfcs__search-criteria--limit {
-    margin-right: 1em;
+.acfcs__search-criteria--orderby {
+    margin-right: 1.25em;
 }
 
 .acfcs__search-criteria--or,
