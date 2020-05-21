@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-21 17:44+0200\n"
-"PO-Revision-Date: 2020-05-21 17:45+0200\n"
+"POT-Creation-Date: 2020-05-21 17:47+0200\n"
+"PO-Revision-Date: 2020-05-21 17:55+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -109,10 +109,8 @@ msgstr[0] "Du hast die Stadt %s gelöscht."
 msgstr[1] "Du hast die folgenden Städte gelöscht: %s."
 
 #: ACF_City_Selector.php:531
-#, fuzzy
-#| msgid "You have successfully removed all entries for %s."
 msgid "You have successfully removed all transients."
-msgstr "Du hast erfolgreich alle Einträge für %s entfernt."
+msgstr "Du hast erfolgreich alle Transients gelöscht."
 
 #: ACF_City_Selector.php:549
 msgid "You didn't select any countries, please try again."
@@ -208,10 +206,8 @@ msgid "Select a city"
 msgstr "Wähle eine Stadt"
 
 #: fields/acf-city-selector-v5.php:86
-#, fuzzy
-#| msgid "Select a country first"
 msgid "Select a default country for a new field"
-msgstr "Wähle als erstes ein Land aus"
+msgstr "Wähle ein standard Land aus"
 
 #: fields/acf-city-selector-v5.php:87
 msgid "Default country"
@@ -222,22 +218,16 @@ msgid "All fields [default]"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:94
-#, fuzzy
-#| msgid "Country code"
 msgid "Country only"
-msgstr "Ländercode"
+msgstr "Nur Land"
 
 #: fields/acf-city-selector-v5.php:95
-#, fuzzy
-#| msgid "States/Provinces"
 msgid "Country + State/province"
-msgstr "Bundesland/Provinz"
+msgstr "Land + Bundesland/Provinz"
 
 #: fields/acf-city-selector-v5.php:96
-#, fuzzy
-#| msgid "Country"
 msgid "Country + City"
-msgstr "Land"
+msgstr "Land + Stadt"
 
 #: fields/acf-city-selector-v5.php:100
 msgid "Select which fields are used"
@@ -259,26 +249,20 @@ msgid "Select a country"
 msgstr "Wähle ein Land"
 
 #: fields/acf-city-selector-v5.php:403
-#, fuzzy
-#| msgid "You didn't select a city"
 msgid "You didn't select a city."
-msgstr "Du hast keine Stadt ausgewählt"
+msgstr "Du hast keine Stadt ausgewählt."
 
 #: fields/acf-city-selector-v5.php:405
 msgid "You didn't select anything."
 msgstr "Du hast nichts ausgewählt."
 
 #: fields/acf-city-selector-v5.php:406
-#, fuzzy
-#| msgid "You didn't select a city"
 msgid "You didn't select a country."
-msgstr "Du hast keine Stadt ausgewählt"
+msgstr "Du hast kein Land ausgewählt."
 
 #: fields/acf-city-selector-v5.php:407
-#, fuzzy
-#| msgid "You didn't select a file."
 msgid "You didn't select a state."
-msgstr "Du hast keine Datei ausgewählt."
+msgstr "Du hast kein Bundesland/Provinz ausgewählt."
 
 #: fields/acf-city-selector-v5.php:408
 msgid "You didn't select a state and city."
@@ -605,22 +589,16 @@ msgid "We might ask for this info if support is helping you fix a problem."
 msgstr ""
 
 #: inc/acfcs-info.php:41
-#, fuzzy
-#| msgid "Clear the database"
 msgid "Countries in database"
-msgstr "Datenbank leeren"
+msgstr "Länder im Datenbank"
 
 #: inc/acfcs-info.php:46
-#, fuzzy
-#| msgid "full country name"
 msgid "Country name"
-msgstr "Voller Länder Name"
+msgstr "Länder Name"
 
 #: inc/acfcs-info.php:47
-#, fuzzy
-#| msgid "Cities"
 msgid "# cities"
-msgstr "Städte"
+msgstr "# Städte"
 
 #: inc/acfcs-info.php:62
 msgid "Server info"
@@ -723,16 +701,12 @@ msgid "Main registration"
 msgstr ""
 
 #: inc/acfcs-info.php:207
-#, fuzzy
-#| msgid "state abbreviation"
 msgid "Subsite registration"
-msgstr "Bundesland Abkürzung"
+msgstr "Subsite registrierung"
 
 #: inc/acfcs-info.php:216
-#, fuzzy
-#| msgid "About the plugin"
 msgid "Active plugins"
-msgstr "Über dieses Plugin"
+msgstr "Aktive Plugins"
 
 #: inc/acfcs-info.php:220
 msgid "Name"
@@ -759,10 +733,8 @@ msgid ""
 msgstr ""
 
 #: inc/acfcs-info.php:256
-#, fuzzy
-#| msgid "Upload a CSV file"
 msgid "Download JSON file"
-msgstr "CSV Datei hochladen"
+msgstr "JSON Datei runterladen"
 
 #: inc/acfcs-preview.php:9
 msgid "Sorry, you do not have sufficient permissions to access this page."
@@ -823,7 +795,7 @@ msgid "Limit"
 msgstr "Begrenzung"
 
 #: inc/acfcs-search.php:211
-msgid "Orderby"
+msgid "Order by"
 msgstr "Sortieren nach"
 
 #: inc/acfcs-search.php:234
@@ -891,10 +863,8 @@ msgid "Delete selected countries"
 msgstr "Ausgewählte Länder löschen"
 
 #: inc/acfcs-settings.php:64 inc/acfcs-settings.php:70
-#, fuzzy
-#| msgid "Delete selected"
 msgid "Delete transients"
-msgstr "Ausgewählte Elemente löschen"
+msgstr "Transients löschen"
 
 #: inc/acfcs-settings.php:65
 msgid ""
@@ -903,10 +873,8 @@ msgid ""
 msgstr ""
 
 #: inc/acfcs-settings.php:68
-#, fuzzy
-#| msgid "Delete selected countries"
 msgid "Delete all transients"
-msgstr "Ausgewählte Länder löschen"
+msgstr "Alle Transients löschen"
 
 #: inc/acfcs-settings.php:77
 msgid "Clear the database"
@@ -927,10 +895,8 @@ msgid "Delete all cities from the database"
 msgstr "Entferne alle Städte in der Datenbank"
 
 #: inc/acfcs-settings.php:83
-#, fuzzy
-#| msgid "Delete selected"
 msgid "Delete everything"
-msgstr "Ausgewählte Elemente löschen"
+msgstr "Alles löschen"
 
 #: inc/acfcs-settings.php:90
 msgid "Save data"
