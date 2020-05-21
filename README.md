@@ -214,7 +214,7 @@ This is very random and unpredictable.
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-[Jarah de Jong](https://github.com/inquota) helped me out with the JS basics and [John McDonald](https://github.com/mrjohnmc) for the German translation.
+[Jarah de Jong](https://github.com/inquota) helped me out with the JS basics and [John McDonald](https://github.com/mrjohnmc) with the German translation.
 
 <a name="changelog"></a>
 ### Changelog
