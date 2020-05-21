@@ -89,6 +89,7 @@
             }
 
             global $wpdb;
+            $results = [];
             if ( false !== $state_code && false !== $country_code ) {
                 $sql = $wpdb->prepare( "
                         SELECT *
@@ -107,16 +108,21 @@
                 );
                 $results = $wpdb->get_results( $sql );
             }
-            $items                     = array();
-            $items[ 0 ][ 'id' ]        = '';
-            $items[ 0 ][ 'city_name' ] = esc_html__( 'Select a city', 'acf-city-selector' ); // shown after state change
-            $i                         = 1;
-            if ( isset( $results ) && is_array( $results ) ) {
+            // shown after state change
+            $first_item = [
+                'id'        => '',
+                'city_name' => esc_html__( 'Select a city', 'acf-city-selector' ),
+            ];
+            $items  = array();
+            if ( ! empty( $results ) ) {
                 foreach ( $results as $data ) {
-                    $items[ $i ][ 'id' ]        = $data->city_name;
-                    $items[ $i ][ 'city_name' ] = $data->city_name;
-                    $i++;
+                    $items[] = [
+                        'id'        => $data->city_name,
+                        'city_name' => $data->city_name,
+                    ];
                 }
+                uasort( $items, 'acfcs_sort_array_with_quotes' );
+                array_unshift( $items, $first_item );
                 echo json_encode( $items );
                 wp_die();
             }
