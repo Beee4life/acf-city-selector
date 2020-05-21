@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
 "POT-Creation-Date: 2020-05-21 17:47+0200\n"
-"PO-Revision-Date: 2020-05-21 17:55+0200\n"
+"PO-Revision-Date: 2020-05-21 18:28+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -155,7 +155,7 @@ msgstr "Vorschau"
 
 #: ACF_City_Selector.php:718 inc/acfcs-info.php:32
 msgid "Info"
-msgstr ""
+msgstr "Information"
 
 #: ACF_City_Selector.php:722
 msgid "Get more countries"
@@ -197,7 +197,7 @@ msgstr "Stadt auswählen"
 
 #: fields/acf-city-selector-v5.php:36
 msgid "Choice"
-msgstr ""
+msgstr "Auswahl"
 
 #: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:224
 #: fields/acf-city-selector-v5.php:228 inc/acfcs-functions.php:162
@@ -207,7 +207,7 @@ msgstr "Wähle eine Stadt"
 
 #: fields/acf-city-selector-v5.php:86
 msgid "Select a default country for a new field"
-msgstr "Wähle ein standard Land aus"
+msgstr "Wählen Sie ein Standardland für ein neues Feld"
 
 #: fields/acf-city-selector-v5.php:87
 msgid "Default country"
@@ -215,7 +215,7 @@ msgstr "Standard Land"
 
 #: fields/acf-city-selector-v5.php:93
 msgid "All fields [default]"
-msgstr ""
+msgstr "Alle Felder [Standard]"
 
 #: fields/acf-city-selector-v5.php:94
 msgid "Country only"
@@ -231,11 +231,11 @@ msgstr "Land + Stadt"
 
 #: fields/acf-city-selector-v5.php:100
 msgid "Select which fields are used"
-msgstr ""
+msgstr "Wähle welche Felder verwendet werden"
 
 #: fields/acf-city-selector-v5.php:101
 msgid "Fields to use"
-msgstr ""
+msgstr "Zu verwendende Felder"
 
 #: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:197
 #: fields/acf-city-selector-v5.php:201 inc/acfcs-search.php:164
@@ -583,10 +583,13 @@ msgstr "Vereinigte Staaten"
 #: inc/acfcs-info.php:34
 msgid "This page shows real-time info about your site and settings."
 msgstr ""
+"Diese Seite zeigt Echtzeit Information über deine Seite und Einstellungen."
 
 #: inc/acfcs-info.php:36
 msgid "We might ask for this info if support is helping you fix a problem."
 msgstr ""
+"Wir bitten Sie möglicherweise um diese Informationen, wenn der Support Ihnen "
+"bei der Behebung eines Problems hilft."
 
 #: inc/acfcs-info.php:41
 msgid "Countries in database"
@@ -602,19 +605,19 @@ msgstr "# Städte"
 
 #: inc/acfcs-info.php:62
 msgid "Server info"
-msgstr ""
+msgstr "Server Information"
 
 #: inc/acfcs-info.php:66 inc/acfcs-info.php:108 inc/acfcs-info.php:186
 msgid "What ?"
-msgstr ""
+msgstr "Was ?"
 
 #: inc/acfcs-info.php:67 inc/acfcs-info.php:109 inc/acfcs-info.php:187
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 #: inc/acfcs-info.php:73
 msgid "Operating system"
-msgstr ""
+msgstr "Betriebssystem"
 
 #: inc/acfcs-info.php:78
 msgid "PHP version"
@@ -626,7 +629,7 @@ msgstr ""
 
 #: inc/acfcs-info.php:88
 msgid "Server port"
-msgstr ""
+msgstr "Server Port"
 
 #: inc/acfcs-info.php:93
 msgid "Scheme"
@@ -638,11 +641,11 @@ msgstr ""
 
 #: inc/acfcs-info.php:104
 msgid "WordPress info"
-msgstr ""
+msgstr "WordPress Information"
 
 #: inc/acfcs-info.php:115
 msgid "WordPress version"
-msgstr ""
+msgstr "WordPress Version"
 
 #: inc/acfcs-info.php:120
 msgid "Home URL"
@@ -658,7 +661,7 @@ msgstr ""
 
 #: inc/acfcs-info.php:135
 msgid "Users can register"
-msgstr ""
+msgstr "Jeder kann sich registrieren"
 
 #: inc/acfcs-info.php:140
 msgid "Page on front"
@@ -666,27 +669,27 @@ msgstr ""
 
 #: inc/acfcs-info.php:145
 msgid "Current theme"
-msgstr ""
+msgstr "Aktuelles Thema"
 
 #: inc/acfcs-info.php:153
 msgid "Stylesheet folder"
-msgstr ""
+msgstr "Stylesheet Ordner"
 
 #: inc/acfcs-info.php:159
 msgid "Template folder"
-msgstr ""
+msgstr "Template Ordner"
 
 #: inc/acfcs-info.php:164
 msgid "Charset"
-msgstr ""
+msgstr "Zeichensatz"
 
 #: inc/acfcs-info.php:170
 msgid "Text direction"
-msgstr ""
+msgstr "Textrichtung"
 
 #: inc/acfcs-info.php:175
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: inc/acfcs-info.php:182
 msgid "Multisite"
@@ -694,7 +697,7 @@ msgstr ""
 
 #: inc/acfcs-info.php:194
 msgid "Main site"
-msgstr ""
+msgstr "Hauptseite"
 
 #: inc/acfcs-info.php:200
 msgid "Main registration"
@@ -718,19 +721,23 @@ msgstr ""
 
 #: inc/acfcs-info.php:243
 msgid "Download JSON"
-msgstr ""
+msgstr "JSON herunterladen"
 
 #: inc/acfcs-info.php:245
 msgid ""
 "If you're in need of support, the info above might helpful for us to fix a "
 "problem."
 msgstr ""
+"Wenn Sie Unterstützung benötigen, können die oben genannten Informationen "
+"hilfreich sein, um ein Problem zu beheben."
 
 #: inc/acfcs-info.php:247
 msgid ""
 "You can download the settings to a JSON file below (and send it to us when "
 "asked)."
 msgstr ""
+"Sie können die Einstellungen unten in eine JSON-Datei herunterladen (und auf "
+"Anfrage an uns senden)."
 
 #: inc/acfcs-info.php:256
 msgid "Download JSON file"
@@ -871,6 +878,8 @@ msgid ""
 "If you're seeing unexpected results in your dropdowns, try clearing all "
 "transients with this option."
 msgstr ""
+"Wenn in Ihren Dropdowns unerwartete Ergebnisse angezeigt werden, löschen Sie "
+"alle Transienten mit dieser Option."
 
 #: inc/acfcs-settings.php:68
 msgid "Delete all transients"
