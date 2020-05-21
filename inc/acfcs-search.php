@@ -208,7 +208,7 @@
                         <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
                             <label>
                                 <select name="acfcs_orderby" class="">
-                                    <option value=""><?php esc_html_e( 'Orderby', 'acf-city-selector' ); ?></option>
+                                    <option value=""><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></option>
                                     <?php
                                         $orderby = [
                                             __( 'City', 'acf-city-selector' ),
