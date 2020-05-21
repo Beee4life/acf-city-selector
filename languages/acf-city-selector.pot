@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-21 17:42+0200\n"
+"POT-Creation-Date: 2020-05-21 17:47+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -732,7 +732,7 @@ msgid "Limit"
 msgstr ""
 
 #: inc/acfcs-search.php:211
-msgid "Orderby"
+msgid "Order by"
 msgstr ""
 
 #: inc/acfcs-search.php:234
