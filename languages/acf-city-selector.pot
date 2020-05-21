@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-21 17:47+0200\n"
+"POT-Creation-Date: 2020-05-21 19:00+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Dismiss this notice"
 msgstr ""
 
-#: ACF_City_Selector.php:656 ACF_City_Selector.php:704
+#: ACF_City_Selector.php:656 ACF_City_Selector.php:702
 msgid "Settings"
 msgstr ""
 
@@ -127,23 +127,23 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: ACF_City_Selector.php:702
+#: ACF_City_Selector.php:700
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:708 inc/acfcs-search.php:227
+#: ACF_City_Selector.php:706 inc/acfcs-search.php:227
 msgid "Search"
 msgstr ""
 
-#: ACF_City_Selector.php:713
+#: ACF_City_Selector.php:711
 msgid "Preview"
 msgstr ""
 
-#: ACF_City_Selector.php:718 inc/acfcs-info.php:32
+#: ACF_City_Selector.php:715 inc/acfcs-info.php:32
 msgid "Info"
 msgstr ""
 
-#: ACF_City_Selector.php:722
+#: ACF_City_Selector.php:718
 msgid "Get more countries"
 msgstr ""
 
@@ -234,23 +234,23 @@ msgstr ""
 msgid "Select a country"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:403
+#: fields/acf-city-selector-v5.php:392
 msgid "You didn't select a city."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:405
+#: fields/acf-city-selector-v5.php:394
 msgid "You didn't select anything."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:406
+#: fields/acf-city-selector-v5.php:395
 msgid "You didn't select a country."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:407
+#: fields/acf-city-selector-v5.php:396
 msgid "You didn't select a state."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:408
+#: fields/acf-city-selector-v5.php:397
 msgid "You didn't select a state and city."
 msgstr ""
 
