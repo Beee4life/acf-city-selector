@@ -271,17 +271,6 @@
                 if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
                     $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
                     $load_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : false;
-                } else {
-                    // @TODO: create fallback for other array depths (flexible content + 1 single field ?)
-                    global $post;
-                    if ( isset( $post->post_parent ) && isset( $post->ID ) ) {
-                        if ( 91 == $post->post_parent && 95 != $post->ID ) {
-                            // temp log
-                            if ( 'acf-field-group' != get_post_type( get_the_ID() ) ) {
-                                error_log( 'Make a fix for post: ' . get_the_ID() );
-                            }
-                        }
-                    }
                 }
                 $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
