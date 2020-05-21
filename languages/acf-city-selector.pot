@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-05-12 19:10+0200\n"
+"POT-Creation-Date: 2020-05-21 17:42+0200\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -17,136 +17,147 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:115
+#: ACF_City_Selector.php:118
 #, php-format
 msgid "\"%s\" is not activated. This plugin <strong>must</strong> be activated, because without it \"%s\" won't work. Activate it <a href=\"%s\">here</a>."
 msgstr ""
 
-#: ACF_City_Selector.php:138
+#: ACF_City_Selector.php:141
 #, php-format
 msgid "<b>Warning</b>: The \"%s\" plugin will not work properly (anymore) with %s v4.x. Please upgrade to PRO."
 msgstr ""
 
-#: ACF_City_Selector.php:230 ACF_City_Selector.php:266
-#: ACF_City_Selector.php:345 ACF_City_Selector.php:394
-#: ACF_City_Selector.php:429 ACF_City_Selector.php:454
-#: ACF_City_Selector.php:476 ACF_City_Selector.php:512
+#: ACF_City_Selector.php:237 ACF_City_Selector.php:274
+#: ACF_City_Selector.php:354 ACF_City_Selector.php:403
+#: ACF_City_Selector.php:438 ACF_City_Selector.php:463
+#: ACF_City_Selector.php:485 ACF_City_Selector.php:522
+#: ACF_City_Selector.php:543
 msgid "Something went wrong, please try again."
 msgstr ""
 
-#: ACF_City_Selector.php:242
+#: ACF_City_Selector.php:249
 #, php-format
 msgid "File '%s' is successfully uploaded and now shows under 'Select files to import'"
 msgstr ""
 
-#: ACF_City_Selector.php:249
+#: ACF_City_Selector.php:257
 msgid "Upload failed. Please try again."
 msgstr ""
 
-#: ACF_City_Selector.php:273
+#: ACF_City_Selector.php:281
 msgid "You didn't select a file."
 msgstr ""
 
-#: ACF_City_Selector.php:287
+#: ACF_City_Selector.php:295
 #, php-format
 msgid "Congratulations, there appear to be no errors in CSV file: \"%s\"."
 msgstr ""
 
-#: ACF_City_Selector.php:315
+#: ACF_City_Selector.php:323
 #, php-format
 msgid "Congratulations. You have successfully imported %d cities from \"%s\"."
 msgstr ""
 
-#: ACF_City_Selector.php:328
+#: ACF_City_Selector.php:336
 #, php-format
 msgid "File \"%s\" successfully deleted."
 msgstr ""
 
-#: ACF_City_Selector.php:330
+#: ACF_City_Selector.php:339
 #, php-format
 msgid "File \"%s\" is not deleted. Please try again."
 msgstr ""
 
-#: ACF_City_Selector.php:354
+#: ACF_City_Selector.php:363
 msgid "Congratulations, your CSV data seems valid."
 msgstr ""
 
-#: ACF_City_Selector.php:378
+#: ACF_City_Selector.php:387
 #, php-format
 msgid "Congratulations, you imported 1 city."
 msgid_plural "Congratulations, you imported %d cities."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ACF_City_Selector.php:439
+#: ACF_City_Selector.php:448
 msgid "All cities are deleted."
 msgstr ""
 
-#: ACF_City_Selector.php:464
+#: ACF_City_Selector.php:473
 msgid "Settings saved"
 msgstr ""
 
-#: ACF_City_Selector.php:498
+#: ACF_City_Selector.php:507
 #, php-format
 msgid "You have deleted the city %s."
 msgid_plural "You have deleted the following cities: %s."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ACF_City_Selector.php:518
+#: ACF_City_Selector.php:531
+msgid "You have successfully removed all transients."
+msgstr ""
+
+#: ACF_City_Selector.php:549
 msgid "You didn't select any countries, please try again."
 msgstr ""
 
-#: ACF_City_Selector.php:540
+#: ACF_City_Selector.php:571
 #, php-format
 msgid "You have successfully removed all entries for %s."
 msgstr ""
 
-#: ACF_City_Selector.php:575 ACF_City_Selector.php:584
+#: ACF_City_Selector.php:607 ACF_City_Selector.php:616
 msgid "Error"
 msgstr ""
 
-#: ACF_City_Selector.php:578
+#: ACF_City_Selector.php:610
 msgid "Warning"
 msgstr ""
 
-#: ACF_City_Selector.php:596
+#: ACF_City_Selector.php:628
 msgid "Dismiss this notice"
 msgstr ""
 
-#: ACF_City_Selector.php:624 ACF_City_Selector.php:661
+#: ACF_City_Selector.php:656 ACF_City_Selector.php:704
 msgid "Settings"
 msgstr ""
 
-#: ACF_City_Selector.php:643
+#: ACF_City_Selector.php:675
 msgid "Documentation"
 msgstr ""
 
-#: ACF_City_Selector.php:657
+#: ACF_City_Selector.php:702
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:665 inc/acfcs-search.php:195
+#: ACF_City_Selector.php:708 inc/acfcs-search.php:227
 msgid "Search"
 msgstr ""
 
-#: ACF_City_Selector.php:669
+#: ACF_City_Selector.php:713
 msgid "Preview"
 msgstr ""
 
-#: ACF_City_Selector.php:673
+#: ACF_City_Selector.php:718 inc/acfcs-info.php:32
+msgid "Info"
+msgstr ""
+
+#: ACF_City_Selector.php:722
 msgid "Get more countries"
 msgstr ""
 
-#: assets/js/city-selector.js:68
+#: assets/js/city-selector.js:76
 msgid "acf_city_selector"
 msgstr ""
 
 #: fields/acf-city-selector-v4.php:66 fields/acf-city-selector-v5.php:69
+#: inc/acfcs-info.php:192
 msgid "Yes"
 msgstr ""
 
 #: fields/acf-city-selector-v4.php:67 fields/acf-city-selector-v5.php:70
+#: inc/acfcs-info.php:192
 msgid "No"
 msgstr ""
 
@@ -170,45 +181,81 @@ msgstr ""
 msgid "Select city"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:199
-#: fields/acf-city-selector-v5.php:203 inc/acfcs-functions.php:149
-#: inc/country-field.php:118
+#: fields/acf-city-selector-v5.php:36
+msgid "Choice"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:224
+#: fields/acf-city-selector-v5.php:228 inc/acfcs-functions.php:162
+#: inc/country-field.php:114
 msgid "Select a city"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:86
-msgid "Pre-select a default country when creating a new post or adding a new row in a repeater"
+msgid "Select a default country for a new field"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:87
 msgid "Default country"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:125 fields/acf-city-selector-v5.php:173
-#: fields/acf-city-selector-v5.php:177 inc/acfcs-search.php:152
+#: fields/acf-city-selector-v5.php:93
+msgid "All fields [default]"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:94
+msgid "Country only"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:95
+msgid "Country + State/province"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:96
+msgid "Country + City"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:100
+msgid "Select which fields are used"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:101
+msgid "Fields to use"
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:197
+#: fields/acf-city-selector-v5.php:201 inc/acfcs-search.php:164
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:145 fields/acf-city-selector-v5.php:149
-#: inc/acfcs-functions.php:67 inc/acfcs-search.php:135
+#: fields/acf-city-selector-v5.php:168 fields/acf-city-selector-v5.php:172
+#: inc/acfcs-functions.php:68 inc/acfcs-search.php:147
 msgid "Select a country"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:319
+#: fields/acf-city-selector-v5.php:403
+msgid "You didn't select a city."
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:405
 msgid "You didn't select anything."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:321
+#: fields/acf-city-selector-v5.php:406
+msgid "You didn't select a country."
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:407
+msgid "You didn't select a state."
+msgstr ""
+
+#: fields/acf-city-selector-v5.php:408
 msgid "You didn't select a state and city."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:323
-msgid "You didn't select a city"
-msgstr ""
-
-#: inc/acfcs-countries.php:8 inc/acfcs-dashboard.php:8 inc/acfcs-search.php:8
-#: inc/acfcs-settings.php:8
+#: inc/acfcs-countries.php:8 inc/acfcs-dashboard.php:8 inc/acfcs-info.php:8
+#: inc/acfcs-search.php:8 inc/acfcs-settings.php:8
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
@@ -220,37 +267,37 @@ msgstr ""
 msgid "Default the plugin comes with 3 countries included, the Benelux; Belgium, Netherlands, Luxembourg, but you might want to add more countries to choose from."
 msgstr ""
 
-#: inc/acfcs-countries.php:41
+#: inc/acfcs-countries.php:40
 msgid "And now you can !! We have created several 'country packages' for you to import as is."
 msgstr ""
 
-#: inc/acfcs-countries.php:46
+#: inc/acfcs-countries.php:45
 msgid "Country packages"
 msgstr ""
 
-#: inc/acfcs-countries.php:52 inc/acfcs-help-tabs.php:51
-#: inc/acfcs-preview.php:117 inc/acfcs-search.php:225
+#: inc/acfcs-countries.php:51 inc/acfcs-help-tabs.php:51
+#: inc/acfcs-preview.php:117 inc/acfcs-search.php:257
 msgid "Country"
 msgstr ""
 
-#: inc/acfcs-countries.php:53
+#: inc/acfcs-countries.php:52
 msgid "States/Provinces"
 msgstr ""
 
-#: inc/acfcs-countries.php:54
+#: inc/acfcs-countries.php:53
 msgid "Cities"
 msgstr ""
 
-#: inc/acfcs-countries.php:55
+#: inc/acfcs-countries.php:54
 msgid "Price"
 msgstr ""
 
-#: inc/acfcs-countries.php:76
+#: inc/acfcs-countries.php:75
 #, php-format
 msgid "More countries will be added soon. Feel free to <a href=\"%s\" target=\"_blank\" rel=\"noopener\">request</a> a country, if it's not available (yet)."
 msgstr ""
 
-#: inc/acfcs-countries.php:80
+#: inc/acfcs-countries.php:79
 msgid "Get your country now"
 msgstr ""
 
@@ -270,23 +317,23 @@ msgstr ""
 msgid "Select a file to import"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:49 inc/acfcs-preview.php:41
+#: inc/acfcs-dashboard.php:49 inc/acfcs-preview.php:40
 msgid "File name"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:50 inc/acfcs-preview.php:42
+#: inc/acfcs-dashboard.php:50 inc/acfcs-preview.php:41
 msgid "Delimiter"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:51 inc/acfcs-preview.php:43
+#: inc/acfcs-dashboard.php:51 inc/acfcs-preview.php:42
 msgid "Max. lines"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:60 inc/acfcs-preview.php:54
+#: inc/acfcs-dashboard.php:60 inc/acfcs-preview.php:53
 msgid "Select a file"
 msgstr ""
 
-#: inc/acfcs-dashboard.php:83 inc/acfcs-preview.php:80
+#: inc/acfcs-dashboard.php:83 inc/acfcs-preview.php:79
 msgid "All"
 msgstr ""
 
@@ -336,40 +383,35 @@ msgstr ""
 msgid "Thank you for installing the 'City Selector' plugin. I hope you enjoy it. Please <a href=\"%s\" rel=\"noopener\" target=\"_blank\">consider a donation</a> if you do, so I can continue to improve it even more."
 msgstr ""
 
-#: inc/acfcs-functions.php:108
+#: inc/acfcs-functions.php:111
 msgid "Select a country first"
 msgstr ""
 
-#: inc/acfcs-functions.php:272 inc/acfcs-functions.php:277
+#: inc/acfcs-functions.php:291 inc/acfcs-functions.php:296
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr ""
 
-#: inc/acfcs-functions.php:273
+#: inc/acfcs-functions.php:292
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:282
+#: inc/acfcs-functions.php:301
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:348
+#: inc/acfcs-functions.php:369
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:353
+#: inc/acfcs-functions.php:374
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:364
-#, php-format
-msgid "The length of the state abbreviation on line %d is incorrect."
-msgstr ""
-
-#: inc/acfcs-functions.php:371
+#: inc/acfcs-functions.php:385
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""
@@ -395,7 +437,7 @@ msgid "Note"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:219
+#: inc/acfcs-search.php:214 inc/acfcs-search.php:251
 msgid "City"
 msgstr ""
 
@@ -416,7 +458,7 @@ msgid "max 3 characters"
 msgstr ""
 
 #: inc/acfcs-help-tabs.php:41 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:222
+#: inc/acfcs-search.php:215 inc/acfcs-search.php:254
 msgid "State"
 msgstr ""
 
@@ -488,27 +530,179 @@ msgstr ""
 msgid "United States"
 msgstr ""
 
+#: inc/acfcs-info.php:34
+msgid "This page shows real-time info about your site and settings."
+msgstr ""
+
+#: inc/acfcs-info.php:36
+msgid "We might ask for this info if support is helping you fix a problem."
+msgstr ""
+
+#: inc/acfcs-info.php:41
+msgid "Countries in database"
+msgstr ""
+
+#: inc/acfcs-info.php:46
+msgid "Country name"
+msgstr ""
+
+#: inc/acfcs-info.php:47
+msgid "# cities"
+msgstr ""
+
+#: inc/acfcs-info.php:62
+msgid "Server info"
+msgstr ""
+
+#: inc/acfcs-info.php:66 inc/acfcs-info.php:108 inc/acfcs-info.php:186
+msgid "What ?"
+msgstr ""
+
+#: inc/acfcs-info.php:67 inc/acfcs-info.php:109 inc/acfcs-info.php:187
+msgid "Value"
+msgstr ""
+
+#: inc/acfcs-info.php:73
+msgid "Operating system"
+msgstr ""
+
+#: inc/acfcs-info.php:78
+msgid "PHP version"
+msgstr ""
+
+#: inc/acfcs-info.php:83
+msgid "Server IP"
+msgstr ""
+
+#: inc/acfcs-info.php:88
+msgid "Server port"
+msgstr ""
+
+#: inc/acfcs-info.php:93
+msgid "Scheme"
+msgstr ""
+
+#: inc/acfcs-info.php:98
+msgid "Home path"
+msgstr ""
+
+#: inc/acfcs-info.php:104
+msgid "WordPress info"
+msgstr ""
+
+#: inc/acfcs-info.php:115
+msgid "WordPress version"
+msgstr ""
+
+#: inc/acfcs-info.php:120
+msgid "Home URL"
+msgstr ""
+
+#: inc/acfcs-info.php:125
+msgid "Admin email"
+msgstr ""
+
+#: inc/acfcs-info.php:130
+msgid "Blog public"
+msgstr ""
+
+#: inc/acfcs-info.php:135
+msgid "Users can register"
+msgstr ""
+
+#: inc/acfcs-info.php:140
+msgid "Page on front"
+msgstr ""
+
+#: inc/acfcs-info.php:145
+msgid "Current theme"
+msgstr ""
+
+#: inc/acfcs-info.php:153
+msgid "Stylesheet folder"
+msgstr ""
+
+#: inc/acfcs-info.php:159
+msgid "Template folder"
+msgstr ""
+
+#: inc/acfcs-info.php:164
+msgid "Charset"
+msgstr ""
+
+#: inc/acfcs-info.php:170
+msgid "Text direction"
+msgstr ""
+
+#: inc/acfcs-info.php:175
+msgid "Language"
+msgstr ""
+
+#: inc/acfcs-info.php:182
+msgid "Multisite"
+msgstr ""
+
+#: inc/acfcs-info.php:194
+msgid "Main site"
+msgstr ""
+
+#: inc/acfcs-info.php:200
+msgid "Main registration"
+msgstr ""
+
+#: inc/acfcs-info.php:207
+msgid "Subsite registration"
+msgstr ""
+
+#: inc/acfcs-info.php:216
+msgid "Active plugins"
+msgstr ""
+
+#: inc/acfcs-info.php:220
+msgid "Name"
+msgstr ""
+
+#: inc/acfcs-info.php:221
+msgid "Version"
+msgstr ""
+
+#: inc/acfcs-info.php:243
+msgid "Download JSON"
+msgstr ""
+
+#: inc/acfcs-info.php:245
+msgid "If you're in need of support, the info above might helpful for us to fix a problem."
+msgstr ""
+
+#: inc/acfcs-info.php:247
+msgid "You can download the settings to a JSON file below (and send it to us when asked)."
+msgstr ""
+
+#: inc/acfcs-info.php:256
+msgid "Download JSON file"
+msgstr ""
+
 #: inc/acfcs-preview.php:9
 msgid "Sorry, you do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/acfcs-preview.php:31
+#: inc/acfcs-preview.php:30
 msgid "Preview data"
 msgstr ""
 
-#: inc/acfcs-preview.php:32
+#: inc/acfcs-preview.php:31
 msgid "Here you can preview any uploaded csv files."
 msgstr ""
 
-#: inc/acfcs-preview.php:33
+#: inc/acfcs-preview.php:32
 msgid "Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered)."
 msgstr ""
 
-#: inc/acfcs-preview.php:90
+#: inc/acfcs-preview.php:89
 msgid "View this file"
 msgstr ""
 
-#: inc/acfcs-preview.php:99
+#: inc/acfcs-preview.php:98
 msgid "You have no files to preview."
 msgstr ""
 
@@ -521,107 +715,123 @@ msgstr ""
 msgid "You either have errors in your CSV or there is no data. Verify this file on the <a href=\"%s\">dashboard</a>."
 msgstr ""
 
-#: inc/acfcs-search.php:124
+#: inc/acfcs-search.php:136
 msgid "Search for cities"
 msgstr ""
 
-#: inc/acfcs-search.php:145
+#: inc/acfcs-search.php:157
 msgid "OR"
 msgstr ""
 
-#: inc/acfcs-search.php:173
+#: inc/acfcs-search.php:185
 msgid "Search term"
 msgstr ""
 
-#: inc/acfcs-search.php:182
+#: inc/acfcs-search.php:194
 msgid "Limit"
 msgstr ""
 
-#: inc/acfcs-search.php:202
+#: inc/acfcs-search.php:211
+msgid "Orderby"
+msgstr ""
+
+#: inc/acfcs-search.php:234
 msgid "No results, please try again."
 msgstr ""
 
-#: inc/acfcs-search.php:208
+#: inc/acfcs-search.php:240
 msgid "results"
 msgstr ""
 
-#: inc/acfcs-search.php:213
+#: inc/acfcs-search.php:245
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:216
+#: inc/acfcs-search.php:248
 msgid "Select"
 msgstr ""
 
-#: inc/acfcs-search.php:252
+#: inc/acfcs-search.php:284
 msgid "Delete selected"
 msgstr ""
 
-#: inc/acfcs-settings.php:26
+#: inc/acfcs-settings.php:25
 msgid "Import countries"
 msgstr ""
 
-#: inc/acfcs-settings.php:27
+#: inc/acfcs-settings.php:26
 msgid "Here you can (re-)import all cities for the individual countries listed below."
 msgstr ""
 
-#: inc/acfcs-settings.php:30
+#: inc/acfcs-settings.php:29
 msgid "Import all cities in Belgium"
 msgstr ""
 
-#: inc/acfcs-settings.php:34
+#: inc/acfcs-settings.php:33
 msgid "Import all cities in Luxembourg"
 msgstr ""
 
-#: inc/acfcs-settings.php:38
+#: inc/acfcs-settings.php:37
 msgid "Import all cities in Holland/The Netherlands"
 msgstr ""
 
-#: inc/acfcs-settings.php:40
+#: inc/acfcs-settings.php:39
 msgid "Import selected countries"
 msgstr ""
 
-#: inc/acfcs-settings.php:47
+#: inc/acfcs-settings.php:46
 msgid "Remove countries"
 msgstr ""
 
-#: inc/acfcs-settings.php:48
+#: inc/acfcs-settings.php:47
 msgid "Here you can remove a country and all its states and cities from the database."
 msgstr ""
 
-#: inc/acfcs-settings.php:58
+#: inc/acfcs-settings.php:57
 msgid "Delete selected countries"
 msgstr ""
 
+#: inc/acfcs-settings.php:64 inc/acfcs-settings.php:70
+msgid "Delete transients"
+msgstr ""
+
 #: inc/acfcs-settings.php:65
+msgid "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option."
+msgstr ""
+
+#: inc/acfcs-settings.php:68
+msgid "Delete all transients"
+msgstr ""
+
+#: inc/acfcs-settings.php:77
 msgid "Clear the database"
 msgstr ""
 
-#: inc/acfcs-settings.php:66
+#: inc/acfcs-settings.php:78
 msgid "By selecting this option, you will remove all cities, which are present in the database. This is handy if you don't need the preset cities or you want a fresh start."
 msgstr ""
 
-#: inc/acfcs-settings.php:69
+#: inc/acfcs-settings.php:81
 msgid "Delete all cities from the database"
 msgstr ""
 
-#: inc/acfcs-settings.php:71
-msgid "Nuke 'em"
+#: inc/acfcs-settings.php:83
+msgid "Delete everything"
 msgstr ""
 
-#: inc/acfcs-settings.php:78
+#: inc/acfcs-settings.php:90
 msgid "Save data"
 msgstr ""
 
-#: inc/acfcs-settings.php:79
+#: inc/acfcs-settings.php:91
 msgid "When the plugin is deleted, all settings and cities are deleted as well. Select this option to preserve this data upon deletion."
 msgstr ""
 
-#: inc/acfcs-settings.php:84
+#: inc/acfcs-settings.php:96
 msgid "Preserve settings on plugin deletion"
 msgstr ""
 
-#: inc/acfcs-settings.php:87
+#: inc/acfcs-settings.php:99
 msgid "Save settings"
 msgstr ""
 

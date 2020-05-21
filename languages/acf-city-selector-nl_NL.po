@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2020-05-16 02:35+0200\n"
-"PO-Revision-Date: 2020-05-16 02:37+0200\n"
+"POT-Creation-Date: 2020-05-21 17:42+0200\n"
+"PO-Revision-Date: 2020-05-21 17:43+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -143,7 +143,7 @@ msgstr "Documentatie"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ACF_City_Selector.php:708 inc/acfcs-search.php:195
+#: ACF_City_Selector.php:708 inc/acfcs-search.php:227
 msgid "Search"
 msgstr "Zoeken"
 
@@ -199,7 +199,7 @@ msgstr "Keuze"
 
 #: fields/acf-city-selector-v5.php:47 fields/acf-city-selector-v5.php:224
 #: fields/acf-city-selector-v5.php:228 inc/acfcs-functions.php:162
-#: inc/country-field.php:112
+#: inc/country-field.php:114
 msgid "Select a city"
 msgstr "Selecteer een stad"
 
@@ -236,13 +236,13 @@ msgid "Fields to use"
 msgstr "Velden om te gebruiken"
 
 #: fields/acf-city-selector-v5.php:139 fields/acf-city-selector-v5.php:197
-#: fields/acf-city-selector-v5.php:201 inc/acfcs-search.php:152
+#: fields/acf-city-selector-v5.php:201 inc/acfcs-search.php:164
 #: inc/country-field.php:44
 msgid "Select a province/state"
 msgstr "Selecteer een provincie/staat"
 
 #: fields/acf-city-selector-v5.php:168 fields/acf-city-selector-v5.php:172
-#: inc/acfcs-functions.php:68 inc/acfcs-search.php:135
+#: inc/acfcs-functions.php:68 inc/acfcs-search.php:147
 msgid "Select a country"
 msgstr "Selecteer een land"
 
@@ -297,7 +297,7 @@ msgid "Country packages"
 msgstr "Land pakketten"
 
 #: inc/acfcs-countries.php:51 inc/acfcs-help-tabs.php:51
-#: inc/acfcs-preview.php:117 inc/acfcs-search.php:225
+#: inc/acfcs-preview.php:117 inc/acfcs-search.php:257
 msgid "Country"
 msgstr "Land"
 
@@ -481,7 +481,7 @@ msgid "Note"
 msgstr "Notitie"
 
 #: inc/acfcs-help-tabs.php:31 inc/acfcs-preview.php:113
-#: inc/acfcs-search.php:219
+#: inc/acfcs-search.php:214 inc/acfcs-search.php:251
 msgid "City"
 msgstr "Stad"
 
@@ -502,7 +502,7 @@ msgid "max 3 characters"
 msgstr "max 3 karakters"
 
 #: inc/acfcs-help-tabs.php:41 inc/acfcs-preview.php:115
-#: inc/acfcs-search.php:222
+#: inc/acfcs-search.php:215 inc/acfcs-search.php:254
 msgid "State"
 msgstr "Staat/provincie"
 
@@ -780,39 +780,43 @@ msgstr ""
 "Of er zijn errors in je CSV of er is geen data aanwezig. Verifieer dit "
 "bestand op het <a href=\"%s\">dashboard</a>."
 
-#: inc/acfcs-search.php:124
+#: inc/acfcs-search.php:136
 msgid "Search for cities"
 msgstr "Zoek naar steden"
 
-#: inc/acfcs-search.php:145
+#: inc/acfcs-search.php:157
 msgid "OR"
 msgstr "OF"
 
-#: inc/acfcs-search.php:173
+#: inc/acfcs-search.php:185
 msgid "Search term"
 msgstr "Zoekterm"
 
-#: inc/acfcs-search.php:182
+#: inc/acfcs-search.php:194
 msgid "Limit"
 msgstr "Limiet"
 
-#: inc/acfcs-search.php:202
+#: inc/acfcs-search.php:211
+msgid "Orderby"
+msgstr "Sorteren op"
+
+#: inc/acfcs-search.php:234
 msgid "No results, please try again."
 msgstr "Geen resultaten, probeer het aub nog een keer."
 
-#: inc/acfcs-search.php:208
+#: inc/acfcs-search.php:240
 msgid "results"
 msgstr "resultaten"
 
-#: inc/acfcs-search.php:213
+#: inc/acfcs-search.php:245
 msgid "Row ID"
 msgstr ""
 
-#: inc/acfcs-search.php:216
+#: inc/acfcs-search.php:248
 msgid "Select"
 msgstr "Selecteer"
 
-#: inc/acfcs-search.php:252
+#: inc/acfcs-search.php:284
 msgid "Delete selected"
 msgstr "Verwijder geselecteerde"
 
@@ -18008,9 +18012,6 @@ msgstr "Je hebt succesvol 2449 steden in Nederland geïmporteerd."
 
 #~ msgid "Order now !!!"
 #~ msgstr "Bestel nu !!!"
-
-#~ msgid "Order"
-#~ msgstr "Bestel"
 
 #~ msgid ""
 #~ "On this page you can import cities. You can select cities from The "
