@@ -166,9 +166,15 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* Wordpress 5.4.1
-* Advanced Custom Fields Pro 5.8.9
-* Advanced Custom Fields 4.4.12
+[X] Wordpress 5.4.1
+[X] Advanced Custom Fields Pro 5.8.9
+[X] Advanced Custom Fields 4.4.12
+[X] Chrome (latest version)
+[ ] Firefox (latest version)
+[ ] Safari (latest version)
+[ ] Edge (latest version)
+[ ] iPhone
+[ ] Android
 
 <a name="support"></a>
 ### Support
