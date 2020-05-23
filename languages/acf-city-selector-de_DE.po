@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
 "POT-Creation-Date: 2020-05-21 19:00+0200\n"
-"PO-Revision-Date: 2020-05-21 19:01+0200\n"
+"PO-Revision-Date: 2020-05-23 18:45+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -207,7 +207,7 @@ msgstr "Wähle eine Stadt"
 
 #: fields/acf-city-selector-v5.php:86
 msgid "Select a default country for a new field"
-msgstr "Wählen Sie ein Standardland für ein neues Feld"
+msgstr "Wählen Sie das voreingestellte Land für ein neues Feld"
 
 #: fields/acf-city-selector-v5.php:87
 msgid "Default country"
@@ -231,7 +231,7 @@ msgstr "Land + Stadt"
 
 #: fields/acf-city-selector-v5.php:100
 msgid "Select which fields are used"
-msgstr "Wähle welche Felder verwendet werden"
+msgstr "Wählen Sie welche Felder verwendet werden"
 
 #: fields/acf-city-selector-v5.php:101
 msgid "Fields to use"
@@ -583,7 +583,8 @@ msgstr "Vereinigte Staaten"
 #: inc/acfcs-info.php:34
 msgid "This page shows real-time info about your site and settings."
 msgstr ""
-"Diese Seite zeigt Echtzeit Information über deine Seite und Einstellungen."
+"Diese Seite zeigt Echtzeit-Information über deine Webseite und deinen "
+"Einstellungen."
 
 #: inc/acfcs-info.php:36
 msgid "We might ask for this info if support is helping you fix a problem."
@@ -625,7 +626,7 @@ msgstr "PHP Version"
 
 #: inc/acfcs-info.php:83
 msgid "Server IP"
-msgstr ""
+msgstr "Server IP"
 
 #: inc/acfcs-info.php:88
 msgid "Server port"
@@ -633,11 +634,11 @@ msgstr "Server Port"
 
 #: inc/acfcs-info.php:93
 msgid "Scheme"
-msgstr ""
+msgstr "Schema"
 
 #: inc/acfcs-info.php:98
 msgid "Home path"
-msgstr ""
+msgstr "Startseiten Pfad"
 
 #: inc/acfcs-info.php:104
 msgid "WordPress info"
@@ -649,15 +650,15 @@ msgstr "WordPress Version"
 
 #: inc/acfcs-info.php:120
 msgid "Home URL"
-msgstr ""
+msgstr "Startseiten URL"
 
 #: inc/acfcs-info.php:125
 msgid "Admin email"
-msgstr ""
+msgstr "Administrator E-Mail"
 
 #: inc/acfcs-info.php:130
 msgid "Blog public"
-msgstr ""
+msgstr "Öffentlicher Blog"
 
 #: inc/acfcs-info.php:135
 msgid "Users can register"
@@ -665,11 +666,11 @@ msgstr "Jeder kann sich registrieren"
 
 #: inc/acfcs-info.php:140
 msgid "Page on front"
-msgstr ""
+msgstr "Startseite"
 
 #: inc/acfcs-info.php:145
 msgid "Current theme"
-msgstr "Aktuelles Thema"
+msgstr "Aktuelles Design"
 
 #: inc/acfcs-info.php:153
 msgid "Stylesheet folder"
@@ -693,7 +694,7 @@ msgstr "Sprache"
 
 #: inc/acfcs-info.php:182
 msgid "Multisite"
-msgstr ""
+msgstr "Multisite"
 
 #: inc/acfcs-info.php:194
 msgid "Main site"
@@ -701,7 +702,7 @@ msgstr "Hauptseite"
 
 #: inc/acfcs-info.php:200
 msgid "Main registration"
-msgstr ""
+msgstr "Haupt- Anmeldung"
 
 #: inc/acfcs-info.php:207
 msgid "Subsite registration"
@@ -713,11 +714,11 @@ msgstr "Aktive Plugins"
 
 #: inc/acfcs-info.php:220
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: inc/acfcs-info.php:221
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: inc/acfcs-info.php:243
 msgid "Download JSON"
@@ -729,15 +730,15 @@ msgid ""
 "problem."
 msgstr ""
 "Wenn Sie Unterstützung benötigen, können die oben genannten Informationen "
-"hilfreich sein, um ein Problem zu beheben."
+"hilfreich sein, um ihr Problem zu beheben."
 
 #: inc/acfcs-info.php:247
 msgid ""
 "You can download the settings to a JSON file below (and send it to us when "
 "asked)."
 msgstr ""
-"Sie können die Einstellungen unten in eine JSON-Datei herunterladen (und auf "
-"Anfrage an uns senden)."
+"Sie können die Einstellungen unten als eine JSON-Datei herunterladen (und "
+"auf Anfrage an uns senden)."
 
 #: inc/acfcs-info.php:256
 msgid "Download JSON file"
