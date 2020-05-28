@@ -45,7 +45,7 @@
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                         // @TODO: check for multiple (single) fields
-                        $settings[ 'default_country' ] = $field[ 'default_country' ];
+                        $settings[ 'default_country' ] = isset( $field[ 'default_country' ] ) ? $field[ 'default_country' ] : false;
                         $settings[ 'show_labels' ]     = $field[ 'show_labels' ] ;
                         $settings[ 'which_fields' ]    = $field[ 'which_fields' ];
                         break;
