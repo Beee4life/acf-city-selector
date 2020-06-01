@@ -38,8 +38,8 @@
                 </div>
 
                 <div class="acfcs__section acfcs__section--countries">
-                    <h2><?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?></h2>
                     <?php if ( ! empty( $countries ) ) { ?>
+                        <h2><?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?></h2>
                         <table class="acfcs__table acfcs__table--info">
                             <thead>
                             <tr>
@@ -57,6 +57,8 @@
                             <?php } ?>
                             </tbody>
                         </table>
+                    <?php } else { ?>
+                        <?php $prepare_json[ 'countries' ] = 'none'; ?>
                     <?php } ?>
 
                     <h2><?php esc_html_e( 'Server info', 'acf-city-selector' ); ?></h2>
