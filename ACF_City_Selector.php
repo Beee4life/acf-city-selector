@@ -625,7 +625,7 @@
                             }
                             echo $message;
                             echo '</div>';
-                            echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'action-logger' ) . '</span></button>';
+                            echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'acf-city-selector' ) . '</span></button>';
                         }
                         echo '</div>';
                     }
