@@ -33,10 +33,11 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'version'       => '0.22',
-                    'url'           => plugin_dir_url( __FILE__ ),
+                    'db_version'    => '1.0',
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
+                    'url'           => plugin_dir_url( __FILE__ ),
+                    'version'       => '0.22',
                 );
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
@@ -69,6 +70,7 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
+                add_action( 'plugins_loaded',               array( $this, 'acfcs_set_db_version' ) );
 
                 // Plugin's own actions
                 add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
@@ -93,63 +95,10 @@
 
 
             /*
-             * Change plugin order so ACFCS loads after ACF
-             */
-            public function acfcs_change_plugin_order() {
-                $active_plugins = get_option( 'active_plugins' );
-                $acfcs_key      = array_search( 'acf-city-selector/ACF_City_Selector.php', $active_plugins );
-                $acf_key        = array_search( 'advanced-custom-fields-pro/acf.php', $active_plugins );
-                if ( false !== $acf_key && false !== $acfcs_key ) {
-                    if ( $acfcs_key < $acf_key ) {
-                        $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
-                        update_option( 'active_plugins', $active_plugins, true );
-                    }
-                }
-            }
-
-
-            /*
-             * Check if ACF is active and if not add an admin notice
-             */
-            public function acfcs_check_for_acf() {
-                if ( ! class_exists( 'acf' ) ) {
-                    add_action( 'admin_notices', function () {
-                        echo '<div class="error"><p>';
-                        echo sprintf( __( '"%s" is not activated. This plugin <strong>must</strong> be activated, because without it "%s" won\'t work. Activate it <a href="%s">here</a>.', 'acf-city-selector' ),
-                            'Advanced Custom Fields',
-                            'ACF City Selector',
-                            esc_url( admin_url( 'plugins.php?s=acf&plugin_status=inactive' ) ) );
-                        echo '</p></div>';
-                    });
-                }
-            }
-
-
-            /**
-             * Add admin notice when ACF version < 5
-             */
-            public function acfcs_check_acf_version() {
-                if ( ! function_exists( 'get_plugins' ) ) {
-                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
-                }
-                $plugins = get_plugins();
-
-                if ( isset( $plugins[ 'advanced-custom-fields-pro/acf.php' ] ) ) {
-                    if ( $plugins[ 'advanced-custom-fields-pro/acf.php' ][ 'Version' ] < 5 && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
-                        add_action( 'admin_notices', function () {
-                            echo '<div class="error"><p>';
-                            echo sprintf( __( '<b>Warning</b>: The "%s" plugin will not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ), 'City Selector', 'Advanced Custom Fields' );
-                            echo '</p></div>';
-                        } );
-                    }
-                }
-            }
-
-
-            /*
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_activation() {
+                $this->acfcs_set_db_version();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_create_fill_db();
                 }
@@ -184,24 +133,25 @@
              * Check if table exists
              */
             public function acfcs_check_table() {
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-                ob_start();
-                global $wpdb;
-                ?>
-                CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
-                id int(6) unsigned NOT NULL auto_increment,
-                city_name varchar(50) NULL,
-                state_code varchar(3) NULL,
-                state_name varchar(50) NULL,
-                country_code varchar(2) NULL,
-                country varchar(50) NULL,
-                PRIMARY KEY  (id)
-                )
-                COLLATE <?php echo $wpdb->collate; ?>;
-                <?php
-                $sql = ob_get_clean();
-                dbDelta( $sql );
-
+                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
+                    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                    ob_start();
+                    global $wpdb;
+                    ?>
+                    CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
+                    id int(6) unsigned NOT NULL auto_increment,
+                    city_name varchar(50) NULL,
+                    state_code varchar(3) NULL,
+                    state_name varchar(50) NULL,
+                    country_code varchar(2) NULL,
+                    country varchar(50) NULL,
+                    PRIMARY KEY  (id)
+                    )
+                    COLLATE <?php echo $wpdb->collate; ?>;
+                    <?php
+                        $sql = ob_get_clean();
+                        dbDelta( $sql );
+                }
             }
 
 
@@ -723,6 +673,70 @@
                 return $menu;
             }
 
+            /*
+             * Check if ACF is active and if not add an admin notice
+             */
+            public function acfcs_check_for_acf() {
+                if ( ! class_exists( 'acf' ) ) {
+                    add_action( 'admin_notices', function () {
+                        echo '<div class="error"><p>';
+                        echo sprintf( __( '"%s" is not activated. This plugin <strong>must</strong> be activated, because without it "%s" won\'t work. Activate it <a href="%s">here</a>.', 'acf-city-selector' ),
+                            'Advanced Custom Fields',
+                            'ACF City Selector',
+                            esc_url( admin_url( 'plugins.php?s=acf&plugin_status=inactive' ) ) );
+                        echo '</p></div>';
+                    });
+                }
+            }
+
+
+            /*
+             * Add admin notice when ACF version < 5
+             */
+            public function acfcs_check_acf_version() {
+                if ( ! function_exists( 'get_plugins' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/plugin.php';
+                }
+                $plugins = get_plugins();
+
+                if ( isset( $plugins[ 'advanced-custom-fields-pro/acf.php' ] ) ) {
+                    if ( $plugins[ 'advanced-custom-fields-pro/acf.php' ][ 'Version' ] < 5 && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
+                        add_action( 'admin_notices', function () {
+                            echo '<div class="error"><p>';
+                            echo sprintf( __( '<b>Warning</b>: The "%s" plugin will not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ), 'City Selector', 'Advanced Custom Fields' );
+                            echo '</p></div>';
+                        } );
+                    }
+                }
+            }
+
+
+            /*
+             * Change plugin order so ACFCS loads after ACF
+             */
+            public function acfcs_change_plugin_order() {
+                $active_plugins = get_option( 'active_plugins' );
+                $acfcs_key      = array_search( 'acf-city-selector/ACF_City_Selector.php', $active_plugins );
+                $acf_key        = array_search( 'advanced-custom-fields-pro/acf.php', $active_plugins );
+                if ( false !== $acf_key && false !== $acfcs_key ) {
+                    if ( $acfcs_key < $acf_key ) {
+                        $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
+                        update_option( 'active_plugins', $active_plugins, true );
+                    }
+                }
+            }
+
+
+            /*
+             * Set DB version
+             */
+            public function acfcs_set_db_version() {
+                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
+                    update_option( 'b3_db_version', $this->settings[ 'db_version' ] );
+                }
+            }
+
+
             /**
              * Move array element to specific position
              *
@@ -734,6 +748,7 @@
                 $out = array_splice( $array, $from_index, 1 );
                 array_splice( $array, $to_index, 0, $out );
             }
+
 
             /*
              * Adds admin pages
