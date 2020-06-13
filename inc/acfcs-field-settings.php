@@ -45,26 +45,26 @@
                 foreach( $fields as $field ) {
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                         // @TODO: check for multiple (single) fields
-                        $settings[ 'default_country' ] = $field[ 'default_country' ];
+                        $settings[ 'default_country' ] = isset( $field[ 'default_country' ] ) ? $field[ 'default_country' ] : false;
                         $settings[ 'show_labels' ]     = $field[ 'show_labels' ] ;
-                        $settings[ 'which_fields' ]    = $field[ 'which_fields' ];
+                        $settings[ 'which_fields' ]    = isset( $field[ 'which_fields' ] ) ? $field[ 'which_fields' ] : false;
                         break;
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
                         // @TODO: look into multiple repeaters
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                         if ( false !== $array_key ) {
-                            $settings[ 'default_country' ] = $field[ 'sub_fields' ][ $array_key ][ 'default_country' ];
+                            $settings[ 'default_country' ] = isset( $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] : false;
                             $settings[ 'show_labels' ]     = $field[ 'sub_fields' ][ $array_key ][ 'show_labels' ];
-                            $settings[ 'which_fields' ]    = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
+                            $settings[ 'which_fields' ]    = isset( $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] : false;
                             break;
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'group' ) {
                         $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
                         // @TODO: look into multiple fields - array_search returns first instance only
                         if ( false !== $array_key ) {
-                            $settings[ 'default_country' ] = $field[ 'sub_fields' ][ $array_key ][ 'default_country' ];
+                            $settings[ 'default_country' ] = isset( $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] : false;
                             $settings[ 'show_labels' ]     = $field[ 'sub_fields' ][ $array_key ][ 'show_labels' ];
-                            $settings[ 'which_fields' ]    = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
+                            $settings[ 'which_fields' ]    = isset( $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] : false;
                             break;
                         } else {
                             $array_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ], 'type' ) );
@@ -77,9 +77,9 @@
                                     if ( ! empty( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ] ) ) {
                                         $acf_key = array_search( 'acf_city_selector', array_column( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ], 'type' ) );
                                         if ( false !== $acf_key ) {
-                                            $settings[ 'default_country' ] = $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ];
+                                            $settings[ 'default_country' ] = isset( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ] : false;
                                             $settings[ 'show_labels' ]     = $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'show_labels' ];
-                                            $settings[ 'which_fields' ]    = $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ];
+                                            $settings[ 'which_fields' ]    = isset( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] : false;
                                             break;
                                         } else {
                                             // @TODO: check for clone
@@ -87,9 +87,9 @@
                                     }
                                 }
                             } else {
-                                $settings[ 'default_country' ] = $field[ 'sub_fields' ][ $array_key ][ 'default_country' ];
+                                $settings[ 'default_country' ] = isset( $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'default_country' ] : false;
                                 $settings[ 'show_labels' ]     = $field[ 'sub_fields' ][ $array_key ][ 'show_labels' ];
-                                $settings[ 'which_fields' ]    = $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ];
+                                $settings[ 'which_fields' ]    = isset( $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'which_fields' ] : false;
                             }
                         }
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'flexible_content' ) {
@@ -99,9 +99,9 @@
                             $sub_fields = $layout[ 'sub_fields' ];
                             $acf_key = array_search( 'acf_city_selector', array_column( $sub_fields, 'type' ) );
                             if ( false !== $acf_key ) {
-                                $settings[ 'default_country' ] = $sub_fields[ $acf_key ][ 'default_country' ];
+                                $settings[ 'default_country' ] = isset( $sub_fields[ $acf_key ][ 'default_country' ] ) ? $sub_fields[ $acf_key ][ 'default_country' ] : false;
                                 $settings[ 'show_labels' ]     = $sub_fields[ $acf_key ][ 'show_labels' ];
-                                $settings[ 'which_fields' ]    = $sub_fields[ $acf_key ][ 'which_fields' ];
+                                $settings[ 'which_fields' ]    = isset( $sub_fields[ $acf_key ][ 'which_fields' ] ) ? $sub_fields[ $acf_key ][ 'which_fields' ] : false;
                                 break;
                             } else {
                                 // check for repeater
@@ -109,9 +109,9 @@
                                 if ( false !== $repeater_key ) {
                                     $acf_key = array_search( 'acf_city_selector', array_column( $sub_fields[ $repeater_key ][ 'sub_fields' ], 'type' ) );
                                     if ( false !== $acf_key ) {
-                                        $settings[ 'default_country' ] = $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ];
+                                        $settings[ 'default_country' ] = isset( $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ] ) ? $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'default_country' ] : false;
                                         $settings[ 'show_labels' ]     = $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'show_labels' ];
-                                        $settings[ 'which_fields' ]    = $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ];
+                                        $settings[ 'which_fields' ]    = isset( $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] ) ? $sub_fields[ $repeater_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] : false;
                                     }
                                 } else {
                                     $group_key = array_search( 'group', array_column( $sub_fields, 'type' ) );
@@ -134,5 +134,3 @@
         return $settings;
 
     }
-
-
