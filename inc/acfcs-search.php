@@ -114,7 +114,7 @@
                 " . $orderby . "
                 " . $search_limit . "
             ";
-            $cities = $wpdb->get_results( $sql );
+            $cities     = $wpdb->get_results( $sql );
             $city_array = array();
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
