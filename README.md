@@ -225,6 +225,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.23
+* added constants
+
 0.22.1
 * added undefined index when no criteria are used to search (in admin)
 * added isset for new values
