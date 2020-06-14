@@ -43,6 +43,21 @@
                     define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
                 }
 
+                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
+                    $plugin_url = plugins_url( '/', __FILE__ );
+                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
+                }
+
+                if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
+                    $plugin_path = dirname( __FILE__ );
+                    define( 'ACFCS_PLUGIN_PATH', $plugin_path );
+                }
+
+                if ( ! defined( 'ACFCS_PLUGIN_SETTINGS' ) ) {
+                    $settings_url = admin_url( 'admin.php?page=b3-onboarding' );
+                    define( 'ACFCS_PLUGIN_SETTINGS', $settings_url );
+                }
+
                 // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
