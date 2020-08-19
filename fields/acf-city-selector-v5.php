@@ -334,36 +334,44 @@
 
                 $required = $field[ 'required' ];
                 if ( 0 == $required ) {
-                    if ( isset( $fields[ 'which_fields' ] ) && 'all' == $fields[ 'which_fields' ] || ! isset( $fields[ 'which_fields' ] ) ) {
+                    if ( isset( $field[ 'which_fields' ] ) && 'all' == $field[ 'which_fields' ] || ! isset( $field[ 'which_fields' ] ) ) {
                         // if nothing is selected, set value to false
                         if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
-                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_state' == $fields[ 'which_fields' ] ) {
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_only' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_state' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) ) {
                             $value = false;
                         }
-                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_city' == $fields[ 'which_fields' ] ) {
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_city' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
                     }
                 } else {
                     // field == required
-                    if ( isset( $fields[ 'which_fields' ] ) && 'all' == $fields[ 'which_fields' ] || ! isset( $fields[ 'which_fields' ] ) ) {
+                    if ( isset( $field[ 'which_fields' ] ) && 'all' == $field[ 'which_fields' ] || ! isset( $field[ 'which_fields' ] ) ) {
                         // if nothing is selected, set value to false
                         if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         } elseif ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
-                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_state' == $fields[ 'which_fields' ] ) {
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_only' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) ) {
+                            $value = false;
+                        }
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_state' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'stateCode' ] ) ) {
                             $value = false;
                         }
-                    } elseif ( isset( $fields[ 'which_fields' ] ) && 'country_city' == $fields[ 'which_fields' ] ) {
+                    } elseif ( isset( $field[ 'which_fields' ] ) && 'country_city' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
