@@ -70,7 +70,6 @@
         }
 
         $transient = get_transient( 'acfcs_countries' );
-        $transient = false;
         if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
             global $wpdb;
             $results = $wpdb->get_results( '
