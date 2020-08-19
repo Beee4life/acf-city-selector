@@ -3,7 +3,7 @@ Tags: acf, custom, field, fields, custom field, custom fields, edit
 Contributors: beee4life,mrjohnmc
 Requires at least: 3.6.0
 Tested up to: 5.2.2
-Stable tag: 0.22.1
+Stable tag: 0.22.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
