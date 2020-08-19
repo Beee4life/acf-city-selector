@@ -58,7 +58,7 @@
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $show_labels = false ) {
+    function acfcs_get_countries( $show_first = false, $show_labels = false, $show_count = false ) {
 
         $countries = [];
         if ( false !== $show_first ) {
@@ -80,7 +80,15 @@
 
             $country_results = [];
             foreach ( $results as $data ) {
-                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+                $count_results = false;
+                if ( false != $show_count ) {
+                    $city_results = $wpdb->get_results( '
+                        SELECT * FROM ' . $wpdb->prefix . 'cities
+                        WHERE country_code = \'' . $data->country_code . '\'
+                    ' );
+                    $count_results = ' (' . count( $city_results ) . ')';
+                }
+                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' ) . $count_results;
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
@@ -467,8 +475,9 @@
                 ORDER BY country_code ASC
             ' );
             $acfcs_info[ $country_code ] = [
-                'count' => count( $results ),
-                'name'  => acfcs_get_country_name( $country_code ),
+                'country_code' => $country_code,
+                'count'        => count( $results ),
+                'name'         => acfcs_get_country_name( $country_code ),
             ];
         }
 

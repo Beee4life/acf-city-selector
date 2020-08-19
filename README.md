@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.22.1 - released 13.06.20
+0.22.2 - released 20.08.20
 
 <a name="description"></a>
 ### Description
@@ -166,8 +166,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-[X] Wordpress 5.4.1
-[X] Advanced Custom Fields Pro 5.8.9
+[X] Wordpress 5.5
+[X] Advanced Custom Fields Pro 5.9.0
 [X] Advanced Custom Fields 4.4.12
 [X] Chrome (latest version)
 [ ] Firefox (latest version)
@@ -224,6 +224,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.22.2
+* changed var name which prevented storing of some fields
+* added constants
 
 0.22.1
 * added undefined index when no criteria are used to search (in admin)
