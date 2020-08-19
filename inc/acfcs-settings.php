@@ -41,11 +41,12 @@
 
                 <br /><hr />
 
+                <?php $countries = acfcs_get_countries( false, false, true ); ?>
+                <?php if ( ! empty( $countries ) ) { ?>
+                <h2><?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?></h2>
                 <form method="post" action="">
                     <input name="acfcs_remove_countries_nonce" value="<?php echo wp_create_nonce( 'acfcs-remove-countries-nonce' ); ?>" type="hidden" />
-                    <h2><?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ); ?></p>
-                    <?php $countries = acfcs_get_countries(); ?>
                     <ul>
                         <?php foreach( $countries as $key => $value ) { ?>
                             <li>
@@ -58,6 +59,7 @@
                 </form>
 
                 <br /><hr />
+                <?php } ?>
 
                 <form method="post" action="">
                     <input name="acfcs_delete_transients" value="<?php echo wp_create_nonce( 'acfcs-delete-transients-nonce' ); ?>" type="hidden" />
