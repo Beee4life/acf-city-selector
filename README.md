@@ -213,7 +213,7 @@ This is very random and unpredictable.
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
 - [ ] Add explanation about how the field validation works 
-- [ ] Add select2 to dropdowns (including a search, like with a post object field) 
+- [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
 ### Credit
