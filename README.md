@@ -13,6 +13,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
+- [Updates](#updates)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -48,6 +49,32 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Select if you want to show labels
 1. Select if you want a default country
 1. (optional) Import new cities with help of the included excel sheet.
+
+If you use a composer file to add any plugins/libraries. Add the following to `repositories` in your composer.json:
+
+```
+    {
+      "type":    "package",
+      "package": {
+        "name":    "Beee4life/acf-city-selector",
+        "type":    "wordpress-plugin",
+        "version": "0.23.0",
+        "dist":    {
+          "type": "zip",
+          "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
+        }
+      }
+    },
+
+```
+
+Then run `composer require "beee4life/acf-city-selector"`
+
+or add this to the require section by hand:
+
+```
+"beee4life/acf-city-selector": "0.23.0",
+```
 
 <a name="usage"></a>
 ### Usage
@@ -176,6 +203,11 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 * [ ] iPhone
 * [ ] Android
 
+<a name="updates"></a>
+### Updates
+
+Since this plugin hasn't been added to the Wordpress repo yet, we recommend 'watching' the plugin [here](https://github.com/Beee4life/acf-city-selector/watchers).
+
 <a name="support"></a>
 ### Support
 
@@ -227,6 +259,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.23.0
 * added min. PHP requirement
+* removed brackets around file includes
+* fixed db version option
 
 0.22.2
 * changed var name which prevented storing of some fields
