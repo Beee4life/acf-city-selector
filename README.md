@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.23.0 - released xx.09.20
+0.23.0 - released 13.09.20
 
 <a name="description"></a>
 ### Description
@@ -137,7 +137,7 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
+There are a few country packages (csv files) available. These packages can be imported as is. These are available through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="actions"></a>
 ### Actions
@@ -166,15 +166,15 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-[X] Wordpress 5.5
-[X] Advanced Custom Fields Pro 5.9.0
-[X] Advanced Custom Fields 4.4.12
-[X] Chrome (latest version)
-[ ] Firefox (latest version)
-[ ] Safari (latest version)
-[ ] Edge (latest version)
-[ ] iPhone
-[ ] Android
+* [X] Wordpress 5.5
+* [X] Advanced Custom Fields Pro 5.9.0
+* [X] Advanced Custom Fields 4.4.12
+* [X] Chrome (latest version)
+* [ ] Firefox (latest version)
+* [ ] Safari (latest version)
+* [ ] Edge (latest version)
+* [ ] iPhone
+* [ ] Android
 
 <a name="support"></a>
 ### Support
