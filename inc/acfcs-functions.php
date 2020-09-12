@@ -1,6 +1,6 @@
 <?php
     // function to check for field values
-    include( 'acfcs-field-settings.php' );
+    include 'acfcs-field-settings.php';
     /**
      * Create an array with countries
      *

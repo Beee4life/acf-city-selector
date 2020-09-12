@@ -128,7 +128,7 @@
                 <?php } ?>
             </div>
 
-            <?php include( 'admin-right.php' ); ?>
+            <?php include 'admin-right.php'; ?>
 
         </div>
         <?php
