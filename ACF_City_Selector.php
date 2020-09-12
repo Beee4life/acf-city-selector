@@ -101,7 +101,6 @@
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
-                include 'inc/acfcs-donate-box.php';
                 include 'inc/acfcs-functions.php';
                 include 'inc/acfcs-help-tabs.php';
                 include 'inc/acfcs-i18n.php';
