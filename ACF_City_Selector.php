@@ -374,15 +374,15 @@
                             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
-                            if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
+                            if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
                                 require_once 'lib/import_be.php';
                                 do_action( 'acfcs_after_success_import_be' );
                             }
-                            if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
+                            if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ 'import_lux' ] ) {
                                 require_once 'lib/import_lux.php';
                                 do_action( 'acfcs_after_success_import_lu' );
                             }
-                            if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
+                            if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
                                 require_once 'lib/import_nl.php';
                                 do_action( 'acfcs_after_success_import_nl' );
                             }
