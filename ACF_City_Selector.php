@@ -40,17 +40,18 @@
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                 );
+
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
                 }
 
                 if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
-                    $plugin_url = plugins_url( '/', __FILE__ );
+                    $plugin_url = $this->settings[ 'url' ];
                     define( 'ACFCS_PLUGIN_URL', $plugin_url );
                 }
 
                 if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
-                    $plugin_path = dirname( __FILE__ );
+                    $plugin_path = $this->settings[ 'path' ];
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
@@ -345,7 +346,6 @@
                                         'country'      => $line[ 4 ],
                                     );
 
-                                    global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
 
                                 }
