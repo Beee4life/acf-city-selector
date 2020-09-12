@@ -82,6 +82,7 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
@@ -101,11 +102,11 @@
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
                 add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
 
-                include( 'inc/acfcs-donate-box.php' );
-                include( 'inc/acfcs-functions.php' );
-                include( 'inc/acfcs-help-tabs.php' );
-                include( 'inc/acfcs-i18n.php' );
-                include( 'inc/country-field.php' );
+                include 'inc/acfcs-donate-box.php';
+                include 'inc/acfcs-functions.php';
+                include 'inc/acfcs-help-tabs.php';
+                include 'inc/acfcs-i18n.php';
+                include 'inc/country-field.php';
 
             }
 
@@ -133,13 +134,12 @@
              * Prepare database upon plugin activation
              */
             public function acfcs_create_fill_db() {
-                $this->acfcs_check_table();
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
-                require_once( 'lib/import_nl.php' );
-                require_once( 'lib/import_be.php' );
-                require_once( 'lib/import_lux.php' );
+                require_once 'lib/import_nl.php';
+                require_once 'lib/import_be.php';
+                require_once 'lib/import_lux.php';
                 $sql = ob_get_clean();
                 dbDelta( $sql );
             }
@@ -149,8 +149,9 @@
              * Check if table exists
              */
             public function acfcs_check_table() {
-                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
-                    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                $stored_db_version = get_option( 'acfcs_db_version', false );
+                if ( false == $stored_db_version || $stored_db_version != $this->settings[ 'db_version' ] ) {
+                    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                     ob_start();
                     global $wpdb;
                     ?>
@@ -372,19 +373,19 @@
                     } else {
 
                         if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
-                            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                            require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
                             if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
-                                require_once( 'lib/import_be.php' );
+                                require_once 'lib/import_be.php';
                                 do_action( 'acfcs_after_success_import_be' );
                             }
                             if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
-                                require_once( 'lib/import_lux.php' );
+                                require_once 'lib/import_lux.php';
                                 do_action( 'acfcs_after_success_import_lu' );
                             }
                             if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
-                                require_once( 'lib/import_nl.php' );
+                                require_once 'lib/import_nl.php';
                                 do_action( 'acfcs_after_success_import_nl' );
                             }
                             $sql = ob_get_clean();
@@ -747,8 +748,8 @@
              * Set DB version
              */
             public function acfcs_set_db_version() {
-                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
-                    update_option( 'b3_db_version', $this->settings[ 'db_version' ] );
+                if ( get_option( 'acfcs_db_version', false ) != $this->settings[ 'db_version' ] ) {
+                    update_option( 'acfcs_db_version', $this->settings[ 'db_version' ] );
                 }
             }
 
