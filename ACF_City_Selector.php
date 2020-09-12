@@ -100,7 +100,6 @@
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
-                add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
 
                 include 'inc/acfcs-donate-box.php';
                 include 'inc/acfcs-functions.php';
@@ -622,27 +621,6 @@
             public function acfcs_settings_link( $links ) {
                 $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
                 $links         = array_merge( $settings_link, $links );
-
-                return $links;
-            }
-
-
-            /**
-             * Add links below plugin description
-             *
-             * @param $links
-             * @param $file
-             *
-             * @return array
-             */
-            public function acfcs_meta_links( $links, $file ) {
-
-                if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
-                    $visit_plugin_link            = array_pop( $links );
-                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation/">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
-                    $new_links[]                  = $visit_plugin_link;
-                    $links                        = array_merge( $links, $new_links );
-                }
 
                 return $links;
             }
