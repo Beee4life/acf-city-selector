@@ -639,7 +639,7 @@
 
                 if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
                     $visit_plugin_link            = array_pop( $links );
-                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
+                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation/">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
                     $new_links[]                  = $visit_plugin_link;
                     $links                        = array_merge( $links, $new_links );
                 }
