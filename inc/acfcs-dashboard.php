@@ -67,7 +67,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <?php $delimiters = [ ",", ";", "|" ]; ?>
+                                            <?php $delimiters = [ ',', ';', '|' ]; ?>
                                             <label>
                                                 <select name="acfcs_delimiter" id="acfcs_delimiter">
                                                     <?php foreach( $delimiters as $delimiter ) { ?>
