@@ -18,9 +18,11 @@
                 $package[ 'country_name' ] = __( $package[ 'country_name' ], 'acf-city-selector' );
                 $packages[]                = $package;
             }
-            usort( $packages, function( $a, $b ) {
-                return $a[ 'country_name' ] <=> $b[ 'country_name' ];
-            } );
+            if ( ! empty( $packages ) ) {
+                usort( $packages, function( $a, $b ) {
+                    return $a[ 'country_name' ] <=> $b[ 'country_name' ];
+                } );
+            }
         }
         ?>
 
