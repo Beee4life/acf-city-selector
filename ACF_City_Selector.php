@@ -4,6 +4,7 @@
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
     Version:        0.23.0
+    Tested up to:   5.5.1
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
