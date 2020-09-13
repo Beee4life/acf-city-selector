@@ -506,7 +506,6 @@
     function acfcs_custom_sort_with_quotes( $city ) {
         // strip quote marks
         $city = trim( $city, '\'s ' );
-        // strip leading definitive article
         $city = preg_replace( '/^\s*\'s \s+/i', '', $city );
 
         return $city;
