@@ -3,7 +3,9 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.22.2
+    Version:        0.23.0
+    Tested up to:   5.5.1
+    Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
     Text Domain:    acf-city-selector
@@ -34,22 +36,23 @@
 
                 $this->settings = array(
                     'db_version'    => '1.0',
-                    'version'       => '0.22.2',
+                    'version'       => '0.23.0',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                 );
+
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
                 }
 
                 if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
-                    $plugin_url = plugins_url( '/', __FILE__ );
+                    $plugin_url = $this->settings[ 'url' ];
                     define( 'ACFCS_PLUGIN_URL', $plugin_url );
                 }
 
                 if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
-                    $plugin_path = dirname( __FILE__ );
+                    $plugin_path = $this->settings[ 'path' ];
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
@@ -81,6 +84,7 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
+                add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
@@ -98,13 +102,11 @@
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
-                add_filter( 'plugin_row_meta',      array( $this, 'acfcs_meta_links'), 10, 2 );
 
-                include( 'inc/acfcs-donate-box.php' );
-                include( 'inc/acfcs-functions.php' );
-                include( 'inc/acfcs-help-tabs.php' );
-                include( 'inc/acfcs-i18n.php' );
-                include( 'inc/country-field.php' );
+                include 'inc/acfcs-functions.php';
+                include 'inc/acfcs-help-tabs.php';
+                include 'inc/acfcs-i18n.php';
+                include 'inc/country-field.php';
 
             }
 
@@ -132,13 +134,12 @@
              * Prepare database upon plugin activation
              */
             public function acfcs_create_fill_db() {
-                $this->acfcs_check_table();
-                require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
-                require_once( 'lib/import_nl.php' );
-                require_once( 'lib/import_be.php' );
-                require_once( 'lib/import_lux.php' );
+                require_once 'lib/import_nl.php';
+                require_once 'lib/import_be.php';
+                require_once 'lib/import_lux.php';
                 $sql = ob_get_clean();
                 dbDelta( $sql );
             }
@@ -148,8 +149,9 @@
              * Check if table exists
              */
             public function acfcs_check_table() {
-                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
-                    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                $stored_db_version = get_option( 'acfcs_db_version', false );
+                if ( false == $stored_db_version || $stored_db_version != $this->settings[ 'db_version' ] ) {
+                    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                     ob_start();
                     global $wpdb;
                     ?>
@@ -345,7 +347,6 @@
                                         'country'      => $line[ 4 ],
                                     );
 
-                                    global $wpdb;
                                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
 
                                 }
@@ -371,19 +372,19 @@
                     } else {
 
                         if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
-                            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+                            require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
-                            if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ "import_be" ] ) {
-                                require_once( 'lib/import_be.php' );
+                            if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
+                                require_once 'lib/import_be.php';
                                 do_action( 'acfcs_after_success_import_be' );
                             }
-                            if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ "import_lux" ] ) {
-                                require_once( 'lib/import_lux.php' );
+                            if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ 'import_lux' ] ) {
+                                require_once 'lib/import_lux.php';
                                 do_action( 'acfcs_after_success_import_lu' );
                             }
-                            if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ "import_nl" ] ) {
-                                require_once( 'lib/import_nl.php' );
+                            if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
+                                require_once 'lib/import_nl.php';
                                 do_action( 'acfcs_after_success_import_nl' );
                             }
                             $sql = ob_get_clean();
@@ -553,6 +554,7 @@
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
 
+
             /*
              * Displays error messages from form submissions
              */
@@ -625,27 +627,6 @@
             }
 
 
-            /**
-             * Add links below plugin description
-             *
-             * @param $links
-             * @param $file
-             *
-             * @return array
-             */
-            public function acfcs_meta_links( $links, $file ) {
-
-                if ( strpos( $file, 'ACF_City_Selector.php' ) !== false ) {
-                    $visit_plugin_link            = array_pop( $links );
-                    $new_links[ 'documentation' ] = '<a href="' . ACFCS_WEBSITE_URL . '/documentation">' . __( 'Documentation', 'acf-city-selector' ) . '</a>';
-                    $new_links[]                  = $visit_plugin_link;
-                    $links                        = array_merge( $links, $new_links );
-                }
-
-                return $links;
-            }
-
-
             /*
              * Admin menu
              */
@@ -654,7 +635,6 @@
                 $countries      = false;
                 $preview        = false;
                 $search         = false;
-                $show_countries = true;
                 $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
 
                 if ( isset( $url_array[ 'query' ] ) ) {
@@ -679,9 +659,7 @@
                 $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
                 $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
 
-                if ( true === $show_countries ) {
-                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
-                }
+                $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
 
                 $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $info . $countries . '</p>';
 
@@ -746,8 +724,8 @@
              * Set DB version
              */
             public function acfcs_set_db_version() {
-                if ( get_option( 'b3_db_version', false ) != $this->settings[ 'db_version' ] ) {
-                    update_option( 'b3_db_version', $this->settings[ 'db_version' ] );
+                if ( get_option( 'acfcs_db_version', false ) != $this->settings[ 'db_version' ] ) {
+                    update_option( 'acfcs_db_version', $this->settings[ 'db_version' ] );
                 }
             }
 
@@ -760,8 +738,8 @@
              * @param $to_index
              */
             public static function acfcs_move_array_element( &$array, $from_index, $to_index ) {
-                $out = array_splice( $array, $from_index, 1 );
-                array_splice( $array, $to_index, 0, $out );
+                $splice = array_splice( $array, $from_index, 1 );
+                array_splice( $array, $to_index, 0, $splice );
             }
 
 
@@ -770,24 +748,24 @@
              */
             public function acfcs_add_admin_pages() {
 
-                include( 'inc/acfcs-dashboard.php' );
+                include 'inc/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
-                include( 'inc/acfcs-preview.php' );
+                include 'inc/acfcs-preview.php';
                 add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
 
-                include( 'inc/acfcs-settings.php' );
+                include 'inc/acfcs-settings.php';
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 
                 if ( true == acfcs_has_cities() ) {
-                    include( 'inc/acfcs-search.php' );
+                    include 'inc/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
 
-                include( 'inc/acfcs-info.php' );
+                include 'inc/acfcs-info.php';
                 add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
 
-                include( 'inc/acfcs-countries.php' );
+                include 'inc/acfcs-countries.php';
                 add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
             }
 

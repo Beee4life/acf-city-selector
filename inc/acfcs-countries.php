@@ -18,9 +18,11 @@
                 $package[ 'country_name' ] = __( $package[ 'country_name' ], 'acf-city-selector' );
                 $packages[]                = $package;
             }
-            usort( $packages, function( $a, $b ) {
-                return $a[ 'country_name' ] <=> $b[ 'country_name' ];
-            } );
+            if ( ! empty( $packages ) ) {
+                usort( $packages, function( $a, $b ) {
+                    return $a[ 'country_name' ] <=> $b[ 'country_name' ];
+                } );
+            }
         }
         ?>
 
@@ -60,7 +62,7 @@
                             <?php foreach( $packages as $package ) { ?>
                                 <?php $total_price = $total_price + $package[ 'price' ]; ?>
                                 <tr>
-                                    <td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
+                                    <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
                                     <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
                                     <td><?php echo $package[ 'number_states' ]; ?></td>
                                     <td><?php echo $package[ 'number_cities' ]; ?></td>
@@ -83,7 +85,7 @@
 
             </div>
 
-            <?php include( 'admin-right.php' ); ?>
+            <?php include 'admin-right.php'; ?>
 
         </div>
         <?php

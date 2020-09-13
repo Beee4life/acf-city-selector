@@ -5,14 +5,15 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Version](#version)
 - [Description](#description)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Impact](#impact)
+- [Usage](#usage)
 - [Cities](#cities)
 - [Actions](#actions)
 - [Filters](#filters)
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
+- [Updates](#updates)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -23,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.22.2 - released 20.08.20
+0.23.0 - released 13.09.20
 
 <a name="description"></a>
 ### Description
@@ -48,6 +49,38 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Select if you want to show labels
 1. Select if you want a default country
 1. (optional) Import new cities with help of the included excel sheet.
+
+If you use a composer file to add any plugins/libraries. Add the following to your composer.json:
+
+```
+  "repositories": [
+    {
+      "type":    "package",
+      "package": {
+        "name":    "Beee4life/acf-city-selector",
+        "type":    "wordpress-plugin",
+        "version": "0.23.0",
+        "dist":    {
+          "type": "zip",
+          "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
+        }
+      }
+    },
+  ]
+```
+
+Then run `composer require "beee4life/acf-city-selector"`
+
+or add this to the `require` section by hand:
+
+```
+"beee4life/acf-city-selector": "0.23.0",
+```
+
+<a name="impact"></a>
+### Impact
+
+The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
 
 <a name="usage"></a>
 ### Usage
@@ -123,11 +156,6 @@ This outputs:
 "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
 ```
         
-<a name="impact"></a>
-### Impact
-
-The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
-
 <a name="cities"></a>
 ### Cities
 
@@ -137,19 +165,19 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-There will be several country packages (csv files) available (soon), especially for this plugin. These packages can be imported as is. These will be made available soon, through the [ACFCS website](https://acfcs.berryplasman.com).
+There are a few country packages (csv files) available. These packages can be imported as is. These are available through the [ACFCS website](https://acfcs.berryplasman.com).
 
 <a name="actions"></a>
 ### Actions
 
 There are a few actions available to add your own custom actions. 
 
-Find all actions [here](https://acfcs.berryplasman.com/documentation/hooks/#actions).
+Find all actions [here](https://acfcs.berryplasman.com/documentation/actions/).
 
 <a name="filters"></a>
 ### Filters
 
-Find all filters [here](https://acfcs.berryplasman.com/documentation/hooks/#filters).
+Find all filters [here](https://acfcs.berryplasman.com/documentation/filters/).
 
 <a name="functions"></a>
 ### Functions
@@ -166,15 +194,20 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-[X] Wordpress 5.5
-[X] Advanced Custom Fields Pro 5.9.0
-[X] Advanced Custom Fields 4.4.12
-[X] Chrome (latest version)
-[ ] Firefox (latest version)
-[ ] Safari (latest version)
-[ ] Edge (latest version)
-[ ] iPhone
-[ ] Android
+* [X] Wordpress 5.5.1
+* [X] Advanced Custom Fields Pro 5.9.1
+* [X] Advanced Custom Fields 4.4.12
+* [X] Chrome (latest version)
+* [X] Firefox (latest version)
+* [ ] Safari (latest version)
+* [ ] Edge (latest version)
+* [ ] iPhone
+* [ ] Android
+
+<a name="updates"></a>
+### Updates
+
+Since this plugin hasn't been added to the Wordpress repo yet, we recommend 'watching' the plugin [here](https://github.com/Beee4life/acf-city-selector/watchers).
 
 <a name="support"></a>
 ### Support
@@ -213,17 +246,22 @@ This is very random and unpredictable.
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
 - [ ] Add explanation about how the field validation works 
-- [ ] Add select2 to dropdowns (including a search, like with a post object field) 
+- [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
 ### Credit
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-[Jarah de Jong](https://github.com/inquota) helped me out with the JS basics and [John McDonald](https://github.com/mrjohnmc) with the German translation.
+[Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did the German translations.
 
 <a name="changelog"></a>
 ### Changelog
+
+0.23.0
+* added min. PHP requirement
+* removed brackets around file includes
+* fixed db version option
 
 0.22.2
 * changed var name which prevented storing of some fields

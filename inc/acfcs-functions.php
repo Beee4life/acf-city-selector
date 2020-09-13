@@ -1,6 +1,7 @@
 <?php
     // function to check for field values
-    include( 'acfcs-field-settings.php' );
+    include 'acfcs-field-settings.php';
+
     /**
      * Create an array with countries
      *
@@ -153,6 +154,7 @@
         return $states;
     }
 
+
     /**
      * Create an array with cities for a certain country/state
      *
@@ -237,6 +239,7 @@
         }
     }
 
+
     /**
      * Checks if files are uploaded
      *
@@ -269,6 +272,7 @@
 
         return [];
     }
+
 
     /**
      * Convert data from an uploaded CSV file to an array
@@ -429,6 +433,7 @@
         return $response;
     }
 
+
     /**
      * Check depth of array
      * @param $array
@@ -484,6 +489,7 @@
         return $acfcs_info;
     }
 
+
     /**
      * Search an array which contains quotes like "'t Veld"
      *
@@ -496,6 +502,7 @@
         return strnatcasecmp( acfcs_custom_sort_with_quotes( $a[ 'city_name' ] ), acfcs_custom_sort_with_quotes( $b[ 'city_name' ] ) );
     }
 
+
     /**
      * Sort with quotes
      *
@@ -506,7 +513,6 @@
     function acfcs_custom_sort_with_quotes( $city ) {
         // strip quote marks
         $city = trim( $city, '\'s ' );
-        // strip leading definitive article
         $city = preg_replace( '/^\s*\'s \s+/i', '', $city );
 
         return $city;

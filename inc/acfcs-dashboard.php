@@ -67,7 +67,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <?php $delimiters = [ ",", ";", "|" ]; ?>
+                                            <?php $delimiters = [ ',', ';', '|' ]; ?>
                                             <label>
                                                 <select name="acfcs_delimiter" id="acfcs_delimiter">
                                                     <?php foreach( $delimiters as $delimiter ) { ?>
@@ -128,7 +128,7 @@
                 <?php } ?>
             </div>
 
-            <?php include( 'admin-right.php' ); ?>
+            <?php include 'admin-right.php'; ?>
 
         </div>
         <?php
