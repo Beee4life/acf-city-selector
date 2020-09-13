@@ -154,6 +154,7 @@
         return $states;
     }
 
+
     /**
      * Create an array with cities for a certain country/state
      *
@@ -238,6 +239,7 @@
         }
     }
 
+
     /**
      * Checks if files are uploaded
      *
@@ -270,6 +272,7 @@
 
         return [];
     }
+
 
     /**
      * Convert data from an uploaded CSV file to an array
@@ -430,6 +433,7 @@
         return $response;
     }
 
+
     /**
      * Check depth of array
      * @param $array
@@ -485,6 +489,7 @@
         return $acfcs_info;
     }
 
+
     /**
      * Search an array which contains quotes like "'t Veld"
      *
@@ -496,6 +501,7 @@
     function acfcs_sort_array_with_quotes( $a, $b ) {
         return strnatcasecmp( acfcs_custom_sort_with_quotes( $a[ 'city_name' ] ), acfcs_custom_sort_with_quotes( $b[ 'city_name' ] ) );
     }
+
 
     /**
      * Sort with quotes
