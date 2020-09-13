@@ -5,8 +5,8 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Version](#version)
 - [Description](#description)
 - [Installation](#installation)
-- [Usage](#usage)
 - [Impact](#impact)
+- [Usage](#usage)
 - [Cities](#cities)
 - [Actions](#actions)
 - [Filters](#filters)
@@ -50,9 +50,10 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Select if you want a default country
 1. (optional) Import new cities with help of the included excel sheet.
 
-If you use a composer file to add any plugins/libraries. Add the following to `repositories` in your composer.json:
+If you use a composer file to add any plugins/libraries. Add the following to your composer.json:
 
 ```
+  "repositories": [
     {
       "type":    "package",
       "package": {
@@ -65,16 +66,21 @@ If you use a composer file to add any plugins/libraries. Add the following to `r
         }
       }
     },
-
+  ]
 ```
 
 Then run `composer require "beee4life/acf-city-selector"`
 
-or add this to the require section by hand:
+or add this to the `require` section by hand:
 
 ```
 "beee4life/acf-city-selector": "0.23.0",
 ```
+
+<a name="impact"></a>
+### Impact
+
+The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
 
 <a name="usage"></a>
 ### Usage
@@ -150,11 +156,6 @@ This outputs:
 "I live in Amsterdam which is in the state Noord-Holland (NH) which lies in the country Netherlands (NL)".
 ```
         
-<a name="impact"></a>
-### Impact
-
-The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
-
 <a name="cities"></a>
 ### Cities
 
@@ -171,12 +172,12 @@ There are a few country packages (csv files) available. These packages can be im
 
 There are a few actions available to add your own custom actions. 
 
-Find all actions [here](https://acfcs.berryplasman.com/documentation/hooks/#actions).
+Find all actions [here](https://acfcs.berryplasman.com/documentation/actions/).
 
 <a name="filters"></a>
 ### Filters
 
-Find all filters [here](https://acfcs.berryplasman.com/documentation/hooks/#filters).
+Find all filters [here](https://acfcs.berryplasman.com/documentation/filters/).
 
 <a name="functions"></a>
 ### Functions
