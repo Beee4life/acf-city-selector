@@ -553,6 +553,7 @@
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
 
+
             /*
              * Displays error messages from form submissions
              */
@@ -633,7 +634,6 @@
                 $countries      = false;
                 $preview        = false;
                 $search         = false;
-                $show_countries = true;
                 $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
 
                 if ( isset( $url_array[ 'query' ] ) ) {
@@ -658,9 +658,7 @@
                 $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
                 $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
 
-                if ( true === $show_countries ) {
-                    $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
-                }
+                $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
 
                 $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $info . $countries . '</p>';
 
