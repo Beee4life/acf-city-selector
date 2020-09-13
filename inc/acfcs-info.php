@@ -11,7 +11,6 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $countries    = acfcs_get_country_info();
-        $decoded      = false;
         $prepare_json = [];
 
         if ( isset( $_POST[ 'acfcs_json' ] ) ) {
