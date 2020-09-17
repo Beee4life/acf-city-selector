@@ -54,12 +54,14 @@
      * Create an array with available countries from db.
      * This function makes use of a transient to speed up the process.
      *
-     * @param bool $show_first
-     * @param bool $show_labels
+     * @param false $show_first
+     * @param false $show_labels
+     * @param false $show_count
+     * @param false $force
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $show_labels = false, $show_count = false ) {
+    function acfcs_get_countries( $show_first = false, $show_labels = false, $force = false ) {
 
         $countries = [];
         if ( false !== $show_first ) {
@@ -71,7 +73,7 @@
         }
 
         $transient = get_transient( 'acfcs_countries' );
-        if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+        if ( false != $force || false == $transient || is_array( $transient ) && empty( $transient ) ) {
             global $wpdb;
             $results = $wpdb->get_results( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
@@ -81,15 +83,7 @@
 
             $country_results = [];
             foreach ( $results as $data ) {
-                $count_results = false;
-                if ( false != $show_count ) {
-                    $city_results = $wpdb->get_results( '
-                        SELECT * FROM ' . $wpdb->prefix . 'cities
-                        WHERE country_code = \'' . $data->country_code . '\'
-                    ' );
-                    $count_results = ' (' . count( $city_results ) . ')';
-                }
-                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' ) . $count_results;
+                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
