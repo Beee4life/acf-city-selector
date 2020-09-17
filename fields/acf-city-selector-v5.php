@@ -122,17 +122,11 @@
                 $field_name        = $field[ 'name' ];
                 $prefill_cities    = [];
                 $prefill_states    = [];
-                $selected_city     = false;
-                $selected_country  = false;
+                $selected_country  = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                $selected_state    = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                $selected_city     = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
                 $selected_selected = ' selected="selected"';
-                $selected_state    = false;
                 $show_labels       = $field[ 'show_labels' ];
-
-                if ( is_array( $field[ 'value' ] ) && ! empty( $field[ 'value' ] ) ) {
-                    $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-                    $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-                }
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states for $default_country
@@ -159,7 +153,7 @@
                         if ( false !== $selected_country ) {
                             $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
                         }
-                   }
+                    }
                 }
                 ?>
                 <div class="dropdown-box cs-countries">
