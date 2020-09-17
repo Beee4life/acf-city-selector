@@ -29,6 +29,7 @@
                         <input name="acfcs_upload_csv_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-upload-csv-nonce' ); ?>" />
                         <input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
                         <label for="file_upload"><?php _e( 'Choose a (CSV) file to upload', 'acf-city-selector' ); ?></label>
+                        <br />
                         <input name="csv_upload" type="file" accept=".csv" />
                         <br /><br />
                         <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Upload CSV', 'acf-city-selector' ); ?>" />
