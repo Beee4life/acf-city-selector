@@ -25,10 +25,10 @@
 
         // if there is at least 1 country
         if ( ! empty( $results ) ) {
-            foreach ( $results as $data ) {
+            foreach ( $results as $country_code => $label ) {
                 $countries[] = [
-                    'code' => $data->country_code,
-                    'name' => __( $data->country, 'acf-city-selector' ),
+                    'code' => $country_code,
+                    'name' => __( $label, 'acf-city-selector' ),
                 ];
             }
 
