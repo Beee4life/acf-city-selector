@@ -127,7 +127,7 @@
                 $sql = $wpdb->prepare( "
                     SELECT *
                     FROM " . $wpdb->prefix . "cities
-                    WHERE country_code = '%s'
+                    WHERE country_code = %s
                     GROUP BY state_code
                     " . $order, strtoupper( $country_code )
                 );
@@ -206,7 +206,7 @@
 
         if ( false != $country_code ) {
             global $wpdb;
-            $country = $wpdb->get_row( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '{$country_code}'" );
+            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '%s'", $country_code ) );
             if ( isset( $country->country ) ) {
                 return $country->country;
             }

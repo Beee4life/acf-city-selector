@@ -304,7 +304,8 @@
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
                     $table                  = $wpdb->prefix . 'cities';
-                    $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM %s WHERE country_code= %s AND state_code= %s", $table, $country_code, $state_code );
+                    $row                    = $wpdb->get_row( $sql_query );
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
