@@ -467,12 +467,13 @@
 
         $acfcs_info = [];
         foreach ( $results as $data ) {
-            $country_code                = $data->country_code;
-            $results                     = $wpdb->get_results( '
+            $country_code = $data->country_code;
+            $results      = $wpdb->get_results( $wpdb->prepare( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
-                WHERE country_code = \'' . $country_code . '\'
+                WHERE country_code = %s
                 ORDER BY country_code ASC
-            ' );
+            ', $country_code ) );
+
             $acfcs_info[ $country_code ] = [
                 'country_code' => $country_code,
                 'count'        => count( $results ),
