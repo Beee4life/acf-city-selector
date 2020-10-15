@@ -252,6 +252,54 @@
     border-top: 1px solid #444444;
 }
 
+.upload-element {
+    margin-bottom: 1rem;
+}
+
+.upload-element:last-child {
+    margin-bottom: 0;
+}
+
+.form--upload {
+    margin-top: 5px;
+    position:   relative;
+}
+
+.form--upload input[type='file'] {
+    width:   350px;
+    height:  35px;
+    opacity: 0;
+
+}
+
+.form--upload .val {
+    background:     white;
+    border:         1px solid #CCC;
+    width:          350px;
+    height:         35px;
+    position:       absolute;
+    top:            0;
+    left:           0;
+    font-size:      15px;
+    line-height:    35px;
+    text-indent:    10px;
+    pointer-events: none;
+    overflow:       hidden;
+}
+
+.form--upload .upload_button {
+    border:        1px solid #CCC;
+    border-radius: 0;
+    display:       block;
+    height:        37px;
+    left:          350px;
+    position:      absolute;
+    top:           0;
+    font-size:     15px;
+    line-height:   35px;
+    text-align:    center;
+}
+
 /* v4, not actively supported anymore */
 /* edit post screens */
 .field_type-acf_city_selector .dropdown-box {

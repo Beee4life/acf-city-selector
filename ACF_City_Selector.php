@@ -775,6 +775,9 @@
              */
             public function acfcs_add_css() {
                 wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), [], $this->settings[ 'version' ] );
+
+                wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/admin.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
+                wp_enqueue_script( 'acfcs-admin' );
             }
         }
 
