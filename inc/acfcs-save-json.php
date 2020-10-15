@@ -7,6 +7,3 @@
 
     $json = file_get_contents( $_POST[ 'acfcs_json_file' ] );
     echo $json;
-
-    // remove exported file
-    unlink( $_POST[ 'acfcs_json_file' ] );
