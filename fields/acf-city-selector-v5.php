@@ -286,19 +286,18 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                // this is here for some debugging. Most likely it will never 'come up'. Will be removed by 1.0.0 at the latest.
-                if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) { error_log( 'countryCode == 0' ); }
-
+                $state_code   = false;
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
 
                 if ( isset( $value[ 'stateCode' ] ) ) {
                     if ( 3 < strlen( $value[ 'stateCode' ] ) ) {
+                        // $value[ 'stateCode' ] is longer than 3 characters, which starts with xx-
+                        // where xx is the country code
                         $state_code = substr( $value[ 'stateCode' ], 3 );
                     } elseif ( 1 <= strlen( $value[ 'stateCode' ] ) ) {
+                        // this is a fallback and is probably never reached
                         $state_code = $value[ 'stateCode' ];
                     }
-                } else {
-                    $state_code = false;
                 }
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
