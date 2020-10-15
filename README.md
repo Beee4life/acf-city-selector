@@ -258,6 +258,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.24.0
+* added wpdb->prepare in queries
+* styled csv upload better
+
 0.23.0
 * added min. PHP requirement
 * removed brackets around file includes
