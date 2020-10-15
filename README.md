@@ -261,6 +261,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 0.24.0
 * added wpdb->prepare in queries
 * styled csv upload better
+* changed incorrect function call acfcs_after_success_import_nuke to acfcs_after_success_nuke  
 
 0.23.0
 * added min. PHP requirement
