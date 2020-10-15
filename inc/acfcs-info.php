@@ -122,11 +122,6 @@
                             <td><?php echo get_home_url(); ?></td>
                         </tr>
                         <tr>
-                            <?php $prepare_json[ 'wordpress_info' ][ 'admin_email' ] = get_bloginfo( 'admin_email' ); ?>
-                            <td><?php esc_html_e( 'Admin email', 'acf-city-selector' ); ?></td>
-                            <td><?php echo get_bloginfo( 'admin_email' ); ?></td>
-                        </tr>
-                        <tr>
                             <?php $prepare_json[ 'wordpress_info' ][ 'blog_public' ] = get_option( 'blog_public' ); ?>
                             <td><?php esc_html_e( 'Blog public', 'acf-city-selector' ); ?></td>
                             <td><?php echo get_option( 'blog_public' ); ?></td>
