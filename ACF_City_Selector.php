@@ -97,8 +97,8 @@
                 add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_lu',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_nuke',      array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_raw',       array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_nuke',             array( $this, 'acfcs_delete_transients' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
