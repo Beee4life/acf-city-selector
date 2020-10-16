@@ -111,7 +111,7 @@
             if ( false != $show_labels ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' ); 
+                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
             }
         }
 
@@ -206,7 +206,7 @@
 
         if ( false != $country_code ) {
             global $wpdb;
-            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '%s'", $country_code ) );
+            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = %s", $country_code ) );
             if ( isset( $country->country ) ) {
                 return $country->country;
             }
@@ -456,7 +456,7 @@
      *
      * @return array
      */
-    function acfcs_get_country_info() {
+    function acfcs_get_countries_info() {
 
         global $wpdb;
         $results = $wpdb->get_results( '
