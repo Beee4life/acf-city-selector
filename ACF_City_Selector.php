@@ -126,7 +126,6 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                delete_transient( 'acfcs_countries' );
             }
 
 
