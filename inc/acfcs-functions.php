@@ -21,6 +21,7 @@
     /**
      * Create an array with states based on a country code
      *
+     * @param false $country_code
      * @param array $field
      *
      * @return array
@@ -37,6 +38,8 @@
     /**
      * Create an array with cities for a specific province/state
      *
+     * @param false $country_code
+     * @param false $state_code
      * @param array $field
      *
      * @return array
@@ -54,12 +57,13 @@
      * Create an array with available countries from db.
      * This function makes use of a transient to speed up the process.
      *
-     * @param bool $show_first
-     * @param bool $show_labels
+     * @param false $show_first
+     * @param false $show_labels
+     * @param false $force
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $show_labels = false, $show_count = false ) {
+    function acfcs_get_countries( $show_first = false, $show_labels = false, $force = false ) {
 
         $countries = [];
         if ( false !== $show_first ) {
@@ -71,7 +75,7 @@
         }
 
         $transient = get_transient( 'acfcs_countries' );
-        if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
+        if ( false != $force || false == $transient || is_array( $transient ) && empty( $transient ) ) {
             global $wpdb;
             $results = $wpdb->get_results( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
@@ -81,15 +85,7 @@
 
             $country_results = [];
             foreach ( $results as $data ) {
-                $count_results = false;
-                if ( false != $show_count ) {
-                    $city_results = $wpdb->get_results( '
-                        SELECT * FROM ' . $wpdb->prefix . 'cities
-                        WHERE country_code = \'' . $data->country_code . '\'
-                    ' );
-                    $count_results = ' (' . count( $city_results ) . ')';
-                }
-                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' ) . $count_results;
+                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
@@ -106,7 +102,9 @@
     /**
      * Create an array with states based on a country code
      *
-     * @param array $field
+     * @param false $country_code
+     * @param false $show_first
+     * @param false $show_labels
      *
      * @return array
      */
@@ -117,7 +115,7 @@
             if ( false != $show_labels ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' ); // when does this show
+                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
             }
         }
 
@@ -133,7 +131,7 @@
                 $sql = $wpdb->prepare( "
                     SELECT *
                     FROM " . $wpdb->prefix . "cities
-                    WHERE country_code = '%s'
+                    WHERE country_code = %s
                     GROUP BY state_code
                     " . $order, strtoupper( $country_code )
                 );
@@ -158,8 +156,9 @@
     /**
      * Create an array with cities for a certain country/state
      *
-     * @param bool $country_code
-     * @param bool $state_code
+     * @param false $country_code
+     * @param false $state_code
+     * @param false $show_labels
      *
      * @return array
      */
@@ -212,7 +211,7 @@
 
         if ( false != $country_code ) {
             global $wpdb;
-            $country = $wpdb->get_row( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = '{$country_code}'" );
+            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = %s", $country_code ) );
             if ( isset( $country->country ) ) {
                 return $country->country;
             }
@@ -230,7 +229,7 @@
      */
     function acfcs_has_cities() {
         global $wpdb;
-        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 2 ' );
+        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 1' );
 
         if ( count( $results ) > 0 ) {
             return true;
@@ -279,10 +278,9 @@
      *
      * @param        $file_name
      * @param string $delimiter
-     * @param bool   $verify
-     * @param bool   $preview
+     * @param false  $verify
      *
-     * @return array|bool
+     * @return array
      */
     function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
 
@@ -351,8 +349,10 @@
     /**
      * Verify raw csv import
      *
-     * @param bool $csv_data
-     * @return array|bool
+     * @param false  $csv_data
+     * @param string $delimiter
+     *
+     * @return false
      */
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = "," ) {
 
@@ -436,6 +436,7 @@
 
     /**
      * Check depth of array
+     *
      * @param $array
      *
      * @return int|mixed
@@ -462,7 +463,7 @@
      *
      * @return array
      */
-    function acfcs_get_country_info() {
+    function acfcs_get_countries_info() {
 
         global $wpdb;
         $results = $wpdb->get_results( '
@@ -473,12 +474,13 @@
 
         $acfcs_info = [];
         foreach ( $results as $data ) {
-            $country_code                = $data->country_code;
-            $results                     = $wpdb->get_results( '
+            $country_code = $data->country_code;
+            $results      = $wpdb->get_results( $wpdb->prepare( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
-                WHERE country_code = \'' . $country_code . '\'
+                WHERE country_code = %s
                 ORDER BY country_code ASC
-            ' );
+            ', $country_code ) );
+
             $acfcs_info[ $country_code ] = [
                 'country_code' => $country_code,
                 'count'        => count( $results ),

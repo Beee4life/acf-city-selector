@@ -21,19 +21,14 @@
         $selected_limit          = false;
 
         // get cities by country
-        // @TODO: replace with function
-        $results = $wpdb->get_results( "SELECT *
-            FROM " . $wpdb->prefix . "cities
-            group by country_code
-            order by country ASC
-        " );
+        $results = acfcs_get_countries();
 
         // if there is at least 1 country
-        if ( count( $results ) > 0 ) {
-            foreach ( $results as $data ) {
+        if ( ! empty( $results ) ) {
+            foreach ( $results as $country_code => $label ) {
                 $countries[] = [
-                    'code' => $data->country_code,
-                    'name' => __( $data->country, 'acf-city-selector' ),
+                    'code' => $country_code,
+                    'name' => __( $label, 'acf-city-selector' ),
                 ];
             }
 

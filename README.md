@@ -48,7 +48,7 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
 1. Select if you want to show labels
 1. Select if you want a default country
-1. (optional) Import new cities with help of the included excel sheet.
+1. (optional) Import new cities with help of the included Excel sheet.
 
 If you use a composer file to add any plugins/libraries. Add the following to your composer.json:
 
@@ -85,7 +85,7 @@ The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activ
 <a name="usage"></a>
 ### Usage
 
-When the field is used a single field, 3 values are stored in an array: 
+When the field is used by a single field, 3 values are stored in an array: 
 
 ```php
 array(3) {
@@ -98,7 +98,7 @@ array(3) {
 }
 ```
 
-When the field is used in repeater field, the values are stored in a multidimensional array:
+When the field is used in a repeater field, the values are stored in a multidimensional array:
 
 ```php 
 array(2) {
@@ -123,9 +123,9 @@ array(2) {
 }
 ```
 
-The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as one in another country. You won't notice this, since this value is formatted on return.
+The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as in another country. You won't notice this, since this value is formatted on return.
 
-The return value gets overridden so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
+The return value gets overridden, so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
 ```php
 array(5) {
   ["countryCode"]=>
@@ -161,7 +161,7 @@ This outputs:
 
 The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed.
 
-You can also add more countries yourself, through SQL or CSV import. There's a simple excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
+You can also add more countries yourself, through SQL or CSV import. There's a simple Excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
@@ -258,6 +258,12 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.24.0
+* dropdown values are now loaded from transients to speed it up
+* added wpdb->prepare in queries
+* styled csv upload better
+* changed incorrect function call acfcs_after_success_import_nuke to acfcs_after_success_nuke  
+
 0.23.0
 * added min. PHP requirement
 * removed brackets around file includes
@@ -268,7 +274,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added constants
 
 0.22.1
-* added undefined index when no criteria are used to search (in admin)
+* added undefined index when no criteria are used to search (on the admin search page)
 * added isset for new values
 
 0.22
@@ -282,7 +288,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added German translation
 
 0.20
-* removed a check on length state code which falsed on countries like France, Spain and Australia
+* removed a check on length state code which returned false on countries like France, Spain and Australia
 * temporarily removed preview page since it incorrectly deleted files
 
 0.19
@@ -317,7 +323,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 0.14
 * added the option to set a default country (for single fields/in groups/in repeaters)
 * changed state length to 3 characters for Australia and some other countries
-* added optgroups to the state dropdown in the admin search
+* added `optgroups` to the state dropdown in the admin search
 
 0.13
 * Forgot to change version
@@ -338,7 +344,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * Made the field available in groups
 
 0.9
-* Added a search page to manuallly remove cities from the database
+* Added a search page to manually remove cities from the database
 
 0.8
 * Fix incorrect version

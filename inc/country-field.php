@@ -22,37 +22,27 @@
     function get_states_call() {
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
-            global $wpdb;
-            $country_code = $_POST[ 'country_code' ];
-            $order        = 'ORDER BY state_name ASC';
-            if ( 'FR' == $country_code ) {
-                $order = "ORDER BY LENGTH(state_name), state_name";
-            }
-            $sql = $wpdb->prepare( "
-                SELECT *
-                FROM " . $wpdb->prefix . "cities
-                WHERE country_code = '%s'
-                GROUP BY state_code
-                " . $order, $country_code
-            );
+            $country_code     = $_POST[ 'country_code' ];
+            $transient_states = acfcs_get_states( $country_code );
 
-            $query_results                 = $wpdb->get_results( $sql );
-            $items                         = array();
-            $items[ 0 ][ 'country_code' ]  = '';
-            $items[ 0 ][ 'country_state' ] = '';
-            $items[ 0 ][ 'state_code' ]    = '';
-            $items[ 0 ][ 'state_name' ]    = esc_html__( 'Select a province/state', 'acf-city-selector' );
-            $i                             = 1;
+            $i          = 1;
+            $items      = [];
+            $items[ 0 ] = [
+                'country_code'  => '',
+                'country_state' => '',
+                'state_code'    => '',
+                'state_name'    => esc_html__( 'Select a province/state', 'acf-city-selector' ),
+            ];
 
-            foreach ( $query_results as $data ) {
-                $items[ $i ][ 'country_code' ] = $data->country_code;
-                $items[ $i ][ 'state_code' ]   = $data->state_code;
-                if ( $data->state_name != 'N/A' ) {
-                    $items[ $i ][ 'state_name' ]    = $data->state_name;
-                    $items[ $i ][ 'country_state' ] = $data->country_code . '-' . $data->state_code;
+            foreach ( $transient_states as $key => $label ) {
+                $items[ $i ][ 'country_code' ] = $country_code;
+                $items[ $i ][ 'state_code' ]   = $key;
+                if ( $label != 'N/A' ) {
+                    $items[ $i ][ 'state_name' ]    = $label;
+                    $items[ $i ][ 'country_state' ] = $key;
                 } else {
-                    $items[ $i ][ 'state_name' ]    = $data->country;
-                    $items[ $i ][ 'country_state' ] = $data->country_code . '-' . $data->state_code;
+                    $items[ $i ][ 'state_name' ]    = $country_code;
+                    $items[ $i ][ 'country_state' ] = $key;
                 }
                 $i++;
             }
@@ -88,37 +78,19 @@
                 $state_code   = $codes[ 1 ];
             }
 
-            global $wpdb;
-            $results = [];
-            if ( false !== $state_code && false !== $country_code ) {
-                $sql = $wpdb->prepare( "
-                        SELECT *
-                        FROM " . $wpdb->prefix . "cities
-                        WHERE state_code = '%s'
-                            AND country_code='%s'
-                        ORDER BY city_name ASC", $state_code, $country_code
-                );
-                $results = $wpdb->get_results( $sql );
-            } elseif ( false !== $country_code ) {
-                $sql = $wpdb->prepare( "
-                        SELECT *
-                        FROM " . $wpdb->prefix . "cities
-                        WHERE country_code='%s'
-                        ORDER BY city_name ASC", $country_code
-                );
-                $results = $wpdb->get_results( $sql );
-            }
+            $cities_transient = acfcs_get_cities( $country_code, $state_code );
+
             // shown after state change
             $first_item = [
                 'id'        => '',
                 'city_name' => esc_html__( 'Select a city', 'acf-city-selector' ),
             ];
             $items  = array();
-            if ( ! empty( $results ) ) {
-                foreach ( $results as $data ) {
+            if ( ! empty( $cities_transient ) ) {
+                foreach ( $cities_transient as $city ) {
                     $items[] = [
-                        'id'        => $data->city_name,
-                        'city_name' => $data->city_name,
+                        'id'        => $city,
+                        'city_name' => $city,
                     ];
                 }
                 uasort( $items, 'acfcs_sort_array_with_quotes' );

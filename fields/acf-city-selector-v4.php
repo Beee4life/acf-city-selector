@@ -256,13 +256,14 @@
                     $state_code = substr( $value['stateCode'], 3 );
                 }
                 if ( strlen( $country_code ) == 2 && ( isset( $value['stateCode'] ) && '-' != $value['stateCode'] ) && ( isset( $value['cityName'] ) && 'Select a city' != $value['cityName'] ) ) {
-                    $table                = $wpdb->prefix . 'cities';
-                    $row                  = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
-                    $country              = $row->country;
-                    $state_name           = $row->state_name;
-                    $value['stateCode']   = $state_code;
-                    $value['stateName']   = $state_name;
-                    $value['countryName'] = $country;
+                    $table                  = $wpdb->prefix . 'cities';
+                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM %s WHERE country_code= %s AND state_code= %s", $table, $country_code, $state_code );
+                    $row                    = $wpdb->get_row( $sql_query );
+                    $country                = $row->country;
+                    $state_name             = $row->state_name;
+                    $value[ 'stateCode' ]   = $state_code;
+                    $value[ 'stateName' ]   = $state_name;
+                    $value[ 'countryName' ] = $country;
                 }
 
                 return $value;

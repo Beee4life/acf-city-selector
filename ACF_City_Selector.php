@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.23.0
+    Version:        0.24.0
     Tested up to:   5.5.1
     Requires PHP:   7.0
     Author:         Beee
@@ -36,7 +36,7 @@
 
                 $this->settings = array(
                     'db_version'    => '1.0',
-                    'version'       => '0.23.0',
+                    'version'       => '0.24.0',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
@@ -65,7 +65,7 @@
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
-                register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
+                // register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
                 // actions
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
@@ -89,7 +89,6 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_set_db_version' ) );
 
                 // Plugin's own actions
                 add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
@@ -97,8 +96,8 @@
                 add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_lu',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_nuke',      array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_raw',       array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_nuke',             array( $this, 'acfcs_delete_transients' ) );
 
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
@@ -117,7 +116,7 @@
             public function acfcs_plugin_activation() {
                 $this->acfcs_set_db_version();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
-                    $this->acfcs_create_fill_db();
+                    $this->acfcs_fill_database();
                 }
             }
 
@@ -126,14 +125,14 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                delete_transient( 'acfcs_countries' );
+                // nothing right now, stuff gets done in uninstall.php
             }
 
 
             /*
              * Prepare database upon plugin activation
              */
-            public function acfcs_create_fill_db() {
+            public function acfcs_fill_database() {
                 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
@@ -185,6 +184,8 @@
 
             /**
              * Delete country transient
+             *
+             * @param $country_code
              */
             public function acfcs_delete_transients( $country_code ) {
                 if ( false != $country_code ) {
@@ -618,6 +619,10 @@
 
             /*
              * Add settings link on plugin page
+             *
+             * @param $links
+             *
+             * @return array
              */
             public function acfcs_settings_link( $links ) {
                 $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
@@ -632,7 +637,6 @@
              */
             public static function acfcs_admin_menu() {
                 $admin_url      = admin_url( 'options-general.php?page=' );
-                $countries      = false;
                 $preview        = false;
                 $search         = false;
                 $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
@@ -747,7 +751,6 @@
              * Adds admin pages
              */
             public function acfcs_add_admin_pages() {
-
                 include 'inc/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
@@ -775,6 +778,9 @@
              */
             public function acfcs_add_css() {
                 wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), [], $this->settings[ 'version' ] );
+
+                wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/admin.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
+                wp_enqueue_script( 'acfcs-admin' );
             }
         }
 

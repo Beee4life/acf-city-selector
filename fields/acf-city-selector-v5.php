@@ -122,17 +122,11 @@
                 $field_name        = $field[ 'name' ];
                 $prefill_cities    = [];
                 $prefill_states    = [];
-                $selected_city     = false;
-                $selected_country  = false;
+                $selected_country  = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                $selected_state    = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                $selected_city     = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
                 $selected_selected = ' selected="selected"';
-                $selected_state    = false;
                 $show_labels       = $field[ 'show_labels' ];
-
-                if ( is_array( $field[ 'value' ] ) && ! empty( $field[ 'value' ] ) ) {
-                    $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                    $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-                    $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-                }
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states for $default_country
@@ -159,7 +153,7 @@
                         if ( false !== $selected_country ) {
                             $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
                         }
-                   }
+                    }
                 }
                 ?>
                 <div class="dropdown-box cs-countries">
@@ -292,25 +286,24 @@
              */
             function load_value( $value, $post_id, $field ) {
 
-                // this is here for some debugging. Most likely it will never 'come up'. Will be removed by 1.0.0 at the latest.
-                if ( isset( $value[ 'countryCode' ] ) && '0' == $value[ 'countryCode' ] ) { error_log( 'countryCode == 0' ); }
-
+                $state_code   = false;
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
 
                 if ( isset( $value[ 'stateCode' ] ) ) {
                     if ( 3 < strlen( $value[ 'stateCode' ] ) ) {
+                        // $value[ 'stateCode' ] is longer than 3 characters, which starts with xx-
+                        // where xx is the country code
                         $state_code = substr( $value[ 'stateCode' ], 3 );
                     } elseif ( 1 <= strlen( $value[ 'stateCode' ] ) ) {
+                        // this is a fallback and is probably never reached
                         $state_code = $value[ 'stateCode' ];
                     }
-                } else {
-                    $state_code = false;
                 }
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $table                  = $wpdb->prefix . 'cities';
-                    $row                    = $wpdb->get_row( "SELECT country, state_name FROM $table WHERE country_code= '$country_code' AND state_code= '$state_code'" );
+                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$wpdb->prefix}cities WHERE country_code= %s AND state_code= %s", $country_code, $state_code );
+                    $row                    = $wpdb->get_row( $sql_query );
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;

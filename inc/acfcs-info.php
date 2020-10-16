@@ -10,7 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $countries    = acfcs_get_country_info();
+        $countries    = acfcs_get_countries_info();
         $prepare_json = [];
 
         if ( isset( $_POST[ 'acfcs_json' ] ) ) {
@@ -120,11 +120,6 @@
                             <?php $prepare_json[ 'wordpress_info' ][ 'home_url' ] = get_home_url(); ?>
                             <td><?php esc_html_e( 'Home URL', 'acf-city-selector' ); ?></td>
                             <td><?php echo get_home_url(); ?></td>
-                        </tr>
-                        <tr>
-                            <?php $prepare_json[ 'wordpress_info' ][ 'admin_email' ] = get_bloginfo( 'admin_email' ); ?>
-                            <td><?php esc_html_e( 'Admin email', 'acf-city-selector' ); ?></td>
-                            <td><?php echo get_bloginfo( 'admin_email' ); ?></td>
                         </tr>
                         <tr>
                             <?php $prepare_json[ 'wordpress_info' ][ 'blog_public' ] = get_option( 'blog_public' ); ?>
