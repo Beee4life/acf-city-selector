@@ -65,7 +65,7 @@
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
-                register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
+                // register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
                 // actions
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
@@ -89,7 +89,6 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_set_db_version' ) );
 
                 // Plugin's own actions
                 add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
@@ -126,6 +125,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
+                // nothing right now, stuff gets done in uninstall.php
             }
 
 
@@ -630,6 +630,8 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
+                error_log('admin init');
+
                 $admin_url      = admin_url( 'options-general.php?page=' );
                 $preview        = false;
                 $search         = false;
@@ -745,6 +747,7 @@
              * Adds admin pages
              */
             public function acfcs_add_admin_pages() {
+                error_log('admin menu');
 
                 include 'inc/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
