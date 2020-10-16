@@ -224,7 +224,7 @@
      */
     function acfcs_has_cities() {
         global $wpdb;
-        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 2 ' );
+        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 1' );
 
         if ( count( $results ) > 0 ) {
             return true;
