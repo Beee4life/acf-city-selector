@@ -630,8 +630,6 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
-                error_log('admin init');
-
                 $admin_url      = admin_url( 'options-general.php?page=' );
                 $preview        = false;
                 $search         = false;
@@ -747,8 +745,6 @@
              * Adds admin pages
              */
             public function acfcs_add_admin_pages() {
-                error_log('admin menu');
-
                 include 'inc/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
