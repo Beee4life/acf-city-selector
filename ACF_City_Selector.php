@@ -117,7 +117,7 @@
             public function acfcs_plugin_activation() {
                 $this->acfcs_set_db_version();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
-                    $this->acfcs_create_fill_db();
+                    $this->acfcs_fill_database();
                 }
             }
 
@@ -133,7 +133,7 @@
             /*
              * Prepare database upon plugin activation
              */
-            public function acfcs_create_fill_db() {
+            public function acfcs_fill_database() {
                 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
