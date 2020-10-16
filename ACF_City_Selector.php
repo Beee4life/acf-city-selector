@@ -36,7 +36,7 @@
 
                 $this->settings = array(
                     'db_version'    => '1.0',
-                    'version'       => '0.23.0',
+                    'version'       => '0.24.0',
                     'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
