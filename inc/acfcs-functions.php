@@ -111,7 +111,7 @@
             if ( false != $show_labels ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' ); // when does this show
+                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' ); 
             }
         }
 
