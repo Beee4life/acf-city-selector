@@ -259,6 +259,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.24.0
+* dropdown values are now loaded from transients to speed it up
 * added wpdb->prepare in queries
 * styled csv upload better
 * changed incorrect function call acfcs_after_success_import_nuke to acfcs_after_success_nuke  
