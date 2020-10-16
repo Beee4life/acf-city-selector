@@ -21,6 +21,7 @@
     /**
      * Create an array with states based on a country code
      *
+     * @param false $country_code
      * @param array $field
      *
      * @return array
@@ -37,6 +38,8 @@
     /**
      * Create an array with cities for a specific province/state
      *
+     * @param false $country_code
+     * @param false $state_code
      * @param array $field
      *
      * @return array
@@ -56,7 +59,6 @@
      *
      * @param false $show_first
      * @param false $show_labels
-     * @param false $show_count
      * @param false $force
      *
      * @return array
@@ -100,7 +102,9 @@
     /**
      * Create an array with states based on a country code
      *
-     * @param array $field
+     * @param false $country_code
+     * @param false $show_first
+     * @param false $show_labels
      *
      * @return array
      */
@@ -152,8 +156,9 @@
     /**
      * Create an array with cities for a certain country/state
      *
-     * @param bool $country_code
-     * @param bool $state_code
+     * @param false $country_code
+     * @param false $state_code
+     * @param false $show_labels
      *
      * @return array
      */
@@ -273,10 +278,9 @@
      *
      * @param        $file_name
      * @param string $delimiter
-     * @param bool   $verify
-     * @param bool   $preview
+     * @param false  $verify
      *
-     * @return array|bool
+     * @return array
      */
     function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
 
@@ -345,8 +349,10 @@
     /**
      * Verify raw csv import
      *
-     * @param bool $csv_data
-     * @return array|bool
+     * @param false  $csv_data
+     * @param string $delimiter
+     *
+     * @return false
      */
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = "," ) {
 
@@ -430,6 +436,7 @@
 
     /**
      * Check depth of array
+     *
      * @param $array
      *
      * @return int|mixed

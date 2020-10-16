@@ -184,6 +184,8 @@
 
             /**
              * Delete country transient
+             *
+             * @param $country_code
              */
             public function acfcs_delete_transients( $country_code ) {
                 if ( false != $country_code ) {
@@ -617,6 +619,10 @@
 
             /*
              * Add settings link on plugin page
+             *
+             * @param $links
+             *
+             * @return array
              */
             public function acfcs_settings_link( $links ) {
                 $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
