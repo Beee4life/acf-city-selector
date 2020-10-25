@@ -262,6 +262,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added Andorra to included countries
 * added Australia to available country packages
 * load all cities when a default country is set
+* merged populate dropdown functions 
 
 0.25.0
 * forgotten version in readme
