@@ -3,57 +3,6 @@
     include 'acfcs-field-settings.php';
 
     /**
-     * Create an array with countries
-     *
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_country_select( $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_countries( true, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
-     * Create an array with states based on a country code
-     *
-     * @param false $country_code
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_state_select( $country_code = false, $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_states( $country_code, true, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
-     * Create an array with cities for a specific province/state
-     *
-     * @param false $country_code
-     * @param false $state_code
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_city_select( $country_code = false, $state_code = false, $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_cities( $country_code, $state_code, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
      * Create an array with available countries from db.
      * This function makes use of a transient to speed up the process.
      *
@@ -63,11 +12,11 @@
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $show_labels = false, $force = false ) {
+    function acfcs_get_countries( $show_first = false, $field = false, $force = false ) {
 
         $countries = [];
         if ( false !== $show_first ) {
-            if ( false != $show_labels ) {
+            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
                 $countries[ '' ] = '-';
             } else {
                 $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
@@ -108,14 +57,18 @@
      *
      * @return array
      */
-    function acfcs_get_states( $country_code = false, $show_first = false, $show_labels = false ) {
+    function acfcs_get_states( $country_code = false, $show_first = false, $field = [] ) {
 
         $states = [];
         if ( false !== $show_first ) {
-            if ( false != $show_labels ) {
+            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                if ( isset( $field[ 'default_country' ] ) && false != $field[ 'default_country' ] ) {
+                    $states[ '' ] = esc_html__( 'Select a state', 'acf-city-selector' );
+                } else {
+                    $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                }
             }
         }
 
@@ -162,10 +115,10 @@
      *
      * @return array
      */
-    function acfcs_get_cities( $country_code = false, $state_code = false, $show_labels = false ) {
+    function acfcs_get_cities( $country_code = false, $state_code = false, $field = [] ) {
 
         $cities = [];
-        if ( 0 != $show_labels ) {
+        if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
             $cities[ '' ] = '-';
         } else {
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
