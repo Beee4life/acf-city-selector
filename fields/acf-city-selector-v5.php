@@ -80,7 +80,7 @@
                 ) );
 
                 $settings[ 'show_labels' ] = false;
-                $countries                 = acfcs_get_countries( true, $settings );
+                $countries                 = acfcs_get_countries( true, $settings, true );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
                     'instructions' => esc_html__( 'Select a default country for a new field', 'acf-city-selector' ),
