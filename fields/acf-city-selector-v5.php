@@ -116,7 +116,7 @@
              */
             function render_field( $field ) {
 
-                $countries         = acfcs_get_countries( $field );
+                $countries         = acfcs_get_countries( true, $field );
                 $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $field_id          = $field[ 'id' ];
                 $field_name        = $field[ 'name' ];
