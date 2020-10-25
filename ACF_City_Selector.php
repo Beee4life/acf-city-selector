@@ -136,9 +136,10 @@
                 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
-                require_once 'lib/import_nl.php';
+                require_once 'lib/import_ad.php';
                 require_once 'lib/import_be.php';
                 require_once 'lib/import_lux.php';
+                require_once 'lib/import_nl.php';
                 $sql = ob_get_clean();
                 dbDelta( $sql );
             }
@@ -376,6 +377,10 @@
                             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
+                            if ( isset( $_POST[ 'import_ad' ] ) && 1 == $_POST[ 'import_ad' ] ) {
+                                require_once 'lib/import_ad.php';
+                                do_action( 'acfcs_after_success_import_ad' );
+                            }
                             if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
                                 require_once 'lib/import_be.php';
                                 do_action( 'acfcs_after_success_import_be' );

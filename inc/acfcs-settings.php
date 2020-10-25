@@ -25,6 +25,10 @@
                     <h2><?php esc_html_e( 'Import countries', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?></p>
                     <p>
+                        <label for="import_ad" class="screen-reader-text"></label>
+                        <input type="checkbox" name="import_ad" id="import_ad" value="1" /> <?php esc_html_e( 'Import all cities in Andorra', 'acf-city-selector' ); ?> (11)
+                    </p>
+                    <p>
                         <label for="import_be" class="screen-reader-text"></label>
                         <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
                     </p>
