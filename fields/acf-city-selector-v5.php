@@ -130,9 +130,12 @@
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states for $default_country
-                    $first_option   = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
-                    $states         = acfcs_populate_state_select( $default_country, $field );
-                    $prefill_states = array_merge( $first_option, $states );
+                    $first_state_option = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
+                    $first_city_option  = [ '' => esc_html__( 'Select a city', 'acf-city-selector' ) ];
+                    $states             = acfcs_populate_state_select( $default_country, $field );
+                    $cities             = acfcs_populate_city_select( $default_country, false, $field );
+                    $prefill_states     = array_merge( $first_state_option, $states );
+                    $prefill_cities     = array_merge( $first_city_option, $cities );
                 } elseif ( false != $selected_country ) {
                     $which_fields = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : false;
 
