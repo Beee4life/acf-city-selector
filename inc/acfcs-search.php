@@ -21,7 +21,7 @@
         $selected_limit          = false;
 
         // get cities by country
-        $results = acfcs_get_countries();
+        $results = acfcs_get_countries( false, false, true );
 
         // if there is at least 1 country
         if ( ! empty( $results ) ) {
