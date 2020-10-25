@@ -146,7 +146,7 @@
         }
 
         /**
-         * Get states
+         * Get states on change
          *
          * @param countryCode
          * @param callback
@@ -165,7 +165,7 @@
         }
 
         /**
-         * Get cities
+         * Get cities on change
          *
          * @param stateCode
          * @param callback
