@@ -171,7 +171,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        // @TODO: MAYBE add transient
+        // @TODO: MAYBE get from transient
         if ( false !== $country_code ) {
             global $wpdb;
             $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
@@ -180,10 +180,11 @@
                     $state_code = substr( $state_code, 3 );
                 }
                 $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+                $query .= " ORDER BY state_name, city_name ASC";
             } elseif ( $country_code ) {
                 $query .= " WHERE country_code = '{$country_code}'";
+                $query .= " ORDER BY city_name ASC";
             }
-            $query        .= " ORDER BY state_name, city_name ASC";
             $results      = $wpdb->get_results( $query );
             $city_counter = 1;
             foreach ( $results as $data ) {
