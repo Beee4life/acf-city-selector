@@ -496,7 +496,7 @@
                         return;
                     } else {
                         delete_transient( 'acfcs_countries' );
-                        $countries = acfcs_get_countries();
+                        $countries = acfcs_get_countries( false, false, true );
                         foreach( $countries as $country_code => $country_name ) {
                             delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
                         }
