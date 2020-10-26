@@ -70,6 +70,7 @@
                 $state_code   = substr( $_POST[ 'state_code' ], 3 );
             } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
                 // if 2 == strlen( $_POST[ 'state_code' ] ) then it's a country code
+                // probably never reached, but just in case...
                 $country_code = $_POST[ 'state_code' ];
                 $state_code   = false;
             } else {
@@ -78,14 +79,9 @@
                 $state_code   = $codes[ 1 ];
             }
 
+            $items            = [];
             $cities_transient = acfcs_get_cities( $country_code, $state_code );
 
-            // shown after state change
-            $first_item = [
-                'id'        => '',
-                'city_name' => esc_html__( 'Select a city', 'acf-city-selector' ),
-            ];
-            $items  = array();
             if ( ! empty( $cities_transient ) ) {
                 foreach ( $cities_transient as $city ) {
                     $items[] = [
@@ -93,7 +89,6 @@
                         'city_name' => $city,
                     ];
                 }
-                array_unshift( $items, $first_item );
                 echo json_encode( $items );
                 wp_die();
             }
