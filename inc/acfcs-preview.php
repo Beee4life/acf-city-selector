@@ -92,7 +92,8 @@
                         echo '<div class="acfcs__section acfcs__section--results">';
                         if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
                             echo '<h2>' . __( 'CSV contents', 'acf-city-selector' ) . '</h2>';
-                            echo '<table class="acfcs__table acfcs__table--preview-result">';
+                            echo '<p class="hide640"><small>' . __( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
+                            echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
                             echo '<thead>';
                             echo '<tr>';
                             echo '<th>' . __( 'City', 'acf-city-selector' ) . '</th>';
