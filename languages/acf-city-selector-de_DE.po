@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
 "POT-Creation-Date: 2020-10-26 02:36+0100\n"
-"PO-Revision-Date: 2020-10-26 02:36+0100\n"
+"PO-Revision-Date: 2020-10-26 14:20+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -813,10 +813,8 @@ msgstr ""
 "installieren."
 
 #: inc/acfcs-settings.php:29
-#, fuzzy
-#| msgid "Import all cities in Luxembourg"
 msgid "Import all cities in Andorra"
-msgstr "Importiere alle Städte in Luxemburg"
+msgstr "Importiere alle Städte in Andorra"
 
 #: inc/acfcs-settings.php:33
 msgid "Import all cities in Belgium"
@@ -17963,10 +17961,8 @@ msgid "Zundert"
 msgstr ""
 
 #: lib/import_ad.php:2
-#, fuzzy
-#| msgid "Successfully imported 12 cities for Luxembourg."
 msgid "Successfully imported 11 cities for Andorra."
-msgstr "Erfolgreich 12 Städte für Luxemburg importiert."
+msgstr "Erfolgreich 11 Städte für Andorra importiert."
 
 #: lib/import_be.php:2
 msgid "Successfully imported 1166 cities for Belgium."
