@@ -115,7 +115,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                // nothing right now, stuff gets done in uninstall.php
+                // nothing right now, important stuff gets done in uninstall.php
             }
 
 
