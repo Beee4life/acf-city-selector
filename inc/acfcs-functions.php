@@ -140,11 +140,16 @@
             }
             $results = $wpdb->get_results( $query );
             foreach ( $results as $data ) {
-                $city_results[ $data->city_name ] = __( $data->city_name, 'acf-city-selector' );
+                $city_results[] = [
+                    'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                ];
             }
-            // @TODO: add uasort
-            if ( isset( $city_results ) ) {
-                $cities = array_merge( $cities, $city_results );
+            uasort( $city_results, 'acfcs_sort_array_with_quotes' );
+            foreach ( $city_results as $data ) {
+                $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
+            }
+            if ( isset( $city_array ) ) {
+                $cities = array_merge( $cities, $city_array );
             }
         }
 

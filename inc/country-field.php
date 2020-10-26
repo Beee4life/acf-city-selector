@@ -93,7 +93,6 @@
                         'city_name' => $city,
                     ];
                 }
-                uasort( $items, 'acfcs_sort_array_with_quotes' );
                 array_unshift( $items, $first_item );
                 echo json_encode( $items );
                 wp_die();
