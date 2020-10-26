@@ -138,11 +138,9 @@
                 $query .= " WHERE country_code = '{$country_code}'";
                 $query .= " ORDER BY city_name ASC";
             }
-            $results      = $wpdb->get_results( $query );
-            $city_counter = 1;
+            $results = $wpdb->get_results( $query );
             foreach ( $results as $data ) {
                 $city_results[ $data->city_name ] = __( $data->city_name, 'acf-city-selector' );
-                $city_counter++;
             }
             if ( isset( $city_results ) ) {
                 $cities = array_merge( $cities, $city_results );
