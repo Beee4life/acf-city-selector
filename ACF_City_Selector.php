@@ -36,10 +36,10 @@
 
                 $this->settings = array(
                     'db_version'    => '1.0',
-                    'version'       => '0.26.0',
-                    'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
+                    'url'           => plugin_dir_url( __FILE__ ),
+                    'version'       => '0.26.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -49,16 +49,6 @@
                 if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
                     $plugin_url = $this->settings[ 'url' ];
                     define( 'ACFCS_PLUGIN_URL', $plugin_url );
-                }
-
-                if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
-                    $plugin_path = $this->settings[ 'path' ];
-                    define( 'ACFCS_PLUGIN_PATH', $plugin_path );
-                }
-
-                if ( ! defined( 'ACFCS_PLUGIN_SETTINGS' ) ) {
-                    $settings_url = admin_url( 'admin.php?page=b3-onboarding' );
-                    define( 'ACFCS_PLUGIN_SETTINGS', $settings_url );
                 }
 
                 // set text domain
