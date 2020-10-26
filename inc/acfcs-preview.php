@@ -74,15 +74,8 @@
                                     </td>
 
                                     <td>
-                                        <?php $amounts = [ 5, 10, 25, 50, 100, 250, 500, 1000 ]; ?>
                                         <label>
-                                            <select name="acfcs_max_lines" id="acfcs_max_lines">
-                                                <option value=""><?php esc_html_e( 'All', 'acf-city-selector' ); ?></option>
-                                                <?php foreach( $amounts as $amount ) { ?>
-                                                    <?php $selected_lines = ( $max_lines == $amount ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $amount; ?>"<?php echo $selected_lines; ?>><?php echo $amount; ?></option>
-                                                <?php } ?>
-                                            </select>
+                                            <input name="acfcs_max_lines" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                                         </label>
                                     </td>
 

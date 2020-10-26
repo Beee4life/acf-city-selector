@@ -299,6 +299,11 @@
     text-align:    center;
 }
 
+input[name="acfcs_limit"],
+input[name="acfcs_max_lines"] {
+    width: 80px;
+}
+
 /* v4, not actively supported anymore */
 /* edit post screens */
 .field_type-acf_city_selector .dropdown-box {

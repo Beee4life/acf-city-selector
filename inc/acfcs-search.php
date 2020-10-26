@@ -132,7 +132,7 @@
                 <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
 
                 <?php // Search form ?>
-                <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
+                <form action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
                         <?php // if there's only 1 country, no need to add country dropdown ?>
@@ -186,16 +186,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
                             <label>
-                                <select name="acfcs_limit" class="">
-                                    <option value="0"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></option>
-                                    <?php
-                                        $limits = [ 10, 20, 50, 100 ];
-                                        foreach( $limits as $limit ) {
-                                            $selected = ( $limit == $selected_limit ) ? ' selected' : false;
-                                            echo '<option value="' . $limit . '" ' . $selected . '>' . $limit . '</option>';
-                                        }
-                                    ?>
-                                </select>
+                                <input name="acfcs_limit" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                             </label>
                         </div>
 
