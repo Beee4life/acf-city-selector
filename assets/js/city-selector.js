@@ -67,7 +67,6 @@
                                 changed_state.empty();
                                 changed_state.fadeIn();
                                 for (j = 0; j < len; j++) {
-                                    $selected = '';
                                     var state = obj[j];
                                     $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                                 }
