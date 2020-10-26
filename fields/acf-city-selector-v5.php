@@ -57,12 +57,12 @@
              */
             function render_field_settings( $field ) {
 
-                $select_options = array(
+                $label_options = array(
                     1 => __( 'Yes', 'acf-city-selector' ),
                     0 => __( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $select_options,
+                    'choices'      => $label_options,
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
@@ -81,14 +81,14 @@
                     'type'         => 'select',
                 ) );
 
-                $select_fields = array(
+                $default_country_fields = array(
                     'all'           => __( 'All fields [default]', 'acf-city-selector' ),
                     'country_only'  => __( 'Country only', 'acf-city-selector' ),
                     'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
                     'country_city'  => __( 'Country + City', 'acf-city-selector' ),
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $select_fields,
+                    'choices'      => $default_country_fields,
                     'instructions' => esc_html__( 'Select which fields are used', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Fields to use', 'acf-city-selector' ),
                     'name'         => 'which_fields',
