@@ -54,7 +54,9 @@
 
                     if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
                         const d = get_states(country_code);
-                        response_states.push(d)
+                        response_states.push(d);
+                        const e = get_cities(country_code);
+                        response_cities.push(e);
 
                         Promise.all(response_states).then(function(jsonResults) {
                             for (i = 0; i < jsonResults.length; i++) {
@@ -62,8 +64,8 @@
                                 var len          = obj.length;
                                 var $stateValues = '';
 
-                                changed_city.empty();
-                                changed_city.fadeIn();
+                                // changed_city.empty();
+                                // changed_city.fadeIn();
                                 changed_state.empty();
                                 changed_state.fadeIn();
                                 for (j = 0; j < len; j++) {
@@ -73,9 +75,29 @@
                                 }
                                 changed_state.append($stateValues);
                                 // this string 'comes' from fields/acf-city-selector-v5.php
-                                var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
-                                $select_city = '<option value="">' + i18n_select_city + '</option>';
-                                changed_city.append($select_city);
+                                // var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
+                                // $select_city = '<option value="">' + i18n_select_city + '</option>';
+                                // changed_city.append($select_city);
+                            }
+                        });
+
+                        Promise.all(response_cities).then(function(jsonResults) {
+                            for (i = 0; i < jsonResults.length; i++) {
+                                var obj         = JSON.parse(jsonResults);
+                                var len         = obj.length;
+                                var $cityValues = '';
+
+                                changed_city.empty();
+                                changed_city.fadeIn();
+                                for (j = 0; j < len; j++) {
+                                    var city = obj[j];
+                                    if ( j === 0 ) {
+                                        $cityValues += '<option value="">' + city.city_name + '</option>';
+                                    } else {
+                                        $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
+                                    }
+                                }
+                                changed_city.append($cityValues);
                             }
                         });
 
