@@ -375,17 +375,13 @@
      *
      * @return array
      */
-    function acfcs_get_packages( $retry = false ) {
-        try {
-            $handle = curl_init();
-            $url    = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
-            curl_setopt( $handle, CURLOPT_URL, $url );
-            curl_setopt( $handle, CURLOPT_RETURNTRANSFER, true );
-            $response = json_decode( curl_exec( $handle ) );
-            curl_close( $handle );
-        }
-        catch (\Exception $e) {
-            $response = [];
+    function acfcs_get_packages() {
+
+        $url     = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
+        $request = new WP_Http;
+        $result  = $request->request( $url, array( 'method' => 'GET' ) );
+        if ( 200 == $result[ 'response' ][ 'code' ] ) {
+            $response = json_decode( $result[ 'body' ] );
         }
 
         return $response;
