@@ -65,7 +65,7 @@
                 $states[ '' ] = '-';
             } else {
                 if ( isset( $field[ 'default_country' ] ) && false != $field[ 'default_country' ] ) {
-                    $states[ '' ] = esc_html__( 'Select a state', 'acf-city-selector' );
+                    $states[ '' ] = esc_html__( 'Select a province/state', 'acf-city-selector' );
                 } else {
                     $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
                 }
