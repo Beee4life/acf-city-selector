@@ -245,7 +245,6 @@ This is very random and unpredictable.
 ### TODO
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
-- [ ] Add explanation about how the field validation works 
 - [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
