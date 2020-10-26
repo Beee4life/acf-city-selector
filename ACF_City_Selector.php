@@ -83,6 +83,7 @@
                 // Plugin's own actions
                 add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import',           array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_ad',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_lu',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
@@ -104,10 +105,10 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_activation() {
-                $this->acfcs_set_db_version();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_fill_database();
                 }
+                $this->acfcs_set_db_version();
             }
 
 
