@@ -142,6 +142,7 @@
             foreach ( $results as $data ) {
                 $city_results[ $data->city_name ] = __( $data->city_name, 'acf-city-selector' );
             }
+            // @TODO: add uasort
             if ( isset( $city_results ) ) {
                 $cities = array_merge( $cities, $city_results );
             }
