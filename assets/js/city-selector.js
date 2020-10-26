@@ -64,8 +64,6 @@
                                 var len          = obj.length;
                                 var $stateValues = '';
 
-                                // changed_city.empty();
-                                // changed_city.fadeIn();
                                 changed_state.empty();
                                 changed_state.fadeIn();
                                 for (j = 0; j < len; j++) {
@@ -74,10 +72,6 @@
                                     $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                                 }
                                 changed_state.append($stateValues);
-                                // this string 'comes' from fields/acf-city-selector-v5.php
-                                // var i18n_select_city = acf._e('acf_city_selector', 'i18n_select_city');
-                                // $select_city = '<option value="">' + i18n_select_city + '</option>';
-                                // changed_city.append($select_city);
                             }
                         });
 

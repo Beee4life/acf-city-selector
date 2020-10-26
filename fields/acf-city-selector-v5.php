@@ -39,14 +39,6 @@
                     'which_fields' => 'all',
                 );
 
-                /*
-                *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
-                *  var message = acf._e('FIELD_NAME', 'error');
-                */
-                $this->l10n = array(
-                    'i18n_select_city' => __( 'Select a city', 'acf-city-selector' ), // shown after country change
-                );
-
                 $this->settings = $settings;
 
                 // do not delete!
