@@ -239,12 +239,15 @@ The plugin hasn't been tested yet in the following situations:
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why...
-This is very random and unpredictable.
+This seems to be very random and unpredictable.
+
+The plugin's admin pages are not properly styled for mobile (yet).
 
 <a name="todo"></a>
 ### TODO
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
+- [ ] Remove table around output in preview/search (admin) 
 - [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
