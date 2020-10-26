@@ -369,11 +369,9 @@
 
 
     /**
-     * Get packages through REST
+     * Get packages through WP_Http
      *
-     * @param bool $retry
-     *
-     * @return array
+     * @return array|mixed
      */
     function acfcs_get_packages() {
 
@@ -382,9 +380,11 @@
         $result  = $request->request( $url, array( 'method' => 'GET' ) );
         if ( 200 == $result[ 'response' ][ 'code' ] ) {
             $response = json_decode( $result[ 'body' ] );
+
+            return $response;
         }
 
-        return $response;
+        return [];
     }
 
 
