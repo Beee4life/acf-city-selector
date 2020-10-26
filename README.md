@@ -263,7 +263,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added natsorting for cities
 * load all cities when a default country is set
 * load all cities when a country is selected
-* merged populate dropdown functions 
+* merged populate dropdown functions
+* changed dropdowns (for line limits) to free user input  
 
 0.25.0
 * forgotten version in readme
