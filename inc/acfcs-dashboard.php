@@ -42,7 +42,6 @@
                 </div>
 
                 <?php
-                    // @TODO: remove table (for mobile settings)
                     $file_index = acfcs_check_if_files();
                     if ( ! empty( $file_index ) ) { ?>
                         <div class="acfcs__section acfcs__section--process-file">
