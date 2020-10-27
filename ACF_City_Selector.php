@@ -365,7 +365,7 @@
                         return;
                     } else {
 
-                        if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
+                        if ( isset( $_POST[ 'import_ad' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
                             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
@@ -385,6 +385,7 @@
                                 require_once 'lib/import_nl.php';
                                 do_action( 'acfcs_after_success_import_nl', 'nl' );
                             }
+                            do_action( 'acfcs_after_success_import' );
                             $sql = ob_get_clean();
                             dbDelta( $sql );
                         }
