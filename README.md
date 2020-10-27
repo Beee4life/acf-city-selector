@@ -264,8 +264,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added Andorra to included countries
 * added Australia to available country packages
 * added natsorting for cities
-* load all cities when a default country is set
-* load all cities when a country is selected
+* added transient for cities per country
+* preload all cities when a default country is set
+* preload all cities when a country is selected
 * merged populate dropdown functions
 * changed dropdowns (for line limits) to free user input  
 
