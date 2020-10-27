@@ -117,39 +117,63 @@
      */
     function acfcs_get_cities( $country_code = false, $state_code = false, $field = [] ) {
 
-        $cities = [];
+        $cities            = [];
+        $get_from_database = true;
+        $set_transient     = false;
+
         if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
             $cities[ '' ] = '-';
         } else {
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        // @TODO: MAYBE get from transient
-        if ( false !== $country_code ) {
-            global $wpdb;
-            $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
-            if ( $country_code && $state_code ) {
-                if ( 3 < strlen( $state_code ) ) {
-                    $state_code = substr( $state_code, 3 );
+        if ( ! $state_code ) {
+            $transient = get_transient( 'acfcs_cities_' . $country_code );
+            if ( false == $transient || empty( $transient ) ) {
+                $set_transient = true;
+            } else {
+                $get_from_database = false;
+
+                foreach ( $transient as $data ) {
+                    $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
                 }
-                $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
-                $query .= " ORDER BY state_name, city_name ASC";
-            } elseif ( $country_code ) {
-                $query .= " WHERE country_code = '{$country_code}'";
-                $query .= " ORDER BY city_name ASC";
+                if ( isset( $city_array ) ) {
+                    $cities = $city_array;
+                }
             }
-            $results = $wpdb->get_results( $query );
-            foreach ( $results as $data ) {
-                $city_results[] = [
-                    'city_name' => __( $data->city_name, 'acf-city-selector' ),
-                ];
-            }
-            uasort( $city_results, 'acfcs_sort_array_with_quotes' );
-            foreach ( $city_results as $data ) {
-                $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
-            }
-            if ( isset( $city_array ) ) {
-                $cities = array_merge( $cities, $city_array );
+        }
+
+        if ( $get_from_database ) {
+            if ( false !== $country_code ) {
+                global $wpdb;
+                $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
+                if ( $country_code && $state_code ) {
+                    if ( 3 < strlen( $state_code ) ) {
+                        $state_code = substr( $state_code, 3 );
+                    }
+                    $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+                    $query .= " ORDER BY state_name, city_name ASC";
+                } elseif ( $country_code ) {
+                    $query .= " WHERE country_code = '{$country_code}'";
+                }
+                $results = $wpdb->get_results( $query );
+                if ( ! $state_code ) {
+                    foreach ( $results as $data ) {
+                        $city_results[] = [
+                            'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                        ];
+                    }
+                    uasort( $city_results, 'acfcs_sort_array_with_quotes' );
+                }
+                foreach ( $city_results as $data ) {
+                    $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
+                }
+                if ( isset( $city_array ) ) {
+                    $cities = $city_array;
+                }
+                if ( ! $state_code && true == $set_transient ) {
+                    set_transient( 'acfcs_cities_' . $country_code, $cities, DAY_IN_SECONDS );
+                }
             }
         }
 
