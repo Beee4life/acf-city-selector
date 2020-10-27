@@ -3,57 +3,6 @@
     include 'acfcs-field-settings.php';
 
     /**
-     * Create an array with countries
-     *
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_country_select( $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_countries( true, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
-     * Create an array with states based on a country code
-     *
-     * @param false $country_code
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_state_select( $country_code = false, $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_states( $country_code, true, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
-     * Create an array with cities for a specific province/state
-     *
-     * @param false $country_code
-     * @param false $state_code
-     * @param array $field
-     *
-     * @return array
-     */
-    function acfcs_populate_city_select( $country_code = false, $state_code = false, $field = [] ) {
-
-        $show_labels = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : false;
-        $countries   = acfcs_get_cities( $country_code, $state_code, $show_labels );
-
-        return $countries;
-    }
-
-
-    /**
      * Create an array with available countries from db.
      * This function makes use of a transient to speed up the process.
      *
@@ -63,11 +12,11 @@
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $show_labels = false, $force = false ) {
+    function acfcs_get_countries( $show_first = false, $field = false, $force = false ) {
 
         $countries = [];
         if ( false !== $show_first ) {
-            if ( false != $show_labels ) {
+            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
                 $countries[ '' ] = '-';
             } else {
                 $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
@@ -108,14 +57,18 @@
      *
      * @return array
      */
-    function acfcs_get_states( $country_code = false, $show_first = false, $show_labels = false ) {
+    function acfcs_get_states( $country_code = false, $show_first = false, $field = [] ) {
 
         $states = [];
         if ( false !== $show_first ) {
-            if ( false != $show_labels ) {
+            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
                 $states[ '' ] = '-';
             } else {
-                $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                if ( isset( $field[ 'default_country' ] ) && false != $field[ 'default_country' ] ) {
+                    $states[ '' ] = esc_html__( 'Select a province/state', 'acf-city-selector' );
+                } else {
+                    $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
+                }
             }
         }
 
@@ -162,36 +115,65 @@
      *
      * @return array
      */
-    function acfcs_get_cities( $country_code = false, $state_code = false, $show_labels = false ) {
+    function acfcs_get_cities( $country_code = false, $state_code = false, $field = [] ) {
 
-        $cities = [];
-        if ( 0 != $show_labels ) {
+        $cities            = [];
+        $get_from_database = true;
+        $set_transient     = false;
+
+        if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
             $cities[ '' ] = '-';
         } else {
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        // @TODO: MAYBE add transient
-        if ( false !== $country_code ) {
-            global $wpdb;
-            $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
-            if ( $country_code && $state_code ) {
-                if ( 3 < strlen( $state_code ) ) {
-                    $state_code = substr( $state_code, 3 );
+        if ( ! $state_code ) {
+            $transient = get_transient( 'acfcs_cities_' . $country_code );
+            if ( false == $transient || empty( $transient ) ) {
+                $set_transient = true;
+            } else {
+                $get_from_database = false;
+
+                foreach ( $transient as $data ) {
+                    $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
                 }
-                $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
-            } elseif ( $country_code ) {
-                $query .= " WHERE country_code = '{$country_code}'";
+                if ( isset( $city_array ) ) {
+                    $cities = $city_array;
+                }
             }
-            $query        .= " ORDER BY state_name, city_name ASC";
-            $results      = $wpdb->get_results( $query );
-            $city_counter = 1;
-            foreach ( $results as $data ) {
-                $city_results[ $data->city_name ] = __( $data->city_name, 'acf-city-selector' );
-                $city_counter++;
-            }
-            if ( isset( $city_results ) ) {
-                $cities = array_merge( $cities, $city_results );
+        }
+
+        if ( $get_from_database ) {
+            if ( false !== $country_code ) {
+                global $wpdb;
+                $query = 'SELECT * FROM ' . $wpdb->prefix . 'cities';
+                if ( $country_code && $state_code ) {
+                    if ( 3 < strlen( $state_code ) ) {
+                        $state_code = substr( $state_code, 3 );
+                    }
+                    $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
+                    $query .= " ORDER BY state_name, city_name ASC";
+                } elseif ( $country_code ) {
+                    $query .= " WHERE country_code = '{$country_code}'";
+                }
+                $results = $wpdb->get_results( $query );
+                if ( ! $state_code ) {
+                    foreach ( $results as $data ) {
+                        $city_results[] = [
+                            'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                        ];
+                    }
+                    uasort( $city_results, 'acfcs_sort_array_with_quotes' );
+                }
+                foreach ( $city_results as $data ) {
+                    $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
+                }
+                if ( isset( $city_array ) ) {
+                    $cities = $city_array;
+                }
+                if ( ! $state_code && true == $set_transient ) {
+                    set_transient( 'acfcs_cities_' . $country_code, $cities, DAY_IN_SECONDS );
+                }
             }
         }
 
@@ -411,26 +393,22 @@
 
 
     /**
-     * Get packages through REST
+     * Get packages through WP_Http
      *
-     * @param bool $retry
-     *
-     * @return array
+     * @return array|mixed
      */
-    function acfcs_get_packages( $retry = false ) {
-        try {
-            $handle = curl_init();
-            $url    = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
-            curl_setopt( $handle, CURLOPT_URL, $url );
-            curl_setopt( $handle, CURLOPT_RETURNTRANSFER, true );
-            $response = json_decode( curl_exec( $handle ) );
-            curl_close( $handle );
-        }
-        catch (\Exception $e) {
-            $response = [];
+    function acfcs_get_packages() {
+
+        $url     = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
+        $request = new WP_Http;
+        $result  = $request->request( $url, array( 'method' => 'GET' ) );
+        if ( 200 == $result[ 'response' ][ 'code' ] ) {
+            $response = json_decode( $result[ 'body' ] );
+
+            return $response;
         }
 
-        return $response;
+        return [];
     }
 
 

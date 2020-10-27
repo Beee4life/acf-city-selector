@@ -39,14 +39,6 @@
                     'which_fields' => 'all',
                 );
 
-                /*
-                *  l10n (array) Array of strings that are used in JavaScript. This allows JS strings to be translated in PHP and loaded via:
-                *  var message = acf._e('FIELD_NAME', 'error');
-                */
-                $this->l10n = array(
-                    'i18n_select_city' => __( 'Select a city', 'acf-city-selector' ), // shown after country change
-                );
-
                 $this->settings = $settings;
 
                 // do not delete!
@@ -65,12 +57,12 @@
              */
             function render_field_settings( $field ) {
 
-                $select_options = array(
+                $label_options = array(
                     1 => __( 'Yes', 'acf-city-selector' ),
                     0 => __( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $select_options,
+                    'choices'      => $label_options,
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
@@ -79,8 +71,8 @@
                     'value'        => $field[ 'show_labels' ],
                 ) );
 
-                $field_vars[ 'show_labels' ] = 0;
-                $countries                   = acfcs_populate_country_select( $field_vars );
+                $settings[ 'show_labels' ] = false;
+                $countries                 = acfcs_get_countries( true, $settings, true );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
                     'instructions' => esc_html__( 'Select a default country for a new field', 'acf-city-selector' ),
@@ -89,14 +81,14 @@
                     'type'         => 'select',
                 ) );
 
-                $select_fields = array(
+                $default_country_fields = array(
                     'all'           => __( 'All fields [default]', 'acf-city-selector' ),
                     'country_only'  => __( 'Country only', 'acf-city-selector' ),
                     'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
                     'country_city'  => __( 'Country + City', 'acf-city-selector' ),
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $select_fields,
+                    'choices'      => $default_country_fields,
                     'instructions' => esc_html__( 'Select which fields are used', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Fields to use', 'acf-city-selector' ),
                     'name'         => 'which_fields',
@@ -116,7 +108,7 @@
              */
             function render_field( $field ) {
 
-                $countries         = acfcs_populate_country_select( $field );
+                $countries         = acfcs_get_countries( true, $field );
                 $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $field_id          = $field[ 'id' ];
                 $field_name        = $field[ 'name' ];
@@ -130,9 +122,12 @@
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states for $default_country
-                    $first_option   = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
-                    $states         = acfcs_populate_state_select( $default_country, $field );
-                    $prefill_states = array_merge( $first_option, $states );
+                    $first_state_option = [ '' => esc_html__( 'Select a province/state', 'acf-city-selector' ) ];
+                    $first_city_option  = [ '' => esc_html__( 'Select a city', 'acf-city-selector' ) ];
+                    $states             = acfcs_get_states( $default_country, true, $field );
+                    $cities             = acfcs_get_cities( $default_country, false, $field );
+                    $prefill_states     = array_merge( $first_state_option, $states );
+                    $prefill_cities     = array_merge( $first_city_option, $cities );
                 } elseif ( false != $selected_country ) {
                     $which_fields = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : false;
 
@@ -140,18 +135,18 @@
                     if ( 'all' == $which_fields ) {
                         if ( false !== $selected_country ) {
                             $setting[ 'show_labels' ] = 0;
-                            $prefill_states = acfcs_populate_state_select( $selected_country, $setting );
-                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $setting );
+                            $prefill_states = acfcs_get_states( $selected_country, true, $field );
+                            $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                             $selected_state = $selected_country . '-' . $selected_state;
                         }
                     } elseif ( 'country_state' == $which_fields ) {
                         if ( false !== $selected_country ) {
-                            $prefill_states = acfcs_populate_state_select( $selected_country, $field );
+                            $prefill_states = acfcs_get_states( $selected_country, true, $field );
                             $selected_state = $selected_country . '-' . $selected_state;
                         }
                     } elseif ( 'country_city' == $which_fields ) {
                         if ( false !== $selected_country ) {
-                            $prefill_cities = acfcs_populate_city_select( $selected_country, $selected_state, $field );
+                            $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                         }
                     }
                 }

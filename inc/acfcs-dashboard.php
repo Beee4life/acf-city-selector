@@ -49,58 +49,43 @@
 
                             <form method="post">
                                 <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-select-file-nonce' ); ?>" />
-                                <table class="acfcs__table acfcs__table--uploaded">
-                                    <thead>
-                                    <tr>
-                                        <th><?php _e( 'File name', 'acf-city-selector' ); ?></th>
-                                        <th><?php _e( 'Delimiter', 'acf-city-selector' ); ?></th>
-                                        <th><?php _e( 'Max. lines', 'acf-city-selector' ); ?></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <select name="acfcs_file_name">
-                                                    <?php if ( count( $file_index ) > 1 ) { ?>
-                                                        <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
-                                                    <?php } ?>
-                                                    <?php foreach ( $file_index as $file_name ) { ?>
-                                                        <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
-                                                        <option value="<?php echo $file_name; ?>"<?php echo $selected; ?>><?php echo $file_name; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <?php $delimiters = [ ',', ';', '|' ]; ?>
-                                            <label>
-                                                <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                    <?php foreach( $delimiters as $delimiter ) { ?>
-                                                        <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
-                                                        <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label>
-                                                <select name="acfcs_max_lines" id="acfcs_max_lines">
-                                                    <option value=""><?php esc_html_e( 'All', 'acf-city-selector' ); ?></option>
-                                                    <option value="5">5</option>
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                    <option value="250">250</option>
-                                                    <option value="500">500</option>
-                                                    <option value="1000">1000</option>
-                                                </select>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                                <div class="acfcs__process-file">
+                                    <div class="acfcs__process-file-element">
+                                        <label for="acfcs_file_name">
+                                            <?php esc_html_e( 'File', 'acf-city-selector' ); ?>
+                                        </label>
+                                        <select name="acfcs_file_name" id="acfcs_file_name">
+                                            <?php if ( count( $file_index ) > 1 ) { ?>
+                                                <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
+                                            <?php } ?>
+                                            <?php foreach ( $file_index as $file_name ) { ?>
+                                                <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
+                                                <option value="<?php echo $file_name; ?>"<?php echo $selected; ?>><?php echo $file_name; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="acfcs__process-file-element">
+                                        <?php $delimiters = [ ',', ';', '|' ]; ?>
+                                        <label for="acfcs_delimiter">
+                                            <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
+                                        </label>
+                                        <select name="acfcs_delimiter" id="acfcs_delimiter">
+                                            <?php foreach( $delimiters as $delimiter ) { ?>
+                                                <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                                <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="acfcs__process-file-element">
+                                        <label for="acfcs_max_lines">
+                                            <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
+                                        </label>
+                                        <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" />
+                                    </div>
+                                </div>
 
                                 <input name="verify" type="submit" class="button button-primary" value="<?php esc_html_e( 'Verify selected file', 'acf-city-selector' ); ?>" />
                                 <input name="import" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected file', 'acf-city-selector' ); ?>" />
@@ -123,9 +108,8 @@
                         </p>
                         <form method="post">
                             <input name="acfcs_import_raw_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-import-raw-nonce' ); ?>" />
-                            <label>
-                                <textarea name="acfcs_raw_csv_import" id="raw-import" rows="5" cols="100" placeholder="<?php echo $placeholder; ?>"><?php echo $submitted_raw_data; ?></textarea>
-                            </label>
+                            <label for="raw-import"><?php esc_html_e( 'Raw CSV import', 'acf-city-selector' ); ?></label>
+                            <textarea name="acfcs_raw_csv_import" id="raw-import" rows="5" placeholder="<?php echo $placeholder; ?>"><?php echo $submitted_raw_data; ?></textarea>
                             <br />
                             <input name="verify" type="submit" class="button button-primary" value="<?php esc_html_e( 'Verify CSV data', 'acf-city-selector' ); ?>" />
                             <input name="import" type="submit" class="button button-primary" value="<?php esc_html_e( 'Import CSV data', 'acf-city-selector' ); ?>" />

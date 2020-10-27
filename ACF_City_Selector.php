@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.25.0
+    Version:        0.26.0
     Tested up to:   5.5.1
     Requires PHP:   7.0
     Author:         Beee
@@ -36,10 +36,10 @@
 
                 $this->settings = array(
                     'db_version'    => '1.0',
-                    'version'       => '0.25.0',
-                    'url'           => plugin_dir_url( __FILE__ ),
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
+                    'url'           => plugin_dir_url( __FILE__ ),
+                    'version'       => '0.26.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -49,16 +49,6 @@
                 if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
                     $plugin_url = $this->settings[ 'url' ];
                     define( 'ACFCS_PLUGIN_URL', $plugin_url );
-                }
-
-                if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
-                    $plugin_path = $this->settings[ 'path' ];
-                    define( 'ACFCS_PLUGIN_PATH', $plugin_path );
-                }
-
-                if ( ! defined( 'ACFCS_PLUGIN_SETTINGS' ) ) {
-                    $settings_url = admin_url( 'admin.php?page=b3-onboarding' );
-                    define( 'ACFCS_PLUGIN_SETTINGS', $settings_url );
                 }
 
                 // set text domain
@@ -93,6 +83,7 @@
                 // Plugin's own actions
                 add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import',           array( $this, 'acfcs_delete_transients' ) );
+                add_action( 'acfcs_after_success_import_ad',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_lu',        array( $this, 'acfcs_delete_transients' ) );
                 add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
@@ -114,10 +105,10 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_activation() {
-                $this->acfcs_set_db_version();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_fill_database();
                 }
+                $this->acfcs_set_db_version();
             }
 
 
@@ -125,7 +116,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
-                // nothing right now, stuff gets done in uninstall.php
+                // nothing right now, important stuff gets done in uninstall.php
             }
 
 
@@ -136,9 +127,10 @@
                 require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                 ob_start();
                 global $wpdb;
-                require_once 'lib/import_nl.php';
+                require_once 'lib/import_ad.php';
                 require_once 'lib/import_be.php';
                 require_once 'lib/import_lux.php';
+                require_once 'lib/import_nl.php';
                 $sql = ob_get_clean();
                 dbDelta( $sql );
             }
@@ -190,6 +182,7 @@
             public function acfcs_delete_transients( $country_code ) {
                 if ( false != $country_code ) {
                     delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
+                    delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
                 } else {
                     delete_transient( 'acfcs_countries' );
                 }
@@ -372,22 +365,27 @@
                         return;
                     } else {
 
-                        if ( isset( $_POST[ 'import_nl' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) ) {
+                        if ( isset( $_POST[ 'import_ad' ] ) || isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_lux' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
                             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                             ob_start();
                             global $wpdb;
+                            if ( isset( $_POST[ 'import_ad' ] ) && 1 == $_POST[ 'import_ad' ] ) {
+                                require_once 'lib/import_ad.php';
+                                do_action( 'acfcs_after_success_import_ad', 'ad' );
+                            }
                             if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
                                 require_once 'lib/import_be.php';
-                                do_action( 'acfcs_after_success_import_be' );
+                                do_action( 'acfcs_after_success_import_be', 'be' );
                             }
                             if ( isset( $_POST[ 'import_lux' ] ) && 1 == $_POST[ 'import_lux' ] ) {
                                 require_once 'lib/import_lux.php';
-                                do_action( 'acfcs_after_success_import_lu' );
+                                do_action( 'acfcs_after_success_import_lu', 'lu' );
                             }
                             if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
                                 require_once 'lib/import_nl.php';
-                                do_action( 'acfcs_after_success_import_nl' );
+                                do_action( 'acfcs_after_success_import_nl', 'nl' );
                             }
+                            do_action( 'acfcs_after_success_import' );
                             $sql = ob_get_clean();
                             dbDelta( $sql );
                         }
@@ -491,9 +489,10 @@
                         return;
                     } else {
                         delete_transient( 'acfcs_countries' );
-                        $countries = acfcs_get_countries();
+                        $countries = acfcs_get_countries( false, false, true );
                         foreach( $countries as $country_code => $country_name ) {
                             delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
+                            delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
                         }
                         ACF_City_Selector::acfcs_errors()->add( 'success_transients_delete', esc_html__( 'You have successfully removed all transients.', 'acf-city-selector' ) );
                     }
@@ -537,6 +536,9 @@
                             if ( $result > 0 ) {
                                 ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
                                 do_action( 'acfcs_after_success_country_remove' );
+                                foreach( $_POST[ 'delete_country' ] as $country_code ) {
+                                    do_action( 'acfcs_after_success_country_remove', $country_code );
+                                }
                             }
                         }
                     }

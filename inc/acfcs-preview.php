@@ -35,63 +35,46 @@
                     <div class="acfcs__section acfcs__section--preview">
 
                         <form name="select-preview-file" id="settings-form" action="" method="post">
-                            <table class="acfcs__table acfcs__table--preview-form">
-                                <thead>
-                                <tr>
-                                    <th><?php esc_html_e( 'File name', 'acf-city-selector' ); ?></th>
-                                    <th><?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?></th>
-                                    <th><?php esc_html_e( 'Max. lines', 'acf-city-selector' ); ?></th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <label>
-                                            <select name="acfcs_file_name" id="select-preview-file">
-                                                <?php $posted_file = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false; ?>
-                                                <?php if ( count( $file_index ) > 1 ) { ?>
-                                                    <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
-                                                <?php } ?>
-                                                <?php foreach ( $file_index as $file ) { ?>
-                                                    <?php $selected_file = ( $posted_file == $file ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $file; ?>"<?php echo $selected_file; ?>><?php echo $file; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </label>
-                                    </td>
+                            <div class="acfcs__process-file">
+                                <div class="acfcs__process-file-element">
+                                    <label for="acfcs_file_name">
+                                        <?php esc_html_e( 'File', 'acf-city-selector' ); ?>
+                                    </label>
+                                    <select name="acfcs_file_name" id="acfcs_file_name">
+                                        <?php if ( count( $file_index ) > 1 ) { ?>
+                                            <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
+                                        <?php } ?>
+                                        <?php foreach ( $file_index as $file ) { ?>
+                                            <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file ) ? ' selected="selected"' : false; ?>
+                                            <option value="<?php echo $file; ?>"<?php echo $selected; ?>><?php echo $file; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
 
-                                    <td>
-                                        <?php $delimiters = [ ",", ";", "|" ]; ?>
-                                        <label>
-                                            <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                <?php foreach( $delimiters as $delimiter ) { ?>
-                                                    <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </label>
-                                    </td>
+                                <div class="acfcs__process-file-element">
+                                    <?php $delimiters = [ ',', ';', '|' ]; ?>
+                                    <label for="acfcs_delimiter">
+                                        <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
+                                    </label>
+                                    <select name="acfcs_delimiter" id="acfcs_delimiter">
+                                        <?php foreach( $delimiters as $delimiter ) { ?>
+                                            <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                            <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
 
-                                    <td>
-                                        <?php $amounts = [ 5, 10, 25, 50, 100, 250, 500, 1000 ]; ?>
-                                        <label>
-                                            <select name="acfcs_max_lines" id="acfcs_max_lines">
-                                                <option value=""><?php esc_html_e( 'All', 'acf-city-selector' ); ?></option>
-                                                <?php foreach( $amounts as $amount ) { ?>
-                                                    <?php $selected_lines = ( $max_lines == $amount ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $amount; ?>"<?php echo $selected_lines; ?>><?php echo $amount; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </label>
-                                    </td>
+                                <div class="acfcs__process-file-element">
+                                    <label for="acfcs_max_lines">
+                                        <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
+                                    </label>
+                                    <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" />
+                                </div>
+                            </div>
 
-                                    <td class="submit">
-                                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'View this file', 'acf-city-selector' ); ?>"/>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div>
+                                <input type="submit" class="button button-primary" value="<?php esc_html_e( 'View this file', 'acf-city-selector' ); ?>"/>
+                            </div>
                         </form>
                     </div>
 
@@ -100,15 +83,17 @@
                 <?php } ?>
 
                 <?php
+                    // @TODO: style table better for mobile
                     // Get imported data
                     if ( $file_name ) {
-                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : false;
+                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ',';
                         $csv_info  = acfcs_csv_to_array( $file_name, $delimiter, true );
 
                         echo '<div class="acfcs__section acfcs__section--results">';
                         if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
                             echo '<h2>' . __( 'CSV contents', 'acf-city-selector' ) . '</h2>';
-                            echo '<table class="acfcs__table acfcs__table--preview-result">';
+                            echo '<p class="hide640"><small>' . __( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
+                            echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
                             echo '<thead>';
                             echo '<tr>';
                             echo '<th>' . __( 'City', 'acf-city-selector' ) . '</th>';

@@ -110,7 +110,7 @@
                 if ( isset( $field[ 'value' ][ 'countryCode' ] ) ) {
                     $countrycode = $field[ 'value' ][ 'countryCode' ];
                 }
-                $countries = acfcs_populate_country_select( $field );
+                $countries = acfcs_get_countries( true, $field );
                 ?>
                 <div class="dropdown-box cs-countries">
                     <?php if ( $field['show_labels'] == 1 ) { ?>

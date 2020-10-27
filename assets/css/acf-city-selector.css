@@ -1,45 +1,35 @@
-/**
- *  CSS for the ACF City Selector plugin
+/*
+ * CSS for the ACF City Selector plugin
+ * @TODO: add index
  */
 
-/* v5 */
-/* edit post screens */
-.acf-field-acf-city-selector .dropdown-box {
-    margin-bottom: 1em;
+/* admin menu */
+.acfcs .acfcs-admin-menu a {
+    text-decoration: none;
 }
 
-.acf-field.acf-field-acf-city-selector select {
-    padding: 4px;
+.acfcs .acfcs-admin-menu a.current_page {
+    font-weight: bold;
 }
 
-.acf-field-acf-city-selector .acf-input-header {
-    margin-bottom: 10px;
+.acfcs .acfcs-admin-menu a.cta {
+    color:       red;
+    font-weight: bold;
 }
 
 /* admin pages */
-.admin_left,
-.admin_right {
+.acfcs .admin_left,
+.acfcs .admin_right {
     background:            white;
     box-sizing:            border-box;
-    padding:               20px;
+    padding:               10px;
     border:                1px solid #cccccc;
     -moz-border-radius:    8px;
     -webkit-border-radius: 8px;
 }
 
-.admin_left {
-    float:    left;
-    position: relative;
-    width:    75%;
-}
-
-.admin_right {
-    float:     right;
-    max-width: 22.5%;
-}
-
-.acfcs input[type="checkbox"] {
-    margin-right: 10px;
+.acfcs .admin_left {
+    margin-bottom: 1rem;
 }
 
 .acfcs h2,
@@ -64,25 +54,12 @@
     padding-bottom: 0;
 }
 
-.acfcs__section--preview-form {
-    padding-bottom: 0;
-}
-
 .acfcs__section--results {
     margin-top: 2em;
 }
 
 .acfcs__search-criteria {
     display: inline-block;
-}
-
-.acfcs__search-criteria--search input {
-    border:        1px solid #7e8993;
-    border-radius: 3px;
-    box-sizing:    border-box;
-    color:         #32373c;
-    min-height:    30px;
-    padding:       0 0 0 5px;
 }
 
 .acfcs__search-criteria--orderby {
@@ -94,15 +71,16 @@
     margin: 0 0.5em;
 }
 
+/* tables */
 .acfcs table.acfcs__table {
     border:          0;
     border-spacing:  0;
     border-collapse: collapse;
     width:           100%;
+    max-width:       100%;
 }
 
-.acfcs table.acfcs__table--search,
-.acfcs table.acfcs__table--uploaded {
+.acfcs table.acfcs__table--search {
     max-width: 60%;
 }
 
@@ -115,17 +93,19 @@
     max-width:     450px;
 }
 
-.acfcs table.acfcs__table--info:last-child {
-    margin-bottom: 0;
-}
-
-.acfcs table.acfcs__table--uploaded {
-    margin-bottom: 1em;
-}
-
 .acfcs table.acfcs__table--search {
     margin-top:    1em;
     margin-bottom: 1em;
+}
+
+.acfcs table.acfcs__table th,
+.acfcs table.acfcs__table td {
+    padding:    5px 0.5em 5px 0;
+    text-align: left;
+}
+
+.acfcs table.acfcs__table td {
+    border-top: 1px solid #444444;
 }
 
 .acfcs table.acfcs__table--search tr td:nth-child(1),
@@ -133,41 +113,89 @@
     width: 60px;
 }
 
-.acfcs table.acfcs__table th {
-    text-align: left;
+/* forms */
+.acfcs .upload-element {
+    margin-bottom: 1rem;
 }
 
-.acfcs table.acfcs__table th,
-.acfcs table.acfcs__table td {
-    padding: 5px 3em 5px 0;
+.acfcs .upload-element:last-child {
+    margin-bottom: 0;
 }
 
-.acfcs table.acfcs__table td {
-    border-top: 1px solid #444444;
+.acfcs .form--upload {
+    margin-top: 5px;
+    position:   relative;
 }
 
-.acfcs table.acfcs__table--uploaded td {
-    padding-top: 1em;
+.acfcs .form--upload .val {
+    background:     white;
+    border:         1px solid #CCC;
+    width:          185px;
+    height:         35px;
+    position:       absolute;
+    top:            0;
+    left:           0;
+    font-size:      15px;
+    line-height:    35px;
+    text-indent:    10px;
+    pointer-events: none;
+    overflow:       hidden;
 }
 
-.acfcs table.acfcs__table td.submit {
-    padding-right: 0;
-    text-align:    right;
+.acfcs .form--upload .upload_button {
+    border-radius: 0;
+    display:       block;
+    height:        37px;
+    left:          185px;
+    position:      absolute;
+    top:           0;
+    font-size:     15px;
+    line-height:   35px;
+    text-align:    center;
 }
 
-.acfcs hr {
-    background:    #CCCCCC;
+.acfcs .acfcs__process-file-element {
+    margin-bottom: 0.5rem;
+}
+
+.acfcs label {
+    font-weight: bold;
+}
+
+.acfcs .acfcs__process-file-element label {
+    display: inline-block;
+    width:   85px;
+}
+
+/* form inputs */
+.acfcs .form--upload input[type='file'] {
+    width:   185px;
+    height:  35px;
+    opacity: 0;
+}
+
+.acfcs__search-criteria--search input {
+    border:        1px solid #7e8993;
+    border-radius: 3px;
+    box-sizing:    border-box;
+    color:         #32373c;
+    min-height:    30px;
+    padding:       0 0 0 5px;
+}
+
+.acfcs input[name="acfcs_limit"],
+.acfcs input[name="acfcs_max_lines"] {
+    width: 80px;
+}
+
+.acfcs input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.acfcs textarea#raw-import {
     width:         100%;
-    height:        1px;
-    border:        0;
-    margin-bottom: 1em;
-}
-
-.acfcs img.acfcs__donate {
-    float:         left;
-    margin-top:    3px;
-    margin-right:  10px;
-    margin-bottom: 10px;
+    max-width:     100%;
+    margin-bottom: 1rem;
 }
 
 /* errors */
@@ -192,18 +220,44 @@
     border-left-color: #00a0d2;
 }
 
-/* admin menu */
-.acfcs .acfcs-admin-menu a {
-    text-decoration: none;
+/* misc */
+.acfcs hr {
+    background:    #CCCCCC;
+    width:         100%;
+    height:        1px;
+    border:        0;
+    margin-bottom: 1em;
 }
 
-.acfcs .acfcs-admin-menu a.current_page {
-    font-weight: bold;
+.acfcs img.acfcs__donate {
+    float:         left;
+    margin-top:    3px;
+    margin-right:  10px;
+    margin-bottom: 10px;
 }
 
-.acfcs .acfcs-admin-menu a.cta {
-    color:       red;
-    font-weight: bold;
+/* edit post screens v4 */
+/* not actively supported anymore */
+.field_type-acf_city_selector .dropdown-box {
+    margin-bottom: 1em;
+}
+
+.field_type-acf_city_selector span.acf-input-header {
+    display:       block;
+    margin-bottom: 10px;
+}
+
+/* edit post screens v5 */
+.acf-field-acf-city-selector .dropdown-box {
+    margin-bottom: 1em;
+}
+
+.acf-field.acf-field-acf-city-selector select {
+    padding: 4px;
+}
+
+.acf-field-acf-city-selector .acf-input-header {
+    margin-bottom: 10px;
 }
 
 /* help menus */
@@ -241,7 +295,7 @@
 
 #contextual-help-columns .contextual-help-tabs-wrap th,
 #contextual-help-columns .contextual-help-tabs-wrap td {
-    padding: 5px 3em 5px 0;
+    padding: 5px 0.5em 5px 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap th {
@@ -252,61 +306,76 @@
     border-top: 1px solid #444444;
 }
 
-.upload-element {
-    margin-bottom: 1rem;
+/* media queries */
+@media screen and ( min-width: 480px ) {
+
+    .acfcs .admin_left,
+    .acfcs .admin_right {
+        padding: 20px;
+    }
+
+    .acfcs .form--upload input[type='file'] {
+        width:  350px;
+        height: 35px;
+    }
+
+    .acfcs .form--upload .val {
+        width: 350px;
+    }
+
+    .acfcs .form--upload .upload_button {
+        left: 350px;
+    }
 }
 
-.upload-element:last-child {
-    margin-bottom: 0;
+@media screen and (max-width: 640px) {
+    .acfcs table.scrollable {
+        display:     block;
+        overflow:    hidden;
+        white-space: nowrap;
+        overflow-x:  scroll;
+    }
 }
 
-.form--upload {
-    margin-top: 5px;
-    position:   relative;
+@media screen and ( min-width: 640px ) {
+
+    .hide640 {
+        display: none;
+    }
+
+    .acfcs .acfcs__process-file {
+        display:   flex;
+        flex-flow: row nowrap;
+    }
+
+    .acfcs .acfcs__process-file-element {
+        margin-right: 1rem;
+    }
+
+    .acfcs .acfcs__process-file-element label {
+        display: block;
+    }
 }
 
-.form--upload input[type='file'] {
-    width:   350px;
-    height:  35px;
-    opacity: 0;
+@media screen and ( min-width: 1024px ) {
+    .acfcs .admin_left {
+        float:    left;
+        position: relative;
+        width:    67.5%;
+    }
 
+    .acfcs .admin_right {
+        float:     right;
+        max-width: 30%;
+    }
 }
 
-.form--upload .val {
-    background:     white;
-    border:         1px solid #CCC;
-    width:          350px;
-    height:         35px;
-    position:       absolute;
-    top:            0;
-    left:           0;
-    font-size:      15px;
-    line-height:    35px;
-    text-indent:    10px;
-    pointer-events: none;
-    overflow:       hidden;
-}
+@media screen and ( min-width: 1024px ) {
+    .acfcs .admin_left {
+        width: 75%;
+    }
 
-.form--upload .upload_button {
-    border:        1px solid #CCC;
-    border-radius: 0;
-    display:       block;
-    height:        37px;
-    left:          350px;
-    position:      absolute;
-    top:           0;
-    font-size:     15px;
-    line-height:   35px;
-    text-align:    center;
-}
-
-/* v4, not actively supported anymore */
-/* edit post screens */
-.field_type-acf_city_selector .dropdown-box {
-    margin-bottom: 1em;
-}
-
-.field_type-acf_city_selector span.acf-input-header {
-    display:       block;
-    margin-bottom: 10px;
+    .acfcs .admin_right {
+        max-width: 22.5%;
+    }
 }

@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.25.0 - released 16.10.20
+0.26.0 - released 27.10.20
 
 <a name="description"></a>
 ### Description
@@ -59,7 +59,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.23.0",
+        "version": "0.26.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -74,7 +74,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.23.0",
+"beee4life/acf-city-selector": "0.26.0",
 ```
 
 <a name="impact"></a>
@@ -159,7 +159,7 @@ This outputs:
 <a name="cities"></a>
 ### Cities
 
-The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembourg) pre-installed.
+The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembourg) and Andorra pre-installed.
 
 You can also add more countries yourself, through SQL or CSV import. There's a simple Excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
@@ -239,13 +239,15 @@ The plugin hasn't been tested yet in the following situations:
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why...
-This is very random and unpredictable.
+This seems to be very random and unpredictable.
+
+The plugin's admin pages are not properly styled for mobile (yet).
 
 <a name="todo"></a>
 ### TODO
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
-- [ ] Add explanation about how the field validation works 
+- [ ] Remove table around output in preview/search (admin) 
 - [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
@@ -257,6 +259,16 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.26.0
+* added Andorra to included countries
+* added Australia to available country packages
+* added natsorting for cities
+* added transient for cities per country
+* preload all cities when a default country is set
+* preload all cities when a country is selected
+* merged populate dropdown functions
+* changed dropdowns (for line limits) to free user input  
 
 0.25.0
 * forgotten version in readme
