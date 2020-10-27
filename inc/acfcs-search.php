@@ -114,7 +114,7 @@
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
-            uasort( $city_array, 'acfcs_sort_array_with_quotes' );
+            uasort( $city_array, 'acfcs_sort_single_array_with_quotes' );
             $result_count = count( $city_array );
         }
 
@@ -138,15 +138,14 @@
                         <?php // if there's only 1 country, no need to add country dropdown ?>
                         <?php if ( count( $countries ) > 1 ) { ?>
                             <div class="acfcs__search-criteria acfcs__search-criteria--country">
-                                <label>
-                                    <select name="acfcs_country" class="">
-                                        <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
-                                        <?php foreach( $countries as $country ) { ?>
-                                            <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
-                                            <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </label>
+                                <label for="acfcs_country" class="screen-reader-text"><?php _e( 'Select a country', 'acf-city-selector' ); ?></label>
+                                <select name="acfcs_country" id="acfcs_country">
+                                    <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
+                                    <?php foreach( $countries as $country ) { ?>
+                                        <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                        <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
+                                    <?php } ?>
+                                </select>
                             </div>
 
                             <div class="acfcs__search-criteria acfcs__search-criteria--or">
@@ -155,59 +154,55 @@
                         <?php } ?>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
-                            <label>
-                                <select name="acfcs_state" class="">
-                                    <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
-                                    <?php foreach( $states as $state ) { ?>
-                                        <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
-                                            <optgroup label="<?php echo $state[ 'name' ]; ?>">
-                                        <?php } ?>
-                                        <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
-                                            <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
-                                            <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
-                                        <?php } ?>
-                                        <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
-                                            </optgroup>
-                                        <?php } ?>
+                            <label for="acfcs_state" class="screen-reader-text"><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></label>
+                            <select name="acfcs_state" id="acfcs_state">
+                                <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
+                                <?php foreach( $states as $state ) { ?>
+                                    <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
+                                        <optgroup label="<?php echo $state[ 'name' ]; ?>">
                                     <?php } ?>
-                                </select>
-                            </label>
+                                    <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
+                                        <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
+                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
+                                    <?php } ?>
+                                    <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
+                                        </optgroup>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
-                            <label>
-                                <input name="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
-                            </label>
+                            <label for="acfcs_search" class="screen-reader-text"><?php esc_html_e( 'Search term', 'acf-city-selector' ); ?></label>
+                            <input name="acfcs_search" id="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
-                            <label>
-                                <input name="acfcs_limit" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
-                            </label>
+                            <label for="acfcs_limit" class="screen-reader-text"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></label>
+                            <input name="acfcs_limit" id="acfcs_limit" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
-                            <label>
-                                <select name="acfcs_orderby" class="">
-                                    <option value=""><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></option>
-                                    <?php
-                                        $orderby = [
-                                            __( 'City', 'acf-city-selector' ),
-                                            __( 'State', 'acf-city-selector' ),
-                                        ];
-                                        foreach( $orderby as $criterium ) {
-                                            $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
-                                            echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </label>
+                            <label for="acfcs_orderby" class="screen-reader-text"><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></label>
+                            <select name="acfcs_orderby" id="acfcs_orderby">
+                                <option value=""><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></option>
+                                <?php
+                                    $orderby = [
+                                        __( 'City', 'acf-city-selector' ),
+                                        __( 'State', 'acf-city-selector' ),
+                                    ];
+                                    foreach( $orderby as $criterium ) {
+                                        $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
+                                        echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
+                                    }
+                                ?>
+                            </select>
                         </div>
                     <?php } ?>
 
