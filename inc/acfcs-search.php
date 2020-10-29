@@ -86,7 +86,6 @@
 
                 if ( $search_criteria_country || $search_criteria_state ) {
                     $where[] = '(' . implode( ' OR ', $search ) . ')';
-                    $where   = "WHERE " . implode( ' AND ', $where );
                 } else {
                     $where[] = implode( ' OR ', $search );
                 }
@@ -96,7 +95,9 @@
                 $search_limit = "LIMIT " . $selected_limit;
             }
 
-            if ( empty( $where ) ) {
+            if ( ! empty( $where ) ) {
+                $where   = "WHERE " . implode( ' AND ', $where );
+            } else {
                 $where = false;
             }
 
@@ -227,7 +228,7 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <?php esc_html_e( 'Row ID', 'acf-city-selector' ); ?>
+                                        <?php esc_html_e( 'ID', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
                                         <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
