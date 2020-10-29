@@ -68,7 +68,7 @@
                                     <label for="acfcs_max_lines">
                                         <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
                                     </label>
-                                    <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" />
+                                    <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo $max_lines; ?>" />
                                 </div>
                             </div>
 

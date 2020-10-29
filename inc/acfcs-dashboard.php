@@ -51,7 +51,7 @@
                                 <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-select-file-nonce' ); ?>" />
 
                                 <div class="acfcs__process-file">
-                                    <div class="acfcs__process-file-element">
+                                    <div class="acfcs__process-file-element acfcs__process-file-element--file">
                                         <label for="acfcs_file_name">
                                             <?php esc_html_e( 'File', 'acf-city-selector' ); ?>
                                         </label>
@@ -66,7 +66,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="acfcs__process-file-element">
+                                    <div class="acfcs__process-file-element acfcs__process-file-element--delimiter">
                                         <?php $delimiters = [ ',', ';', '|' ]; ?>
                                         <label for="acfcs_delimiter">
                                             <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
@@ -79,7 +79,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="acfcs__process-file-element">
+                                    <div class="acfcs__process-file-element acfcs__process-file-element--maxlines">
                                         <label for="acfcs_max_lines">
                                             <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
                                         </label>

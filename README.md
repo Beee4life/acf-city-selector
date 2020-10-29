@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.26.0 - released 27.10.20
+0.26.1 - released 30.10.20
 
 <a name="description"></a>
 ### Description
@@ -195,7 +195,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 ### Tested with
 
 * [X] Wordpress 5.5.1
-* [X] Advanced Custom Fields Pro 5.9.1
+* [X] Advanced Custom Fields Pro 5.9.2
 * [X] Advanced Custom Fields 4.4.12
 * [X] Chrome (latest version)
 * [X] Firefox (latest version)
@@ -259,6 +259,17 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.26.1
+* urgent fix for non-working city dropdown upon state change
+* added first 'empty' option for cities upon state change
+* improved styling for mobile admin pages
+* fix broken sql query in search when no limit is set
+* improve styling search form (admin)
+* load searched values on search form (admin)
+
+0.26.0
+* added Andorra to included countries
 
 0.26.0
 * added Andorra to included countries

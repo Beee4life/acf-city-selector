@@ -128,7 +128,7 @@
         }
 
         if ( ! $state_code ) {
-            $transient = get_transient( 'acfcs_cities_' . $country_code );
+            $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
             if ( false == $transient || empty( $transient ) ) {
                 $set_transient = true;
             } else {
@@ -156,13 +156,14 @@
                 } elseif ( $country_code ) {
                     $query .= " WHERE country_code = '{$country_code}'";
                 }
-                $results = $wpdb->get_results( $query );
-                if ( ! $state_code ) {
-                    foreach ( $results as $data ) {
-                        $city_results[] = [
-                            'city_name' => __( $data->city_name, 'acf-city-selector' ),
-                        ];
-                    }
+                $city_results = [];
+                $results      = $wpdb->get_results( $query );
+                foreach ( $results as $data ) {
+                    $city_results[] = [
+                        'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                    ];
+                }
+                if ( ! empty( $city_results ) ) {
                     uasort( $city_results, 'acfcs_sort_array_with_quotes' );
                 }
                 foreach ( $city_results as $data ) {
@@ -172,7 +173,7 @@
                     $cities = $city_array;
                 }
                 if ( ! $state_code && true == $set_transient ) {
-                    set_transient( 'acfcs_cities_' . $country_code, $cities, DAY_IN_SECONDS );
+                    set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
                 }
             }
         }

@@ -127,15 +127,14 @@
                 state.on('change', function () {
 
                     // @TODO: add if for when city isn't needed
-
-                    const response_cities = []
+                    const response_cities = [];
                     var $this = $(this);
                     var state_code = $this.val();
                     var state_field_id = $this.attr('id');
                     var city_field_id = state_field_id.replace('stateCode', 'cityName');
                     var changed_city = $('select[id="' + city_field_id + '"]');
                     const d = get_cities(state_code);
-                    response_cities.push(d)
+                    response_cities.push(d);
 
                     Promise.all(response_cities).then(function(jsonResults) {
                         for (i = 0; i < jsonResults.length; i++) {

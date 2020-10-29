@@ -164,7 +164,7 @@
 
 .acfcs .acfcs__process-file-element label {
     display: inline-block;
-    width:   85px;
+    width:   80px;
 }
 
 /* form inputs */
@@ -181,6 +181,14 @@
     color:         #32373c;
     min-height:    30px;
     padding:       0 0 0 5px;
+}
+
+.acfcs input[name="acfcs_search"] {
+    margin-top: 1px;
+}
+
+.acfcs select[name="acfcs_orderby"] {
+    margin-top: -3px;
 }
 
 .acfcs input[name="acfcs_limit"],
@@ -349,11 +357,15 @@
     }
 
     .acfcs .acfcs__process-file-element {
-        margin-right: 1rem;
+        margin-right: 2rem;
     }
 
     .acfcs .acfcs__process-file-element label {
         display: block;
+    }
+
+    .acfcs .acfcs__process-file-element--file {
+        min-width: 130px;
     }
 }
 

@@ -17,8 +17,8 @@
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? $_POST[ 'acfcs_orderby' ] : false;
-        $searched_term           = false;
-        $selected_limit          = false;
+        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
+        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
 
         // get cities by country
         $results = acfcs_get_countries( false, false, true );
@@ -71,10 +71,8 @@
 
         // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
-            $search_limit            = false;
-            $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
-            $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
-            $where                   = [];
+            $search_limit = false;
+            $where        = [];
 
             if ( false != $search_criteria_state ) {
                 $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
@@ -82,17 +80,21 @@
                 $where[] = "country_code = '" . $search_criteria_country . "'";
             }
             if ( false != $searched_term ) {
-                $search[] = 'state_name LIKE "%' . $searched_term . '%"';
-                $search[] = 'country LIKE "%' . $searched_term . '%"';
                 $search[] = 'city_name LIKE "%' . $searched_term . '%"';
-                $where[] = implode( ' OR ', $search );
+
+                if ( $search_criteria_country || $search_criteria_state ) {
+                    $where[] = '(' . implode( ' OR ', $search ) . ')';
+                } else {
+                    $where[] = implode( ' OR ', $search );
+                }
+
             }
-            if ( '0' != $selected_limit ) {
+            if ( 0 != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
 
             if ( ! empty( $where ) ) {
-                $where = "WHERE " . implode( ' AND ', $where );
+                $where   = "WHERE " . implode( ' AND ', $where );
             } else {
                 $where = false;
             }
@@ -110,11 +112,13 @@
                 " . $search_limit . "
             ";
             $cities     = $wpdb->get_results( $sql );
-            $city_array = array();
+            $city_array = [];
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
-            uasort( $city_array, 'acfcs_sort_single_array_with_quotes' );
+            if ( ! empty( $city_array ) ) {
+                uasort( $city_array, 'acfcs_sort_array_with_quotes' );
+            }
             $result_count = count( $city_array );
         }
 
@@ -176,14 +180,14 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
                             <label for="acfcs_search" class="screen-reader-text"><?php esc_html_e( 'Search term', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_search" id="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
+                            <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
                             <label for="acfcs_limit" class="screen-reader-text"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_limit" id="acfcs_limit" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
+                            <input name="acfcs_limit" id="acfcs_limit" type="number" value="<?php if ( false != $selected_limit ) { echo $selected_limit; } ?>" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
@@ -224,7 +228,7 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <?php esc_html_e( 'Row ID', 'acf-city-selector' ); ?>
+                                        <?php esc_html_e( 'ID', 'acf-city-selector' ); ?>
                                     </th>
                                     <th>
                                         <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
