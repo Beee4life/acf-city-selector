@@ -261,7 +261,12 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.26.1
-* Fix for non-working city dropdown after state change
+* urgent fix for non-working city dropdown upon state change
+* added first 'empty' option for cities upon state change
+* improved styling for mobile admin pages
+* fix broken sql query in search when no limit is set
+* improve styling search form (admin)
+* load searched values on search form (admin)
 
 0.26.0
 * added Andorra to included countries
