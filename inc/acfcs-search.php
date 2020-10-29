@@ -179,7 +179,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
                             <label for="acfcs_search" class="screen-reader-text"><?php esc_html_e( 'Search term', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_search" id="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
+                            <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
@@ -209,9 +209,7 @@
                         </div>
                     <?php } ?>
 
-                    <div class="acfcs__search-criteria acfcs__search-criteria--submit">
-                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
-                    </div>
+                    <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
                 </form>
 
                 <?php // Results output below ?>
