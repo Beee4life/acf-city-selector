@@ -128,11 +128,11 @@
         }
 
         if ( ! $state_code ) {
-            $transient = get_transient( 'acfcs_cities_' . $country_code );
+            $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
             if ( false == $transient || empty( $transient ) ) {
                 $set_transient = true;
             } else {
-                // $get_from_database = false;
+                $get_from_database = false;
 
                 foreach ( $transient as $data ) {
                     $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
@@ -173,7 +173,7 @@
                     $cities = $city_array;
                 }
                 if ( ! $state_code && true == $set_transient ) {
-                    set_transient( 'acfcs_cities_' . $country_code, $cities, DAY_IN_SECONDS );
+                    set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
                 }
             }
         }
