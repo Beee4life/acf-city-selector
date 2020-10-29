@@ -83,23 +83,6 @@
                     <p><a href="https://berryplasman.com?utm_source=' . $_SERVER[ 'SERVER_NAME' ] . '&utm_medium=plugin_admin&utm_campaign=free_promo">berryplasman.com</a></p>'
                 );
             }
-
-            if ( 'settings_page_acfcs-search' == $screen->id ) {
-
-                $on_this_page = esc_html__( 'On this page you can search through your database of cities.', 'acf-city-selector' );
-                $field_info   = '<ul>';
-                $field_info   .= '<li>A search term only searches in the city column</li>';
-                $field_info   .= '</ul>';
-
-                $screen->add_help_tab( array(
-                    'id'      => 'search',
-                    'title'   => esc_html__( 'Search info', 'acf-city-selector' ),
-                    'content' =>
-                        '<h5>Search explanation</h5>'
-                        . $field_info
-                ) );
-
-            }
         }
 
         return false;
