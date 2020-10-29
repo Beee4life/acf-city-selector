@@ -71,10 +71,8 @@
 
         // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
-            $search_limit            = false;
-            $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : 0;
-            $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
-            $where                   = [];
+            $search_limit = false;
+            $where        = [];
 
             if ( false != $search_criteria_state ) {
                 $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
@@ -114,11 +112,13 @@
                 " . $search_limit . "
             ";
             $cities     = $wpdb->get_results( $sql );
-            $city_array = array();
+            $city_array = [];
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
-            uasort( $city_array, 'acfcs_sort_array_with_quotes' );
+            if ( ! empty( $city_array ) ) {
+                uasort( $city_array, 'acfcs_sort_array_with_quotes' );
+            }
             $result_count = count( $city_array );
         }
 
