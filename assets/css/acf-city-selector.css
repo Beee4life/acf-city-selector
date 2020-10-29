@@ -71,6 +71,10 @@
     margin: 0 0.5em;
 }
 
+.acfcs__search-criteria--submit {
+    vertical-align: middle;
+}
+
 /* tables */
 .acfcs table.acfcs__table {
     border:          0;

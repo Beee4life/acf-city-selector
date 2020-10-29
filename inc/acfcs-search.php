@@ -82,18 +82,21 @@
                 $where[] = "country_code = '" . $search_criteria_country . "'";
             }
             if ( false != $searched_term ) {
-                $search[] = 'state_name LIKE "%' . $searched_term . '%"';
-                $search[] = 'country LIKE "%' . $searched_term . '%"';
                 $search[] = 'city_name LIKE "%' . $searched_term . '%"';
-                $where[] = implode( ' OR ', $search );
+
+                if ( $search_criteria_country || $search_criteria_state ) {
+                    $where[] = '(' . implode( ' OR ', $search ) . ')';
+                    $where   = "WHERE " . implode( ' AND ', $where );
+                } else {
+                    $where[] = implode( ' OR ', $search );
+                }
+
             }
             if ( 0 != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
 
-            if ( ! empty( $where ) ) {
-                $where = "WHERE " . implode( ' AND ', $where );
-            } else {
+            if ( empty( $where ) ) {
                 $where = false;
             }
 
@@ -176,7 +179,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--search">
                             <label for="acfcs_search" class="screen-reader-text"><?php esc_html_e( 'Search term', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_search" id="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>">
+                            <input name="acfcs_search" id="acfcs_search" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
@@ -206,7 +209,9 @@
                         </div>
                     <?php } ?>
 
-                    <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
+                    <div class="acfcs__search-criteria acfcs__search-criteria--submit">
+                        <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
+                    </div>
                 </form>
 
                 <?php // Results output below ?>
