@@ -132,7 +132,7 @@
             if ( false == $transient || empty( $transient ) ) {
                 $set_transient = true;
             } else {
-                $get_from_database = false;
+                // $get_from_database = false;
 
                 foreach ( $transient as $data ) {
                     $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
@@ -156,13 +156,14 @@
                 } elseif ( $country_code ) {
                     $query .= " WHERE country_code = '{$country_code}'";
                 }
-                $results = $wpdb->get_results( $query );
-                if ( ! $state_code ) {
-                    foreach ( $results as $data ) {
-                        $city_results[] = [
-                            'city_name' => __( $data->city_name, 'acf-city-selector' ),
-                        ];
-                    }
+                $city_results = [];
+                $results      = $wpdb->get_results( $query );
+                foreach ( $results as $data ) {
+                    $city_results[] = [
+                        'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                    ];
+                }
+                if ( ! empty( $city_results ) ) {
                     uasort( $city_results, 'acfcs_sort_array_with_quotes' );
                 }
                 foreach ( $city_results as $data ) {
