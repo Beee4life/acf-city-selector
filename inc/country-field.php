@@ -69,10 +69,9 @@
                 $country_code = substr( $_POST[ 'state_code' ], 0, 2 );
                 $state_code   = substr( $_POST[ 'state_code' ], 3 );
             } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
-                // if 2 == strlen( $_POST[ 'state_code' ] ) then it's a country code
-                // probably never reached, but just in case...
+                // if 2 == strlen( $_POST[ 'state_code' ] ) then it's probably a country code
+                // this is probably never reached, but just in case...
                 $country_code = $_POST[ 'state_code' ];
-                error_log($country_code);
                 $state_code   = false;
             } else {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
