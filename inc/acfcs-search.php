@@ -17,8 +17,8 @@
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? $_POST[ 'acfcs_orderby' ] : false;
-        $searched_term           = false;
-        $selected_limit          = false;
+        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
+        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
 
         // get cities by country
         $results = acfcs_get_countries( false, false, true );
@@ -187,7 +187,7 @@
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--limit">
                             <label for="acfcs_limit" class="screen-reader-text"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_limit" id="acfcs_limit" type="number" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
+                            <input name="acfcs_limit" id="acfcs_limit" type="number" value="<?php if ( false != $selected_limit ) { echo $selected_limit; } ?>" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                         </div>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
