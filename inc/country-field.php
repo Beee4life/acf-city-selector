@@ -79,8 +79,12 @@
                 $state_code   = $codes[ 1 ];
             }
 
-            $items            = [];
             $cities_transient = acfcs_get_cities( $country_code, $state_code );
+            $items            = [];
+            $items[ 0 ]       = [
+                'id'        => '',
+                'city_name' => esc_html__( 'Select a city', 'acf-city-selector' ),
+            ];
 
             if ( ! empty( $cities_transient ) ) {
                 foreach ( $cities_transient as $city ) {
