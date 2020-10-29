@@ -135,7 +135,6 @@
                     var changed_city = $('select[id="' + city_field_id + '"]');
                     const d = get_cities(state_code);
                     response_cities.push(d);
-                    console.log(response_cities);
 
                     Promise.all(response_cities).then(function(jsonResults) {
                         for (i = 0; i < jsonResults.length; i++) {
@@ -153,7 +152,6 @@
                                     $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
                                 }
                             }
-                            // console.log($cityValues);
                             changed_city.append($cityValues);
                         }
                     });
