@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-10-29 21:44+0100\n"
-"PO-Revision-Date: 2020-10-29 21:44+0100\n"
+"POT-Creation-Date: 2020-10-29 23:00+0100\n"
+"PO-Revision-Date: 2020-10-29 23:01+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -536,28 +536,36 @@ msgid "Australia"
 msgstr "Australien"
 
 #: inc/acfcs-i18n.php:4
+msgid "Brazil"
+msgstr "Brasilien"
+
+#: inc/acfcs-i18n.php:5
 msgid "Canada"
 msgstr "Kanada"
 
-#: inc/acfcs-i18n.php:5
+#: inc/acfcs-i18n.php:6
 msgid "France"
 msgstr "Frankfreich"
 
-#: inc/acfcs-i18n.php:6
+#: inc/acfcs-i18n.php:7
 msgid "Germany"
 msgstr "Deutschland"
 
-#: inc/acfcs-i18n.php:7
+#: inc/acfcs-i18n.php:8
 msgid "Spain"
 msgstr "Spanien"
 
-#: inc/acfcs-i18n.php:8
+#: inc/acfcs-i18n.php:9
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: inc/acfcs-i18n.php:9
+#: inc/acfcs-i18n.php:10
 msgid "United States"
 msgstr "Vereinigte Staaten"
+
+#: inc/acfcs-i18n.php:11
+msgid "Uruguay"
+msgstr ""
 
 #: inc/acfcs-info.php:33
 msgid "This page shows real-time info about your site and settings."

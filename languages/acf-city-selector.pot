@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-10-29 21:43+0100\n"
+"POT-Creation-Date: 2020-10-29 22:59+0100\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -493,27 +493,35 @@ msgid "Australia"
 msgstr ""
 
 #: inc/acfcs-i18n.php:4
-msgid "Canada"
+msgid "Brazil"
 msgstr ""
 
 #: inc/acfcs-i18n.php:5
-msgid "France"
+msgid "Canada"
 msgstr ""
 
 #: inc/acfcs-i18n.php:6
-msgid "Germany"
+msgid "France"
 msgstr ""
 
 #: inc/acfcs-i18n.php:7
-msgid "Spain"
+msgid "Germany"
 msgstr ""
 
 #: inc/acfcs-i18n.php:8
-msgid "Switzerland"
+msgid "Spain"
 msgstr ""
 
 #: inc/acfcs-i18n.php:9
+msgid "Switzerland"
+msgstr ""
+
+#: inc/acfcs-i18n.php:10
 msgid "United States"
+msgstr ""
+
+#: inc/acfcs-i18n.php:11
+msgid "Uruguay"
 msgstr ""
 
 #: inc/acfcs-info.php:33
