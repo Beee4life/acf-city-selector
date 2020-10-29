@@ -195,7 +195,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 ### Tested with
 
 * [X] Wordpress 5.5.1
-* [X] Advanced Custom Fields Pro 5.9.1
+* [X] Advanced Custom Fields Pro 5.9.2
 * [X] Advanced Custom Fields 4.4.12
 * [X] Chrome (latest version)
 * [X] Firefox (latest version)
@@ -259,6 +259,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.27.0
+* 
 
 0.26.0
 * added Andorra to included countries
