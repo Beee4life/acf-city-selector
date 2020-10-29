@@ -71,10 +71,6 @@
     margin: 0 0.5em;
 }
 
-.acfcs__search-criteria--submit {
-    vertical-align: middle;
-}
-
 /* tables */
 .acfcs table.acfcs__table {
     border:          0;
@@ -185,6 +181,14 @@
     color:         #32373c;
     min-height:    30px;
     padding:       0 0 0 5px;
+}
+
+.acfcs input[name="acfcs_search"] {
+    margin-top: 1px;
+}
+
+.acfcs select[name="acfcs_orderby"] {
+    margin-top: -2px;
 }
 
 .acfcs input[name="acfcs_limit"],
