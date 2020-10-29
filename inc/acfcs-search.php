@@ -72,7 +72,7 @@
         // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit            = false;
-            $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : false;
+            $selected_limit          = ( isset( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : 0;
             $searched_term           = ( isset( $_POST[ 'acfcs_search' ] ) ) ? $_POST[ 'acfcs_search' ] : false;
             $where                   = [];
 
@@ -87,7 +87,7 @@
                 $search[] = 'city_name LIKE "%' . $searched_term . '%"';
                 $where[] = implode( ' OR ', $search );
             }
-            if ( '0' != $selected_limit ) {
+            if ( 0 != $selected_limit ) {
                 $search_limit = "LIMIT " . $selected_limit;
             }
 
@@ -114,7 +114,7 @@
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
-            uasort( $city_array, 'acfcs_sort_single_array_with_quotes' );
+            uasort( $city_array, 'acfcs_sort_array_with_quotes' );
             $result_count = count( $city_array );
         }
 
