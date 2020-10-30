@@ -405,15 +405,11 @@
                         return;
                     } else {
 
-                        if ( isset( $_POST[ 'delete_cities' ] ) ) {
-                            if ( isset( $_POST[ 'delete_cities' ] ) && 1 == $_POST[ "delete_cities" ] ) {
-                                global $wpdb;
-                                $prefix = $wpdb->get_blog_prefix();
-                                $wpdb->query( 'TRUNCATE TABLE ' . $prefix . 'cities' );
-                                $this->acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
-                                do_action( 'acfcs_after_success_nuke' );
-                            }
-                        }
+                        global $wpdb;
+                        $prefix = $wpdb->get_blog_prefix();
+                        $wpdb->query( 'TRUNCATE TABLE ' . $prefix . 'cities' );
+                        $this->acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
+                        do_action( 'acfcs_after_success_nuke' );
                     }
                 }
             }

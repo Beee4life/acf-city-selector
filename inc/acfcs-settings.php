@@ -82,12 +82,6 @@
                     <input name="acfcs_truncate_table_nonce" value="<?php echo wp_create_nonce( 'acfcs-truncate-table-nonce' ); ?>" type="hidden" />
                     <h2><?php esc_html_e( 'Clear the database', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "By selecting this option, you will remove all cities, which are present in the database. This is useful if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ); ?></p>
-                    <ul>
-                        <li>
-                            <label for="delete_cities" class="screen-reader-text"></label>
-                            <input type="checkbox" name="delete_cities" id="delete_cities" value="1" /> <?php esc_html_e( 'Delete all cities from the database', 'acf-city-selector' ); ?>
-                        </li>
-                    </ul>
                     <input type="submit" class="button button-primary"  onclick="return confirm( 'Are you sure you want to delete all cities ?' )" value="<?php esc_html_e( 'Delete everything', 'acf-city-selector' ); ?>" />
                 </form>
 
