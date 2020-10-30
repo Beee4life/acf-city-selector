@@ -24,22 +24,26 @@
                     <input name="acfcs_import_actions_nonce" value="<?php echo wp_create_nonce( 'acfcs-import-actions-nonce' ); ?>" type="hidden" />
                     <h2><?php esc_html_e( 'Import countries', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?></p>
-                    <p>
-                        <label for="import_ad" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_ad" id="import_ad" value="1" /> <?php esc_html_e( 'Import all cities in Andorra', 'acf-city-selector' ); ?> (11)
-                    </p>
-                    <p>
-                        <label for="import_be" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
-                    </p>
-                    <p>
-                        <label for="import_lux" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import all cities in Luxembourg', 'acf-city-selector' ); ?> (12)
-                    </p>
-                    <p>
-                        <label for="import_nl" class="screen-reader-text"></label>
-                        <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
-                    </p>
+
+                    <ul>
+                        <li>
+                            <label for="import_ad" class="screen-reader-text"></label>
+                            <input type="checkbox" name="import_ad" id="import_ad" value="1" /> <?php esc_html_e( 'Import all cities in Andorra', 'acf-city-selector' ); ?> (11)
+                        </li>
+                        <li>
+                            <label for="import_be" class="screen-reader-text"></label>
+                            <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
+                        </li>
+                        <li>
+                            <label for="import_lux" class="screen-reader-text"></label>
+                            <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import all cities in Luxembourg', 'acf-city-selector' ); ?> (12)
+                        </li>
+                        <li>
+                            <label for="import_nl" class="screen-reader-text"></label>
+                            <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
+                        </li>
+                    </ul>
+
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Import selected countries', 'acf-city-selector' ); ?>" />
                 </form>
 
