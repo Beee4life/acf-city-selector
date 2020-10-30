@@ -73,12 +73,6 @@
                     <input name="acfcs_delete_transients" value="<?php echo wp_create_nonce( 'acfcs-delete-transients-nonce' ); ?>" type="hidden" />
                     <h2><?php esc_html_e( 'Delete transients', 'acf-city-selector' ); ?></h2>
                     <p><?php esc_html_e( "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option.", 'acf-city-selector' ); ?></p>
-                    <ul>
-                        <li>
-                            <label for="delete_transients" class="screen-reader-text"></label>
-                            <input type="checkbox" name="delete_transients" id="delete_transients" value="1" /> <?php esc_html_e( 'Delete all transients', 'acf-city-selector' ); ?>
-                        </li>
-                    </ul>
                     <input type="submit" class="button button-primary" value="<?php esc_html_e( "Delete transients", 'acf-city-selector' ); ?>" />
                 </form>
 
