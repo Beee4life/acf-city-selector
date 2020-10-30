@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.26.1 - released 30.10.20
+0.27.0 - released 00.11.20
 
 <a name="description"></a>
 ### Description
@@ -259,6 +259,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.27.0
+* updated output for free countries
 
 0.26.1
 * urgent fix for non-working city dropdown upon state change
