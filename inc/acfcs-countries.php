@@ -62,13 +62,29 @@
                         <?php if ( is_array( $packages ) ) { ?>
                             <?php $total_price = 0; ?>
                             <?php foreach( $packages as $package ) { ?>
-                                <?php $total_price = $total_price + $package[ 'price' ]; ?>
+                                <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
                                 <tr>
                                     <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
                                     <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $package[ 'number_states' ]; ?></td>
+                                    <td>
+                                        <?php
+                                            if ( ! empty( $package[ 'number_states' ] ) ) {
+                                                echo $package[ 'number_states' ];
+                                            } else {
+                                                echo 'n/a';
+                                            }
+                                        ?>
+                                    </td>
                                     <td><?php echo $package[ 'number_cities' ]; ?></td>
-                                    <td>&euro; <?php echo $package[ 'price' ]; ?>,00</td>
+                                    <td>
+                                        <?php
+                                            if ( ! empty( $package[ 'price' ] ) ) {
+                                                echo '&euro; ' . $package[ 'price' ] . ',00';
+                                            } else {
+                                                echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free' ) );
+                                            }
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         <?php } ?>
