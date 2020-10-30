@@ -81,7 +81,7 @@
                                             if ( ! empty( $package[ 'price' ] ) ) {
                                                 echo '&euro; ' . $package[ 'price' ] . ',00';
                                             } else {
-                                                echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free' ) );
+                                                echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free', 'acf-city-selector' ) );
                                             }
                                         ?>
                                     </td>
