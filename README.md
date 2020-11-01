@@ -273,9 +273,6 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.26.0
 * added Andorra to included countries
-
-0.26.0
-* added Andorra to included countries
 * added Australia to available country packages
 * added natsorting for cities
 * added transient for cities per country

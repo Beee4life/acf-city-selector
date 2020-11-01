@@ -27,16 +27,8 @@
 
                     <ul>
                         <li>
-                            <label for="import_ad" class="screen-reader-text"></label>
-                            <input type="checkbox" name="import_ad" id="import_ad" value="1" /> <?php esc_html_e( 'Import all cities in Andorra', 'acf-city-selector' ); ?> (11)
-                        </li>
-                        <li>
                             <label for="import_be" class="screen-reader-text"></label>
                             <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
-                        </li>
-                        <li>
-                            <label for="import_lux" class="screen-reader-text"></label>
-                            <input type="checkbox" name="import_lux" id="import_lux" value="1" /> <?php esc_html_e( 'Import all cities in Luxembourg', 'acf-city-selector' ); ?> (12)
                         </li>
                         <li>
                             <label for="import_nl" class="screen-reader-text"></label>
