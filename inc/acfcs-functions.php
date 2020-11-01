@@ -129,7 +129,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        if ( ! $state_code ) {
+        if ( ! $state_code && $country_code ) {
             $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
             if ( false == $transient || empty( $transient ) ) {
                 $set_transient = true;
