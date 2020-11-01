@@ -59,7 +59,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.26.0",
+        "version": "0.27.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -74,7 +74,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.26.0",
+"beee4life/acf-city-selector": "0.27.0",
 ```
 
 <a name="impact"></a>
@@ -262,7 +262,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.27.0
 * updated output for free countries
-* removed Andorra and Luxembourg as freely included countries (now freely downloadable)
+* removed Andorra and Luxembourg as default included countries
+* added more available countries and combined country packages
 
 0.26.1
 * urgent fix for non-working city dropdown upon state change
