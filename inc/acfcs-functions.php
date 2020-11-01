@@ -398,9 +398,9 @@
      *
      * @return array|mixed
      */
-    function acfcs_get_packages() {
+    function acfcs_get_packages( $endpoint = 'single' ) {
 
-        $url     = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
+        $url     = ACFCS_WEBSITE_URL . '/wp-json/countries/v1/' . $endpoint;
         $request = new WP_Http;
         $result  = $request->request( $url, array( 'method' => 'GET' ) );
         if ( 200 == $result[ 'response' ][ 'code' ] ) {
