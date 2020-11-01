@@ -264,6 +264,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * updated output for free countries
 * removed Andorra and Luxembourg as default included countries
 * added more available countries and combined country packages
+* added fix for non-returning transient on first (state) load
 
 0.26.1
 * urgent fix for non-working city dropdown upon state change
