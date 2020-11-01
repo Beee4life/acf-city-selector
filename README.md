@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.26.1 - released 30.10.20
+0.27.0 - released 01.11.20
 
 <a name="description"></a>
 ### Description
@@ -59,7 +59,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.26.0",
+        "version": "0.27.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -74,7 +74,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.26.0",
+"beee4life/acf-city-selector": "0.27.0",
 ```
 
 <a name="impact"></a>
@@ -260,6 +260,12 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.27.0
+* updated output for free countries
+* removed Andorra and Luxembourg as default included countries
+* added more available countries and combined country packages
+* added fix for non-returning transient on first (state) load
+
 0.26.1
 * urgent fix for non-working city dropdown upon state change
 * added first 'empty' option for cities upon state change
@@ -267,9 +273,6 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * fix broken sql query in search when no limit is set
 * improve styling search form (admin)
 * load searched values on search form (admin)
-
-0.26.0
-* added Andorra to included countries
 
 0.26.0
 * added Andorra to included countries

@@ -23,7 +23,7 @@
 
                 $file_index = acfcs_check_if_files();
                 $file_name  = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
-                $max_lines  = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : false;
+                $max_lines  = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : 100;
             ?>
 
             <div class="admin_left">

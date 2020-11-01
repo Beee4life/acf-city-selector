@@ -34,7 +34,8 @@
 
 .acfcs h2,
 .acfcs h3 {
-    margin: 0 0 1em 0;
+    margin:        0;
+    margin-bottom: 1rem;
 }
 
 .acfcs__section {
@@ -85,7 +86,13 @@
 }
 
 .acfcs table.acfcs__table--packages {
-    max-width: 75%;
+    margin-top:    1rem;
+    margin-bottom: 1rem;
+}
+
+.acfcs table.acfcs__table--packages img.flag {
+    border:       1px solid #222;
+    margin-right: 0.5rem;
 }
 
 .acfcs table.acfcs__table--info {
@@ -315,6 +322,13 @@
 }
 
 /* media queries */
+@media screen and ( min-width: 400px ) {
+
+    .hide400 {
+        display: none;
+    }
+}
+
 @media screen and ( min-width: 480px ) {
 
     .acfcs .admin_left,
@@ -334,10 +348,11 @@
     .acfcs .form--upload .upload_button {
         left: 350px;
     }
+
 }
 
-@media screen and (max-width: 640px) {
-    .acfcs table.scrollable {
+@media screen and (max-width: 400px) {
+    .acfcs table.acfcs__table--packages.scrollable {
         display:     block;
         overflow:    hidden;
         white-space: nowrap;
@@ -373,21 +388,25 @@
     .acfcs .admin_left {
         float:    left;
         position: relative;
-        width:    67.5%;
+        width:    75%;
     }
 
     .acfcs .admin_right {
         float:     right;
-        max-width: 30%;
+        max-width: 22.5%;
     }
 }
 
-@media screen and ( min-width: 1024px ) {
+@media screen and ( min-width: 1440px ) {
     .acfcs .admin_left {
-        width: 75%;
+        width: 77.5%;
     }
 
     .acfcs .admin_right {
-        max-width: 22.5%;
+        max-width: 20%;
+    }
+
+    .acfcs table.acfcs__table--packages {
+        max-width: 75%;
     }
 }

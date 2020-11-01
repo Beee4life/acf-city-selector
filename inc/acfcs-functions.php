@@ -97,6 +97,8 @@
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
 
+                $states = array_merge( $states, $state_results );
+
             } else {
                 $states = array_merge( $states, $transient );
             }
@@ -127,7 +129,7 @@
             $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
         }
 
-        if ( ! $state_code ) {
+        if ( ! $state_code && $country_code ) {
             $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
             if ( false == $transient || empty( $transient ) ) {
                 $set_transient = true;
@@ -398,9 +400,9 @@
      *
      * @return array|mixed
      */
-    function acfcs_get_packages() {
+    function acfcs_get_packages( $endpoint = 'single' ) {
 
-        $url     = ACFCS_WEBSITE_URL . '/wp-json/packages/v1/all';
+        $url     = ACFCS_WEBSITE_URL . '/wp-json/countries/v1/' . $endpoint;
         $request = new WP_Http;
         $result  = $request->request( $url, array( 'method' => 'GET' ) );
         if ( 200 == $result[ 'response' ][ 'code' ] ) {
