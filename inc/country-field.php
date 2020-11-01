@@ -61,6 +61,8 @@
     function get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
+            $country_code = false;
+            $state_code   = false;
             if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
@@ -73,7 +75,7 @@
                 // this is probably never reached, but just in case...
                 $country_code = $_POST[ 'state_code' ];
                 $state_code   = false;
-            } else {
+            } elseif ( ! empty( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
