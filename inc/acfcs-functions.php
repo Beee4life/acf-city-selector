@@ -97,6 +97,8 @@
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
 
+                $states = array_merge( $states, $state_results );
+
             } else {
                 $states = array_merge( $states, $transient );
             }
