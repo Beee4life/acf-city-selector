@@ -262,6 +262,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.27.0
 * updated output for free countries
+* removed Andorra and Luxembourg as freely included countries (now freely downloadable)
 
 0.26.1
 * urgent fix for non-working city dropdown upon state change
