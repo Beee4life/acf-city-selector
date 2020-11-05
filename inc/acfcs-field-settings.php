@@ -125,7 +125,7 @@
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'clone' ) {
                         // @TODO: fix clone
                     } else {
-                        // TODO: maybe fallback ?
+                        // TODO: maybe fallback for when no values are saved yet
                     }
                 }
             }
