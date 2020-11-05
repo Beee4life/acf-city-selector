@@ -14,7 +14,7 @@
         $prepare_json = [];
 
         if ( isset( $_POST[ 'acfcs_json' ] ) ) {
-            print_r(unserialize($_POST[ 'acfcs_json' ]));
+            print_r( unserialize( $_POST[ 'acfcs_json' ] ) );
         }
         ?>
 
