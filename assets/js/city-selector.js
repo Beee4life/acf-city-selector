@@ -49,7 +49,8 @@
                     var which_fields      = 'all';
 
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
-                        var which_fields  = city_selector_vars[ 'which_fields' ];
+                        var show_labels  = city_selector_vars[ 'show_labels' ];
+                        var which_fields = city_selector_vars[ 'which_fields' ];
                     }
 
                     if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
@@ -118,7 +119,6 @@
                             }
                         });
                     }
-
                 });
             }
 
@@ -135,6 +135,11 @@
                     var changed_city = $('select[id="' + city_field_id + '"]');
                     const d = get_cities(state_code);
                     response_cities.push(d);
+
+                    if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                        var $firstValue = '';
+                        var show_labels = city_selector_vars[ 'show_labels' ];
+                    }
 
                     Promise.all(response_cities).then(function(jsonResults) {
                         for (i = 0; i < jsonResults.length; i++) {
