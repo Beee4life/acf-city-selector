@@ -123,10 +123,14 @@
         $get_from_database = true;
         $set_transient     = false;
 
-        if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
-            $cities[ '' ] = '-';
+        if ( isset( $field[ 'show_labels' ] ) ) {
+            if ( 1 == $field[ 'show_labels' ] ) {
+                $cities[ '' ] = '-';
+            } else {
+                $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+            }
         } else {
-            $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+            $cities[ '' ] = '-';
         }
 
         if ( ! $state_code && $country_code ) {
@@ -140,7 +144,7 @@
                     $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
                 }
                 if ( isset( $city_array ) ) {
-                    $cities = $city_array;
+                    $cities = array_merge( $cities, $city_array );
                 }
             }
         }
@@ -172,7 +176,7 @@
                     $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
                 }
                 if ( isset( $city_array ) ) {
-                    $cities = $city_array;
+                    $cities = array_merge( $cities, $city_array );
                 }
                 if ( ! $state_code && true == $set_transient ) {
                     set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
