@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acfcs.berryplasman.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.27.0
+    Version:        0.27.1
     Tested up to:   5.5.1
     Requires PHP:   7.0
     Author:         Beee
@@ -39,7 +39,7 @@
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                     'url'           => plugin_dir_url( __FILE__ ),
-                    'version'       => '0.27.0',
+                    'version'       => '0.27.1',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -106,7 +106,6 @@
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_fill_database();
                 }
-                $this->acfcs_set_db_version();
             }
 
 
@@ -136,26 +135,23 @@
              * Check if table exists
              */
             public function acfcs_check_table() {
-                $stored_db_version = get_option( 'acfcs_db_version', false );
-                if ( false == $stored_db_version || $stored_db_version != $this->settings[ 'db_version' ] ) {
-                    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-                    ob_start();
-                    global $wpdb;
-                    ?>
-                    CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
-                    id int(6) unsigned NOT NULL auto_increment,
-                    city_name varchar(50) NULL,
-                    state_code varchar(3) NULL,
-                    state_name varchar(50) NULL,
-                    country_code varchar(2) NULL,
-                    country varchar(50) NULL,
-                    PRIMARY KEY  (id)
-                    )
-                    COLLATE <?php echo $wpdb->collate; ?>;
-                    <?php
-                        $sql = ob_get_clean();
-                        dbDelta( $sql );
-                }
+                require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+                ob_start();
+                global $wpdb;
+                ?>
+                CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
+                id int(6) unsigned NOT NULL auto_increment,
+                city_name varchar(50) NULL,
+                state_code varchar(3) NULL,
+                state_name varchar(50) NULL,
+                country_code varchar(2) NULL,
+                country varchar(50) NULL,
+                PRIMARY KEY  (id)
+                )
+                COLLATE <?php echo $wpdb->collate; ?>;
+                <?php
+                $sql = ob_get_clean();
+                dbDelta( $sql );
             }
 
 
@@ -706,16 +702,6 @@
                         $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
                         update_option( 'active_plugins', $active_plugins, true );
                     }
-                }
-            }
-
-
-            /*
-             * Set DB version
-             */
-            public function acfcs_set_db_version() {
-                if ( get_option( 'acfcs_db_version', false ) != $this->settings[ 'db_version' ] ) {
-                    update_option( 'acfcs_db_version', $this->settings[ 'db_version' ] );
                 }
             }
 
