@@ -61,8 +61,9 @@
     function get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
-            $country_code = false;
-            $state_code   = false;
+            $field = [];
+            $items = [];
+
             if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
@@ -79,14 +80,14 @@
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
+            } else {
+                // empty options
+                $field[ 'show_labels' ] = true;
+                $country_code           = false;
+                $state_code             = false;
             }
 
-            $cities_transient = acfcs_get_cities( $country_code, $state_code );
-            $items            = [];
-            $items[ 0 ]       = [
-                'id'        => '',
-                'city_name' => esc_html__( 'Select a city', 'acf-city-selector' ),
-            ];
+            $cities_transient = acfcs_get_cities( $country_code, $state_code, $field );
 
             if ( ! empty( $cities_transient ) ) {
                 foreach ( $cities_transient as $city ) {
