@@ -133,19 +133,22 @@
             $cities[ '' ] = '-';
         }
 
-        if ( ! $state_code && $country_code ) {
+        if ( $country_code && ! $state_code ) {
             $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
-            if ( false == $transient || empty( $transient ) ) {
-                $set_transient = true;
-            } else {
-                $get_from_database = false;
+        } elseif ( $country_code && $state_code ) {
+            $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ) );
+        }
 
-                foreach ( $transient as $data ) {
-                    $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
-                }
-                if ( isset( $city_array ) ) {
-                    $cities = array_merge( $cities, $city_array );
-                }
+        if ( false == $transient || empty( $transient ) ) {
+            $set_transient = true;
+        } else {
+            $get_from_database = false;
+
+            foreach ( $transient as $data ) {
+                $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
+            }
+            if ( isset( $city_array ) ) {
+                $cities = array_merge( $cities, $city_array );
             }
         }
 
@@ -178,8 +181,12 @@
                 if ( isset( $city_array ) ) {
                     $cities = array_merge( $cities, $city_array );
                 }
-                if ( ! $state_code && true == $set_transient ) {
-                    set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
+                if ( true == $set_transient ) {
+                    if ( ! $state_code ) {
+                        set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
+                    } elseif ( $state_code ) {
+                        set_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ), $cities, DAY_IN_SECONDS );
+                    }
                 }
             }
         }
