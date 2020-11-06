@@ -61,8 +61,22 @@
     function get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
-            $field = [];
-            $items = [];
+
+            $country_code = false;
+            $field        = [];
+            $items        = [];
+            $state_code   = false;
+
+            if ( ! empty( $_POST[ 'post_id' ] ) ) {
+                $fields = get_field_objects( $_POST[ 'post_id' ] );
+                if ( ! empty( $fields ) ) {
+                    $field = acfcs_get_field_settings( $fields );
+                }
+            }
+
+            if ( ! isset( $field[ 'show_labels' ] ) ) {
+                $field[ 'show_labels' ] = false;
+            }
 
             if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
                 $codes        = explode( '-', $_POST[ 'state_code' ] );
@@ -81,10 +95,9 @@
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
             } else {
-                // empty options
-                $field[ 'show_labels' ] = true;
-                $country_code           = false;
-                $state_code             = false;
+                if ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) {
+                    $country_code = $field[ 'default_country' ];
+                }
             }
 
             $cities_transient = acfcs_get_cities( $country_code, $state_code, $field );
