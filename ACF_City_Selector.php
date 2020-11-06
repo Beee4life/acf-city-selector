@@ -103,6 +103,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_activation() {
+                $this->acfcs_check_table();
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_fill_database();
                 }
