@@ -122,7 +122,6 @@
                 $show_labels       = $field[ 'show_labels' ];
                 $which_fields      = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : false;
 
-
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
                     $prefill_states = acfcs_get_states( $default_country, true, $field );
@@ -393,9 +392,9 @@
              */
             function validate_value( $valid, $value, $field, $input ) {
 
-                $no_city = __( "You didn't select a city.", 'acf-city-selector' );
                 if ( 1 == $field[ 'required' ] ) {
                     $nothing       = __( "You didn't select anything.", 'acf-city-selector' );
+                    $no_city       = __( "You didn't select a city.", 'acf-city-selector' );
                     $no_country    = __( "You didn't select a country.", 'acf-city-selector' );
                     $no_state      = __( "You didn't select a state.", 'acf-city-selector' );
                     $no_state_city = __( "You didn't select a state and city.", 'acf-city-selector' );
@@ -431,8 +430,6 @@
                             $valid = $no_city;
                         }
                     }
-                } else {
-                    // not required
                 }
 
                 return $valid;
