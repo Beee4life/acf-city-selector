@@ -144,7 +144,6 @@
                         $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                         $selected_state = $selected_country . '-' . $selected_state;
                     }
-
                 }
 
                 if ( 'state_city' != $which_fields ) {
