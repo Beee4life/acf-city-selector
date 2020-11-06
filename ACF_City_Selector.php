@@ -136,23 +136,27 @@
              * Check if table exists
              */
             public function acfcs_check_table() {
-                require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-                ob_start();
-                global $wpdb;
-                ?>
-                CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
-                id int(6) unsigned NOT NULL auto_increment,
-                city_name varchar(50) NULL,
-                state_code varchar(3) NULL,
-                state_name varchar(50) NULL,
-                country_code varchar(2) NULL,
-                country varchar(50) NULL,
-                PRIMARY KEY  (id)
-                )
-                COLLATE <?php echo $wpdb->collate; ?>;
-                <?php
-                $sql = ob_get_clean();
-                dbDelta( $sql );
+                $acfcs_db_version = get_option( 'acfcs_db_version', false );
+                if ( false == $acfcs_db_version || $acfcs_db_version != $this->settings[ 'db_version' ] ) {
+                    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+                    ob_start();
+                    global $wpdb;
+                    ?>
+                    CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
+                    id int(6) unsigned NOT NULL auto_increment,
+                    city_name varchar(50) NULL,
+                    state_code varchar(3) NULL,
+                    state_name varchar(50) NULL,
+                    country_code varchar(2) NULL,
+                    country varchar(50) NULL,
+                    PRIMARY KEY  (id)
+                    )
+                    COLLATE <?php echo $wpdb->collate; ?>;
+                    <?php
+                    $sql = ob_get_clean();
+                    dbDelta( $sql );
+                    update_option( 'acfcs_db_version', $this->settings[ 'db_version' ] );
+                }
             }
 
 
