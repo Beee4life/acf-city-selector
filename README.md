@@ -260,6 +260,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.28.0
+* added a new option: "state/provence + city" (for when a default country is set)
+* added a transient for cities per state 
+
 0.27.1
 * removed version check for database which prevents creating database on plugin activation
 
