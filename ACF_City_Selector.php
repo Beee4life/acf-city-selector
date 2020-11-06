@@ -471,6 +471,10 @@
                         delete_transient( 'acfcs_countries' );
                         $countries = acfcs_get_countries( false, false, true );
                         foreach( $countries as $country_code => $country_name ) {
+                            $states = acfcs_get_states( $country_code );
+                            foreach( $states as $country_state => $name ) {
+                                delete_transient( 'acfcs_cities_' . strtolower( $country_state ) );
+                            }
                             delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
                             delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
                         }
