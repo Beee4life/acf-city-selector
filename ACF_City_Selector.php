@@ -46,6 +46,11 @@
                     define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
                 }
 
+                if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
+                    $plugin_path = $this->settings[ 'path' ];
+                    define( 'ACFCS_PLUGIN_PATH', $plugin_path );
+                }
+
                 if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
                     $plugin_url = $this->settings[ 'url' ];
                     define( 'ACFCS_PLUGIN_URL', $plugin_url );
