@@ -161,18 +161,23 @@
                             <label for="acfcs_state" class="screen-reader-text"><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></label>
                             <select name="acfcs_state" id="acfcs_state">
                                 <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
-                                <?php foreach( $states as $state ) { ?>
-                                    <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
-                                        <optgroup label="<?php echo $state[ 'name' ]; ?>">
-                                    <?php } ?>
-                                    <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
-                                        <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
-                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
-                                    <?php } ?>
-                                    <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
-                                        </optgroup>
-                                    <?php } ?>
-                                <?php } ?>
+                                <?php
+                                    foreach( $states as $state ) {
+                                        if ( 'open_optgroup' == $state[ 'state' ] ) {
+                                            echo "\n";
+                                            echo '<optgroup label="'. $state[ 'name' ] . '">';
+                                        }
+                                        if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) {
+                                            $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false;
+                                            echo "\n";
+                                            echo '<option value="' . $state[ 'state' ] . '"' . $selected . '>' . __( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
+                                        }
+                                        if ( 'close_optgroup' == $state[ 'state' ] ) {
+                                            echo "\n";
+                                            echo '</optgroup>';
+                                        }
+                                    }
+                                ?>
                             </select>
                         </div>
 
