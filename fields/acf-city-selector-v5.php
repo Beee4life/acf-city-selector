@@ -120,7 +120,7 @@
                 $selected_city     = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
                 $selected_selected = ' selected="selected"';
                 $show_labels       = $field[ 'show_labels' ];
-                $which_fields      = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : false;
+                $which_fields      = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
