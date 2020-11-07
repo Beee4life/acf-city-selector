@@ -10,9 +10,10 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $country_files = acfcs_get_packages( 'single' );
-        $country_packs = acfcs_get_packages( 'packages' );
-        $single_files  = [];
+        $country_files    = acfcs_get_packages( 'single' );
+        $country_packages = [];
+        $country_packs    = acfcs_get_packages( 'packages' );
+        $single_files     = [];
 
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
@@ -76,29 +77,31 @@
                             <?php $total_price = 0; ?>
                             <?php foreach( $single_files as $package ) { ?>
                                 <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
-                                <tr>
-                                    <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
-                                    <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
-                                    <td>
-                                        <?php
-                                            if ( ! empty( $package[ 'number_states' ] ) ) {
-                                                echo $package[ 'number_states' ];
-                                            } else {
-                                                echo 'n/a';
-                                            }
-                                        ?>
-                                    </td>
-                                    <td><?php echo $package[ 'number_cities' ]; ?></td>
-                                    <td>
-                                        <?php
-                                            if ( ! empty( $package[ 'price' ] ) ) {
-                                                echo '&euro; ' . $package[ 'price' ] . ',00';
-                                            } else {
-                                                echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free', 'acf-city-selector' ) );
-                                            }
-                                        ?>
-                                    </td>
-                                </tr>
+                                <?php if ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) && ( isset( $package[ 'active' ] ) && true == $package[ 'active' ] ) ) { ?>
+                                    <tr>
+                                        <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
+                                        <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
+                                        <td>
+                                            <?php
+                                                if ( ! empty( $package[ 'number_states' ] ) ) {
+                                                    echo $package[ 'number_states' ];
+                                                } else {
+                                                    echo 'n/a';
+                                                }
+                                            ?>
+                                        </td>
+                                        <td><?php echo $package[ 'number_cities' ]; ?></td>
+                                        <td>
+                                            <?php
+                                                if ( ! empty( $package[ 'price' ] ) ) {
+                                                    echo '&euro; ' . $package[ 'price' ] . ',00';
+                                                } else {
+                                                    echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free', 'acf-city-selector' ) );
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             <?php } ?>
                             </tbody>
                         </table>
@@ -128,8 +131,8 @@
                                     <td>
                                         <?php
                                             if ( isset( $package[ 'included_countries' ] ) && is_array( $package[ 'included_countries' ] ) && ! empty( $package[ 'included_countries' ] ) ) {
-                                                foreach( $package[ 'included_countries' ] as $country_code ) {
-                                                    echo '<img src="' . ACFCS_PLUGIN_URL . 'assets/img/flags/' . $country_code . '.png" alt="' . $country_code . '" class="flag" />';
+                                                foreach( $package[ 'included_countries' ] as $country ) {
+                                                    echo '<img src="' . ACFCS_PLUGIN_URL . 'assets/img/flags/' . $country->value . '.png" alt="' . $country->value . '" class="flag" />';
                                                 }
                                             }
                                         ?>
