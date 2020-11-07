@@ -77,7 +77,15 @@
                             <?php $total_price = 0; ?>
                             <?php foreach( $single_files as $package ) { ?>
                                 <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
-                                <?php if ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) && ( isset( $package[ 'active' ] ) && true == $package[ 'active' ] ) ) { ?>
+                                <?php $show_country = false; ?>
+
+                                <?php if ( ( isset( $package[ 'active' ] ) && true == $package[ 'active' ] ) || ! isset( $package[ 'active' ] ) ) { ?>
+                                    <?php if ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) { ?>
+                                        <?php $show_country = true; ?>
+                                    <?php } ?>
+                                <?php } ?>
+
+                                <?php if ( true == $show_country ) { ?>
                                     <tr>
                                         <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
                                         <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
