@@ -164,16 +164,13 @@
                                 <?php
                                     foreach( $states as $state ) {
                                         if ( 'open_optgroup' == $state[ 'state' ] ) {
-                                            echo "\n";
                                             echo '<optgroup label="'. $state[ 'name' ] . '">';
                                         }
                                         if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) {
                                             $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false;
-                                            echo "\n";
                                             echo '<option value="' . $state[ 'state' ] . '"' . $selected . '>' . __( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
                                         }
                                         if ( 'close_optgroup' == $state[ 'state' ] ) {
-                                            echo "\n";
                                             echo '</optgroup>';
                                         }
                                     }
