@@ -28,7 +28,6 @@
                     <p>
                         <?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?>
                     </p>
-
                     <ul>
                         <li>
                             <label for="import_be" class="screen-reader-text">
