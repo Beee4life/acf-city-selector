@@ -265,6 +265,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added a transient for cities per state 
 * added new countries
 * added 3 new filters to override field labels 
+* added a new filter to override showing of field labels 
 * (re-)added a check for database version to prevent unnecessary table updates 
 
 0.27.1

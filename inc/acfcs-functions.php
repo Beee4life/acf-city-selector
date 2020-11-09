@@ -7,20 +7,29 @@
      * This function makes use of a transient to speed up the process.
      *
      * @param false $show_first
-     * @param false $show_labels
+     * @param false $field
      * @param false $force
      *
      * @return array
      */
-    function acfcs_get_countries( $show_first = false, $field = false, $force = false ) {
+    function acfcs_get_countries( $show_first = true, $field = false, $force = false ) {
 
-        $countries = [];
-        if ( false !== $show_first ) {
-            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
-                $countries[ '' ] = '-';
+        $countries            = [];
+        $select_country_label = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
+        $show_labels          = apply_filters( 'acfcs_show_labels', ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true );
+
+        if ( $show_first ) {
+            if ( ! $show_labels ) {
+                if ( false !== $select_country_label ) {
+                    $countries[ '' ] = $select_country_label;
+                } else {
+                    $countries[ '' ] = '-';
+                }
             } else {
-                $countries[ '' ] = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
+                $countries[ '' ] = '-';
             }
+        } else {
+            // don't show first
         }
 
         $transient = get_transient( 'acfcs_countries' );
@@ -53,23 +62,23 @@
      *
      * @param false $country_code
      * @param false $show_first
-     * @param false $show_labels
      *
      * @return array
      */
-    function acfcs_get_states( $country_code = false, $show_first = false, $field = [] ) {
+    function acfcs_get_states( $country_code = false, $show_first = false, $field = false ) {
 
-        $states = [];
-        if ( false !== $show_first ) {
-            if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
+        $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
+        $show_labels                 = apply_filters( 'acfcs_show_labels', ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true );
+        $states                      = [];
+
+        if ( $show_first ) {
+            if ( $show_labels ) {
                 $states[ '' ] = '-';
             } else {
-                if ( isset( $field[ 'default_country' ] ) && false != $field[ 'default_country' ] ) {
-                    $states[ '' ] = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
-                } else {
-                    $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
-                }
+                $states[ '' ] = $select_province_state_label;
             }
+        } else {
+            // don't show first
         }
 
         if ( false != $country_code ) {
@@ -117,34 +126,32 @@
      *
      * @return array
      */
-    function acfcs_get_cities( $country_code = false, $state_code = false, $field = [] ) {
+    function acfcs_get_cities( $country_code = false, $state_code = false, $field = false ) {
 
         $cities            = [];
         $get_from_database = true;
+        $select_city_label = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
         $set_transient     = false;
+        $show_labels       = apply_filters( 'acfcs_show_labels', ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true );
 
-        if ( isset( $field[ 'show_labels' ] ) ) {
-            if ( 1 == $field[ 'show_labels' ] ) {
-                $cities[ '' ] = '-';
-            } else {
-                $cities[ '' ] = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
-            }
-        } else {
+        if ( $show_labels ) {
             $cities[ '' ] = '-';
+        } else {
+            $cities[ '' ] = $select_city_label;
         }
 
         if ( $country_code && ! $state_code ) {
-            $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
+            $cities_transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) );
         } elseif ( $country_code && $state_code ) {
-            $transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ) );
+            $cities_transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ) );
         }
 
-        if ( false == $transient || empty( $transient ) ) {
+        if ( false == $cities_transient || empty( $cities_transient ) ) {
             $set_transient = true;
         } else {
             $get_from_database = false;
 
-            foreach ( $transient as $data ) {
+            foreach ( $cities_transient as $data ) {
                 $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
             }
             if ( isset( $city_array ) ) {
@@ -183,9 +190,9 @@
                 }
                 if ( true == $set_transient ) {
                     if ( ! $state_code ) {
-                        set_transient( 'acfcs_cities_' . strtolower( $country_code ), $cities, DAY_IN_SECONDS );
+                        set_transient( 'acfcs_cities_' . strtolower( $country_code ), $city_array, DAY_IN_SECONDS );
                     } elseif ( $state_code ) {
-                        set_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ), $cities, DAY_IN_SECONDS );
+                        set_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ), $city_array, DAY_IN_SECONDS );
                     }
                 }
             }

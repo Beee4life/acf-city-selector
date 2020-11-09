@@ -21,7 +21,7 @@
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : 100;
 
         // get cities by country
-        $results = acfcs_get_countries( false, false, true );
+        $results = acfcs_get_countries( false );
 
         // if there is at least 1 country
         if ( ! empty( $results ) ) {

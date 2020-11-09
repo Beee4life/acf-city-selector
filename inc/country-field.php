@@ -22,29 +22,35 @@
     function get_states_call() {
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
-            $country_code     = $_POST[ 'country_code' ];
-            $states_transient = acfcs_get_states( $country_code );
+            $country_code = $_POST[ 'country_code' ];
+            $items        = [];
+            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
 
-            $i          = 1;
-            $items      = [];
-            $items[ 0 ] = [
-                'country_code'  => '',
-                'country_state' => '',
-                'state_code'    => '',
-                'state_name'    => apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ),
-            ];
+            if ( false != $post_id ) {
+                $fields = get_field_objects( $_POST[ 'post_id' ] );
+                if ( ! empty( $fields ) ) {
+                    $field = acfcs_get_field_settings( $fields );
+                }
+            }
+
+            if ( ! isset( $field[ 'show_labels' ] ) ) {
+                $field[ 'show_labels' ] = apply_filters( 'acfcs_show_labels', true );
+            }
+
+            $states_transient = acfcs_get_states( $country_code, true );
 
             foreach ( $states_transient as $key => $label ) {
-                $items[ $i ][ 'country_code' ] = $country_code;
-                $items[ $i ][ 'state_code' ]   = $key;
                 if ( $label != 'N/A' ) {
-                    $items[ $i ][ 'state_name' ]    = $label;
-                    $items[ $i ][ 'country_state' ] = $key;
+                    $items[] = [
+                        'state_name'    => $label,
+                        'country_state' => $key,
+                    ];
                 } else {
-                    $items[ $i ][ 'state_name' ]    = $country_code;
-                    $items[ $i ][ 'country_state' ] = $key;
+                    $items[] = [
+                        'state_name'    => $country_code,
+                        'country_state' => $key,
+                    ];
                 }
-                $i++;
             }
             echo json_encode( $items );
             wp_die();
@@ -62,39 +68,42 @@
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
 
-            $country_code = false;
-            $field        = [];
-            $items        = [];
-            $state_code   = false;
+            $country_code      = false;
+            $field             = false;
+            $items             = [];
+            $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
+            $posted_state_code = $_POST[ 'state_code' ];
+            $state_code        = false;
 
-            if ( ! empty( $_POST[ 'post_id' ] ) ) {
-                $fields = get_field_objects( $_POST[ 'post_id' ] );
+            if ( false != $post_id ) {
+                $fields = get_field_objects( $post_id );
                 if ( ! empty( $fields ) ) {
                     $field = acfcs_get_field_settings( $fields );
                 }
             }
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = true;
+                $field[ 'show_labels' ] = apply_filters( 'acfcs_show_labels', true );
             }
 
-            if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
-                $codes        = explode( '-', $_POST[ 'state_code' ] );
+            if ( 6 <= strlen( $posted_state_code ) ) {
+                $codes        = explode( '-', $posted_state_code );
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
-            } elseif ( strpos( $_POST[ 'state_code' ], 'FR-' ) !== false ) {
-                $country_code = substr( $_POST[ 'state_code' ], 0, 2 );
-                $state_code   = substr( $_POST[ 'state_code' ], 3 );
-            } elseif ( 2 == strlen( $_POST[ 'state_code' ] ) ) {
-                // if 2 == strlen( $_POST[ 'state_code' ] ) then it's probably a country code
+            } elseif ( strpos( $posted_state_code, 'FR-' ) !== false ) {
+                $country_code = substr( $posted_state_code, 0, 2 );
+                $state_code   = substr( $posted_state_code, 3 );
+            } elseif ( 2 == strlen( $posted_state_code ) ) {
+                // if 2 == strlen( $posted_state_code ) then it's probably a country code
                 // this is probably never reached, but just in case...
-                $country_code = $_POST[ 'state_code' ];
+                $country_code = $posted_state_code;
                 $state_code   = false;
-            } elseif ( ! empty( $_POST[ 'state_code' ] ) ) {
-                $codes        = explode( '-', $_POST[ 'state_code' ] );
+            } elseif ( ! empty( $posted_state_code ) ) {
+                $codes        = explode( '-', $posted_state_code );
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
             } else {
+                // fallback if all else fails
                 if ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) {
                     $country_code = $field[ 'default_country' ];
                 }
