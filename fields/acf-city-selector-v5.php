@@ -151,11 +151,11 @@
                     <div class="dropdown-box cs-countries">
                         <?php if ( 1 == $show_labels ) { ?>
                             <div class="acf-input-header">
-                                <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
+                                <?php echo apply_filters( 'acfcs_select_country', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
                             </div>
                         <?php } ?>
                         <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
-                            <?php esc_html_e( 'Select a country', 'acf-city-selector' ); ?>
+                            <?php echo apply_filters( 'acfcs_select_country', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
                         </label>
                         <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
                             <?php
@@ -181,11 +181,11 @@
                     <div class="dropdown-box cs-provinces">
                         <?php if ( 1 == $show_labels ) { ?>
                             <div class="acf-input-header">
-                                <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                                <?php echo apply_filters( 'acfcs_select_province_state', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
                             </div>
                         <?php } ?>
                         <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
-                            <?php esc_html_e( 'Select a province/state', 'acf-city-selector' ); ?>
+                            <?php echo apply_filters( 'acfcs_select_province_state', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
                         </label>
                         <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
                             <?php
@@ -208,11 +208,11 @@
                     <div class="dropdown-box cs-cities">
                         <?php if ( 1 == $show_labels ) { ?>
                             <div class="acf-input-header">
-                                <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                                <?php echo apply_filters( 'acfcs_select_city', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
                             </div>
                         <?php } ?>
                         <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
-                            <?php esc_html_e( 'Select a city', 'acf-city-selector' ); ?>
+                            <?php echo apply_filters( 'acfcs_select_city', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
                         </label>
                         <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
                             <?php
