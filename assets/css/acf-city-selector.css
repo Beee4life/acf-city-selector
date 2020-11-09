@@ -13,7 +13,7 @@
 }
 
 .acfcs .acfcs-admin-menu a.cta {
-    color:       red;
+    color:       #dc3232;
     font-weight: bold;
 }
 
@@ -136,7 +136,7 @@
 
 .acfcs .form--upload .val {
     background:     white;
-    border:         1px solid #CCC;
+    border:         1px solid #ccc;
     width:          185px;
     height:         35px;
     position:       absolute;
@@ -233,6 +233,15 @@
 
 .acfcs .notice--info {
     border-left-color: #00a0d2;
+}
+
+.acfcs .field-error {
+    background-color:  #f9f9f9;
+    border-left-color: #dc3232;
+    border-top:        1px solid #ccd0d4;
+    border-right:      1px solid #ccd0d4;
+    border-bottom:     1px solid #ccd0d4;
+    margin-bottom:     1rem;
 }
 
 /* misc */

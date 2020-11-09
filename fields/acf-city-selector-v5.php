@@ -127,8 +127,7 @@
                     $prefill_states = acfcs_get_states( $default_country, true, $field );
                     $prefill_cities = acfcs_get_cities( $default_country, false, $field );
 
-                } elseif ( false != $selected_country ) {
-
+                } elseif ( false !== $selected_country ) {
                     // check if cities and/or states are needed
                     if ( 'all' == $which_fields ) {
                         $prefill_states = acfcs_get_states( $selected_country, true, $field );
@@ -143,6 +142,13 @@
                         $prefill_states = acfcs_get_states( $selected_country, true, $field );
                         $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                         $selected_state = $selected_country . '-' . $selected_state;
+                    }
+                } elseif ( false == $default_country ) {
+                    // no country set
+                    if ( 'state_city' == $which_fields ) {
+                        echo '<div class="acfcs"><div class="acfcs__notice field-error">';
+                        echo esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
+                        echo '</div></div>';
                     }
                 }
 
