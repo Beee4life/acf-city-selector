@@ -29,6 +29,7 @@
          * Change dropdowns
          */
         function change_dropdowns( $instance ) {
+            $post_id = false;
             var countries = $('select[name*="countryCode"]');
             var state = $('select[name*="stateCode"]');
 
@@ -39,8 +40,9 @@
                 $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
             }
             if ( $_GET[ 'post' ] ) {
-                var post_id = $_GET[ 'post' ];
+                $post_id = $_GET[ 'post' ];
             }
+            var post_id = $post_id;
 
             /**
              * If there are any selects with name*=countryCode
@@ -57,16 +59,19 @@
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
 
+                    $show_labels = true;
                     $which_fields = 'all';
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                        $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
                     }
+                    var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
                     if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
-                        const d = get_states(country_code);
+                        const d = get_states(country_code, show_labels);
                         response_states.push(d);
-                        const e = get_cities(country_code);
+                        const e = get_cities(country_code, show_labels, post_id);
                         response_cities.push(e);
 
                         Promise.all(response_states).then(function(jsonResults) {
@@ -149,7 +154,7 @@
                         var state_field_id = $this.attr('id');
                         var city_field_id = state_field_id.replace('stateCode', 'cityName');
                         var changed_city = $('select[id="' + city_field_id + '"]');
-                        const d = get_cities(state_code,post_id);
+                        const d = get_cities(state_code);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
@@ -180,11 +185,14 @@
          * Get states on change
          *
          * @param countryCode
+         * @param showLabels
          * @param callback
+         * @returns {Promise<unknown>}
          */
-        function get_states(countryCode, callback) {
+        function get_states(countryCode, showLabels, callback) {
             const state_data = {
                 action: 'get_states_call',
+                show_labels: showLabels,
                 country_code: countryCode
             };
 
@@ -199,14 +207,16 @@
          * Get cities on change
          *
          * @param stateCode
+         * @param showLabels
          * @param postID
          * @param callback
          * @returns {Promise<unknown>}
          */
-        function get_cities(stateCode, postID, callback) {
+        function get_cities(stateCode, showLabels, postID, callback) {
             const city_data = {
                 action: 'get_cities_call',
                 post_id: postID,
+                show_labels: showLabels,
                 state_code: stateCode
             };
 
