@@ -103,11 +103,9 @@
                 $country_code = $codes[ 0 ];
                 $state_code   = $codes[ 1 ];
             } else {
+                // fallback if all else fails
                 if ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) {
                     $country_code = $field[ 'default_country' ];
-                } else {
-                    // @TODO: remove this after testing, before release
-                    error_log('default country not set');
                 }
             }
 
