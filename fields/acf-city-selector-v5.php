@@ -121,11 +121,10 @@
                 $which_fields      = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
                 // input header filters
+                $city_label           = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
                 $country_label        = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
                 $province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
-                $city_label           = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
                 $show_labels          = apply_filters( 'acfcs_show_labels', ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true );
-
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
