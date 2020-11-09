@@ -435,6 +435,8 @@
                     } elseif ( 'state_city' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
                             $valid = $nothing;
+                        } elseif ( empty( $value[ 'stateCode' ] ) ) {
+                            $valid = $no_state;
                         } elseif ( empty( $value[ 'cityName' ] ) ) {
                             $valid = $no_city;
                         }
