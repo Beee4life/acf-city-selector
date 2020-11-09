@@ -19,7 +19,7 @@
             if ( isset( $field[ 'show_labels' ] ) && false != $field[ 'show_labels' ] ) {
                 $countries[ '' ] = '-';
             } else {
-                $countries[ '' ] = esc_html__( 'Select a country', 'acf-city-selector' );
+                $countries[ '' ] = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
             }
         }
 
@@ -65,7 +65,7 @@
                 $states[ '' ] = '-';
             } else {
                 if ( isset( $field[ 'default_country' ] ) && false != $field[ 'default_country' ] ) {
-                    $states[ '' ] = esc_html__( 'Select a province/state', 'acf-city-selector' );
+                    $states[ '' ] = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
                 } else {
                     $states[ '' ] = esc_html__( 'Select a country first', 'acf-city-selector' );
                 }
@@ -127,7 +127,7 @@
             if ( 1 == $field[ 'show_labels' ] ) {
                 $cities[ '' ] = '-';
             } else {
-                $cities[ '' ] = esc_html__( 'Select a city', 'acf-city-selector' );
+                $cities[ '' ] = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
             }
         } else {
             $cities[ '' ] = '-';

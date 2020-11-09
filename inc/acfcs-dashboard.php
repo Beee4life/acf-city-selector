@@ -30,7 +30,7 @@
                         <input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
 
                         <div class="upload-element">
-                            <label for="csv_upload"><?php _e( 'Choose a (CSV) file to upload', 'acf-city-selector' ); ?></label>
+                            <label for="csv_upload"><?php esc_html_e( 'Choose a (CSV) file to upload', 'acf-city-selector' ); ?></label>
                             <div class="form--upload form--csv_upload">
                                 <input type="file" name="csv_upload" id="csv_upload" accept=".csv" />
                                 <span class="val"></span>

@@ -27,11 +27,15 @@
 
                     <ul>
                         <li>
-                            <label for="import_be" class="screen-reader-text"></label>
+                            <label for="import_be" class="screen-reader-text">
+                                <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?>
+                            </label>
                             <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
                         </li>
                         <li>
-                            <label for="import_nl" class="screen-reader-text"></label>
+                            <label for="import_nl" class="screen-reader-text">
+                                <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?>
+                            </label>
                             <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
                         </li>
                     </ul>
@@ -50,7 +54,9 @@
                     <ul>
                         <?php foreach( $countries as $key => $value ) { ?>
                             <li>
-                                <label for="delete_<?php echo strtolower( $key ); ?>" class="screen-reader-text"></label>
+                                <label for="delete_<?php echo strtolower( $key ); ?>" class="screen-reader-text">
+                                    <?php esc_html_e( $value, 'acf-city-selector' ); ?>
+                                </label>
                                 <input type="checkbox" name="delete_country[]" id="delete_<?php echo strtolower( $key ); ?>" value="<?php echo strtolower( $key ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
                             </li>
                         <?php } ?>
@@ -87,7 +93,9 @@
                     <ul>
                         <li>
                             <span class="acfcs_input">
-                                <label for="preserve_settings" class="screen-reader-text"></label>
+                                <label for="preserve_settings" class="screen-reader-text">
+                                    <?php esc_html_e( 'Preserve settings on plugin deletion', 'acf-city-selector' ); ?>
+                                </label>
                                 <input type="checkbox" name="preserve_settings" id="preserve_settings" value="1" <?php echo $checked; ?>/> <?php esc_html_e( 'Preserve settings on plugin deletion', 'acf-city-selector' ); ?>
                             </span>
                         </li>

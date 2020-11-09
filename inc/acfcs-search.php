@@ -142,9 +142,9 @@
                         <?php // if there's only 1 country, no need to add country dropdown ?>
                         <?php if ( count( $countries ) > 1 ) { ?>
                             <div class="acfcs__search-criteria acfcs__search-criteria--country">
-                                <label for="acfcs_country" class="screen-reader-text"><?php _e( 'Select a country', 'acf-city-selector' ); ?></label>
+                                <label for="acfcs_country" class="screen-reader-text"><?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?></label>
                                 <select name="acfcs_country" id="acfcs_country">
-                                    <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
+                                    <option value=""><?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?></option>
                                     <?php foreach( $countries as $country ) { ?>
                                         <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
                                         <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
@@ -158,9 +158,13 @@
                         <?php } ?>
 
                         <div class="acfcs__search-criteria acfcs__search-criteria--state">
-                            <label for="acfcs_state" class="screen-reader-text"><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></label>
+                            <label for="acfcs_state" class="screen-reader-text">
+                                <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
+                            </label>
                             <select name="acfcs_state" id="acfcs_state">
-                                <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
+                                <option value="">
+                                    <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
+                                </option>
                                 <?php
                                     foreach( $states as $state ) {
                                         if ( 'open_optgroup' == $state[ 'state' ] ) {

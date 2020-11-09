@@ -31,7 +31,7 @@
                 'country_code'  => '',
                 'country_state' => '',
                 'state_code'    => '',
-                'state_name'    => esc_html__( 'Select a province/state', 'acf-city-selector' ),
+                'state_name'    => apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ),
             ];
 
             foreach ( $transient_states as $key => $label ) {
