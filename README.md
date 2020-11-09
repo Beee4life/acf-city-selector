@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.28.0 - released 05.11.20
+0.28.0-beta1 - released 09.11.20
 
 <a name="description"></a>
 ### Description
@@ -260,7 +260,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-0.28.0
+0.28.0-beta1
 * added a new option: "state/provence + city" (for when a default country is set)
 * added a transient for cities per state 
 * added new country packages on the website
