@@ -23,7 +23,7 @@
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
             $country_code     = $_POST[ 'country_code' ];
-            $transient_states = acfcs_get_states( $country_code );
+            $states_transient = acfcs_get_states( $country_code );
 
             $i          = 1;
             $items      = [];
@@ -34,7 +34,7 @@
                 'state_name'    => apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ),
             ];
 
-            foreach ( $transient_states as $key => $label ) {
+            foreach ( $states_transient as $key => $label ) {
                 $items[ $i ][ 'country_code' ] = $country_code;
                 $items[ $i ][ 'state_code' ]   = $key;
                 if ( $label != 'N/A' ) {
@@ -75,7 +75,7 @@
             }
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = false;
+                $field[ 'show_labels' ] = true;
             }
 
             if ( 6 <= strlen( $_POST[ 'state_code' ] ) ) {
