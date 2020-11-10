@@ -16,7 +16,7 @@
 
     <hr />
 
-    <p>
+    <p class="paypal_button">
         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL" target="_blank"><img src="<?php echo plugins_url( '/assets/img/paypal_donate.gif', dirname( __FILE__ )  ); ?>" alt="" class="acfcs__donate" /></a>
         <?php esc_html_e( 'If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it.', 'acf-city-selector' ); ?>
     </p>
