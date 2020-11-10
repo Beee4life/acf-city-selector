@@ -431,6 +431,12 @@
     }
 }
 
+@media screen and ( min-width: 1280px ) {
+    .acfcs table.acfcs__table--preview-result {
+        max-width: 90%;
+    }
+}
+
 @media screen and ( min-width: 1440px ) {
     .acfcs .admin_left {
         width: 77.5%;
