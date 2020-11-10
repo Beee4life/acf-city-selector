@@ -59,8 +59,8 @@
     margin-top: 2em;
 }
 
-.acfcs__search-criteria {
-    display: inline-block;
+.acfcs__search-form {
+    display: flex;
 }
 
 .acfcs__search-criteria--orderby {
@@ -69,7 +69,8 @@
 
 .acfcs__search-criteria--or,
 .acfcs__search-criteria--plus {
-    margin: 0 0.5em;
+    margin:      0 0.5em;
+    padding-top: 5px;
 }
 
 /* tables */
@@ -182,16 +183,13 @@
     border-radius: 3px;
     box-sizing:    border-box;
     color:         #32373c;
-    min-height:    30px;
-    padding:       0 0 0 5px;
-}
-
-.acfcs input[name="acfcs_search"] {
-    margin-top: 1px;
+    /*min-height:    30px;*/
+    margin:        0;
+    /*padding:       0 0 0 5px;*/
 }
 
 .acfcs select[name="acfcs_orderby"] {
-    margin-top: -3px;
+    /*margin-top: -3px;*/
 }
 
 .acfcs input[name="acfcs_limit"],
