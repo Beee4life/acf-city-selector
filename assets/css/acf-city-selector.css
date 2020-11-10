@@ -81,10 +81,6 @@
     max-width:       100%;
 }
 
-.acfcs table.acfcs__table--search {
-    max-width: 60%;
-}
-
 .acfcs table.acfcs__table--packages {
     margin-top:    1rem;
     margin-bottom: 1rem;
@@ -332,13 +328,15 @@
 
 /* media queries */
 @media screen and ( min-width: 400px ) {
-
     .hide400 {
         display: none;
     }
 }
 
 @media screen and ( min-width: 480px ) {
+    .hide480 {
+        display: none;
+    }
 
     .acfcs .admin_left,
     .acfcs .admin_right {
@@ -369,8 +367,31 @@
     }
 }
 
-@media screen and ( min-width: 640px ) {
+@media screen and (max-width: 567px) {
+    .acfcs table.acfcs__table--search.scrollable {
+        display:     block;
+        overflow:    hidden;
+        white-space: nowrap;
+        overflow-x:  scroll;
+    }
+}
 
+@media screen and ( min-width: 568px ) {
+    .hide568 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .acfcs table.acfcs__table--preview-result.scrollable {
+        display:     block;
+        overflow:    hidden;
+        white-space: nowrap;
+        overflow-x:  scroll;
+    }
+}
+
+@media screen and ( min-width: 640px ) {
     .hide640 {
         display: none;
     }
@@ -404,6 +425,10 @@
         float:     right;
         max-width: 22.5%;
     }
+
+    .acfcs table.acfcs__table--search {
+        max-width: 90%;
+    }
 }
 
 @media screen and ( min-width: 1440px ) {
@@ -413,6 +438,10 @@
 
     .acfcs .admin_right {
         max-width: 20%;
+    }
+
+    .acfcs table.acfcs__table--search {
+        max-width: 60%;
     }
 
     .acfcs table.acfcs__table--packages {
