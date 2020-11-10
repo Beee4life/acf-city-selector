@@ -61,6 +61,15 @@
 
 .acfcs__search-form {
     display: flex;
+    flex-flow: row wrap;
+}
+
+.acfcs__search-criteria {
+    margin-bottom: 0.75rem;
+}
+
+.acfcs__search-criteria:last-child {
+    margin-bottom: 0;
 }
 
 .acfcs__search-criteria--orderby {
@@ -183,13 +192,7 @@
     border-radius: 3px;
     box-sizing:    border-box;
     color:         #32373c;
-    /*min-height:    30px;*/
     margin:        0;
-    /*padding:       0 0 0 5px;*/
-}
-
-.acfcs select[name="acfcs_orderby"] {
-    /*margin-top: -3px;*/
 }
 
 .acfcs input[name="acfcs_limit"],
@@ -325,7 +328,7 @@
 }
 
 /* media queries */
-@media screen and ( min-width: 400px ) {
+@media screen and (min-width: 400px) {
     .hide400 {
         display: none;
     }
@@ -374,7 +377,7 @@
     }
 }
 
-@media screen and ( min-width: 568px ) {
+@media screen and (min-width: 568px) {
     .hide568 {
         display: none;
     }
@@ -389,9 +392,13 @@
     }
 }
 
-@media screen and ( min-width: 640px ) {
+@media screen and (min-width: 640px) {
     .hide640 {
         display: none;
+    }
+
+    .admin_right .paypal_button {
+        margin-bottom: 2.5em;
     }
 
     .acfcs .acfcs__process-file {
@@ -412,7 +419,25 @@
     }
 }
 
-@media screen and ( min-width: 1024px ) {
+/* screensize used in WP forms.css */
+@media screen and (max-width: 782px) {
+    .acfcs__search-criteria--or,
+    .acfcs__search-criteria--plus {
+        margin:      0 0.5em;
+        padding-top: 10px;
+    }
+    .acfcs__checkboxes li {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (min-width: 783px) {
+    .acfcs__checkboxes li {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
     .acfcs .admin_left {
         float:    left;
         position: relative;
@@ -424,18 +449,22 @@
         max-width: 22.5%;
     }
 
+    .admin_right .paypal_button {
+        margin-bottom: initial;
+    }
+
     .acfcs table.acfcs__table--search {
         max-width: 90%;
     }
 }
 
-@media screen and ( min-width: 1280px ) {
+@media screen and (min-width: 1280px) {
     .acfcs table.acfcs__table--preview-result {
         max-width: 90%;
     }
 }
 
-@media screen and ( min-width: 1440px ) {
+@media screen and (min-width: 1440px) {
     .acfcs .admin_left {
         width: 77.5%;
     }
