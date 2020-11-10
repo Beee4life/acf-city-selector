@@ -28,7 +28,7 @@
                     <p>
                         <?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?>
                     </p>
-                    <ul>
+                    <ul class="acfcs__checkboxes">
                         <li>
                             <label for="import_be" class="screen-reader-text">
                                 <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?>
@@ -58,7 +58,7 @@
                         <p>
                             <?php esc_html_e( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ); ?>
                         </p>
-                        <ul>
+                        <ul class="acfcs__checkboxes">
                             <?php foreach( $countries as $key => $value ) { ?>
                                 <li>
                                     <label for="delete_<?php echo strtolower( $key ); ?>" class="screen-reader-text">
