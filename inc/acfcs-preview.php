@@ -83,7 +83,6 @@
                 <?php } ?>
 
                 <?php
-                    // @TODO: style table better for mobile
                     // Get imported data
                     if ( $file_name ) {
                         $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ',';
