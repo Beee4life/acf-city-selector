@@ -133,9 +133,12 @@
 
             <div class="admin_left">
 
-                <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
+                <h2>
+                    <?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?>
+                </h2>
 
                 <?php // Search form ?>
+                <?php // @TODO: check css margins (input) ?>
                 <form action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
                     <input name="acfcs_search_form" type="hidden" value="1" />
                     <?php if ( count( $countries ) > 0 ) { ?>
@@ -241,10 +244,15 @@
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">
+                            <p class="hide568">
+                                <small>
+                                    <?php _e( 'Table scrolls horizontally.', 'acf-city-selector' ); ?>
+                                </small>
+                            </p>
                             <p>
                                 <?php echo $result_count; ?> <?php esc_html_e( 'results',  'acf-city-selector' ); ?>
                             </p>
-                            <table class="acfcs__table acfcs__table--search">
+                            <table class="acfcs__table acfcs__table--search scrollable">
                                 <thead>
                                 <tr>
                                     <th>
