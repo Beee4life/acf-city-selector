@@ -13,7 +13,10 @@
         $country_files    = acfcs_get_packages( 'single' );
         $country_packages = [];
         $country_packs    = acfcs_get_packages( 'packages' );
+        $europe_price     = 0;
+        $noram_price      = 0;
         $single_files     = [];
+        $total_price      = 0;
 
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
@@ -47,10 +50,11 @@
                 <div class="acfcs__section acfcs__section--gopro">
                     <h2><?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?></h2>
                     <p>
-                        <?php esc_html_e( 'Default the plugin comes with 2 countries included, Belgium and the Netherlands but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
+                        <?php esc_html_e( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
                     </p>
                     <p>
                         <?php esc_html_e( 'And now you can !! We have created several \'country packages\' for you to import as is.', 'acf-city-selector' ); ?>
+                        <?php echo sprintf( __( 'Get them <a href="%s">%s</a>.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), 'here' ); ?>
                     </p>
                 </div>
 
@@ -74,14 +78,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $total_price = 0; ?>
                             <?php foreach( $single_files as $package ) { ?>
+                                <?php $europe_price = ( isset( $package[ 'continent' ] ) && 'europe' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $europe_price + $package[ 'price' ] : $europe_price; ?>
+                                <?php $noram_price = ( isset( $package[ 'continent' ] ) && 'n-america' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price; ?>
                                 <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
                                 <?php $show_country = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) ? true : false; ?>
                                 <?php if ( $show_country ) { ?>
                                     <tr>
-                                        <td><img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" /></td>
-                                        <td><?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?></td>
+                                        <td>
+                                            <img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" />
+                                        </td>
+
+                                        <td>
+                                            <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
+                                        </td>
+
                                         <td>
                                             <?php
                                                 if ( ! empty( $package[ 'number_states' ] ) ) {
@@ -91,13 +102,17 @@
                                                 }
                                             ?>
                                         </td>
-                                        <td><?php echo $package[ 'number_cities' ]; ?></td>
+
+                                        <td>
+                                            <?php echo $package[ 'number_cities' ]; ?>
+                                        </td>
+
                                         <td>
                                             <?php
                                                 if ( ! empty( $package[ 'price' ] ) ) {
                                                     echo '&euro; ' . $package[ 'price' ] . ',00';
                                                 } else {
-                                                    echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free', 'acf-city-selector' ) );
+                                                    _e( 'FREE', 'acf-city-selector' );
                                                 }
                                             ?>
                                         </td>
@@ -117,7 +132,8 @@
                             <tr>
                                 <th><?php esc_html_e( 'Package', 'acf-city-selector' ); ?></th>
                                 <th><?php esc_html_e( 'Included countries', 'acf-city-selector' ); ?></th>
-                                <th><?php esc_html_e( 'Price', 'acf-city-selector' ); ?></th>
+                                <th><?php esc_html_e( 'As separate countries', 'acf-city-selector' ); ?></th>
+                                <th><?php esc_html_e( 'Package price', 'acf-city-selector' ); ?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -142,9 +158,26 @@
                                     <td>
                                         <?php
                                             if ( ! empty( $package[ 'price' ] ) ) {
+                                                if ( 'europe' == $package[ 'package_code' ] ) {
+                                                    $individual_price = $europe_price;
+                                                } elseif ( 'noram' == $package[ 'package_code' ] ) {
+                                                    $individual_price = $noram_price;
+                                                }
+                                                if ( isset( $individual_price ) ) {
+                                                    echo '&euro; ' . number_format( $individual_price, 2, ',', '' );
+                                                }
+                                            } else {
+                                                echo '&nbsp;';
+                                            }
+                                        ?>
+                                    </td>
+
+                                    <td>
+                                        <?php
+                                            if ( ! empty( $package[ 'price' ] ) ) {
                                                 echo '&euro; ' . $package[ 'price' ] . ',00';
                                             } else {
-                                                echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', ACFCS_WEBSITE_URL . '/get-countries/?utm_source=wpadmin&utm_medium=free_download&utm_campaign=acf-plugin', __( 'Free', 'acf-city-selector' ) );
+                                                echo '&nbsp;';
                                             }
                                         ?>
                                     </td>
