@@ -230,7 +230,9 @@
                                 </select>
                             </div>
 
-                            <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
+                            <div class="acfcs__search-criteria acfcs__search-criteria--submit">
+                                <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
+                            </div>
                         </div>
                     </form>
                 <?php } ?>
