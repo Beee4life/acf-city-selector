@@ -467,6 +467,10 @@
         max-width: 20%;
     }
 
+    .acfcs__search-criteria {
+        margin-bottom: 0;
+    }
+
     .acfcs table.acfcs__table--search {
         max-width: 60%;
     }
