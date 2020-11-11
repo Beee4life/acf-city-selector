@@ -18,7 +18,6 @@
             <h1>ACF City Selector</h1>
 
             <?php
-
                 echo ACF_City_Selector::acfcs_admin_menu();
 
                 $file_index = acfcs_check_if_files();
