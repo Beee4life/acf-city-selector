@@ -756,24 +756,24 @@
              * Adds admin pages
              */
             public function acfcs_add_admin_pages() {
-                include 'inc/acfcs-dashboard.php';
+                include 'admin/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
-                include 'inc/acfcs-preview.php';
+                include 'admin/acfcs-preview.php';
                 add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
 
-                include 'inc/acfcs-settings.php';
+                include 'admin/acfcs-settings.php';
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 
                 if ( true == acfcs_has_cities() ) {
-                    include 'inc/acfcs-search.php';
+                    include 'admin/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
 
-                include 'inc/acfcs-info.php';
+                include 'admin/acfcs-info.php';
                 add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
 
-                include 'inc/acfcs-countries.php';
+                include 'admin/acfcs-countries.php';
                 add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
             }
 
