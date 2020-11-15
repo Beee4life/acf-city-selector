@@ -262,7 +262,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.28.0
 * added select2 option
-* removed filter to override showing of field labels (was added in beta) 
+* changed hide labels filter as fallback for select2 
 
 0.28.0-beta1
 * added a new option: "state/provence + city" (for when a default country is set)
