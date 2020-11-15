@@ -157,7 +157,7 @@
                         var state_field_id = $this.attr('id');
                         var city_field_id = state_field_id.replace('stateCode', 'cityName');
                         var changed_city = $('select[id="' + city_field_id + '"]');
-                        const d = get_cities(country_code, show_labels, post_id);
+                        const d = get_cities(state_code, show_labels, post_id);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
