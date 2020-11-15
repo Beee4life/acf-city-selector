@@ -549,8 +549,23 @@
              * Add select2 settings with possible user overrides
              */
             public function acfcs_select2_footer() {
-                $field          = acfcs_get_field_settings();
-                $show_labels    = ( isset( $field[ 'show_labels' ] ) && true == $field[ 'show_labels' ] ) ? true : false;
+                if ( isset( $_GET[ 'post' ] ) && isset( $_GET[ 'action' ] ) ) {
+                    $item_id = $_GET[ 'post' ];
+                    $fields = get_field_objects( $item_id );
+                    if ( is_array( $fields ) && ! empty( $fields ) ) {
+                        $field = acfcs_get_field_settings( $fields );
+                    }
+                }
+
+                $show_labels = false;
+                if ( isset( $field[ 'show_labels' ] ) ) {
+                    if ( true == $field[ 'show_labels' ] ) {
+                        $show_labels = true;
+                    }
+                } else {
+                    $show_labels = apply_filters( 'acfcs_show_labels', true );
+                }
+
                 $select_country = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
                 $select_state   = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
                 $select_city    = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
