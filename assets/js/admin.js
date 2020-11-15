@@ -12,8 +12,9 @@ jQuery(document).ready(function () {
 
     $(document).ready(function() {
         $('select.acfcs__dropdown.select2').select2({
-            width: '100%',
-            allowClear: true
+            allowClear: true,
+            placeholder: '',
+            width: '100%'
         });
     });
 });
