@@ -1,7 +1,6 @@
 <?php
-
     /*
-     * Set admin-ajax.php on the front side (by default it is available only for Backend)
+     * Set admin-ajax.php on the front side (by default it is available only on back-end)
      */
     function city_selector_ajaxurl() {
         ?>
@@ -13,6 +12,7 @@
     add_action( 'wp_head', 'city_selector_ajaxurl' );
     add_action( 'login_head', 'city_selector_ajaxurl' );
 
+
     /*
      * Get states by country code
      *
@@ -23,21 +23,28 @@
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
             $country_code = $_POST[ 'country_code' ];
+            $field        = false;
             $items        = [];
             $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
 
             if ( false != $post_id ) {
                 $fields = get_field_objects( $_POST[ 'post_id' ] );
-                if ( ! empty( $fields ) ) {
+                if ( is_array( $fields ) && ! empty( $fields ) ) {
                     $field = acfcs_get_field_settings( $fields );
                 }
             }
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = apply_filters( 'acfcs_show_labels', true );
+                if ( isset( $_POST[ 'show_labels' ] ) ) {
+                    if ( '1' == $_POST[ 'show_labels' ] ) {
+                        $field[ 'show_labels' ] = true;
+                    } elseif ( '0' == $_POST[ 'show_labels' ] ) {
+                        $field[ 'show_labels' ] = false;
+                    }
+                }
             }
 
-            $states_transient = acfcs_get_states( $country_code, true );
+            $states_transient = acfcs_get_states( $country_code, true, $field );
 
             foreach ( $states_transient as $key => $label ) {
                 if ( $label != 'N/A' ) {
@@ -59,6 +66,7 @@
     add_action( 'wp_ajax_get_states_call', 'get_states_call' );
     add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
 
+
     /*
      * Get cities by state code and/or country code
      *
@@ -67,7 +75,6 @@
     function get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
-
             $country_code      = false;
             $field             = false;
             $items             = [];
@@ -83,7 +90,13 @@
             }
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = apply_filters( 'acfcs_show_labels', true );
+                if ( isset( $_POST[ 'show_labels' ] ) ) {
+                    if ( '1' == $_POST[ 'show_labels' ] ) {
+                        $field[ 'show_labels' ] = true;
+                    } elseif ( '0' == $_POST[ 'show_labels' ] ) {
+                        $field[ 'show_labels' ] = false;
+                    }
+                }
             }
 
             if ( 6 <= strlen( $posted_state_code ) ) {
