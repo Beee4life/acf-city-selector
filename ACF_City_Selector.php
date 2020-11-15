@@ -82,6 +82,8 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
                 add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
+                add_action( 'admin_footer',                 array( $this, 'acfcs_select2_footer' ) );
+                add_action( 'wp_footer',                    array( $this, 'acfcs_select2_footer' ) ); // for front-end usage
 
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
@@ -484,7 +486,7 @@
                         delete_transient( 'acfcs_countries' );
                         $countries = acfcs_get_countries( false, false, true );
                         foreach( $countries as $country_code => $country_name ) {
-                            $states = acfcs_get_states( $country_code );
+                            $states = acfcs_get_states( $country_code, false );
                             foreach( $states as $country_state => $name ) {
                                 delete_transient( 'acfcs_cities_' . strtolower( $country_state ) );
                             }
@@ -540,6 +542,39 @@
                         }
                     }
                 }
+            }
+
+
+            /**
+             * Add select2 settings with possible user overrides
+             */
+            public function acfcs_select2_footer() {
+                $field          = acfcs_get_field_settings();
+                $show_labels    = ( isset( $field[ 'show_labels' ] ) && true == $field[ 'show_labels' ] ) ? true : false;
+                $select_country = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
+                $select_state   = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
+                $select_city    = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+                ?>
+                <script>
+                    $(document).ready(function() {
+                        $('select.select2.acfcs__dropdown--country').select2({
+                            allowClear: true,
+                            placeholder: "<?php echo $select_country ?>",
+                            width: '100%'
+                        });
+                        $('select.select2.acfcs__dropdown--state').select2({
+                            allowClear: true,
+                            placeholder: "<?php echo $select_state ?>",
+                            width: '100%'
+                        });
+                        $('select.select2.acfcs__dropdown--city').select2({
+                            allowClear: true,
+                            placeholder: "<?php echo $select_city ?>",
+                            width: '100%'
+                        });
+                    });
+                </script>
+                <?php
             }
 
 
