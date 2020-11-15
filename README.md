@@ -247,8 +247,8 @@ The plugin's admin pages are not properly styled for mobile (yet).
 ### TODO
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
+- [X] Add select2 to dropdowns 
 - [ ] Remove table around output in preview/search (admin) 
-- [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
 ### Credit
@@ -261,7 +261,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.28.0
-*
+* added select2 option
+* removed filter to override showing of field labels (not needed anymore) 
 
 0.28.0-beta1
 * added a new option: "state/provence + city" (for when a default country is set)
