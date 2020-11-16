@@ -173,6 +173,16 @@
                     }
                 }
 
+                if ( true == $use_select2 ) {
+                    if ( isset( $field[ 'parent_layout' ] ) ) {
+                        echo '<div class="acfcs"><div class="acfcs__notice field-error">';
+                        echo esc_html__( "Sorrry, select2 doesn't work yet in a flexible content block.", 'acf-city-selector' );
+                        echo '</div></div>';
+                    } elseif ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false ) {
+                        // repeater
+                    }
+                }
+
                 if ( 'state_city' != $which_fields ) {
                 ?>
                     <div class="dropdown-box cs-countries">
