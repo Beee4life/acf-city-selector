@@ -530,6 +530,7 @@
         $countries            = acfcs_get_countries( true, $field );
         $country_label        = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
         $default_country      = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+        $default_value        = false;
         $field_id             = $field[ 'id' ];
         $field_name           = $field[ 'name' ];
         $prefill_cities       = $prefill_values[ 'prefill_cities' ];
@@ -551,7 +552,6 @@
                 $values         = $countries;
                 break;
             case 'state':
-                $default_value  = false;
                 $field_label    = $province_state_label;
                 $modifier       = 'states';
                 $field_suffix   = 'stateCode';
@@ -559,7 +559,6 @@
                 $values         = $prefill_states;
                 break;
             case 'city':
-                $default_value  = false;
                 $field_label    = $city_label;
                 $modifier       = 'cities';
                 $field_suffix   = 'cityName';
@@ -567,6 +566,7 @@
                 $values         = $prefill_cities;
                 break;
         }
+        $dropdown_class = $dropdown_class . ' ' . $acfcs_dropdown . '--' . $modifier;
 
         ob_start();
         ?>
@@ -579,7 +579,7 @@
             <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
                 <?php echo $field_label; ?>
             </label>
-            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--<?php echo $modifier; ?>" data-show-label="<?php echo $data_label_value; ?>">
+            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-label="<?php echo $data_label_value; ?>">
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
