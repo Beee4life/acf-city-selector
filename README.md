@@ -227,22 +227,22 @@ This plugin is not 100% finished yet. It won't break anything but be on the look
 The plugin works in the following situations: 
 * in a single field
 * in a repeater field
-* in a group (as single and repeater)
-* in a flexible content block (as single and repeater)
-* as a clone field
+* in a group
+* in a flexible content block
+* in an accordion field
+* as a cloned field
 
 The plugin has NOT been tested yet in the following situations: 
-* as a repeater field on a user page
 * on taxonomy pages
 * on settings pages
-* most front-end usage (except single use)
+* most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 Select2 does NOT work yet for the following field types/situations: 
-* when adding a layout in a flexible content field
+* when adding a new layout in a flexible content field
 * when adding a new row in a repeater field
 
-Sometimes the loading of states/cities, takes a few seconds... Don't know why...
+Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
 
 <a name="todo"></a>
