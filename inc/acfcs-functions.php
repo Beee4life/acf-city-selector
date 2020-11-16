@@ -587,7 +587,7 @@
                             if ( false !== $selected_value ) {
                                 $selected = ( $selected_value == $key ) ? $selected_selected : $selected;
                             } elseif ( ! empty( $default_value ) ) {
-                                // only for countries
+                                // only when a default country is set
                                 $selected = ( $default_value == $key ) ? $selected_selected : $selected;
                             }
                             ?>
