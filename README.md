@@ -238,10 +238,12 @@ The plugin hasn't been tested yet in the following situations:
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
+Select2 doesn't work yet for the following field types/situations: 
+* in a flexible content group
+* in a repeater
+
 Sometimes the loading of states/cities, takes a few seconds... Don't know why...
 This seems to be very random and unpredictable.
-
-The plugin's admin pages are not properly styled for mobile (yet).
 
 <a name="todo"></a>
 ### TODO
