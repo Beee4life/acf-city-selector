@@ -569,6 +569,7 @@
                 $select_country = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
                 $select_state   = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
                 $select_city    = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+                // @TODO: set width as class
                 ?>
                 <script>
                     $(document).ready(function() {
