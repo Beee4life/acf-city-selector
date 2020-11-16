@@ -276,7 +276,7 @@
 }
 
 /* edit post screens v5 */
-.acf-field-acf-city-selector .dropdown-box {
+.acf-field-acf-city-selector .acfcs__dropdown-box {
     margin-bottom: 1em;
 }
 
