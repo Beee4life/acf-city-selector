@@ -229,18 +229,18 @@ The plugin works in the following situations:
 * in a repeater field
 * in a group (as single and repeater)
 * in a flexible content block (as single and repeater)
-
-The plugin hasn't been tested yet in the following situations: 
-* as a repeater field on a user page
 * as a clone field
+
+The plugin has NOT been tested yet in the following situations: 
+* as a repeater field on a user page
 * on taxonomy pages
 * on settings pages
 * most front-end usage (except single use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
-Select2 doesn't work yet for the following field types/situations: 
-* in a flexible content group
-* in a repeater
+Select2 does NOT work yet for the following field types/situations: 
+* when adding a layout in a flexible content field
+* when adding a new row in a repeater field
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why...
 This seems to be very random and unpredictable.
