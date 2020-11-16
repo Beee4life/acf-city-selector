@@ -118,26 +118,14 @@
              */
             function render_field( $field ) {
 
-                $acfcs_dropdown       = 'acfcs__dropdown';
-                $city_label           = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
-                $countries            = acfcs_get_countries( true, $field );
-                $country_label        = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
-                $default_country      = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
-                $field_id             = $field[ 'id' ];
-                $field_name           = $field[ 'name' ];
-                $prefill_cities       = [];
-                $prefill_states       = [];
-                $province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
-                $selected_country     = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                $selected_state       = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-                $selected_city        = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-                $selected_selected    = ' selected="selected"';
-                $show_first           = true;
-                $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
-                $which_fields         = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
-                $use_select2          = ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false ) ? false : ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
-                $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
-                $data_label_value     = ( true == $show_labels ) ? '1' : '0';
+                $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+                $prefill_cities   = [];
+                $prefill_states   = [];
+                $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+                $show_first       = true;
+                $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
@@ -151,16 +139,7 @@
                     if ( in_array( $which_fields, [ 'all', 'country_city', 'state_city' ] ) ) {
                         $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                     }
-
-                    // @TODO: do I still need this ?
-                    // maybe only for non-select2
-                    if ( 'all' == $which_fields ) {
-                        $selected_state = $selected_country . '-' . $selected_state;
-                    } elseif ( 'country_state' == $which_fields ) {
-                        $selected_state = $selected_country . '-' . $selected_state;
-                    } elseif ( 'country_city' == $which_fields ) {
-                        // ?? none here ??
-                    } elseif ( 'state_city' == $which_fields ) {
+                    if ( 'country_city' != $which_fields ) {
                         $selected_state = $selected_country . '-' . $selected_state;
                     }
 
@@ -173,7 +152,8 @@
                     }
                 }
 
-                if ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false ) {
+                // if repeater/flexible content and select2 set to yes
+                if ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false && ( isset( $field[ 'use_select2' ] ) && 1 == $field[ 'use_select2' ] ) ) {
                     echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--warning">';
                     if ( isset( $field[ 'parent_layout' ] ) ) {
                         // flexible content
@@ -191,178 +171,21 @@
                     echo '</div></div>';
                 }
 
-                // show fields normally
+                $prefill_values = [
+                    'prefill_states' => $prefill_states,
+                    'prefill_cities' => $prefill_cities,
+                ];
+
                 if ( 'state_city' != $which_fields ) {
-                    ?>
-                    <div class="dropdown-box cs-countries">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $country_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--country" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                foreach ( $countries as $country_code => $country ) {
-                                    $selected = false;
-                                    if ( false !== $selected_country ) {
-                                        if ( $selected_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    } elseif ( ! empty( $default_country ) ) {
-                                        if ( $default_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    }
-                                    ?>
-                                    <option value="<?php echo $country_code; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
-                                <?php } ?>
-                        </select>
-                    </div>
-                <?php }
+                    echo acfcs_render_dropdown( 'country', $field, $selected_country, $prefill_values );
+                }
+                if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) {
+                    echo acfcs_render_dropdown( 'state', $field, $selected_state, $prefill_values );
+                }
+                if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
+                    echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
+                }
 
-                if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) { ?>
-                    <div class="dropdown-box cs-provinces">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $province_state_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--state" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                if ( ! empty( $prefill_states ) ) {
-                                    foreach( $prefill_states as $country_state_code => $label ) {
-                                        $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php }
-
-                if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) { ?>
-                    <div class="dropdown-box cs-cities">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $city_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--city" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                if ( ! empty( $prefill_cities ) ) {
-                                    foreach( $prefill_cities as $city_name => $label ) {
-                                        $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country or state
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php }
-
-                /*
-                if ( 'state_city' != $which_fields ) {
-                ?>
-                    <div class="dropdown-box cs-countries">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $country_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--country" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                foreach ( $countries as $country_code => $country ) {
-                                    $selected = false;
-                                    if ( false !== $selected_country ) {
-                                        if ( $selected_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    } elseif ( ! empty( $default_country ) ) {
-                                        if ( $default_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    }
-                                ?>
-                                <option value="<?php echo $country_code; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                <?php } ?>
-
-                <?php if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) { ?>
-                    <div class="dropdown-box cs-provinces">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $province_state_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--state" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                if ( ! empty( $prefill_states ) ) {
-                                    foreach( $prefill_states as $country_state_code => $label ) {
-                                        $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php } ?>
-
-                <?php if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) { ?>
-                    <div class="dropdown-box cs-cities">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $city_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--city" data-show-label="<?php echo $data_label_value; ?>">
-                            <?php
-                                if ( ! empty( $prefill_cities ) ) {
-                                    foreach( $prefill_cities as $city_name => $label ) {
-                                        $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country or state
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php } ?>
-                <?php */
             }
 
 

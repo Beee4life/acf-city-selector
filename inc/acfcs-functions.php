@@ -513,3 +513,95 @@
 
         return $city;
     }
+
+
+    /**
+     * @param $type
+     * @param $field
+     * @param $stored_value
+     * @param $prefill_values
+     *
+     * @return false|string
+     */
+    function acfcs_render_dropdown( $type, $field, $stored_value, $prefill_values ) {
+
+        $acfcs_dropdown       = 'acfcs__dropdown';
+        $city_label           = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+        $countries            = acfcs_get_countries( true, $field );
+        $country_label        = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
+        $default_country      = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+        $field_id             = $field[ 'id' ];
+        $field_name           = $field[ 'name' ];
+        $prefill_cities       = $prefill_values[ 'prefill_cities' ];
+        $prefill_states       = $prefill_values[ 'prefill_states' ];
+        $province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
+        $selected_selected    = ' selected="selected"';
+        $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
+        $use_select2          = ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false ) ? false : ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
+        $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
+        $data_label_value     = ( true == $show_labels ) ? '1' : '0';
+
+        switch( $type ) {
+            case 'country':
+                $default_value  = $default_country;
+                $modifier       = 'countries';
+                $field_label    = $country_label;
+                $field_suffix   = 'countryCode';
+                $selected_value = $stored_value;
+                $values         = $countries;
+                break;
+            case 'state':
+                $default_value  = false;
+                $field_label    = $province_state_label;
+                $modifier       = 'states';
+                $field_suffix   = 'stateCode';
+                $selected_value = $stored_value;
+                $values         = $prefill_states;
+                break;
+            case 'city':
+                $default_value  = false;
+                $field_label    = $city_label;
+                $modifier       = 'cities';
+                $field_suffix   = 'cityName';
+                $selected_value = $stored_value;
+                $values         = $prefill_cities;
+                break;
+        }
+
+        ob_start();
+        ?>
+        <div class="acfcs__dropdown-box acfcs__dropdown-box--<?php echo $modifier; ?>">
+            <?php if ( $show_labels ) { ?>
+                <div class="acf-input-header">
+                    <?php echo $field_label; ?>
+                </div>
+            <?php } ?>
+            <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
+                <?php echo $field_label; ?>
+            </label>
+            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?> <?php echo $acfcs_dropdown; ?>--<?php echo $modifier; ?>" data-show-label="<?php echo $data_label_value; ?>">
+                <?php
+                    if ( ! empty( $values ) ) {
+                        foreach ( $values as $key => $label ) {
+                            $selected = false;
+                            if ( false !== $selected_value ) {
+                                $selected = ( $selected_value == $key ) ? $selected_selected : $selected;
+                            } elseif ( ! empty( $default_value ) ) {
+                                // only for countries
+                                $selected = ( $default_value == $key ) ? $selected_selected : $selected;
+                            }
+                            ?>
+                            <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
+                                <?php echo $label; ?>
+                            </option>
+                            <?php
+                        }
+                    }
+                ?>
+            </select>
+        </div>
+        <?php
+        $dropdown = ob_get_clean();
+
+        return $dropdown;
+    }
