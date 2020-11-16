@@ -166,7 +166,7 @@
                     if ( defined( 'IS_PROFILE_PAGE' ) ) {
                         echo esc_html__( 'If you save your profile, select2 will work.', 'acf-city-selector' );
                     } else {
-                        echo esc_html__( 'If you save the post, select2 will work.', 'acf-city-selector' );
+                        echo esc_html__( 'Just save the post and select2 will work.', 'acf-city-selector' );
                     }
                     echo '</div></div>';
                 }
