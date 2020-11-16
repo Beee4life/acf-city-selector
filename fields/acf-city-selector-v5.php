@@ -138,6 +138,7 @@
                 $use_select2          = ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
                 $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
                 $data_label_value     = ( true == $show_labels ) ? '1' : '0';
+
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
                     $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
