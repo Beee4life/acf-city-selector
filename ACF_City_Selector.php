@@ -572,18 +572,18 @@
                 // @TODO: set width as class
                 ?>
                 <script>
-                    $(document).ready(function() {
-                        $('select.select2.acfcs__dropdown--country').select2({
+                    jQuery(document).ready(function() {
+                        jQuery('select.select2.acfcs__dropdown--country').select2({
                             allowClear: true,
                             placeholder: "<?php echo $select_country ?>",
                             width: '100%'
                         });
-                        $('select.select2.acfcs__dropdown--state').select2({
+                        jQuery('select.select2.acfcs__dropdown--state').select2({
                             allowClear: true,
                             placeholder: "<?php echo $select_state ?>",
                             width: '100%'
                         });
-                        $('select.select2.acfcs__dropdown--city').select2({
+                        jQuery('select.select2.acfcs__dropdown--city').select2({
                             allowClear: true,
                             placeholder: "<?php echo $select_city ?>",
                             width: '100%'
