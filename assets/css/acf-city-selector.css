@@ -212,8 +212,8 @@
 
 /* errors */
 .acfcs .acfcs__notice {
-    padding:     10px 0 10px 15px;
     border-left: 4px solid #ffffff;
+    padding:     10px 0 10px 15px;
 }
 
 .acfcs .notice--error {
@@ -232,13 +232,20 @@
     border-left-color: #00a0d2;
 }
 
-.acfcs .field-error {
+.acfcs .field__message {
     background-color:  #f9f9f9;
-    border-left-color: #dc3232;
     border-top:        1px solid #ccd0d4;
     border-right:      1px solid #ccd0d4;
     border-bottom:     1px solid #ccd0d4;
     margin-bottom:     1rem;
+}
+
+.acfcs .field__message--error {
+    border-left-color: #dc3232;
+}
+
+.acfcs .field__message--warning {
+    border-left-color: #ff9000;
 }
 
 /* misc */
