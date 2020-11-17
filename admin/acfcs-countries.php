@@ -15,7 +15,7 @@
             foreach( $country_files as $country ) {
                 $countries[] = (array) $country;
             }
-            $country_files = $countries;
+            // $country_files = $countries;
         }
         $country_packages = [];
         $country_packs    = acfcs_get_packages( 'packages' );
@@ -23,7 +23,7 @@
             foreach( $country_packs as $pack ) {
                 $packs[] = (array) $pack;
             }
-            $country_packs = $packs;
+            // $country_packs = $packs;
         }
         $europe_price     = 0;
         $noram_price      = 0;
@@ -160,9 +160,9 @@
                                         <?php
                                             if ( isset( $package[ 'included_countries' ] ) && is_array( $package[ 'included_countries' ] ) && ! empty( $package[ 'included_countries' ] ) ) {
                                                 foreach( $package[ 'included_countries' ] as $country ) {
-                                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $country[ 'value' ] . '.png' ) ) ? true : false;
+                                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $country->value . '.png' ) ) ? true : false;
                                                     $flag_folder  = ( true == $flag_exists ) ? ACFCS_PLUGIN_URL . 'assets/img/flags/' : ACFCS_WEBSITE_URL . '/app/themes/acfcs-child/assets/img/flags/';
-                                                    echo '<img src="' . $flag_folder . $country[ 'value' ] . '.png" alt="' . $country[ 'value' ] . '" class="flag" />';
+                                                    echo '<img src="' . $flag_folder . $country->value . '.png" alt="' . $country->value . '" class="flag" />';
                                                 }
                                             }
                                         ?>
