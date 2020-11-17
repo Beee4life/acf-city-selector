@@ -265,11 +265,11 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 0.28.0
 * added select2 option
 * changed hide labels filter as fallback for select2 
+* added new country packages on the website
 
 0.28.0-beta1
 * added a new option: "state/provence + city" (for when a default country is set)
 * added a transient for cities per state 
-* added new country packages on the website
 * added 3 new filters to override field labels 
 * added a new filter to override showing of field labels 
 * (re-)added a check for database version to prevent unnecessary table updates 
