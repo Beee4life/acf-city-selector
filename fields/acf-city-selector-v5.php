@@ -167,7 +167,7 @@
                         <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
                             <?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
                         </label>
-                        <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="countrySelect">
+                        <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="acfcs__dropdown">
                             <?php
                                 foreach ( $countries as $country_code => $country ) {
                                     $selected = false;
@@ -197,7 +197,7 @@
                         <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
                             <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
                         </label>
-                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="countrySelect">
+                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="acfcs__dropdown">
                             <?php
                                 if ( ! empty( $prefill_states ) ) {
                                     foreach( $prefill_states as $country_state_code => $label ) {
@@ -224,7 +224,7 @@
                         <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
                             <?php echo apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
                         </label>
-                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="countrySelect">
+                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="acfcs__dropdown">
                             <?php
                                 if ( ! empty( $prefill_cities ) ) {
                                     foreach( $prefill_cities as $city_name => $label ) {

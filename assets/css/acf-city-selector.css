@@ -273,7 +273,7 @@
     margin-bottom: 1em;
 }
 
-.acf-field.acf-field-acf-city-selector select {
+.acf-field.acf-field-acf-city-selector select.acfcs__dropdown {
     padding: 4px;
 }
 
