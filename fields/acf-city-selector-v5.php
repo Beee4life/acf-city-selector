@@ -33,7 +33,7 @@
 
                 $this->name     = 'acf_city_selector';
                 $this->label    = 'City Selector';
-                $this->category = __( 'Choice', 'acf-city-selector' );
+                $this->category = esc_attr__( 'Choice', 'acf-city-selector' );
                 $this->defaults = array(
                     'show_labels'  => 1,
                     'which_fields' => 'all',
@@ -59,8 +59,8 @@
             function render_field_settings( $field ) {
 
                 $label_options = array(
-                    1 => __( 'Yes', 'acf-city-selector' ),
-                    0 => __( 'No', 'acf-city-selector' )
+                    1 => esc_attr__( 'Yes', 'acf-city-selector' ),
+                    0 => esc_attr__( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
                     'choices'      => $label_options,
@@ -92,11 +92,11 @@
                 ) );
 
                 $default_country_fields = array(
-                    'all'           => __( 'All fields [default]', 'acf-city-selector' ),
-                    'country_only'  => __( 'Country only', 'acf-city-selector' ),
-                    'country_state' => __( 'Country + State/province', 'acf-city-selector' ),
-                    'country_city'  => __( 'Country + City', 'acf-city-selector' ),
-                    'state_city'    => __( 'State/province + City', 'acf-city-selector' ),
+                    'all'           => esc_attr__( 'All fields [default]', 'acf-city-selector' ),
+                    'country_only'  => esc_attr__( 'Country only', 'acf-city-selector' ),
+                    'country_state' => esc_attr__( 'Country + State/province', 'acf-city-selector' ),
+                    'country_city'  => esc_attr__( 'Country + City', 'acf-city-selector' ),
+                    'state_city'    => esc_attr__( 'State/province + City', 'acf-city-selector' ),
                 );
                 acf_render_field_setting( $field, array(
                     'choices'      => $default_country_fields,
@@ -185,7 +185,6 @@
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
                 }
-
             }
 
 
@@ -213,6 +212,7 @@
                 if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
                     $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
                 }
+                // @TODO: remove ?
                 $load_vars[ 'show_labels' ]  = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
                 $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
@@ -347,11 +347,11 @@
             function validate_value( $valid, $value, $field, $input ) {
 
                 if ( 1 == $field[ 'required' ] ) {
-                    $nothing       = __( "You didn't select anything.", 'acf-city-selector' );
-                    $no_city       = __( "You didn't select a city.", 'acf-city-selector' );
-                    $no_country    = __( "You didn't select a country.", 'acf-city-selector' );
-                    $no_state      = __( "You didn't select a state.", 'acf-city-selector' );
-                    $no_state_city = __( "You didn't select a state and city.", 'acf-city-selector' );
+                    $nothing       = esc_html__( "You didn't select anything.", 'acf-city-selector' );
+                    $no_city       = esc_html__( "You didn't select a city.", 'acf-city-selector' );
+                    $no_country    = esc_html__( "You didn't select a country.", 'acf-city-selector' );
+                    $no_state      = esc_html__( "You didn't select a state.", 'acf-city-selector' );
+                    $no_state_city = esc_html__( "You didn't select a state and city.", 'acf-city-selector' );
 
                     if ( 'all' == $field[ 'which_fields' ] ) {
                         if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {

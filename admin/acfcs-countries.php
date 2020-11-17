@@ -21,7 +21,7 @@
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
                 $single_file                   = (array) $single_file;
-                $single_file[ 'country_name' ] = __( $single_file[ 'country_name' ], 'acf-city-selector' );
+                $single_file[ 'country_name' ] = esc_attr__( $single_file[ 'country_name' ], 'acf-city-selector' );
                 $single_files[]                = $single_file;
             }
             if ( ! empty( $single_files ) ) {
@@ -32,7 +32,7 @@
         if ( is_array( $country_packs ) ) {
             foreach( $country_packs as $country_package ) {
                 $country_package                   = (array) $country_package;
-                $country_package[ 'country_name' ] = __( $country_package[ 'country_name' ], 'acf-city-selector' );
+                $country_package[ 'country_name' ] = esc_attr__( $country_package[ 'country_name' ], 'acf-city-selector' );
                 $country_packages[]                = $country_package;
             }
         }
@@ -94,7 +94,7 @@
                                     </td>
 
                                     <td>
-                                        <?php _e( $package[ 'country_name' ], 'acf-city-selector' ); ?>
+                                        <?php echo $package[ 'country_name' ]; ?>
                                     </td>
 
                                     <td>

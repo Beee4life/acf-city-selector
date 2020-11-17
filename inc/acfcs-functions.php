@@ -43,7 +43,7 @@
 
             $country_results = [];
             foreach ( $results as $data ) {
-                $country_results[ $data->country_code ] = __( $data->country, 'acf-city-selector' );
+                $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
@@ -100,7 +100,7 @@
 
                 $state_results = array();
                 foreach ( $results as $data ) {
-                    $state_results[ $country_code . '-' . $data->state_code ] = __( $data->state_name, 'acf-city-selector' );
+                    $state_results[ $country_code . '-' . $data->state_code ] = esc_html__( $data->state_name, 'acf-city-selector' );
                 }
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
@@ -149,7 +149,7 @@
             $set_transient = true;
         } else {
             foreach ( $cities_transient as $data ) {
-                $city_array[ __( $data, 'acf-city-selector' ) ] = __( $data, 'acf-city-selector' );
+                $city_array[ esc_attr__( $data, 'acf-city-selector' ) ] = esc_html__( $data, 'acf-city-selector' );
             }
             if ( isset( $city_array ) ) {
                 $cities = array_merge( $cities, $city_array );
@@ -173,14 +173,14 @@
                 $results      = $wpdb->get_results( $query );
                 foreach ( $results as $data ) {
                     $city_results[] = [
-                        'city_name' => __( $data->city_name, 'acf-city-selector' ),
+                        'city_name' => esc_html__( $data->city_name, 'acf-city-selector' ),
                     ];
                 }
                 if ( ! empty( $city_results ) ) {
                     uasort( $city_results, 'acfcs_sort_array_with_quotes' );
                 }
                 foreach ( $city_results as $data ) {
-                    $city_array[ $data[ 'city_name' ] ] = __( $data[ 'city_name' ], 'acf-city-selector' );
+                    $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_html__( $data[ 'city_name' ], 'acf-city-selector' );
                 }
                 if ( isset( $city_array ) ) {
                     $cities = array_merge( $cities, $city_array );
@@ -296,17 +296,17 @@
                 if ( count( $csv_line ) != $column_benchmark ) {
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
-                        $error_message = esc_html( __( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' ) );
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( __( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
-                        $error_message = esc_html( __( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' ) );
+                        $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
                         if ( false === $verify ) {
                             // for real
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
                         }
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html( __( 'There are too many columns on line %d. %s', 'acf-city-selector' ) ), $line_number, $error_message ) );
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                     // delete file
                     if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {

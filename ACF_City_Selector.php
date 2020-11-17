@@ -567,11 +567,11 @@
                     $show_labels = apply_filters( 'acfcs_show_labels', true );
                 }
 
-                $no_results           = __( 'No results...', 'acf-city-selector' );
-                $select_country_first = __( 'Select a country first', 'acf-city-selector' );
-                $select_country       = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
-                $select_state         = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
-                $select_city          = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+                $no_results           = esc_attr__( 'No results...', 'acf-city-selector' );
+                $select_country_first = esc_attr__( 'Select a country first', 'acf-city-selector' );
+                $select_country       = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_attr__( 'Select a country', 'acf-city-selector' ) );
+                $select_state         = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
+                $select_city          = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
                 ?>
                 <script>
                     jQuery(document).ready(function() {
@@ -748,7 +748,7 @@
                     if ( strpos( $screen->id, 'acfcs' ) !== false ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
-                            <p><?php echo sprintf( __( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
+                            <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
                         </div>
                     <?php
                     }

@@ -185,7 +185,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <?php $main_site = ( is_main_site() ) ? __( 'Yes', 'acf-city-selector' ) : __( 'No', 'acf-city-selector' ); ?>
+                                <?php $main_site = ( is_main_site() ) ? esc_html__( 'Yes', 'acf-city-selector' ) : esc_html__( 'No', 'acf-city-selector' ); ?>
                                 <?php $prepare_json[ 'multisite' ][ 'main_site' ] = $main_site; ?>
                                 <td><?php esc_html_e( 'Main site', 'acf-city-selector' ); ?></td>
                                 <td><?php echo $main_site; ?> </td>
@@ -246,10 +246,10 @@
                     <?php $file_name       = wp_upload_dir()[ 'basedir' ] . '/acfcs/debug.json'; ?>
                     <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
                     <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
-                    <form name="acfcs_export_json" method="POST" action="<?php echo plugin_dir_url(__FILE__); ?>acfcs-save-json.php">
+                    <form name="acfcs_export_json" method="POST" action="<?php echo plugin_dir_url( __FILE__ ); ?>acfcs-save-json.php">
                         <input type="hidden" name="acfcs_export_json" value="1" />
                         <input type="hidden" name="acfcs_json_file" value="<?php echo $file_name; ?>" />
-                        <input type="submit" class="button button-primary" name="" value="<?php esc_html_e( 'Download JSON file', 'acf-city-selector' ); ?>" />
+                        <input type="submit" class="button button-primary" value="<?php esc_attr_e( 'Download JSON file', 'acf-city-selector' ); ?>" />
                     </form>
                 </div>
 

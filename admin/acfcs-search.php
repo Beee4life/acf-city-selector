@@ -28,7 +28,7 @@
             foreach ( $results as $country_code => $label ) {
                 $countries[] = [
                     'code' => $country_code,
-                    'name' => __( $label, 'acf-city-selector' ),
+                    'name' => esc_attr__( $label, 'acf-city-selector' ),
                 ];
             }
 
@@ -38,7 +38,7 @@
                 foreach ( $countries as $country ) {
                     $states[] = array(
                         'state' => 'open_optgroup',
-                        'name'  => __( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
+                        'name'  => esc_attr__( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
                     );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
@@ -57,7 +57,7 @@
                         foreach ( $results as $data ) {
                             $states[] = array(
                                 'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name'  => __( $data->state_name, 'acf-city-selector' ),
+                                'name'  => esc_attr__( $data->state_name, 'acf-city-selector' ),
                             );
                         }
                     }
@@ -179,7 +179,7 @@
                                             }
                                             if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) {
                                                 $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false;
-                                                echo '<option value="' . $state[ 'state' ] . '"' . $selected . '>' . __( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
+                                                echo '<option value="' . $state[ 'state' ] . '"' . $selected . '>' . esc_html__( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
                                             }
                                             if ( 'close_optgroup' == $state[ 'state' ] ) {
                                                 echo '</optgroup>';
@@ -219,8 +219,8 @@
                                     </option>
                                     <?php
                                         $orderby = [
-                                            __( 'City', 'acf-city-selector' ),
-                                            __( 'State', 'acf-city-selector' ),
+                                            esc_attr__( 'City', 'acf-city-selector' ),
+                                            esc_attr__( 'State', 'acf-city-selector' ),
                                         ];
                                         foreach( $orderby as $criterium ) {
                                             $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
