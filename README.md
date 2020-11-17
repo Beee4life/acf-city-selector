@@ -231,10 +231,10 @@ The plugin works in the following situations:
 * in a flexible content block
 * in an accordion field
 * as a cloned field
+* on taxonomy terms
+* on settings pages
 
 The plugin has NOT been tested yet in the following situations: 
-* on taxonomy pages
-* on settings pages
 * most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
