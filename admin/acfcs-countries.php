@@ -48,7 +48,9 @@
             <div class="admin_left">
 
                 <div class="acfcs__section acfcs__section--gopro">
-                    <h2><?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?></h2>
+                    <h2>
+                        <?php esc_html_e( 'Get countries', 'acf-city-selector' ); ?>
+                    </h2>
                     <p>
                         <?php esc_html_e( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
                     </p>
@@ -131,17 +133,25 @@
                         <table class="acfcs__table acfcs__table--packages">
                             <thead>
                             <tr>
-                                <th><?php esc_html_e( 'Package', 'acf-city-selector' ); ?></th>
-                                <th><?php esc_html_e( 'Included countries', 'acf-city-selector' ); ?></th>
-                                <th><?php esc_html_e( 'As separate countries', 'acf-city-selector' ); ?></th>
-                                <th><?php esc_html_e( 'Package price', 'acf-city-selector' ); ?></th>
+                                <th>
+                                    <?php esc_html_e( 'Package', 'acf-city-selector' ); ?>
+                                </th>
+                                <th>
+                                    <?php esc_html_e( 'Included countries', 'acf-city-selector' ); ?>
+                                </th>
+                                <th>
+                                    <?php esc_html_e( 'As separate countries', 'acf-city-selector' ); ?>
+                                </th>
+                                <th>
+                                    <?php esc_html_e( 'Package price', 'acf-city-selector' ); ?>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach( $country_packages as $package ) { ?>
                                 <tr>
                                     <td>
-                                        <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
+                                        <?php _e( $package[ 'country_name' ], 'acf-city-selector' ); ?>
                                     </td>
 
                                     <td>
