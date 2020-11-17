@@ -37,6 +37,7 @@
                 $this->defaults = array(
                     'show_labels'  => 1,
                     'which_fields' => 'all',
+                    'use_select2'  => 0,
                 );
 
                 $this->settings = $settings;
@@ -71,6 +72,16 @@
                     'value'        => $field[ 'show_labels' ],
                 ) );
 
+                acf_render_field_setting( $field, array(
+                    'choices'      => $label_options,
+                    'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
+                    'layout'       => 'horizontal',
+                    'name'         => 'use_select2',
+                    'type'         => 'radio',
+                    'value'        => $field[ 'use_select2' ],
+                ) );
+
                 $countries = acfcs_get_countries( true, false, true );
                 acf_render_field_setting( $field, array(
                     'choices'      => $countries,
@@ -94,7 +105,6 @@
                     'name'         => 'which_fields',
                     'type'         => 'radio',
                 ) );
-
             }
 
             /*
@@ -108,139 +118,74 @@
              */
             function render_field( $field ) {
 
-                $countries         = acfcs_get_countries( true, $field );
-                $default_country   = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
-                $field_id          = $field[ 'id' ];
-                $field_name        = $field[ 'name' ];
-                $prefill_cities    = [];
-                $prefill_states    = [];
-                $selected_country  = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                $selected_state    = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-                $selected_city     = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-                $selected_selected = ' selected="selected"';
-                $which_fields      = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
-
-                // input header filters
-                $city_label           = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
-                $country_label        = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
-                $province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
-                $show_labels          = apply_filters( 'acfcs_show_labels', ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true );
+                $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+                $prefill_cities   = [];
+                $prefill_states   = [];
+                $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+                $show_first       = true;
+                $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country, so load all states + cities for $default_country
-                    $prefill_states = acfcs_get_states( $default_country, true, $field );
-                    $prefill_cities = acfcs_get_cities( $default_country, false );
+                    $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
+                    $prefill_cities = acfcs_get_cities( $default_country, false, $field );
 
                 } elseif ( false !== $selected_country ) {
-                    // check if cities and/or states are needed
-                    if ( 'all' == $which_fields ) {
-                        $prefill_states = acfcs_get_states( $selected_country, true, $field );
-                        $prefill_cities = acfcs_get_cities( $selected_country, $selected_state );
-                        $selected_state = $selected_country . '-' . $selected_state;
-                    } elseif ( 'country_state' == $which_fields ) {
-                        $prefill_states = acfcs_get_states( $selected_country, true, $field );
-                        $selected_state = $selected_country . '-' . $selected_state;
-                    } elseif ( 'country_city' == $which_fields ) {
-                        $prefill_cities = acfcs_get_cities( $selected_country, $selected_state );
-                    } elseif ( 'state_city' == $which_fields ) {
-                        $prefill_states = acfcs_get_states( $selected_country, true, $field );
-                        $prefill_cities = acfcs_get_cities( $selected_country, $selected_state );
+                    if ( in_array( $which_fields, [ 'all', 'country_state', 'state_city' ] ) ) {
+                        $prefill_states = acfcs_get_states( $selected_country, $show_first, $field );
+                    }
+                    if ( in_array( $which_fields, [ 'all', 'country_city', 'state_city' ] ) ) {
+                        $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
+                    }
+                    if ( 'country_city' != $which_fields ) {
                         $selected_state = $selected_country . '-' . $selected_state;
                     }
+
                 } elseif ( false == $default_country ) {
                     // no country set
                     if ( 'state_city' == $which_fields ) {
-                        echo '<div class="acfcs"><div class="acfcs__notice field-error">';
+                        echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">';
                         echo esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
                         echo '</div></div>';
                     }
                 }
 
+                // if repeater/flexible content and select2 set to yes
+                if ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false && ( isset( $field[ 'use_select2' ] ) && 1 == $field[ 'use_select2' ] ) ) {
+                    echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--warning">';
+                    if ( isset( $field[ 'parent_layout' ] ) ) {
+                        // flexible content
+                        echo esc_html__( "Select2 doesn't work (yet) when adding a new layout in a flexible content block.", 'acf-city-selector' );
+                    } else {
+                        // repeater
+                        echo esc_html__( "Select2 doesn't work (yet) when a new row is added.", 'acf-city-selector' );
+                    }
+                    echo ' ';
+                    if ( defined( 'IS_PROFILE_PAGE' ) ) {
+                        echo esc_html__( 'If you save your profile, select2 will work.', 'acf-city-selector' );
+                    } else {
+                        echo esc_html__( 'Just save the post and select2 will work.', 'acf-city-selector' );
+                    }
+                    echo '</div></div>';
+                }
+
+                $prefill_values = [
+                    'prefill_states' => $prefill_states,
+                    'prefill_cities' => $prefill_cities,
+                ];
+
                 if ( 'state_city' != $which_fields ) {
-                ?>
-                    <div class="dropdown-box cs-countries">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $country_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>countryCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[countryCode]" id="<?php echo $field_id; ?>countryCode" class="acfcs__dropdown">
-                            <?php
-                                foreach ( $countries as $country_code => $country ) {
-                                    $selected = false;
-                                    if ( false !== $selected_country ) {
-                                        if ( $selected_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    } elseif ( ! empty( $default_country ) ) {
-                                        if ( $default_country == $country_code ) {
-                                            $selected = $selected_selected;
-                                        }
-                                    }
-                                ?>
-                                <option value="<?php echo $country_code; ?>"<?php echo $selected; ?>><?php echo $country; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                <?php } ?>
+                    echo acfcs_render_dropdown( 'country', $field, $selected_country, $prefill_values );
+                }
+                if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) {
+                    echo acfcs_render_dropdown( 'state', $field, $selected_state, $prefill_values );
+                }
+                if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
+                    echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
+                }
 
-                <?php if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) { ?>
-                    <div class="dropdown-box cs-provinces">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $province_state_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>stateCode" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[stateCode]" id="<?php echo $field_id; ?>stateCode" class="acfcs__dropdown">
-                            <?php
-                                if ( ! empty( $prefill_states ) ) {
-                                    foreach( $prefill_states as $country_state_code => $label ) {
-                                        $selected = ( $selected_state == $country_state_code ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $country_state_code; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php } ?>
-
-                <?php if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) { ?>
-                    <div class="dropdown-box cs-cities">
-                        <?php if ( $show_labels ) { ?>
-                            <div class="acf-input-header">
-                                <?php echo $city_label; ?>
-                            </div>
-                        <?php } ?>
-                        <label for="<?php echo $field_id; ?>cityName" class="screen-reader-text">
-                            <?php echo apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) ); ?>
-                        </label>
-                        <select name="<?php echo $field_name; ?>[cityName]" id="<?php echo $field_id; ?>cityName" class="acfcs__dropdown">
-                            <?php
-                                if ( ! empty( $prefill_cities ) ) {
-                                    foreach( $prefill_cities as $city_name => $label ) {
-                                        $selected = ( $selected_city == $city_name ) ? $selected_selected : false;
-                                        ?>
-                                        <option value="<?php echo $city_name; ?>"<?php echo $selected; ?>><?php echo $label; ?></option>
-                                        <?php
-                                    }
-                                } else {
-                                    // content will be dynamically generated on.change country or state
-                                }
-                            ?>
-                        </select>
-                    </div>
-                <?php } ?>
-                <?php
             }
 
 
@@ -267,8 +212,8 @@
 
                 if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
                     $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
-                    $load_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
                 }
+                $load_vars[ 'show_labels' ]  = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
                 $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
                 wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $load_vars );

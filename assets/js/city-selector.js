@@ -51,6 +51,7 @@
                 countries.on('change', function () {
                     const response_cities = []
                     const response_states = []
+
                     var $this             = $(this);
                     var country_code      = $this.val();
                     var country_field_id  = $this.attr('id');
@@ -59,17 +60,16 @@
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
 
-                    $show_labels = true;
+                    // @TODO: maybe get from data-
                     $which_fields = 'all';
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
-                        $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
                     }
-                    var show_labels = $show_labels;
+                    var show_labels = $(this).data('show-label');
                     var which_fields = $which_fields;
 
                     if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
-                        const d = get_states(country_code, show_labels);
+                        const d = get_states(country_code, show_labels, post_id);
                         response_states.push(d);
                         const e = get_cities(country_code, show_labels, post_id);
                         response_cities.push(e);
@@ -141,13 +141,12 @@
             if (state.length) {
                 state.on('change', function () {
 
-                    $show_labels = true;
+                    // @TODO: maybe get from data-
                     $which_fields = 'all';
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
-                        $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
                     }
-                    var show_labels = $show_labels;
+                    var show_labels = $(this).data('show-label');
                     var which_fields = $which_fields;
 
                     if ( 'all' === which_fields || which_fields.indexOf("city") >= 0 ) {
@@ -157,7 +156,7 @@
                         var state_field_id = $this.attr('id');
                         var city_field_id = state_field_id.replace('stateCode', 'cityName');
                         var changed_city = $('select[id="' + city_field_id + '"]');
-                        const d = get_cities(country_code, show_labels, post_id);
+                        const d = get_cities(state_code, show_labels, post_id);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
@@ -189,14 +188,16 @@
          *
          * @param countryCode
          * @param showLabels
+         * @param postID
          * @param callback
          * @returns {Promise<unknown>}
          */
-        function get_states(countryCode, showLabels, callback) {
+        function get_states(countryCode, showLabels, postID, callback) {
             const state_data = {
                 action: 'get_states_call',
-                show_labels: showLabels,
-                country_code: countryCode
+                country_code: countryCode,
+                post_id: postID,
+                show_labels: showLabels
             };
 
             return new Promise((resolve, reject) => {

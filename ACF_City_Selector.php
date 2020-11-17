@@ -82,6 +82,8 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
                 add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
+                add_action( 'admin_footer',                 array( $this, 'acfcs_select2_footer' ) );
+                add_action( 'wp_footer',                    array( $this, 'acfcs_select2_footer' ) ); // front-end
 
 
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
@@ -484,7 +486,7 @@
                         delete_transient( 'acfcs_countries' );
                         $countries = acfcs_get_countries( false, false, true );
                         foreach( $countries as $country_code => $country_name ) {
-                            $states = acfcs_get_states( $country_code );
+                            $states = acfcs_get_states( $country_code, false );
                             foreach( $states as $country_state => $name ) {
                                 delete_transient( 'acfcs_cities_' . strtolower( $country_state ) );
                             }
@@ -540,6 +542,74 @@
                         }
                     }
                 }
+            }
+
+
+            /**
+             * Add select2 settings with possible user overrides
+             */
+            public function acfcs_select2_footer() {
+
+                if ( isset( $_GET[ 'post' ] ) && isset( $_GET[ 'action' ] ) ) {
+                    $item_id = $_GET[ 'post' ];
+                    $fields = get_field_objects( $item_id );
+                    if ( is_array( $fields ) && ! empty( $fields ) ) {
+                        $field = acfcs_get_field_settings( $fields );
+                    }
+                }
+
+                $show_labels = false;
+                if ( isset( $field[ 'show_labels' ] ) ) {
+                    if ( true == $field[ 'show_labels' ] ) {
+                        $show_labels = true;
+                    }
+                } else {
+                    $show_labels = apply_filters( 'acfcs_show_labels', true );
+                }
+
+                $no_results           = __( 'No results...', 'acf-city-selector' );
+                $select_country_first = __( 'Select a country first', 'acf-city-selector' );
+                $select_country       = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
+                $select_state         = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
+                $select_city          = ( true == $show_labels ) ? '-' : apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+                ?>
+                <script>
+                    jQuery(document).ready(function() {
+                        if ( jQuery.isFunction(jQuery.fn.select2) ) {
+                            jQuery('select.select2.acfcs__dropdown--countries').select2({
+                                allowClear: true,
+                                placeholder: "<?php echo $select_country ?>",
+                                "language": {
+                                    "noResults": function(){
+                                        return "<?php echo $no_results ?>";
+                                    }
+                                },
+                                escapeMarkup: function (markup) { return markup; }
+                            });
+                            jQuery('select.select2.acfcs__dropdown--states').select2({
+                                allowClear: true,
+                                placeholder: "<?php echo $select_state ?>",
+                                "language": {
+                                    "noResults": function(){
+                                        return "<?php echo $select_country_first ?>";
+                                    }
+                                },
+                                escapeMarkup: function (markup) { return markup; }
+                            });
+                            jQuery('select.select2.acfcs__dropdown--cities').select2({
+                                allowClear: true,
+                                placeholder: "<?php echo $select_city ?>",
+                                "language": {
+                                    "noResults": function(){
+                                        return "<?php echo $no_results ?>";
+                                    }
+                                },
+                                escapeMarkup: function (markup) { return markup; }
+                            });
+                        }
+                    });
+                </script>
+                <?php
             }
 
 

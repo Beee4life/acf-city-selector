@@ -79,45 +79,46 @@
                             </thead>
                             <tbody>
                             <?php foreach( $single_files as $package ) { ?>
-                                <?php $europe_price = ( isset( $package[ 'continent' ] ) && 'europe' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $europe_price + $package[ 'price' ] : $europe_price; ?>
-                                <?php $noram_price = ( isset( $package[ 'continent' ] ) && 'noram' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price; ?>
-                                <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
-                                <?php $show_country = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) ? true : false; ?>
-                                <?php if ( $show_country ) { ?>
-                                    <tr>
-                                        <td>
-                                            <img src="<?php echo ACFCS_PLUGIN_URL . 'assets/img/flags/' . $package[ 'country_code' ] . '.png'; ?>" alt="" />
-                                        </td>
+                                <?php
+                                    $europe_price = ( isset( $package[ 'continent' ] ) && 'europe' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $europe_price + $package[ 'price' ] : $europe_price;
+                                    $noram_price  = ( isset( $package[ 'continent' ] ) && 'noram' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price;
+                                    $total_price  = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price;
+                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) ? true : false;
+                                    $flag_folder  = ( true == $flag_exists ) ? ACFCS_PLUGIN_URL . 'assets/img/flags/' : ACFCS_WEBSITE_URL . '/app/themes/acfcs-child/assets/img/flags/';
+                                ?>
+                                <tr>
+                                    <td>
+                                        <img src="<?php echo $flag_folder . $package[ 'country_code' ] . '.png'; ?>" alt="" />
+                                    </td>
 
-                                        <td>
-                                            <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
-                                        </td>
+                                    <td>
+                                        <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
+                                    </td>
 
-                                        <td>
-                                            <?php
-                                                if ( ! empty( $package[ 'number_states' ] ) ) {
-                                                    echo $package[ 'number_states' ];
-                                                } else {
-                                                    echo 'n/a';
-                                                }
-                                            ?>
-                                        </td>
+                                    <td>
+                                        <?php
+                                            if ( ! empty( $package[ 'number_states' ] ) ) {
+                                                echo $package[ 'number_states' ];
+                                            } else {
+                                                echo 'n/a';
+                                            }
+                                        ?>
+                                    </td>
 
-                                        <td>
-                                            <?php echo $package[ 'number_cities' ]; ?>
-                                        </td>
+                                    <td>
+                                        <?php echo $package[ 'number_cities' ]; ?>
+                                    </td>
 
-                                        <td>
-                                            <?php
-                                                if ( ! empty( $package[ 'price' ] ) ) {
-                                                    echo '&euro; ' . $package[ 'price' ] . ',00';
-                                                } else {
-                                                    _e( 'FREE', 'acf-city-selector' );
-                                                }
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
+                                    <td>
+                                        <?php
+                                            if ( ! empty( $package[ 'price' ] ) ) {
+                                                echo '&euro; ' . $package[ 'price' ] . ',00';
+                                            } else {
+                                                _e( 'FREE', 'acf-city-selector' );
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
                             <?php } ?>
                             </tbody>
                         </table>
@@ -137,9 +138,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $total_price = 0; ?>
                             <?php foreach( $country_packages as $package ) { ?>
-                                <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
                                 <tr>
                                     <td>
                                         <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
@@ -149,7 +148,9 @@
                                         <?php
                                             if ( isset( $package[ 'included_countries' ] ) && is_array( $package[ 'included_countries' ] ) && ! empty( $package[ 'included_countries' ] ) ) {
                                                 foreach( $package[ 'included_countries' ] as $country ) {
-                                                    echo '<img src="' . ACFCS_PLUGIN_URL . 'assets/img/flags/' . $country->value . '.png" alt="' . $country->value . '" class="flag" />';
+                                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $country->value . '.png' ) ) ? true : false;
+                                                    $flag_folder  = ( true == $flag_exists ) ? ACFCS_PLUGIN_URL . 'assets/img/flags/' : ACFCS_WEBSITE_URL . '/app/themes/acfcs-child/assets/img/flags/';
+                                                    echo '<img src="' . $flag_folder . $country->value . '.png" alt="' . $country->value . '" class="flag" />';
                                                 }
                                             }
                                         ?>
@@ -162,6 +163,8 @@
                                                     $individual_price = $europe_price;
                                                 } elseif ( 'noram' == $package[ 'package_code' ] ) {
                                                     $individual_price = $noram_price;
+                                                } elseif ( 'world' == $package[ 'package_code' ] ) {
+                                                    $individual_price = $total_price;
                                                 }
                                                 if ( isset( $individual_price ) ) {
                                                     echo '&euro; ' . number_format( $individual_price, 2, ',', '' );

@@ -101,7 +101,7 @@
 
                         foreach( $layouts as $layout ) {
                             $sub_fields = $layout[ 'sub_fields' ];
-                            $acf_key = array_search( 'acf_city_selector', array_column( $sub_fields, 'type' ) );
+                            $acf_key    = array_search( 'acf_city_selector', array_column( $sub_fields, 'type' ) );
                             if ( false !== $acf_key ) {
                                 $settings[ 'default_country' ] = isset( $sub_fields[ $acf_key ][ 'default_country' ] ) ? $sub_fields[ $acf_key ][ 'default_country' ] : false;
                                 $settings[ 'show_labels' ]     = $sub_fields[ $acf_key ][ 'show_labels' ];
