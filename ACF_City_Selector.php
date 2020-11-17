@@ -601,7 +601,7 @@
                                 placeholder: "<?php echo $select_city ?>",
                                 "language": {
                                     "noResults": function(){
-                                        return "<?php echo $select_country_first ?>";
+                                        return "<?php echo $no_results ?>";
                                     }
                                 },
                                 escapeMarkup: function (markup) { return markup; }
