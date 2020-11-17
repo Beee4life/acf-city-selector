@@ -147,7 +147,7 @@
                     // no country set
                     if ( 'state_city' == $which_fields ) {
                         echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">';
-                        echo esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
+                        esc_html_e( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
                         echo '</div></div>';
                     }
                 }
@@ -157,16 +157,16 @@
                     echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--warning">';
                     if ( isset( $field[ 'parent_layout' ] ) ) {
                         // flexible content
-                        echo esc_html__( "Select2 doesn't work (yet) when adding a new layout in a flexible content block.", 'acf-city-selector' );
+                        esc_html_e( "Select2 doesn't work (yet) when adding a new layout in a flexible content block.", 'acf-city-selector' );
                     } else {
                         // repeater
-                        echo esc_html__( "Select2 doesn't work (yet) when a new row is added.", 'acf-city-selector' );
+                        esc_html_e( "Select2 doesn't work (yet) when a new row is added.", 'acf-city-selector' );
                     }
                     echo ' ';
                     if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                        echo esc_html__( 'If you save your profile, select2 will work.', 'acf-city-selector' );
+                        esc_html_e( 'If you save your profile, select2 will work.', 'acf-city-selector' );
                     } else {
-                        echo esc_html__( 'Just save the post and select2 will work.', 'acf-city-selector' );
+                        esc_html_e( 'Just save the post and select2 will work.', 'acf-city-selector' );
                     }
                     echo '</div></div>';
                 }

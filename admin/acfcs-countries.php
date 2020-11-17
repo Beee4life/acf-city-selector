@@ -94,7 +94,7 @@
                                     </td>
 
                                     <td>
-                                        <?php echo __( $package[ 'country_name' ], 'acf-city-selector' ); ?>
+                                        <?php _e( $package[ 'country_name' ], 'acf-city-selector' ); ?>
                                     </td>
 
                                     <td>
@@ -205,7 +205,9 @@
                     </p>
 
                     <p>
-                        <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary"><?php echo __( 'Get your country now', 'acf-city-selector' ); ?> !</a>
+                        <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary">
+                            <?php _e( 'Get your country now', 'acf-city-selector' ); ?> !
+                        </a>
                     </p>
 
                 </div>

@@ -249,7 +249,7 @@
                     <form name="acfcs_export_json" method="POST" action="<?php echo plugin_dir_url(__FILE__); ?>acfcs-save-json.php">
                         <input type="hidden" name="acfcs_export_json" value="1" />
                         <input type="hidden" name="acfcs_json_file" value="<?php echo $file_name; ?>" />
-                        <input type="submit" class="button button-primary" name="" value="<?php echo esc_html__( 'Download JSON file', 'acf-city-selector' ); ?>" />
+                        <input type="submit" class="button button-primary" name="" value="<?php esc_html_e( 'Download JSON file', 'acf-city-selector' ); ?>" />
                     </form>
                 </div>
 

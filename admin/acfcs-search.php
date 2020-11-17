@@ -153,7 +153,7 @@
                                         <?php foreach( $countries as $country ) { ?>
                                             <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
                                             <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>>
-                                                <?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?>
+                                                <?php _e( $country[ 'name' ], 'acf-city-selector' ); ?>
                                             </option>
                                         <?php } ?>
                                     </select>
@@ -292,7 +292,7 @@
                                             <?php echo $city[ 'state_name' ]; ?>
                                         </td>
                                         <td>
-                                            <?php echo __( $city[ 'country' ], 'acf-city-selector' ); ?>
+                                            <?php _e( $city[ 'country' ], 'acf-city-selector' ); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
