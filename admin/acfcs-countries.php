@@ -54,7 +54,7 @@
                     </p>
                     <p>
                         <?php esc_html_e( 'And now you can !! We have created several \'country packages\' for you to import as is.', 'acf-city-selector' ); ?>
-                        <?php echo sprintf( __( 'Get them <a href="%s">%s</a>.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), 'here' ); ?>
+                        <?php echo sprintf( __( 'Download them <a href="%s">%s</a>.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), 'here' ); ?>
                     </p>
                 </div>
 
