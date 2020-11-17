@@ -11,6 +11,7 @@
     $greatbritain  = __( 'Great Britain', 'acf-city-selector' );
     $luxembourg    = __( 'Luxembourg', 'acf-city-selector' );
     $mexico        = __( 'Mexico', 'acf-city-selector' );
+    $portugal      = __( 'Portugal', 'acf-city-selector' );
     $spain         = __( 'Spain', 'acf-city-selector' );
     $switzerland   = __( 'Switzerland', 'acf-city-selector' );
     $united_states = __( 'United States', 'acf-city-selector' );
