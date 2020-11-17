@@ -80,7 +80,7 @@
                             <tbody>
                             <?php foreach( $single_files as $package ) { ?>
                                 <?php $europe_price = ( isset( $package[ 'continent' ] ) && 'europe' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $europe_price + $package[ 'price' ] : $europe_price; ?>
-                                <?php $noram_price = ( isset( $package[ 'continent' ] ) && 'n-america' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price; ?>
+                                <?php $noram_price = ( isset( $package[ 'continent' ] ) && 'noram' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price; ?>
                                 <?php $total_price = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price; ?>
                                 <?php $show_country = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) ? true : false; ?>
                                 <?php if ( $show_country ) { ?>
