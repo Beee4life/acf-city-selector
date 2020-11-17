@@ -11,20 +11,8 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $country_files    = acfcs_get_packages( 'single' );
-        if ( ! empty( $country_files ) ) {
-            foreach( $country_files as $country ) {
-                $countries[] = (array) $country;
-            }
-            // $country_files = $countries;
-        }
         $country_packages = [];
         $country_packs    = acfcs_get_packages( 'packages' );
-        if ( ! empty( $country_packs ) ) {
-            foreach( $country_packs as $pack ) {
-                $packs[] = (array) $pack;
-            }
-            // $country_packs = $packs;
-        }
         $europe_price     = 0;
         $noram_price      = 0;
         $single_files     = [];
