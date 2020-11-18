@@ -264,7 +264,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 0.29.0
 * added China country package
-* added a fix for incorrect escaping which caused incorrect ordering
+* added a fix for incorrect escaping which caused incorrect ordering in names starting with a `'`.
 * added new function as fallback for `acfcs_get_country_name()`
 
 0.28.0
