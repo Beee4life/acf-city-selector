@@ -173,14 +173,15 @@
                 $results      = $wpdb->get_results( $query );
                 foreach ( $results as $data ) {
                     $city_results[] = [
-                        'city_name' => esc_html__( $data->city_name, 'acf-city-selector' ),
+                        'city_name' => $data->city_name,
                     ];
                 }
+
                 if ( ! empty( $city_results ) ) {
                     uasort( $city_results, 'acfcs_sort_array_with_quotes' );
                 }
                 foreach ( $city_results as $data ) {
-                    $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_html__( $data[ 'city_name' ], 'acf-city-selector' );
+                    $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_attr__( $data[ 'city_name' ], 'acf-city-selector' );
                 }
                 if ( isset( $city_array ) ) {
                     $cities = array_merge( $cities, $city_array );
