@@ -262,6 +262,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+0.29.0
+* added China country package
+
 0.28.0
 * added select2 option
 * changed hide labels filter as fallback for select2 
