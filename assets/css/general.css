@@ -1,0 +1,61 @@
+/* errors */
+.acfcs .acfcs__notice {
+    border-left: 4px solid #ffffff;
+    padding:     10px 0 10px 15px;
+}
+
+.acfcs .notice--error {
+    border-left-color: #dc3232;
+}
+
+.acfcs .notice--success {
+    border-left-color: #43bc71;
+}
+
+.acfcs .notice--warning {
+    border-left-color: #ff9000;
+}
+
+.acfcs .notice--info {
+    border-left-color: #00a0d2;
+}
+
+.acfcs .field__message {
+    background-color:  #f9f9f9;
+    border-top:        1px solid #ccd0d4;
+    border-right:      1px solid #ccd0d4;
+    border-bottom:     1px solid #ccd0d4;
+    margin-bottom:     1rem;
+}
+
+.acfcs .field__message--error {
+    border-left-color: #dc3232;
+}
+
+.acfcs .field__message--warning {
+    border-left-color: #ff9000;
+}
+
+/* edit post screens v4 */
+/* not actively supported anymore */
+.field_type-acf_city_selector .acfcs__dropdown-box {
+    margin-bottom: 1rem;
+}
+
+.field_type-acf_city_selector span.acf-input-header {
+    display:       block;
+    margin-bottom: 10px;
+}
+
+/* edit post screens v5 */
+.acf-field-acf-city-selector .acfcs__dropdown-box {
+    margin-bottom: 1rem;
+}
+
+.acf-field.acf-field-acf-city-selector select.acfcs__dropdown {
+    padding: 4px;
+}
+
+.acf-field-acf-city-selector .acf-input-header {
+    margin-bottom: 10px;
+}

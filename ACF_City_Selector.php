@@ -66,7 +66,8 @@
                 // actions
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
-                add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_css' ) );
+                add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_scripts' ) );
+                add_action( 'wp_enqueue_scripts',           array( $this, 'acfcs_add_scripts' ) );
 
                 add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
@@ -851,11 +852,16 @@
             /*
              * Adds CSS on the admin side
              */
-            public function acfcs_add_css() {
-                wp_enqueue_style( 'acf-city-selector', plugins_url( 'assets/css/acf-city-selector.css', __FILE__ ), [], $this->settings[ 'version' ] );
+            public function acfcs_add_scripts() {
 
-                wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/admin.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
-                wp_enqueue_script( 'acfcs-admin' );
+                wp_enqueue_style( 'acfcs-general', plugins_url( 'assets/css/general.css', __FILE__ ), [], $this->settings[ 'version' ] );
+
+                if ( is_admin() ) {
+                    wp_enqueue_style( 'acfcs-admin', plugins_url( 'assets/css/admin.css', __FILE__ ), [], $this->settings[ 'version' ] );
+
+                    wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/admin.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
+                    wp_enqueue_script( 'acfcs-admin' );
+                }
             }
         }
 
