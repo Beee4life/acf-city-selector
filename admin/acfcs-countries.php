@@ -90,7 +90,11 @@
                                 ?>
                                 <tr>
                                     <td>
-                                        <img src="<?php echo $flag_folder . $package[ 'country_code' ] . '.png'; ?>" alt="" />
+                                        <?php if ( isset( $package[ 'flag_url' ] ) ) { ?>
+                                            <img src="<?php echo $package[ 'flag_url' ]; ?>" alt="" />
+                                        <?php } else { ?>
+                                            <img src="<?php echo $flag_folder . $package[ 'country_code' ] . '.png'; ?>" alt="" />
+                                        <?php } ?>
                                     </td>
 
                                     <td>
