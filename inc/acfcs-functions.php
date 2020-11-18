@@ -212,6 +212,13 @@
             $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = %s", $country_code ) );
             if ( isset( $country->country ) ) {
                 return $country->country;
+            } else {
+                if ( function_exists( 'acfcs_country_i18n' ) ) {
+                    $country_name = acfcs_country_i18n( $country_code );
+                    if ( $country_code != $country_name ) {
+                        return $country_name;
+                    }
+                }
             }
         }
 
