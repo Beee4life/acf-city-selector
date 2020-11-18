@@ -21,14 +21,14 @@
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? $_POST[ 'acfcs_limit' ] : 100;
 
         // get cities by country
-        $results = acfcs_get_countries( false, false, true );
+        $results = acfcs_get_countries( false );
 
         // if there is at least 1 country
         if ( ! empty( $results ) ) {
             foreach ( $results as $country_code => $label ) {
                 $countries[] = [
                     'code' => $country_code,
-                    'name' => __( $label, 'acf-city-selector' ),
+                    'name' => esc_attr__( $label, 'acf-city-selector' ),
                 ];
             }
 
@@ -38,7 +38,7 @@
                 foreach ( $countries as $country ) {
                     $states[] = array(
                         'state' => 'open_optgroup',
-                        'name'  => __( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
+                        'name'  => esc_attr__( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
                     );
                     $order = 'ORDER BY state_name ASC';
                     if ( 'FR' == $country[ 'code' ] ) {
@@ -57,7 +57,7 @@
                         foreach ( $results as $data ) {
                             $states[] = array(
                                 'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name'  => __( $data->state_name, 'acf-city-selector' ),
+                                'name'  => esc_attr__( $data->state_name, 'acf-city-selector' ),
                             );
                         }
                     }
@@ -133,85 +133,109 @@
 
             <div class="admin_left">
 
-                <h2><?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?></h2>
+                <h2>
+                    <?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?>
+                </h2>
 
-                <?php // Search form ?>
-                <form action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
-                    <input name="acfcs_search_form" type="hidden" value="1" />
-                    <?php if ( count( $countries ) > 0 ) { ?>
-                        <?php // if there's only 1 country, no need to add country dropdown ?>
-                        <?php if ( count( $countries ) > 1 ) { ?>
-                            <div class="acfcs__search-criteria acfcs__search-criteria--country">
-                                <label for="acfcs_country" class="screen-reader-text"><?php _e( 'Select a country', 'acf-city-selector' ); ?></label>
-                                <select name="acfcs_country" id="acfcs_country">
-                                    <option value=""><?php _e( 'Select a country', 'acf-city-selector' ); ?></option>
-                                    <?php foreach( $countries as $country ) { ?>
-                                        <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
-                                        <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>><?php echo __( $country[ 'name' ], 'acf-city-selector' ); ?></option>
-                                    <?php } ?>
+                <?php if ( count( $countries ) > 0 ) { ?>
+                    <form action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
+                        <input name="acfcs_search_form" type="hidden" value="1" />
+
+                        <div class="acfcs__search-form">
+                            <?php // if there's only 1 country, no need to add country dropdown ?>
+                            <?php if ( count( $countries ) > 1 ) { ?>
+                                <div class="acfcs__search-criteria acfcs__search-criteria--country">
+                                    <label for="acfcs_country" class="screen-reader-text"><?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?></label>
+                                    <select name="acfcs_country" id="acfcs_country">
+                                        <option value="">
+                                            <?php echo apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ); ?>
+                                        </option>
+                                        <?php foreach( $countries as $country ) { ?>
+                                            <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                            <option value="<?php echo $country[ 'code' ]; ?>"<?php echo $selected; ?>>
+                                                <?php _e( $country[ 'name' ], 'acf-city-selector' ); ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="acfcs__search-criteria acfcs__search-criteria--or">
+                                    <small><?php esc_html_e( 'OR', 'acf-city-selector' ); ?></small>
+                                </div>
+                            <?php } ?>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--state">
+                                <label for="acfcs_state" class="screen-reader-text">
+                                    <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
+                                </label>
+                                <select name="acfcs_state" id="acfcs_state">
+                                    <option value="">
+                                        <?php echo apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) ); ?>
+                                    </option>
+                                    <?php
+                                        foreach( $states as $state ) {
+                                            if ( 'open_optgroup' == $state[ 'state' ] ) {
+                                                echo '<optgroup label="'. $state[ 'name' ] . '">';
+                                            }
+                                            if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) {
+                                                $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false;
+                                                echo '<option value="' . $state[ 'state' ] . '"' . $selected . '>' . esc_html__( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
+                                            }
+                                            if ( 'close_optgroup' == $state[ 'state' ] ) {
+                                                echo '</optgroup>';
+                                            }
+                                        }
+                                    ?>
                                 </select>
                             </div>
 
-                            <div class="acfcs__search-criteria acfcs__search-criteria--or">
-                                <small><?php esc_html_e( 'OR', 'acf-city-selector' ); ?></small>
+                            <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--search">
+                                <label for="acfcs_search" class="screen-reader-text">
+                                    <?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>
+                                </label>
+                                <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                             </div>
-                        <?php } ?>
 
-                        <div class="acfcs__search-criteria acfcs__search-criteria--state">
-                            <label for="acfcs_state" class="screen-reader-text"><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></label>
-                            <select name="acfcs_state" id="acfcs_state">
-                                <option value=""><?php _e( 'Select a province/state', 'acf-city-selector' ); ?></option>
-                                <?php foreach( $states as $state ) { ?>
-                                    <?php if ( 'open_optgroup' == $state[ 'state' ] ) { ?>
-                                        <optgroup label="<?php echo $state[ 'name' ]; ?>">
-                                    <?php } ?>
-                                    <?php if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) { ?>
-                                        <?php $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false; ?>
-                                        <option value="<?php echo $state[ 'state' ]; ?>"<?php echo $selected; ?>><?php echo __( $state[ 'name' ], 'acf-city-selector' ); ?></option>
-                                    <?php } ?>
-                                    <?php if ( 'close_optgroup' == $state[ 'state' ] ) { ?>
-                                        </optgroup>
-                                    <?php } ?>
-                                <?php } ?>
-                            </select>
+                            <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--limit">
+                                <label for="acfcs_limit" class="screen-reader-text">
+                                    <?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>
+                                </label>
+                                <input name="acfcs_limit" id="acfcs_limit" type="number" value="<?php if ( false != $selected_limit ) { echo $selected_limit; } ?>" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
+                            </div>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
+                                <label for="acfcs_orderby" class="screen-reader-text">
+                                    <?php esc_html_e( 'Order by', 'acf-city-selector' ); ?>
+                                </label>
+                                <select name="acfcs_orderby" id="acfcs_orderby">
+                                    <option value="">
+                                        <?php esc_html_e( 'Order by', 'acf-city-selector' ); ?>
+                                    </option>
+                                    <?php
+                                        $orderby = [
+                                            esc_attr__( 'City', 'acf-city-selector' ),
+                                            esc_attr__( 'State', 'acf-city-selector' ),
+                                        ];
+                                        foreach( $orderby as $criterium ) {
+                                            $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
+                                            echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="acfcs__search-criteria acfcs__search-criteria--submit">
+                                <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
+                            </div>
                         </div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--search">
-                            <label for="acfcs_search" class="screen-reader-text"><?php esc_html_e( 'Search term', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
-                        </div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--limit">
-                            <label for="acfcs_limit" class="screen-reader-text"><?php esc_html_e( 'Limit', 'acf-city-selector' ); ?></label>
-                            <input name="acfcs_limit" id="acfcs_limit" type="number" value="<?php if ( false != $selected_limit ) { echo $selected_limit; } ?>" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
-                        </div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
-
-                        <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
-                            <label for="acfcs_orderby" class="screen-reader-text"><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></label>
-                            <select name="acfcs_orderby" id="acfcs_orderby">
-                                <option value=""><?php esc_html_e( 'Order by', 'acf-city-selector' ); ?></option>
-                                <?php
-                                    $orderby = [
-                                        __( 'City', 'acf-city-selector' ),
-                                        __( 'State', 'acf-city-selector' ),
-                                    ];
-                                    foreach( $orderby as $criterium ) {
-                                        $selected = ( $criterium == $searched_orderby ) ? ' selected' : false;
-                                        echo '<option value="' . $criterium . '" ' . $selected . '>' . ucfirst( $criterium ) . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    <?php } ?>
-
-                    <input type="submit" class="button button-primary" value="<?php esc_html_e( 'Search', 'acf-city-selector' ); ?>" />
-                </form>
+                    </form>
+                <?php } ?>
 
                 <?php // Results output below ?>
                 <?php if ( isset( $_POST[ 'acfcs_search_form' ] ) && empty( $cities ) ) { ?>
@@ -223,8 +247,15 @@
                     <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
                         <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                         <div class="acfcs__search-results">
-                            <p><?php echo $result_count; ?> <?php esc_html_e( 'results',  'acf-city-selector' ); ?></p>
-                            <table class="acfcs__table acfcs__table--search">
+                            <p class="hide568">
+                                <small>
+                                    <?php _e( 'Table scrolls horizontally.', 'acf-city-selector' ); ?>
+                                </small>
+                            </p>
+                            <p>
+                                <?php echo $result_count; ?> <?php esc_html_e( 'results',  'acf-city-selector' ); ?>
+                            </p>
+                            <table class="acfcs__table acfcs__table--search scrollable">
                                 <thead>
                                 <tr>
                                     <th>
@@ -261,7 +292,7 @@
                                             <?php echo $city[ 'state_name' ]; ?>
                                         </td>
                                         <td>
-                                            <?php echo __( $city[ 'country' ], 'acf-city-selector' ); ?>
+                                            <?php _e( $city[ 'country' ], 'acf-city-selector' ); ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

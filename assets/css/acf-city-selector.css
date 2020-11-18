@@ -13,7 +13,7 @@
 }
 
 .acfcs .acfcs-admin-menu a.cta {
-    color:       red;
+    color:       #dc3232;
     font-weight: bold;
 }
 
@@ -59,8 +59,17 @@
     margin-top: 2em;
 }
 
+.acfcs__search-form {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .acfcs__search-criteria {
-    display: inline-block;
+    margin-bottom: 0.75rem;
+}
+
+.acfcs__search-criteria:last-child {
+    margin-bottom: 0;
 }
 
 .acfcs__search-criteria--orderby {
@@ -69,7 +78,8 @@
 
 .acfcs__search-criteria--or,
 .acfcs__search-criteria--plus {
-    margin: 0 0.5em;
+    margin:      0 0.5em;
+    padding-top: 5px;
 }
 
 /* tables */
@@ -79,10 +89,6 @@
     border-collapse: collapse;
     width:           100%;
     max-width:       100%;
-}
-
-.acfcs table.acfcs__table--search {
-    max-width: 60%;
 }
 
 .acfcs table.acfcs__table--packages {
@@ -136,7 +142,7 @@
 
 .acfcs .form--upload .val {
     background:     white;
-    border:         1px solid #CCC;
+    border:         1px solid #ccc;
     width:          185px;
     height:         35px;
     position:       absolute;
@@ -186,16 +192,7 @@
     border-radius: 3px;
     box-sizing:    border-box;
     color:         #32373c;
-    min-height:    30px;
-    padding:       0 0 0 5px;
-}
-
-.acfcs input[name="acfcs_search"] {
-    margin-top: 1px;
-}
-
-.acfcs select[name="acfcs_orderby"] {
-    margin-top: -3px;
+    margin:        0;
 }
 
 .acfcs input[name="acfcs_limit"],
@@ -215,8 +212,8 @@
 
 /* errors */
 .acfcs .acfcs__notice {
-    padding:     10px 0 10px 15px;
     border-left: 4px solid #ffffff;
+    padding:     10px 0 10px 15px;
 }
 
 .acfcs .notice--error {
@@ -233,6 +230,22 @@
 
 .acfcs .notice--info {
     border-left-color: #00a0d2;
+}
+
+.acfcs .field__message {
+    background-color:  #f9f9f9;
+    border-top:        1px solid #ccd0d4;
+    border-right:      1px solid #ccd0d4;
+    border-bottom:     1px solid #ccd0d4;
+    margin-bottom:     1rem;
+}
+
+.acfcs .field__message--error {
+    border-left-color: #dc3232;
+}
+
+.acfcs .field__message--warning {
+    border-left-color: #ff9000;
 }
 
 /* misc */
@@ -263,11 +276,11 @@
 }
 
 /* edit post screens v5 */
-.acf-field-acf-city-selector .dropdown-box {
+.acf-field-acf-city-selector .acfcs__dropdown-box {
     margin-bottom: 1em;
 }
 
-.acf-field.acf-field-acf-city-selector select {
+.acf-field.acf-field-acf-city-selector select.acfcs__dropdown {
     padding: 4px;
 }
 
@@ -322,14 +335,16 @@
 }
 
 /* media queries */
-@media screen and ( min-width: 400px ) {
-
+@media screen and (min-width: 400px) {
     .hide400 {
         display: none;
     }
 }
 
 @media screen and ( min-width: 480px ) {
+    .hide480 {
+        display: none;
+    }
 
     .acfcs .admin_left,
     .acfcs .admin_right {
@@ -360,10 +375,37 @@
     }
 }
 
-@media screen and ( min-width: 640px ) {
+@media screen and (max-width: 567px) {
+    .acfcs table.acfcs__table--search.scrollable {
+        display:     block;
+        overflow:    hidden;
+        white-space: nowrap;
+        overflow-x:  scroll;
+    }
+}
 
+@media screen and (min-width: 568px) {
+    .hide568 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .acfcs table.acfcs__table--preview-result.scrollable {
+        display:     block;
+        overflow:    hidden;
+        white-space: nowrap;
+        overflow-x:  scroll;
+    }
+}
+
+@media screen and (min-width: 640px) {
     .hide640 {
         display: none;
+    }
+
+    .admin_right .paypal_button {
+        margin-bottom: 2.5em;
     }
 
     .acfcs .acfcs__process-file {
@@ -384,7 +426,19 @@
     }
 }
 
-@media screen and ( min-width: 1024px ) {
+/* screensize used in WP forms.css */
+@media screen and (max-width: 782px) {
+    .acfcs__search-criteria--or,
+    .acfcs__search-criteria--plus {
+        margin:      0 0.5em;
+        padding-top: 10px;
+    }
+    .acfcs__checkboxes li {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
     .acfcs .admin_left {
         float:    left;
         position: relative;
@@ -395,9 +449,23 @@
         float:     right;
         max-width: 22.5%;
     }
+
+    .admin_right .paypal_button {
+        margin-bottom: initial;
+    }
+
+    .acfcs table.acfcs__table--search {
+        max-width: 90%;
+    }
 }
 
-@media screen and ( min-width: 1440px ) {
+@media screen and (min-width: 1280px) {
+    .acfcs table.acfcs__table--preview-result {
+        max-width: 90%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
     .acfcs .admin_left {
         width: 77.5%;
     }
@@ -406,7 +474,15 @@
         max-width: 20%;
     }
 
+    .acfcs__search-criteria {
+        margin-bottom: 0;
+    }
+
+    .acfcs table.acfcs__table--search {
+        max-width: 60%;
+    }
+
     .acfcs table.acfcs__table--packages {
-        max-width: 75%;
+        max-width: 80%;
     }
 }

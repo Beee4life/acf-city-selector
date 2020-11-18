@@ -1,15 +1,17 @@
 <?php
     /**
-     * Return the field settings for a group (for use in js)
+     * Return the field settings for a group (for use in js), only if post has saved values
      *
      * @return array
      */
-    function acfcs_get_field_settings() {
+    function acfcs_get_field_settings( $fields = [] ) {
 
         $activate = false;
         $settings = [];
 
-        if ( isset( $_GET[ 'user_id' ] ) ) {
+        if ( ! empty( $fields ) ) {
+            $activate = true;
+        } elseif ( isset( $_GET[ 'user_id' ] ) ) {
             $activate = true;
             $user_id  = $_GET[ 'user_id' ];
         } elseif ( isset( $_GET[ 'post' ] ) ) {
@@ -32,10 +34,12 @@
         }
 
         if ( false != $activate ) {
-            if ( isset( $user_id ) && false !== $user_id ) {
-                $fields = get_field_objects( 'user_' . $user_id );
-            } elseif ( isset( $post_id ) && false !== $post_id ) {
-                $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
+            if ( empty( $fields ) ) {
+                if ( isset( $user_id ) && false !== $user_id ) {
+                    $fields = get_field_objects( 'user_' . $user_id );
+                } elseif ( isset( $post_id ) && false !== $post_id ) {
+                    $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
+                }
             }
 
             /*
@@ -97,7 +101,7 @@
 
                         foreach( $layouts as $layout ) {
                             $sub_fields = $layout[ 'sub_fields' ];
-                            $acf_key = array_search( 'acf_city_selector', array_column( $sub_fields, 'type' ) );
+                            $acf_key    = array_search( 'acf_city_selector', array_column( $sub_fields, 'type' ) );
                             if ( false !== $acf_key ) {
                                 $settings[ 'default_country' ] = isset( $sub_fields[ $acf_key ][ 'default_country' ] ) ? $sub_fields[ $acf_key ][ 'default_country' ] : false;
                                 $settings[ 'show_labels' ]     = $sub_fields[ $acf_key ][ 'show_labels' ];
@@ -125,7 +129,7 @@
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'clone' ) {
                         // @TODO: fix clone
                     } else {
-                        // TODO: maybe fallback ?
+                        // TODO: maybe fallback for when no values are saved yet
                     }
                 }
             }

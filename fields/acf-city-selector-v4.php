@@ -63,8 +63,8 @@
                 $key = $field['name'];
 
                 $select_options = array(
-                    1 => __( 'Yes', 'acf-city-selector' ),
-                    0 => __( 'No', 'acf-city-selector' )
+                    1 => esc_attr__( 'Yes', 'acf-city-selector' ),
+                    0 => esc_attr__( 'No', 'acf-city-selector' )
                 );
 
                 // Create Field Options HTML

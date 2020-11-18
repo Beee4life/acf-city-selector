@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.27.1 - released 05.11.20
+0.28.0 - released 18.11.20
 
 <a name="description"></a>
 ### Description
@@ -227,28 +227,30 @@ This plugin is not 100% finished yet. It won't break anything but be on the look
 The plugin works in the following situations: 
 * in a single field
 * in a repeater field
-* in a group (as single and repeater)
-* in a flexible content block (as single and repeater)
-
-The plugin hasn't been tested yet in the following situations: 
-* as a repeater field on a user page
-* as a clone field
-* on taxonomy pages
+* in a group
+* in a flexible content block
+* in an accordion field
+* as a cloned field
+* on taxonomy terms
 * on settings pages
-* most front-end usage (except single use)
+
+The plugin has NOT been tested yet in the following situations: 
+* most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
-Sometimes the loading of states/cities, takes a few seconds... Don't know why...
-This seems to be very random and unpredictable.
+Select2 does NOT work yet for the following field types/situations: 
+* when adding a new layout in a flexible content field
+* when adding a new row in a repeater field
 
-The plugin's admin pages are not properly styled for mobile (yet).
+Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
+This seems to be very random and unpredictable.
 
 <a name="todo"></a>
 ### TODO
 
 - [X] Select which fields to use; all, country + state or country + city or state city 
+- [X] Add select2 to dropdowns 
 - [ ] Remove table around output in preview/search (admin) 
-- [ ] Add select2 to dropdowns 
 
 <a name="credit"></a>
 ### Credit
@@ -259,6 +261,18 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.28.0
+* added select2 option
+* changed hide labels filter as fallback for select2 
+* added new country packages on the website
+
+0.28.0-beta1
+* added a new option: "state/provence + city" (for when a default country is set)
+* added a transient for cities per state 
+* added 3 new filters to override field labels 
+* added a new filter to override showing of field labels 
+* (re-)added a check for database version to prevent unnecessary table updates 
 
 0.27.1
 * removed version check for database which prevents creating database on plugin activation

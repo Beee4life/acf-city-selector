@@ -18,7 +18,6 @@
             <h1>ACF City Selector</h1>
 
             <?php
-
                 echo ACF_City_Selector::acfcs_admin_menu();
 
                 $file_index = acfcs_check_if_files();
@@ -83,7 +82,6 @@
                 <?php } ?>
 
                 <?php
-                    // @TODO: style table better for mobile
                     // Get imported data
                     if ( $file_name ) {
                         $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ',';
@@ -91,16 +89,16 @@
 
                         echo '<div class="acfcs__section acfcs__section--results">';
                         if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
-                            echo '<h2>' . __( 'CSV contents', 'acf-city-selector' ) . '</h2>';
-                            echo '<p class="hide640"><small>' . __( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
+                            echo '<h2>' . esc_html__( 'CSV contents', 'acf-city-selector' ) . '</h2>';
+                            echo '<p class="hide640"><small>' . esc_html__( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
                             echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
                             echo '<thead>';
                             echo '<tr>';
-                            echo '<th>' . __( 'City', 'acf-city-selector' ) . '</th>';
-                            echo '<th>' . __( 'State code', 'acf-city-selector' ) . '</th>';
-                            echo '<th>' . __( 'State', 'acf-city-selector' ) . '</th>';
-                            echo '<th>' . __( 'Country code', 'acf-city-selector' ) . '</th>';
-                            echo '<th>' . __( 'Country', 'acf-city-selector' ) . '</th>';
+                            echo '<th>' . esc_html__( 'City', 'acf-city-selector' ) . '</th>';
+                            echo '<th>' . esc_html__( 'State code', 'acf-city-selector' ) . '</th>';
+                            echo '<th>' . esc_html__( 'State', 'acf-city-selector' ) . '</th>';
+                            echo '<th>' . esc_html__( 'Country code', 'acf-city-selector' ) . '</th>';
+                            echo '<th>' . esc_html__( 'Country', 'acf-city-selector' ) . '</th>';
                             echo '</tr>';
                             echo '</thead>';
                             echo '<tbody>';
