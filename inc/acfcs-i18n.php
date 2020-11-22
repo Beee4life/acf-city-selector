@@ -25,6 +25,7 @@
             'gb'     => esc_html__( 'Great Britain', 'acf-city-selector' ),
             'lu'     => esc_html__( 'Luxembourg', 'acf-city-selector' ),
             'mx'     => esc_html__( 'Mexico', 'acf-city-selector' ),
+            'nz'     => esc_html__( 'New Zealand', 'acf-city-selector' ),
             'pt'     => esc_html__( 'Portugal', 'acf-city-selector' ),
             'es'     => esc_html__( 'Spain', 'acf-city-selector' ),
             'ch'     => esc_html__( 'Switzerland', 'acf-city-selector' ),
