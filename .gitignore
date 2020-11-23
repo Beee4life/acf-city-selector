@@ -4,6 +4,9 @@
 .Spotlight-V100
 .Trashes
 
+# Build
+deploy-acfcs.sh
+
 # Development
 .idea/**
 *.sublime-*
