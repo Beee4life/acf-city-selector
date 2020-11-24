@@ -266,6 +266,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added China and New Zealand country packages
 * added a fix for incorrect escaping which caused incorrect ordering in names starting with a `'`.
 * added new function as fallback for `acfcs_get_country_name()`
+* removed flag assets from plugin
 
 0.28.0
 * added select2 option
