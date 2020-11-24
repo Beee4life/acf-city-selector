@@ -14,14 +14,16 @@
 
         $country_array = [
             'ad'     => esc_html__( 'Andorra', 'acf-city-selector' ),
+            'aw'     => esc_html__( 'Aruba', 'acf-city-selector' ),
             'at'     => esc_html__( 'Austria', 'acf-city-selector' ),
             'au'     => esc_html__( 'Australia', 'acf-city-selector' ),
             'br'     => esc_html__( 'Brazil', 'acf-city-selector' ),
             'ca'     => esc_html__( 'Canada', 'acf-city-selector' ),
             'cn'     => esc_html__( 'China', 'acf-city-selector' ),
-            'europe' => esc_html__( 'Europe', 'acf-city-selector' ),
+            'cw'     => esc_html__( 'Curaçao', 'acf-city-selector' ),
             'fr'     => esc_html__( 'France', 'acf-city-selector' ),
             'de'     => esc_html__( 'Germany', 'acf-city-selector' ),
+            'europe' => esc_html__( 'Europe', 'acf-city-selector' ),
             'gb'     => esc_html__( 'Great Britain', 'acf-city-selector' ),
             'lu'     => esc_html__( 'Luxembourg', 'acf-city-selector' ),
             'mx'     => esc_html__( 'Mexico', 'acf-city-selector' ),
