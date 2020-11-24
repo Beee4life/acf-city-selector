@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.28.0 - released 18.11.20
+0.29.0 - released 2x.11.20
 
 <a name="description"></a>
 ### Description
@@ -263,7 +263,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.29.0
-* added China country package
+* added China and New Zealand country packages
 * added a fix for incorrect escaping which caused incorrect ordering in names starting with a `'`.
 * added new function as fallback for `acfcs_get_country_name()`
 
