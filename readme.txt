@@ -26,7 +26,7 @@ I took a piece of code by [Fabrizio Sabato](https://github.com/fab01) and custom
 
 = Plugin website =
 
-https://acfcs.berryplasman.com
+https://acf-city-selector.com
 
 == Installation ==
 

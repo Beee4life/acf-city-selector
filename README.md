@@ -165,26 +165,26 @@ You can also add more countries yourself, through SQL or CSV import. There's a s
 
 The explanation on how to do this, can be found on the first tab/sheet of the excel file.
 
-There are a few country packages (csv files) available. These packages can be imported as is. These are available through the [ACFCS website](https://acfcs.berryplasman.com).
+There are a few country packages (csv files) available. These packages can be imported as is. These are available through the [ACFCS website](https://acf-city-selector.com).
 
 <a name="actions"></a>
 ### Actions
 
 There are a few actions available to add your own custom actions. 
 
-Find all actions [here](https://acfcs.berryplasman.com/documentation/actions/).
+Find all actions [here](https://acf-city-selector.com/documentation/actions/).
 
 <a name="filters"></a>
 ### Filters
 
-Find all filters [here](https://acfcs.berryplasman.com/documentation/filters/).
+Find all filters [here](https://acf-city-selector.com/documentation/filters/).
 
 <a name="functions"></a>
 ### Functions
 
 A few custom functions are available for you to easily retrieve data.
 
-Find all functions and their info [here](https://acfcs.berryplasman.com/documentation/functions/).
+Find all functions and their info [here](https://acf-city-selector.com/documentation/functions/).
 
 <a name="compatibility"></a>
 ### Compatibility
@@ -217,7 +217,7 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 <a name="website"></a>
 ### Website
 
-[acfcs.berryplasman.com](https://acfcs.berryplasman.com)
+[acf-city-selector.com](https://acf-city-selector.com)
 
 <a name="disclaimer"></a>
 ### Disclaimer
