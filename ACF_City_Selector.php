@@ -44,7 +44,7 @@
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
-                    define( 'ACFCS_WEBSITE_URL', 'https://acfcs.berryplasman.com' );
+                    define( 'ACFCS_WEBSITE_URL', 'https://acf-city-selector.com' );
                 }
 
                 if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
