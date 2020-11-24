@@ -231,12 +231,48 @@
             })
         }
 
+        acf.addAction('new_field/type=xacf_city_selector', function($field){
+            if ( jQuery.isFunction(jQuery.fn.select2) ) {
+                console.log($field);
+                // console.log('select2 is available');
+                jQuery('select.select2.acfcs__dropdown--countries').select2();
+            }
+        });
+
         /**
          * Function calls
          */
         change_dropdowns();
 
     });
+
+    // src: https://www.advancedcustomfields.com/resources/javascript-api/#acf.field-extend
+
+    // check
+    // https://support.advancedcustomfields.com/forums/topic/dependent-dropdown-select-field/
+    // https://pastebin.com/ABFTEzL4
+    // https://github.com/Hube2/acf-dynamic-ajax-select-example/blob/master/dynamic-fields-on-relationship/dynamic-fields-on-relationship.js
+    // https://github.com/Hube2/acf-dynamic-ajax-select-example/blob/master/dynamic-select-example/dynamic-select-on-select.js
+
+    var ACFCS = acf.Field.extend({
+        type: 'acf_city_selector',
+        actions: {
+            'append': 'onAppend'
+        },
+        onAppend: function($el){
+            // check if select2 is available
+            if ( jQuery.isFunction(jQuery.fn.select2) ) {
+                this.render();
+            }
+        },
+        render: function(){
+            $('select.select2.acfcs__dropdown--countries').select2();
+            $('select.select2.acfcs__dropdown--states').select2();
+            $('select.select2.acfcs__dropdown--cities').select2();
+        }
+    });
+
+    acf.registerFieldType( ACFCS );
 
 })(jQuery);
 
