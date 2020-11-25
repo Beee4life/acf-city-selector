@@ -35,21 +35,17 @@
             $select_city = acf._e('acf_city_selector', 'select_city');
         }
 
-        var select_country = $select_country;
-        var select_state = $select_state;
-        var select_city = $select_city;
-
         $('select.select2.acfcs__dropdown--countries').select2({
             allowClear: true,
-            placeholder: select_country
+            placeholder: $select_country
         });
         $('select.select2.acfcs__dropdown--states').select2({
             allowClear: true,
-            placeholder: select_state
+            placeholder: $select_state
         });
         $('select.select2.acfcs__dropdown--cities').select2({
             allowClear: true,
-            placeholder: select_city
+            placeholder: $select_city
         });
 
     }
