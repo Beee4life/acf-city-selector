@@ -51,13 +51,13 @@
                                 </div>
 
                                 <div class="acfcs__process-file-element">
-                                    <?php $delimiters = [ ',', ';', '|' ]; ?>
+                                    <?php $delimiters = [ ';', ',', '|' ]; ?>
                                     <label for="acfcs_delimiter">
                                         <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
                                     </label>
                                     <select name="acfcs_delimiter" id="acfcs_delimiter">
                                         <?php foreach( $delimiters as $delimiter ) { ?>
-                                            <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                            <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ';' ) ) ? ' selected' : false; ?>
                                             <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
                                         <?php } ?>
                                     </select>
@@ -84,7 +84,7 @@
                 <?php
                     // Get imported data
                     if ( $file_name ) {
-                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ',';
+                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ';';
                         $csv_info  = acfcs_csv_to_array( $file_name, $delimiter, true );
 
                         echo '<div class="acfcs__section acfcs__section--results">';

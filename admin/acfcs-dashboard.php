@@ -79,13 +79,13 @@
                                     </div>
 
                                     <div class="acfcs__process-file-element acfcs__process-file-element--delimiter">
-                                        <?php $delimiters = [ ',', ';', '|' ]; ?>
+                                        <?php $delimiters = [ ';', ',', '|' ]; ?>
                                         <label for="acfcs_delimiter">
                                             <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
                                         </label>
                                         <select name="acfcs_delimiter" id="acfcs_delimiter">
                                             <?php foreach( $delimiters as $delimiter ) { ?>
-                                                <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ',' ) ) ? ' selected' : false; ?>
+                                                <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ';' ) ) ? ' selected' : false; ?>
                                                 <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>>
                                                     <?php echo $delimiter; ?>
                                                 </option>
@@ -109,7 +109,7 @@
                 <?php } ?>
 
                 <?php if ( true === $show_raw_import ) { ?>
-                    <?php $placeholder = "Amsterdam,NH,Noord-Holland,NL,Netherlands\nRotterdam,ZH,Zuid-Holland,NL,Netherlands"; ?>
+                    <?php $placeholder = "Amsterdam;NH;Noord-Holland;NL;Netherlands\nRotterdam;ZH;Zuid-Holland;NL;Netherlands"; ?>
                     <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? $_POST[ 'raw_csv_import' ] : false; ?>
                     <div class="acfcs__section acfcs__section--raw-import">
                         <h2>

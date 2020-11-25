@@ -252,7 +252,7 @@
                         }
 
                         $file_name = $_POST[ 'acfcs_file_name' ];
-                        $delimiter = ! empty( $_POST[ 'delimiter' ] ) ? $_POST[ 'delimiter' ] : ',';
+                        $delimiter = ! empty( $_POST[ 'delimiter' ] ) ? $_POST[ 'delimiter' ] : ';';
                         $import    = isset( $_POST[ 'import' ] ) ? true : false;
                         $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                         $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
@@ -522,6 +522,7 @@
                             if ( ! empty( $country_names ) ) {
                                 $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
                                 if ( 1 < count( $country_names ) ) {
+                                    // @TODO: check this ','
                                     $country_names_and = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
                                 } else {
                                     $country_names_and = $country_names_quotes;
@@ -529,6 +530,7 @@
                             }
 
                             global $wpdb;
+                            // @TODO: check this ','
                             $country_string = strtoupper( "'" . implode( "', '", $_POST[ 'delete_country' ] ) . "'" );
                             $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
                             $result         = $wpdb->query( $query );

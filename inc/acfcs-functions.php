@@ -280,7 +280,7 @@
      *
      * @return array
      */
-    function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
+    function acfcs_csv_to_array( $file_name, $delimiter = ';', $verify = false ) {
 
         $csv_array   = [];
         $empty_array = false;
@@ -352,7 +352,7 @@
      *
      * @return false
      */
-    function acfcs_verify_csv_data( $csv_data = false, $delimiter = "," ) {
+    function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
 
         if ( false != $csv_data ) {
 
@@ -370,7 +370,7 @@
                 $line_number++;
 
                 if ( ! is_array( $csv_data ) ) {
-                    $line_array = explode( ",", $line );
+                    $line_array = explode( $delimiter, $line );
                 }
 
                 if ( count( $line_array ) != $column_benchmark ) {
