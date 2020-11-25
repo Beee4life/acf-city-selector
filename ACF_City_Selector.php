@@ -669,12 +669,13 @@
             }
 
             /*
-             * Check if it's a beta version
+             * Add admin notices
              */
             public function acfcs_check_for_beta() {
                 $screen = get_current_screen();
                 if ( strpos( $screen->id, 'acfcs' ) !== false ) {
                     if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
+                        // Check if it's a beta version
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
@@ -682,6 +683,7 @@
                     <?php
                     }
                     if ( '0.29.0' <= $this->settings[ 'version' ] ) {
+                        // add notice for change default delimiter
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( __( "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
