@@ -42,6 +42,16 @@
 
                 $this->settings = $settings;
 
+                $select_country = apply_filters( 'acfcs_select_country_label', esc_attr__( 'Select a country', 'acf-city-selector' ) );
+                $select_state   = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
+                $select_city    = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
+
+                $this->l10n = array(
+                    'select_country' => $select_country,
+                    'select_state'   => $select_state,
+                    'select_city'    => $select_city,
+                );
+
                 // do not delete!
                 parent::__construct();
 
@@ -152,25 +162,6 @@
                     }
                 }
 
-                // if repeater/flexible content and select2 set to yes
-                if ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false && ( isset( $field[ 'use_select2' ] ) && 1 == $field[ 'use_select2' ] ) ) {
-                    echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--warning">';
-                    if ( isset( $field[ 'parent_layout' ] ) ) {
-                        // flexible content
-                        esc_html_e( "Select2 doesn't work (yet) when adding a new layout in a flexible content block.", 'acf-city-selector' );
-                    } else {
-                        // repeater
-                        esc_html_e( "Select2 doesn't work (yet) when a new row is added.", 'acf-city-selector' );
-                    }
-                    echo ' ';
-                    if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                        esc_html_e( 'If you save your profile, select2 will work.', 'acf-city-selector' );
-                    } else {
-                        esc_html_e( 'Just save the post and select2 will work.', 'acf-city-selector' );
-                    }
-                    echo '</div></div>';
-                }
-
                 $prefill_values = [
                     'prefill_states' => $prefill_states,
                     'prefill_cities' => $prefill_cities,
@@ -199,12 +190,32 @@
              * @return  n/a
              */
             function input_admin_head() {
+            }
+
+
+            /*
+            *  input_admin_enqueue_scripts()
+            *
+            *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
+            *  Use this action to add CSS + JavaScript to assist your render_field() action.
+            *
+            *  @type	action (admin_enqueue_scripts)
+            *  @since	3.6
+            *  @date	23/01/13
+            *
+            *  @param	n/a
+            *  @return	n/a
+            */
+            function input_admin_enqueue_scripts() {
 
                 $plugin_url     = $this->settings[ 'url' ];
                 $plugin_version = $this->settings[ 'version' ];
 
-                wp_register_script( 'acf-city-selector-js', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
-                wp_enqueue_script( 'acf-city-selector-js' );
+                wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version );
+                wp_enqueue_script( 'acfcs-init' );
+
+                wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
+                wp_enqueue_script( 'acfcs-process' );
 
                 // check field settings
                 $all_info = acfcs_get_field_settings();
@@ -212,13 +223,30 @@
                 if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
                     $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
                 }
-                // @TODO: remove ?
                 $load_vars[ 'show_labels' ]  = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
                 $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
-                wp_localize_script( 'acf-city-selector-js', 'city_selector_vars', $load_vars );
+                wp_localize_script( 'acfcs-process', 'city_selector_vars', $load_vars );
 
             }
+
+
+            /*
+            *  input_admin_footer()
+            *
+            *  This action is called in the admin_footer action on the edit screen where your field is created.
+            *  Use this action to add CSS and JavaScript to assist your render_field() action.
+            *
+            *  @type	action (admin_footer)
+            *  @since	3.6
+            *  @date	23/01/13
+            *
+            *  @param	n/a
+            *  @return	n/a
+            */
+            function input_admin_footer() {
+            }
+
 
             /*
              * load_value()
@@ -330,6 +358,7 @@
                 return $value;
 
             }
+
 
             /*
              * validate_value()
