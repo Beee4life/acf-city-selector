@@ -5,15 +5,13 @@
     }
 
     if ( false == get_option( 'acfcs_preserve_settings' ) ) {
-        delete_option( 'acfcs_db_version' );
 
         global $wpdb;
         // drop table
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
 
         $target_folder = wp_upload_dir()[ 'basedir' ] . '/acfcs';
+
         // remove folder
         rmdir( $target_folder );
-
-        delete_transient( 'acfcs_countries' );
     }
