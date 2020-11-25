@@ -162,25 +162,6 @@
                     }
                 }
 
-                // if repeater/flexible content and select2 set to yes
-                // if ( strpos( $field[ 'prefix' ], 'xacfcloneindex' ) !== false && ( isset( $field[ 'use_select2' ] ) && 1 == $field[ 'use_select2' ] ) ) {
-                //     echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--warning">';
-                //     if ( isset( $field[ 'parent_layout' ] ) ) {
-                //         // flexible content
-                //         esc_html_e( "Select2 doesn't work (yet) when adding a new layout in a flexible content block.", 'acf-city-selector' );
-                //     } else {
-                //         // repeater
-                //         esc_html_e( "Select2 doesn't work (yet) when a new row is added.", 'acf-city-selector' );
-                //     }
-                //     echo ' ';
-                //     if ( defined( 'IS_PROFILE_PAGE' ) ) {
-                //         esc_html_e( 'If you save your profile, select2 will work.', 'acf-city-selector' );
-                //     } else {
-                //         esc_html_e( 'Just save the post and select2 will work.', 'acf-city-selector' );
-                //     }
-                //     echo '</div></div>';
-                // }
-                //
                 $prefill_values = [
                     'prefill_states' => $prefill_states,
                     'prefill_cities' => $prefill_cities,
