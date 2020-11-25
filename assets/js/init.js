@@ -11,6 +11,7 @@
      *  @return	n/a
      */
     function initialize_field( $field ) {
+
         if ( $.isFunction($.fn.select2) ) {
             render_field( $field );
         }
