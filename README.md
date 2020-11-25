@@ -238,10 +238,6 @@ The plugin has NOT been tested yet in the following situations:
 * most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
-Select2 does NOT work yet for the following field types/situations: 
-* when adding a new layout in a flexible content field
-* when adding a new row in a repeater field
-
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
 
