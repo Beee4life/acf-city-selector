@@ -16,7 +16,7 @@
              * - construct( $settings )
              * - render_field_settings( $field )
              * - render_field( $field )
-             * - input_admin_head()
+             * - input_admin_enqueue_scripts()
              * - load_value( $value, $post_id, $field )
              * - validate_value( $valid, $value, $field, $input )
              */
@@ -218,32 +218,17 @@
 
 
             /*
-            *  input_admin_footer()
-            *
-            *  This action is called in the admin_footer action on the edit screen where your field is created.
-            *  Use this action to add CSS and JavaScript to assist your render_field() action.
-            *
-            *  @type	action (admin_footer)
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	n/a
-            *  @return	n/a
-            */
-            function input_admin_footer() {
-            }
-
-
-            /*
              * load_value()
              *
              * This filter is applied to the $value after it is loaded from the db
              * This returns false if no country/state is selected (but empty values are stored)
              *
              * @type    filter
+             *
              * @param   $value (mixed) the value found in the database
              * @param   $post_id (mixed) the $post_id from which the value was loaded
              * @param   $field (array) the field array holding all the field options
+             *
              * @return  $value
              */
             function load_value( $value, $post_id, $field ) {
