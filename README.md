@@ -17,7 +17,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
-- [To do](#todo)
 - [Credit](#credit)
 - [Changelog](#changelog)
 
@@ -59,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.27.0",
+        "version": "0.29.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -74,7 +73,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.27.0",
+"beee4life/acf-city-selector": "0.29.0",
 ```
 
 <a name="impact"></a>
@@ -194,8 +193,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.5.1
-* [X] Advanced Custom Fields Pro 5.9.2
+* [X] Wordpress 5.5.3
+* [X] Advanced Custom Fields Pro 5.9.3
 * [X] Advanced Custom Fields 4.4.12
 * [X] Chrome (latest version)
 * [X] Firefox (latest version)
@@ -240,13 +239,6 @@ The plugin has NOT been tested yet in the following situations:
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
-
-<a name="todo"></a>
-### TODO
-
-- [X] Select which fields to use; all, country + state or country + city or state city 
-- [X] Add select2 to dropdowns 
-- [ ] Remove table around output in preview/search (admin) 
 
 <a name="credit"></a>
 ### Credit
