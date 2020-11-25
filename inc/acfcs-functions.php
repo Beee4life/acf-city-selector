@@ -251,7 +251,7 @@
      * @return array
      */
     function acfcs_check_if_files() {
-
+        // @TODO: add filter to change folder
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
@@ -378,7 +378,7 @@
                 $line_number++;
 
                 if ( ! is_array( $csv_data ) ) {
-                    $line_array = explode( ",", $line );
+                    $line_array = explode( $delimiter, $line );
                 }
 
                 if ( count( $line_array ) != $column_benchmark ) {
@@ -553,23 +553,23 @@
         switch( $type ) {
             case 'country':
                 $default_value  = $default_country;
-                $modifier       = 'countries';
                 $field_label    = $country_label;
                 $field_suffix   = 'countryCode';
+                $modifier       = 'countries';
                 $selected_value = $stored_value;
                 $values         = $countries;
                 break;
             case 'state':
                 $field_label    = $province_state_label;
-                $modifier       = 'states';
                 $field_suffix   = 'stateCode';
+                $modifier       = 'states';
                 $selected_value = $stored_value;
                 $values         = $prefill_states;
                 break;
             case 'city':
                 $field_label    = $city_label;
-                $modifier       = 'cities';
                 $field_suffix   = 'cityName';
+                $modifier       = 'cities';
                 $selected_value = $stored_value;
                 $values         = $prefill_cities;
                 break;
@@ -591,18 +591,15 @@
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
-                            $selected = false;
                             if ( false !== $selected_value ) {
-                                $selected = ( $selected_value == $key ) ? $selected_selected : $selected;
+                                $selected = ( $selected_value == $key ) ? $selected_selected : false;
                             } elseif ( ! empty( $default_value ) ) {
                                 // only when a default country is set
-                                $selected = ( $default_value == $key ) ? $selected_selected : $selected;
+                                $selected = ( $default_value == $key ) ? $selected_selected : false;
+                            } else {
+                                $selected = false;
                             }
-                            ?>
-                            <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
-                                <?php echo $label; ?>
-                            </option>
-                            <?php
+                            echo '<option value="' . $key . '"' . $selected . '>' . $label . '</option>';
                         }
                     }
                 ?>

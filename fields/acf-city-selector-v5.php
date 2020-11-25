@@ -27,8 +27,6 @@
              * This function will setup the class functionality
              *
              * @param $settings
-             *
-             * @return  n/a
              */
             function __construct( $settings ) {
 
@@ -58,14 +56,12 @@
 
             }
 
-            /*
+            /**
              * render_field_settings()
              *
              * Create extra settings for your field. These are visible when editing a field
              *
-             * @type    action
-             * @param   $field (array) the $field being edited
-             * @return  n/a
+             * @param $field (array) the $field being edited
              */
             function render_field_settings( $field ) {
 
@@ -118,14 +114,12 @@
                 ) );
             }
 
-            /*
+            /**
              * render_field()
              *
              * Create the HTML interface for your field
              *
-             * @type    action
-             * @param   $field (array) the $field being edited
-             * @return  n/a
+             * @param $field (array) the $field being edited
              */
             function render_field( $field ) {
 
@@ -180,19 +174,12 @@
             }
 
 
-            /*
-            *  input_admin_enqueue_scripts()
-            *
-            *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
-            *  Use this action to add CSS + JavaScript to assist your render_field() action.
-            *
-            *  @type	action (admin_enqueue_scripts)
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	n/a
-            *  @return	n/a
-            */
+            /**
+             * input_admin_enqueue_scripts()
+             *
+             * This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
+             * Use this action to add CSS + JavaScript to assist your render_field() action.
+             */
             function input_admin_enqueue_scripts() {
 
                 $plugin_url     = $this->settings[ 'url' ];
@@ -224,13 +211,12 @@
              * This filter is applied to the $value after it is loaded from the db
              * This returns false if no country/state is selected (but empty values are stored)
              *
-             * @type    filter
-             *
              * @param   $value (mixed) the value found in the database
              * @param   $post_id (mixed) the $post_id from which the value was loaded
              * @param   $field (array) the field array holding all the field options
              *
              * @return  $value
+             *
              */
             function load_value( $value, $post_id, $field ) {
 
@@ -262,15 +248,15 @@
 
 
             /*
-            *  update_value()
-            *
-            *  This filter is applied to the $value before it is saved in the db
-            *
-            *  @param	$value (mixed) the value found in the database
-            *  @param	$post_id (mixed) the $post_id from which the value was loaded
-            *  @param	$field (array) the field array holding all the field options
-            *  @return	$value
-            */
+             * update_value()
+             *
+             * This filter is applied to the $value before it is saved in the db
+             * @param   $value (mixed) the value found in the database
+             * @param   $post_id (mixed) the $post_id from which the value was loaded
+             * @param   $field (array) the field array holding all the field options
+             *
+             * @return $value
+             */
             function update_value( $value, $post_id, $field ) {
 
                 $required = $field[ 'required' ];
@@ -343,6 +329,7 @@
              * @param   $value (mixed) the $_POST value
              * @param   $field (array) the field array holding all the field options
              * @param   $input (string) the corresponding input name for $_POST value
+             *
              * @return  $valid
              */
             function validate_value( $valid, $value, $field, $input ) {
