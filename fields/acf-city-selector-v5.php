@@ -180,20 +180,6 @@
 
 
             /*
-             * input_admin_head()
-             *
-             * This action is called in the admin_head action on the edit screen where your field is created.
-             * Use this action to add CSS and JavaScript to assist your render_field() action.
-             *
-             * @type    action (admin_head)
-             * @param   n/a
-             * @return  n/a
-             */
-            function input_admin_head() {
-            }
-
-
-            /*
             *  input_admin_enqueue_scripts()
             *
             *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
