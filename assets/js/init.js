@@ -14,6 +14,29 @@
         if ( $.isFunction($.fn.select2) ) {
             render_field( $field );
         }
+
+        $(".acf-input .button").click(function () {
+            if ( 'add-row' === $(this).data('event') ) {
+                setTimeout(function() {
+                    render_field( $field );
+                },0);
+            }
+
+            if ( 'add-layout' === $(this).data('name') ) {
+                setTimeout(function() {
+                    $('.acf-tooltip ul li').on('click','a',function(e){
+                        setTimeout(function() {
+                            render_field( $field );
+                            $(".acf-input .button").click(function () {
+                                setTimeout(function() {
+                                    render_field( $field );
+                                },0);
+                            });
+                        },0);
+                    });
+                },0);
+            }
+        });
     }
 
     function render_field( $field ) {
@@ -27,7 +50,6 @@
             $show_labels = city_selector_vars[ 'show_labels' ];
         }
         var show_labels = $show_labels;
-
 
         if ( '0' === show_labels ) {
             $select_country = acf._e('acf_city_selector', 'select_country');
