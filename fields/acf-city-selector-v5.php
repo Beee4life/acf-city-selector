@@ -21,13 +21,14 @@
              * - validate_value( $valid, $value, $field, $input )
              */
 
-            /*
-             *  __construct
+            /**
+             * acf_field_city_selector constructor
              *
-             *  This function will setup the class functionality
+             * This function will setup the class functionality
              *
-             *  @param   n/a
-             *  @return  n/a
+             * @param $settings
+             *
+             * @return  n/a
              */
             function __construct( $settings ) {
 
