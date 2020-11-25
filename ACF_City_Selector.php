@@ -252,7 +252,7 @@
                         }
 
                         $file_name = $_POST[ 'acfcs_file_name' ];
-                        $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : ';';
+                        $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : ',';
                         $import    = isset( $_POST[ 'import' ] ) ? true : false;
                         $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                         $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
