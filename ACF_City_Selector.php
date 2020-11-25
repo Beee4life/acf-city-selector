@@ -672,12 +672,19 @@
              * Check if it's a beta version
              */
             public function acfcs_check_for_beta() {
-                if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
-                    $screen = get_current_screen();
-                    if ( strpos( $screen->id, 'acfcs' ) !== false ) {
+                $screen = get_current_screen();
+                if ( strpos( $screen->id, 'acfcs' ) !== false ) {
+                    if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
+                        </div>
+                    <?php
+                    }
+                    if ( '0.29.0' <= $this->settings[ 'version' ] ) {
+                    ?>
+                        <div class="notice notice-warning is-dismissible">
+                            <p><?php echo sprintf( __( "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
                         </div>
                     <?php
                     }
@@ -787,7 +794,7 @@
                 if ( is_admin() ) {
                     wp_enqueue_style( 'acfcs-admin', plugins_url( 'assets/css/admin.css', __FILE__ ), [], $this->settings[ 'version' ] );
 
-                    wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/admin.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
+                    wp_register_script( 'acfcs-admin', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
                     wp_enqueue_script( 'acfcs-admin' );
                 }
             }
