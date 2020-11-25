@@ -83,8 +83,6 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
                 add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
-
-
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
