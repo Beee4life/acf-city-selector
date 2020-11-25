@@ -259,6 +259,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.29.0
+* added a fix for select2 in repeaters/flexible content blocks 
 * added China, New Zealand, Aruba and Curaçao country files
 * added a fix for incorrect escaping which caused incorrect ordering in names starting with a `'`.
 * added new function as fallback for `acfcs_get_country_name()`
