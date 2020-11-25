@@ -51,7 +51,6 @@
                     'select_city'    => $select_city,
                 );
 
-                // do not delete!
                 parent::__construct();
 
             }
