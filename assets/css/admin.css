@@ -439,17 +439,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .acfcs .admin_left {
-        float:    left;
-        position: relative;
-        width:    75%;
-    }
-
-    .acfcs .admin_right {
-        float:     right;
-        max-width: 22.5%;
-    }
-
     .admin_right .paypal_button {
         margin-bottom: initial;
     }
@@ -460,20 +449,27 @@
 }
 
 @media screen and (min-width: 1280px) {
+    .acfcs__container {
+        display:         flex;
+        flex-flow:       row nowrap;
+        justify-content: space-between;
+    }
+
+    .acfcs .admin_left {
+        margin-bottom: 0;
+        width:         70%;
+    }
+
+    .acfcs .admin_right {
+        max-width: 27.5%;
+    }
+
     .acfcs table.acfcs__table--preview-result {
         max-width: 90%;
     }
 }
 
 @media screen and (min-width: 1440px) {
-    .acfcs .admin_left {
-        width: 77.5%;
-    }
-
-    .acfcs .admin_right {
-        max-width: 20%;
-    }
-
     .acfcs__search-criteria {
         margin-bottom: 0;
     }
