@@ -18,12 +18,12 @@
 }
 
 /* admin pages */
-.acfcs .admin_left,
-.acfcs .admin_right {
-    background:            white;
+.acfcs .admin_left .content,
+.acfcs .admin_right .content {
+    background: white;
     box-sizing:            border-box;
-    padding:               10px;
     border:                1px solid #cccccc;
+    padding:               10px;
     -moz-border-radius:    8px;
     -webkit-border-radius: 8px;
 }
@@ -346,8 +346,8 @@
         display: none;
     }
 
-    .acfcs .admin_left,
-    .acfcs .admin_right {
+    .acfcs .admin_left .content,
+    .acfcs .admin_right .content {
         padding: 20px;
     }
 
@@ -470,6 +470,14 @@
 }
 
 @media screen and (min-width: 1440px) {
+    .acfcs .admin_left {
+        width: 77.5%;
+    }
+
+    .acfcs .admin_right {
+        max-width: 20%;
+    }
+
     .acfcs__search-criteria {
         margin-bottom: 0;
     }
