@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-11-25 04:27+0100\n"
+"POT-Creation-Date: 2020-11-26 03:36+0100\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -133,17 +133,22 @@ msgstr ""
 msgid "Get more countries"
 msgstr ""
 
-#: ACF_City_Selector.php:680
+#: ACF_City_Selector.php:681
 #, php-format
 msgid "Please be aware, you're using a beta version of \"%s\"."
 msgstr ""
 
-#: ACF_City_Selector.php:694
+#: ACF_City_Selector.php:689
+#, php-format
+msgid "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>."
+msgstr ""
+
+#: ACF_City_Selector.php:703
 #, php-format
 msgid "\"%s\" is not activated. This plugin <strong>must</strong> be activated, because without it \"%s\" won't work. Activate it <a href=\"%s\">here</a>."
 msgstr ""
 
-#: ACF_City_Selector.php:717
+#: ACF_City_Selector.php:726
 #, php-format
 msgid "<b>Warning</b>: The \"%s\" plugin will probably not work properly (anymore) with %s v4.x. Please upgrade to PRO."
 msgstr ""
@@ -413,12 +418,12 @@ msgid "Multisite"
 msgstr ""
 
 #: admin/acfcs-info.php:188 fields/acf-city-selector-v4.php:66
-#: fields/acf-city-selector-v5.php:69
+#: fields/acf-city-selector-v5.php:68
 msgid "Yes"
 msgstr ""
 
 #: admin/acfcs-info.php:188 fields/acf-city-selector-v4.php:67
-#: fields/acf-city-selector-v5.php:70
+#: fields/acf-city-selector-v5.php:69
 msgid "No"
 msgstr ""
 
@@ -672,15 +677,15 @@ msgstr ""
 msgid "If you like this plugin, buy me a coke to show your appreciation so I can continue to develop it."
 msgstr ""
 
-#: assets/js/init.js:33 assets/js/init.js:34 assets/js/init.js:35
+#: assets/js/init.js:56 assets/js/init.js:57 assets/js/init.js:58
 msgid "acf_city_selector"
 msgstr ""
 
-#: fields/acf-city-selector-v4.php:74 fields/acf-city-selector-v5.php:75
+#: fields/acf-city-selector-v4.php:74 fields/acf-city-selector-v5.php:74
 msgid "Show labels"
 msgstr ""
 
-#: fields/acf-city-selector-v4.php:75 fields/acf-city-selector-v5.php:74
+#: fields/acf-city-selector-v4.php:75 fields/acf-city-selector-v5.php:73
 msgid "Show field labels above the dropdown menus"
 msgstr ""
 
@@ -705,71 +710,71 @@ msgstr ""
 msgid "Select a city"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:84
+#: fields/acf-city-selector-v5.php:83
 msgid "Use select2 for dropdowns"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:85
+#: fields/acf-city-selector-v5.php:84
 msgid "Select2"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:95
+#: fields/acf-city-selector-v5.php:94
 msgid "Select a default country for a new field"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:96
+#: fields/acf-city-selector-v5.php:95
 msgid "Default country"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:102
+#: fields/acf-city-selector-v5.php:101
 msgid "All fields [default]"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:103
+#: fields/acf-city-selector-v5.php:102
 msgid "Country only"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:104
+#: fields/acf-city-selector-v5.php:103
 msgid "Country + State/province"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:105
+#: fields/acf-city-selector-v5.php:104
 msgid "Country + City"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:106
+#: fields/acf-city-selector-v5.php:105
 msgid "State/province + City"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:110
+#: fields/acf-city-selector-v5.php:109
 msgid "Select which fields are used"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:111
+#: fields/acf-city-selector-v5.php:110
 msgid "Fields to use"
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:155
+#: fields/acf-city-selector-v5.php:154
 msgid "You haven't set a default country, so NO provinces/states and cities will be loaded."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:338
+#: fields/acf-city-selector-v5.php:337
 msgid "You didn't select anything."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:339
+#: fields/acf-city-selector-v5.php:338
 msgid "You didn't select a city."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:340
+#: fields/acf-city-selector-v5.php:339
 msgid "You didn't select a country."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:341
+#: fields/acf-city-selector-v5.php:340
 msgid "You didn't select a state."
 msgstr ""
 
-#: fields/acf-city-selector-v5.php:342
+#: fields/acf-city-selector-v5.php:341
 msgid "You didn't select a state and city."
 msgstr ""
 
