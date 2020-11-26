@@ -78,7 +78,9 @@
                     </div>
 
                 <?php } else { ?>
-                    <p><?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?></p>
+                    <p>
+                        <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
+                    </p>
                 <?php } ?>
 
                 <?php

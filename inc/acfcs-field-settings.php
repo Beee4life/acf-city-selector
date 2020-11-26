@@ -38,7 +38,7 @@
                 if ( isset( $user_id ) && false !== $user_id ) {
                     $fields = get_field_objects( 'user_' . $user_id );
                 } elseif ( isset( $post_id ) && false !== $post_id ) {
-                    $fields = get_field_objects( $post_id ); // all fields incl. index (in case of multiple fields)
+                    $fields = get_field_objects( $post_id );
                 }
             }
 
@@ -85,8 +85,6 @@
                                             $settings[ 'show_labels' ]     = $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'show_labels' ];
                                             $settings[ 'which_fields' ]    = isset( $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] ) ? $field[ 'sub_fields' ][ $array_key ][ 'sub_fields' ][ $acf_key ][ 'which_fields' ] : false;
                                             break;
-                                        } else {
-                                            // @TODO: check for clone
                                         }
                                     }
                                 }
@@ -120,14 +118,11 @@
                                 } else {
                                     $group_key = array_search( 'group', array_column( $sub_fields, 'type' ) );
                                     if ( false !== $group_key ) {
-                                    } else {
-                                        // @TODO: check for other fields like clone
+                                        // @TODO: check for group fields
                                     }
                                 }
                             }
                         }
-                    } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'clone' ) {
-                        // @TODO: fix clone
                     } else {
                         // TODO: maybe fallback for when no values are saved yet
                     }

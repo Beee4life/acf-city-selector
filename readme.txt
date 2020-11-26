@@ -1,10 +1,10 @@
 === ACF CIty Selector ===
 Tags: acf, custom, field, fields, custom field, custom fields, edit
-Contributors: beee4life,mrjohnmc
+Contributors: beee4life
 Requires at least: 3.6.0
 Requires PHP: 7.0
-Tested up to: 5.5.1
-Stable tag: 0.28.0
+Tested up to: 5.5.3
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,8 +13,6 @@ Customise your ACF install with a field to select a City based on country and st
 == Description ==
 
 ACF City Selector is a plugin which offers a function which is often asked about on the ACF forums; a city selector, based on country and provcence/state. After failing to find a proper solution myself, I built my own to try and solve the issue once and for all :)
-
-It was built, based on this [tutorial post](https://www.advancedcustomfields.com/resources/tutorials/creating-a-new-field-type/), whcih explains how to create your own field type.
 
 I took a piece of code by [Fabrizio Sabato](https://github.com/fab01) and customised that into this plugin.
 
@@ -28,14 +26,13 @@ I took a piece of code by [Fabrizio Sabato](https://github.com/fab01) and custom
 
 = Plugin website =
 
-https://acfcs.berryplasman.com
+https://acf-city-selector.com
 
 == Installation ==
 
 1. Upload 'acf-city-selector' to the '/wp-content/plugins/' directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Click on 'Add Field' in a Custom Field Group and add the 'City Selector' field
-
 
 == Frequently Asked Questions ==
 

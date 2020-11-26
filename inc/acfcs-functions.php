@@ -173,14 +173,15 @@
                 $results      = $wpdb->get_results( $query );
                 foreach ( $results as $data ) {
                     $city_results[] = [
-                        'city_name' => esc_html__( $data->city_name, 'acf-city-selector' ),
+                        'city_name' => $data->city_name,
                     ];
                 }
+
                 if ( ! empty( $city_results ) ) {
                     uasort( $city_results, 'acfcs_sort_array_with_quotes' );
                 }
                 foreach ( $city_results as $data ) {
-                    $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_html__( $data[ 'city_name' ], 'acf-city-selector' );
+                    $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_attr__( $data[ 'city_name' ], 'acf-city-selector' );
                 }
                 if ( isset( $city_array ) ) {
                     $cities = array_merge( $cities, $city_array );
@@ -212,6 +213,13 @@
             $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = %s", $country_code ) );
             if ( isset( $country->country ) ) {
                 return $country->country;
+            } else {
+                if ( function_exists( 'acfcs_country_i18n' ) ) {
+                    $country_name = acfcs_country_i18n( $country_code );
+                    if ( $country_code != $country_name ) {
+                        return $country_name;
+                    }
+                }
             }
         }
 
@@ -243,7 +251,7 @@
      * @return array
      */
     function acfcs_check_if_files() {
-
+        // @TODO: add filter to change folder
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
@@ -538,30 +546,30 @@
         $province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
         $selected_selected    = ' selected="selected"';
         $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
-        $use_select2          = ( strpos( $field[ 'prefix' ], 'acfcloneindex' ) !== false ) ? false : ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
+        $use_select2          = ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
         $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
         $data_label_value     = ( true == $show_labels ) ? '1' : '0';
 
         switch( $type ) {
             case 'country':
                 $default_value  = $default_country;
-                $modifier       = 'countries';
                 $field_label    = $country_label;
                 $field_suffix   = 'countryCode';
+                $modifier       = 'countries';
                 $selected_value = $stored_value;
                 $values         = $countries;
                 break;
             case 'state':
                 $field_label    = $province_state_label;
-                $modifier       = 'states';
                 $field_suffix   = 'stateCode';
+                $modifier       = 'states';
                 $selected_value = $stored_value;
                 $values         = $prefill_states;
                 break;
             case 'city':
                 $field_label    = $city_label;
-                $modifier       = 'cities';
                 $field_suffix   = 'cityName';
+                $modifier       = 'cities';
                 $selected_value = $stored_value;
                 $values         = $prefill_cities;
                 break;
@@ -583,18 +591,15 @@
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
-                            $selected = false;
                             if ( false !== $selected_value ) {
-                                $selected = ( $selected_value == $key ) ? $selected_selected : $selected;
+                                $selected = ( $selected_value == $key ) ? $selected_selected : false;
                             } elseif ( ! empty( $default_value ) ) {
                                 // only when a default country is set
-                                $selected = ( $default_value == $key ) ? $selected_selected : $selected;
+                                $selected = ( $default_value == $key ) ? $selected_selected : false;
+                            } else {
+                                $selected = false;
                             }
-                            ?>
-                            <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
-                                <?php echo $label; ?>
-                            </option>
-                            <?php
+                            echo '<option value="' . $key . '"' . $selected . '>' . $label . '</option>';
                         }
                     }
                 ?>

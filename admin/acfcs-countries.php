@@ -85,8 +85,7 @@
                                     $europe_price = ( isset( $package[ 'continent' ] ) && 'europe' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $europe_price + $package[ 'price' ] : $europe_price;
                                     $noram_price  = ( isset( $package[ 'continent' ] ) && 'noram' == $package[ 'continent' ] && ! empty( $package[ 'price' ] ) ) ? $noram_price + $package[ 'price' ] : $noram_price;
                                     $total_price  = ( ! empty( $package[ 'price' ] ) ) ? $total_price + $package[ 'price' ] : $total_price;
-                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $package[ 'country_code' ] . '.png' ) ) ? true : false;
-                                    $flag_folder  = ( true == $flag_exists ) ? ACFCS_PLUGIN_URL . 'assets/img/flags/' : ACFCS_WEBSITE_URL . '/app/themes/acfcs-child/assets/img/flags/';
+                                    $flag_folder  = ( isset( $package[ 'flag_folder' ] ) ) ? $package[ 'flag_folder' ] : ACFCS_WEBSITE_URL . '/flags/';
                                 ?>
                                 <tr>
                                     <td>
@@ -158,8 +157,7 @@
                                         <?php
                                             if ( isset( $package[ 'included_countries' ] ) && is_array( $package[ 'included_countries' ] ) && ! empty( $package[ 'included_countries' ] ) ) {
                                                 foreach( $package[ 'included_countries' ] as $country ) {
-                                                    $flag_exists  = ( file_exists( ACFCS_PLUGIN_PATH . 'assets/img/flags/' . $country->value . '.png' ) ) ? true : false;
-                                                    $flag_folder  = ( true == $flag_exists ) ? ACFCS_PLUGIN_URL . 'assets/img/flags/' : ACFCS_WEBSITE_URL . '/app/themes/acfcs-child/assets/img/flags/';
+                                                    $flag_folder  = ( isset( $package[ 'flag_folder' ] ) ) ? $package[ 'flag_folder' ] : ACFCS_WEBSITE_URL . '/flags/';
                                                     echo '<img src="' . $flag_folder . $country->value . '.png" alt="' . $country->value . '" class="flag" />';
                                                 }
                                             }
