@@ -243,6 +243,7 @@
                         <?php esc_html_e( 'You can download the settings to a JSON file below (and send it to us when asked).', 'acf-city-selector' ); ?>
 
                     </p>
+                    <?php // @TODO: if add filter, also change here ?>
                     <?php $file_name       = wp_upload_dir()[ 'basedir' ] . '/acfcs/debug.json'; ?>
                     <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
                     <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>

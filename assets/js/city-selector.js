@@ -1,8 +1,8 @@
 // JS File for Country Field
 (function($) {
-    jQuery(document).ready(function() {
+    $(document).ready(function() {
 
-        jQuery(".acf-input .button").click(function () {
+        $(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
                     change_dropdowns();
@@ -11,10 +11,10 @@
 
             if ( 'add-layout' === $(this).data('name') ) {
                 setTimeout(function() {
-                    jQuery('.acf-tooltip ul li').on('click','a',function(e){
+                    $('.acf-tooltip ul li').on('click','a',function(e){
                         setTimeout(function() {
                             change_dropdowns();
-                            jQuery(".acf-input .button").click(function () {
+                            $(".acf-input .button").click(function () {
                                 setTimeout(function() {
                                     change_dropdowns();
                                 },0);
@@ -68,7 +68,7 @@
                     var show_labels = $(this).data('show-label');
                     var which_fields = $which_fields;
 
-                    if ( jQuery.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
+                    if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
                         const d = get_states(country_code, show_labels, post_id);
                         response_states.push(d);
                         const e = get_cities(country_code, show_labels, post_id);
@@ -110,7 +110,7 @@
                             }
                         });
 
-                    } else if ( jQuery.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
+                    } else if ( $.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
                         const d = get_cities(country_code, show_labels, post_id);
                         response_cities.push(d);
 

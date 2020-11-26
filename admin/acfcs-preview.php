@@ -78,13 +78,15 @@
                     </div>
 
                 <?php } else { ?>
-                    <p><?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?></p>
+                    <p>
+                        <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
+                    </p>
                 <?php } ?>
 
                 <?php
                     // Get imported data
                     if ( $file_name ) {
-                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : ',';
+                        $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ',' );
                         $csv_info  = acfcs_csv_to_array( $file_name, $delimiter, true );
 
                         echo '<div class="acfcs__section acfcs__section--results">';
