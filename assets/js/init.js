@@ -13,13 +13,13 @@
     function initialize_field( $field ) {
 
         if ( $.isFunction($.fn.select2) ) {
-            render_field( $field );
+            render_field();
         }
 
         $(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
-                    render_field( $field );
+                    render_field();
                 },0);
             }
 
@@ -27,10 +27,10 @@
                 setTimeout(function() {
                     $('.acf-tooltip ul li').on('click','a',function(e){
                         setTimeout(function() {
-                            render_field( $field );
+                            render_field();
                             $(".acf-input .button").click(function () {
                                 setTimeout(function() {
-                                    render_field( $field );
+                                    render_field();
                                 },0);
                             });
                         },0);
@@ -40,7 +40,7 @@
         });
     }
 
-    function render_field( $field ) {
+    function render_field() {
 
         $select_country = '-';
         $select_state = '-';
