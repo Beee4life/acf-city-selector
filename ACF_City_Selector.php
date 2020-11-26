@@ -684,7 +684,7 @@
                         </div>
                     <?php
                     }
-                    if ( '0.29.0' <= $this->settings[ 'version' ] ) {
+                    if ( '0.29.0' >= $this->settings[ 'version' ] ) {
                         // add notice for change default delimiter
                     ?>
                         <div class="notice notice-warning is-dismissible">
