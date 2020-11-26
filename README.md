@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.29.0 - released 26.11.20
+0.30.0 - released 26.11.20
 
 <a name="description"></a>
 ### Description
@@ -46,6 +46,7 @@ It creates a new `field type` for you to choose when you're creating an ACF Fiel
 1. Activate the `ACF City Selector` plugin via the plugins admin page.
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
 1. Select if you want to show labels
+1. Select if you want to use select2
 1. Select if you want a default country
 1. (optional) Import new cities with help of the included Excel sheet.
 
@@ -249,6 +250,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.30.0
+* change default delimiter from `,` tot `;`. 
 
 0.29.0
 * added a fix for select2 in repeaters/flexible content blocks 
