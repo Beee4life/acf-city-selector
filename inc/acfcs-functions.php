@@ -251,7 +251,7 @@
      * @return array
      */
     function acfcs_check_if_files() {
-        // @TODO: add filter to change folder
+        // @TODO: if filter is added, also add it here
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
