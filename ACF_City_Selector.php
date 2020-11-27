@@ -522,7 +522,6 @@
                             if ( ! empty( $country_names ) ) {
                                 $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
                                 if ( 1 < count( $country_names ) ) {
-                                    // @TODO: check this ','
                                     $country_names_and = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
                                 } else {
                                     $country_names_and = $country_names_quotes;
@@ -530,7 +529,6 @@
                             }
 
                             global $wpdb;
-                            // @TODO: check this ','
                             $country_string = strtoupper( "'" . implode( "', '", $_POST[ 'delete_country' ] ) . "'" );
                             $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
                             $result         = $wpdb->query( $query );
@@ -676,16 +674,21 @@
             public function acfcs_check_for_beta() {
                 $screen = get_current_screen();
                 if ( strpos( $screen->id, 'acfcs' ) !== false ) {
+                    // Check if it's a beta version
                     if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
-                        // Check if it's a beta version
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
                         </div>
                     <?php
                     }
-                    if ( '0.29.0' >= $this->settings[ 'version' ] ) {
-                        // add notice for change default delimiter
+                    if ( '0.30.0' == $this->settings[ 'version' ] ) {
+                    ?>
+                        <div class="notice notice-warning is-dismissible">
+                            <p><?php echo sprintf( __( "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon) as of this version. Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
+                        </div>
+                        <?php
+                    } elseif ( '0.29.0' >= $this->settings[ 'version' ] ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( __( "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
