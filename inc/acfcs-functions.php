@@ -288,7 +288,7 @@
      *
      * @return array
      */
-    function acfcs_csv_to_array( $file_name, $delimiter = ';', $verify = false ) {
+    function acfcs_csv_to_array( $file_name, $delimiter = ';', $verify = false, $max_lines = false ) {
 
         $csv_array   = [];
         $empty_array = false;
@@ -334,6 +334,12 @@
                     }
                     if ( ! empty( $new_line ) ) {
                         $new_array[] = $new_line;
+                    }
+
+                    if ( false != $max_lines ) {
+                        if ( $line_number == $max_lines ) {
+                            break;
+                        }
                     }
                 }
             }
