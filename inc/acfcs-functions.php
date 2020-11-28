@@ -293,7 +293,7 @@
         $csv_array   = [];
         $empty_array = false;
         $new_array   = [];
-        if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
+        if ( ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) && $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
             while ( ( $csv_line = fgetcsv( $handle, apply_filters( 'acfcs_line_length', 1000 ), "{$delimiter}" ) ) !== false ) {
@@ -319,6 +319,7 @@
                     // delete file
                     if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {
                         unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                        $csv_array[ 'error' ] = 'file_deleted';
                     }
 
                 }
