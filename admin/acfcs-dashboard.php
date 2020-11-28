@@ -57,6 +57,12 @@
                                         <?php esc_html_e( 'Select a file to import', 'acf-city-selector' ); ?>
                                     </h2>
 
+                                    <p>
+                                        <small>
+                                            Max lines has no effect when verifying. The entire file will be checked.
+                                        </small>
+                                    </p>
+
                                     <form method="post">
                                         <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-select-file-nonce' ); ?>" />
 
