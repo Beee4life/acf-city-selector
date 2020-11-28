@@ -253,6 +253,7 @@
 
                         $file_name = $_POST[ 'acfcs_file_name' ];
                         $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
+                        $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? $_POST[ 'acfcs_max_lines' ] : false;
                         $import    = isset( $_POST[ 'import' ] ) ? true : false;
                         $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                         $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
@@ -270,7 +271,7 @@
                         } elseif ( true === $import ) {
 
                             // import data
-                            $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
+                            $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify, $max_lines );
                             if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
                                 $line_number = 0;
                                 foreach ( $csv_array[ 'data' ] as $line ) {
