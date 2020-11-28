@@ -20,9 +20,17 @@
             <?php
                 echo ACF_City_Selector::acfcs_admin_menu();
 
-                $file_index = acfcs_check_if_files();
-                $file_name  = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
-                $max_lines  = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : 100;
+                $file_index      = acfcs_check_if_files();
+                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
+                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : false;
+                $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
+                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
+
+                // Get imported data
+                if ( $file_name ) {
+                    $csv_info   = acfcs_csv_to_array( $file_name, $delimiter, true, $max_lines );
+                    $file_index = acfcs_check_if_files();
+                }
             ?>
 
             <div class="acfcs__container">
@@ -59,9 +67,9 @@
                                                 <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
                                             </label>
                                             <select name="acfcs_delimiter" id="acfcs_delimiter">
-                                                <?php foreach( $delimiters as $delimiter ) { ?>
-                                                    <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ';' ) ) ? ' selected' : false; ?>
-                                                    <option value="<?php echo $delimiter; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter; ?></option>
+                                                <?php foreach( $delimiters as $delimiter_value ) { ?>
+                                                    <?php $selected_delimiter = ( $delimiter_value == $delimiter ) ? ' selected' : false; ?>
+                                                    <option value="<?php echo $delimiter_value; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter_value; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -70,7 +78,7 @@
                                             <label for="acfcs_max_lines">
                                                 <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
                                             </label>
-                                            <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo $max_lines; ?>" />
+                                            <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo $max_lines_value; ?>" />
                                         </div>
                                     </div>
 
@@ -89,11 +97,22 @@
                         <?php
                             // Get imported data
                             if ( $file_name ) {
-                                $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
-                                $csv_info  = acfcs_csv_to_array( $file_name, $delimiter, true );
-
                                 echo '<div class="acfcs__section acfcs__section--results">';
-                                if ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
+
+                                if ( array_key_exists( 'error', $csv_info ) ) {
+                                    if ( 'file_deleted' == $csv_info[ 'error' ] ) {
+                                        echo '<div class="notice notice-error is-dismissable">';
+                                        echo '<p>';
+                                        echo sprintf( esc_html__( 'You either have errors in your CSV or there is no data. In case of an error, the file is deleted. Please check "%s".', 'acf-city-selector' ), $file_name );
+                                        echo '</p>';
+                                        echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'acf-city-selector' ) . '</span></button>';
+                                        echo '</div>';
+                                    } elseif ( ! isset( $csv_info[ 'data' ] ) || ( isset( $csv_info[ 'data' ] ) && empty( $csv_info[ 'data' ] ) ) ) {
+                                        echo '<div class="notice notice-error">';
+                                        echo esc_html__( 'There appears to be no data in the file. Are you sure it has content and you selected the correct delimiter ?', 'acf-city-selector' );
+                                        echo '</div>';
+                                    }
+                                } elseif ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
                                     echo '<h2>' . esc_html__( 'CSV contents', 'acf-city-selector' ) . '</h2>';
                                     echo '<p class="hide640"><small>' . esc_html__( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
                                     echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
@@ -117,16 +136,9 @@
                                             echo '</td>';
                                         }
                                         echo '</tr>';
-                                        if ( $line_number == $max_lines ) {
-                                            break;
-                                        }
                                     }
                                     echo '</tbody>';
                                     echo '</table>';
-                                } else {
-                                    echo '<p class="error_notice">';
-                                    echo sprintf( esc_html__( 'You either have errors in your CSV or there is no data. Verify this file on the <a href="%s">dashboard</a>.', 'acf-city-selector' ), admin_url( 'admin.php?page=' ) . 'csv2wp-dashboard' );
-                                    echo '</p>';
                                 }
                                 echo '</div>';
                             }
