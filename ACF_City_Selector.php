@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.31.1
+    Version:        0.32.0
     Tested up to:   5.5.3
     Requires PHP:   7.0
     Author:         Beee
@@ -40,7 +40,7 @@
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                     'url'           => plugin_dir_url( __FILE__ ),
-                    'version'       => '0.31.1',
+                    'version'       => '0.32.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -683,16 +683,10 @@
                         </div>
                     <?php
                     }
-                    if ( '0.30.0' <= $this->settings[ 'version' ] ) {
+                    if ( '0.29.0' >= $this->settings[ 'version' ] ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
-                            <p><?php echo sprintf( __( "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
-                        </div>
-                        <?php
-                    } elseif ( '0.29.0' >= $this->settings[ 'version' ] ) {
-                    ?>
-                        <div class="notice notice-warning is-dismissible">
-                            <p><?php echo sprintf( __( "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
+                            <p><?php echo sprintf( __( "<strong>!!!</strong> In versions 0.30.0, the default delimiter will be changed from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
                         </div>
                     <?php
                     }
