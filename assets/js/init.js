@@ -48,7 +48,7 @@
         $select_state = '-';
         $select_state_first = acf._e('acf_city_selector', 'select_state_first');
 
-        if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+        if(typeof(city_selector_vars) !== "undefined" && city_selector_vars !== null) {
             $show_labels = city_selector_vars[ 'show_labels' ];
             $which_fields = city_selector_vars[ 'which_fields' ];
         } else {
