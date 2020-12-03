@@ -683,7 +683,7 @@
                         </div>
                     <?php
                     }
-                    if ( '0.30.0' == $this->settings[ 'version' ] ) {
+                    if ( '0.30.0' <= $this->settings[ 'version' ] ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( __( "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
