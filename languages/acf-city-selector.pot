@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2020-12-03 04:57+0100\n"
+"POT-Creation-Date: 2020-12-03 22:42+0100\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -140,7 +140,7 @@ msgstr ""
 
 #: ACF_City_Selector.php:689
 #, php-format
-msgid "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon) as of this version. Read more about it <a href=\"%s\">%s</a>."
+msgid "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>."
 msgstr ""
 
 #: ACF_City_Selector.php:695
@@ -537,7 +537,7 @@ msgstr ""
 
 #: admin/acfcs-search.php:150 admin/acfcs-search.php:153
 #: fields/acf-city-selector-v5.php:43 inc/acfcs-functions.php:18
-#: inc/acfcs-functions.php:546
+#: inc/acfcs-functions.php:548
 msgid "Select a country"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 
 #: admin/acfcs-search.php:171 admin/acfcs-search.php:175
 #: fields/acf-city-selector-v5.php:47 inc/acfcs-functions.php:71
-#: inc/acfcs-functions.php:553
+#: inc/acfcs-functions.php:555
 msgid "Select a province/state"
 msgstr ""
 
@@ -687,8 +687,8 @@ msgid "If you like this plugin, buy me a coke to show your appreciation so I can
 msgstr ""
 
 #: assets/js/init.js:43 assets/js/init.js:46 assets/js/init.js:47
-#: assets/js/init.js:49 assets/js/init.js:61 assets/js/init.js:62
-#: assets/js/init.js:63 assets/js/init.js:67
+#: assets/js/init.js:49 assets/js/init.js:62 assets/js/init.js:63
+#: assets/js/init.js:64 assets/js/init.js:68
 msgid "acf_city_selector"
 msgstr ""
 
@@ -721,7 +721,7 @@ msgid "No countries"
 msgstr ""
 
 #: fields/acf-city-selector-v5.php:44 inc/acfcs-functions.php:132
-#: inc/acfcs-functions.php:544
+#: inc/acfcs-functions.php:546
 msgid "Select a city"
 msgstr ""
 
@@ -805,31 +805,31 @@ msgstr ""
 msgid "You didn't select a state and city."
 msgstr ""
 
-#: inc/acfcs-functions.php:307 inc/acfcs-functions.php:312
+#: inc/acfcs-functions.php:308 inc/acfcs-functions.php:313
 msgid "Since your file is not accurate anymore, the file is deleted."
 msgstr ""
 
-#: inc/acfcs-functions.php:308
+#: inc/acfcs-functions.php:309
 #, php-format
 msgid "There are too few columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:317
+#: inc/acfcs-functions.php:318
 #, php-format
 msgid "There are too many columns on line %d. %s"
 msgstr ""
 
-#: inc/acfcs-functions.php:394
+#: inc/acfcs-functions.php:396
 #, php-format
 msgid "There are too few columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:399
+#: inc/acfcs-functions.php:401
 #, php-format
 msgid "There are too many columns on line %d."
 msgstr ""
 
-#: inc/acfcs-functions.php:410
+#: inc/acfcs-functions.php:412
 #, php-format
 msgid "The length of the country abbreviation on line %d is incorrect."
 msgstr ""

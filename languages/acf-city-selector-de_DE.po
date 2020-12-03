@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
 "POT-Creation-Date: 2020-12-03 05:03+0100\n"
-"PO-Revision-Date: 2020-12-03 05:07+0100\n"
+"PO-Revision-Date: 2020-12-03 22:43+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1137,7 +1137,7 @@ msgstr ""
 
 #: inc/acfcs-i18n.php:33
 msgid "South Korea"
-msgstr ""
+msgstr "Südkorea"
 
 #: inc/acfcs-i18n.php:34
 msgid "Spain"
