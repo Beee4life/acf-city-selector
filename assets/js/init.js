@@ -12,9 +12,7 @@
      */
     function initialize_field( $field ) {
 
-        if ( $.isFunction($.fn.select2) ) {
-            render_field();
-        }
+        render_field();
 
         $(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
@@ -42,15 +40,22 @@
 
     function render_field() {
 
-        $select_country = '-';
-        $select_state = '-';
+        $no_countries = acf._e('acf_city_selector', 'no_countries');
         $select_city = '-';
-        $show_labels = '1';
+        $select_country = '-';
+        $select_country_first = acf._e('acf_city_selector', 'select_country_first');
+        $select_country_state_first = acf._e('acf_city_selector', 'select_country_state_first');
+        $select_state = '-';
+        $select_state_first = acf._e('acf_city_selector', 'select_state_first');
 
         if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
             $show_labels = city_selector_vars[ 'show_labels' ];
+            $which_fields = city_selector_vars[ 'which_fields' ];
+        } else {
+            console.log('else');
         }
         var show_labels = $show_labels;
+        var which_fields = $which_fields;
 
         if ( '0' === show_labels ) {
             $select_country = acf._e('acf_city_selector', 'select_country');
@@ -58,19 +63,41 @@
             $select_city = acf._e('acf_city_selector', 'select_city');
         }
 
-        $('select.select2.acfcs__dropdown--countries').select2({
-            allowClear: true,
-            placeholder: $select_country
-        });
-        $('select.select2.acfcs__dropdown--states').select2({
-            allowClear: true,
-            placeholder: $select_state
-        });
-        $('select.select2.acfcs__dropdown--cities').select2({
-            allowClear: true,
-            placeholder: $select_city
-        });
+        if ( 'country_city' === which_fields ) {
+            $select_country_state_first = acf._e('acf_city_selector', 'select_country_first');
+        }
 
+        if ( $.isFunction($.fn.select2) ) {
+            $('select.select2.acfcs__dropdown--countries').select2({
+                allowClear: true,
+                placeholder: $select_country,
+                language: {
+                    noResults: function() {
+                        return $no_countries
+                    }
+                }
+            });
+
+            $('select.select2.acfcs__dropdown--states').select2({
+                allowClear: true,
+                placeholder: $select_state,
+                language: {
+                    noResults: function() {
+                        return $select_country_first
+                    }
+                }
+            });
+
+            $('select.select2.acfcs__dropdown--cities').select2({
+                allowClear: true,
+                placeholder: $select_city,
+                language: {
+                    noResults: function() {
+                        return $select_country_state_first
+                    }
+                }
+            });
+        }
     }
 
     if( typeof acf.add_action !== 'undefined' ) {
