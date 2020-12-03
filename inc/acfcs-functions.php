@@ -556,6 +556,7 @@
         $use_select2          = ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
         $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
         $data_label_value     = ( true == $show_labels ) ? '1' : '0';
+        $which_fields         = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
         switch( $type ) {
             case 'country':
@@ -594,7 +595,7 @@
             <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
                 <?php echo $field_label; ?>
             </label>
-            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-label="<?php echo $data_label_value; ?>">
+            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-labels="<?php echo $data_label_value; ?>" data-which-fields="<?php echo $which_fields; ?>">
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
