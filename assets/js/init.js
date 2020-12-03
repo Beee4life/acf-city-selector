@@ -45,7 +45,7 @@
         $select_country = '-';
         $select_state = '-';
         $select_city = '-';
-        $show_labels = "1";
+        $show_labels = '1';
 
         if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
             $show_labels = city_selector_vars[ 'show_labels' ];
