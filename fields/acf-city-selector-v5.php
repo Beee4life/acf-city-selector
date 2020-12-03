@@ -39,17 +39,25 @@
                     'use_select2'  => 0,
                 );
 
-                $this->settings = $settings;
-
-                $select_country = apply_filters( 'acfcs_select_country_label', esc_attr__( 'Select a country', 'acf-city-selector' ) );
-                $select_state   = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
-                $select_city    = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
+                $no_countries               = esc_attr__( 'No countries', 'acf-city-selector' );
+                $select_country             = apply_filters( 'acfcs_select_country_label', esc_attr__( 'Select a country', 'acf-city-selector' ) );
+                $select_city                = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
+                $select_country_first       = apply_filters( 'acfcs_select_country_first', esc_attr__( 'No results (yet), first select a country', 'acf-city-selector' ) );
+                $select_country_state_first = apply_filters( 'acfcs_select_country_state_first', esc_attr__( 'No results (yet), first select a country or state', 'acf-city-selector' ) );
+                $select_state               = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
+                $select_state_first         = apply_filters( 'acfcs_select_state_first', esc_attr__( 'No results (yet), first select a state', 'acf-city-selector' ) );
 
                 $this->l10n = array(
-                    'select_country' => $select_country,
-                    'select_state'   => $select_state,
-                    'select_city'    => $select_city,
+                    'no_countries'               => $no_countries,
+                    'select_city'                => $select_city,
+                    'select_country'             => $select_country,
+                    'select_country_first'       => $select_country_first,
+                    'select_country_state_first' => $select_country_state_first,
+                    'select_state'               => $select_state,
+                    'select_state_first'         => $select_state_first,
                 );
+
+                $this->settings = $settings;
 
                 parent::__construct();
 
@@ -192,14 +200,12 @@
 
                 // check field settings
                 $all_info = acfcs_get_field_settings();
+                $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
+                $js_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
+                $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
+                $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
-                if ( ! empty( $all_info ) && 1 == acfcs_check_array_depth( $all_info ) ) {
-                    $load_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) ) ? $all_info[ 'default_country' ] : false;
-                }
-                $load_vars[ 'show_labels' ]  = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
-                $load_vars[ 'which_fields' ] = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
-
-                wp_localize_script( 'acfcs-process', 'city_selector_vars', $load_vars );
+                wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
 
             }
 
