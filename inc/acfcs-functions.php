@@ -293,6 +293,7 @@
         $csv_array   = [];
         $empty_array = false;
         $new_array   = [];
+        //@TODO: if upload filter is added, also add here
         if ( ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) && $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
