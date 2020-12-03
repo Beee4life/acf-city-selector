@@ -47,12 +47,13 @@
         $select_country_state_first = acf._e('acf_city_selector', 'select_country_state_first');
         $select_state = '-';
         $select_state_first = acf._e('acf_city_selector', 'select_state_first');
-        $show_labels = '1'; // fallback value
-        $which_fields = 'all'; // fallback value
 
         if(typeof(city_selector_vars) !== "undefined" && city_selector_vars !== null) {
             $show_labels = city_selector_vars[ 'show_labels' ];
             $which_fields = city_selector_vars[ 'which_fields' ];
+        } else {
+            $show_labels = '1';
+            $which_fields = 'all';
         }
         var show_labels = $show_labels;
         var which_fields = $which_fields;
