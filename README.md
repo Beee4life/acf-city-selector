@@ -263,7 +263,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * changed all country files from `,` tot `;`.
 * change import sheet from `,` tot `;`.
 * fixed non-working max lines setting on import
-* added Japan country file
+* added Japan and South Korea country files
 * extended Spain country file
 
 0.29.0
