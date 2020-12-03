@@ -317,6 +317,7 @@
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                     // delete file
+                    //@TODO: if upload filter is added, also add here
                     if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {
                         unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
                         $csv_array[ 'error' ] = 'file_deleted';
