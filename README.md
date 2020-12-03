@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.30.0 - released 26.11.20
+0.30.0 - released 03.12.20
 
 <a name="description"></a>
 ### Description
@@ -33,11 +33,7 @@ This plugin allows you to select a city, based on country and province/state in 
 
 ![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
-It creates a new `field type` for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will find a new option (category: "Choice") to choose called `City Selector`.
-
-* Add the field.
-* Select whether to show labels above the input fields (default = yes).
-* Save/publish the Field Group.
+It creates a new `field type` for you to choose when you're creating an ACF Field Group.
 
 <a name="impact"></a>
 ### Impact
@@ -62,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.29.0",
+        "version": "0.30.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -77,17 +73,18 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.29.0",
+"beee4life/acf-city-selector": "0.30.0",
 ```
 
 <a name="setup"></a>
 ### Setup
 
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
-1. Select if you want to show labels
-1. Select if you want to use select2
-1. Select if you want a default country
+1. Select if you want to show labels (default = yes)
+1. Select if you want to use select2 (default = no)
+1. Select if you want a default country (default = none)
 1. (optional) Import new cities with help of the included Excel sheet.
+1. (optional) Import new cities by csv (available on the website).
 
 <a name="usage"></a>
 ### Usage
@@ -241,8 +238,10 @@ The plugin works in the following situations:
 * on taxonomy terms
 * on settings pages
 
+The plugin does NOT work properly yet in the following situations: 
+* when multiple instances of the field are used in 1 group/on 1 post
+
 The plugin has NOT been tested yet in the following situations: 
-* most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
