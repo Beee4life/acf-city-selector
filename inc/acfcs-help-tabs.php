@@ -80,7 +80,16 @@
                     'title'   => esc_html__( 'Preview CSV data', 'acf-city-selector' ),
                     'content' =>
                         '<h5>Preview CSV data</h5>
-                        <p>' . esc_html__( 'Please keep in mind, if you preview an uploaded csv file, the file will get verified and it can be deleted if it contains errors.', 'acf-city-selector' ) . '</p>
+                        <p>' . esc_html__( 'On the preview page, you can preview uploaded csv files. Not to be confused with search where you can search imported cities. Please keep in mind, if you preview an uploaded csv file, the file will get verified and it can be deleted if it contains errors.', 'acf-city-selector' ) . '</p>
+                        '
+                ) );
+
+                $screen->add_help_tab( array(
+                    'id'      => 'search-data',
+                    'title'   => esc_html__( 'Search CSV data', 'acf-city-selector' ),
+                    'content' =>
+                        '<h5>Preview CSV data</h5>
+                        <p>' . esc_html__( 'On the search page, you can search in imported cities. Not to be confused with preview where you can preview uploaded csv files.', 'acf-city-selector' ) . '</p>
                         '
                 ) );
 
