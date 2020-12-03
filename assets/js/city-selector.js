@@ -60,12 +60,14 @@
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
 
-                    // @TODO: maybe get from data-
-                    $which_fields = 'all';
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                        $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
+                    } else {
+                        $show_labels = $(this).data('show-labels');
+                        $which_fields = $(this).data('which-fields');
                     }
-                    var show_labels = $(this).data('show-label');
+                    var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
@@ -141,12 +143,14 @@
             if (state.length) {
                 state.on('change', function () {
 
-                    // @TODO: maybe get from data-
-                    $which_fields = 'all';
                     if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                        $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
+                    } else {
+                        $show_labels = $(this).data('show-labels');
+                        $which_fields = $(this).data('which-fields');
                     }
-                    var show_labels = $(this).data('show-label');
+                    var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
                     if ( 'all' === which_fields || which_fields.indexOf("city") >= 0 ) {

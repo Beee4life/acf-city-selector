@@ -251,7 +251,7 @@
      * @return array
      */
     function acfcs_check_if_files() {
-        // @TODO: add filter to change folder
+        //@TODO: if upload filter is added, also add here
         $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
@@ -288,12 +288,13 @@
      *
      * @return array
      */
-    function acfcs_csv_to_array( $file_name, $delimiter = ',', $verify = false ) {
+    function acfcs_csv_to_array( $file_name, $delimiter = ';', $verify = false, $max_lines = false ) {
 
         $csv_array   = [];
         $empty_array = false;
         $new_array   = [];
-        if ( ( $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
+        //@TODO: if upload filter is added, also add here
+        if ( ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) && $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
             while ( ( $csv_line = fgetcsv( $handle, apply_filters( 'acfcs_line_length', 1000 ), "{$delimiter}" ) ) !== false ) {
@@ -317,8 +318,10 @@
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                     // delete file
+                    //@TODO: if upload filter is added, also add here
                     if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {
                         unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                        $csv_array[ 'error' ] = 'file_deleted';
                     }
 
                 }
@@ -334,6 +337,12 @@
                     }
                     if ( ! empty( $new_line ) ) {
                         $new_array[] = $new_line;
+                    }
+
+                    if ( false != $max_lines ) {
+                        if ( $line_number == $max_lines ) {
+                            break;
+                        }
                     }
                 }
             }
@@ -360,7 +369,7 @@
      *
      * @return false
      */
-    function acfcs_verify_csv_data( $csv_data = false, $delimiter = "," ) {
+    function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
 
         if ( false != $csv_data ) {
 
@@ -549,6 +558,7 @@
         $use_select2          = ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
         $dropdown_class       = ( true == $use_select2 ) ? 'select2 ' . $acfcs_dropdown : $acfcs_dropdown;
         $data_label_value     = ( true == $show_labels ) ? '1' : '0';
+        $which_fields         = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
         switch( $type ) {
             case 'country':
@@ -587,7 +597,7 @@
             <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
                 <?php echo $field_label; ?>
             </label>
-            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-label="<?php echo $data_label_value; ?>">
+            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-labels="<?php echo $data_label_value; ?>" data-which-fields="<?php echo $which_fields; ?>">
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {

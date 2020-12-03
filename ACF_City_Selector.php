@@ -61,7 +61,7 @@
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
-                // register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
+                register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
                 // actions
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
@@ -252,7 +252,8 @@
                         }
 
                         $file_name = $_POST[ 'acfcs_file_name' ];
-                        $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ',' );
+                        $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
+                        $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? $_POST[ 'acfcs_max_lines' ] : false;
                         $import    = isset( $_POST[ 'import' ] ) ? true : false;
                         $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                         $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
@@ -270,7 +271,7 @@
                         } elseif ( true === $import ) {
 
                             // import data
-                            $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify );
+                            $csv_array = acfcs_csv_to_array( $file_name, $delimiter, $verify, $max_lines );
                             if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
                                 $line_number = 0;
                                 foreach ( $csv_array[ 'data' ] as $line ) {
@@ -674,16 +675,21 @@
             public function acfcs_check_for_beta() {
                 $screen = get_current_screen();
                 if ( strpos( $screen->id, 'acfcs' ) !== false ) {
+                    // Check if it's a beta version
                     if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
-                        // Check if it's a beta version
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
                         </div>
                     <?php
                     }
-                    if ( '0.29.0' <= $this->settings[ 'version' ] ) {
-                        // add notice for change default delimiter
+                    if ( '0.30.0' == $this->settings[ 'version' ] ) {
+                    ?>
+                        <div class="notice notice-warning is-dismissible">
+                            <p><?php echo sprintf( __( "<strong>!!!</strong> The default delimiters has been changed from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>
+                        </div>
+                        <?php
+                    } elseif ( '0.29.0' >= $this->settings[ 'version' ] ) {
                     ?>
                         <div class="notice notice-warning is-dismissible">
                             <p><?php echo sprintf( __( "<strong>!!!</strong> In one of the next versions (most likely 0.30.0), the default delimiter will change from ',' (comma) to ';' (semi-colon). Read more about it <a href=\"%s\">%s</a>.", 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/faq/changing-default-csv-delimiter/' ), 'here' ); ?></p>

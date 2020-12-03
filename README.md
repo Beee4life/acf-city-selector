@@ -4,8 +4,9 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 
 - [Version](#version)
 - [Description](#description)
-- [Installation](#installation)
 - [Impact](#impact)
+- [Installation](#installation)
+- [Setup](#setup)
 - [Usage](#usage)
 - [Cities](#cities)
 - [Actions](#actions)
@@ -23,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.30.0 - released 26.11.20
+0.30.0 - released 03.12.20
 
 <a name="description"></a>
 ### Description
@@ -32,22 +33,21 @@ This plugin allows you to select a city, based on country and province/state in 
 
 ![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
 
-It creates a new `field type` for you to choose when you're creating an ACF Field Group. If you click '+ add field' in a Field Group, you will find a new option (category: "Choice") to choose called `City Selector`.
+It creates a new `field type` for you to choose when you're creating an ACF Field Group.
 
-* Add the field.
-* Select whether to show labels above the input fields (default = yes).
-* Save/publish the Field Group.
+<a name="impact"></a>
+### Impact
+
+The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 2 different countries.
 
 <a name="installation"></a>
 ### Installation
 
-1. Download the [latest release](https://github.com/Beee4life/acf-city-selector/archive/master.zip).
-1. Copy the `acf-city-selector` folder into your `wp-content/plugins` folder.
-1. Activate the `ACF City Selector` plugin via the plugins admin page.
-1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
-1. Select if you want to show labels
-1. Select if you want a default country
-1. (optional) Import new cities with help of the included Excel sheet.
+1. Download the [latest release zip file](https://github.com/Beee4life/acf-city-selector/releases/latest).
+1. In your WordPress admin, go to Plugins -> Add New
+1. Click Upload Plugin
+1. Upload the zip file that you just downloaded.
+1. Activate the `ACF City Selector` plugin via the plugins page.
 
 If you use a composer file to add any plugins/libraries. Add the following to your composer.json:
 
@@ -58,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.29.0",
+        "version": "0.30.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -73,13 +73,18 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.29.0",
+"beee4life/acf-city-selector": "0.30.0",
 ```
 
-<a name="impact"></a>
-### Impact
+<a name="setup"></a>
+### Setup
 
-The plugin adds a database table named `{$wpdb->prefix}cities` upon plugin activation and imports cities from 3 different countries.
+1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
+1. Select if you want to show labels (default = yes)
+1. Select if you want to use select2 (default = no)
+1. Select if you want a default country (default = none)
+1. (optional) Import new cities with help of the included Excel sheet.
+1. (optional) Import new cities by csv (available on the website).
 
 <a name="usage"></a>
 ### Usage
@@ -158,7 +163,7 @@ This outputs:
 <a name="cities"></a>
 ### Cities
 
-The plugin comes with all cities in the Benelux (Belgium, Netherlands, Luxembourg) and Andorra pre-installed.
+The plugin comes with all cities in Belgium and the Netherlands pre-installed.
 
 You can also add more countries yourself, through SQL or CSV import. There's a simple Excel sheet included in the plugin and can be found in the `import` folder. With this sheet, you can easily create an SQL insert statement or a CSV data set.
 
@@ -200,7 +205,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 * [X] Firefox (latest version)
 * [ ] Safari (latest version)
 * [ ] Edge (latest version)
-* [ ] iPhone
+* [X] iPhone
 * [ ] Android
 
 <a name="updates"></a>
@@ -233,8 +238,10 @@ The plugin works in the following situations:
 * on taxonomy terms
 * on settings pages
 
+The plugin does NOT work properly yet in the following situations: 
+* when multiple instances of the field are used in 1 group/on 1 post
+
 The plugin has NOT been tested yet in the following situations: 
-* most front-end usage (except single/repeater use)
 * with the Gutenberg editor (and don't hold your breath either, I hate it)
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
@@ -249,6 +256,13 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.30.0
+* change default delimiter from `,` tot `;`.
+* change import sheet from `,` tot `;`.
+* fixed non-working max lines setting on import
+* added Japan and South Korea country files
+* extended Spain country file
 
 0.29.0
 * added a fix for select2 in repeaters/flexible content blocks 
