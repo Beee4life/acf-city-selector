@@ -241,9 +241,6 @@ The plugin works in the following situations:
 The plugin does NOT work properly yet in the following situations: 
 * when multiple instances of the field are used in 1 group/on 1 post
 
-The plugin has NOT been tested yet in the following situations: 
-* with the Gutenberg editor (and don't hold your breath either, I hate it)
-
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
 
