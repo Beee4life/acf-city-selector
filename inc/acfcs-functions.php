@@ -367,7 +367,7 @@
      * @param false  $csv_data
      * @param string $delimiter
      *
-     * @return false
+     * @return array|false
      */
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
 
