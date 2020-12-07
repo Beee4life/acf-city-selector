@@ -138,3 +138,51 @@
     }
     add_action( 'wp_ajax_get_cities_call', 'get_cities_call' );
     add_action( 'wp_ajax_nopriv_get_cities_call', 'get_cities_call' );
+
+
+    /**
+     * Set transient per country with zipcodes
+     */
+    function get_zipcodes_call() {
+        if ( isset( $_POST[ 'country_code' ] ) ) {
+            acfcs_create_zipcodes_transient( $_POST[ 'country_code' ] );
+        }
+    }
+    add_action( 'wp_ajax_get_zipcodes_call', 'get_zipcodes_call' );
+    add_action( 'wp_ajax_nopriv_get_zipcodes_call', 'get_zipcodes_call' );
+
+
+    /**
+     * Find city for given (partial) zipcode
+     */
+    function find_city_zipcode() {
+        if ( isset( $_POST[ 'country' ] ) && isset( $_POST[ 'zipcode' ] ) ) {
+            $country_code   = $_POST[ 'country' ];
+            $posted_zipcode = $_POST[ 'zipcode' ];
+            $zipcode_length = strlen( $posted_zipcode );
+
+            if ( empty( $posted_zipcode ) ) {
+                $unique_cities = [ 'Enter a zipcode' ];
+            } else {
+                $transient_results = get_transient( 'acfcs_zipcodes_' . $country_code );
+                if ( 0 < count( $transient_results ) ) {
+                    foreach( $transient_results as $city_name => $zipcodes ) {
+                        foreach( $zipcodes as $zipcode ) {
+                            $part = substr( $zipcode, 0, $zipcode_length );
+                            if ( $posted_zipcode == $part ) {
+                                $cities[] = $city_name;
+                            }
+                        }
+                    }
+                    if ( isset( $cities ) ) {
+                        $unique_cities = array_unique( $cities );
+                        sort($unique_cities);
+                    }
+                }
+            }
+            echo json_encode( $unique_cities );
+            wp_die();
+        }
+    }
+    add_action( 'wp_ajax_find_city_zipcode', 'find_city_zipcode' );
+    add_action( 'wp_ajax_nopriv_find_city_zipcode', 'find_city_zipcode' );
