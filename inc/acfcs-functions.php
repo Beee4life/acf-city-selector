@@ -666,3 +666,28 @@
 
         return $zip_code_field;
     }
+
+    /**
+     * Create transient for zipcodes
+     *
+     * @param $country_code
+     */
+    function acfcs_create_zipcodes_transient( $country_code ) {
+
+        if ( false != $country_code ) {
+            global $wpdb;
+            $country_code = $_POST[ 'country_code' ];
+            $sql_query    = $wpdb->prepare( "SELECT city_name, zipcodes FROM {$wpdb->prefix}cities WHERE country_code= %s", $country_code );
+            $results      = $wpdb->get_results( $sql_query );
+            if ( 0 < count( $results ) ) {
+                foreach( $results as $result ) {
+                    if ( ! empty( $result->zipcodes ) ) {
+                        $city_array[ $result->city_name ] = unserialize( $result->zipcodes );
+                    }
+                }
+                if ( isset( $city_array ) ) {
+                    set_transient( 'acfcs_zipcodes_' . $country_code, $city_array, 0 );
+                }
+            }
+        }
+    }
