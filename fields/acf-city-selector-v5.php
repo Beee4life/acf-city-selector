@@ -111,6 +111,7 @@
                     'country_state' => esc_attr__( 'Country + State/province', 'acf-city-selector' ),
                     'country_city'  => esc_attr__( 'Country + City', 'acf-city-selector' ),
                     'state_city'    => esc_attr__( 'State/province + City', 'acf-city-selector' ),
+                    'country_zip'   => esc_attr__( 'Country + zipcode', 'acf-city-selector' ),
                 );
                 acf_render_field_setting( $field, array(
                     'choices'      => $default_country_fields,
@@ -177,6 +178,10 @@
                 }
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
+                }
+                if ( 'country_zip' == $which_fields ) {
+                    echo acfcs_render_zipcode_field( $field );
+                    echo acfcs_render_dropdown( 'zipcode', $field, false, false );
                 }
             }
 
