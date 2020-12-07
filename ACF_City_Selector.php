@@ -123,7 +123,6 @@
              */
             public function acfcs_plugin_deactivation() {
                 delete_option( 'acfcs_db_version' );
-                delete_transient( 'acfcs_countries' );
                 // other important stuff gets done in uninstall.php
             }
 
