@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.32.0
+    Version:        0.32.0-beta
     Tested up to:   5.5.3
     Requires PHP:   7.0
     Author:         Beee
@@ -36,11 +36,11 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'db_version'    => '1.0',
+                    'db_version'    => '1.1',
                     'path'          => plugin_dir_path( __FILE__ ),
                     'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
                     'url'           => plugin_dir_url( __FILE__ ),
-                    'version'       => '0.32.0',
+                    'version'       => '0.32.0-beta',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -159,6 +159,7 @@
                     state_name varchar(50) NULL,
                     country_code varchar(2) NULL,
                     country varchar(50) NULL,
+                    zipcodes LONGTEXT NULL,
                     PRIMARY KEY  (id)
                     )
                     COLLATE <?php echo $wpdb->collate; ?>;
