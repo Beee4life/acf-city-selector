@@ -566,6 +566,7 @@
                 $field_label    = $country_label;
                 $field_suffix   = 'countryCode';
                 $modifier       = 'countries';
+                $box_modifier   = $modifier;
                 $selected_value = $stored_value;
                 $values         = $countries;
                 break;
@@ -573,6 +574,7 @@
                 $field_label    = $province_state_label;
                 $field_suffix   = 'stateCode';
                 $modifier       = 'states';
+                $box_modifier   = $modifier;
                 $selected_value = $stored_value;
                 $values         = $prefill_states;
                 break;
@@ -580,24 +582,34 @@
                 $field_label    = $city_label;
                 $field_suffix   = 'cityName';
                 $modifier       = 'cities';
+                $box_modifier   = $modifier;
                 $selected_value = $stored_value;
                 $values         = $prefill_cities;
                 break;
+            case 'zipcode':
+                $field_label    = esc_attr__( 'Possible results', 'acf-city-selector' );
+                $field_suffix   = 'zipCodes';
+                $modifier       = 'zipcodes';
+                $box_modifier   = $modifier . ' hidden';
+                $selected_value = false;
+                $values         = [];
+                break;
         }
+        $box_class      = 'acfcs__dropdown-box acfcs__dropdown-box--' . $box_modifier;
         $dropdown_class = $dropdown_class . ' ' . $acfcs_dropdown . '--' . $modifier;
 
         ob_start();
         ?>
-        <div class="acfcs__dropdown-box acfcs__dropdown-box--<?php echo $modifier; ?>">
+        <div class="<?php echo $box_class; ?>">
             <?php if ( $show_labels ) { ?>
                 <div class="acf-input-header">
                     <?php echo $field_label; ?>
                 </div>
             <?php } ?>
-            <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
+            <label for="<?php echo $field_id . '_' . $field_suffix; ?>" class="screen-reader-text">
                 <?php echo $field_label; ?>
             </label>
-            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-labels="<?php echo $data_label_value; ?>" data-which-fields="<?php echo $which_fields; ?>">
+            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . '_' . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-labels="<?php echo $data_label_value; ?>" data-which-fields="<?php echo $which_fields; ?>">
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
@@ -619,4 +631,38 @@
         $dropdown = ob_get_clean();
 
         return $dropdown;
+    }
+
+
+    /**
+     * Render zipcode input field
+     *
+     * @param $field
+     *
+     * @return false|string
+     */
+    function acfcs_render_zipcode_field( $field ) {
+
+        $field_id      = $field[ 'id' ];
+        $field_label  = 'Zipcode';
+        $field_suffix = 'zipCode';
+        $show_labels   = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
+
+        ob_start();
+        ?>
+        <div class="acfcs__zipcode-box hidden">
+            <?php if ( $show_labels ) { ?>
+                <div class="acf-input-header">
+                    <?php echo $field_label; ?>
+                </div>
+            <?php } ?>
+            <label for="<?php echo $field_id . '_' . $field_suffix; ?>" class="screen-reader-text">
+                <?php echo $field_label; ?>
+            </label>
+            <input name="<?php echo $field_id . '_' . $field_suffix; ?>" id="<?php echo $field_id . '_' . $field_suffix; ?>" type="text" placeholder="<?php esc_html_e( 'Start typing...', 'acf-city-selector' ); ?>" />
+        </div>
+        <?php
+        $zip_code_field = ob_get_clean();
+
+        return $zip_code_field;
     }
