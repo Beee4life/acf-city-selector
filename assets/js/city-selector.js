@@ -135,6 +135,11 @@
                                 changed_city.append($cityValues);
                             }
                         });
+                    } else if ( 'country_zip' === which_fields ) {
+                        get_zipcodes( country_code );
+                        var zipcode_input = '.acfcs__zipcode-box';
+                        $(zipcode_input).removeClass('hidden');
+                        $(zipcode_input + ' input').attr('data-country', '' + country_code);
                     }
                 });
             }
@@ -233,6 +238,21 @@
                     resolve(response);
                 });
             })
+        }
+
+
+        /**
+         * Init zipcodes transient for a country
+         *
+         * @param countryCode
+         * @param callback
+         * @returns {Promise<unknown>}
+         */
+        function get_zipcodes(countryCode, callback) {
+            const zip_data = {
+                action: 'get_zipcodes_call',
+                country_code: countryCode
+            };
         }
 
         /**
