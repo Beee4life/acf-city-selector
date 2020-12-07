@@ -12,12 +12,12 @@
      */
     function initialize_field( $field ) {
 
-        render_field();
+        render_field( $field );
 
         $(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
                 setTimeout(function() {
-                    render_field();
+                    render_field( $field );
                 },0);
             }
 
@@ -25,10 +25,10 @@
                 setTimeout(function() {
                     $('.acf-tooltip ul li').on('click','a',function(e){
                         setTimeout(function() {
-                            render_field();
+                            render_field( $field );
                             $(".acf-input .button").click(function () {
                                 setTimeout(function() {
-                                    render_field();
+                                    render_field( $field );
                                 },0);
                             });
                         },0);
@@ -38,7 +38,7 @@
         });
     }
 
-    function render_field() {
+    function render_field( $field ) {
 
         $no_countries = acf._e('acf_city_selector', 'no_countries');
         $select_city = '-';
@@ -71,6 +71,7 @@
         if ( $.isFunction($.fn.select2) ) {
             $('select.select2.acfcs__dropdown--countries').select2({
                 allowClear: true,
+                closeOnSelect: true,
                 placeholder: $select_country,
                 language: {
                     noResults: function() {
@@ -81,6 +82,7 @@
 
             $('select.select2.acfcs__dropdown--states').select2({
                 allowClear: true,
+                closeOnSelect: true,
                 placeholder: $select_state,
                 language: {
                     noResults: function() {
@@ -91,6 +93,7 @@
 
             $('select.select2.acfcs__dropdown--cities').select2({
                 allowClear: true,
+                closeOnSelect: true,
                 placeholder: $select_city,
                 language: {
                     noResults: function() {
@@ -99,11 +102,60 @@
                 }
             });
         }
+
+        if ( 'country_zip' === which_fields ) {
+            var field_data = $field.data();
+            var field_key = field_data['key'];
+            var zipcode_container = '.acfcs__zipcode-box';
+            var zipcode_dropdown = '.acfcs__dropdown-box--zipcodes';
+
+            $(zipcode_container + ' input').keyup(function() {
+                var searched_value = $(this).val();
+                var country_code = $('#acf-' + field_data['key'] + '_zipCode').data('country');
+                if ($(zipcode_dropdown).hasClass('hidden')){
+                    $(zipcode_dropdown).removeClass('hidden');
+                }
+                get_zipcode_city(country_code, searched_value, field_key);
+            });
+        }
     }
 
     if( typeof acf.add_action !== 'undefined' ) {
         acf.add_action('ready_field/type=acf_city_selector', initialize_field);
         acf.add_action('append_field/type=acf_city_selector', initialize_field);
+    }
+
+    function get_zipcode_city(countryCode, zipcode, field_key, callback) {
+
+        const zip_data = {
+            action: 'find_city_zipcode',
+            country: countryCode,
+            zipcode: zipcode
+        };
+        var zipcode_results = $('select#acf-' + field_key + '_zipCodes');
+
+        $.post(
+            ajaxurl,
+            zip_data,
+            function(response) {
+                decoded_response = JSON.parse(response);
+                if ( decoded_response.length > 0 ) {
+                    for (i = 0; i < decoded_response.length; i++) {
+                        var obj         = decoded_response;
+                        var len         = obj.length;
+                        var $cityValues = '';
+
+                        zipcode_results.empty();
+                        zipcode_results.fadeIn();
+                        for (j = 0; j < len; j++) {
+                            var city = obj[j];
+                            $cityValues += '<option value="' + city + '">' + city + '</option>';
+                        }
+                        zipcode_results.append($cityValues);
+                    }
+                }
+            }
+        );
     }
 
 })(jQuery);
