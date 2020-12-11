@@ -80,17 +80,10 @@
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
 
-                // Plugin's own actions
-                add_action( 'acfcs_after_success_country_remove',   array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import',           array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_be',        array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_nl',        array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_import_raw',       array( $this, 'acfcs_delete_transients' ) );
-                add_action( 'acfcs_after_success_nuke',             array( $this, 'acfcs_delete_transients' ) );
-
                 // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
+                include 'inc/acfcs-actions.php';
                 include 'inc/acfcs-functions.php';
                 include 'inc/acfcs-help-tabs.php';
                 include 'inc/acfcs-i18n.php';
@@ -119,7 +112,8 @@
              */
             public function acfcs_plugin_deactivation() {
                 delete_option( 'acfcs_db_version' );
-                $this->acfcs_delete_transients();
+                // this hook is here because didn't want to create 1 new hook for an existing actions
+                do_action( 'acfcs_delete_transients' );
                 // other important stuff gets done in uninstall.php
             }
 
@@ -174,28 +168,6 @@
             }
 
 
-            /**
-             * Delete country transient
-             *
-             * @param $country_code
-             */
-            public function acfcs_delete_transients( $country_code = false ) {
-                if ( false != $country_code ) {
-                    delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
-                    delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
-                } else {
-                    delete_transient( 'acfcs_countries' );
-                    // get all countries
-                    $countries = acfcs_get_countries( false, false, true );
-                    if ( ! empty( $countries ) ) {
-                        foreach( $countries as $country_code => $label ) {
-                            do_action( 'acfcs_after_success_import', $country_code );
-                        }
-                    }
-                }
-            }
-
-
             /*
              * Import preset countries
              */
@@ -212,14 +184,14 @@
                                     acfcs_copy_file( 'be' );
                                 }
                                 acfcs_import_data( 'be.csv' );
-                                do_action( 'acfcs_after_success_import_be', 'be' );
+                                do_action( 'acfcs_delete_transients', 'be' );
                             }
                             if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
                                 if ( ! file_exists( $this->settings[ 'path' ] . 'lib/nl.csv' ) ) {
                                     acfcs_copy_file( 'nl' );
                                 }
                                 acfcs_import_data( 'nl.csv' );
-                                do_action( 'acfcs_after_success_import_nl', 'nl' );
+                                do_action( 'acfcs_delete_transients', 'nl' );
                             }
                             do_action( 'acfcs_after_success_import' );
                         }
@@ -349,6 +321,7 @@
                 return $menu;
             }
 
+
             /*
              * Add admin notices
              */
@@ -365,6 +338,7 @@
                     }
                 }
             }
+
 
             /*
              * Check if ACF is active and if not add an admin notice
