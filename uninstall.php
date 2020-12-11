@@ -11,7 +11,6 @@
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
 
         // remove folder
-        // @TODO: also add filter here, if added
-        $target_folder = wp_upload_dir()[ 'basedir' ] . '/acfcs';
+        $target_folder = acfcs_upload_folder();
         rmdir( $target_folder );
     }
