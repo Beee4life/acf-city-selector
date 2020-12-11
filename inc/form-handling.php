@@ -141,7 +141,7 @@
 
                 return;
             } else {
-                do_action( 'acfcs_after_success_nuke' );
+                do_action( 'acfcs_delete_transients' );
                 ACF_City_Selector::acfcs_errors()->add( 'success_transients_delete', esc_html__( 'You have successfully deleted all transients.', 'acf-city-selector' ) );
             }
         }
