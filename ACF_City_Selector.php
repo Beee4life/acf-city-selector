@@ -99,8 +99,6 @@
             public function acfcs_plugin_activation() {
                 $this->acfcs_check_table();
                 $this->acfcs_check_uploads_folder();
-                acfcs_copy_file( 'nl' );
-                acfcs_copy_file( 'be' );
                 if ( false == get_option( 'acfcs_preserve_settings' ) ) {
                     $this->acfcs_fill_database();
                 }
@@ -124,7 +122,7 @@
             public function acfcs_fill_database() {
                 $countries = [ 'nl', 'be' ];
                 foreach( $countries as $country ) {
-                    acfcs_import_data( $country . '.csv' );
+                    acfcs_import_data( $country . '.csv', $this->settings[ 'path' ] . 'import/' );
                 }
             }
 
@@ -180,17 +178,11 @@
                     } else {
                         if ( isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
                             if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
-                                if ( ! file_exists( $this->settings[ 'path' ] . 'lib/be.csv' ) ) {
-                                    acfcs_copy_file( 'be' );
-                                }
-                                acfcs_import_data( 'be.csv' );
+                                acfcs_import_data( 'be.csv', $this->settings[ 'path' ] . 'import/' );
                                 do_action( 'acfcs_delete_transients', 'be' );
                             }
                             if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
-                                if ( ! file_exists( $this->settings[ 'path' ] . 'lib/nl.csv' ) ) {
-                                    acfcs_copy_file( 'nl' );
-                                }
-                                acfcs_import_data( 'nl.csv' );
+                                acfcs_import_data( 'nl.csv', $this->settings[ 'path' ] . 'import/' );
                                 do_action( 'acfcs_delete_transients', 'nl' );
                             }
                             do_action( 'acfcs_after_success_import' );
