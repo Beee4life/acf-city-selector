@@ -1,6 +1,6 @@
 # ACF City Selector
 
-Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
+Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF (active) for it to run.
 
 - [Version](#version)
 - [Description](#description)
@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.32.0 - released xx.12.20
+0.32.0 - released 11.12.20
 
 <a name="description"></a>
 ### Description
@@ -58,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.30.0",
+        "version": "0.32.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -73,7 +73,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.30.0",
+"beee4life/acf-city-selector": "0.32.0",
 ```
 
 <a name="setup"></a>
@@ -225,8 +225,6 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 
 <a name="disclaimer"></a>
 ### Disclaimer
-
-This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
 
 The plugin works in the following situations: 
 * in a single field
