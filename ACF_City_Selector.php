@@ -440,8 +440,10 @@
                 include 'admin/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
-                include 'admin/acfcs-preview.php';
-                add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
+                if ( ! empty( acfcs_check_if_files() ) ) {
+                    include 'admin/acfcs-preview.php';
+                    add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
+                }
 
                 include 'admin/acfcs-settings.php';
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
