@@ -35,6 +35,7 @@
             'ch'     => esc_html__( 'Switzerland', 'acf-city-selector' ),
             'us'     => esc_html__( 'United States', 'acf-city-selector' ),
             'uy'     => esc_html__( 'Uruguay', 'acf-city-selector' ),
+            'world'  => esc_html__( 'World', 'acf-city-selector' ),
         ];
 
         if ( $country_code && array_key_exists( $country_code, $country_array ) ) {
