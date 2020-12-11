@@ -251,7 +251,6 @@
      * @return array
      */
     function acfcs_check_if_files() {
-        //@TODO: if upload filter is added, also add here
         $target_dir = acfcs_upload_folder();
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
