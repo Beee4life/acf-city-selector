@@ -133,6 +133,7 @@
     }
     add_action( 'admin_init', 'acfcs_delete_rows' );
 
+
     function acfcs_delete_all_transients() {
         if ( isset( $_POST[ 'acfcs_delete_transients' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_delete_transients' ], 'acfcs-delete-transients-nonce' ) ) {
