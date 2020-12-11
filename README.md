@@ -254,12 +254,23 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-0.30.0
+0.32.0
+* add acfcs_upload_folder filter
+* improve code by making more 'smaller' functions
+* import preset countries from csv instead of php
+
+0.31.1
+* fix version number
+
+0.31.0
 * change default delimiter from `,` tot `;`.
 * change import sheet from `,` tot `;`.
 * fixed non-working max lines setting on import
 * added Japan and South Korea country files
 * extended Spain country file
+
+0.30.0
+* messed up release with version numbers
 
 0.29.0
 * added a fix for select2 in repeaters/flexible content blocks 
