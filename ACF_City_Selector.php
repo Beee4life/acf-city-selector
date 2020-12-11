@@ -391,21 +391,20 @@
                         if ( is_array( $_POST[ 'row_id' ] ) ) {
                             foreach( $_POST[ 'row_id' ] as $row ) {
                                 $split    = explode( ' ', $row, 2 );
-                                $ids[]    = $split[ 0 ];
-                                $cities[] = $split[ 1 ];
+                                if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
+                                    $ids[]    = $split[ 0 ];
+                                    $cities[] = $split[ 1 ];
+                                }
                             }
-
                             $cities  = implode( ', ', $cities );
                             $row_ids = implode( ',', $ids );
-                            // @TODO: add prepare
                             $amount  = $wpdb->query("
                                 DELETE FROM " . $wpdb->prefix . "cities
                                 WHERE id IN (" . $row_ids . ")
                             ");
 
                             if ( $amount > 0 ) {
-                                $row_count = count( $ids );
-                                $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $row_count, 'acf-city-selector' ), $cities ) );
+                                $this->acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $amount, 'acf-city-selector' ), $cities ) );
                             }
                         }
                     }
@@ -478,16 +477,16 @@
                                 $prefix     = false;
                             } elseif ( strpos( $code, 'error' ) !== false ) {
                                 $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'action-logger' );
+                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             } elseif ( strpos( $code, 'warning' ) !== false ) {
                                 $span_class = 'notice--warning ';
-                                $prefix     = esc_html__( 'Warning', 'action-logger' );
+                                $prefix     = esc_html__( 'Warning', 'acf-city-selector' );
                             } elseif ( strpos( $code, 'info' ) !== false ) {
                                 $span_class = 'notice--info ';
                                 $prefix     = false;
                             } else {
                                 $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'action-logger' );
+                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             }
                         }
                         echo '<div class="acfcs__notice notice ' . $span_class . 'is-dismissible">';
