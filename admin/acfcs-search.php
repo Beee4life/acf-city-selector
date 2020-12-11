@@ -140,7 +140,7 @@
                         </h2>
 
                         <?php if ( count( $countries ) > 0 ) { ?>
-                            <form action="<?php echo admin_url( 'options-general.php?page=acfcs-search' ); ?>" method="POST">
+                            <form action="" method="POST">
                                 <input name="acfcs_search_form" type="hidden" value="1" />
 
                                 <div class="acfcs__search-form">
@@ -246,7 +246,7 @@
                                 <?php _e( 'No results, please try again.', 'acf-city-selector'); ?>
                             </p>
                         <?php } elseif ( ! empty( $cities ) ) { ?>
-                            <form enctype="multipart/form-data" action="<?php echo admin_url( 'options-general.php?page=acfcs-cities' ); ?>" method="POST">
+                            <form enctype="multipart/form-data" action="" method="POST">
                                 <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                                 <div class="acfcs__search-results">
                                     <p class="hide568">
