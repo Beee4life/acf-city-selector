@@ -72,16 +72,16 @@
 
                 add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_delete_countries' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_delete_all_transients' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_do_something_with_file' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_delete_countries' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_delete_rows' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_delete_all_transients' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_do_something_with_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_import_preset_countries' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_import_raw_data' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_preserve_settings' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_truncate_table' ) );
+                // add_action( 'admin_init',                   array( $this, 'acfcs_upload_csv_file' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
                 add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
@@ -103,6 +103,7 @@
                 include 'inc/acfcs-help-tabs.php';
                 include 'inc/acfcs-i18n.php';
                 include 'inc/country-field.php';
+                include 'inc/form-handling.php';
 
             }
 
@@ -187,7 +188,7 @@
             /*
              * Check if (upload) folder exists
              */
-            public function acfcs_check_uploads_folder() {
+            public static function acfcs_check_uploads_folder() {
                 $target_folder = acfcs_upload_folder( '/' );
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
@@ -444,7 +445,7 @@
 
                             return;
                         } else {
-                            acfcs_delete_countries( $_POST[ 'delete_country' ] );
+                            acfcs_delete_country( $_POST[ 'delete_country' ] );
                         }
                     }
                 }
