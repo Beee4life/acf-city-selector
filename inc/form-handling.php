@@ -1,5 +1,7 @@
 <?php
-
+    /**
+     * Handle CSV upload form
+     */
     function acfcs_upload_csv_file() {
         if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_upload_csv_nonce' ], 'acfcs-upload-csv-nonce' ) ) {
@@ -25,6 +27,9 @@
     add_action( 'admin_init', 'acfcs_upload_csv_file' );
 
 
+    /**
+     * Handle process CSV form
+     */
     function acfcs_do_something_with_file() {
         if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_select_file_nonce' ], 'acfcs-select-file-nonce' ) ) {
@@ -58,6 +63,9 @@
     add_action( 'admin_init', 'acfcs_do_something_with_file' );
 
 
+    /**
+     * Handle importing of raw CSV data
+     */
     function acfcs_import_raw_data() {
         if ( isset( $_POST[ 'acfcs_import_raw_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_import_raw_nonce' ], 'acfcs-import-raw-nonce' ) ) {
@@ -81,6 +89,9 @@
     add_action( 'admin_init', 'acfcs_import_raw_data' );
 
 
+    /**
+     * Handle form to delete one or more countries
+     */
     function acfcs_delete_countries() {
         if ( isset( $_POST[ 'acfcs_remove_countries_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_remove_countries_nonce' ], 'acfcs-remove-countries-nonce' ) ) {
@@ -101,6 +112,9 @@
     add_action( 'admin_init', 'acfcs_delete_countries' );
 
 
+    /**
+     * Form to delete individual rows/cities
+     */
     function acfcs_delete_rows() {
         if ( isset( $_POST[ 'acfcs_delete_row_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_delete_row_nonce' ], 'acfcs-delete-row-nonce' ) ) {
@@ -134,6 +148,9 @@
     add_action( 'admin_init', 'acfcs_delete_rows' );
 
 
+    /**
+     * Form to handle deleting of all transients
+     */
     function acfcs_delete_all_transients() {
         if ( isset( $_POST[ 'acfcs_delete_transients' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_delete_transients' ], 'acfcs-delete-transients-nonce' ) ) {
@@ -149,6 +166,9 @@
     add_action( 'admin_init', 'acfcs_delete_all_transients' );
 
 
+    /**
+     * Delete contents of entire cities table
+     */
     function acfcs_truncate_table() {
         if ( isset( $_POST[ 'acfcs_truncate_table_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_truncate_table_nonce' ], 'acfcs-truncate-table-nonce' ) ) {
@@ -167,6 +187,9 @@
     add_action( 'admin_init', 'acfcs_truncate_table' );
 
 
+    /**
+     * Handle preserve settings option
+     */
     function acfcs_preserve_settings() {
         if ( isset( $_POST[ 'acfcs_preserve_settings_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_preserve_settings_nonce' ], 'acfcs-preserve-settings-nonce' ) ) {

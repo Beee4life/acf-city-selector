@@ -535,6 +535,8 @@
 
 
     /**
+     * Render select in ACF field
+     *
      * @param $type
      * @param $field
      * @param $stored_value
@@ -734,6 +736,11 @@
     }
 
 
+    /**
+     * Delete one or more countries
+     *
+     * @param $countries
+     */
     function acfcs_delete_country( $countries ) {
 
         $country_names_and = false;
@@ -765,6 +772,8 @@
 
     /**
      * Get upload folder for plugin, can be overriden with filter
+     *
+     * @param false $suffix
      *
      * @return mixed|void
      */
