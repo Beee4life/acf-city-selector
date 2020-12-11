@@ -728,7 +728,7 @@
         return;
     }
 
-    function acfcs_delete_countries( $countries ) {
+    function acfcs_delete_country( $countries ) {
 
         $country_names_and = false;
         foreach( $countries as $country_code ) {
