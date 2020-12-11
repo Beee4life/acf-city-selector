@@ -258,6 +258,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * add acfcs_upload_folder filter
 * improve code by making more 'smaller' functions
 * import preset countries from csv instead of php
+* remove some unnecessary hooks
 
 0.31.1
 * fix version number
