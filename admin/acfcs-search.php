@@ -47,7 +47,7 @@
                     $sql = $wpdb->prepare( "
                         SELECT *
                         FROM " . $wpdb->prefix . "cities
-                        WHERE country_code = '%s'
+                        WHERE country_code = %s
                         GROUP BY state_code
                         " . $order, $country[ 'code' ]
                     );
