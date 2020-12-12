@@ -1,21 +1,21 @@
 // JS File for Country Field
 (function($) {
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         $(".acf-input .button").click(function () {
             if ( 'add-row' === $(this).data('event') ) {
-                setTimeout(function() {
+                setTimeout(function () {
                     change_dropdowns();
                 },0);
             }
 
             if ( 'add-layout' === $(this).data('name') ) {
-                setTimeout(function() {
-                    $('.acf-tooltip ul li').on('click','a',function(e){
-                        setTimeout(function() {
+                setTimeout(function () {
+                    $('.acf-tooltip ul li').on('click','a',function (e){
+                        setTimeout(function () {
                             change_dropdowns();
                             $(".acf-input .button").click(function () {
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     change_dropdowns();
                                 },0);
                             });
@@ -28,17 +28,18 @@
         /**
          * Change dropdowns
          */
-        function change_dropdowns() {
+        function change_dropdowns () {
             $post_id = false;
             var countries = $('select[name*="countryCode"]');
             var state = $('select[name*="stateCode"]');
-
             var parts = window.location.search.substr(1).split("&");
             var $_GET = {};
+
             for (var i = 0; i < parts.length; i++) {
                 var temp = parts[i].split("=");
                 $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
             }
+
             if ( $_GET[ 'post' ] ) {
                 $post_id = $_GET[ 'post' ];
             }
@@ -60,7 +61,7 @@
                     var changed_state     = $('select[id="' + state_field_id + '"]');
                     var changed_city      = $('select[id="' + city_field_id + '"]');
 
-                    if(typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                    if (typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
                         $show_labels = city_selector_vars[ 'show_labels' ];
                         $which_fields = city_selector_vars[ 'which_fields' ];
                     } else {
