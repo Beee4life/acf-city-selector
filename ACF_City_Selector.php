@@ -399,7 +399,7 @@
 
 
             /*
-             * Adds admin pages
+             * Add admin pages
              */
             public function acfcs_add_admin_pages() {
                 include 'admin/acfcs-dashboard.php';
