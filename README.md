@@ -239,6 +239,8 @@ The plugin works in the following situations:
 The plugin does NOT work properly yet in the following situations: 
 * when multiple instances of the field are used in 1 group/on 1 post
 
+It might have some twitches with taxonomies, but need some more testing.
+
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
 
