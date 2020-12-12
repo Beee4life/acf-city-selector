@@ -3,7 +3,7 @@
     /**
      *  initialize_field
      *
-     *  This function will initialize the $field.
+     *  This function will initialize the $field for select2.
      *
      *  @since	0.29.0
      *
