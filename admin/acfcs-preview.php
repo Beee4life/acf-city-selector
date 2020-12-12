@@ -28,7 +28,7 @@
 
                 // Get imported data
                 if ( $file_name ) {
-                    $csv_info   = acfcs_csv_to_array( $file_name, 'default', $delimiter, true, $max_lines );
+                    $csv_info   = acfcs_csv_to_array( $file_name, '', $delimiter, true, $max_lines );
                     $file_index = acfcs_check_if_files();
                 }
             ?>

@@ -53,7 +53,7 @@
                 if ( true === $verify ) {
                     acfcs_verify_data( $file_name, $delimiter, $verify );
                 } elseif ( true === $import ) {
-                    acfcs_import_data( $file_name, 'default', $delimiter, $verify, $max_lines );
+                    acfcs_import_data( $file_name, '', $delimiter, $verify, $max_lines );
                 } elseif ( true === $remove ) {
                     acfcs_delete_file( $file_name );
                 }

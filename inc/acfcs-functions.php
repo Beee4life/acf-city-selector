@@ -289,9 +289,9 @@
      *
      * @return array|WP_Error
      */
-    function acfcs_csv_to_array( $file_name, $upload_folder = 'default', $delimiter = ';', $verify = false, $max_lines = false ) {
+    function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
 
-        $upload_folder = ( 'default' == $upload_folder ) ? acfcs_upload_folder( '/' ) : $upload_folder;
+        $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
 
         $csv_array   = [];
         $empty_array = false;
@@ -627,7 +627,7 @@
      * @param bool   $verify
      */
     function acfcs_verify_data( $file_name, $delimiter = ';', $verify = true ) {
-        $csv_array = acfcs_csv_to_array( $file_name, 'default', $delimiter, $verify );
+        $csv_array = acfcs_csv_to_array( $file_name, '', $delimiter, $verify );
         if ( isset( $csv_array[ 'data' ] ) ) {
             ACF_City_Selector::acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
 
@@ -647,7 +647,7 @@
      * @param false  $verify
      * @param false  $max_lines
      */
-    function acfcs_import_data( $file_name, $upload_folder = 'default', $delimiter = ';', $verify = false, $max_lines = false ) {
+    function acfcs_import_data( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
         if ( $file_name ) {
             if ( strpos( $file_name, '.csv', -4 ) !== false ) {
                 $csv_array = acfcs_csv_to_array( $file_name, $upload_folder, $delimiter, $verify, $max_lines );
