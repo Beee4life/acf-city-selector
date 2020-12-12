@@ -36,10 +36,9 @@
             public function __construct() {
 
                 $this->settings = array(
-                    'db_version'    => '1.0',
-                    'upload_folder' => wp_upload_dir()[ 'basedir' ] . '/acfcs/',
-                    'url'           => plugin_dir_url( __FILE__ ),
-                    'version'       => '0.32.0',
+                    'db_version' => '1.0',
+                    'url'        => plugin_dir_url( __FILE__ ),
+                    'version'    => '0.32.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
