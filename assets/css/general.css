@@ -32,6 +32,10 @@
     border-left-color: #dc3232;
 }
 
+.acfcs .field__message--warning {
+    border-left-color: #ff9000;
+}
+
 /* edit post screens v4 */
 /* not actively supported anymore */
 .field_type-acf_city_selector .acfcs__dropdown-box {
