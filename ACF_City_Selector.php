@@ -413,7 +413,7 @@
                 include 'admin/acfcs-settings.php';
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 
-                if ( true == acfcs_has_cities() ) {
+                if ( true === acfcs_has_cities() ) {
                     include 'admin/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
