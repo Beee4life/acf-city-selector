@@ -14,7 +14,7 @@ Customise your ACF install with a field to select a City based on country and st
 
 ACF City Selector is a plugin which offers a function which is often asked about on the ACF forums; a city selector, based on country and provcence/state. After failing to find a proper solution myself, I built my own to try and solve the issue once and for all :)
 
-= Field Types =
+= Field Type =
 
 * Select (3 drop down lists of choices; Country, State/Provence, City)
 
