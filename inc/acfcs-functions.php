@@ -200,7 +200,7 @@
 
 
     /**
-     * Get country name by country code (used in search)
+     * Get country name by country code
      *
      * @param $country_code
      *
@@ -374,16 +374,9 @@
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
 
         if ( false != $csv_data ) {
-
-            if ( is_array( $csv_data ) ) {
-                // @TODO: check if this is still needed since an array is not outputted anymore
-                $lines = $csv_data;
-            } else {
-                $lines = explode( "\r\n", $csv_data );
-            }
-
-            $line_number      = 0;
             $column_benchmark = 5;
+            $line_number      = 0;
+            $lines            = explode( "\r\n", $csv_data );
 
             foreach ( $lines as $line ) {
                 $line_number++;
@@ -406,10 +399,10 @@
                     }
                 }
 
-                $element_counter = 0;
+                $column_counter = 0;
                 foreach( $line_array as $element ) {
-                    $element_counter++;
-                    if ( $element_counter == 4 ) {
+                    $column_counter++;
+                    if ( $column_counter == 4 ) {
                         if ( 2 != strlen( $element ) ) {
                             ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
