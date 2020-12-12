@@ -21,10 +21,10 @@
             'ca'     => esc_html__( 'Canada', 'acf-city-selector' ),
             'cn'     => esc_html__( 'China', 'acf-city-selector' ),
             'cw'     => esc_html__( 'Curaçao', 'acf-city-selector' ),
+            'europe' => esc_html__( 'Europe', 'acf-city-selector' ),
             'fr'     => esc_html__( 'France', 'acf-city-selector' ),
             'de'     => esc_html__( 'Germany', 'acf-city-selector' ),
             'gd'     => esc_html__( 'Grenada', 'acf-city-selector' ),
-            'europe' => esc_html__( 'Europe', 'acf-city-selector' ),
             'gb'     => esc_html__( 'Great Britain', 'acf-city-selector' ),
             'lu'     => esc_html__( 'Luxembourg', 'acf-city-selector' ),
             'mx'     => esc_html__( 'Mexico', 'acf-city-selector' ),
@@ -35,6 +35,7 @@
             'ch'     => esc_html__( 'Switzerland', 'acf-city-selector' ),
             'us'     => esc_html__( 'United States', 'acf-city-selector' ),
             'uy'     => esc_html__( 'Uruguay', 'acf-city-selector' ),
+            'world'  => esc_html__( 'World', 'acf-city-selector' ),
         ];
 
         if ( $country_code && array_key_exists( $country_code, $country_array ) ) {

@@ -50,7 +50,7 @@
 
                         <br /><hr />
 
-                        <?php $countries = acfcs_get_countries( false ); ?>
+                        <?php $countries = acfcs_get_countries( false, false,  true ); ?>
                         <?php if ( ! empty( $countries ) ) { ?>
                             <h2>
                                 <?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?>
@@ -133,4 +133,3 @@
         </div>
         <?php
     }
-

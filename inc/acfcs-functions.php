@@ -129,7 +129,7 @@
 
         $cities            = [];
         $cities_transient  = false;
-        $select_city_label = apply_filters( 'acfcs_select_city_label', esc_html__( 'Select a city', 'acf-city-selector' ) );
+        $select_city_label = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
         $set_transient     = false;
         $show_labels       = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
 
@@ -149,7 +149,7 @@
             $set_transient = true;
         } else {
             foreach ( $cities_transient as $data ) {
-                $city_array[ esc_attr__( $data, 'acf-city-selector' ) ] = esc_html__( $data, 'acf-city-selector' );
+                $city_array[ esc_attr__( $data, 'acf-city-selector' ) ] = esc_attr__( $data, 'acf-city-selector' );
             }
             if ( isset( $city_array ) ) {
                 $cities = array_merge( $cities, $city_array );
@@ -200,7 +200,7 @@
 
 
     /**
-     * Get country name by country code (used in search)
+     * Get country name by country code
      *
      * @param $country_code
      *
@@ -251,8 +251,7 @@
      * @return array
      */
     function acfcs_check_if_files() {
-        //@TODO: if upload filter is added, also add here
-        $target_dir = wp_upload_dir()[ 'basedir' ] . '/acfcs';
+        $target_dir = acfcs_upload_folder();
         if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
             $excluded_files = [
@@ -284,19 +283,24 @@
      *
      * @param        $file_name
      * @param string $delimiter
+     * @param string $upload_folder
      * @param false  $verify
+     * @param false  $max_lines
      *
-     * @return array
+     * @return array|WP_Error
      */
-    function acfcs_csv_to_array( $file_name, $delimiter = ';', $verify = false, $max_lines = false ) {
+    function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
+
+        $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
 
         $csv_array   = [];
         $empty_array = false;
         $new_array   = [];
-        //@TODO: if upload filter is added, also add here
-        if ( ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) && $handle = fopen( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name, "r" ) ) !== false ) {
+        $errors      = new WP_Error();
+        if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
+
             while ( ( $csv_line = fgetcsv( $handle, apply_filters( 'acfcs_line_length', 1000 ), "{$delimiter}" ) ) !== false ) {
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
@@ -306,27 +310,25 @@
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        $errors->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
                         if ( false === $verify ) {
-                            // for real
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
                         }
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        $errors->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                     // delete file
-                    //@TODO: if upload filter is added, also add here
-                    if ( file_exists( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name ) ) {
-                        unlink( wp_upload_dir()[ 'basedir' ] . '/acfcs/' . $file_name );
+                    if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
+                        unlink( acfcs_upload_folder( '/' ) . $file_name );
                         $csv_array[ 'error' ] = 'file_deleted';
                     }
 
                 }
 
-                if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
+                if ( $errors->get_error_codes() ) {
                     $empty_array = true;
                     $new_array   = [];
                 } else {
@@ -367,21 +369,14 @@
      * @param false  $csv_data
      * @param string $delimiter
      *
-     * @return false
+     * @return array|false
      */
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
 
         if ( false != $csv_data ) {
-
-            if ( is_array( $csv_data ) ) {
-                // @TODO: check if this is still needed since an array is not outputted anymore
-                $lines = $csv_data;
-            } else {
-                $lines = explode( "\r\n", $csv_data );
-            }
-
-            $line_number      = 0;
             $column_benchmark = 5;
+            $line_number      = 0;
+            $lines            = explode( "\r\n", $csv_data );
 
             foreach ( $lines as $line ) {
                 $line_number++;
@@ -404,10 +399,10 @@
                     }
                 }
 
-                $element_counter = 0;
+                $column_counter = 0;
                 foreach( $line_array as $element ) {
-                    $element_counter++;
-                    if ( $element_counter == 4 ) {
+                    $column_counter++;
+                    if ( $column_counter == 4 ) {
                         if ( 2 != strlen( $element ) ) {
                             ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
@@ -533,6 +528,8 @@
 
 
     /**
+     * Render select in ACF field
+     *
      * @param $type
      * @param $field
      * @param $stored_value
@@ -619,4 +616,162 @@
         $dropdown = ob_get_clean();
 
         return $dropdown;
+    }
+
+
+    /**
+     * Verify CSV data
+     *
+     * @param        $file_name
+     * @param string $delimiter
+     * @param bool   $verify
+     */
+    function acfcs_verify_data( $file_name, $delimiter = ';', $verify = true ) {
+        $csv_array = acfcs_csv_to_array( $file_name, '', $delimiter, $verify );
+        if ( isset( $csv_array[ 'data' ] ) ) {
+            ACF_City_Selector::acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
+
+            do_action( 'acfcs_after_success_verify' );
+
+            return;
+        }
+    }
+
+
+    /**
+     * Import CSV data
+     *
+     * @param        $file_name
+     * @param string $upload_folder
+     * @param string $delimiter
+     * @param false  $verify
+     * @param false  $max_lines
+     */
+    function acfcs_import_data( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
+        if ( $file_name ) {
+            if ( strpos( $file_name, '.csv', -4 ) !== false ) {
+                $csv_array = acfcs_csv_to_array( $file_name, $upload_folder, $delimiter, $verify, $max_lines );
+
+                if ( ! is_wp_error( $csv_array ) ) {
+                    if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
+                        $line_number = 0;
+                        foreach ( $csv_array[ 'data' ] as $line ) {
+                            $line_number++;
+
+                            $city_row = array(
+                                'city_name'    => $line[ 0 ],
+                                'state_code'   => $line[ 1 ],
+                                'state_name'   => $line[ 2 ],
+                                'country_code' => $line[ 3 ],
+                                'country'      => $line[ 4 ],
+                            );
+
+                            global $wpdb;
+                            $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
+                        }
+                        if ( in_array( $file_name, [ 'be.csv', 'nl.csv' ] ) ) {
+                            $country_code = substr( $file_name, 0, 2 );
+                            ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported_' . $country_code, sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                        } else {
+                            ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                        }
+
+                        do_action( 'acfcs_after_success_import' );
+                    }
+                }
+            } else {
+                // raw data
+                global $wpdb;
+                $line_number   = 0;
+                $verified_data = $file_name;
+
+                foreach ( $verified_data as $line ) {
+                    $line_number++;
+
+                    $city_row = array(
+                        'city_name'    => $line[ 0 ],
+                        'state_code'   => $line[ 1 ],
+                        'state_name'   => $line[ 2 ],
+                        'country_code' => $line[ 3 ],
+                        'country'      => $line[ 4 ],
+                    );
+
+                    $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
+                }
+                ACF_City_Selector::acfcs_errors()->add( 'success_cities_imported', sprintf( _n( 'Congratulations, you imported 1 city.', 'Congratulations, you imported %d cities.', $line_number, 'acf-city-selector' ), $line_number ) );
+
+                do_action( 'acfcs_after_success_import_raw' );
+            }
+
+        } else {
+            ACF_City_Selector::acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
+        }
+
+    }
+
+    /**
+     * Remove an uploaded file
+     *
+     * @param false $file_name
+     */
+    function acfcs_delete_file( $file_name = false ) {
+        if ( false != $file_name ) {
+            $delete_result = unlink( acfcs_upload_folder( '/' ) . $file_name );
+            if ( true === $delete_result ) {
+                ACF_City_Selector::acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                do_action( 'acfcs_after_success_file_delete' );
+            } else {
+                ACF_City_Selector::acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
+            }
+        }
+
+        return;
+    }
+
+
+    /**
+     * Delete one or more countries
+     *
+     * @param $countries
+     */
+    function acfcs_delete_country( $countries ) {
+
+        $country_names_and = false;
+        foreach( $countries as $country_code ) {
+            $country_names[] = acfcs_get_country_name( $country_code );
+        }
+        if ( ! empty( $country_names ) ) {
+            $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
+            if ( 1 < count( $country_names ) ) {
+                $country_names_and = substr_replace( $country_names_quotes, ' and', strrpos( $country_names_quotes, ',' ), 1 );
+            } else {
+                $country_names_and = $country_names_quotes;
+            }
+        }
+
+        global $wpdb;
+        $country_string = strtoupper( "'" . implode( "', '", $countries ) . "'" );
+        $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
+        $result         = $wpdb->query( $query );
+        if ( $result > 0 ) {
+            ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
+            foreach( $_POST[ 'delete_country' ] as $country_code ) {
+                do_action( 'acfcs_delete_transients', $country_code );
+            }
+        }
+
+    }
+
+
+    /**
+     * Get upload folder for plugin, can be overriden with filter
+     *
+     * @param false $suffix
+     *
+     * @return mixed|void
+     */
+    function acfcs_upload_folder( $suffix = false ) {
+        $upload_folder = apply_filters( 'acfcs_upload_folder', wp_upload_dir()[ 'basedir' ] . '/acfcs' . $suffix );
+
+        return $upload_folder;
     }

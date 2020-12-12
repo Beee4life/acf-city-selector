@@ -1,6 +1,6 @@
 # ACF City Selector
 
-Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF for it.
+Welcome to the City Selector plugin, which is an extension for [Advanced Custom Fields](https://www.advancedcustomfields.com). This is not a stand-alone plugin, you'll need ACF (active) for it to run.
 
 - [Version](#version)
 - [Description](#description)
@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.31.1 - released 03.12.20
+0.32.0 - released 12.12.20
 
 <a name="description"></a>
 ### Description
@@ -58,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.30.0",
+        "version": "0.32.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -73,7 +73,7 @@ Then run `composer require "beee4life/acf-city-selector"`
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.30.0",
+"beee4life/acf-city-selector": "0.32.0",
 ```
 
 <a name="setup"></a>
@@ -198,7 +198,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.5.3
+* [X] Wordpress 5.6
 * [X] Advanced Custom Fields Pro 5.9.3
 * [X] Advanced Custom Fields 4.4.12
 * [X] Chrome (latest version)
@@ -226,8 +226,6 @@ If you need support, please turn to [Github](https://github.com/Beee4life/acf-ci
 <a name="disclaimer"></a>
 ### Disclaimer
 
-This plugin is not 100% finished yet. It won't break anything but be on the look out, just in case.
-
 The plugin works in the following situations: 
 * in a single field
 * in a repeater field
@@ -241,8 +239,7 @@ The plugin works in the following situations:
 The plugin does NOT work properly yet in the following situations: 
 * when multiple instances of the field are used in 1 group/on 1 post
 
-The plugin has NOT been tested yet in the following situations: 
-* with the Gutenberg editor (and don't hold your breath either, I hate it)
+It might have some twitches with taxonomies, but need some more testing.
 
 Sometimes the loading of states/cities, takes a few seconds... Don't know why yet...
 This seems to be very random and unpredictable.
@@ -257,12 +254,24 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-0.30.0
+0.32.0
+* add acfcs_upload_folder filter
+* improve code by making more 'smaller' functions
+* import preset countries from csv instead of php
+* remove some unnecessary hooks
+
+0.31.1
+* fix version number
+
+0.31.0
 * change default delimiter from `,` tot `;`.
 * change import sheet from `,` tot `;`.
 * fixed non-working max lines setting on import
 * added Japan and South Korea country files
 * extended Spain country file
+
+0.30.0
+* messed up release with version numbers
 
 0.29.0
 * added a fix for select2 in repeaters/flexible content blocks 
