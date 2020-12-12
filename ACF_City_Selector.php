@@ -63,8 +63,8 @@
                 register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
                 // actions
-                add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
+                add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
 
                 add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_scripts' ) );
                 add_action( 'wp_enqueue_scripts',           array( $this, 'acfcs_add_scripts' ) );
