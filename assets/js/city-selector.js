@@ -28,7 +28,7 @@
         /**
          * Change dropdowns
          */
-        function change_dropdowns( $instance ) {
+        function change_dropdowns() {
             $post_id = false;
             var countries = $('select[name*="countryCode"]');
             var state = $('select[name*="stateCode"]');
