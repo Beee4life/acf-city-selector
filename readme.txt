@@ -8,11 +8,11 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Customise your ACF install with a field to select a City based on country and state.
+This plugins adds a new ACF field type to select a city depending on country and state.
 
 == Description ==
 
-ACF City Selector is a plugin which offers a function which is often asked about on the ACF forums; a city selector, based on country and provcence/state. After failing to find a proper solution myself, I built my own to try and solve the issue once and for all :)
+ACF City Selector is an extension for Advanced Custom Fields which creates a new field where you can select a city, depending on country and provcence/state.
 
 = Field Type =
 
