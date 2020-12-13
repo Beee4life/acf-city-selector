@@ -128,7 +128,9 @@
 
                         <?php if ( is_array( $country_packages ) && ! empty( $country_packages ) ) { ?>
 
-                            <h2><?php esc_html_e( 'Combined country packages', 'acf-city-selector' ); ?></h2>
+                            <h2>
+                                <?php esc_html_e( 'Combined country packages', 'acf-city-selector' ); ?>
+                            </h2>
 
                             <table class="acfcs__table acfcs__table--packages">
                                 <thead>
@@ -205,7 +207,7 @@
 
                         <p>
                             <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary">
-                                <?php _e( 'Get your country now', 'acf-city-selector' ); ?> !
+                                <?php esc_html_e( 'Get your country now', 'acf-city-selector' ); ?> !
                             </a>
                         </p>
 
