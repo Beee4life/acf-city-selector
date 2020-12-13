@@ -50,13 +50,11 @@
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
-                // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
                 register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
-                // actions
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
 
