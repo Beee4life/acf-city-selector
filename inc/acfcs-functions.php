@@ -63,7 +63,7 @@
      */
     function acfcs_get_states( $country_code = false, $show_first = true, $field = false ) {
 
-        $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
+        $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
         $show_labels                 = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
         $states                      = array();
 
@@ -95,7 +95,7 @@
 
                 $state_results = array();
                 foreach ( $results as $data ) {
-                    $state_results[ $country_code . '-' . $data->state_code ] = esc_html__( $data->state_name, 'acf-city-selector' );
+                    $state_results[ $country_code . '-' . $data->state_code ] = esc_attr__( $data->state_name, 'acf-city-selector' );
                 }
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
@@ -432,30 +432,6 @@
         }
 
         return array();
-    }
-
-
-    /**
-     * Check depth of array
-     *
-     * @param $array
-     *
-     * @return int|mixed
-     */
-    function acfcs_check_array_depth( $array ) {
-        $max_depth = 1;
-
-        foreach( $array as $value ) {
-            if ( is_array( $value ) ) {
-                $depth = acfcs_check_array_depth( $value ) + 1;
-
-                if ( $depth > $max_depth ) {
-                    $max_depth = $depth;
-                }
-            }
-        }
-
-        return $max_depth;
     }
 
 
