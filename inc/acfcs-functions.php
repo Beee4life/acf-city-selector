@@ -14,7 +14,7 @@
      */
     function acfcs_get_countries( $show_first = true, $field = false, $force = false ) {
 
-        $countries            = [];
+        $countries            = array();
         $select_country_label = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
         $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
 
@@ -36,7 +36,7 @@
                 ORDER BY country ASC
             ' );
 
-            $country_results = [];
+            $country_results = array();
             foreach ( $results as $data ) {
                 $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
             }
@@ -65,7 +65,7 @@
 
         $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_html__( 'Select a province/state', 'acf-city-selector' ) );
         $show_labels                 = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
-        $states                      = [];
+        $states                      = array();
 
         if ( $show_first ) {
             if ( $show_labels ) {
@@ -122,7 +122,7 @@
      */
     function acfcs_get_cities( $country_code = false, $state_code = false, $field = false ) {
 
-        $cities            = [];
+        $cities            = array();
         $cities_transient  = false;
         $select_city_label = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
         $set_transient     = false;
@@ -164,7 +164,7 @@
                 } elseif ( $country_code ) {
                     $query .= " WHERE country_code = '{$country_code}'";
                 }
-                $city_results = [];
+                $city_results = array();
                 $results      = $wpdb->get_results( $query );
                 foreach ( $results as $data ) {
                     $city_results[] = [
@@ -257,7 +257,7 @@
             ];
 
             if ( is_array( $file_index ) ) {
-                $actual_files = [];
+                $actual_files = array();
                 foreach ( $file_index as $file ) {
                     if ( ! in_array( $file, $excluded_files ) ) {
                         $actual_files[] = $file;
@@ -269,7 +269,7 @@
             }
         }
 
-        return [];
+        return array();
     }
 
 
@@ -288,9 +288,9 @@
 
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
 
-        $csv_array   = [];
+        $csv_array   = array();
         $empty_array = false;
-        $new_array   = [];
+        $new_array   = array();
         $errors      = new WP_Error();
         if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
@@ -325,10 +325,10 @@
 
                 if ( $errors->get_error_codes() ) {
                     $empty_array = true;
-                    $new_array   = [];
+                    $new_array   = array();
                 } else {
                     // create a new array for each row
-                    $new_line = [];
+                    $new_line = array();
                     foreach ( $csv_line as $item ) {
                         $new_line[] = $item;
                     }
@@ -431,7 +431,7 @@
             return $response;
         }
 
-        return [];
+        return array();
     }
 
 
@@ -473,7 +473,7 @@
                 ORDER BY country_code ASC
             ' );
 
-        $acfcs_info = [];
+        $acfcs_info = array();
         foreach ( $results as $data ) {
             $country_code = $data->country_code;
             $results      = $wpdb->get_results( $wpdb->prepare( '
