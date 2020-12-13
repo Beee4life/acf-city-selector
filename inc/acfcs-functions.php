@@ -20,13 +20,10 @@
 
         if ( $show_first ) {
             if ( ! $show_labels ) {
+                $countries[ '' ] = '-';
                 if ( false !== $select_country_label ) {
                     $countries[ '' ] = $select_country_label;
-                } else {
-                    $countries[ '' ] = '-';
                 }
-            } else {
-                $countries[ '' ] = '-';
             }
         } else {
             // don't show first
