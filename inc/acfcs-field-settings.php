@@ -4,10 +4,10 @@
      *
      * @return array
      */
-    function acfcs_get_field_settings( $fields = [] ) {
+    function acfcs_get_field_settings( $fields = array() ) {
 
         $activate = false;
-        $settings = [];
+        $settings = array();
 
         if ( ! empty( $fields ) ) {
             $activate = true;
