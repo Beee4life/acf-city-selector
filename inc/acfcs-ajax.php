@@ -24,7 +24,7 @@
         if ( isset( $_POST[ 'country_code' ] ) ) {
             $country_code = $_POST[ 'country_code' ];
             $field        = false;
-            $items        = [];
+            $items        = array();
             $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
 
             if ( false != $post_id ) {
@@ -46,21 +46,23 @@
 
             $states_transient = acfcs_get_states( $country_code, true, $field );
 
-            foreach ( $states_transient as $key => $label ) {
-                if ( $label != 'N/A' ) {
-                    $items[] = [
-                        'state_name'    => $label,
-                        'country_state' => $key,
-                    ];
-                } else {
-                    $items[] = [
-                        'state_name'    => $country_code,
-                        'country_state' => $key,
-                    ];
+            if ( ! empty( $states_transient ) ) {
+                foreach ( $states_transient as $key => $label ) {
+                    if ( $label != 'N/A' ) {
+                        $items[] = [
+                            'state_name'    => $label,
+                            'country_state' => $key,
+                        ];
+                    } else {
+                        $items[] = [
+                            'state_name'    => $country_code,
+                            'country_state' => $key,
+                        ];
+                    }
                 }
+                echo json_encode( $items );
+                wp_die();
             }
-            echo json_encode( $items );
-            wp_die();
         }
     }
     add_action( 'wp_ajax_get_states_call', 'get_states_call' );
@@ -77,7 +79,7 @@
         if ( isset( $_POST[ 'state_code' ] ) ) {
             $country_code      = false;
             $field             = false;
-            $items             = [];
+            $items             = array();
             $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
             $posted_state_code = $_POST[ 'state_code' ];
             $state_code        = false;
