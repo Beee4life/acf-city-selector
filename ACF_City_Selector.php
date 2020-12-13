@@ -50,11 +50,6 @@
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
-                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
-                    $plugin_url = $this->settings[ 'url' ];
-                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
-                }
-
                 // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
