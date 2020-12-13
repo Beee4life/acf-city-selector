@@ -25,8 +25,6 @@
                     $countries[ '' ] = $select_country_label;
                 }
             }
-        } else {
-            // don't show first
         }
 
         $transient = get_transient( 'acfcs_countries' );
