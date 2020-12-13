@@ -255,7 +255,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.33.0
-* ...
+* code refactoring according to (most) Wordpress standards
 
 0.32.0
 * add acfcs_upload_folder filter
