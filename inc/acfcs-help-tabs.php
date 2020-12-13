@@ -9,11 +9,6 @@
      */
     function acfcs_help_tabs( $screen ) {
 
-        $screen_array = array(
-            'settings_page_acfcs-dashboard',
-            'settings_page_acfcs-settings',
-        );
-
         if ( isset( $screen->id ) ) {
             if ( strpos( $screen->id, 'acfcs' ) !== false ) {
                 $on_this_page = esc_html__( 'On this page you can import cities by either CSV file or raw (pasted) CSV data.', 'acf-city-selector' );
