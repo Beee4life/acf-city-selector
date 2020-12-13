@@ -11,11 +11,11 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $country_files    = acfcs_get_packages( 'single' );
-        $country_packages = [];
+        $country_packages = array();
         $country_packs    = acfcs_get_packages( 'packages' );
         $europe_price     = 0;
         $noram_price      = 0;
-        $single_files     = [];
+        $single_files     = array();
         $total_price      = 0;
 
         if ( is_array( $country_files ) ) {
