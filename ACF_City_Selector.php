@@ -21,7 +21,7 @@
     }
 
     // check if class already exists
-    if ( ! class_exists( 'ACF_City_Selector' ) ) :
+    if ( ! class_exists( 'ACF_City_Selector' ) ) {
 
         /*
          * Main class
@@ -440,4 +440,4 @@
 
         new ACF_City_Selector();
 
-    endif;
+    }
