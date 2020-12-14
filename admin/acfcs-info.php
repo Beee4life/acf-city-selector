@@ -11,7 +11,7 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $countries    = acfcs_get_countries_info();
-        $prepare_json = [];
+        $prepare_json = array();
 
         if ( isset( $_POST[ 'acfcs_json' ] ) ) {
             print_r( unserialize( $_POST[ 'acfcs_json' ] ) );
@@ -40,7 +40,10 @@
 
                         <div class="acfcs__section acfcs__section--countries">
                             <?php if ( ! empty( $countries ) ) { ?>
-                                <h2><?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?></h2>
+                                <h2>
+                                    <?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?>
+                                </h2>
+
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
                                     <tr>
@@ -62,7 +65,10 @@
                                 <?php $prepare_json[ 'countries' ] = 'none'; ?>
                             <?php } ?>
 
-                            <h2><?php esc_html_e( 'Server info', 'acf-city-selector' ); ?></h2>
+                            <h2>
+                                <?php esc_html_e( 'Server info', 'acf-city-selector' ); ?>
+                            </h2>
+
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
                                 <tr>
@@ -104,7 +110,10 @@
                                 </tbody>
                             </table>
 
-                            <h2><?php esc_html_e( 'WordPress info', 'acf-city-selector' ); ?></h2>
+                            <h2>
+                                <?php esc_html_e( 'WordPress info', 'acf-city-selector' ); ?>
+                            </h2>
+
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
                                 <tr>
@@ -177,7 +186,10 @@
                             </table>
 
                             <?php if ( is_multisite() ) { ?>
-                                <h2><?php esc_html_e( 'Multisite', 'acf-city-selector' ); ?></h2>
+                                <h2>
+                                    <?php esc_html_e( 'Multisite', 'acf-city-selector' ); ?>
+                                </h2>
+
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
                                     <tr>
@@ -210,31 +222,37 @@
                                 </table>
                             <?php } ?>
 
+
+                            <h2>
+                                <?php esc_html_e( 'Active plugins', 'acf-city-selector' ); ?>
+                            </h2>
+
                             <?php $plugins = get_plugins(); ?>
-                            <h2><?php esc_html_e( 'Active plugins', 'acf-city-selector' ); ?></h2>
-                            <table class="acfcs__table acfcs__table--info">
-                                <thead>
-                                <tr>
-                                    <th><?php esc_html_e( 'Name', 'acf-city-selector' ); ?></th>
-                                    <th><?php esc_html_e( 'Version', 'acf-city-selector' ); ?></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach( $plugins as $key => $value ) { ?>
-                                    <?php if ( is_plugin_active( $key ) ) { ?>
-                                        <?php $prepare_json[ 'plugins' ][] = [ 'name' => $value[ 'Name' ], 'version' => $value[ 'Version' ], 'author' => $value[ 'Author' ], 'author_uri' => $value[ 'AuthorURI' ] ]; ?>
-                                        <tr>
-                                            <td>
-                                                <?php echo $value[ 'Name' ]; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $value[ 'Version' ]; ?>
-                                            </td>
-                                        </tr>
+                            <?php if ( ! empty( $plugins ) ) { ?>
+                                <table class="acfcs__table acfcs__table--info">
+                                    <thead>
+                                    <tr>
+                                        <th><?php esc_html_e( 'Name', 'acf-city-selector' ); ?></th>
+                                        <th><?php esc_html_e( 'Version', 'acf-city-selector' ); ?></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach( $plugins as $key => $value ) { ?>
+                                        <?php if ( is_plugin_active( $key ) ) { ?>
+                                            <?php $prepare_json[ 'plugins' ][] = [ 'name' => $value[ 'Name' ], 'version' => $value[ 'Version' ], 'author' => $value[ 'Author' ], 'author_uri' => $value[ 'AuthorURI' ] ]; ?>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $value[ 'Name' ]; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $value[ 'Version' ]; ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
                                     <?php } ?>
-                                <?php } ?>
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            <?php } ?>
                         </div>
 
                         <div class="acfcs__section acfcs__section--export">

@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.32.0 - released 12.12.20
+0.33.0 - released xx.12.20
 
 <a name="description"></a>
 ### Description
@@ -253,6 +253,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.33.0
+* code refactoring according to (most) Wordpress standards
 
 0.32.0
 * add acfcs_upload_folder filter

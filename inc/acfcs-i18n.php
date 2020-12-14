@@ -12,7 +12,7 @@
      */
     function acfcs_country_i18n( $country_code ) {
 
-        $country_array = [
+        $country_array = array(
             'ad'     => esc_html__( 'Andorra', 'acf-city-selector' ),
             'aw'     => esc_html__( 'Aruba', 'acf-city-selector' ),
             'at'     => esc_html__( 'Austria', 'acf-city-selector' ),
@@ -36,7 +36,7 @@
             'us'     => esc_html__( 'United States', 'acf-city-selector' ),
             'uy'     => esc_html__( 'Uruguay', 'acf-city-selector' ),
             'world'  => esc_html__( 'World', 'acf-city-selector' ),
-        ];
+        );
 
         if ( $country_code && array_key_exists( $country_code, $country_array ) ) {
             return $country_array[ $country_code ];

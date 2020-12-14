@@ -4,7 +4,7 @@
         exit;
     }
 
-    if ( ! class_exists( 'acf_field_city_selector' ) ) :
+    if ( ! class_exists( 'acf_field_city_selector' ) ) {
 
         /**
          * Main class
@@ -131,8 +131,8 @@
             function render_field( $field ) {
 
                 $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
-                $prefill_cities   = [];
-                $prefill_states   = [];
+                $prefill_cities   = array();
+                $prefill_states   = array();
                 $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
                 $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
                 $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
@@ -388,4 +388,4 @@
         // initialize
         new acf_field_city_selector( $this->settings );
 
-    endif; // class_exists check
+    }

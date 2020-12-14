@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.32.0
+    Version:        0.33.0
     Tested up to:   5.6
     Requires PHP:   7.0
     Author:         Beee
@@ -21,7 +21,7 @@
     }
 
     // check if class already exists
-    if ( ! class_exists( 'ACF_City_Selector' ) ) :
+    if ( ! class_exists( 'ACF_City_Selector' ) ) {
 
         /*
          * Main class
@@ -38,7 +38,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '0.32.0',
+                    'version'    => '0.33.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -50,18 +50,11 @@
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
-                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
-                    $plugin_url = $this->settings[ 'url' ];
-                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
-                }
-
-                // set text domain
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
                 register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
 
-                // actions
                 add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
                 add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
 
@@ -71,14 +64,12 @@
                 add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_import_preset_countries' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
                 add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
 
-                // filters
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
                 include 'inc/acfcs-actions.php';
@@ -118,7 +109,7 @@
              * Prepare database upon plugin activation
              */
             public function acfcs_fill_database() {
-                $countries = [ 'nl', 'be' ];
+                $countries = array( 'nl', 'be' );
                 foreach( $countries as $country ) {
                     acfcs_import_data( $country . '.csv', ACFCS_PLUGIN_PATH . 'import/' );
                 }
@@ -155,37 +146,12 @@
 
             /*
              * Check if (upload) folder exists
+             * If not, create it.
              */
             public static function acfcs_check_uploads_folder() {
                 $target_folder = acfcs_upload_folder( '/' );
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
-                }
-            }
-
-
-            /*
-             * Import preset countries
-             */
-            public function acfcs_import_preset_countries() {
-                if ( isset( $_POST[ 'acfcs_import_actions_nonce' ] ) ) {
-                    if ( ! wp_verify_nonce( $_POST[ 'acfcs_import_actions_nonce' ], 'acfcs-import-actions-nonce' ) ) {
-                        $this->acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-
-                        return;
-                    } else {
-                        if ( isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
-                            if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
-                                acfcs_import_data( 'be.csv', ACFCS_PLUGIN_PATH . 'import/' );
-                                do_action( 'acfcs_delete_transients', 'be' );
-                            }
-                            if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
-                                acfcs_import_data( 'nl.csv', ACFCS_PLUGIN_PATH . 'import/' );
-                                do_action( 'acfcs_delete_transients', 'nl' );
-                            }
-                            do_action( 'acfcs_after_success_import' );
-                        }
-                    }
                 }
             }
 
@@ -440,4 +406,4 @@
 
         new ACF_City_Selector();
 
-    endif;
+    }

@@ -11,11 +11,11 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $country_files    = acfcs_get_packages( 'single' );
-        $country_packages = [];
+        $country_packages = array();
         $country_packs    = acfcs_get_packages( 'packages' );
         $europe_price     = 0;
         $noram_price      = 0;
-        $single_files     = [];
+        $single_files     = array();
         $total_price      = 0;
 
         if ( is_array( $country_files ) ) {
@@ -128,7 +128,9 @@
 
                         <?php if ( is_array( $country_packages ) && ! empty( $country_packages ) ) { ?>
 
-                            <h2><?php esc_html_e( 'Combined country packages', 'acf-city-selector' ); ?></h2>
+                            <h2>
+                                <?php esc_html_e( 'Combined country packages', 'acf-city-selector' ); ?>
+                            </h2>
 
                             <table class="acfcs__table acfcs__table--packages">
                                 <thead>
@@ -205,7 +207,7 @@
 
                         <p>
                             <a href="<?php echo ACFCS_WEBSITE_URL . '/get-countries/'; ?>" target="_blank" rel="noopener" class="button button-primary">
-                                <?php _e( 'Get your country now', 'acf-city-selector' ); ?> !
+                                <?php esc_html_e( 'Get your country now', 'acf-city-selector' ); ?> !
                             </a>
                         </p>
 

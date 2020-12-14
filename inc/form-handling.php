@@ -207,3 +207,30 @@
         }
     }
     add_action( 'admin_init', 'acfcs_preserve_settings' );
+
+
+    /**
+     * Manually import default available countries
+     */
+    function acfcs_import_preset_countries() {
+        if ( isset( $_POST[ 'acfcs_import_actions_nonce' ] ) ) {
+            if ( ! wp_verify_nonce( $_POST[ 'acfcs_import_actions_nonce' ], 'acfcs-import-actions-nonce' ) ) {
+                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+
+                return;
+            } else {
+                if ( isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
+                    if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
+                        acfcs_import_data( 'be.csv', ACFCS_PLUGIN_PATH . 'import/' );
+                        do_action( 'acfcs_delete_transients', 'be' );
+                    }
+                    if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
+                        acfcs_import_data( 'nl.csv', ACFCS_PLUGIN_PATH . 'import/' );
+                        do_action( 'acfcs_delete_transients', 'nl' );
+                    }
+                    do_action( 'acfcs_after_success_import' );
+                }
+            }
+        }
+    }
+    add_action( 'admin_init', 'acfcs_import_preset_countries' );

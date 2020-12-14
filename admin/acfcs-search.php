@@ -12,8 +12,8 @@
 
         // get all countries from database
         global $wpdb;
-        $cities                  = [];
-        $countries               = [];
+        $cities                  = array();
+        $countries               = array();
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? $_POST[ 'acfcs_state' ] : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? $_POST[ 'acfcs_country' ] : false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? $_POST[ 'acfcs_orderby' ] : false;
@@ -34,7 +34,7 @@
 
             // get states for these countries
             if ( ! empty( $countries ) ) {
-                $states = [];
+                $states = array();
                 foreach ( $countries as $country ) {
                     $states[] = array(
                         'state' => 'open_optgroup',
@@ -72,7 +72,7 @@
         // if has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $search_limit = false;
-            $where        = [];
+            $where        = array();
 
             if ( false != $search_criteria_state ) {
                 $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
@@ -112,7 +112,7 @@
                 " . $search_limit . "
             ";
             $cities     = $wpdb->get_results( $sql );
-            $city_array = [];
+            $city_array = array();
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
