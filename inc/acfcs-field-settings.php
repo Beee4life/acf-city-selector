@@ -13,16 +13,16 @@
             $activate = true;
         } elseif ( isset( $_GET[ 'user_id' ] ) ) {
             $activate = true;
-            $user_id  = $_GET[ 'user_id' ];
+            $user_id  = sanitize_text_field( $_GET[ 'user_id' ] );
         } elseif ( isset( $_GET[ 'post' ] ) ) {
-            $post_id = $_GET[ 'post' ];
+            $post_id = sanitize_text_field( $_GET[ 'post' ] );
             if ( 'acf-field-group' != get_post_type( $post_id ) ) {
                 $activate = true;
             }
         } elseif ( isset( $_GET[ 'id' ] ) ) {
             // this is for my own project
             $activate = true;
-            $post_id  = $_GET[ 'id' ];
+            $post_id  = sanitize_text_field( $_GET[ 'id' ] );
         } else {
             $activate = true;
             if ( defined( 'IS_PROFILE_PAGE' ) ) {

@@ -15,10 +15,7 @@
     Contributors:   Jarah de Jong
     */
 
-    // exit if accessed directly
-    if ( ! defined( 'ABSPATH' ) ) {
-        exit;
-    }
+    if ( ! defined( 'ABSPATH' ) ) exit;
 
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) {
@@ -48,6 +45,11 @@
                 if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
                     $plugin_path = plugin_dir_path( __FILE__ );
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
+                }
+
+                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
+                    $plugin_url = plugin_dir_url( __FILE__ );
+                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
                 }
 
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -246,7 +248,7 @@
                 $admin_url      = admin_url( 'options-general.php?page=' );
                 $preview        = false;
                 $search         = false;
-                $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
+                $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
 
                 if ( isset( $url_array[ 'query' ] ) ) {
                     $acfcs_subpage = substr( $url_array[ 'query' ], 11 );

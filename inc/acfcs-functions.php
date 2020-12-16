@@ -726,7 +726,7 @@
         $result         = $wpdb->query( $query );
         if ( $result > 0 ) {
             ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
-            foreach( $_POST[ 'delete_country' ] as $country_code ) {
+            foreach( $countries as $country_code ) {
                 do_action( 'acfcs_delete_transients', $country_code );
             }
         }

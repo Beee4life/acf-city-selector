@@ -12,10 +12,6 @@
 
         $countries    = acfcs_get_countries_info();
         $prepare_json = array();
-
-        if ( isset( $_POST[ 'acfcs_json' ] ) ) {
-            print_r( unserialize( $_POST[ 'acfcs_json' ] ) );
-        }
         ?>
 
         <div class="wrap acfcs">
@@ -267,9 +263,8 @@
                             <?php $file_name       = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                             <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
                             <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
-                            <form name="acfcs_export_json" method="POST" action="<?php echo plugin_dir_url( __FILE__ ); ?>acfcs-save-json.php">
-                                <input type="hidden" name="acfcs_export_json" value="1" />
-                                <input type="hidden" name="acfcs_json_file" value="<?php echo $file_name; ?>" />
+                            <form name="acfcs_export_json" method="POST" action="<?php echo ACFCS_PLUGIN_URL; ?>inc/acfcs-save-json.php">
+                                <input name="acfcs_export_json_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-export-json-nonce' ); ?>" />
                                 <input type="submit" class="button button-primary" value="<?php esc_attr_e( 'Download JSON file', 'acf-city-selector' ); ?>" />
                             </form>
                         </div>
