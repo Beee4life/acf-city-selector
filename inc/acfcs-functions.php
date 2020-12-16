@@ -709,7 +709,7 @@
 
         $country_names_and = false;
         foreach( $countries as $country_code ) {
-            $country_names[] = acfcs_get_country_name( $country_code );
+            $country_names[] = acfcs_get_country_name( sanitize_text_field( $country_code ) );
         }
         if ( ! empty( $country_names ) ) {
             $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
