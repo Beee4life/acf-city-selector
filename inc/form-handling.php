@@ -104,7 +104,9 @@
 
                     return;
                 } else {
-                    acfcs_delete_country( sanitize_text_field( $_POST[ 'delete_country' ] ) );
+                    if ( is_array( $_POST[ 'delete_country' ] ) ) {
+                        acfcs_delete_country( $_POST[ 'delete_country' ] );
+                    }
                 }
             }
         }
