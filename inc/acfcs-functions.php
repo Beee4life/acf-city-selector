@@ -726,7 +726,7 @@
         if ( ! empty( $sanitized_country_codes ) ) {
             global $wpdb;
             $country_string = strtoupper( "'" . implode( "', '", $sanitized_country_codes ) . "'" );
-            $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
+            $query          = "DELETE FROM {$wpdb->prefix}cities WHERE `country_code` IN ({$country_string})";
             $result         = $wpdb->query( $query );
             if ( $result > 0 ) {
                 ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
