@@ -263,10 +263,11 @@
                             <?php $file_name       = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                             <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
                             <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
-                            <form name="acfcs_export_json" method="POST" action="<?php echo ACFCS_PLUGIN_URL; ?>inc/acfcs-save-json.php">
-                                <input name="acfcs_export_json_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-export-json-nonce' ); ?>" />
-                                <input type="submit" class="button button-primary" value="<?php esc_attr_e( 'Download JSON file', 'acf-city-selector' ); ?>" />
-                            </form>
+                            <p class="json_button">
+                                <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
+                                    <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
+                                </a> <small>(right-click to save)</small>
+                            </p>
                         </div>
 
                     </div>
