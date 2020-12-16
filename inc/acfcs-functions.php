@@ -707,9 +707,12 @@
      */
     function acfcs_delete_country( $countries ) {
 
-        $country_names_and = false;
+        $country_names_and       = false;
+        $sanitized_country_codes = array();
         foreach( $countries as $country_code ) {
-            $country_names[] = acfcs_get_country_name( sanitize_text_field( $country_code ) );
+            $sanitized_country_code    = sanitize_text_field( $country_code );
+            $sanitized_country_codes[] = $sanitized_country_code;
+            $country_names[]           = acfcs_get_country_name( $sanitized_country_code );
         }
         if ( ! empty( $country_names ) ) {
             $country_names_quotes = "'" . implode( "', '", $country_names ) . "'";
@@ -720,17 +723,18 @@
             }
         }
 
-        global $wpdb;
-        $country_string = strtoupper( "'" . implode( "', '", $countries ) . "'" );
-        $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
-        $result         = $wpdb->query( $query );
-        if ( $result > 0 ) {
-            ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
-            foreach( $countries as $country_code ) {
-                do_action( 'acfcs_delete_transients', $country_code );
+        if ( ! empty( $sanitized_country_codes ) ) {
+            global $wpdb;
+            $country_string = strtoupper( "'" . implode( "', '", $sanitized_country_codes ) . "'" );
+            $query          = "DELETE FROM {$wpdb->prefix}cities WHERE country_code IN ({$country_string})";
+            $result         = $wpdb->query( $query );
+            if ( $result > 0 ) {
+                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
+                foreach( $countries as $country_code ) {
+                    do_action( 'acfcs_delete_transients', $country_code );
+                }
             }
         }
-
     }
 
 
