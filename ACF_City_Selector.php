@@ -67,7 +67,6 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
-                add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
@@ -277,24 +276,6 @@
                 $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $info . $countries . '</p>';
 
                 return $menu;
-            }
-
-
-            /*
-             * Add admin notices
-             */
-            public function acfcs_check_for_beta() {
-                $screen = get_current_screen();
-                if ( strpos( $screen->id, 'acfcs' ) !== false ) {
-                    // Check if it's a beta version
-                    if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
-                    ?>
-                        <div class="notice notice-warning is-dismissible">
-                            <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
-                        </div>
-                    <?php
-                    }
-                }
             }
 
 
