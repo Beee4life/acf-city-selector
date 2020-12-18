@@ -24,7 +24,7 @@
         if ( isset( $_POST[ 'country_code' ] ) ) {
             $field        = false;
             $items        = array();
-            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? sanitize_text_field( $_POST[ 'post_id' ] ) : false;
+            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
             if ( is_string( $_POST[ 'country_code' ] ) ) {
                 $country_code = sanitize_text_field( $_POST[ 'country_code' ] );
             }
@@ -38,9 +38,10 @@
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
                 if ( isset( $_POST[ 'show_labels' ] ) ) {
-                    if ( '1' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) {
+                    $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
+                    if ( '1' == $show_labels ) {
                         $field[ 'show_labels' ] = true;
-                    } elseif ( '0' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) {
+                    } elseif ( '0' == $show_labels ) {
                         $field[ 'show_labels' ] = false;
                     }
                 }
@@ -84,7 +85,7 @@
             $country_code      = false;
             $field             = false;
             $items             = array();
-            $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? sanitize_text_field( $_POST[ 'post_id' ] ) : false;
+            $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
             $posted_state_code = sanitize_text_field( $_POST[ 'state_code' ] );
             $state_code        = false;
 
@@ -97,9 +98,10 @@
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
                 if ( isset( $_POST[ 'show_labels' ] ) ) {
-                    if ( '1' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) {
+                    $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
+                    if ( '1' == $show_labels ) {
                         $field[ 'show_labels' ] = true;
-                    } elseif ( '0' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) {
+                    } elseif ( '0' == $show_labels ) {
                         $field[ 'show_labels' ] = false;
                     }
                 }
