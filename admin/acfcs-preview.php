@@ -22,7 +22,7 @@
 
                 $file_index      = acfcs_check_if_files();
                 $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_file_name( $_POST[ 'acfcs_file_name' ] ) : false;
-                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_max_lines' ] ) : false;
+                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
                 $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
 

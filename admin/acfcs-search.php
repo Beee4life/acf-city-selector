@@ -18,7 +18,7 @@
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_country' ] ) : false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_orderby' ] ) : false;
         $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_search' ] ) : false;
-        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_limit' ] ) : 100;
+        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
 
         // get cities by country
         $results = acfcs_get_countries( false );
