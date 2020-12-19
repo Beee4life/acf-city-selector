@@ -43,9 +43,9 @@
                     return;
                 }
 
-                $file_name = $_POST[ 'acfcs_file_name' ];
-                $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
-                $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? $_POST[ 'acfcs_max_lines' ] : false;
+                $file_name = sanitize_file_name( $_POST[ 'acfcs_file_name' ] );
+                $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
+                $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $import    = isset( $_POST[ 'import' ] ) ? true : false;
                 $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
                 $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
@@ -73,7 +73,7 @@
 
                 return;
             } else {
-                $verified_data = acfcs_verify_csv_data( $_POST[ 'acfcs_raw_csv_import' ] );
+                $verified_data = acfcs_verify_csv_data( sanitize_textarea_field( $_POST[ 'acfcs_raw_csv_import' ] ) );
                 if ( isset( $_POST[ 'verify' ] ) ) {
                     if ( false != $verified_data ) {
                         ACF_City_Selector::acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
@@ -104,7 +104,9 @@
 
                     return;
                 } else {
-                    acfcs_delete_country( $_POST[ 'delete_country' ] );
+                    if ( is_array( $_POST[ 'delete_country' ] ) ) {
+                        acfcs_delete_country( $_POST[ 'delete_country' ] );
+                    }
                 }
             }
         }
@@ -125,7 +127,8 @@
                 global $wpdb;
                 if ( is_array( $_POST[ 'row_id' ] ) ) {
                     foreach( $_POST[ 'row_id' ] as $row ) {
-                        $split    = explode( ' ', $row, 2 );
+                        $sanitized_row = sanitize_text_field( $row );
+                        $split    = explode( ' ', $sanitized_row, 2 );
                         if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
                             $ids[]    = $split[ 0 ];
                             $cities[] = $split[ 1 ];

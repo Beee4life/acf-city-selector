@@ -2,15 +2,15 @@
     /*
      * Set admin-ajax.php on the front side (by default it is available only on back-end)
      */
-    function city_selector_ajaxurl() {
+    function acfcs_city_selector_ajaxurl() {
         ?>
         <script type="text/javascript">
             var ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
         </script>
         <?php
     }
-    add_action( 'wp_head', 'city_selector_ajaxurl' );
-    add_action( 'login_head', 'city_selector_ajaxurl' );
+    add_action( 'wp_head', 'acfcs_city_selector_ajaxurl' );
+    add_action( 'login_head', 'acfcs_city_selector_ajaxurl' );
 
 
     /*
@@ -19,16 +19,18 @@
      * @param bool $country_code
      * @return JSON Object
      */
-    function get_states_call() {
+    function acfcs_get_states_call() {
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
-            $country_code = $_POST[ 'country_code' ];
             $field        = false;
             $items        = array();
-            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
+            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+            if ( is_string( $_POST[ 'country_code' ] ) ) {
+                $country_code = sanitize_text_field( $_POST[ 'country_code' ] );
+            }
 
             if ( false != $post_id ) {
-                $fields = get_field_objects( $_POST[ 'post_id' ] );
+                $fields = get_field_objects( $post_id );
                 if ( is_array( $fields ) && ! empty( $fields ) ) {
                     $field = acfcs_get_field_settings( $fields );
                 }
@@ -36,17 +38,20 @@
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
                 if ( isset( $_POST[ 'show_labels' ] ) ) {
-                    if ( '1' == $_POST[ 'show_labels' ] ) {
+                    $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
+                    if ( '1' == $show_labels ) {
                         $field[ 'show_labels' ] = true;
-                    } elseif ( '0' == $_POST[ 'show_labels' ] ) {
+                    } elseif ( '0' == $show_labels ) {
                         $field[ 'show_labels' ] = false;
                     }
                 }
             }
 
-            $states_transient = acfcs_get_states( $country_code, true, $field );
+            if ( isset( $country_code ) ) {
+                $states_transient = acfcs_get_states( $country_code, true, $field );
+            }
 
-            if ( ! empty( $states_transient ) ) {
+            if ( isset( $states_transient ) && ! empty( $states_transient ) ) {
                 foreach ( $states_transient as $key => $label ) {
                     if ( $label != 'N/A' ) {
                         $items[] = [
@@ -65,8 +70,8 @@
             }
         }
     }
-    add_action( 'wp_ajax_get_states_call', 'get_states_call' );
-    add_action( 'wp_ajax_nopriv_get_states_call', 'get_states_call' );
+    add_action( 'wp_ajax_get_states_call', 'acfcs_get_states_call' );
+    add_action( 'wp_ajax_nopriv_get_states_call', 'acfcs_get_states_call' );
 
 
     /*
@@ -74,14 +79,14 @@
      *
      * @return JSON Object
      */
-    function get_cities_call() {
+    function acfcs_get_cities_call() {
 
         if ( isset( $_POST[ 'state_code' ] ) ) {
             $country_code      = false;
             $field             = false;
             $items             = array();
-            $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? $_POST[ 'post_id' ] : false;
-            $posted_state_code = $_POST[ 'state_code' ];
+            $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+            $posted_state_code = sanitize_text_field( $_POST[ 'state_code' ] );
             $state_code        = false;
 
             if ( false != $post_id ) {
@@ -93,9 +98,10 @@
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
                 if ( isset( $_POST[ 'show_labels' ] ) ) {
-                    if ( '1' == $_POST[ 'show_labels' ] ) {
+                    $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
+                    if ( '1' == $show_labels ) {
                         $field[ 'show_labels' ] = true;
-                    } elseif ( '0' == $_POST[ 'show_labels' ] ) {
+                    } elseif ( '0' == $show_labels ) {
                         $field[ 'show_labels' ] = false;
                     }
                 }
@@ -138,5 +144,5 @@
             }
         }
     }
-    add_action( 'wp_ajax_get_cities_call', 'get_cities_call' );
-    add_action( 'wp_ajax_nopriv_get_cities_call', 'get_cities_call' );
+    add_action( 'wp_ajax_get_cities_call', 'acfcs_get_cities_call' );
+    add_action( 'wp_ajax_nopriv_get_cities_call', 'acfcs_get_cities_call' );

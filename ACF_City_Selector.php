@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        0.33.0
+    Version:        0.34.0
     Tested up to:   5.6
     Requires PHP:   7.0
     Author:         Beee
@@ -15,10 +15,7 @@
     Contributors:   Jarah de Jong
     */
 
-    // exit if accessed directly
-    if ( ! defined( 'ABSPATH' ) ) {
-        exit;
-    }
+    if ( ! defined( 'ABSPATH' ) ) exit;
 
     // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) {
@@ -38,7 +35,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '0.33.0',
+                    'version'    => '0.34.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -48,6 +45,11 @@
                 if ( ! defined( 'ACFCS_PLUGIN_PATH' ) ) {
                     $plugin_path = plugin_dir_path( __FILE__ );
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
+                }
+
+                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
+                    $plugin_url = plugin_dir_url( __FILE__ );
+                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
                 }
 
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -65,7 +67,6 @@
                 add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
                 add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
-                add_action( 'admin_notices',                array( $this, 'acfcs_check_for_beta' ) );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
@@ -246,7 +247,7 @@
                 $admin_url      = admin_url( 'options-general.php?page=' );
                 $preview        = false;
                 $search         = false;
-                $url_array      = parse_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] );
+                $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
 
                 if ( isset( $url_array[ 'query' ] ) ) {
                     $acfcs_subpage = substr( $url_array[ 'query' ], 11 );
@@ -275,24 +276,6 @@
                 $menu = '<p class="acfcs-admin-menu">' . $dashboard . $search . $preview . $settings . $info . $countries . '</p>';
 
                 return $menu;
-            }
-
-
-            /*
-             * Add admin notices
-             */
-            public function acfcs_check_for_beta() {
-                $screen = get_current_screen();
-                if ( strpos( $screen->id, 'acfcs' ) !== false ) {
-                    // Check if it's a beta version
-                    if ( strpos( $this->settings[ 'version' ], 'beta' ) !== false ) {
-                    ?>
-                        <div class="notice notice-warning is-dismissible">
-                            <p><?php echo sprintf( esc_html__( "Please be aware, you're using a beta version of \"%s\".", 'acf-city-selector' ), 'ACF City Selector' ); ?></p>
-                        </div>
-                    <?php
-                    }
-                }
             }
 
 

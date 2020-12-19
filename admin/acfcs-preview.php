@@ -21,10 +21,10 @@
                 echo ACF_City_Selector::acfcs_admin_menu();
 
                 $file_index      = acfcs_check_if_files();
-                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
-                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? $_POST[ 'acfcs_max_lines' ] : false;
+                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_file_name( $_POST[ 'acfcs_file_name' ] ) : false;
+                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
-                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? $_POST[ 'acfcs_delimiter' ] : apply_filters( 'acfcs_delimiter', ';' );
+                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
 
                 // Get imported data
                 if ( $file_name ) {
@@ -55,7 +55,7 @@
                                                     <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
                                                 <?php } ?>
                                                 <?php foreach ( $file_index as $file ) { ?>
-                                                    <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file ) ? ' selected="selected"' : false; ?>
+                                                    <?php $selected = ( $file_name == $file ) ? ' selected="selected"' : false; ?>
                                                     <option value="<?php echo $file; ?>"<?php echo $selected; ?>><?php echo $file; ?></option>
                                                 <?php } ?>
                                             </select>

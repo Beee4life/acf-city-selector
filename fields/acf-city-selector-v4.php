@@ -204,7 +204,7 @@
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
 
                     if ( isset( $_GET[ 'id' ] ) ) {
-                        $post_id = $_GET[ 'id' ];
+                        $post_id = (int) $_GET[ 'id' ];
                     } else {
                         $post_id = get_the_ID();
                     }

@@ -58,6 +58,10 @@
     margin-top: 2em;
 }
 
+.acfcs__section--export p.json_button {
+    vertical-align: middle;
+}
+
 .acfcs__search-form {
     display: flex;
     flex-flow: row wrap;
