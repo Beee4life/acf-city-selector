@@ -255,7 +255,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 0.34.0
-* escaping user inputs
+* escape user inputs
 
 0.33.0
 * code refactoring according to (most) Wordpress standards
