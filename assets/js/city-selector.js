@@ -32,16 +32,9 @@
             $post_id = false;
             var countries = $('select[name*="countryCode"]');
             var state = $('select[name*="stateCode"]');
-            var parts = window.location.search.substr(1).split("&");
-            var $_GET = {};
 
-            for (var i = 0; i < parts.length; i++) {
-                var temp = parts[i].split("=");
-                $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
-            }
-
-            if ( $_GET[ 'post' ] ) {
-                $post_id = $_GET[ 'post' ];
+            if (typeof(city_selector_vars) != "undefined" && city_selector_vars !== null) {
+                $post_id = city_selector_vars[ 'post_id' ];
             }
             var post_id = $post_id;
 

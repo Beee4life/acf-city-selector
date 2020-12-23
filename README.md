@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.34.0 - released 19.12.20
+0.35.0 - released 23.12.20
 
 <a name="description"></a>
 ### Description
@@ -58,7 +58,7 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
       "package": {
         "name":    "Beee4life/acf-city-selector",
         "type":    "wordpress-plugin",
-        "version": "0.32.0",
+        "version": "0.35.0",
         "dist":    {
           "type": "zip",
           "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
@@ -68,12 +68,12 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
   ]
 ```
 
-Then run `composer require "beee4life/acf-city-selector"`
+Then run `composer require "beee4life/acf-city-selector"` 
 
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.32.0",
+"beee4life/acf-city-selector": "0.35.0",
 ```
 
 <a name="setup"></a>
@@ -253,6 +253,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+0.35.0
+* escape js value
 
 0.34.0
 * escape user inputs
