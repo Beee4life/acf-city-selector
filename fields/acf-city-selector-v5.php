@@ -199,8 +199,9 @@
                 wp_enqueue_script( 'acfcs-process' );
 
                 // check field settings
-                $all_info = acfcs_get_field_settings();
+                $all_info                     = acfcs_get_field_settings();
                 $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
+                $js_vars[ 'post_id' ]         = ( isset( $_GET[ 'post' ] ) ) ? (int) $_GET[ 'post' ] : false;
                 $js_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : true;
                 $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
                 $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
