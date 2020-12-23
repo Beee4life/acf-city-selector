@@ -254,7 +254,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-0.34.0
+0.35.0
 * escape js value
 
 0.34.0
