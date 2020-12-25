@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-0.36.0 - released xx.12.20
+1.0.0 - released 25.12.20
 
 <a name="description"></a>
 ### Description
@@ -254,8 +254,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-0.36.0
-* ??
+1.0.0 - first release in WP repo
+* prefix javascript function names
 
 0.35.0
 * escape js value
