@@ -65,9 +65,9 @@
                     var which_fields = $which_fields;
 
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
-                        const d = get_states(country_code, show_labels, post_id);
+                        const d = acfcs_get_states(country_code, show_labels, post_id);
                         response_states.push(d);
-                        const e = get_cities(country_code, show_labels, post_id);
+                        const e = acfcs_get_cities(country_code, show_labels, post_id);
                         response_cities.push(e);
 
                         Promise.all(response_states).then(function(jsonResults) {
@@ -107,7 +107,7 @@
                         });
 
                     } else if ( $.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
-                        const d = get_cities(country_code, show_labels, post_id);
+                        const d = acfcs_get_cities(country_code, show_labels, post_id);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
@@ -154,7 +154,7 @@
                         var state_field_id = $this.attr('id');
                         var city_field_id = state_field_id.replace('stateCode', 'cityName');
                         var changed_city = $('select[id="' + city_field_id + '"]');
-                        const d = get_cities(state_code, show_labels, post_id);
+                        const d = acfcs_get_cities(state_code, show_labels, post_id);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
@@ -190,7 +190,7 @@
          * @param callback
          * @returns {Promise<unknown>}
          */
-        function get_states(countryCode, showLabels, postID, callback) {
+        function acfcs_get_states(countryCode, showLabels, postID, callback) {
             const state_data = {
                 action: 'get_states_call',
                 country_code: countryCode,
@@ -214,7 +214,7 @@
          * @param callback
          * @returns {Promise<unknown>}
          */
-        function get_cities(stateCode, showLabels, postID, callback) {
+        function acfcs_get_cities(stateCode, showLabels, postID, callback) {
             const city_data = {
                 action: 'get_cities_call',
                 post_id: postID,
