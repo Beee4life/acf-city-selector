@@ -54,22 +54,24 @@
 
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-                register_activation_hook( __FILE__,    array( $this, 'acfcs_plugin_activation' ) );
-                register_deactivation_hook( __FILE__,  array( $this, 'acfcs_plugin_deactivation' ) );
+                register_activation_hook( __FILE__,             array( $this, 'acfcs_plugin_activation' ) );
+                register_deactivation_hook( __FILE__,           array( $this, 'acfcs_plugin_deactivation' ) );
 
-                add_action( 'acf/register_fields',          array( $this, 'acfcs_include_field_types' ) );    // v4
-                add_action( 'acf/include_field_types',      array( $this, 'acfcs_include_field_types' ) );    // v5
+                add_action( 'acf/register_fields',                  array( $this, 'acfcs_include_field_types' ) );    // v4
+                add_action( 'acf/include_field_types',              array( $this, 'acfcs_include_field_types' ) );    // v5
 
-                add_action( 'admin_enqueue_scripts',        array( $this, 'acfcs_add_scripts' ) );
-                add_action( 'wp_enqueue_scripts',           array( $this, 'acfcs_add_scripts' ) );
+                add_action( 'admin_enqueue_scripts',                array( $this, 'acfcs_add_scripts' ) );
+                add_action( 'wp_enqueue_scripts',                   array( $this, 'acfcs_add_scripts' ) );
 
-                add_action( 'admin_menu',                   array( $this, 'acfcs_add_admin_pages' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                   array( $this, 'acfcs_check_table' ) );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_change_plugin_order' ), 5 );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_check_for_acf' ), 6 );
-                add_action( 'plugins_loaded',               array( $this, 'acfcs_check_acf_version' ) );
+                add_action( 'admin_menu',                           array( $this, 'acfcs_add_admin_pages' ) );
+                add_action( 'admin_init',                           array( $this, 'acfcs_admin_menu' ) );
+                add_action( 'admin_init',                           array( $this, 'acfcs_errors' ) );
+                add_action( 'admin_init',                           array( $this, 'acfcs_check_table' ) );
+                add_action( 'plugins_loaded',                       array( $this, 'acfcs_change_plugin_order' ), 5 );
+                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_for_acf' ), 6 );
+                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_acf_version' ) );
+
+                add_filter( 'acf/prepare_field/type=acf_city_selector', array( $this, 'acfcs_prepare_field' ) );
 
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
@@ -237,6 +239,24 @@
                 $links         = array_merge( $settings_link, $links );
 
                 return $links;
+            }
+
+
+            /*
+             * Prepare field
+             */
+            public function acfcs_prepare_field( $field ) {
+
+                // get countries
+                $countries = acfcs_get_countries( false, $field );
+                if ( ! empty( $countries ) ) {
+                    foreach( $countries as $key => $value ) {
+                        // get states transient for each country (to save time when needed)
+                        acfcs_get_states( $key, false, $field );
+                    }
+                }
+
+                return $field;
             }
 
 
