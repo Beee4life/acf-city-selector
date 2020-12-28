@@ -139,7 +139,7 @@
 
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country
-                    if ( in_array( $which_fields, [ 'country_state', 'state_city' ] ) ) {
+                    if ( in_array( $which_fields, [ 'all', 'country_state', 'state_city' ] ) ) {
                         $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
                     }
                     if ( in_array( $which_fields, [ 'country_city', 'state_city' ] ) ) {
