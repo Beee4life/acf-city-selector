@@ -67,10 +67,6 @@
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
                         const d = acfcs_get_states(country_code, show_labels, post_id);
                         response_states.push(d);
-                        if ( $.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
-                            const e = acfcs_get_cities(country_code, show_labels, post_id);
-                            response_cities.push(e);
-                        }
 
                         Promise.all(response_states).then(function(jsonResults) {
                             for (i = 0; i < jsonResults.length; i++) {
@@ -85,26 +81,6 @@
                                     $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
                                 }
                                 changed_state.append($stateValues);
-                            }
-                        });
-
-                        Promise.all(response_cities).then(function(jsonResults) {
-                            for (i = 0; i < jsonResults.length; i++) {
-                                var obj         = JSON.parse(jsonResults);
-                                var len         = obj.length;
-                                var $cityValues = '';
-
-                                changed_city.empty();
-                                changed_city.fadeIn();
-                                for (j = 0; j < len; j++) {
-                                    var city = obj[j];
-                                    if ( j === 0 ) {
-                                        $cityValues += '<option value="">' + city.city_name + '</option>';
-                                    } else {
-                                        $cityValues += '<option value="' + city.city_name + '">' + city.city_name + '</option>';
-                                    }
-                                }
-                                changed_city.append($cityValues);
                             }
                         });
 

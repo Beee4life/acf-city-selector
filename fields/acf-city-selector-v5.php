@@ -43,7 +43,6 @@
                 $select_country             = apply_filters( 'acfcs_select_country_label', esc_attr__( 'Select a country', 'acf-city-selector' ) );
                 $select_city                = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
                 $select_country_first       = apply_filters( 'acfcs_select_country_first', esc_attr__( 'No results (yet), first select a country', 'acf-city-selector' ) );
-                $select_country_state_first = apply_filters( 'acfcs_select_country_state_first', esc_attr__( 'No results (yet), first select a country or state', 'acf-city-selector' ) );
                 $select_state               = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
                 $select_state_first         = apply_filters( 'acfcs_select_state_first', esc_attr__( 'No results (yet), first select a state', 'acf-city-selector' ) );
 
@@ -52,7 +51,6 @@
                     'select_city'                => $select_city,
                     'select_country'             => $select_country,
                     'select_country_first'       => $select_country_first,
-                    'select_country_state_first' => $select_country_state_first,
                     'select_state'               => $select_state,
                     'select_state_first'         => $select_state_first,
                 );
