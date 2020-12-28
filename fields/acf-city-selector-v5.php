@@ -159,13 +159,11 @@
                         }
                     }
 
-                } elseif ( false == $default_country ) {
+                } elseif ( false == $default_country && 'state_city' == $which_fields ) {
                     // no default country is set, so show warning
-                    if ( 'state_city' == $which_fields ) {
-                        echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">';
-                        esc_html_e( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
-                        echo '</div></div>';
-                    }
+                    echo '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">';
+                    esc_html_e( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
+                    echo '</div></div>';
                 }
 
                 $prefill_values = [
