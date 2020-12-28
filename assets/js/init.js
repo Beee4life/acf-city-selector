@@ -57,7 +57,7 @@
         var show_labels = $show_labels;
         var which_fields = $which_fields;
 
-        if ( '0' === show_labels ) {
+        if ( '1' !== show_labels ) {
             $select_country = acf._e('acf_city_selector', 'select_country');
             $select_state = acf._e('acf_city_selector', 'select_state');
             $select_city = acf._e('acf_city_selector', 'select_city');
