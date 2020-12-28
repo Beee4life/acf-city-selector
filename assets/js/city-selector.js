@@ -67,8 +67,10 @@
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
                         const d = acfcs_get_states(country_code, show_labels, post_id);
                         response_states.push(d);
-                        const e = acfcs_get_cities(country_code, show_labels, post_id);
-                        response_cities.push(e);
+                        if ( $.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
+                            const e = acfcs_get_cities(country_code, show_labels, post_id);
+                            response_cities.push(e);
+                        }
 
                         Promise.all(response_states).then(function(jsonResults) {
                             for (i = 0; i < jsonResults.length; i++) {
