@@ -19,12 +19,8 @@
         $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
 
         if ( $show_first ) {
+            $countries[ '' ] = '-';
             if ( ! $show_labels ) {
-                $countries[ '' ] = '-';
-                if ( false !== $select_country_label ) {
-                    $countries[ '' ] = $select_country_label;
-                }
-            } else {
                 $countries[ '' ] = $select_country_label;
             }
         }
