@@ -257,6 +257,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 1.2.0
 * add else for first option default country in field settings
 * don't pre-load cities on country change
+* fix help tab which overrides other plugins' help tabs
 
 1.1.0
 * fix typos + capitalization
