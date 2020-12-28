@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.1.0 - released 25.12.20
+1.2.0 - released 28.12.20
 
 <a name="description"></a>
 ### Description
@@ -253,6 +253,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.2.0
+* add else for first option default country in field settings
+* don't pre-load cities on country change
 
 1.1.0
 * fix typos + capitalization
