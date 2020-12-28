@@ -140,19 +140,25 @@
                 $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
                 if ( false !== $default_country && false == $selected_country ) {
-                    // New post with default country, so load all states + cities for $default_country
-                    $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
-                    $prefill_cities = acfcs_get_cities( $default_country, false, $field );
+                    // New post with default country
+                    if ( in_array( $which_fields, [ 'country_state', 'state_city' ] ) ) {
+                        $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
+                    }
+                    if ( in_array( $which_fields, [ 'country_city', 'state_city' ] ) ) {
+                        $prefill_cities = acfcs_get_cities( $default_country, false, $field );
+                    }
 
                 } elseif ( false !== $selected_country ) {
-                    if ( in_array( $which_fields, [ 'state_city' ] ) ) {
+                    if ( in_array( $which_fields, [ 'country_state', 'state_city' ] ) ) {
                         $prefill_states = acfcs_get_states( $selected_country, $show_first, $field );
                     }
                     if ( in_array( $which_fields, [ 'country_city', 'state_city' ] ) ) {
                         $prefill_cities = acfcs_get_cities( $selected_country, $selected_state, $field );
                     }
                     if ( 'country_city' != $which_fields ) {
-                        $selected_state = $selected_country . '-' . $selected_state;
+                        if ( false != $selected_country && false != $selected_state ) {
+                            $selected_state = $selected_country . '-' . $selected_state;
+                        }
                     }
 
                 } elseif ( false == $default_country ) {
