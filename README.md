@@ -307,7 +307,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added new country packages on the website
 
 0.28.0-beta1
-* added a new option: "state/provence + city" (for when a default country is set)
+* added a new option: "state/province + city" (for when a default country is set)
 * added a transient for cities per state 
 * added 3 new filters to override field labels 
 * added a new filter to override showing of field labels 
