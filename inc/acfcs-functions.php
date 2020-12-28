@@ -24,6 +24,8 @@
                 if ( false !== $select_country_label ) {
                     $countries[ '' ] = $select_country_label;
                 }
+            } else {
+                $countries[ '' ] = $select_country_label;
             }
         }
 
