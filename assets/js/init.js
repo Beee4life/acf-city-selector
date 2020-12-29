@@ -44,7 +44,6 @@
         $select_city = '-';
         $select_country = '-';
         $select_country_first = acf._e('acf_city_selector', 'select_country_first');
-        $select_country_state_first = acf._e('acf_city_selector', 'select_country_state_first');
         $select_state = '-';
         $select_state_first = acf._e('acf_city_selector', 'select_state_first');
 
@@ -58,14 +57,14 @@
         var show_labels = $show_labels;
         var which_fields = $which_fields;
 
-        if ( '0' === show_labels ) {
+        if ( '1' !== show_labels ) {
             $select_country = acf._e('acf_city_selector', 'select_country');
             $select_state = acf._e('acf_city_selector', 'select_state');
             $select_city = acf._e('acf_city_selector', 'select_city');
         }
 
         if ( 'country_city' === which_fields ) {
-            $select_country_state_first = acf._e('acf_city_selector', 'select_country_first');
+            $select_country_first = acf._e('acf_city_selector', 'select_country_first');
         }
 
         if ( $.isFunction($.fn.select2) ) {
@@ -94,7 +93,7 @@
                 placeholder: $select_city,
                 language: {
                     noResults: function() {
-                        return $select_country_state_first
+                        return $select_state_first
                     }
                 }
             });

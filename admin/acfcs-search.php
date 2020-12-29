@@ -197,7 +197,7 @@
                                         <label for="acfcs_search" class="screen-reader-text">
                                             <?php esc_html_e( 'Search term', 'acf-city-selector' ); ?>
                                         </label>
-                                        <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo $searched_term; } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
+                                        <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo stripslashes( $searched_term ); } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                                     </div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>

@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.1.0 - released 25.12.20
+1.2.0 - released 28.12.20
 
 <a name="description"></a>
 ### Description
@@ -254,6 +254,12 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.2.0
+* don't pre-load cities on country change
+* fix help tab which overrides other plugins' help tabs
+* stripslash searched value (admin)
+* update default csv (fixed some typos with 's and 't)
+
 1.1.0
 * fix typos + capitalization
 
@@ -302,7 +308,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added new country packages on the website
 
 0.28.0-beta1
-* added a new option: "state/provence + city" (for when a default country is set)
+* added a new option: "state/province + city" (for when a default country is set)
 * added a transient for cities per state 
 * added 3 new filters to override field labels 
 * added a new filter to override showing of field labels 
