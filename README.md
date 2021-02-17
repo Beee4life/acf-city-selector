@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.3.0 - released xx.01.21
+1.3.0 - released xx.02.21
 
 <a name="description"></a>
 ### Description
