@@ -54,26 +54,18 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
 ```
   "repositories": [
     {
-      "type":    "package",
-      "package": {
-        "name":    "Beee4life/acf-city-selector",
-        "type":    "wordpress-plugin",
-        "version": "0.35.0",
-        "dist":    {
-          "type": "zip",
-          "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
-        }
-      }
-    },
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
   ]
 ```
 
-Then run `composer require "beee4life/acf-city-selector"` 
+Then run `composer require "wpackagist-plugin/acf-city-selector"` 
 
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.35.0",
+"wpackagist-plugin/acf-city-selector": "^1.0",
 ```
 
 <a name="setup"></a>
@@ -198,8 +190,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.6
-* [X] Advanced Custom Fields Pro 5.9.3
+* [X] Wordpress 5.6.1
+* [X] Advanced Custom Fields Pro 5.9.5
 * [X] Advanced Custom Fields 4.4.12
 * [X] Chrome (latest version)
 * [X] Firefox (latest version)
@@ -254,7 +246,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-1.3.0
+1.2.0
 * don't pre-load cities on country change
 * fix help tab which overrides other plugins' help tabs
 * stripslash searched value (admin)
