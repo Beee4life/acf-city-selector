@@ -36,7 +36,9 @@
 
             $country_results = array();
             foreach ( $results as $data ) {
-                $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
+                if ( isset( $data->country_code ) && isset( $data->country ) ) {
+                    $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
+                }
             }
 
             set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
