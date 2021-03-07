@@ -21,7 +21,7 @@
                 echo ACF_City_Selector::acfcs_admin_menu();
 
                 $file_index      = acfcs_check_if_files();
-                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_file_name( $_POST[ 'acfcs_file_name' ] ) : false;
+                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;
                 $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
                 $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
@@ -89,9 +89,10 @@
                             </div>
 
                         <?php } else { ?>
-                            <p>
+                            <div>
                                 <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
-                            </p>
+                                <?php echo sprintf( __( 'Upload a csv file from your <a href="%s">dashboard</a>.', 'acf-city-selector' ), esc_url( admin_url( '/admin.php?page=acfcs-dashboard' ) ) ); ?>
+                            </div>
                         <?php } ?>
 
                         <?php

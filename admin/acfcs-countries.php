@@ -10,7 +10,7 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        $country_files    = acfcs_get_packages( 'single' );
+        $country_files    = acfcs_get_packages();
         $country_packages = array();
         $country_packs    = acfcs_get_packages( 'packages' );
         $europe_price     = 0;

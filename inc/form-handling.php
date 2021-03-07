@@ -43,7 +43,7 @@
                     return;
                 }
 
-                $file_name = sanitize_file_name( $_POST[ 'acfcs_file_name' ] );
+                $file_name = $_POST[ 'acfcs_file_name' ];
                 $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
                 $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $import    = isset( $_POST[ 'import' ] ) ? true : false;

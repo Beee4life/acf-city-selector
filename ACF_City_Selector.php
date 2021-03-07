@@ -3,8 +3,8 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.2.0
-    Tested up to:   5.6
+    Version:        1.3.0
+    Tested up to:   5.6.2
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -35,7 +35,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.2.0',
+                    'version'    => '1.3.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -180,31 +180,22 @@
                         foreach ( $codes as $code ) {
                             if ( strpos( $code, 'success' ) !== false ) {
                                 $span_class = 'notice--success ';
-                                $prefix     = false;
                             } elseif ( strpos( $code, 'error' ) !== false ) {
-                                $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
+                                $span_class = 'error ';
                             } elseif ( strpos( $code, 'warning' ) !== false ) {
                                 $span_class = 'notice--warning ';
-                                $prefix     = esc_html__( 'Warning', 'acf-city-selector' );
                             } elseif ( strpos( $code, 'info' ) !== false ) {
                                 $span_class = 'notice--info ';
-                                $prefix     = false;
                             } else {
                                 $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             }
                         }
-                        echo '<div class="acfcs__notice notice ' . $span_class . 'is-dismissible">';
+                        echo '<div id="message" class="notice ' . $span_class . 'is-dismissible">';
                         foreach ( $codes as $code ) {
                             $message = ACF_City_Selector::acfcs_errors()->get_error_message( $code );
-                            echo '<div class="">';
-                            if ( true == $prefix ) {
-                                echo '<strong>' . $prefix . ':</strong> ';
-                            }
+                            echo '<p class="">';
                             echo $message;
-                            echo '</div>';
-                            echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'acf-city-selector' ) . '</span></button>';
+                            echo '</p>';
                         }
                         echo '</div>';
                     }
@@ -268,8 +259,10 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
-                $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
-                $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
+                if ( current_user_can( 'manage_options' ) ) {
+                    $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
+                }
 
                 $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
 
@@ -353,10 +346,8 @@
                 include 'admin/acfcs-dashboard.php';
                 add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
 
-                if ( ! empty( acfcs_check_if_files() ) ) {
-                    include 'admin/acfcs-preview.php';
-                    add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
-                }
+                include 'admin/acfcs-preview.php';
+                add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
 
                 include 'admin/acfcs-settings.php';
                 add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
@@ -365,9 +356,11 @@
                     include 'admin/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
-
-                include 'admin/acfcs-info.php';
-                add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
+                
+                if ( current_user_can( 'manage_options' ) ) {
+                    include 'admin/acfcs-info.php';
+                    add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
+                }
 
                 include 'admin/acfcs-countries.php';
                 add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );

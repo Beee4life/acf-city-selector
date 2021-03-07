@@ -14,7 +14,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
-- [Updates](#updates)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -24,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.2.0 - released 29.12.20
+1.3.0 - released 07.03.21
 
 <a name="description"></a>
 ### Description
@@ -54,26 +53,18 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
 ```
   "repositories": [
     {
-      "type":    "package",
-      "package": {
-        "name":    "Beee4life/acf-city-selector",
-        "type":    "wordpress-plugin",
-        "version": "0.35.0",
-        "dist":    {
-          "type": "zip",
-          "url":  "https://github.com/Beee4life/acf-city-selector/archive/master.zip"
-        }
-      }
-    },
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
   ]
 ```
 
-Then run `composer require "beee4life/acf-city-selector"` 
+Then run `composer require "wpackagist-plugin/acf-city-selector"` 
 
 or add this to the `require` section by hand:
 
 ```
-"beee4life/acf-city-selector": "0.35.0",
+"wpackagist-plugin/acf-city-selector": "^1.0",
 ```
 
 <a name="setup"></a>
@@ -129,7 +120,7 @@ array(2) {
 
 The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as in another country. You won't notice this, since this value is formatted on return.
 
-The return value gets overridden, so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
+The return value gets overridden, so you get 'more return info' and a properly formatted (stateCode). 5 values are returned:
 ```php
 array(5) {
   ["countryCode"]=>
@@ -198,25 +189,14 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.6
-* [X] Advanced Custom Fields Pro 5.9.3
+* [X] Wordpress 5.6.2
+* [X] Advanced Custom Fields Pro 5.9.5
 * [X] Advanced Custom Fields 4.4.12
-* [X] Chrome (latest version)
-* [X] Firefox (latest version)
-* [ ] Safari (latest version)
-* [ ] Edge (latest version)
-* [X] iPhone
-* [ ] Android
-
-<a name="updates"></a>
-### Updates
-
-Since this plugin hasn't been added to the Wordpress repo yet, we recommend 'watching' the plugin [here](https://github.com/Beee4life/acf-city-selector/watchers).
 
 <a name="support"></a>
 ### Support
 
-If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
+If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues). It's faster than the Wordpress support.
 
 <a name="website"></a>
 ### Website
@@ -253,6 +233,11 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.3.0
+* fix non-showing errors on verify csv file
+* show all errors, instead of just first encountered
+* fix dismiss error button
 
 1.2.0
 * don't pre-load cities on country change
@@ -314,4 +299,4 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added a new filter to override showing of field labels 
 * (re-)added a check for database version to prevent unnecessary table updates 
 
-See more changelogs on the [website](https://acf-city-selector.com/documentation/changelog/).
+See older changelogs on the [website](https://acf-city-selector.com/documentation/changelog/).
