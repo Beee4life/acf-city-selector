@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2021-03-07 17:42+0100\n"
+"POT-Creation-Date: 2021-03-07 17:59+0100\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -17,44 +17,36 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:186 ACF_City_Selector.php:195
-msgid "Error"
-msgstr ""
-
-#: ACF_City_Selector.php:189
-msgid "Warning"
-msgstr ""
-
-#: ACF_City_Selector.php:235 ACF_City_Selector.php:258
+#: ACF_City_Selector.php:227 ACF_City_Selector.php:250
 msgid "Settings"
 msgstr ""
 
-#: ACF_City_Selector.php:256
+#: ACF_City_Selector.php:248
 msgid "Dashboard"
 msgstr ""
 
-#: ACF_City_Selector.php:262 admin/acfcs-search.php:236
+#: ACF_City_Selector.php:254 admin/acfcs-search.php:236
 msgid "Search"
 msgstr ""
 
-#: ACF_City_Selector.php:267
+#: ACF_City_Selector.php:259
 msgid "Preview"
 msgstr ""
 
-#: ACF_City_Selector.php:272 admin/acfcs-info.php:29
+#: ACF_City_Selector.php:264 admin/acfcs-info.php:29
 msgid "Info"
 msgstr ""
 
-#: ACF_City_Selector.php:275
+#: ACF_City_Selector.php:267
 msgid "Get more countries"
 msgstr ""
 
-#: ACF_City_Selector.php:290
+#: ACF_City_Selector.php:282
 #, php-format
 msgid "\"%s\" is not activated. This plugin <strong>must</strong> be activated, because without it \"%s\" won't work. Activate it <a href=\"%s\">here</a>."
 msgstr ""
 
-#: ACF_City_Selector.php:313
+#: ACF_City_Selector.php:305
 #, php-format
 msgid "<b>Warning</b>: The \"%s\" plugin will probably not work properly (anymore) with %s v4.x. Please upgrade to PRO."
 msgstr ""
@@ -89,7 +81,7 @@ msgstr ""
 msgid "Rotate your phone for a better view or scroll the list horizontally."
 msgstr ""
 
-#: admin/acfcs-countries.php:77 admin/acfcs-preview.php:125
+#: admin/acfcs-countries.php:77 admin/acfcs-preview.php:126
 #: admin/acfcs-search.php:276 inc/acfcs-help-tabs.php:46
 msgid "Country"
 msgstr ""
@@ -397,42 +389,47 @@ msgstr ""
 msgid "You have no files to preview."
 msgstr ""
 
-#: admin/acfcs-preview.php:106
+#: admin/acfcs-preview.php:94
+#, php-format
+msgid "Upload a csv file from your <a href=\"%s\">dashboard</a>."
+msgstr ""
+
+#: admin/acfcs-preview.php:107
 #, php-format
 msgid "You either have errors in your CSV or there is no data. In case of an error, the file is deleted. Please check \"%s\"."
 msgstr ""
 
-#: admin/acfcs-preview.php:108
+#: admin/acfcs-preview.php:109
 msgid "Dismiss this notice"
 msgstr ""
 
-#: admin/acfcs-preview.php:112
+#: admin/acfcs-preview.php:113
 msgid "There appears to be no data in the file. Are you sure it has content and you selected the correct delimiter ?"
 msgstr ""
 
-#: admin/acfcs-preview.php:116
+#: admin/acfcs-preview.php:117
 msgid "CSV contents"
 msgstr ""
 
-#: admin/acfcs-preview.php:117 admin/acfcs-search.php:254
+#: admin/acfcs-preview.php:118 admin/acfcs-search.php:254
 msgid "Table scrolls horizontally."
 msgstr ""
 
-#: admin/acfcs-preview.php:121 admin/acfcs-search.php:224
+#: admin/acfcs-preview.php:122 admin/acfcs-search.php:224
 #: admin/acfcs-search.php:270 inc/acfcs-help-tabs.php:26
 msgid "City"
 msgstr ""
 
-#: admin/acfcs-preview.php:122 inc/acfcs-help-tabs.php:31
+#: admin/acfcs-preview.php:123 inc/acfcs-help-tabs.php:31
 msgid "State code"
 msgstr ""
 
-#: admin/acfcs-preview.php:123 admin/acfcs-search.php:225
+#: admin/acfcs-preview.php:124 admin/acfcs-search.php:225
 #: admin/acfcs-search.php:273 inc/acfcs-help-tabs.php:36
 msgid "State"
 msgstr ""
 
-#: admin/acfcs-preview.php:124 inc/acfcs-help-tabs.php:41
+#: admin/acfcs-preview.php:125 inc/acfcs-help-tabs.php:41
 msgid "Country code"
 msgstr ""
 

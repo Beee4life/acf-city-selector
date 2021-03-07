@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2021-03-07 17:42+0100\n"
-"PO-Revision-Date: 2021-03-07 17:43+0100\n"
+"POT-Creation-Date: 2021-03-07 17:59+0100\n"
+"PO-Revision-Date: 2021-03-07 17:59+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -17,39 +17,31 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:186 ACF_City_Selector.php:195
-msgid "Error"
-msgstr "Fout"
-
-#: ACF_City_Selector.php:189
-msgid "Warning"
-msgstr "Waarschuwing"
-
-#: ACF_City_Selector.php:235 ACF_City_Selector.php:258
+#: ACF_City_Selector.php:227 ACF_City_Selector.php:250
 msgid "Settings"
 msgstr "Instellingen"
 
-#: ACF_City_Selector.php:256
+#: ACF_City_Selector.php:248
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: ACF_City_Selector.php:262 admin/acfcs-search.php:236
+#: ACF_City_Selector.php:254 admin/acfcs-search.php:236
 msgid "Search"
 msgstr "Zoeken"
 
-#: ACF_City_Selector.php:267
+#: ACF_City_Selector.php:259
 msgid "Preview"
 msgstr "Preview"
 
-#: ACF_City_Selector.php:272 admin/acfcs-info.php:29
+#: ACF_City_Selector.php:264 admin/acfcs-info.php:29
 msgid "Info"
 msgstr "Informatie"
 
-#: ACF_City_Selector.php:275
+#: ACF_City_Selector.php:267
 msgid "Get more countries"
 msgstr "Meer landen"
 
-#: ACF_City_Selector.php:290
+#: ACF_City_Selector.php:282
 #, php-format
 msgid ""
 "\"%s\" is not activated. This plugin <strong>must</strong> be activated, "
@@ -58,7 +50,7 @@ msgstr ""
 "\"%s\" is niet actief. Deze plugin <strong>moet</strong> actief zijn, anders "
 "werkt \"%s\" niet. Activeer hem <a href=\"%s\">hier</a>."
 
-#: ACF_City_Selector.php:313
+#: ACF_City_Selector.php:305
 #, php-format
 msgid ""
 "<b>Warning</b>: The \"%s\" plugin will probably not work properly (anymore) "
@@ -105,7 +97,7 @@ msgstr "Landen"
 msgid "Rotate your phone for a better view or scroll the list horizontally."
 msgstr "Draai je telefoon voor een betere view of scroll horizontaal."
 
-#: admin/acfcs-countries.php:77 admin/acfcs-preview.php:125
+#: admin/acfcs-countries.php:77 admin/acfcs-preview.php:126
 #: admin/acfcs-search.php:276 inc/acfcs-help-tabs.php:46
 msgid "Country"
 msgstr "Land"
@@ -436,7 +428,12 @@ msgstr "Bekijk dit bestand"
 msgid "You have no files to preview."
 msgstr "Je hebt geen bestanden om te bekijken."
 
-#: admin/acfcs-preview.php:106
+#: admin/acfcs-preview.php:94
+#, php-format
+msgid "Upload a csv file from your <a href=\"%s\">dashboard</a>."
+msgstr "Upload een csv bestand vanaf je <a href=\"%s\">dashboard</a>."
+
+#: admin/acfcs-preview.php:107
 #, php-format
 msgid ""
 "You either have errors in your CSV or there is no data. In case of an error, "
@@ -445,11 +442,11 @@ msgstr ""
 "Of er zijn errors in je CSV of er is geen data aanwezig. In het geval van "
 "een error is het bestanden verwijderd. Aub controleer %s."
 
-#: admin/acfcs-preview.php:108
+#: admin/acfcs-preview.php:109
 msgid "Dismiss this notice"
 msgstr "Verberg deze melding"
 
-#: admin/acfcs-preview.php:112
+#: admin/acfcs-preview.php:113
 msgid ""
 "There appears to be no data in the file. Are you sure it has content and you "
 "selected the correct delimiter ?"
@@ -457,29 +454,29 @@ msgstr ""
 "Er lijkt geen data in het bestand aanwezig te zijn. Ben je er zeker van dat "
 "het bestand inhoud heeft en je de goede delimiter gekozen hebt ?"
 
-#: admin/acfcs-preview.php:116
+#: admin/acfcs-preview.php:117
 msgid "CSV contents"
 msgstr "CSV inhoud"
 
-#: admin/acfcs-preview.php:117 admin/acfcs-search.php:254
+#: admin/acfcs-preview.php:118 admin/acfcs-search.php:254
 msgid "Table scrolls horizontally."
 msgstr "Tabel scroll horizontaal."
 
-#: admin/acfcs-preview.php:121 admin/acfcs-search.php:224
+#: admin/acfcs-preview.php:122 admin/acfcs-search.php:224
 #: admin/acfcs-search.php:270 inc/acfcs-help-tabs.php:26
 msgid "City"
 msgstr "Stad"
 
-#: admin/acfcs-preview.php:122 inc/acfcs-help-tabs.php:31
+#: admin/acfcs-preview.php:123 inc/acfcs-help-tabs.php:31
 msgid "State code"
 msgstr "Staat/provincie code"
 
-#: admin/acfcs-preview.php:123 admin/acfcs-search.php:225
+#: admin/acfcs-preview.php:124 admin/acfcs-search.php:225
 #: admin/acfcs-search.php:273 inc/acfcs-help-tabs.php:36
 msgid "State"
 msgstr "Staat/provincie"
 
-#: admin/acfcs-preview.php:124 inc/acfcs-help-tabs.php:41
+#: admin/acfcs-preview.php:125 inc/acfcs-help-tabs.php:41
 msgid "Country code"
 msgstr "Land code"
 
@@ -1116,6 +1113,12 @@ msgstr "Alle steden zijn verwijderd."
 #: inc/form-handling.php:208
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
+
+#~ msgid "Error"
+#~ msgstr "Fout"
+
+#~ msgid "Warning"
+#~ msgstr "Waarschuwing"
 
 #, php-format
 #~ msgid "Please be aware, you're using a beta version of \"%s\"."

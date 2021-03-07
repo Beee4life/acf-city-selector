@@ -89,9 +89,10 @@
                             </div>
 
                         <?php } else { ?>
-                            <p>
+                            <div>
                                 <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
-                            </p>
+                                <?php echo sprintf( __( 'Upload a csv file from your <a href="%s">dashboard</a>.', 'acf-city-selector' ), esc_url( admin_url( '/admin.php?page=acfcs-dashboard' ) ) ); ?>
+                            </div>
                         <?php } ?>
 
                         <?php
