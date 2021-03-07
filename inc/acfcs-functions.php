@@ -302,7 +302,7 @@
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
@@ -310,14 +310,8 @@
                         if ( false === $verify ) {
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
                         }
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
-                    // delete file
-                    if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
-                        unlink( acfcs_upload_folder( '/' ) . $file_name );
-                        $csv_array[ 'error' ] = 'file_deleted';
-                    }
-
                 }
 
                 if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
@@ -341,7 +335,15 @@
                 }
             }
             fclose( $handle );
-
+    
+            if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
+                // delete file
+                if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
+                    unlink( acfcs_upload_folder( '/' ) . $file_name );
+                    $csv_array[ 'error' ] = 'file_deleted';
+                }
+            }
+    
             /**
              * Don't add data if there are any errors. This to prevent rows which had no error from outputting
              * on the preview page.
@@ -684,12 +686,14 @@
      */
     function acfcs_delete_file( $file_name = false ) {
         if ( false != $file_name ) {
-            $delete_result = unlink( acfcs_upload_folder( '/' ) . $file_name );
-            if ( true === $delete_result ) {
-                ACF_City_Selector::acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
-                do_action( 'acfcs_after_success_file_delete' );
-            } else {
-                ACF_City_Selector::acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
+            if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
+                $delete_result = unlink( acfcs_upload_folder( '/' ) . $file_name );
+                if ( true === $delete_result ) {
+                    ACF_City_Selector::acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                    do_action( 'acfcs_after_success_file_delete' );
+                } else {
+                    ACF_City_Selector::acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
+                }
             }
         }
 
