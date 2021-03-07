@@ -14,7 +14,6 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 - [Functions](#functions)
 - [Compatibility](#compatibility)
 - [Tested on](#tested)
-- [Updates](#updates)
 - [Support](#support)
 - [Website](#website)
 - [Disclaimer](#disclaimer)
@@ -121,7 +120,7 @@ array(2) {
 
 The reason why the state is prefixed (with the country code) in the database is because there can be states/provinces which use the same abbreviation as in another country. You won't notice this, since this value is formatted on return.
 
-The return value gets overridden, so you get 'more return info' and properly formatted (stateCode). 5 values are returned:
+The return value gets overridden, so you get 'more return info' and a properly formatted (stateCode). 5 values are returned:
 ```php
 array(5) {
   ["countryCode"]=>
@@ -194,15 +193,10 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 * [X] Advanced Custom Fields Pro 5.9.5
 * [X] Advanced Custom Fields 4.4.12
 
-<a name="updates"></a>
-### Updates
-
-Since this plugin hasn't been added to the Wordpress repo yet, we recommend 'watching' the plugin [here](https://github.com/Beee4life/acf-city-selector/watchers).
-
 <a name="support"></a>
 ### Support
 
-If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues).
+If you need support, please turn to [Github](https://github.com/Beee4life/acf-city-selector/issues). It's faster than the Wordpress support.
 
 <a name="website"></a>
 ### Website
