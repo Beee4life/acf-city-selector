@@ -180,30 +180,22 @@
                         foreach ( $codes as $code ) {
                             if ( strpos( $code, 'success' ) !== false ) {
                                 $span_class = 'notice--success ';
-                                $prefix     = false;
                             } elseif ( strpos( $code, 'error' ) !== false ) {
                                 $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             } elseif ( strpos( $code, 'warning' ) !== false ) {
                                 $span_class = 'notice--warning ';
-                                $prefix     = esc_html__( 'Warning', 'acf-city-selector' );
                             } elseif ( strpos( $code, 'info' ) !== false ) {
                                 $span_class = 'notice--info ';
-                                $prefix     = false;
                             } else {
                                 $span_class = 'notice--error ';
-                                $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             }
                         }
-                        echo '<div id="message" class="acfcs__notice notice ' . $span_class . 'is-dismissible">';
+                        echo '<div id="message" class="notice ' . $span_class . 'is-dismissible">';
                         foreach ( $codes as $code ) {
                             $message = ACF_City_Selector::acfcs_errors()->get_error_message( $code );
-                            echo '<div class="">';
-                            if ( true == $prefix ) {
-                                echo '<strong>' . $prefix . ':</strong> ';
-                            }
+                            echo '<p class="">';
                             echo $message;
-                            echo '</div>';
+                            echo '</p>';
                         }
                         echo '</div>';
                     }
