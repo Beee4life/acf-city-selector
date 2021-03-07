@@ -236,8 +236,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 1.3.0
 * fix non-showing errors on verify csv file
-* fix dismiss error button
 * show all errors, instead of just first encountered
+* fix dismiss error button
 
 1.2.0
 * don't pre-load cities on country change
@@ -299,4 +299,4 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * added a new filter to override showing of field labels 
 * (re-)added a check for database version to prevent unnecessary table updates 
 
-See more changelogs on the [website](https://acf-city-selector.com/documentation/changelog/).
+See older changelogs on the [website](https://acf-city-selector.com/documentation/changelog/).
