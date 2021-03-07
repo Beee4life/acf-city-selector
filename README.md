@@ -24,7 +24,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.3.0 - released xx.03.21
+1.3.0 - released 07.03.21
 
 <a name="description"></a>
 ### Description
@@ -242,6 +242,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 1.3.0
 * fix non-showing errors on verify csv file
+* fix dismiss error button
+* show all errors, instead of just first encountered
 
 1.2.0
 * don't pre-load cities on country change
