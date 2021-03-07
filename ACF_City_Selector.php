@@ -195,7 +195,7 @@
                                 $prefix     = esc_html__( 'Error', 'acf-city-selector' );
                             }
                         }
-                        echo '<div class="acfcs__notice notice ' . $span_class . 'is-dismissible">';
+                        echo '<div id="message" class="acfcs__notice notice ' . $span_class . 'is-dismissible">';
                         foreach ( $codes as $code ) {
                             $message = ACF_City_Selector::acfcs_errors()->get_error_message( $code );
                             echo '<div class="">';
@@ -204,7 +204,6 @@
                             }
                             echo $message;
                             echo '</div>';
-                            echo '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice', 'acf-city-selector' ) . '</span></button>';
                         }
                         echo '</div>';
                     }
@@ -268,8 +267,10 @@
                     $preview = ' | <a href="' . $admin_url . 'acfcs-preview"' . $current_page . '>' . esc_html__( 'Preview', 'acf-city-selector' ) . '</a>';
                 }
 
-                $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
-                $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
+                if ( current_user_can( 'manage_options' ) ) {
+                    $current_page = ( isset( $acfcs_subpage ) && 'info' == $acfcs_subpage ) ? ' class="current_page"' : false;
+                    $info = ' | <a href="' . $admin_url . 'acfcs-info"' . $current_page . '>' . esc_html__( 'Info', 'acf-city-selector' ) . '</a>';
+                }
 
                 $countries = ' | <a href="' . $admin_url . 'acfcs-countries" class="cta">' . esc_html__( 'Get more countries', 'acf-city-selector' ) . '</a>';
 
@@ -365,9 +366,11 @@
                     include 'admin/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
-
-                include 'admin/acfcs-info.php';
-                add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
+                
+                if ( current_user_can( 'manage_options' ) ) {
+                    include 'admin/acfcs-info.php';
+                    add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
+                }
 
                 include 'admin/acfcs-countries.php';
                 add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
