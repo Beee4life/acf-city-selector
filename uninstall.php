@@ -9,8 +9,4 @@
         // drop table
         global $wpdb;
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
-
-        // remove folder
-        $target_folder = acfcs_upload_folder();
-        rmdir( $target_folder );
     }
