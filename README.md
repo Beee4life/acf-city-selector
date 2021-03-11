@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.3.0 - released 07.03.21
+1.3.1 - released xx.03.21
 
 <a name="description"></a>
 ### Description
@@ -189,7 +189,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.6.2
+* [X] Wordpress 5.7
 * [X] Advanced Custom Fields Pro 5.9.5
 * [X] Advanced Custom Fields 4.4.12
 
