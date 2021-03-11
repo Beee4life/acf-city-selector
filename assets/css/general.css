@@ -1,9 +1,4 @@
 /* errors */
-.acfcs .notice {
-    border-left: 4px solid #ffffff;
-    padding:     10px 0 10px 15px;
-}
-
 .acfcs .notice--error {
     border-left-color: #dc3232;
 }
