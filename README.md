@@ -234,6 +234,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.3.1
+* fix styling which was overriding the styling of other messages
+* remove function from uninstall.php which prevented deleting of plugin
+
 1.3.0
 * fix non-showing errors on verify csv file
 * show all errors, instead of just first encountered
