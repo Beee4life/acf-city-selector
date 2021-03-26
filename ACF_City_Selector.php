@@ -236,6 +236,7 @@
              */
             public static function acfcs_admin_menu() {
                 $admin_url      = admin_url( 'options-general.php?page=' );
+                $info           = false;
                 $preview        = false;
                 $search         = false;
                 $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
