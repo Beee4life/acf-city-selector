@@ -12,7 +12,6 @@
     Domain Path:    /languages
     License:        GPLv2 or later
     License URI:    https://www.gnu.org/licenses/gpl.html
-    Contributors:   Jarah de Jong
     */
 
     if ( ! defined( 'ABSPATH' ) ) exit;
