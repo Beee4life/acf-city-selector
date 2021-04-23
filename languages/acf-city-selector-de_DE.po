@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2021-03-07 17:59+0100\n"
-"PO-Revision-Date: 2021-03-07 18:00+0100\n"
+"POT-Creation-Date: 2021-04-23 23:09+0200\n"
+"PO-Revision-Date: 2021-04-23 23:09+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:227 ACF_City_Selector.php:250
+#: ACF_City_Selector.php:226 ACF_City_Selector.php:250
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -614,20 +614,21 @@ msgid "Delete everything"
 msgstr "Alles löschen"
 
 #: admin/acfcs-settings.php:108
-msgid "Save data"
-msgstr "Daten Speichern"
+msgid "Delete data"
+msgstr "Daten löschen"
 
 #: admin/acfcs-settings.php:111
 msgid ""
-"When the plugin is deleted, all settings and cities are deleted as well. "
-"Select this option to preserve this data upon deletion."
+"When the plugin is deleted, all cities are not automatically deleted. Select "
+"this option to delete the cities table as well upon deletion."
 msgstr ""
-"Wenn das Plugin gelöscht wird, werden alle Einstellungen und Städte ebenso "
-"gelöscht.  Wähle diese Option aus um deine Daten zu behalten."
+"Wenn das Plugin gelöscht wird, werden nicht alle Städte automatisch "
+"gelöscht. Wählen Sie diese Option, um die Stadttabelle beim Löschen "
+"ebenfalls zu löschen."
 
 #: admin/acfcs-settings.php:118 admin/acfcs-settings.php:120
-msgid "Preserve settings on plugin deletion"
-msgstr "Einstellungen bei Plugin-Deinstallation behalten"
+msgid "Remove cities table on plugin deletion"
+msgstr "Entfernen Sie die Städte-Tabelle beim Löschen des Plugins"
 
 #: admin/acfcs-settings.php:124
 msgid "Save settings"
@@ -1124,6 +1125,9 @@ msgstr "Alle Städte wurden gelöscht."
 #: inc/form-handling.php:208
 msgid "Settings saved"
 msgstr "Einstellungen gespeichert"
+
+#~ msgid "Save data"
+#~ msgstr "Daten Speichern"
 
 #~ msgid "Error"
 #~ msgstr "Fehler"

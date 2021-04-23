@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2021-03-07 17:59+0100\n"
-"PO-Revision-Date: 2021-03-07 17:59+0100\n"
+"POT-Creation-Date: 2021-04-23 23:08+0200\n"
+"PO-Revision-Date: 2021-04-23 23:09+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
 
-#: ACF_City_Selector.php:227 ACF_City_Selector.php:250
+#: ACF_City_Selector.php:226 ACF_City_Selector.php:250
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -604,21 +604,21 @@ msgid "Delete everything"
 msgstr "Verwijder alles"
 
 #: admin/acfcs-settings.php:108
-msgid "Save data"
-msgstr "Data bewaren"
+msgid "Delete data"
+msgstr "Verwijder data"
 
 #: admin/acfcs-settings.php:111
 msgid ""
-"When the plugin is deleted, all settings and cities are deleted as well. "
-"Select this option to preserve this data upon deletion."
+"When the plugin is deleted, all cities are not automatically deleted. Select "
+"this option to delete the cities table as well upon deletion."
 msgstr ""
-"Wanneer de plugin wordt verwijderd, worden alle steden en instellingen "
-"verwijderd. Selecteer deze optie om alle steden en instellingen te bewaren "
-"wanneer de plugin wordt verwijderd."
+"Wanneer de plugin wordt verwijderd, worden alle steden niet automatisch "
+"verwijderd. Selecteer deze optie om de tabel met steden ook te verwijderen "
+"als de plugin wordt verwijderd."
 
 #: admin/acfcs-settings.php:118 admin/acfcs-settings.php:120
-msgid "Preserve settings on plugin deletion"
-msgstr "Bewaar data bij verwijderen plugin"
+msgid "Remove cities table on plugin deletion"
+msgstr "Verwijder steden bij verwijderen plugin"
 
 #: admin/acfcs-settings.php:124
 msgid "Save settings"
@@ -1113,6 +1113,9 @@ msgstr "Alle steden zijn verwijderd."
 #: inc/form-handling.php:208
 msgid "Settings saved"
 msgstr "Instellingen opgeslagen"
+
+#~ msgid "Save data"
+#~ msgstr "Data bewaren"
 
 #~ msgid "Error"
 #~ msgstr "Fout"
