@@ -103,21 +103,21 @@
                         <br /><hr />
 
                         <form method="post" action="">
-                            <input name="acfcs_preserve_settings_nonce" value="<?php echo wp_create_nonce( 'acfcs-preserve-settings-nonce' ); ?>" type="hidden" />
+                            <input name="acfcs_remove_cities_nonce" value="<?php echo wp_create_nonce( 'acfcs-remove-cities-nonce' ); ?>" type="hidden" />
                             <h2>
-                                <?php esc_html_e( 'Save data', 'acf-city-selector' ); ?>
+                                <?php esc_html_e( 'Delete data', 'acf-city-selector' ); ?>
                             </h2>
                             <p>
-                                <?php esc_html_e( 'When the plugin is deleted, all settings and cities are deleted as well. Select this option to preserve this data upon deletion.', 'acf-city-selector' ); ?>
+                                <?php esc_html_e( 'When the plugin is deleted, all cities are not automatically deleted. Select this option to delete the cities table as well upon deletion.', 'acf-city-selector' ); ?>
                             </p>
-                            <?php $checked = get_option( 'acfcs_preserve_settings' ) ? ' checked="checked"' : false; ?>
+                            <?php $checked = get_option( 'acfcs_delete_cities_table' ) ? ' checked="checked"' : false; ?>
                             <ul>
                                 <li>
                                     <span class="acfcs_input">
-                                        <label for="preserve_settings" class="screen-reader-text">
-                                            <?php esc_html_e( 'Preserve settings on plugin deletion', 'acf-city-selector' ); ?>
+                                        <label for="remove_cities_table" class="screen-reader-text">
+                                            <?php esc_html_e( 'Remove cities table on plugin deletion', 'acf-city-selector' ); ?>
                                         </label>
-                                        <input type="checkbox" name="preserve_settings" id="preserve_settings" value="1" <?php echo $checked; ?>/> <?php esc_html_e( 'Preserve settings on plugin deletion', 'acf-city-selector' ); ?>
+                                        <input type="checkbox" name="remove_cities_table" id="remove_cities_table" value="1" <?php echo $checked; ?>/> <?php esc_html_e( 'Remove cities table on plugin deletion', 'acf-city-selector' ); ?>
                                     </span>
                                 </li>
                             </ul>

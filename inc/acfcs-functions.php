@@ -533,21 +533,21 @@
                 $field_label    = $country_label;
                 $field_suffix   = 'countryCode';
                 $modifier       = 'countries';
-                $selected_value = $stored_value;
+                $selected_value = esc_attr( $stored_value );
                 $values         = $countries;
                 break;
             case 'state':
                 $field_label    = $province_state_label;
                 $field_suffix   = 'stateCode';
                 $modifier       = 'states';
-                $selected_value = $stored_value;
+                $selected_value = esc_attr( $stored_value );
                 $values         = $prefill_states;
                 break;
             case 'city':
                 $field_label    = $city_label;
                 $field_suffix   = 'cityName';
                 $modifier       = 'cities';
-                $selected_value = $stored_value;
+                $selected_value = esc_attr( $stored_value );
                 $values         = $prefill_cities;
                 break;
         }

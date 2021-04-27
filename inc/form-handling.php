@@ -193,23 +193,23 @@
     /**
      * Handle preserve settings option
      */
-    function acfcs_preserve_settings() {
-        if ( isset( $_POST[ 'acfcs_preserve_settings_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( $_POST[ 'acfcs_preserve_settings_nonce' ], 'acfcs-preserve-settings-nonce' ) ) {
+    function acfcs_delete_settings() {
+        if ( isset( $_POST[ 'acfcs_remove_cities_nonce' ] ) ) {
+            if ( ! wp_verify_nonce( $_POST[ 'acfcs_remove_cities_nonce' ], 'acfcs-remove-cities-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
 
                 return;
             } else {
-                if ( isset( $_POST[ 'preserve_settings' ] ) ) {
-                    update_option( 'acfcs_preserve_settings', 1 );
+                if ( isset( $_POST[ 'remove_cities_table' ] ) ) {
+                    update_option( 'acfcs_delete_cities_table', 1 );
                 } else {
-                    delete_option( 'acfcs_preserve_settings' );
+                    delete_option( 'acfcs_delete_cities_table' );
                 }
                 ACF_City_Selector::acfcs_errors()->add( 'success_settings_saved', esc_html__( 'Settings saved', 'acf-city-selector' ) );
             }
         }
     }
-    add_action( 'admin_init', 'acfcs_preserve_settings' );
+    add_action( 'admin_init', 'acfcs_delete_settings' );
 
 
     /**
