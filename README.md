@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.4.0 - released xx.04.21
+1.3.2 - released 27.04.21
 
 <a name="description"></a>
 ### Description
@@ -234,8 +234,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
-1.4.0
-* escape attributes in dropdowns
+1.3.2
+* escape attributes in dropdowns (via @hardweb-it)
 
 1.3.1
 * fix styling which was overriding the styling of other messages
