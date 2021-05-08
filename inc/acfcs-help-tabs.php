@@ -107,4 +107,4 @@
         return false;
 
     }
-    add_filter( 'current_screen', 'acfcs_help_tabs' );
+    add_action( 'current_screen', 'acfcs_help_tabs' );
