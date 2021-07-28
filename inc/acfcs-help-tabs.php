@@ -92,13 +92,13 @@
                     'title'   => esc_html__( 'More countries', 'acf-city-selector' ),
                     'content' =>
                         '<h5>More countries</h5>
-                        <p>' . __( 'If you need more countries, you can get them on the official website: <a href="https://acf-city-selector.com/get-countries/" target="_blank" rel="noopener">acf-city-selector.com</a>.', 'acf-city-selector' ) . '</p>
+                        <p>' . __( 'If you need more countries, you can get them on the official website: <a href="' . ACFCS_WEBSITE_URL . '/get-countries/" target="_blank" rel="noopener">acf-city-selector.com</a>.', 'acf-city-selector' ) . '</p>
                         '
                 ) );
 
                 get_current_screen()->set_help_sidebar(
                     '<p><strong>' . esc_html__( 'Official website', 'acf-city-selector' ) . '</strong></p>
-                <p><a href="https://acf-city-selector.com?utm_source=' . $_SERVER[ 'SERVER_NAME' ] . '&utm_medium=plugin_admin&utm_campaign=free_promo">acf-city-selector.com</a></p>'
+                <p><a href="' . ACFCS_WEBSITE_URL . '?utm_source=' . $_SERVER[ 'SERVER_NAME' ] . '&utm_medium=plugin_admin&utm_campaign=free_promo">acf-city-selector.com</a></p>'
                 );
             }
         }
