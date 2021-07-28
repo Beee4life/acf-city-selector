@@ -1,4 +1,8 @@
 <?php
+    if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
+
     // function to check for field values
     include 'acfcs-field-settings.php';
 
