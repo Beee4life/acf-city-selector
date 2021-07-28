@@ -38,12 +38,7 @@
 
             if ( ! isset( $field[ 'show_labels' ] ) ) {
                 if ( isset( $_POST[ 'show_labels' ] ) ) {
-                    $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
-                    if ( '1' == $show_labels ) {
-                        $field[ 'show_labels' ] = true;
-                    } elseif ( '0' == $show_labels ) {
-                        $field[ 'show_labels' ] = false;
-                    }
+                    $field[ 'show_labels' ] = ( '1' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) ? true : false;
                 }
             }
 
