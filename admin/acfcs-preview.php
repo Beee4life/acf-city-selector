@@ -1,5 +1,4 @@
 <?php
-
     /**
      * Content for the settings page
      */

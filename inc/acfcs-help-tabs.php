@@ -1,5 +1,4 @@
 <?php
-
     /**
      * Add help tabs
      *
