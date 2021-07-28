@@ -1,3 +1,8 @@
+<?php
+    if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
+?>
 <div class="admin_right">
     <div class="content">
         <h3>
