@@ -4,7 +4,7 @@
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
     Version:        1.4.0
-    Tested up to:   5.7.1
+    Tested up to:   5.8
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -13,10 +13,11 @@
     License:        GPLv2 or later
     License URI:    https://www.gnu.org/licenses/gpl.html
     */
+    
+    if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
 
-    if ( ! defined( 'ABSPATH' ) ) exit;
-
-    // check if class already exists
     if ( ! class_exists( 'ACF_City_Selector' ) ) {
 
         /*
@@ -34,7 +35,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.3.2',
+                    'version'    => '1.4.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -46,18 +47,13 @@
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
 
-                if ( ! defined( 'ACFCS_PLUGIN_URL' ) ) {
-                    $plugin_url = plugin_dir_url( __FILE__ );
-                    define( 'ACFCS_PLUGIN_URL', $plugin_url );
-                }
-
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
                 register_activation_hook( __FILE__,             array( $this, 'acfcs_plugin_activation' ) );
                 register_deactivation_hook( __FILE__,           array( $this, 'acfcs_plugin_deactivation' ) );
 
-                add_action( 'acf/register_fields',                  array( $this, 'acfcs_include_field_types' ) );    // v4
-                add_action( 'acf/include_field_types',              array( $this, 'acfcs_include_field_types' ) );    // v5
+                add_action( 'acf/register_fields',                  array( $this, 'acfcs_include_field_types' ) ); // v4
+                add_action( 'acf/include_field_types',              array( $this, 'acfcs_include_field_types' ) ); // v5
 
                 add_action( 'admin_enqueue_scripts',                array( $this, 'acfcs_add_scripts' ) );
                 add_action( 'wp_enqueue_scripts',                   array( $this, 'acfcs_add_scripts' ) );
@@ -175,7 +171,6 @@
                 if ( $codes = ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
                     if ( is_wp_error( ACF_City_Selector::acfcs_errors() ) ) {
                         $span_class = false;
-                        $prefix     = false;
                         foreach ( $codes as $code ) {
                             if ( strpos( $code, 'success' ) !== false ) {
                                 $span_class = 'notice--success ';
@@ -210,7 +205,9 @@
              * @param bool $version (int) major ACF version. Defaults to false
              */
             public function acfcs_include_field_types( $version = false ) {
-                if ( ! $version ) { $version = 4; }
+                if ( ! $version ) {
+                    $version = 4;
+                }
                 include_once( 'fields/acf-city-selector-v' . $version . '.php' );
             }
 
