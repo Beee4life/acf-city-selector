@@ -1,10 +1,8 @@
 <?php
-
     // exit if accessed directly
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
-
 
     // check if class already exists
     if ( ! class_exists( 'acf_field_city_selector' ) ) :
