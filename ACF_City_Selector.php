@@ -347,7 +347,7 @@
                 add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
 
                 include 'admin/acfcs-settings.php';
-                add_submenu_page( null, 'Settings', 'Settings', 'manage_options', 'acfcs-settings', 'acfcs_settings' );
+                add_submenu_page( null, __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), 'manage_options', 'acfcs-settings', 'acfcs_settings' );
 
                 if ( true === acfcs_has_cities() ) {
                     include 'admin/acfcs-search.php';

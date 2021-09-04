@@ -12,7 +12,7 @@
             <?php echo sprintf( esc_html__( 'This plugin is an extension for %s. I built it because there was no properly working plugin which offered what I needed.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" rel="noopener" target="_blank">Advanced Custom Fields</a>' ); ?>
         </p>
         <p>
-            <?php echo sprintf( __( '<a href="%s" rel="noopener" target="_blank">Click here</a> for the plugin\'s official website.', 'acf-city-selector' ), ACFCS_WEBSITE_URL . '/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin' ); ?>
+            <?php echo sprintf( __( "%s for the plugin's official website.", 'acf-city-selector' ), sprintf( '<a href="%s" rel="noopener" target="_blank">%s</a>', ACFCS_WEBSITE_URL . '/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin', __( 'Click here', 'acf-city-selector' ) ) ); ?>
         </p>
 
         <hr />
