@@ -34,8 +34,6 @@
         if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_select_file_nonce' ], 'acfcs-select-file-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-
-                return;
             } else {
                 if ( empty( $_POST[ 'acfcs_file_name' ] ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
