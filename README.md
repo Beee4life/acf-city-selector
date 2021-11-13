@@ -235,6 +235,11 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 1.4.0
+* fix broken image in readme
+* change incorrect filter to action
+* simplified some IF statements
+* sprintf more output
+* translated some strings
 
 1.3.2
 * escape attributes in dropdowns (via @hardweb-it)
