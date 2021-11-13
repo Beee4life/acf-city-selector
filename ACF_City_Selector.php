@@ -4,7 +4,7 @@
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
     Version:        1.4.0
-    Tested up to:   5.8
+    Tested up to:   5.8.2
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -13,7 +13,7 @@
     License:        GPLv2 or later
     License URI:    https://www.gnu.org/licenses/gpl.html
     */
-    
+
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
@@ -353,7 +353,7 @@
                     include 'admin/acfcs-search.php';
                     add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
                 }
-                
+
                 if ( current_user_can( 'manage_options' ) ) {
                     include 'admin/acfcs-info.php';
                     add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
