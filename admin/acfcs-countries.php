@@ -56,8 +56,8 @@
                                 <?php esc_html_e( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ); ?>
                             </p>
                             <p>
-                                <?php esc_html_e( 'And now you can !! We have created several \'country packages\' for you to import as is.', 'acf-city-selector' ); ?>
-                                <?php echo sprintf( __( 'Download them <a href="%s">%s</a>.', 'acf-city-selector' ), esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), 'here' ); ?>
+                                <?php esc_html_e( "And now you can !! We have created several 'country packages' for you to import 'as is'.", 'acf-city-selector' ); ?>
+                                <?php echo sprintf( __( 'Download them %s.', 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), __( 'here', 'acf-city-selector' ) ) ); ?>
                             </p>
                         </div>
 
@@ -202,7 +202,7 @@
                             <?php } ?>
 
                             <p>
-                                <?php echo sprintf( __( 'More countries will be added soon. Feel free to <a href="%s" target="_blank" rel="noopener">request</a> a country, if it\'s not available (yet).', 'acf-city-selector' ), esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ) ); ?>
+                                <?php echo sprintf( __( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), __( 'request', 'acf-city-selector' ) ) ); ?>
                             </p>
 
                             <p>

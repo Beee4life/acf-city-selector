@@ -1,5 +1,4 @@
 <?php
-
     /**
      * Add help tabs
      *
@@ -54,7 +53,7 @@
                     'id'      => 'import-file',
                     'title'   => esc_html__( 'Import CSV from file', 'acf-city-selector' ),
                     'content' =>
-                        '<h5>Import CSV from file</h5>
+                        sprintf( '<h5>%s</h5>', esc_html__( 'Import CSV from file', 'acf-city-selector' ) ) . '
                         <p>' . $on_this_page . '</p>
                         <p>' . esc_html__( 'You can only upload *.csv files.', 'acf-city-selector' ) . '</p>'
                         . $field_info
@@ -64,7 +63,7 @@
                     'id'      => 'import-raw',
                     'title'   => esc_html__( 'Import raw CSV data', 'acf-city-selector' ),
                     'content' =>
-                        '<h5>Import cities through CSV data</h5>
+                        sprintf( '<h5>%s</h5>', esc_html__( 'Import cities through CSV data', 'acf-city-selector' ) ) . '
                         <p>' . $on_this_page . '</p>
                         <p>' . esc_html__( 'Raw CSV data has to be formatted (and ordered) in a certain way, otherwise it won\'t work.', 'acf-city-selector' ) . '</p>'
                         . $field_info
@@ -74,7 +73,7 @@
                     'id'      => 'preview-data',
                     'title'   => esc_html__( 'Preview CSV data', 'acf-city-selector' ),
                     'content' =>
-                        '<h5>Preview CSV data</h5>
+                        sprintf( '<h5>%s</h5>', esc_html__( 'Preview CSV data', 'acf-city-selector' ) ) . '
                         <p>' . esc_html__( 'On the preview page, you can preview uploaded csv files. Not to be confused with search where you can search imported cities. Please keep in mind, if you preview an uploaded csv file, the file will get verified and it can be deleted if it contains errors.', 'acf-city-selector' ) . '</p>
                         '
                 ) );
@@ -92,14 +91,14 @@
                     'id'      => 'more-countries',
                     'title'   => esc_html__( 'More countries', 'acf-city-selector' ),
                     'content' =>
-                        '<h5>More countries</h5>
-                        <p>' . __( 'If you need more countries, you can get them on the official website: <a href="https://acf-city-selector.com/get-countries/" target="_blank" rel="noopener">acf-city-selector.com</a>.', 'acf-city-selector' ) . '</p>
+                        sprintf( '<h5>%s</h5>', esc_html__( 'More countries', 'acf-city-selector' ) ) . '
+                        <p>' . sprintf( __( 'If you need more countries, you can get them on the official website: %s.', 'acf-city-selector' ), '<a href="' . ACFCS_WEBSITE_URL . '/get-countries/" target="_blank" rel="noopener">acf-city-selector.com</a>' ) . '</p>
                         '
                 ) );
 
                 get_current_screen()->set_help_sidebar(
                     '<p><strong>' . esc_html__( 'Official website', 'acf-city-selector' ) . '</strong></p>
-                <p><a href="https://acf-city-selector.com?utm_source=' . $_SERVER[ 'SERVER_NAME' ] . '&utm_medium=plugin_admin&utm_campaign=free_promo">acf-city-selector.com</a></p>'
+                <p><a href="' . ACFCS_WEBSITE_URL . '?utm_source=' . $_SERVER[ 'SERVER_NAME' ] . '&utm_medium=plugin_admin&utm_campaign=free_promo">acf-city-selector.com</a></p>'
                 );
             }
         }
@@ -107,4 +106,4 @@
         return false;
 
     }
-    add_filter( 'current_screen', 'acfcs_help_tabs' );
+    add_action( 'current_screen', 'acfcs_help_tabs' );

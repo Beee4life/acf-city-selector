@@ -23,14 +23,14 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.3.2 - released 27.04.21
+1.4.0 - released 14.11.21
 
 <a name="description"></a>
 ### Description
 
 This plugin allows you to select a city, based on country and province/state in an ACF Field.
 
-![Screenshot ACF City Selector](https://beee4life.github.com/beee4life.github.io/images/screenshot-acf-city-selector.png)
+![Screenshot ACF City Selector](https://beee4life.github.io/images/screenshot-acf-city-selector.png)
 
 It creates a new `field type` for you to choose when you're creating an ACF Field Group.
 
@@ -189,8 +189,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.7.1
-* [X] Advanced Custom Fields Pro 5.9.5
+* [X] Wordpress 5.8.2
+* [X] Advanced Custom Fields Pro 5.11
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
@@ -233,6 +233,13 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.4.0
+* fix broken image in readme
+* change incorrect filter to action
+* simplified some IF statements
+* sprintf more output
+* translated some strings
 
 1.3.2
 * escape attributes in dropdowns (via @hardweb-it)
