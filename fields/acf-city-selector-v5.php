@@ -389,7 +389,6 @@
             }
         }
 
-        // initialize
         new acf_field_city_selector( $this->settings );
 
     }
