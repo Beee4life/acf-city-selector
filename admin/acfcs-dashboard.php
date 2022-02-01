@@ -62,7 +62,7 @@
 
                                     <p>
                                         <small>
-                                            Max lines has no effect when verifying. The entire file will be checked.
+                                            <?php esc_html_e( 'Max lines has no effect when verifying. The entire file will be checked.', 'acf-city-selector' ); ?>
                                         </small>
                                     </p>
 
