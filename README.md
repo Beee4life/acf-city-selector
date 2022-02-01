@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.4.0 - released 14.11.21
+1.5.0 - released xx.02.22
 
 <a name="description"></a>
 ### Description
@@ -233,6 +233,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.5.0
+* improve adding of ajax url
 
 1.4.0
 * fix broken image in readme
