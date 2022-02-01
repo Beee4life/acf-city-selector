@@ -339,7 +339,7 @@
                 }
             }
             fclose( $handle );
-    
+
             if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
                 // delete file
                 if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
@@ -347,7 +347,7 @@
                     $csv_array[ 'error' ] = 'file_deleted';
                 }
             }
-    
+
             /**
              * Don't add data if there are any errors. This to prevent rows which had no error from outputting
              * on the preview page.
@@ -604,10 +604,7 @@
         $csv_array = acfcs_csv_to_array( $file_name, '', $delimiter, $verify );
         if ( isset( $csv_array[ 'data' ] ) ) {
             ACF_City_Selector::acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
-
             do_action( 'acfcs_after_success_verify' );
-
-            return;
         }
     }
 
@@ -676,7 +673,6 @@
 
                 do_action( 'acfcs_after_success_import_raw' );
             }
-
         } else {
             ACF_City_Selector::acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
         }
@@ -700,8 +696,6 @@
                 }
             }
         }
-
-        return;
     }
 
 
