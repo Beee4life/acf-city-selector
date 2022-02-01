@@ -1,19 +1,5 @@
 <?php
     /*
-     * Set admin-ajax.php on the front side (by default it is available only on back-end)
-     */
-    function acfcs_city_selector_ajaxurl() {
-        ?>
-        <script type="text/javascript">
-            var ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-        </script>
-        <?php
-    }
-    add_action( 'wp_head', 'acfcs_city_selector_ajaxurl' );
-    add_action( 'login_head', 'acfcs_city_selector_ajaxurl' );
-
-
-    /*
      * Get states by country code
      *
      * @param bool $country_code
