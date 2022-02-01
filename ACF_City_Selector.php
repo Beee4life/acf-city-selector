@@ -158,7 +158,7 @@
              * @return WP_Error
              */
             public static function acfcs_errors() {
-                static $wp_error; // Will hold global variable safely
+                static $wp_error;
 
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
