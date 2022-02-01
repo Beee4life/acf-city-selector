@@ -129,21 +129,6 @@
                                     <td><?php echo get_home_url(); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'blog_public' ] = get_option( 'blog_public' ); ?>
-                                    <td><?php esc_html_e( 'Blog public', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'blog_public' ); ?></td>
-                                </tr>
-                                <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'users_can_register' ] = get_option( 'users_can_register' ); ?>
-                                    <td><?php esc_html_e( 'Users can register', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'users_can_register' ); ?></td>
-                                </tr>
-                                <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'page_on_front' ] = get_option( 'page_on_front' ); ?>
-                                    <td><?php esc_html_e( 'Page on front', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'page_on_front' ); ?></td>
-                                </tr>
-                                <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'current_theme' ] = get_option( 'current_theme' ); ?>
                                     <td><?php esc_html_e( 'Current theme', 'acf-city-selector' ); ?></td>
                                     <td><?php echo get_option( 'current_theme' ); ?></td>
