@@ -251,23 +251,31 @@
                             <?php } ?>
                         </div>
 
+                        <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                         <div class="acfcs__section acfcs__section--export">
                             <h2>
                                 <?php esc_html_e( 'Download JSON', 'acf-city-selector' ); ?>
                             </h2>
                             <p>
                                 <?php esc_html_e( "If you're in need of support, the info above might helpful for us to fix a problem.", 'acf-city-selector' ); ?>
+                                <?php if ( file_exists( $file_name ) ) { ?>
                                 <br />
                                 <?php esc_html_e( 'You can download the settings to a JSON file below (and send it to us when asked).', 'acf-city-selector' ); ?>
+                                <?php } ?>
                             </p>
-                            <?php $file_name       = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
-                            <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
-                            <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
-                            <p class="json_button">
-                                <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
-                                    <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
-                                </a> <small>(right-click to save)</small>
-                            </p>
+                            <?php if ( file_exists( $file_name ) ) { ?>
+                                <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
+                                <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
+                                <p class="json_button">
+                                    <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
+                                        <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
+                                    </a> <small>(right-click to save)</small>
+                                </p>
+                            <?php } else { ?>
+                                <p>
+                                    <?php esc_html_e( 'The debug.json file is missing. Please deactivate and reactivate the plugin.', 'acf-city-selector' ); ?>
+                                </p>
+                            <?php } ?>
                         </div>
 
                     </div>
