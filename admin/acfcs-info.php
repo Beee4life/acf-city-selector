@@ -254,7 +254,7 @@
                                 <p class="json_button">
                                     <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
                                         <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
-                                    </a> <small>(right-click to save)</small>
+                                    </a> <small>(<?php _e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
                                 </p>
                             <?php } else { ?>
                                 <p>
