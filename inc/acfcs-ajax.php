@@ -8,9 +8,10 @@
     function acfcs_get_states_call() {
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
-            $field        = false;
-            $items        = array();
-            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+            $field   = false;
+            $items   = array();
+            $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+
             if ( is_string( $_POST[ 'country_code' ] ) ) {
                 $country_code = sanitize_text_field( $_POST[ 'country_code' ] );
             }
