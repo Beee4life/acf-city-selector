@@ -10,123 +10,42 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        // get all countries from database
-        global $wpdb;
+        $all_countries           = acfcs_get_countries( false );
         $cities                  = array();
+        $city_array              = array();
         $countries               = array();
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_state' ] ) : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_country' ] ) : false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_orderby' ] ) : false;
         $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_search' ] ) : false;
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
-
-        // get cities by country
-        $results = acfcs_get_countries( false );
+        $states                  = acfcs_get_states_optgroup();
 
         // if there is at least 1 country
-        if ( ! empty( $results ) ) {
-            foreach ( $results as $country_code => $label ) {
+        if ( ! empty( $all_countries ) ) {
+            foreach ( $all_countries as $country_code => $label ) {
                 $countries[] = [
                     'code' => $country_code,
                     'name' => esc_attr__( $label, 'acf-city-selector' ),
                 ];
             }
-
-            // get states for these countries
-            if ( ! empty( $countries ) ) {
-                $states = array();
-                foreach ( $countries as $country ) {
-                    $states[] = array(
-                        'state' => 'open_optgroup',
-                        'name'  => esc_attr__( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
-                    );
-                    $order = 'ORDER BY state_name ASC';
-                    if ( 'FR' == $country[ 'code' ] ) {
-                        $order = "ORDER BY LENGTH(state_name), state_name";
-                    }
-                    $sql = $wpdb->prepare( "
-                        SELECT *
-                        FROM " . $wpdb->prefix . "cities
-                        WHERE country_code = %s
-                        GROUP BY state_code
-                        " . $order, $country[ 'code' ]
-                    );
-                    $results = $wpdb->get_results( $sql );
-
-                    if ( count( $results ) > 0 ) {
-                        foreach ( $results as $data ) {
-                            $states[] = array(
-                                'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name'  => esc_attr__( $data->state_name, 'acf-city-selector' ),
-                            );
-                        }
-                    }
-                    $states[] = array(
-                        'state' => 'close_optgroup',
-                        'name'  => '',
-                    );
-                }
-            }
         }
 
-        // if has searched
+        // if user has searched
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
-            $search_limit = false;
-            $where        = array();
+            $cities = acfcs_get_searched_cities();
 
-            if ( false != $search_criteria_state ) {
-                $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
-            } elseif ( false != $search_criteria_country ) {
-                $where[] = "country_code = '" . $search_criteria_country . "'";
-            }
-            if ( false != $searched_term ) {
-                $search[] = 'city_name LIKE "%' . $searched_term . '%"';
-
-                if ( $search_criteria_country || $search_criteria_state ) {
-                    $where[] = '(' . implode( ' OR ', $search ) . ')';
-                } else {
-                    $where[] = implode( ' OR ', $search );
-                }
-
-            }
-            if ( 0 != $selected_limit ) {
-                $search_limit = "LIMIT " . $selected_limit;
-            }
-
-            if ( ! empty( $where ) ) {
-                $where   = "WHERE " . implode( ' AND ', $where );
-            } else {
-                $where = false;
-            }
-
-            if ( 'state' == $searched_orderby ) {
-                $orderby = 'ORDER BY state_name ASC, city_name ASC';
-            } else {
-                $orderby = 'ORDER BY city_name ASC, state_name ASC';
-            }
-
-            $sql = "SELECT *
-                FROM " . $wpdb->prefix . "cities
-                " . $where . "
-                " . $orderby . "
-                " . $search_limit . "
-            ";
-            $cities     = $wpdb->get_results( $sql );
-            $city_array = array();
             foreach( $cities as $city_object ) {
                 $city_array[] = (array) $city_object;
             }
+
             if ( ! empty( $city_array ) ) {
                 uasort( $city_array, 'acfcs_sort_array_with_quotes' );
             }
             $result_count = count( $city_array );
         }
-
-        // output
         ?>
         <div class="wrap acfcs">
-            <div id="icon-options-general" class="icon32"><br /></div>
-
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
@@ -249,53 +168,33 @@
                             <form enctype="multipart/form-data" action="" method="POST">
                                 <input name="acfcs_delete_row_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-delete-row-nonce' ); ?>" />
                                 <div class="acfcs__search-results">
-                                    <p class="hide568">
-                                        <small>
-                                            <?php _e( 'Table scrolls horizontally.', 'acf-city-selector' ); ?>
-                                        </small>
-                                    </p>
-                                    <p>
-                                        <?php echo $result_count; ?> <?php esc_html_e( 'results',  'acf-city-selector' ); ?>
-                                    </p>
+                                    <?php echo sprintf( '<p class="hide568">%s</p>', __( 'Table scrolls horizontally.', 'acf-city-selector' ) ); ?>
+                                    <?php echo sprintf( '<p>%d %s</p>', $result_count, _n( 'result',  'results', $result_count, 'acf-city-selector' ) ); ?>
+                                    <?php
+                                        $table_headers = [
+                                            __( 'ID', 'acf-city-selector' ),
+                                            __( 'Select', 'acf-city-selector' ),
+                                            __( 'City', 'acf-city-selector' ),
+                                            __( 'State', 'acf-city-selector' ),
+                                            __( 'Country', 'acf-city-selector' ),
+                                        ];
+                                    ?>
+
                                     <table class="acfcs__table acfcs__table--search scrollable">
                                         <thead>
                                         <tr>
-                                            <th>
-                                                <?php esc_html_e( 'ID', 'acf-city-selector' ); ?>
-                                            </th>
-                                            <th>
-                                                <?php esc_html_e( 'Select', 'acf-city-selector' ); ?>
-                                            </th>
-                                            <th>
-                                                <?php esc_html_e( 'City', 'acf-city-selector' ); ?>
-                                            </th>
-                                            <th>
-                                                <?php esc_html_e( 'State', 'acf-city-selector' ); ?>
-                                            </th>
-                                            <th>
-                                                <?php esc_html_e( 'Country', 'acf-city-selector' ); ?>
-                                            </th>
+                                            <?php foreach( $table_headers as $column ) { ?>
+                                                <?php echo sprintf( '<th>%s</th>', $column ); ?>
+                                            <?php } ?>
                                         </tr>
                                         </thead>
                                         <?php foreach( $city_array as $city ) { ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $city[ 'id' ]; ?>
-                                                </td>
-                                                <td>
-                                                    <label>
-                                                        <input name="row_id[]" type="checkbox" value="<?php echo $city[ 'id' ]; ?> <?php echo $city[ 'city_name' ]; ?>">
-                                                    </label>
-                                                </td>
-                                                <td>
-                                                    <?php echo $city[ 'city_name' ]; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $city[ 'state_name' ]; ?>
-                                                </td>
-                                                <td>
-                                                    <?php _e( $city[ 'country' ], 'acf-city-selector' ); ?>
-                                                </td>
+                                                <?php echo sprintf( '<td>%s</td>', $city[ 'id' ] ); ?>
+                                                <?php echo sprintf( '<td>%s</td>', sprintf( '<label>%s</label>', sprintf( '<input name="row_id[]" type="checkbox" value="%s %s">', $city[ 'id' ], $city[ 'city_name' ] ) ) ); ?>
+                                                <?php echo sprintf( '<td>%s</td>', $city[ 'city_name' ] ); ?>
+                                                <?php echo sprintf( '<td>%s</td>', $city[ 'state_name' ] ); ?>
+                                                <?php echo sprintf( '<td>%s</td>', __( $city[ 'country' ], 'acf-city-selector' ) ); ?>
                                             </tr>
                                         <?php } ?>
                                     </table>
