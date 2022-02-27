@@ -7,13 +7,12 @@
         if ( ! current_user_can( 'manage_options' ) ) {
             wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
         }
+        $countries = acfcs_get_countries( false, false, true );
 
         ACF_City_Selector::acfcs_show_admin_notices();
         ?>
 
         <div class="wrap acfcs">
-            <div id="icon-options-general" class="icon32"><br /></div>
-
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
@@ -21,15 +20,10 @@
             <div class="acfcs__container">
                 <div class="admin_left">
                     <div class="content">
-
                         <form method="post" action="">
                             <input name="acfcs_import_actions_nonce" value="<?php echo wp_create_nonce( 'acfcs-import-actions-nonce' ); ?>" type="hidden" />
-                            <h2>
-                                <?php esc_html_e( 'Import countries', 'acf-city-selector' ); ?>
-                            </h2>
-                            <p>
-                                <?php esc_html_e( "Here you can (re-)import all cities for the individual countries listed below.", 'acf-city-selector' ); ?>
-                            </p>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Import countries', 'acf-city-selector' ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', esc_html__( 'Here you can (re-)import all cities for the individual countries listed below.', 'acf-city-selector' ) ); ?>
                             <ul class="acfcs__checkboxes">
                                 <li>
                                     <label for="import_be" class="screen-reader-text">
@@ -50,16 +44,11 @@
 
                         <br /><hr />
 
-                        <?php $countries = acfcs_get_countries( false, false,  true ); ?>
                         <?php if ( ! empty( $countries ) ) { ?>
-                            <h2>
-                                <?php esc_html_e( 'Remove countries', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Remove countries', 'acf-city-selector' ) ); ?>
                             <form method="post" action="">
                                 <input name="acfcs_remove_countries_nonce" value="<?php echo wp_create_nonce( 'acfcs-remove-countries-nonce' ); ?>" type="hidden" />
-                                <p>
-                                    <?php esc_html_e( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ); ?>
-                                </p>
+                                <?php echo sprintf( '<p>%s</p>', esc_html__( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ) ); ?>
                                 <ul class="acfcs__checkboxes">
                                     <?php foreach( $countries as $key => $value ) { ?>
                                         <li>
@@ -78,12 +67,8 @@
 
                         <form method="post" action="">
                             <input name="acfcs_delete_transients" value="<?php echo wp_create_nonce( 'acfcs-delete-transients-nonce' ); ?>" type="hidden" />
-                            <h2>
-                                <?php esc_html_e( 'Delete transients', 'acf-city-selector' ); ?>
-                            </h2>
-                            <p>
-                                <?php esc_html_e( "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option.", 'acf-city-selector' ); ?>
-                            </p>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Delete transients', 'acf-city-selector' ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', esc_html__( "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option.", 'acf-city-selector' ) ); ?>
                             <input type="submit" class="button button-primary" value="<?php esc_html_e( "Delete transients", 'acf-city-selector' ); ?>" />
                         </form>
 
@@ -91,12 +76,8 @@
 
                         <form method="post" action="">
                             <input name="acfcs_truncate_table_nonce" value="<?php echo wp_create_nonce( 'acfcs-truncate-table-nonce' ); ?>" type="hidden" />
-                            <h2>
-                                <?php esc_html_e( 'Clear the database', 'acf-city-selector' ); ?>
-                            </h2>
-                            <p>
-                                <?php esc_html_e( "By selecting this option, you will remove all cities, which are present in the database. This is useful if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ); ?>
-                            </p>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Clear the database', 'acf-city-selector' ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', esc_html__( "By selecting this option, you will remove all cities, which are present in the database. This is useful if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ) ); ?>
                             <input type="submit" class="button button-primary"  onclick="return confirm( 'Are you sure you want to delete all cities ?' )" value="<?php esc_html_e( 'Delete everything', 'acf-city-selector' ); ?>" />
                         </form>
 
@@ -104,12 +85,8 @@
 
                         <form method="post" action="">
                             <input name="acfcs_remove_cities_nonce" value="<?php echo wp_create_nonce( 'acfcs-remove-cities-nonce' ); ?>" type="hidden" />
-                            <h2>
-                                <?php esc_html_e( 'Delete data', 'acf-city-selector' ); ?>
-                            </h2>
-                            <p>
-                                <?php esc_html_e( 'When the plugin is deleted, all cities are not automatically deleted. Select this option to delete the cities table as well upon deletion.', 'acf-city-selector' ); ?>
-                            </p>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Delete data', 'acf-city-selector' ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', esc_html__( 'When the plugin is deleted, all cities are not automatically deleted. Select this option to delete the cities table as well upon deletion.', 'acf-city-selector' ) ); ?>
                             <?php $checked = get_option( 'acfcs_delete_cities_table' ) ? ' checked="checked"' : false; ?>
                             <ul>
                                 <li>
