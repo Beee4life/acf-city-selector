@@ -14,8 +14,6 @@
         ?>
 
         <div class="wrap acfcs">
-            <div id="icon-options-general" class="icon32"><br /></div>
-
             <h1>
                 <?php echo get_admin_page_title(); ?>
             </h1>

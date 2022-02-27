@@ -15,8 +15,6 @@
         ?>
 
         <div class="wrap acfcs">
-            <div id="icon-options-general" class="icon32"><br /></div>
-
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
