@@ -150,5 +150,4 @@
         }
 
         return $settings;
-
     }
