@@ -1,5 +1,9 @@
 <?php
     /*
+     * Ajax functions
+     */
+
+    /*
      * Get states by country code
      *
      * @param bool $country_code
