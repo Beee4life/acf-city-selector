@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.5.0 - released xx.02.22
+1.5.0 - released 27.02.22
 
 <a name="description"></a>
 ### Description
@@ -61,18 +61,12 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
 
 Then run `composer require "wpackagist-plugin/acf-city-selector"` 
 
-or add this to the `require` section by hand:
-
-```
-"wpackagist-plugin/acf-city-selector": "^1.0",
-```
-
 <a name="setup"></a>
 ### Setup
 
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
 1. Select if you want to show labels (default = yes)
-1. Select if you want to use select2 (default = no)
+1. Select if you want to use select2 (default = no) [ACF pro only]
 1. Select if you want a default country (default = none)
 1. (optional) Import new cities with help of the included Excel sheet.
 1. (optional) Import new cities by csv (available on the website).
@@ -229,7 +223,7 @@ This seems to be very random and unpredictable.
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-[Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did the German translations.
+[Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did some of the German translations.
 
 <a name="changelog"></a>
 ### Changelog
