@@ -4,7 +4,7 @@
      */
     function acfcs_info_page() {
 
-        if ( ! current_user_can( 'manage_options' ) ) {
+        if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
             wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
         }
 
