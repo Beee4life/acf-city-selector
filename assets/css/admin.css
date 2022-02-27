@@ -62,6 +62,11 @@
   vertical-align: middle;
 }
 
+.acfcs__section input[type="submit"] + input[type="submit"] {
+  margin-left: 10px;
+}
+
+
 .acfcs__search-form {
   display:   flex;
   flex-flow: row wrap;
