@@ -561,13 +561,12 @@
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
-                            if ( false !== $selected_value ) {
+                            $selected = false;
+                            if ( ! empty( $selected_value ) ) {
                                 $selected = ( $selected_value == $key ) ? $selected_selected : false;
                             } elseif ( ! empty( $default_value ) ) {
                                 // only when a default country is set
                                 $selected = ( $default_value == $key ) ? $selected_selected : false;
-                            } else {
-                                $selected = false;
                             }
                             echo '<option value="' . $key . '"' . $selected . '>' . $label . '</option>';
                         }
