@@ -268,7 +268,7 @@
                     echo '<a href="' . $admin_url . 'acfcs-' . $slug . '"' . $current_page . '>' . $label . '</a>';
                 }
                 $menu_items = ob_get_clean();
-                $menu = sprintf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
+                $menu       = sprintf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
 
                 return $menu;
             }
@@ -302,7 +302,11 @@
                 if ( isset( $plugins[ 'advanced-custom-fields-pro/acf.php' ] ) ) {
                     if ( $plugins[ 'advanced-custom-fields-pro/acf.php' ][ 'Version' ] < 5 && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
                         add_action( 'admin_notices', function () {
-                            $message = sprintf( __( '<b>Warning</b>: The "%s" plugin will probably not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ), 'City Selector', 'Advanced Custom Fields' );
+                            $message = sprintf( __( '%s: The "%s" plugin will probably not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ),
+                                sprintf( '<b>%s</b>', __( 'Warning', 'acf-city-selector' ) ),
+                                'City Selector',
+                                'Advanced Custom Fields'
+                            );
                             echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', $message );
                         } );
                     }
