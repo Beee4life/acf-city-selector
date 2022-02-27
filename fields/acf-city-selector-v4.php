@@ -134,7 +134,7 @@
                                 'type'    => 'radio',
                                 'name'    => 'fields[' . $key . '][which_fields]',
                                 'choices' => $default_country_fields,
-                                'value'   => ( isset( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false,
+                                'value'   => ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all',
                             ));
                         ?>
                     </td>
