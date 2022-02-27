@@ -189,8 +189,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.8.2
-* [X] Advanced Custom Fields Pro 5.11
+* [X] Wordpress 5.9.1
+* [X] Advanced Custom Fields Pro 5.12
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
