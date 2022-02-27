@@ -1,3 +1,8 @@
+<?php
+    if ( ! defined( 'ABSPATH' ) ) {
+        exit;
+    }
+?>
 <h2><?php esc_html_e( 'Preview data', 'acf-city-selector' ); ?></h2>
 <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
 <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
@@ -6,9 +11,7 @@
     <form name="select-preview-file" id="settings-form" action="" method="post">
         <div class="acfcs__process-file">
             <div class="acfcs__process-file-element">
-                <label for="acfcs_file_name">
-                    <?php esc_html_e( 'File', 'acf-city-selector' ); ?>
-                </label>
+                <?php echo sprintf( '<label for="acfcs_file_name">%s</label>', esc_attr__( 'File', 'acf-city-selector' ) ); ?>
                 <select name="acfcs_file_name" id="acfcs_file_name">
                     <?php if ( count( $file_index ) > 1 ) { ?>
                         <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
@@ -22,9 +25,7 @@
 
             <div class="acfcs__process-file-element">
                 <?php $delimiters = [ ';', ',', '|' ]; ?>
-                <label for="acfcs_delimiter">
-                    <?php esc_html_e( 'Delimiter', 'acf-city-selector' ); ?>
-                </label>
+                <?php echo sprintf( '<label for="acfcs_delimiter">%s</label>', esc_attr__( 'Delimiter', 'acf-city-selector' ) ); ?>
                 <select name="acfcs_delimiter" id="acfcs_delimiter">
                     <?php foreach( $delimiters as $delimiter_value ) { ?>
                         <?php $selected_delimiter = ( $delimiter_value == $delimiter ) ? ' selected' : false; ?>
@@ -34,9 +35,7 @@
             </div>
 
             <div class="acfcs__process-file-element">
-                <label for="acfcs_max_lines">
-                    <?php esc_html_e( 'Max lines', 'acf-city-selector' ); ?>
-                </label>
+                <?php echo sprintf( '<label for="acfcs_max_lines">%s</label>', esc_attr__( 'Max lines', 'acf-city-selector' ) ); ?>
                 <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo $max_lines_value; ?>" />
             </div>
         </div>

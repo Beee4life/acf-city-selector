@@ -39,7 +39,7 @@
                         <?php } else { ?>
                             <div>
                                 <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
-                                <?php echo sprintf( __( 'Upload a csv file from your <a href="%s">dashboard</a>.', 'acf-city-selector' ), esc_url( admin_url( '/admin.php?page=acfcs-dashboard' ) ) ); ?>
+                                <?php echo sprintf( __( 'Upload a csv file from your %s.', 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( admin_url( '/admin.php?page=acfcs-dashboard' ) ), __( 'dashboard', 'acf-city-selector' ) ) ); ?>
                             </div>
                         <?php } ?>
 
