@@ -66,7 +66,7 @@
                 add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_acf_version' ) );
 
-                add_action( 'acf/input/admin_l10n',                 array( $this, 'acfcs_error_messages' ) ); // v4
+                add_action( 'acf/input/admin_l10n',                 array( $this, 'acfcs_error_messages' ) );
 
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
@@ -211,7 +211,7 @@
                                 $span_class = 'notice--error ';
                             }
                         }
-                        echo sprintf( '<div id="message" class="notice %s is-dismissible">',$span_class );
+                        echo sprintf( '<div id="message" class="notice %s is-dismissible">', $span_class );
                         foreach ( $codes as $code ) {
                             echo sprintf( '<p>%s</p>', ACF_City_Selector::acfcs_errors()->get_error_message( $code ) );
                         }
