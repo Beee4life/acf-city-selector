@@ -237,6 +237,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 1.5.0
 * improve adding of ajax url
 * add filter to change user cap to access settings
+* sprintf a lot of values
+* prefix input names to prevent any errors
 * clean up files
 * make more functions to prevent 'spaghetti code'
 
