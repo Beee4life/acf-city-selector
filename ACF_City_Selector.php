@@ -66,6 +66,8 @@
                 add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_for_acf' ), 6 );
                 add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_acf_version' ) );
 
+                add_action( 'acf/input/admin_l10n',                 array( $this, 'acfcs_error_messages' ) ); // v4
+
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
 
                 // functions & hooks
@@ -75,6 +77,8 @@
                 include 'inc/acfcs-i18n.php';
                 include 'inc/acfcs-ajax.php';
                 include 'inc/form-handling.php';
+
+                $this->l10n = acfcs_get_js_translations();
 
                 // admin pages
                 include 'admin/acfcs-dashboard.php';
@@ -158,6 +162,20 @@
                 if ( ! file_exists( $target_folder ) ) {
                     mkdir( $target_folder, 0755 );
                 }
+            }
+
+
+            /**
+             * Add our error messages to acf filter
+             *
+             * @param $messages
+             *
+             * @return mixed
+             */
+            public function acfcs_error_messages( $messages ) {
+                $messages[ 'validation' ] = array_merge( $messages[ 'validation' ], $this->l10n );
+
+                return $messages;
             }
 
 

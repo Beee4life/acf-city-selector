@@ -32,21 +32,7 @@
                     'which_fields' => 'all',
                 );
 
-                $no_countries               = esc_attr__( 'No countries', 'acf-city-selector' );
-                $select_country             = esc_attr( apply_filters( 'acfcs_select_country_label', __( 'Select a country', 'acf-city-selector' ) ) );
-                $select_city                = esc_attr( apply_filters( 'acfcs_select_city_label', __( 'Select a city', 'acf-city-selector' ) ) );
-                $select_country_first       = esc_attr( apply_filters( 'acfcs_select_country_first', __( 'No results (yet), first select a country', 'acf-city-selector' ) ) );
-                $select_state               = esc_attr( apply_filters( 'acfcs_select_province_state_label', __( 'Select a province/state', 'acf-city-selector' ) ) );
-                $select_state_first         = esc_attr( apply_filters( 'acfcs_select_state_first', __( 'No results (yet), first select a state', 'acf-city-selector' ) ) );
-
-                $this->l10n = array(
-                    'no_countries'               => $no_countries,
-                    'select_city'                => $select_city,
-                    'select_country'             => $select_country,
-                    'select_country_first'       => $select_country_first,
-                    'select_state'               => $select_state,
-                    'select_state_first'         => $select_state_first,
-                );
+                $this->l10n = acfcs_get_js_translations();
 
                 parent::__construct();
 

@@ -900,3 +900,24 @@
 
         return $cities;
     }
+
+
+    /**
+     * Get all translation strings for js/input fields
+     *
+     * @since 1.5.0
+     *
+     * @return array
+     */
+    function acfcs_get_js_translations() {
+        $translations = array(
+            'no_countries'         => esc_attr__( 'No countries', 'acf-city-selector' ),
+            'select_city'          => esc_attr( apply_filters( 'acfcs_select_city_label', __( 'Select a city', 'acf-city-selector' ) ) ),
+            'select_country'       => esc_attr( apply_filters( 'acfcs_select_country_label', __( 'Select a country', 'acf-city-selector' ) ) ),
+            'select_country_first' => esc_attr( apply_filters( 'acfcs_select_country_first', __( 'No results (yet), first select a country', 'acf-city-selector' ) ) ),
+            'select_state'         => esc_attr( apply_filters( 'acfcs_select_province_state_label', __( 'Select a province/state', 'acf-city-selector' ) ) ),
+            'select_state_first'   => esc_attr( apply_filters( 'acfcs_select_state_first', __( 'No results (yet), first select a state', 'acf-city-selector' ) ) ),
+        );
+
+        return $translations;
+    }
