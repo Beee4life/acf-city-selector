@@ -29,13 +29,13 @@
                                     <label for="import_be" class="screen-reader-text">
                                         <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?>
                                     </label>
-                                    <input type="checkbox" name="import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
+                                    <input type="checkbox" name="acfcs_import_be" id="import_be" value="1" /> <?php esc_html_e( 'Import all cities in Belgium', 'acf-city-selector' ); ?> (1166)
                                 </li>
                                 <li>
                                     <label for="import_nl" class="screen-reader-text">
                                         <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?>
                                     </label>
-                                    <input type="checkbox" name="import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
+                                    <input type="checkbox" name="acfcs_import_nl" id="import_nl" value="1" /> <?php esc_html_e( 'Import all cities in Holland/The Netherlands', 'acf-city-selector' ); ?> (2449)
                                 </li>
                             </ul>
 
@@ -55,7 +55,7 @@
                                             <label for="delete_<?php echo strtolower( $key ); ?>" class="screen-reader-text">
                                                 <?php esc_html_e( $value, 'acf-city-selector' ); ?>
                                             </label>
-                                            <input type="checkbox" name="delete_country[]" id="delete_<?php echo strtolower( $key ); ?>" value="<?php echo strtolower( $key ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
+                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo strtolower( $key ); ?>" value="<?php echo strtolower( $key ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
                                         </li>
                                     <?php } ?>
                                 </ul>
