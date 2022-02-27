@@ -70,12 +70,12 @@
              */
             function render_field_settings( $field ) {
 
-                $label_options = array(
+                $select_options = array(
                     1 => esc_attr__( 'Yes', 'acf-city-selector' ),
                     0 => esc_attr__( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $label_options,
+                    'choices'      => $select_options,
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
@@ -85,7 +85,7 @@
                 ) );
 
                 acf_render_field_setting( $field, array(
-                    'choices'      => $label_options,
+                    'choices'      => $select_options,
                     'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
