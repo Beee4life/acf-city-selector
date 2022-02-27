@@ -278,6 +278,10 @@
   border-top: 1px solid #444444;
 }
 
+.hide568 {
+  font-size: small;
+}
+
 /* media queries */
 @media screen and (min-width: 400px) {
   .hide400 {
