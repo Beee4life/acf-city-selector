@@ -10,7 +10,6 @@
             delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
         } else {
             delete_transient( 'acfcs_countries' );
-            // get all countries
             $countries = acfcs_get_countries( false, false, true );
             if ( ! empty( $countries ) ) {
                 foreach( $countries as $country_code => $label ) {
