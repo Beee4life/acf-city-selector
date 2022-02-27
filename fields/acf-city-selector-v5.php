@@ -200,7 +200,6 @@
                 wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acfcs-process' );
 
-                // check field settings
                 $all_info                     = acfcs_get_field_settings();
                 $js_vars[ 'ajaxurl' ]         = admin_url( 'admin-ajax.php' );
                 $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
