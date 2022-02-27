@@ -369,17 +369,17 @@
              * Add admin pages
              */
             public function acfcs_add_admin_pages() {
-                add_options_page( 'ACF City Selector', 'City Selector', 'manage_options', 'acfcs-dashboard', 'acfcs_dashboard' );
-                add_submenu_page( null, 'Preview data', 'Preview data', 'manage_options', 'acfcs-preview', 'acfcs_preview_page' );
-                add_submenu_page( null, __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), 'manage_options', 'acfcs-settings', 'acfcs_settings' );
-                add_submenu_page( null, 'Get countries', 'Get countries', 'manage_options', 'acfcs-countries', 'acfcs_country_page' );
+                add_options_page( 'ACF City Selector', 'City Selector', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-dashboard', 'acfcs_dashboard' );
+                add_submenu_page( null, 'Preview data', 'Preview data', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-preview', 'acfcs_preview_page' );
+                add_submenu_page( null, __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-settings', 'acfcs_settings' );
+                add_submenu_page( null, 'Get countries', 'Get countries', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-countries', 'acfcs_country_page' );
 
                 if ( true === acfcs_has_cities() ) {
-                    add_submenu_page( null, 'City Overview', 'City Overview', 'manage_options', 'acfcs-search', 'acfcs_search' );
+                    add_submenu_page( null, 'City Overview', 'City Overview', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
                 }
 
-                if ( current_user_can( 'manage_options' ) ) {
-                    add_submenu_page( null, 'Info', 'Info', 'manage_options', 'acfcs-info', 'acfcs_info_page' );
+                if ( current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
+                    add_submenu_page( null, 'Info', 'Info', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
                 }
             }
 
