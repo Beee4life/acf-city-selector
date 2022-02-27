@@ -18,6 +18,7 @@
              * - render_field( $field )
              * - input_admin_enqueue_scripts()
              * - load_value( $value, $post_id, $field )
+             * - update_value( $value, $post_id, $field )
              * - validate_value( $valid, $value, $field, $input )
              */
 
@@ -249,6 +250,8 @@
              * @param   $post_id (mixed) the $post_id from which the value was loaded
              * @param   $field (array) the field array holding all the field options
              *
+             * @TODO: DRY
+             *
              * @return $value
              */
             function update_value( $value, $post_id, $field ) {
@@ -275,6 +278,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode' ] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
@@ -301,6 +307,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode'] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }

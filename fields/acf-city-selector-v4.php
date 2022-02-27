@@ -206,6 +206,8 @@
             *  @type	action
             *  @since	3.6
             *  @date	23/01/13
+            *
+            *  @TODO: DRY
             */
             function input_admin_enqueue_scripts() {
 
@@ -275,6 +277,8 @@
             *  @param	$post_id - the $post_id from which the value was loaded
             *  @param	$field - the field array holding all the field options
             *
+            *  @TODO: DRY
+            *
             *  @return	$value - the value to be saved in the database
             */
             function load_value( $value, $post_id, $field ) {
@@ -308,11 +312,13 @@
             /**
              * Update value before it's changed in the database
              *
-             * @param $value
-             * @param $post_id
-             * @param $field
+             * @param   $value (mixed) the value found in the database
+             * @param   $post_id (mixed) the $post_id from which the value was loaded
+             * @param   $field (array) the field array holding all the field options
              *
              * @since: 1.5.0
+             *
+             * @TODO: DRY
              *
              * @return false|mixed
              */
@@ -339,6 +345,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode'] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
@@ -365,6 +374,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode'] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
