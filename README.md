@@ -235,6 +235,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 1.5.0
+* added new options to v4 version (which were already available for v5)
 * improve adding of ajax url
 * add filter to change user cap to access settings
 * sprintf a lot of values
