@@ -17,7 +17,6 @@
      * @return array
      */
     function acfcs_get_countries( $show_first = true, $field = false, $force = false ) {
-
         $countries            = array();
         $select_country_label = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
         $show_labels          = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
@@ -66,7 +65,6 @@
      * @return array
      */
     function acfcs_get_states( $country_code = false, $show_first = true, $field = false ) {
-
         $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
         $show_labels                 = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
         $states                      = array();
@@ -125,7 +123,6 @@
      * @return array
      */
     function acfcs_get_cities( $country_code = false, $state_code = false, $field = false ) {
-
         $cities            = array();
         $cities_transient  = false;
         $select_city_label = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
@@ -205,7 +202,6 @@
      * @return mixed
      */
     function acfcs_get_country_name( $country_code = false ) {
-
         if ( false != $country_code ) {
             global $wpdb;
             $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM {$wpdb->prefix}cities WHERE country_code = %s", $country_code ) );
@@ -285,7 +281,6 @@
      * @return array|WP_Error
      */
     function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
-
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
         $csv_array     = array();
         $empty_array   = false;
@@ -368,7 +363,6 @@
      * @return array|false
      */
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
-
         if ( false != $csv_data ) {
             $column_benchmark = 5;
             $line_number      = 0;
@@ -441,7 +435,6 @@
      * @return array
      */
     function acfcs_get_countries_info() {
-
         global $wpdb;
         $results = $wpdb->get_results( '
                 SELECT country_code FROM ' . $wpdb->prefix . 'cities
@@ -757,7 +750,6 @@
      */
     function acfcs_render_preview_results( $csv_data = [] ) {
         if ( ! empty( $csv_data ) ) {
-
             $table_columns = [
                 esc_html__( 'City', 'acf-city-selector' ),
                 esc_html__( 'State code', 'acf-city-selector' ),
