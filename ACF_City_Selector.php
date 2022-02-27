@@ -193,12 +193,9 @@
                                 $span_class = 'notice--error ';
                             }
                         }
-                        echo '<div id="message" class="notice ' . $span_class . 'is-dismissible">';
+                        echo sprintf( '<div id="message" class="notice %s is-dismissible">',$span_class );
                         foreach ( $codes as $code ) {
-                            $message = ACF_City_Selector::acfcs_errors()->get_error_message( $code );
-                            echo '<p class="">';
-                            echo $message;
-                            echo '</p>';
+                            echo sprintf( '<p>%s</p>', ACF_City_Selector::acfcs_errors()->get_error_message( $code ) );
                         }
                         echo '</div>';
                     }
@@ -240,13 +237,9 @@
              */
             public static function acfcs_admin_menu() {
                 $admin_url      = admin_url( 'options-general.php?page=' );
-                $acfcs_subpage  = false;
                 $current_class  = ' class="current_page"';
                 $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
-
-                if ( isset( $url_array[ 'query' ] ) ) {
-                    $acfcs_subpage = substr( $url_array[ 'query' ], 11 );
-                }
+                $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
 
                 $pages = [
                     'dashboard' => esc_html__( 'Dashboard', 'acf-city-selector' ),
