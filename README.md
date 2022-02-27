@@ -236,8 +236,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 1.5.0
 * improve adding of ajax url
-* make more functions to prevent 'spaghetti code'
+* add filter to change user cap to access settings
 * clean up files
+* make more functions to prevent 'spaghetti code'
 
 1.4.0
 * fix broken image in readme
