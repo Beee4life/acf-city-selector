@@ -173,7 +173,11 @@
              * @return mixed
              */
             public function acfcs_error_messages( $messages ) {
-                $messages[ 'validation' ] = array_merge( $messages[ 'validation' ], $this->l10n );
+                if ( isset( $messages[ 'validation' ] ) ) {
+                    $messages[ 'validation' ] = array_merge( $messages[ 'validation' ], $this->l10n );
+                } else {
+                    $messages[ 'validation' ] = $this->l10n;
+                }
 
                 return $messages;
             }
