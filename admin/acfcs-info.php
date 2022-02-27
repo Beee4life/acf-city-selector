@@ -4,7 +4,7 @@
      */
     function acfcs_info_page() {
 
-        if ( ! current_user_can( 'manage_options' ) ) {
+        if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
             wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
         }
 
@@ -15,8 +15,6 @@
         ?>
 
         <div class="wrap acfcs">
-            <div id="icon-options-general" class="icon32"><br /></div>
-
             <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
@@ -24,9 +22,8 @@
             <div class="acfcs__container">
                 <div class="admin_left">
                     <div class="content">
-
                         <div class="acfcs__section">
-                            <h2><?php esc_html_e( 'Info', 'acf-city-selector' ); ?></h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Info', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( 'This page shows real-time info about your site and settings.', 'acf-city-selector' ); ?>
                                 <br />
@@ -36,9 +33,7 @@
 
                         <div class="acfcs__section acfcs__section--countries">
                             <?php if ( ! empty( $countries ) ) { ?>
-                                <h2>
-                                    <?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?>
-                                </h2>
+                                <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Countries in database', 'acf-city-selector' ) ); ?>
 
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
@@ -61,9 +56,7 @@
                                 <?php $prepare_json[ 'countries' ] = 'none'; ?>
                             <?php } ?>
 
-                            <h2>
-                                <?php esc_html_e( 'Server info', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Server info', 'acf-city-selector' ) ); ?>
 
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
@@ -106,9 +99,7 @@
                                 </tbody>
                             </table>
 
-                            <h2>
-                                <?php esc_html_e( 'WordPress info', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Wordpress info', 'acf-city-selector' ) ); ?>
 
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
@@ -127,21 +118,6 @@
                                     <?php $prepare_json[ 'wordpress_info' ][ 'home_url' ] = get_home_url(); ?>
                                     <td><?php esc_html_e( 'Home URL', 'acf-city-selector' ); ?></td>
                                     <td><?php echo get_home_url(); ?></td>
-                                </tr>
-                                <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'blog_public' ] = get_option( 'blog_public' ); ?>
-                                    <td><?php esc_html_e( 'Blog public', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'blog_public' ); ?></td>
-                                </tr>
-                                <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'users_can_register' ] = get_option( 'users_can_register' ); ?>
-                                    <td><?php esc_html_e( 'Users can register', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'users_can_register' ); ?></td>
-                                </tr>
-                                <tr>
-                                    <?php $prepare_json[ 'wordpress_info' ][ 'page_on_front' ] = get_option( 'page_on_front' ); ?>
-                                    <td><?php esc_html_e( 'Page on front', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'page_on_front' ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'current_theme' ] = get_option( 'current_theme' ); ?>
@@ -182,9 +158,7 @@
                             </table>
 
                             <?php if ( is_multisite() ) { ?>
-                                <h2>
-                                    <?php esc_html_e( 'Multisite', 'acf-city-selector' ); ?>
-                                </h2>
+                                <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Multisite', 'acf-city-selector' ) ); ?>
 
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
@@ -218,10 +192,7 @@
                                 </table>
                             <?php } ?>
 
-
-                            <h2>
-                                <?php esc_html_e( 'Active plugins', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Active plugins', 'acf-city-selector' ) ); ?>
 
                             <?php $plugins = get_plugins(); ?>
                             <?php if ( ! empty( $plugins ) ) { ?>
@@ -237,12 +208,8 @@
                                         <?php if ( is_plugin_active( $key ) ) { ?>
                                             <?php $prepare_json[ 'plugins' ][] = [ 'name' => $value[ 'Name' ], 'version' => $value[ 'Version' ], 'author' => $value[ 'Author' ], 'author_uri' => $value[ 'AuthorURI' ] ]; ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $value[ 'Name' ]; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $value[ 'Version' ]; ?>
-                                                </td>
+                                                <td><?php echo $value[ 'Name' ]; ?></td>
+                                                <td><?php echo $value[ 'Version' ]; ?></td>
                                             </tr>
                                         <?php } ?>
                                     <?php } ?>
@@ -251,23 +218,27 @@
                             <?php } ?>
                         </div>
 
+                        <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                         <div class="acfcs__section acfcs__section--export">
-                            <h2>
-                                <?php esc_html_e( 'Download JSON', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Download JSON', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( "If you're in need of support, the info above might helpful for us to fix a problem.", 'acf-city-selector' ); ?>
+                                <?php if ( file_exists( $file_name ) ) { ?>
                                 <br />
                                 <?php esc_html_e( 'You can download the settings to a JSON file below (and send it to us when asked).', 'acf-city-selector' ); ?>
+                                <?php } ?>
                             </p>
-                            <?php $file_name       = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
-                            <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
-                            <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
-                            <p class="json_button">
-                                <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
-                                    <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
-                                </a> <small>(right-click to save)</small>
-                            </p>
+                            <?php if ( file_exists( $file_name ) ) { ?>
+                                <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
+                                <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
+                                <p class="json_button">
+                                    <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
+                                        <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
+                                    </a> <small>(<?php _e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
+                                </p>
+                            <?php } else { ?>
+                                <?php echo sprintf( '<p>%s</p>', esc_html__( 'The debug.json file is missing. Please deactivate and reactivate the plugin.', 'acf-city-selector' ) ); ?>
+                            <?php } ?>
                         </div>
 
                     </div>

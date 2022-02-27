@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.4.0 - released 14.11.21
+1.5.0 - released 27.02.22
 
 <a name="description"></a>
 ### Description
@@ -61,18 +61,12 @@ If you use a composer file to add any plugins/libraries. Add the following to yo
 
 Then run `composer require "wpackagist-plugin/acf-city-selector"` 
 
-or add this to the `require` section by hand:
-
-```
-"wpackagist-plugin/acf-city-selector": "^1.0",
-```
-
 <a name="setup"></a>
 ### Setup
 
 1. Create a new field via ACF and select the `City Selector` type (listed in the Choice section).
 1. Select if you want to show labels (default = yes)
-1. Select if you want to use select2 (default = no)
+1. Select if you want to use select2 (default = no) [ACF pro only]
 1. Select if you want a default country (default = none)
 1. (optional) Import new cities with help of the included Excel sheet.
 1. (optional) Import new cities by csv (available on the website).
@@ -189,8 +183,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] Wordpress 5.8.2
-* [X] Advanced Custom Fields Pro 5.11
+* [X] Wordpress 5.9.1
+* [X] Advanced Custom Fields Pro 5.12
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
@@ -229,10 +223,19 @@ This seems to be very random and unpredictable.
 
 I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
 
-[Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did the German translations.
+[Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did some of the German translations.
 
 <a name="changelog"></a>
 ### Changelog
+
+1.5.0
+* added new options to v4 version (which were already available for v5)
+* improve adding of ajax url
+* add filter to change user cap to access settings
+* sprintf a lot of values
+* prefix input names to prevent any errors
+* clean up files
+* make more functions to prevent 'spaghetti code'
 
 1.4.0
 * fix broken image in readme

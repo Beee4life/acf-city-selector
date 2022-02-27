@@ -2,7 +2,7 @@
     /**
      * Get country name + i18n country names
      *
-     * These are defined here so they are 'picked up' as translatable strings, because not all values occur in the plugin itself.
+     * These are defined here (just in case) so they are 'picked up' as translatable strings, because not all values occur in the plugin itself.
      *
      * @param $country_code
      *
@@ -28,6 +28,7 @@
             'gb'     => esc_html__( 'Great Britain', 'acf-city-selector' ),
             'lu'     => esc_html__( 'Luxembourg', 'acf-city-selector' ),
             'mx'     => esc_html__( 'Mexico', 'acf-city-selector' ),
+            'nl'     => esc_html__( 'Netherlands', 'acf-city-selector' ),
             'nz'     => esc_html__( 'New Zealand', 'acf-city-selector' ),
             'pt'     => esc_html__( 'Portugal', 'acf-city-selector' ),
             'kr'     => esc_html__( 'South Korea', 'acf-city-selector' ),

@@ -18,6 +18,7 @@
              * - render_field( $field )
              * - input_admin_enqueue_scripts()
              * - load_value( $value, $post_id, $field )
+             * - update_value( $value, $post_id, $field )
              * - validate_value( $valid, $value, $field, $input )
              */
 
@@ -39,21 +40,7 @@
                     'use_select2'  => 0,
                 );
 
-                $no_countries               = esc_attr__( 'No countries', 'acf-city-selector' );
-                $select_country             = esc_attr( apply_filters( 'acfcs_select_country_label', __( 'Select a country', 'acf-city-selector' ) ) );
-                $select_city                = esc_attr( apply_filters( 'acfcs_select_city_label', __( 'Select a city', 'acf-city-selector' ) ) );
-                $select_country_first       = esc_attr( apply_filters( 'acfcs_select_country_first', __( 'No results (yet), first select a country', 'acf-city-selector' ) ) );
-                $select_state               = esc_attr( apply_filters( 'acfcs_select_province_state_label', __( 'Select a province/state', 'acf-city-selector' ) ) );
-                $select_state_first         = esc_attr( apply_filters( 'acfcs_select_state_first', __( 'No results (yet), first select a state', 'acf-city-selector' ) ) );
-
-                $this->l10n = array(
-                    'no_countries'               => $no_countries,
-                    'select_city'                => $select_city,
-                    'select_country'             => $select_country,
-                    'select_country_first'       => $select_country_first,
-                    'select_state'               => $select_state,
-                    'select_state_first'         => $select_state_first,
-                );
+                $this->l10n = acfcs_get_js_translations();
 
                 $this->settings = $settings;
 
@@ -70,12 +57,12 @@
              */
             function render_field_settings( $field ) {
 
-                $label_options = array(
+                $select_options = array(
                     1 => esc_attr__( 'Yes', 'acf-city-selector' ),
                     0 => esc_attr__( 'No', 'acf-city-selector' )
                 );
                 acf_render_field_setting( $field, array(
-                    'choices'      => $label_options,
+                    'choices'      => $select_options,
                     'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
@@ -85,7 +72,7 @@
                 ) );
 
                 acf_render_field_setting( $field, array(
-                    'choices'      => $label_options,
+                    'choices'      => $select_options,
                     'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
                     'layout'       => 'horizontal',
@@ -200,8 +187,8 @@
                 wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acfcs-process' );
 
-                // check field settings
                 $all_info                     = acfcs_get_field_settings();
+                $js_vars[ 'ajaxurl' ]         = admin_url( 'admin-ajax.php' );
                 $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
                 $js_vars[ 'post_id' ]         = ( isset( $_GET[ 'post' ] ) ) ? (int) $_GET[ 'post' ] : false;
                 $js_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : apply_filters( 'acfcs_show_labels', true );
@@ -263,6 +250,8 @@
              * @param   $post_id (mixed) the $post_id from which the value was loaded
              * @param   $field (array) the field array holding all the field options
              *
+             * @TODO: DRY
+             *
              * @return $value
              */
             function update_value( $value, $post_id, $field ) {
@@ -289,6 +278,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode' ] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
@@ -315,6 +307,9 @@
                             $value = false;
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( isset( $field[ 'default_country' ] ) ) {
+                            $value[ 'countryCode'] = $field[ 'default_country' ];
+                        }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
                         }
@@ -388,7 +383,6 @@
             }
         }
 
-        // initialize
         new acf_field_city_selector( $this->settings );
 
     }

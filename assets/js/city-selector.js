@@ -177,7 +177,7 @@
             };
 
             return new Promise((resolve, reject) => {
-                $.post(ajaxurl, state_data, (response) => {
+                $.post(city_selector_vars.ajaxurl, state_data, (response) => {
                     resolve(response);
                 });
             })
@@ -201,7 +201,7 @@
             };
 
             return new Promise((resolve, reject) => {
-                $.post(ajaxurl, city_data, (response) => {
+                $.post(city_selector_vars.ajaxurl, city_data, (response) => {
                     resolve(response);
                 });
             })

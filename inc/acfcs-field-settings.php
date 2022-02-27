@@ -6,8 +6,9 @@
      */
     function acfcs_get_field_settings( $fields = array() ) {
 
-        $activate = false;
-        $settings = array();
+        $acf_version = get_option( 'acf_version' );
+        $activate    = false;
+        $settings    = array();
 
         if ( ! empty( $fields ) ) {
             $activate = true;
@@ -40,16 +41,35 @@
                 } elseif ( isset( $post_id ) && false !== $post_id ) {
                     $fields = get_field_objects( $post_id );
                     if ( empty( $fields ) ) {
-                        $groups = acf_get_field_groups( array( 'post_id' => $post_id ) );
-                        foreach( $groups as $key => $values ) {
-                            $group_field = acf_get_fields($values['key']);
-                            foreach( $group_field as $field ) {
-                                if ( in_array( $field[ 'type' ], [ 'acf_city_selector', 'repeater', 'flexible_content', 'group' ] ) ) {
-                                    $new_fields[] = $field;
+                        if ( 5 == substr( $acf_version, 0, 1 ) ) {
+                            $groups = acf_get_field_groups( array( 'post_id' => $post_id ) );
+                            foreach( $groups as $key => $values ) {
+                                if ( isset( $values[ 'key' ] ) ) {
+                                    $group_fields = acf_get_fields( $values[ 'key' ] );
+                                    foreach( $group_fields as $field ) {
+                                        if ( in_array( $field[ 'type' ], [ 'acf_city_selector', 'repeater', 'flexible_content', 'group' ] ) ) {
+                                            $new_fields[] = $field;
+                                        }
+                                    }
+                                    if ( isset( $new_fields ) ) {
+                                        $fields = $new_fields;
+                                    }
                                 }
                             }
-                            if ( isset( $new_fields ) ) {
-                                $fields = $new_fields;
+                        } else {
+                            $groups = apply_filters('acf/get_field_groups', [] );
+                            foreach( $groups as $group ) {
+                                if ( isset( $group[ 'id' ] ) ) {
+                                    $group_fields = apply_filters( 'acf/field_group/get_fields', array(), $group[ 'id' ] );
+                                    foreach( $group_fields as $field ) {
+                                        if ( 'acf_city_selector' == $field[ 'type' ] ) {
+                                            $new_fields[] = $field;
+                                        }
+                                    }
+                                    if ( isset( $new_fields ) ) {
+                                        $fields = $new_fields;
+                                    }
+                                }
                             }
                         }
                     }
@@ -66,7 +86,7 @@
                     if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
                         $settings[ 'default_country' ] = $field[ 'default_country' ];
                         $settings[ 'show_labels' ]     = $field[ 'show_labels' ];
-                        $settings[ 'use_select2' ]     = $field[ 'use_select2' ];
+                        $settings[ 'use_select2' ]     = ( isset( $field[ 'use_select2' ] ) ) ? $field[ 'use_select2' ] : false;
                         $settings[ 'which_fields' ]    = $field[ 'which_fields' ];
                         break;
                     } elseif ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'repeater' ) {
@@ -150,5 +170,4 @@
         }
 
         return $settings;
-
     }

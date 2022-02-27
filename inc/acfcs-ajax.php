@@ -1,17 +1,7 @@
 <?php
     /*
-     * Set admin-ajax.php on the front side (by default it is available only on back-end)
+     * Ajax functions
      */
-    function acfcs_city_selector_ajaxurl() {
-        ?>
-        <script type="text/javascript">
-            var ajaxurl = "<?php echo admin_url( 'admin-ajax.php' ); ?>";
-        </script>
-        <?php
-    }
-    add_action( 'wp_head', 'acfcs_city_selector_ajaxurl' );
-    add_action( 'login_head', 'acfcs_city_selector_ajaxurl' );
-
 
     /*
      * Get states by country code
@@ -22,9 +12,10 @@
     function acfcs_get_states_call() {
 
         if ( isset( $_POST[ 'country_code' ] ) ) {
-            $field        = false;
-            $items        = array();
-            $post_id      = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+            $field   = false;
+            $items   = array();
+            $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+
             if ( is_string( $_POST[ 'country_code' ] ) ) {
                 $country_code = sanitize_text_field( $_POST[ 'country_code' ] );
             }
