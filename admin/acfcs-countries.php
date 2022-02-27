@@ -39,9 +39,7 @@
         ?>
 
         <div class="wrap acfcs">
-            <h1>
-                ACF City Selector
-            </h1>
+            <h1>ACF City Selector</h1>
 
             <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
 
