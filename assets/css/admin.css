@@ -163,7 +163,7 @@
   overflow:       hidden;
 }
 
-.acfcs .form--upload .upload_button {
+.acfcs .form--upload .acfcs_upload_button {
   border-radius: 0;
   display:       block;
   height:        37px;
@@ -313,7 +313,7 @@
     width: 350px;
   }
 
-  .acfcs .form--upload .upload_button {
+  .acfcs .form--upload .acfcs_upload_button {
     left: 350px;
   }
 

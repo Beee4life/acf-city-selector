@@ -8,9 +8,9 @@
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 ACF_City_Selector::acfcs_check_uploads_folder();
-                $target_file = acfcs_upload_folder( '/' ) . basename( $_FILES[ 'csv_upload' ][ 'name' ] );
-                if ( move_uploaded_file( $_FILES[ 'csv_upload' ][ 'tmp_name' ], $target_file ) ) {
-                    ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'csv_upload' ][ 'name' ] ) );
+                $target_file = acfcs_upload_folder( '/' ) . basename( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] );
+                if ( move_uploaded_file( $_FILES[ 'acfcs_csv_upload' ][ 'tmp_name' ], $target_file ) ) {
+                    ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) );
                     do_action( 'acfcs_after_success_file_upload' );
                 } else {
                     ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );

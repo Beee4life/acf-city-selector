@@ -8,11 +8,11 @@
     <input type="hidden" name="MAX_FILE_SIZE" value="1024000" />
 
     <div class="upload-element">
-        <?php echo sprintf( '<label for="csv_upload">%s</label>', esc_attr__( 'Choose a (CSV) file to upload', 'acf-city-selector' ) ); ?>
-        <div class="form--upload form--csv_upload">
-            <input type="file" name="csv_upload" id="csv_upload" accept=".csv" />
+        <?php echo sprintf( '<label for="acfcs_csv_upload">%s</label>', esc_attr__( 'Choose a (CSV) file to upload', 'acf-city-selector' ) ); ?>
+        <div class="form--upload form--acfcs_csv_upload">
+            <input type="file" name="acfcs_csv_upload" id="acfcs_csv_upload" accept=".csv" />
             <span class="val"></span>
-            <span class="upload_button button-primary" data-type="csv_upload">
+            <span class="acfcs_upload_button button-primary" data-type="acfcs_csv_upload">
                 <?php _e( 'Select file', 'acf-city-selector' ); ?>
             </span>
         </div>
