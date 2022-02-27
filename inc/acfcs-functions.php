@@ -749,3 +749,168 @@
 
         return $upload_folder;
     }
+
+
+    /**
+     * Render preview results
+     *
+     * @param $csv_data
+     *
+     * @since 1.5.0
+     *
+     * @return false|string
+     */
+    function acfcs_render_preview_results( $csv_data = [] ) {
+        if ( ! empty( $csv_data ) ) {
+
+            $table_columns = [
+                esc_html__( 'City', 'acf-city-selector' ),
+                esc_html__( 'State code', 'acf-city-selector' ),
+                esc_html__( 'State', 'acf-city-selector' ),
+                esc_html__( 'Country code', 'acf-city-selector' ),
+                esc_html__( 'Country', 'acf-city-selector' ),
+            ];
+            ob_start();
+            foreach( $table_columns as $column ) {
+                echo sprintf( '<th>%s</th>', $column );
+            }
+            echo '<thead><tr>%s</tr></thead>';
+            $table_headers = ob_get_clean();
+
+            ob_start();
+            foreach ( $csv_data as $line ) {
+                echo '<tr>';
+                foreach ( $line as $column ) {
+                    echo sprintf( '<td>%s</td>', stripslashes( htmlspecialchars( $column ) ) );
+                }
+                echo '</tr>';
+            }
+
+            $table_rows = ob_get_clean();
+            $table_body = sprintf( '<tbody>%s</tbody>', $table_rows );
+            $table      = sprintf( '<table class="acfcs__table acfcs__table--preview-result scrollable">%s%s</table>', $table_headers, $table_body );
+
+            return $table;
+        }
+
+        return '';
+    }
+
+
+    /**
+     * Get optgroups for states
+     *
+     * @since 1.5.0
+     *
+     * @return array
+     */
+    function acfcs_get_states_optgroup() {
+        $results = acfcs_get_countries( false );
+        // if there is at least 1 country
+        if ( ! empty( $results ) ) {
+            foreach ( $results as $country_code => $label ) {
+                $countries[] = [
+                    'code' => $country_code,
+                    'name' => esc_attr__( $label, 'acf-city-selector' ),
+                ];
+            }
+
+            // get states for these countries
+            if ( ! empty( $countries ) ) {
+                global $wpdb;
+                $states = array();
+                foreach ( $countries as $country ) {
+                    $states[] = array(
+                        'state' => 'open_optgroup',
+                        'name'  => esc_attr__( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
+                    );
+
+                    $order = 'ORDER BY state_name ASC';
+                    if ( 'FR' == $country[ 'code' ] ) {
+                        $order = "ORDER BY LENGTH(state_name), state_name";
+                    }
+
+                    $query   = "SELECT * FROM " . $wpdb->prefix . "cities WHERE country_code = %s GROUP BY state_code " . $order;
+                    $sql     = $wpdb->prepare( $query, $country[ 'code' ] );
+                    $results = $wpdb->get_results( $sql );
+
+                    if ( count( $results ) > 0 ) {
+                        foreach ( $results as $data ) {
+                            $states[] = array(
+                                'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
+                                'name'  => esc_attr__( $data->state_name, 'acf-city-selector' ),
+                            );
+                        }
+                    }
+
+                    $states[] = array(
+                        'state' => 'close_optgroup',
+                        'name'  => '',
+                    );
+                }
+
+                return $states;
+            }
+        }
+
+        return [];
+    }
+
+
+    /**
+     * Get search results (admin)
+     *
+     * @since 1.5.0
+     *
+     * @return array|object|stdClass[]|null
+     */
+    function acfcs_get_searched_cities() {
+        global $wpdb;
+        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_state' ] ) : false;
+        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_country' ] ) : false;
+        $search_limit            = false;
+        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_orderby' ] ) : false;
+        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_search' ] ) : false;
+        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
+        $where                   = array();
+
+        if ( false != $search_criteria_state ) {
+            $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
+        } elseif ( false != $search_criteria_country ) {
+            $where[] = "country_code = '" . $search_criteria_country . "'";
+        }
+        if ( false != $searched_term ) {
+            $search[] = 'city_name LIKE "%' . $searched_term . '%"';
+
+            if ( $search_criteria_country || $search_criteria_state ) {
+                $where[] = '(' . implode( ' OR ', $search ) . ')';
+            } else {
+                $where[] = implode( ' OR ', $search );
+            }
+
+        }
+        if ( 0 != $selected_limit ) {
+            $search_limit = "LIMIT " . $selected_limit;
+        }
+
+        if ( ! empty( $where ) ) {
+            $where   = "WHERE " . implode( ' AND ', $where );
+        } else {
+            $where = false;
+        }
+
+        if ( 'state' == $searched_orderby ) {
+            $orderby = 'ORDER BY state_name ASC, city_name ASC';
+        } else {
+            $orderby = 'ORDER BY city_name ASC, state_name ASC';
+        }
+
+        $sql = "SELECT * FROM " . $wpdb->prefix . "cities
+                " . $where . "
+                " . $orderby . "
+                " . $search_limit . "
+            ";
+        $cities = $wpdb->get_results( $sql );
+
+        return $cities;
+    }
