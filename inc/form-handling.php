@@ -37,10 +37,10 @@
 
                 $file_name = $_POST[ 'acfcs_file_name' ];
                 $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? sanitize_text_field( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
+                $import    = isset( $_POST[ 'acfcs_import' ] ) ? true : false;
                 $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
-                $import    = isset( $_POST[ 'import' ] ) ? true : false;
-                $remove    = isset( $_POST[ 'remove' ] ) ? true : false;
-                $verify    = isset( $_POST[ 'verify' ] ) ? true : false;
+                $remove    = isset( $_POST[ 'acfcs_remove' ] ) ? true : false;
+                $verify    = isset( $_POST[ 'acfcs_verify' ] ) ? true : false;
 
                 if ( true === $verify ) {
                     acfcs_verify_data( $file_name, $delimiter, $verify );
@@ -64,11 +64,11 @@
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 $verified_data = acfcs_verify_csv_data( sanitize_textarea_field( $_POST[ 'acfcs_raw_csv_import' ] ) );
-                if ( isset( $_POST[ 'verify' ] ) ) {
+                if ( isset( $_POST[ 'acfcs_verify' ] ) ) {
                     if ( false != $verified_data ) {
                         ACF_City_Selector::acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
                     }
-                } elseif ( isset( $_POST[ 'import' ] ) ) {
+                } elseif ( isset( $_POST[ 'acfcs_import' ] ) ) {
                     if ( false != $verified_data ) {
                         acfcs_import_data( $verified_data );
                     }
@@ -87,11 +87,11 @@
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_remove_countries_nonce' ], 'acfcs-remove-countries-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( empty( $_POST[ 'delete_country' ] ) ) {
+                if ( empty( $_POST[ 'acfcs_delete_country' ] ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
                 } else {
-                    if ( is_array( $_POST[ 'delete_country' ] ) ) {
-                        acfcs_delete_country( $_POST[ 'delete_country' ] );
+                    if ( is_array( $_POST[ 'acfcs_delete_country' ] ) ) {
+                        acfcs_delete_country( $_POST[ 'acfcs_delete_country' ] );
                     }
                 }
             }
@@ -120,10 +120,8 @@
                     }
                     $cities  = implode( ', ', $cities );
                     $row_ids = implode( ',', $ids );
-                    $amount  = $wpdb->query("
-                                DELETE FROM " . $wpdb->prefix . "cities
-                                WHERE id IN (" . $row_ids . ")
-                            ");
+                    $query   = "DELETE FROM " . $wpdb->prefix . "cities WHERE id IN (" . $row_ids . ")";
+                    $amount  = $wpdb->query( $query );
 
                     if ( $amount > 0 ) {
                         ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $amount, 'acf-city-selector' ), $cities ) );
@@ -198,12 +196,12 @@
             if ( ! wp_verify_nonce( $_POST[ 'acfcs_import_actions_nonce' ], 'acfcs-import-actions-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( isset( $_POST[ 'import_be' ] ) || isset( $_POST[ 'import_nl' ] ) ) {
-                    if ( isset( $_POST[ 'import_be' ] ) && 1 == $_POST[ 'import_be' ] ) {
+                if ( isset( $_POST[ 'acfcs_import_be' ] ) || isset( $_POST[ 'acfcs_import_nl' ] ) ) {
+                    if ( isset( $_POST[ 'acfcs_import_be' ] ) && 1 == $_POST[ 'acfcs_import_be' ] ) {
                         acfcs_import_data( 'be.csv', ACFCS_PLUGIN_PATH . 'import/' );
                         do_action( 'acfcs_delete_transients', 'be' );
                     }
-                    if ( isset( $_POST[ 'import_nl' ] ) && 1 == $_POST[ 'import_nl' ] ) {
+                    if ( isset( $_POST[ 'acfcs_import_nl' ] ) && 1 == $_POST[ 'acfcs_import_nl' ] ) {
                         acfcs_import_data( 'nl.csv', ACFCS_PLUGIN_PATH . 'import/' );
                         do_action( 'acfcs_delete_transients', 'nl' );
                     }
