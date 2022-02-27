@@ -194,7 +194,6 @@
         }
 
         return $cities;
-
     }
 
 
@@ -221,7 +220,6 @@
         }
 
         return $country_code;
-
     }
 
 
@@ -289,10 +287,10 @@
     function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
 
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
+        $csv_array     = array();
+        $empty_array   = false;
+        $new_array     = array();
 
-        $csv_array   = array();
-        $empty_array = false;
-        $new_array   = array();
         if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
@@ -424,7 +422,6 @@
      * @return array|mixed
      */
     function acfcs_get_packages( $endpoint = 'single' ) {
-
         $url     = ACFCS_WEBSITE_URL . '/wp-json/countries/v1/' . $endpoint;
         $request = new WP_Http;
         $result  = $request->request( $url, array( 'method' => 'GET' ) );
@@ -512,7 +509,6 @@
      * @return false|string
      */
     function acfcs_render_dropdown( $type, $field, $stored_value, $prefill_values ) {
-
         $acfcs_dropdown       = 'acfcs__dropdown';
         $city_label           = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
         $countries            = acfcs_get_countries( true, $field );
@@ -705,7 +701,6 @@
      * @param $countries
      */
     function acfcs_delete_country( $countries ) {
-
         $country_names_and       = false;
         $sanitized_country_codes = array();
         foreach( $countries as $country_code ) {
