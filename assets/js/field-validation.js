@@ -1,18 +1,19 @@
 // for v4
 (function($) {
-
     $(document).on('acf/validate_field', function (e, field) {
 
-        // vars
         $field = $(field);
+        $country_value = $field.find('select#acf-field-city_selectorcountryCode').val();
+        $state_value = $field.find('select#acf-field-city_selectorstateCode').val();
+        $city_value = $field.find('select#acf-field-city_selectorcityName').val();
 
-        if ($field.find('select#countryCode').val() === '') {
+        if ($country_value === '' || typeof($country_value) === "undefined" ) {
             $field.data('validation', false);
         }
-        if ($field.find('select#stateCode').val() === '') {
+        if ($state_value === '' || typeof($state_value) === "undefined" ) {
             $field.data('validation', false);
         }
-        if ($field.find('select#cityName').val() === '') {
+        if ($city_value === '' || typeof($city_value) === "undefined" ) {
             $field.data('validation', false);
         }
 
