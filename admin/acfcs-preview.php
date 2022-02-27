@@ -58,8 +58,8 @@
 
                                     }
                                 } elseif ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
-                                    echo '<h2>' . esc_html__( 'CSV contents', 'acf-city-selector' ) . '</h2>';
-                                    echo '<p class="hide640"><small>' . esc_html__( 'Table scrolls horizontally.', 'acf-city-selector' ) . '</small></p>';
+                                    echo sprintf( '<h2>%s</h2>', esc_html__( 'CSV contents', 'acf-city-selector' ) );
+                                    echo sprintf( '<p class="hide640"><small>%s</small></p>', esc_html__( 'Table scrolls horizontally.', 'acf-city-selector' ) );
                                     echo acfcs_render_preview_results();
                                 }
                                 echo '</div>';

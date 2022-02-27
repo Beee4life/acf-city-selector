@@ -22,9 +22,8 @@
             <div class="acfcs__container">
                 <div class="admin_left">
                     <div class="content">
-
                         <div class="acfcs__section">
-                            <h2><?php esc_html_e( 'Info', 'acf-city-selector' ); ?></h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Info', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( 'This page shows real-time info about your site and settings.', 'acf-city-selector' ); ?>
                                 <br />
@@ -34,9 +33,7 @@
 
                         <div class="acfcs__section acfcs__section--countries">
                             <?php if ( ! empty( $countries ) ) { ?>
-                                <h2>
-                                    <?php esc_html_e( 'Countries in database', 'acf-city-selector' ); ?>
-                                </h2>
+                                <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Countries in database', 'acf-city-selector' ) ); ?>
 
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
@@ -59,9 +56,7 @@
                                 <?php $prepare_json[ 'countries' ] = 'none'; ?>
                             <?php } ?>
 
-                            <h2>
-                                <?php esc_html_e( 'Server info', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Server info', 'acf-city-selector' ) ); ?>
 
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
@@ -104,9 +99,7 @@
                                 </tbody>
                             </table>
 
-                            <h2>
-                                <?php esc_html_e( 'WordPress info', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Wordpress info', 'acf-city-selector' ) ); ?>
 
                             <table class="acfcs__table acfcs__table--info">
                                 <thead>
@@ -165,9 +158,7 @@
                             </table>
 
                             <?php if ( is_multisite() ) { ?>
-                                <h2>
-                                    <?php esc_html_e( 'Multisite', 'acf-city-selector' ); ?>
-                                </h2>
+                                <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Multisite', 'acf-city-selector' ) ); ?>
 
                                 <table class="acfcs__table acfcs__table--info">
                                     <thead>
@@ -201,10 +192,7 @@
                                 </table>
                             <?php } ?>
 
-
-                            <h2>
-                                <?php esc_html_e( 'Active plugins', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Active plugins', 'acf-city-selector' ) ); ?>
 
                             <?php $plugins = get_plugins(); ?>
                             <?php if ( ! empty( $plugins ) ) { ?>
@@ -220,12 +208,8 @@
                                         <?php if ( is_plugin_active( $key ) ) { ?>
                                             <?php $prepare_json[ 'plugins' ][] = [ 'name' => $value[ 'Name' ], 'version' => $value[ 'Version' ], 'author' => $value[ 'Author' ], 'author_uri' => $value[ 'AuthorURI' ] ]; ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $value[ 'Name' ]; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $value[ 'Version' ]; ?>
-                                                </td>
+                                                <td><?php echo $value[ 'Name' ]; ?></td>
+                                                <td><?php echo $value[ 'Version' ]; ?></td>
                                             </tr>
                                         <?php } ?>
                                     <?php } ?>
@@ -236,9 +220,7 @@
 
                         <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                         <div class="acfcs__section acfcs__section--export">
-                            <h2>
-                                <?php esc_html_e( 'Download JSON', 'acf-city-selector' ); ?>
-                            </h2>
+                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Download JSON', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( "If you're in need of support, the info above might helpful for us to fix a problem.", 'acf-city-selector' ); ?>
                                 <?php if ( file_exists( $file_name ) ) { ?>
@@ -255,9 +237,7 @@
                                     </a> <small>(<?php _e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
                                 </p>
                             <?php } else { ?>
-                                <p>
-                                    <?php esc_html_e( 'The debug.json file is missing. Please deactivate and reactivate the plugin.', 'acf-city-selector' ); ?>
-                                </p>
+                                <?php echo sprintf( '<p>%s</p>', esc_html__( 'The debug.json file is missing. Please deactivate and reactivate the plugin.', 'acf-city-selector' ) ); ?>
                             <?php } ?>
                         </div>
 

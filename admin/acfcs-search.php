@@ -53,10 +53,7 @@
             <div class="acfcs__container">
                 <div class="admin_left">
                     <div class="content">
-
-                        <h2>
-                            <?php esc_html_e( 'Search for cities', 'acf-city-selector' ); ?>
-                        </h2>
+                        <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Search for cities', 'acf-city-selector' ) ); ?>
 
                         <?php if ( count( $countries ) > 0 ) { ?>
                             <form action="" method="POST">
