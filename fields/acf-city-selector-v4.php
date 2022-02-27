@@ -226,7 +226,6 @@
                 $plugin_url     = $this->settings[ 'url' ];
                 $plugin_version = $this->settings[ 'version' ];
 
-                // register & include JS
                 wp_enqueue_script( 'acf-custom-validation', "{$plugin_url}assets/js/field-validation.js", array( 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acf-custom-validation' );
 
