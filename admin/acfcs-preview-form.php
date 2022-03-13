@@ -3,7 +3,6 @@
         exit;
     }
 ?>
-<h2><?php esc_html_e( 'Preview data', 'acf-city-selector' ); ?></h2>
 <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
 <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
 
