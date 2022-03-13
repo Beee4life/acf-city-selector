@@ -16,7 +16,13 @@
 
             echo sprintf( '<h3>%s</h3>', esc_html__( 'Support', 'acf-city-selector' ) );
 
-            echo sprintf( '<p>%s</p>', sprintf( esc_html__( 'If you need support for this plugin or if you have some good suggestions for improvements and/or new features, please turn to %s.', 'acf-city-selector' ), '<a href="https://github.com/Beee4life/acf-city-selector/issues" rel="noopener" target="_blank">Github</a>' ) );
+            echo sprintf( '<p>%s</p>', sprintf( esc_html__( 'If you need support for this plugin, please turn to %s.', 'acf-city-selector' ), '<a href="https://github.com/Beee4life/acf-city-selector/issues" rel="noopener" target="_blank">Github</a>' ) );
+
+            echo '<hr />';
+
+            echo sprintf( '<h3>%s</h3>', esc_html__( 'Requests', 'acf-city-selector' ) );
+
+            echo sprintf( '<p>%s</p>', esc_html__( 'If you have some good suggestions for improvements and/or new features, please share them with us, maybe we can incorporate it.', 'acf-city-selector' ) );
 
             echo '<hr />';
         ?>
