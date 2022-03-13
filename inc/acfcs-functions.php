@@ -27,29 +27,24 @@
                 $countries[ '' ] = $select_country_label;
             }
         }
-
-        $transient = get_transient( 'acfcs_countries' );
-        if ( false != $force || false == $transient || is_array( $transient ) && empty( $transient ) ) {
-            global $wpdb;
-            $results = $wpdb->get_results( '
+    
+        global $wpdb;
+        $results = $wpdb->get_results( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
                 GROUP BY country
                 ORDER BY country ASC
             ' );
-
+    
+        if ( ! empty( $results ) ) {
             $country_results = array();
             foreach ( $results as $data ) {
                 if ( isset( $data->country_code ) && isset( $data->country ) ) {
                     $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
                 }
             }
-
-            set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
-            $countries = array_merge( $countries, $country_results );
-
-        } elseif ( is_array( $transient ) ) {
-            $countries = array_merge( $countries, $transient );
         }
+    
+        $countries = array_merge( $countries, $country_results );
 
         return $countries;
     }
