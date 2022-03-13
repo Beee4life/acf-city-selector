@@ -55,7 +55,9 @@
                     <div class="content">
                         <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Search for cities', 'acf-city-selector' ) ); ?>
 
-                        <?php if ( count( $countries ) > 0 ) { ?>
+                        <?php if ( count( $countries ) == 0 ) { ?>
+                            <?php echo sprintf( '<div>%s</div>', sprintf( esc_html__( "You haven't imported any cities yet. Import any files from your %s.", 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'options-general.php?page=acfcs-dashboard' ) ), esc_html__( 'dashboard', 'acf-city-selector' ) ) ) ); ?>
+                        <?php } else { ?>
                             <form action="" method="POST">
                                 <input name="acfcs_search_form" type="hidden" value="1" />
 
