@@ -97,9 +97,6 @@
             public function acfcs_plugin_activation() {
                 $this->acfcs_check_table();
                 $this->acfcs_check_uploads_folder();
-                if ( false == get_option( 'acfcs_preserve_settings' ) ) {
-                    $this->acfcs_fill_database();
-                }
             }
 
 
@@ -108,7 +105,7 @@
              */
             public function acfcs_plugin_deactivation() {
                 delete_option( 'acfcs_db_version' );
-                // this hook is here because didn't want to create a new hook for an existing action
+                // this hook is here because I didn't want to create a new hook for an existing action
                 do_action( 'acfcs_delete_transients' );
                 // other important stuff gets done in uninstall.php
             }
@@ -266,9 +263,6 @@
                 $pages = [
                     'dashboard' => esc_html__( 'Dashboard', 'acf-city-selector' ),
                     'settings'  => esc_html__( 'Settings', 'acf-city-selector' ),
-                    'search'    => esc_html__( 'Search', 'acf-city-selector' ),
-                    'preview'   => esc_html__( 'Preview', 'acf-city-selector' ),
-                    'info'      => esc_html__( 'Info', 'acf-city-selector' ),
                 ];
                 if ( true === acfcs_has_cities() ) {
                     $pages[ 'search' ] = esc_html__( 'Search', 'acf-city-selector' );
@@ -276,7 +270,7 @@
                 if ( ! empty ( acfcs_check_if_files() ) ) {
                     $pages[ 'preview' ] = esc_html__( 'Preview', 'acf-city-selector' );
                 }
-                if ( current_user_can( 'manage_options' ) ) {
+                if ( current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
                     $pages[ 'info' ] = esc_html__( 'Info', 'acf-city-selector' );
                 }
 
@@ -370,17 +364,11 @@
              */
             public function acfcs_add_admin_pages() {
                 add_options_page( 'ACF City Selector', 'City Selector', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-dashboard', 'acfcs_dashboard' );
-                add_submenu_page( null, 'Preview data', 'Preview data', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-preview', 'acfcs_preview_page' );
+                add_submenu_page( null, __( 'Preview data', 'acf-city-selector' ), __( 'Preview data', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-preview', 'acfcs_preview_page' );
                 add_submenu_page( null, __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-settings', 'acfcs_settings' );
-                add_submenu_page( null, 'Get countries', 'Get countries', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-countries', 'acfcs_country_page' );
-
-                if ( true === acfcs_has_cities() ) {
-                    add_submenu_page( null, 'City Overview', 'City Overview', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
-                }
-
-                if ( current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-                    add_submenu_page( null, 'Info', 'Info', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
-                }
+                add_submenu_page( null, __( 'Get countries', 'acf-city-selector' ), __( 'Get countries', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-countries', 'acfcs_country_page' );
+                add_submenu_page( null, __( 'Search', 'acf-city-selector' ), __( 'Search', 'acf-city-selector' ),  apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
+                add_submenu_page( null, __( 'Info', 'acf-city-selector' ), __( 'Info', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
             }
 
 
