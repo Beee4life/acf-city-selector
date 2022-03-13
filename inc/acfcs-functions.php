@@ -42,9 +42,9 @@
                     $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
                 }
             }
+            $countries = array_merge( $countries, $country_results );
         }
     
-        $countries = array_merge( $countries, $country_results );
 
         return $countries;
     }
