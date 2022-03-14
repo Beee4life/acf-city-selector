@@ -185,7 +185,6 @@
 
 .acfcs .acfcs__process-file-element label {
   display: inline-block;
-  width:   80px;
 }
 
 /* form inputs */
@@ -372,10 +371,6 @@
 
   .acfcs .acfcs__process-file-element label {
     display: block;
-  }
-
-  .acfcs .acfcs__process-file-element--file {
-    min-width: 130px;
   }
 }
 
