@@ -233,7 +233,7 @@
                 if ( ! $version ) {
                     $version = 4;
                 }
-                include_once 'fields/acf-city-selector-v' . $version . '.php';
+                include_once 'admin/acf-city-selector-v' . $version . '.php';
             }
 
 
