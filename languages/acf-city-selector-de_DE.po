@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2022-03-13 20:50+0100\n"
-"PO-Revision-Date: 2022-03-13 20:50+0100\n"
+"POT-Creation-Date: 2022-03-14 01:14+0100\n"
+"PO-Revision-Date: 2022-03-14 01:15+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -78,6 +78,100 @@ msgstr "Daten Vorschau"
 msgid "Get countries"
 msgstr "Mehr Länder hinzufügen"
 
+#: admin/acf-city-selector-v4.php:29 admin/acf-city-selector-v5.php:36
+msgid "Choice"
+msgstr "Auswahl"
+
+#: admin/acf-city-selector-v4.php:64 admin/acf-city-selector-v5.php:94
+msgid "All fields [default]"
+msgstr "Alle Felder [Standard]"
+
+#: admin/acf-city-selector-v4.php:65 admin/acf-city-selector-v5.php:95
+msgid "Country only"
+msgstr "Nur Land"
+
+#: admin/acf-city-selector-v4.php:66 admin/acf-city-selector-v5.php:96
+msgid "Country + State/province"
+msgstr "Land + Bundesland/Provinz"
+
+#: admin/acf-city-selector-v4.php:67 admin/acf-city-selector-v5.php:97
+msgid "Country + City"
+msgstr "Land + Stadt"
+
+#: admin/acf-city-selector-v4.php:68 admin/acf-city-selector-v5.php:98
+msgid "State/province + City"
+msgstr "Bundesland/Provinz + Stadt"
+
+#: admin/acf-city-selector-v4.php:72 admin/acf-city-selector-v5.php:61
+#: admin/acfcs-info.php:172
+msgid "Yes"
+msgstr "Ja"
+
+#: admin/acf-city-selector-v4.php:73 admin/acf-city-selector-v5.php:62
+#: admin/acfcs-info.php:172
+msgid "No"
+msgstr "Nein"
+
+#: admin/acf-city-selector-v4.php:80 admin/acf-city-selector-v5.php:67
+msgid "Show labels"
+msgstr "Feld-Beschriftungen anzeigen"
+
+#: admin/acf-city-selector-v4.php:81 admin/acf-city-selector-v5.php:66
+msgid "Show field labels above the dropdown menus"
+msgstr "Zeige Feld-Beschriftungen über den Dropdown-Menüs"
+
+#: admin/acf-city-selector-v4.php:97 admin/acf-city-selector-v5.php:88
+msgid "Default country"
+msgstr "Standard Land"
+
+#: admin/acf-city-selector-v4.php:98 admin/acf-city-selector-v5.php:87
+msgid "Select a default country for a new field"
+msgstr "Wählen Sie das voreingestellte Land für ein neues Feld"
+
+#: admin/acf-city-selector-v4.php:114 admin/acf-city-selector-v5.php:103
+msgid "Fields to use"
+msgstr "Zu verwendende Felder"
+
+#: admin/acf-city-selector-v4.php:115 admin/acf-city-selector-v5.php:102
+msgid "Select which fields are used"
+msgstr "Wählen Sie welche Felder verwendet werden"
+
+#: admin/acf-city-selector-v4.php:178 admin/acf-city-selector-v5.php:151
+msgid ""
+"You haven't set a default country, so NO provinces/states and cities will be "
+"loaded."
+msgstr ""
+"Sie haben kein Standardland festgelegt, daher werden KEINE Provinzen / "
+"Bundesstaaten und Städte geladen."
+
+#: admin/acf-city-selector-v5.php:76
+msgid "Use select2 for dropdowns"
+msgstr "Verwenden Sie select2 für Dropdowns"
+
+#: admin/acf-city-selector-v5.php:77
+msgid "Select2"
+msgstr "Select2"
+
+#: admin/acf-city-selector-v5.php:340
+msgid "You didn't select anything."
+msgstr "Du hast nichts ausgewählt."
+
+#: admin/acf-city-selector-v5.php:341
+msgid "You didn't select a city."
+msgstr "Du hast keine Stadt ausgewählt."
+
+#: admin/acf-city-selector-v5.php:342
+msgid "You didn't select a country."
+msgstr "Du hast kein Land ausgewählt."
+
+#: admin/acf-city-selector-v5.php:343
+msgid "You didn't select a state."
+msgstr "Du hast kein Bundesland/Provinz ausgewählt."
+
+#: admin/acf-city-selector-v5.php:344
+msgid "You didn't select a state and city."
+msgstr "Du hast keine Stadt und Bundesland/Provinz ausgewählt."
+
 #: admin/acfcs-countries.php:8 admin/acfcs-dashboard.php:8
 #: admin/acfcs-info.php:8 admin/acfcs-search.php:8 admin/acfcs-settings.php:8
 msgid "You do not have sufficient permissions to access this page."
@@ -106,7 +200,7 @@ msgstr "Laden Sie sie %s herunter."
 
 #: admin/acfcs-countries.php:54
 msgid "here"
-msgstr ""
+msgstr "hier"
 
 #: admin/acfcs-countries.php:60
 msgid "Country files"
@@ -270,8 +364,6 @@ msgid "Home path"
 msgstr "Startseiten Pfad"
 
 #: admin/acfcs-info.php:102
-#, fuzzy
-#| msgid "WordPress info"
 msgid "Wordpress info"
 msgstr "WordPress Information"
 
@@ -310,16 +402,6 @@ msgstr "Sprache"
 #: admin/acfcs-info.php:161
 msgid "Multisite"
 msgstr "Multisite"
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:72
-#: fields/acf-city-selector-v5.php:61
-msgid "Yes"
-msgstr "Ja"
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:73
-#: fields/acf-city-selector-v5.php:62
-msgid "No"
-msgstr "Nein"
 
 #: admin/acfcs-info.php:174
 msgid "Main site"
@@ -415,16 +497,13 @@ msgid "You have no files to preview."
 msgstr "Du besitzt keine Dateien für eine Vorschau."
 
 #: admin/acfcs-preview.php:43
-#, fuzzy, php-format
-#| msgid "Upload a csv file from your <a href=\"%s\">dashboard</a>."
+#, php-format
 msgid "Upload a csv file from your %s."
-msgstr "Laden Sie ein CSV Daten auf von ihr <a href=\"%s\">dashboard</a>."
+msgstr "Laden Sie ein CSV Daten auf von ihr %s."
 
 #: admin/acfcs-preview.php:43 admin/acfcs-search.php:59
-#, fuzzy
-#| msgid "Dashboard"
 msgid "dashboard"
-msgstr "Übersicht"
+msgstr "übersicht"
 
 #: admin/acfcs-preview.php:52
 msgid "Dismiss this notice"
@@ -511,16 +590,14 @@ msgid "No results, please try again."
 msgstr "Keine Ergebnisse, versuche es erneut."
 
 #: admin/acfcs-search.php:165
-#, fuzzy
-#| msgid "results"
 msgid "result"
 msgid_plural "results"
-msgstr[0] "Ergebnisse"
+msgstr[0] "Ergebnis"
 msgstr[1] "Ergebnisse"
 
 #: admin/acfcs-search.php:168
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: admin/acfcs-search.php:169
 msgid "Select"
@@ -715,90 +792,6 @@ msgstr "Datei hochladen"
 #: admin/upload-file-form.php:20
 msgid "Upload CSV"
 msgstr "CSV hochladen"
-
-#: fields/acf-city-selector-v4.php:29 fields/acf-city-selector-v5.php:36
-msgid "Choice"
-msgstr "Auswahl"
-
-#: fields/acf-city-selector-v4.php:64 fields/acf-city-selector-v5.php:94
-msgid "All fields [default]"
-msgstr "Alle Felder [Standard]"
-
-#: fields/acf-city-selector-v4.php:65 fields/acf-city-selector-v5.php:95
-msgid "Country only"
-msgstr "Nur Land"
-
-#: fields/acf-city-selector-v4.php:66 fields/acf-city-selector-v5.php:96
-msgid "Country + State/province"
-msgstr "Land + Bundesland/Provinz"
-
-#: fields/acf-city-selector-v4.php:67 fields/acf-city-selector-v5.php:97
-msgid "Country + City"
-msgstr "Land + Stadt"
-
-#: fields/acf-city-selector-v4.php:68 fields/acf-city-selector-v5.php:98
-msgid "State/province + City"
-msgstr "Bundesland/Provinz + Stadt"
-
-#: fields/acf-city-selector-v4.php:80 fields/acf-city-selector-v5.php:67
-msgid "Show labels"
-msgstr "Feld-Beschriftungen anzeigen"
-
-#: fields/acf-city-selector-v4.php:81 fields/acf-city-selector-v5.php:66
-msgid "Show field labels above the dropdown menus"
-msgstr "Zeige Feld-Beschriftungen über den Dropdown-Menüs"
-
-#: fields/acf-city-selector-v4.php:97 fields/acf-city-selector-v5.php:88
-msgid "Default country"
-msgstr "Standard Land"
-
-#: fields/acf-city-selector-v4.php:98 fields/acf-city-selector-v5.php:87
-msgid "Select a default country for a new field"
-msgstr "Wählen Sie das voreingestellte Land für ein neues Feld"
-
-#: fields/acf-city-selector-v4.php:114 fields/acf-city-selector-v5.php:103
-msgid "Fields to use"
-msgstr "Zu verwendende Felder"
-
-#: fields/acf-city-selector-v4.php:115 fields/acf-city-selector-v5.php:102
-msgid "Select which fields are used"
-msgstr "Wählen Sie welche Felder verwendet werden"
-
-#: fields/acf-city-selector-v4.php:178 fields/acf-city-selector-v5.php:152
-msgid ""
-"You haven't set a default country, so NO provinces/states and cities will be "
-"loaded."
-msgstr ""
-"Sie haben kein Standardland festgelegt, daher werden KEINE Provinzen / "
-"Bundesstaaten und Städte geladen."
-
-#: fields/acf-city-selector-v5.php:76
-msgid "Use select2 for dropdowns"
-msgstr "Verwenden Sie select2 für Dropdowns"
-
-#: fields/acf-city-selector-v5.php:77
-msgid "Select2"
-msgstr "Select2"
-
-#: fields/acf-city-selector-v5.php:341
-msgid "You didn't select anything."
-msgstr "Du hast nichts ausgewählt."
-
-#: fields/acf-city-selector-v5.php:342
-msgid "You didn't select a city."
-msgstr "Du hast keine Stadt ausgewählt."
-
-#: fields/acf-city-selector-v5.php:343
-msgid "You didn't select a country."
-msgstr "Du hast kein Land ausgewählt."
-
-#: fields/acf-city-selector-v5.php:344
-msgid "You didn't select a state."
-msgstr "Du hast kein Bundesland/Provinz ausgewählt."
-
-#: fields/acf-city-selector-v5.php:345
-msgid "You didn't select a state and city."
-msgstr "Du hast keine Stadt und Bundesland/Provinz ausgewählt."
 
 #: inc/acfcs-functions.php:123 inc/acfcs-functions.php:502
 #: inc/acfcs-functions.php:916
@@ -1073,10 +1066,8 @@ msgid "Mexico"
 msgstr ""
 
 #: inc/acfcs-i18n.php:31
-#, fuzzy
-#| msgid "Switzerland"
 msgid "Netherlands"
-msgstr "Schweiz"
+msgstr "Die Niederlände"
 
 #: inc/acfcs-i18n.php:32
 msgid "New Zealand"

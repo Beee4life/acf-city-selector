@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
-"POT-Creation-Date: 2022-03-13 20:51+0100\n"
+"POT-Creation-Date: 2022-03-14 01:10+0100\n"
 "PO-Revision-Date: 2019-09-14 15:00+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
@@ -64,6 +64,96 @@ msgstr ""
 
 #: ACF_City_Selector.php:369 admin/acfcs-countries.php:50
 msgid "Get countries"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:29 admin/acf-city-selector-v5.php:36
+msgid "Choice"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:64 admin/acf-city-selector-v5.php:94
+msgid "All fields [default]"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:65 admin/acf-city-selector-v5.php:95
+msgid "Country only"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:66 admin/acf-city-selector-v5.php:96
+msgid "Country + State/province"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:67 admin/acf-city-selector-v5.php:97
+msgid "Country + City"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:68 admin/acf-city-selector-v5.php:98
+msgid "State/province + City"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:72 admin/acf-city-selector-v5.php:61
+#: admin/acfcs-info.php:172
+msgid "Yes"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:73 admin/acf-city-selector-v5.php:62
+#: admin/acfcs-info.php:172
+msgid "No"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:80 admin/acf-city-selector-v5.php:67
+msgid "Show labels"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:81 admin/acf-city-selector-v5.php:66
+msgid "Show field labels above the dropdown menus"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:97 admin/acf-city-selector-v5.php:88
+msgid "Default country"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:98 admin/acf-city-selector-v5.php:87
+msgid "Select a default country for a new field"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:114 admin/acf-city-selector-v5.php:103
+msgid "Fields to use"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:115 admin/acf-city-selector-v5.php:102
+msgid "Select which fields are used"
+msgstr ""
+
+#: admin/acf-city-selector-v4.php:178 admin/acf-city-selector-v5.php:151
+msgid "You haven't set a default country, so NO provinces/states and cities will be loaded."
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:76
+msgid "Use select2 for dropdowns"
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:77
+msgid "Select2"
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:340
+msgid "You didn't select anything."
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:341
+msgid "You didn't select a city."
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:342
+msgid "You didn't select a country."
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:343
+msgid "You didn't select a state."
+msgstr ""
+
+#: admin/acf-city-selector-v5.php:344
+msgid "You didn't select a state and city."
 msgstr ""
 
 #: admin/acfcs-countries.php:8 admin/acfcs-dashboard.php:8
@@ -272,16 +362,6 @@ msgstr ""
 
 #: admin/acfcs-info.php:161
 msgid "Multisite"
-msgstr ""
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:72
-#: fields/acf-city-selector-v5.php:61
-msgid "Yes"
-msgstr ""
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:73
-#: fields/acf-city-selector-v5.php:62
-msgid "No"
 msgstr ""
 
 #: admin/acfcs-info.php:174
@@ -608,92 +688,6 @@ msgstr ""
 
 #: admin/upload-file-form.php:20
 msgid "Upload CSV"
-msgstr ""
-
-#: assets/js/init.js:43 assets/js/init.js:46 assets/js/init.js:48
-#: assets/js/init.js:61 assets/js/init.js:62 assets/js/init.js:63
-#: assets/js/init.js:67
-msgid "acf_city_selector"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:29 fields/acf-city-selector-v5.php:36
-msgid "Choice"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:64 fields/acf-city-selector-v5.php:94
-msgid "All fields [default]"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:65 fields/acf-city-selector-v5.php:95
-msgid "Country only"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:66 fields/acf-city-selector-v5.php:96
-msgid "Country + State/province"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:67 fields/acf-city-selector-v5.php:97
-msgid "Country + City"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:68 fields/acf-city-selector-v5.php:98
-msgid "State/province + City"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:80 fields/acf-city-selector-v5.php:67
-msgid "Show labels"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:81 fields/acf-city-selector-v5.php:66
-msgid "Show field labels above the dropdown menus"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:97 fields/acf-city-selector-v5.php:88
-msgid "Default country"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:98 fields/acf-city-selector-v5.php:87
-msgid "Select a default country for a new field"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:114 fields/acf-city-selector-v5.php:103
-msgid "Fields to use"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:115 fields/acf-city-selector-v5.php:102
-msgid "Select which fields are used"
-msgstr ""
-
-#: fields/acf-city-selector-v4.php:178 fields/acf-city-selector-v5.php:152
-msgid "You haven't set a default country, so NO provinces/states and cities will be loaded."
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:76
-msgid "Use select2 for dropdowns"
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:77
-msgid "Select2"
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:341
-msgid "You didn't select anything."
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:342
-msgid "You didn't select a city."
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:343
-msgid "You didn't select a country."
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:344
-msgid "You didn't select a state."
-msgstr ""
-
-#: fields/acf-city-selector-v5.php:345
-msgid "You didn't select a state and city."
 msgstr ""
 
 #: inc/acfcs-functions.php:123 inc/acfcs-functions.php:502

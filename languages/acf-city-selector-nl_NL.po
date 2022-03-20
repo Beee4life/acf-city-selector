@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
-"POT-Creation-Date: 2022-03-13 20:49+0100\n"
-"PO-Revision-Date: 2022-03-13 20:50+0100\n"
+"POT-Creation-Date: 2022-03-14 01:17+0100\n"
+"PO-Revision-Date: 2022-03-14 01:17+0100\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -16,7 +16,6 @@ msgstr ""
 "esc_html__;esc_html_e;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: languages\n"
-"X-Poedit-SearchPathExcluded-1: assets/js/init.js\n"
 
 #: ACF_City_Selector.php:248 ACF_City_Selector.php:265
 #: ACF_City_Selector.php:368
@@ -73,6 +72,100 @@ msgstr "Data bekijken"
 #: ACF_City_Selector.php:369 admin/acfcs-countries.php:50
 msgid "Get countries"
 msgstr "Meer landen"
+
+#: admin/acf-city-selector-v4.php:29 admin/acf-city-selector-v5.php:36
+msgid "Choice"
+msgstr "Keuze"
+
+#: admin/acf-city-selector-v4.php:64 admin/acf-city-selector-v5.php:94
+msgid "All fields [default]"
+msgstr "Alle velden [standaard]"
+
+#: admin/acf-city-selector-v4.php:65 admin/acf-city-selector-v5.php:95
+msgid "Country only"
+msgstr "Alleen land"
+
+#: admin/acf-city-selector-v4.php:66 admin/acf-city-selector-v5.php:96
+msgid "Country + State/province"
+msgstr "Land + Staat/Provincies"
+
+#: admin/acf-city-selector-v4.php:67 admin/acf-city-selector-v5.php:97
+msgid "Country + City"
+msgstr "Land + Stad"
+
+#: admin/acf-city-selector-v4.php:68 admin/acf-city-selector-v5.php:98
+msgid "State/province + City"
+msgstr "Staat/Provincie + Stad"
+
+#: admin/acf-city-selector-v4.php:72 admin/acf-city-selector-v5.php:61
+#: admin/acfcs-info.php:172
+msgid "Yes"
+msgstr "Ja"
+
+#: admin/acf-city-selector-v4.php:73 admin/acf-city-selector-v5.php:62
+#: admin/acfcs-info.php:172
+msgid "No"
+msgstr "Nee"
+
+#: admin/acf-city-selector-v4.php:80 admin/acf-city-selector-v5.php:67
+msgid "Show labels"
+msgstr "Toon labels"
+
+#: admin/acf-city-selector-v4.php:81 admin/acf-city-selector-v5.php:66
+msgid "Show field labels above the dropdown menus"
+msgstr "Labels tonen boven de dropdown menu’s"
+
+#: admin/acf-city-selector-v4.php:97 admin/acf-city-selector-v5.php:88
+msgid "Default country"
+msgstr "Default land"
+
+#: admin/acf-city-selector-v4.php:98 admin/acf-city-selector-v5.php:87
+msgid "Select a default country for a new field"
+msgstr "Selecteer een standaard land voor een nieuw veld"
+
+#: admin/acf-city-selector-v4.php:114 admin/acf-city-selector-v5.php:103
+msgid "Fields to use"
+msgstr "Velden om te gebruiken"
+
+#: admin/acf-city-selector-v4.php:115 admin/acf-city-selector-v5.php:102
+msgid "Select which fields are used"
+msgstr "Kies welke velden gebruikt worden"
+
+#: admin/acf-city-selector-v4.php:178 admin/acf-city-selector-v5.php:151
+msgid ""
+"You haven't set a default country, so NO provinces/states and cities will be "
+"loaded."
+msgstr ""
+"Je hebt geen default land ingesteld, dus er worden GEEN provincies/staten en "
+"steden geladen."
+
+#: admin/acf-city-selector-v5.php:76
+msgid "Use select2 for dropdowns"
+msgstr "Gebruik select2 voor dropdowns"
+
+#: admin/acf-city-selector-v5.php:77
+msgid "Select2"
+msgstr "Select2"
+
+#: admin/acf-city-selector-v5.php:340
+msgid "You didn't select anything."
+msgstr "Je hebt niks geselecteerd."
+
+#: admin/acf-city-selector-v5.php:341
+msgid "You didn't select a city."
+msgstr "Je hebt geen stad gekozen."
+
+#: admin/acf-city-selector-v5.php:342
+msgid "You didn't select a country."
+msgstr "Je hebt geen land gekozen."
+
+#: admin/acf-city-selector-v5.php:343
+msgid "You didn't select a state."
+msgstr "Je hebt geen staat/provincie gekozen."
+
+#: admin/acf-city-selector-v5.php:344
+msgid "You didn't select a state and city."
+msgstr "Je hebt geen staat/provincie en een stad gekozen."
 
 #: admin/acfcs-countries.php:8 admin/acfcs-dashboard.php:8
 #: admin/acfcs-info.php:8 admin/acfcs-search.php:8 admin/acfcs-settings.php:8
@@ -301,16 +394,6 @@ msgstr "Taal"
 #: admin/acfcs-info.php:161
 msgid "Multisite"
 msgstr "Multisite"
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:72
-#: fields/acf-city-selector-v5.php:61
-msgid "Yes"
-msgstr "Ja"
-
-#: admin/acfcs-info.php:172 fields/acf-city-selector-v4.php:73
-#: fields/acf-city-selector-v5.php:62
-msgid "No"
-msgstr "Nee"
 
 #: admin/acfcs-info.php:174
 msgid "Main site"
@@ -691,89 +774,11 @@ msgstr "Selecteer bestand"
 msgid "Upload CSV"
 msgstr "Upload CSV"
 
-#: fields/acf-city-selector-v4.php:29 fields/acf-city-selector-v5.php:36
-msgid "Choice"
-msgstr "Keuze"
-
-#: fields/acf-city-selector-v4.php:64 fields/acf-city-selector-v5.php:94
-msgid "All fields [default]"
-msgstr "Alle velden [standaard]"
-
-#: fields/acf-city-selector-v4.php:65 fields/acf-city-selector-v5.php:95
-msgid "Country only"
-msgstr "Alleen land"
-
-#: fields/acf-city-selector-v4.php:66 fields/acf-city-selector-v5.php:96
-msgid "Country + State/province"
-msgstr "Land + Staat/Provincies"
-
-#: fields/acf-city-selector-v4.php:67 fields/acf-city-selector-v5.php:97
-msgid "Country + City"
-msgstr "Land + Stad"
-
-#: fields/acf-city-selector-v4.php:68 fields/acf-city-selector-v5.php:98
-msgid "State/province + City"
-msgstr "Staat/Provincie + Stad"
-
-#: fields/acf-city-selector-v4.php:80 fields/acf-city-selector-v5.php:67
-msgid "Show labels"
-msgstr "Toon labels"
-
-#: fields/acf-city-selector-v4.php:81 fields/acf-city-selector-v5.php:66
-msgid "Show field labels above the dropdown menus"
-msgstr "Labels tonen boven de dropdown menu’s"
-
-#: fields/acf-city-selector-v4.php:97 fields/acf-city-selector-v5.php:88
-msgid "Default country"
-msgstr "Default land"
-
-#: fields/acf-city-selector-v4.php:98 fields/acf-city-selector-v5.php:87
-msgid "Select a default country for a new field"
-msgstr "Selecteer een standaard land voor een nieuw veld"
-
-#: fields/acf-city-selector-v4.php:114 fields/acf-city-selector-v5.php:103
-msgid "Fields to use"
-msgstr "Velden om te gebruiken"
-
-#: fields/acf-city-selector-v4.php:115 fields/acf-city-selector-v5.php:102
-msgid "Select which fields are used"
-msgstr "Kies welke velden gebruikt worden"
-
-#: fields/acf-city-selector-v4.php:178 fields/acf-city-selector-v5.php:152
-msgid ""
-"You haven't set a default country, so NO provinces/states and cities will be "
-"loaded."
+#: assets/js/init.js:43 assets/js/init.js:46 assets/js/init.js:48
+#: assets/js/init.js:61 assets/js/init.js:62 assets/js/init.js:63
+#: assets/js/init.js:67
+msgid "acf_city_selector"
 msgstr ""
-"Je hebt geen default land ingesteld, dus er worden GEEN provincies/staten en "
-"steden geladen."
-
-#: fields/acf-city-selector-v5.php:76
-msgid "Use select2 for dropdowns"
-msgstr "Gebruik select2 voor dropdowns"
-
-#: fields/acf-city-selector-v5.php:77
-msgid "Select2"
-msgstr "Select2"
-
-#: fields/acf-city-selector-v5.php:341
-msgid "You didn't select anything."
-msgstr "Je hebt niks geselecteerd."
-
-#: fields/acf-city-selector-v5.php:342
-msgid "You didn't select a city."
-msgstr "Je hebt geen stad gekozen."
-
-#: fields/acf-city-selector-v5.php:343
-msgid "You didn't select a country."
-msgstr "Je hebt geen land gekozen."
-
-#: fields/acf-city-selector-v5.php:344
-msgid "You didn't select a state."
-msgstr "Je hebt geen staat/provincie gekozen."
-
-#: fields/acf-city-selector-v5.php:345
-msgid "You didn't select a state and city."
-msgstr "Je hebt geen staat/provincie en een stad gekozen."
 
 #: inc/acfcs-functions.php:123 inc/acfcs-functions.php:502
 #: inc/acfcs-functions.php:916
