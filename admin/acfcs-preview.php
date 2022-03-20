@@ -33,9 +33,10 @@
             <div class="acfcs__container">
                 <div class="admin_left">
                     <div class="content">
+                        <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Preview data', 'acf-city-selector' ) ); ?>
+                        
                         <?php if ( ! empty( $file_index ) ) { ?>
                             <?php include 'acfcs-preview-form.php'; ?>
-
                         <?php } else { ?>
                             <div>
                                 <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>

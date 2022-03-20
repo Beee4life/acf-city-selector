@@ -4,24 +4,31 @@
         exit;
     }
 
-    // check if class already exists
-    if ( ! class_exists( 'acf_field_city_selector' ) ) :
+    if ( ! class_exists( 'acf_field_city_selector' ) ) {
 
+        /**
+         * Main class
+         */
         class acf_field_city_selector extends acf_field {
 
-            // vars
-            var $settings, // will hold info such as dir / path
-                $defaults; // will hold default field options
-
-
             /*
-            *  __construct
-            *
-            *  Set name / label needed for actions / filters
-            *
-            *  @since	3.6
-            *  @date	23/01/13
-            */
+             * Function index
+             * - construct( $settings )
+             * - render_field_settings( $field )
+             * - render_field( $field )
+             * - input_admin_enqueue_scripts()
+             * - load_value( $value, $post_id, $field )
+             * - update_value( $value, $post_id, $field )
+             * - validate_value( $valid, $value, $field, $input )
+             */
+
+            /**
+             * acf_field_city_selector constructor
+             *
+             * This function will setup the class functionality
+             *
+             * @param $settings
+             */
             function __construct( $settings ) {
 
                 $this->name     = 'acf_city_selector';
@@ -30,35 +37,58 @@
                 $this->defaults = array(
                     'show_labels'  => 1,
                     'which_fields' => 'all',
+                    'use_select2'  => 0,
                 );
 
                 $this->l10n = acfcs_get_js_translations();
 
-                parent::__construct();
-
                 $this->settings = $settings;
+
+                parent::__construct();
 
             }
 
+            /**
+             * render_field_settings()
+             *
+             * Create extra settings for your field. These are visible when editing a field
+             *
+             * @param $field (array) the $field being edited
+             */
+            function render_field_settings( $field ) {
 
-            /*
-            *  create_options()
-            *
-            *  Create extra options for your field. This is rendered when editing a field.
-            *  The value of $field['name'] can be used (like below) to save extra data to the $field
-            *
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	$field	- an array holding all the field's data
-            */
-            function create_options( $field ) {
-                $field = array_merge($this->defaults, $field);
+                $select_options = array(
+                    1 => esc_attr__( 'Yes', 'acf-city-selector' ),
+                    0 => esc_attr__( 'No', 'acf-city-selector' )
+                );
+                acf_render_field_setting( $field, array(
+                    'choices'      => $select_options,
+                    'instructions' => esc_html__( 'Show field labels above the dropdown menus', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Show labels', 'acf-city-selector' ),
+                    'layout'       => 'horizontal',
+                    'name'         => 'show_labels',
+                    'type'         => 'radio',
+                    'value'        => $field[ 'show_labels' ],
+                ) );
 
-                // key is needed in the field names to correctly save the data
-                $key       = $field[ 'name' ];
+                acf_render_field_setting( $field, array(
+                    'choices'      => $select_options,
+                    'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
+                    'layout'       => 'horizontal',
+                    'name'         => 'use_select2',
+                    'type'         => 'radio',
+                    'value'        => $field[ 'use_select2' ],
+                ) );
+
                 $countries = acfcs_get_countries( true, false, true );
+                acf_render_field_setting( $field, array(
+                    'choices'      => $countries,
+                    'instructions' => esc_html__( 'Select a default country for a new field', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Default country', 'acf-city-selector' ),
+                    'name'         => 'default_country',
+                    'type'         => 'select',
+                ) );
 
                 $default_country_fields = array(
                     'all'           => esc_attr__( 'All fields [default]', 'acf-city-selector' ),
@@ -67,81 +97,24 @@
                     'country_city'  => esc_attr__( 'Country + City', 'acf-city-selector' ),
                     'state_city'    => esc_attr__( 'State/province + City', 'acf-city-selector' ),
                 );
-
-                $select_options = array(
-                    1 => esc_attr__( 'Yes', 'acf-city-selector' ),
-                    0 => esc_attr__( 'No', 'acf-city-selector' )
-                );
-
-                // Create Field Options HTML
-                ?>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
-                    <td class="label">
-                        <label><?php esc_attr_e('Show labels','acf-city-selector'); ?></label>
-                        <p class="description"><?php esc_html_e( 'Show field labels above the dropdown menus', 'acf-city-selector' ); ?></p>
-                    </td>
-                    <td>
-                        <?php
-                            do_action('acf/create_field', array(
-                                'type'    => 'radio',
-                                'name'    => 'fields[' . $key . '][show_labels]',
-                                'choices' => $select_options,
-                                'value'   => $field[ 'show_labels' ],
-                                'layout'  => 'horizontal',
-                            ));
-                        ?>
-                    </td>
-                </tr>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
-                    <td class="label">
-                        <label><?php esc_attr_e('Default country','acf-city-selector'); ?></label>
-                        <p class="description"><?php esc_html_e( 'Select a default country for a new field', 'acf-city-selector' ); ?></p>
-                    </td>
-                    <td>
-                        <?php
-                            do_action('acf/create_field', array(
-                                'type'    => 'select',
-                                'name'    => 'fields[' . $key . '][default_country]',
-                                'choices' => $countries,
-                                'value'   => ( isset( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false,
-                                'layout'  => 'horizontal',
-                            ));
-                        ?>
-                    </td>
-                </tr>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
-                    <td class="label">
-                        <label><?php esc_attr_e('Fields to use','acf-city-selector'); ?></label>
-                        <p class="description"><?php esc_html_e( 'Select which fields are used', 'acf-city-selector' ); ?></p>
-                    </td>
-                    <td>
-                        <?php
-                            do_action('acf/create_field', array(
-                                'type'    => 'radio',
-                                'name'    => 'fields[' . $key . '][which_fields]',
-                                'choices' => $default_country_fields,
-                                'value'   => ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all',
-                            ));
-                        ?>
-                    </td>
-                </tr>
-                <?php
+                acf_render_field_setting( $field, array(
+                    'choices'      => $default_country_fields,
+                    'instructions' => esc_html__( 'Select which fields are used', 'acf-city-selector' ),
+                    'label'        => esc_html__( 'Fields to use', 'acf-city-selector' ),
+                    'name'         => 'which_fields',
+                    'type'         => 'radio',
+                ) );
             }
 
+            /**
+             * render_field()
+             *
+             * Create the HTML interface for your field
+             *
+             * @param $field (array) the $field being edited
+             */
+            function render_field( $field ) {
 
-            /*
-            *  create_field()
-            *
-            *  Create the HTML interface for your field
-            *
-            *  @param	$field - an array holding all the field's data
-            *
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            */
-            function create_field( $field ) {
-                $field            = array_merge( $this->defaults, $field );
                 $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
                 $prefill_cities   = array();
                 $prefill_states   = array();
@@ -175,8 +148,8 @@
 
                 } elseif ( false == $default_country && 'state_city' == $which_fields ) {
                     // no default country is set, so show warning
-                    $error_message = esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
-                    echo sprintf( '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">%s</div></div>', $error_message );
+                    $message = esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
+                    echo sprintf( '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">%s</div></div>', $message );
                 }
 
                 $prefill_values = [
@@ -196,26 +169,16 @@
             }
 
 
-            /*
-            *  input_admin_enqueue_scripts()
-            *
-            *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
-            *  Use this action to add CSS + JavaScript to assist your create_field() action.
-            *
-            *  $info	https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @TODO: DRY
-            */
+            /**
+             * input_admin_enqueue_scripts()
+             *
+             * This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
+             * Use this action to add CSS + JavaScript to assist your render_field() action.
+             */
             function input_admin_enqueue_scripts() {
 
                 $plugin_url     = $this->settings[ 'url' ];
                 $plugin_version = $this->settings[ 'version' ];
-
-                wp_enqueue_script( 'acf-custom-validation', "{$plugin_url}assets/js/field-validation.js", array( 'acf-input' ), $plugin_version );
-                wp_enqueue_script( 'acf-custom-validation' );
 
                 wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version );
                 wp_enqueue_script( 'acfcs-init' );
@@ -231,57 +194,26 @@
                 $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
                 $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
-                if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
-                    if ( isset( $_GET[ 'id' ] ) ) {
-                        $post_id = (int) $_GET[ 'id' ];
-                    } else {
-                        $post_id = get_the_ID();
-                    }
-
-                    $fields     = get_field_objects( $post_id );
-                    $field_name = 'acf_city_selector';
-                    if ( is_array( $fields ) && count( $fields ) > 0 ) {
-                        foreach( $fields as $field ) {
-                            if ( isset( $field[ 'type' ] ) && $field[ 'type' ] == 'acf_city_selector' ) {
-                                $field_name = $field[ 'name' ];
-                                break;
-                            }
-                        }
-                    }
-                    $post_meta = get_post_meta( $post_id, $field_name, true );
-
-                    if ( ! empty( $post_meta[ 'cityName' ] ) ) {
-                        $v4_vars = array(
-                            'countryCode' => $post_meta[ 'countryCode' ],
-                            'stateCode'   => $post_meta[ 'stateCode' ],
-                            'cityName'    => $post_meta[ 'cityName' ],
-                        );
-                        $js_vars = array_merge( $js_vars, $v4_vars );
-                    }
-                }
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
 
             }
 
 
             /*
-            *  load_value()
-            *
-            *  This filter is applied to the $value after it is loaded from the db
-            *
-            *  @type	filter
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	$value - the value found in the database
-            *  @param	$post_id - the $post_id from which the value was loaded
-            *  @param	$field - the field array holding all the field options
-            *
-            *  @TODO: DRY
-            *
-            *  @return	$value - the value to be saved in the database
-            */
+             * load_value()
+             *
+             * This filter is applied to the $value after it is loaded from the db
+             * This returns false if no country/state is selected (but empty values are stored)
+             *
+             * @param   $value (mixed) the value found in the database
+             * @param   $post_id (mixed) the $post_id from which the value was loaded
+             * @param   $field (array) the field array holding all the field options
+             *
+             * @return  $value
+             *
+             */
             function load_value( $value, $post_id, $field ) {
+
                 $state_code   = false;
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
 
@@ -309,20 +241,20 @@
             }
 
 
-            /**
-             * Update value before it's changed in the database
+            /*
+             * update_value()
              *
+             * This filter is applied to the $value before it is saved in the db
              * @param   $value (mixed) the value found in the database
              * @param   $post_id (mixed) the $post_id from which the value was loaded
              * @param   $field (array) the field array holding all the field options
              *
-             * @since: 1.5.0
-             *
              * @TODO: DRY
              *
-             * @return false|mixed
+             * @return $value
              */
             function update_value( $value, $post_id, $field ) {
+
                 $required = $field[ 'required' ];
                 if ( 0 == $required ) {
                     if ( isset( $field[ 'which_fields' ] ) && 'all' == $field[ 'which_fields' ] || ! isset( $field[ 'which_fields' ] ) ) {
@@ -346,7 +278,7 @@
                         }
                     } elseif ( isset( $field[ 'which_fields' ] ) && 'state_city' == $field[ 'which_fields' ] ) {
                         if ( isset( $field[ 'default_country' ] ) ) {
-                            $value[ 'countryCode'] = $field[ 'default_country' ];
+                            $value[ 'countryCode' ] = $field[ 'default_country' ];
                         }
                         if ( empty( $value[ 'stateCode' ] ) || empty( $value[ 'cityName' ] ) ) {
                             $value = false;
@@ -384,13 +316,72 @@
                 }
 
                 return $value;
+
+            }
+
+
+            /*
+             * validate_value()
+             *
+             * This filter is used to perform validation on the value prior to saving.
+             * All values are validated regardless of the field's required setting. This allows you to validate and return
+             * messages to the user if the value is not correct
+             *
+             * @param   $valid (boolean) validation status based on the value and the field's required setting
+             * @param   $value (mixed) the $_POST value
+             * @param   $field (array) the field array holding all the field options
+             * @param   $input (string) the corresponding input name for $_POST value
+             *
+             * @return  $valid
+             */
+            function validate_value( $valid, $value, $field, $input ) {
+
+                if ( 1 == $field[ 'required' ] ) {
+                    $nothing       = esc_html__( "You didn't select anything.", 'acf-city-selector' );
+                    $no_city       = esc_html__( "You didn't select a city.", 'acf-city-selector' );
+                    $no_country    = esc_html__( "You didn't select a country.", 'acf-city-selector' );
+                    $no_state      = esc_html__( "You didn't select a state.", 'acf-city-selector' );
+                    $no_state_city = esc_html__( "You didn't select a state and city.", 'acf-city-selector' );
+
+                    if ( 'all' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $valid = $nothing;
+                        } elseif ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $valid = $no_state_city;
+                        } elseif ( empty( $value[ 'cityName' ] ) ) {
+                            $valid = $no_city;
+                        }
+                    } elseif ( 'country_only' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) ) {
+                            $valid = $no_country;
+                        }
+                    } elseif ( 'country_state' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'stateCode' ] ) ) {
+                            $valid = $nothing;
+                        } elseif ( empty( $value[ 'stateCode' ] ) ) {
+                            $valid = $no_state;
+                        }
+                    } elseif ( 'country_city' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'countryCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $valid = $nothing;
+                        } elseif ( empty( $value[ 'cityName' ] ) ) {
+                            $valid = $no_city;
+                        }
+                    } elseif ( 'state_city' == $field[ 'which_fields' ] ) {
+                        if ( empty( $value[ 'stateCode' ] ) && empty( $value[ 'cityName' ] ) ) {
+                            $valid = $nothing;
+                        } elseif ( empty( $value[ 'stateCode' ] ) ) {
+                            $valid = $no_state;
+                        } elseif ( empty( $value[ 'cityName' ] ) ) {
+                            $valid = $no_city;
+                        }
+                    }
+                }
+
+                return $valid;
             }
         }
 
-
-        // initialize
         new acf_field_city_selector( $this->settings );
 
-
-        // class_exists check
-    endif;
+    }

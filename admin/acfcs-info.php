@@ -219,6 +219,9 @@
                         </div>
 
                         <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
+                        <?php if ( ! file_exists( $file_name ) ) { ?>
+                            <?php file_put_contents( $file_name, '' ); // create empty file ?>
+                        <?php } ?>
                         <div class="acfcs__section acfcs__section--export">
                             <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Download JSON', 'acf-city-selector' ) ); ?>
                             <p>
@@ -236,8 +239,6 @@
                                         <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
                                     </a> <small>(<?php _e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
                                 </p>
-                            <?php } else { ?>
-                                <?php echo sprintf( '<p>%s</p>', esc_html__( 'The debug.json file is missing. Please deactivate and reactivate the plugin.', 'acf-city-selector' ) ); ?>
                             <?php } ?>
                         </div>
 

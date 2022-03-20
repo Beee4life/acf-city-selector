@@ -39,8 +39,8 @@
 
 .acfcs__section {
   border-top:  1px solid #cccccc;
-  margin-top:  1.5em;
-  padding-top: 1.5em;
+  margin-top:  1.5rem;
+  padding-top: 1.5rem;
 }
 
 .acfcs__section:first-child {
@@ -55,7 +55,7 @@
 }
 
 .acfcs__section--results {
-  margin-top: 2em;
+  margin-top: 2rem;
 }
 
 .acfcs__section--export p.json_button {
@@ -81,12 +81,12 @@
 }
 
 .acfcs__search-criteria--orderby {
-  margin-right: 1.25em;
+  margin-right: 1.25rem;
 }
 
 .acfcs__search-criteria--or,
 .acfcs__search-criteria--plus {
-  margin:      0 0.5em;
+  margin:      0 0.5rem;
   padding-top: 5px;
 }
 
@@ -110,18 +110,18 @@
 }
 
 .acfcs table.acfcs__table--info {
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
   max-width:     450px;
 }
 
 .acfcs table.acfcs__table--search {
-  margin-top:    1em;
-  margin-bottom: 1em;
+  margin-top:    1rem;
+  margin-bottom: 1rem;
 }
 
 .acfcs table.acfcs__table th,
 .acfcs table.acfcs__table td {
-  padding:    5px 0.5em 5px 0;
+  padding:    5px 0.5rem 5px 0;
   text-align: left;
 }
 
@@ -185,7 +185,6 @@
 
 .acfcs .acfcs__process-file-element label {
   display: inline-block;
-  width:   80px;
 }
 
 /* form inputs */
@@ -224,7 +223,7 @@
   width:         100%;
   height:        1px;
   border:        0;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .acfcs img.acfcs__donate {
@@ -249,21 +248,21 @@
 #contextual-help-columns .contextual-help-tabs-wrap h5 {
   -webkit-margin-before: 0;
   -webkit-margin-after:  0;
-  margin-bottom:         0.5em;
+  margin-bottom:         0.5rem;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap h5:first-child {
-  -webkit-margin-before: 0.75em;
+  -webkit-margin-before: 0.75rem;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap p {
   -webkit-margin-before: 0;
-  margin:                0.5em 0 0.5em 0;
+  margin:                0.5rem 0 0.5rem 0;
 }
 
 #contextual-help-columns .contextual-help-sidebar p {
   -webkit-margin-before: 0;
-  margin:                1em 0 0.5em 0;
+  margin:                1rem 0 0.5rem 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap table {
@@ -272,7 +271,7 @@
 
 #contextual-help-columns .contextual-help-tabs-wrap th,
 #contextual-help-columns .contextual-help-tabs-wrap td {
-  padding: 5px 0.5em 5px 0;
+  padding: 5px 0.5rem 5px 0;
 }
 
 #contextual-help-columns .contextual-help-tabs-wrap th {
@@ -316,7 +315,6 @@
   .acfcs .form--upload .acfcs_upload_button {
     left: 350px;
   }
-
 }
 
 @media screen and (max-width: 400px) {
@@ -358,7 +356,7 @@
   }
 
   .admin_right .paypal_button {
-    margin-bottom: 2.5em;
+    margin-bottom: 2.5rem;
   }
 
   .acfcs .acfcs__process-file {
@@ -373,17 +371,13 @@
   .acfcs .acfcs__process-file-element label {
     display: block;
   }
-
-  .acfcs .acfcs__process-file-element--file {
-    min-width: 130px;
-  }
 }
 
 /* screensize used in WP forms.css */
 @media screen and (max-width: 782px) {
   .acfcs__search-criteria--or,
   .acfcs__search-criteria--plus {
-    margin:      0 0.5em;
+    margin:      0 0.5rem;
     padding-top: 10px;
   }
 

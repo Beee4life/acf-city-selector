@@ -27,29 +27,24 @@
                 $countries[ '' ] = $select_country_label;
             }
         }
-
-        $transient = get_transient( 'acfcs_countries' );
-        if ( false != $force || false == $transient || is_array( $transient ) && empty( $transient ) ) {
-            global $wpdb;
-            $results = $wpdb->get_results( '
+    
+        global $wpdb;
+        $results = $wpdb->get_results( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
                 GROUP BY country
                 ORDER BY country ASC
             ' );
-
+    
+        if ( ! empty( $results ) ) {
             $country_results = array();
             foreach ( $results as $data ) {
                 if ( isset( $data->country_code ) && isset( $data->country ) ) {
                     $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
                 }
             }
-
-            set_transient( 'acfcs_countries', $country_results, DAY_IN_SECONDS );
             $countries = array_merge( $countries, $country_results );
-
-        } elseif ( is_array( $transient ) ) {
-            $countries = array_merge( $countries, $transient );
         }
+    
 
         return $countries;
     }
@@ -284,8 +279,9 @@
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
         $csv_array     = array();
         $empty_array   = false;
+        $errors        = ACF_City_Selector::acfcs_errors();
         $new_array     = array();
-
+        
         if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
@@ -299,7 +295,7 @@
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
@@ -307,11 +303,11 @@
                         if ( false === $verify ) {
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
                         }
-                        ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                 }
 
-                if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
+                if ( $errors->has_errors() ) {
                     $empty_array = true;
                     $new_array   = array();
                 } else {
@@ -332,8 +328,8 @@
                 }
             }
             fclose( $handle );
-
-            if ( ACF_City_Selector::acfcs_errors()->get_error_codes() ) {
+    
+            if ( $errors->has_errors() ) {
                 // delete file
                 if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
                     unlink( acfcs_upload_folder( '/' ) . $file_name );
@@ -636,9 +632,14 @@
                         }
 
                         do_action( 'acfcs_after_success_import' );
+                    } else {
+                        error_log( 'error in ' . $file_name);
                     }
+                } else {
+                    error_log('wp error');
                 }
             } else {
+                error_log('raw');
                 // raw data
                 global $wpdb;
                 $line_number   = 0;
