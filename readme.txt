@@ -38,3 +38,13 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 = Q. I have a question =
 
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
+
+== Upgrade Notice ==
+
+= 1.7.0 =
+The raw csv import was broken. That's now fixed.
+
+== Changelog ==
+
+= 1.7.0 =
+* fixed raw csv import
