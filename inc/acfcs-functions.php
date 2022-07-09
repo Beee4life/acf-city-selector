@@ -27,14 +27,14 @@
                 $countries[ '' ] = $select_country_label;
             }
         }
-    
+
         global $wpdb;
         $results = $wpdb->get_results( '
                 SELECT * FROM ' . $wpdb->prefix . 'cities
                 GROUP BY country
                 ORDER BY country ASC
             ' );
-    
+
         if ( ! empty( $results ) ) {
             $country_results = array();
             foreach ( $results as $data ) {
@@ -44,7 +44,7 @@
             }
             $countries = array_merge( $countries, $country_results );
         }
-    
+
 
         return $countries;
     }
@@ -281,7 +281,7 @@
         $empty_array   = false;
         $errors        = ACF_City_Selector::acfcs_errors();
         $new_array     = array();
-        
+
         if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
             $column_benchmark = 5;
             $line_number      = 0;
@@ -328,7 +328,7 @@
                 }
             }
             fclose( $handle );
-    
+
             if ( $errors->has_errors() ) {
                 // delete file
                 if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
@@ -604,42 +604,44 @@
      */
     function acfcs_import_data( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
         if ( $file_name ) {
-            if ( strpos( $file_name, '.csv', -4 ) !== false ) {
-                $csv_array = acfcs_csv_to_array( $file_name, $upload_folder, $delimiter, $verify, $max_lines );
+            if ( ! is_array( $file_name ) ) {
+                // csv data
+                if ( strpos( $file_name, '.csv', -4 ) !== false ) {
+                    $csv_array = acfcs_csv_to_array( $file_name, $upload_folder, $delimiter, $verify, $max_lines );
 
-                if ( ! is_wp_error( $csv_array ) ) {
-                    if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
-                        $line_number = 0;
-                        foreach ( $csv_array[ 'data' ] as $line ) {
-                            $line_number++;
+                    if ( ! is_wp_error( $csv_array ) ) {
+                        if ( isset( $csv_array[ 'data' ] ) && ! empty( $csv_array[ 'data' ] ) ) {
+                            $line_number = 0;
+                            foreach ( $csv_array[ 'data' ] as $line ) {
+                                $line_number++;
 
-                            $city_row = array(
-                                'city_name'    => $line[ 0 ],
-                                'state_code'   => $line[ 1 ],
-                                'state_name'   => $line[ 2 ],
-                                'country_code' => $line[ 3 ],
-                                'country'      => $line[ 4 ],
-                            );
+                                $city_row = array(
+                                    'city_name'    => $line[ 0 ],
+                                    'state_code'   => $line[ 1 ],
+                                    'state_name'   => $line[ 2 ],
+                                    'country_code' => $line[ 3 ],
+                                    'country'      => $line[ 4 ],
+                                );
 
-                            global $wpdb;
-                            $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
-                        }
-                        if ( in_array( $file_name, [ 'be.csv', 'nl.csv' ] ) ) {
-                            $country_code = substr( $file_name, 0, 2 );
-                            ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported_' . $country_code, sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                                global $wpdb;
+                                $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
+                            }
+                            if ( in_array( $file_name, [ 'be.csv', 'nl.csv' ] ) ) {
+                                $country_code = substr( $file_name, 0, 2 );
+                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported_' . $country_code, sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                            } else {
+                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                            }
+
+                            do_action( 'acfcs_after_success_import' );
                         } else {
-                            ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                            error_log( 'error in ' . $file_name);
                         }
-
-                        do_action( 'acfcs_after_success_import' );
                     } else {
-                        error_log( 'error in ' . $file_name);
+                        error_log('wp error');
                     }
-                } else {
-                    error_log('wp error');
                 }
             } else {
-                error_log('raw');
                 // raw data
                 global $wpdb;
                 $line_number   = 0;
@@ -662,10 +664,10 @@
 
                 do_action( 'acfcs_after_success_import_raw' );
             }
+
         } else {
             ACF_City_Selector::acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
         }
-
     }
 
     /**
