@@ -28,7 +28,7 @@
             /*
              * __construct
              *
-             * This function will setup the class functionality
+             * This function will set up the class functionality
              */
             public function __construct() {
 
