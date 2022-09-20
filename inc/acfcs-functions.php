@@ -763,7 +763,6 @@
             foreach( $table_columns as $column ) {
                 echo sprintf( '<th>%s</th>', $column );
             }
-            echo '<thead><tr>%s</tr></thead>';
             $table_headers = ob_get_clean();
 
             ob_start();
