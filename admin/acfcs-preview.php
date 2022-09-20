@@ -34,7 +34,7 @@
                 <div class="admin_left">
                     <div class="content">
                         <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Preview data', 'acf-city-selector' ) ); ?>
-                        
+
                         <?php if ( ! empty( $file_index ) ) { ?>
                             <?php include 'acfcs-preview-form.php'; ?>
                         <?php } else { ?>
@@ -61,7 +61,7 @@
                                 } elseif ( isset( $csv_info[ 'data' ] ) && ! empty( $csv_info[ 'data' ] ) ) {
                                     echo sprintf( '<h2>%s</h2>', esc_html__( 'CSV contents', 'acf-city-selector' ) );
                                     echo sprintf( '<p class="hide640"><small>%s</small></p>', esc_html__( 'Table scrolls horizontally.', 'acf-city-selector' ) );
-                                    echo acfcs_render_preview_results();
+                                    echo acfcs_render_preview_results( $csv_info[ 'data' ] );
                                 }
                                 echo '</div>';
                             }
