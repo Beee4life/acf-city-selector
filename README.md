@@ -230,6 +230,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 1.8.0
 * fixed preview
+* fixed city names with an '
+* fixed city names with special characters
 
 1.7.0
 * fixed raw import

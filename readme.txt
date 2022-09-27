@@ -42,12 +42,14 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Upgrade Notice ==
 
 = 1.8.0 =
-The preview option was broken, which is now fixed.
+The preview option was broken, which is now fixed. Also all 'broken' special characters are replaced.
 
 == Changelog ==
 
 = 1.8.0 =
-* fixed csv preview
+* fixed preview
+* fixed city names with an '
+* fixed city names with special characters
 
 = 1.7.0 =
 * fixed raw csv import
