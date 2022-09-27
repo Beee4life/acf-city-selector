@@ -22,3 +22,27 @@
     add_action( 'acfcs_after_success_import', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_import_raw', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_nuke', 'acfcs_delete_transients' );
+
+
+	/**
+	 * Do stuff after certain imports
+	 *
+	 * @param $country_code
+	 *
+	 * @return void
+	 */
+	function acfcs_reimport_cities( $country_code = false ) {
+		if ( $country_code && in_array( $country_code, [ 'nl', 'be' ] ) ) {
+			update_option( 'acfcs_city_update_1_8_0_' . $country_code, 'done' );
+
+			$belgium_done     = get_option( 'acfcs_city_update_1_8_0_be' );
+			$netherlands_done = get_option( 'acfcs_city_update_1_8_0_nl' );
+
+			if ( $belgium_done && $netherlands_done ) {
+				delete_option( 'acfcs_city_update_1_8_0_be' );
+				delete_option( 'acfcs_city_update_1_8_0_nl' );
+				update_option( 'acfcs_city_update_1_8_0', 'done' );
+			}
+		}
+	}
+    add_action( 'acfcs_after_success_import', 'acfcs_reimport_cities' );
