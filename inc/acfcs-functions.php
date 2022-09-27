@@ -136,7 +136,7 @@
             $cities_transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ) );
         }
 
-        if ( false == $cities_transient || empty( $cities_transient ) ) {
+		if ( false == $cities_transient || empty( $cities_transient ) ) {
             $set_transient = true;
         } else {
             foreach ( $cities_transient as $data ) {
@@ -480,8 +480,13 @@
      */
     function acfcs_custom_sort_with_quotes( $city ) {
         // strip quote marks
-        $city = trim( $city, '\'s ' );
-        $city = preg_replace( '/^\s*\'s \s+/i', '', $city );
+		if ( strpos( $city, "'s" ) !== false ) {
+			$city = trim( $city, '\'s ' );
+			$city = preg_replace( '/^\s*\'s \s+/i', '', $city );
+		} elseif ( strpos( $city, "'t" ) !== false ) {
+			$city = trim( $city, '\'t ' );
+			$city = preg_replace( '/^\s*\'t \s+/i', '', $city );
+		}
 
         return $city;
     }
