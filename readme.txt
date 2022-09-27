@@ -3,8 +3,8 @@ Tags: acf, custom, fields, custom fields, select, country, city, state, province
 Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
-Tested up to: 6.0
-Stable tag: 1.7.0
+Tested up to: 6.0.2
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,10 +41,13 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 
 == Upgrade Notice ==
 
-= 1.7.0 =
-The raw csv import was broken. That's now fixed.
+= 1.8.0 =
+The preview option was broken, which is now fixed.
 
 == Changelog ==
+
+= 1.8.0 =
+* fixed csv preview
 
 = 1.7.0 =
 * fixed raw csv import
