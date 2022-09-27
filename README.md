@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.7.0 - released 09.07.22
+1.8.0 - released xx.07.22
 
 <a name="description"></a>
 ### Description
@@ -227,6 +227,11 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.8.0
+* fixed preview
+* fixed city names with an '
+* fixed city names with special characters
 
 1.7.0
 * fixed raw import

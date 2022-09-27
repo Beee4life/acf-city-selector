@@ -136,7 +136,7 @@
             $cities_transient = get_transient( 'acfcs_cities_' . strtolower( $country_code ) . '-' . strtolower( $state_code ) );
         }
 
-        if ( false == $cities_transient || empty( $cities_transient ) ) {
+		if ( false == $cities_transient || empty( $cities_transient ) ) {
             $set_transient = true;
         } else {
             foreach ( $cities_transient as $data ) {
@@ -214,14 +214,21 @@
     }
 
 
-    /**
+	/**
      * Checks if there any cities in the database (for page availability)
-     *
-     * @return bool
-     */
-    function acfcs_has_cities() {
+	 *
+	 * @param $country_code
+	 *
+	 * @return bool
+	 */
+    function acfcs_has_cities( $country_code = false ) {
         global $wpdb;
-        $results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 1' );
+		$query = 'SELECT * FROM ' . $wpdb->prefix . 'cities LIMIT 1';
+		if ( $country_code ) {
+			$query = $wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'cities WHERE country_code = %s LIMIT 1', $country_code );
+		}
+
+        $results = $wpdb->get_results( $query );
 
         if ( count( $results ) > 0 ) {
             return true;
@@ -480,8 +487,13 @@
      */
     function acfcs_custom_sort_with_quotes( $city ) {
         // strip quote marks
-        $city = trim( $city, '\'s ' );
-        $city = preg_replace( '/^\s*\'s \s+/i', '', $city );
+		if ( strpos( $city, "'s" ) !== false ) {
+			$city = trim( $city, '\'s ' );
+			$city = preg_replace( '/^\s*\'s \s+/i', '', $city );
+		} elseif ( strpos( $city, "'t" ) !== false ) {
+			$city = trim( $city, '\'t ' );
+			$city = preg_replace( '/^\s*\'t \s+/i', '', $city );
+		}
 
         return $city;
     }
@@ -718,7 +730,7 @@
             $query          = "DELETE FROM {$wpdb->prefix}cities WHERE `country_code` IN ({$country_string})";
             $result         = $wpdb->query( $query );
             if ( $result > 0 ) {
-                ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
+				ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
                 foreach( $countries as $country_code ) {
                     do_action( 'acfcs_delete_transients', $country_code );
                 }
@@ -763,7 +775,6 @@
             foreach( $table_columns as $column ) {
                 echo sprintf( '<th>%s</th>', $column );
             }
-            echo '<thead><tr>%s</tr></thead>';
             $table_headers = ob_get_clean();
 
             ob_start();
