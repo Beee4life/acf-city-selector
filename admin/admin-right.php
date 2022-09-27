@@ -23,18 +23,7 @@
             echo sprintf( '<h3>%s</h3>', esc_html__( 'Requests', 'acf-city-selector' ) );
 
             echo sprintf( '<p>%s</p>', esc_html__( 'If you have some good suggestions for improvements and/or new features, please share them with us, maybe we can incorporate it.', 'acf-city-selector' ) );
-
-            echo '<hr />';
         ?>
-
-        <div class="paypal_button">
-            <div>
-                <?php esc_html_e( 'If you like this plugin, purchase a country package or buy me a coke to show your appreciation so I can continue to develop it.', 'acf-city-selector' ); ?>
-            </div>
-            <div>
-                <?php echo sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=24H4ULSQAT9ZL', sprintf( '<img src="%s" alt="" class="acfcs_donate" />', plugins_url( '/assets/img/paypal_donate.gif', dirname( __FILE__ ) ) ) ); ?>
-            </div>
-        </div>
 
     </div>
 </div>

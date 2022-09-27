@@ -230,12 +230,6 @@
   margin-left: 10px;
 }
 
-.acfcs .admin_right .paypal_button {
-  display:       flex;
-  flex-flow:     row nowrap;
-  align-content: space-between;
-}
-
 /* help menus */
 .contextual-help-tabs {
   width: 170px;
