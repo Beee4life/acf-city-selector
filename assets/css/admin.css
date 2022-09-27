@@ -349,10 +349,6 @@
     display: none;
   }
 
-  .admin_right .paypal_button {
-    margin-bottom: 2.5rem;
-  }
-
   .acfcs .acfcs__process-file {
     display:   flex;
     flex-flow: row nowrap;
@@ -381,10 +377,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .admin_right .paypal_button {
-    margin-bottom: initial;
-  }
-
   .acfcs table.acfcs__table--search {
     max-width: 90%;
   }
