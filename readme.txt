@@ -41,10 +41,14 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 
 == Upgrade Notice ==
 
-= 1.8.0 =
-The preview option was broken, which is now fixed. Also all 'broken' special characters are replaced.
+= 1.9.0 =
+tbc
 
 == Changelog ==
+
+= 1.9.0 =
+* fixed case for country code in states transient
+* added wpdb->prepare (where needed)
 
 = 1.8.0 =
 * fixed preview

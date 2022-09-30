@@ -228,6 +228,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.9.0
+* fixed case in states transient
+* added wpdb->prepare (where needed)
+
 1.8.0
 * fixed preview
 * fixed city names with an '
