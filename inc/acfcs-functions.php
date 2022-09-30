@@ -92,7 +92,7 @@
 
                 $state_results = array();
                 foreach ( $results as $data ) {
-                    $state_results[ $country_code . '-' . $data->state_code ] = esc_attr__( $data->state_name, 'acf-city-selector' );
+                    $state_results[ strtoupper( $country_code ) . '-' . $data->state_code ] = esc_attr__( $data->state_name, 'acf-city-selector' );
                 }
 
                 set_transient( 'acfcs_states_' . strtolower( $country_code ), $state_results, DAY_IN_SECONDS );
