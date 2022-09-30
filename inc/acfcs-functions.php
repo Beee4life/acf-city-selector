@@ -155,10 +155,9 @@
                     if ( 3 < strlen( $state_code ) ) {
                         $state_code = substr( $state_code, 3 );
                     }
-                    $query .= " WHERE country_code = '{$country_code}' AND state_code = '{$state_code}'";
-                    $query .= " ORDER BY state_name, city_name ASC";
+                    $query = $wpdb->prepare( $query . " WHERE country_code = %s AND state_code = %s ORDER BY state_name, city_name ASC", $country_code, $state_code );
                 } elseif ( $country_code ) {
-                    $query .= " WHERE country_code = '{$country_code}'";
+                    $query = $wpdb->prepare( $query . " WHERE country_code = %s", $country_code );
                 }
                 $city_results = array();
                 $results      = $wpdb->get_results( $query );
