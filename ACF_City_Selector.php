@@ -35,7 +35,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => get_plugin_data( __FILE__ )['Version'],
+                    'version'    => '1.9.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
