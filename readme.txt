@@ -39,12 +39,12 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
 
-== Upgrade Notice ==
-
-= 1.8.0 =
-The preview option was broken, which is now fixed. Also all 'broken' special characters are replaced.
-
 == Changelog ==
+
+= 1.9.0 =
+* fixed case for country code in states transient
+* added wpdb->prepare (where needed)
+* reverted version by function due to some people reporting errors
 
 = 1.8.0 =
 * fixed preview

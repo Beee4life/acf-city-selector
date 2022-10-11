@@ -14,6 +14,7 @@
             if ( ! empty( $countries ) ) {
                 foreach( $countries as $country_code => $label ) {
                     do_action( 'acfcs_delete_transients', $country_code );
+					// @TODO: also add states
                 }
             }
         }
