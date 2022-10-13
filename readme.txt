@@ -4,7 +4,7 @@ Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
 Tested up to: 6.0.2
-Stable tag: 1.8.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
 
 == Changelog ==
+
+= 1.9.1 =
+* fix incorrect version
 
 = 1.9.0 =
 * fixed case for country code in states transient
