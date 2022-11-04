@@ -258,7 +258,7 @@
              * @return array
              */
             public function acfcs_settings_link( $links ) {
-                $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
+                $settings_link = [ 'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=acfcs-dashboard' ), esc_html__( 'Settings', 'acf-city-selector' ) ) ];
 
                 return array_merge( $settings_link, $links );
             }
