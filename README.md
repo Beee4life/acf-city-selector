@@ -228,6 +228,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.10.0
+* ?
+
 1.9.1
 * fixed incorrect version
 
