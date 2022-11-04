@@ -26,8 +26,6 @@
                             <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Info', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( 'This page shows real-time info about your site and settings.', 'acf-city-selector' ); ?>
-                                <br />
-                                <?php esc_html_e( 'We might ask for this info if support is helping you fix a problem.', 'acf-city-selector' ); ?>
                             </p>
                         </div>
 
