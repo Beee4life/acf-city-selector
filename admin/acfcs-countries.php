@@ -51,7 +51,7 @@
                             <?php echo sprintf( '<p>%s</p>', esc_html__( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( "And now you can !! We have created several 'country packages' for you to import 'as is'.", 'acf-city-selector' ); ?>
-                                <?php echo sprintf( __( 'Download them %s.', 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), __( 'here', 'acf-city-selector' ) ) ); ?>
+                                <?php echo sprintf( esc_html__( 'Download them %s.', 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'here', 'acf-city-selector' ) ) ); ?>
                             </p>
                         </div>
 
