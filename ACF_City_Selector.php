@@ -371,7 +371,7 @@
              * @param $from_index
              * @param $to_index
              */
-            public static function acfcs_move_array_element( &$array, $from_index, $to_index ) {
+            public function acfcs_move_array_element( &$array, $from_index, $to_index ) {
                 $splice = array_splice( $array, $from_index, 1 );
                 array_splice( $array, $to_index, 0, $splice );
             }
