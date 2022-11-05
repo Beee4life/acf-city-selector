@@ -48,6 +48,7 @@
 
             }
 
+
             /**
              * render_field_settings()
              *
@@ -105,6 +106,7 @@
                     'type'         => 'radio',
                 ) );
             }
+
 
             /**
              * render_field()
@@ -230,11 +232,12 @@
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$wpdb->prefix}cities WHERE country_code= %s AND state_code= %s", $country_code, $state_code );
-                    $row                    = $wpdb->get_row( $sql_query );
-                    $value[ 'stateCode' ]   = $state_code;
-                    $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
-                    $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
+					$table                  = $wpdb->prefix . 'cities';
+					$sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$table} WHERE country_code = %s AND state_code = %s", $country_code, $state_code );
+					$row                    = $wpdb->get_row( $sql_query );
+					$value[ 'stateCode' ]   = $state_code;
+					$value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
+					$value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
                 }
 
                 return $value;
