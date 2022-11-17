@@ -47,3 +47,24 @@
 		}
 	}
 	add_action( 'acfcs_after_success_import', 'acfcs_reimport_cities' );
+
+	function acfcs_save_single( $value, $post_id ) {
+		if ( isset( $value[ 'save_single' ] ) && 1 == $value[ 'save_single' ] ) {
+			if ( ! empty( $value[ 'countryCode' ] ) ) {
+				update_post_meta( $post_id, 'acfcs_search_country', $value[ 'countryCode' ] );
+			}
+			if ( ! empty( $value[ 'stateCode' ] ) ) {
+				update_post_meta( $post_id, 'acfcs_search_state', $value[ 'stateCode' ] );
+			}
+			if ( ! empty( $value[ 'cityName' ] ) ) {
+				update_post_meta( $post_id, 'acfcs_search_city', $value[ 'cityName' ] );
+			}
+		} else {
+			// remove meta
+			delete_post_meta( $post_id, 'acfcs_search_country' );
+			delete_post_meta( $post_id, 'acfcs_search_state' );
+			delete_post_meta( $post_id, 'acfcs_search_city' );
+		}
+		// error_log(print_r($value,true));
+	}
+	add_action( 'acfcs_store_meta', 'acfcs_save_single', 10, 2 );
