@@ -588,6 +588,37 @@
     }
 
 
+	function acfcs_render_checkbox( $field, $stored_value ) {
+		$faq_explanation = ACFCS_WEBSITE_URL . '/faq/#';
+		$field_id        = $field[ 'id' ];
+		$field_name      = $field[ 'name' ];
+		$field_label     = __( 'Save as single meta', 'acf-city-selector' );
+		$field_suffix    = 'save_single';
+
+		ob_start();
+		?>
+		<div class="acfcs__checkbox">
+			<div>
+				<input type="checkbox" id="<?php echo $field_id . $field_suffix; ?>" name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" value="1" <?php checked( $stored_value ); ?>/>
+			</div>
+			<div>
+				<label for="<?php echo $field_id . $field_suffix; ?>">
+					<?php echo $field_label; ?>
+				</label>
+				|
+				<a href="<?php echo $faq_explanation; ?>">
+					<?php esc_html_e( 'Explanation', 'acf-city-selector' ); ?>
+				</a>
+			</div>
+		</div>
+		<?php
+		$input = ob_get_clean();
+
+		return $input;
+
+	}
+
+
     /**
      * Verify CSV data
      *
