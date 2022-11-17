@@ -117,16 +117,17 @@
              */
             function render_field( $field ) {
 
-                $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
-                $prefill_cities   = array();
-                $prefill_states   = array();
-                $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-                $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-                $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-                $show_first       = true;
-                $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
+				$default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+				$prefill_cities   = [];
+				$prefill_states   = [];
+				$selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+				$selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+				$selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+				$save_as_single   = ( isset( $field[ 'value' ][ 'save_single' ] ) ) ? $field[ 'value' ][ 'save_single' ] : false;
+				$show_first       = true;
+				$which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
-                if ( false !== $default_country && false == $selected_country ) {
+				if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country
                     if ( in_array( $which_fields, [ 'all', 'country_state', 'state_city' ] ) ) {
                         $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
@@ -167,6 +168,10 @@
                 }
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
+                }
+
+				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
+					echo acfcs_render_checkbox( $field, $save_as_single );
                 }
             }
 
@@ -317,6 +322,10 @@
                         }
                     }
                 }
+
+				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
+					do_action( 'acfcs_store_meta', $value, $post_id );
+				}
 
                 return $value;
 
