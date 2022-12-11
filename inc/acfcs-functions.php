@@ -589,7 +589,7 @@
 
 
 	function acfcs_render_checkbox( $field, $stored_value ) {
-		$faq_explanation = ACFCS_WEBSITE_URL . '/faq/#';
+		$faq_explanation = ACFCS_WEBSITE_URL . '/faq/store-city-selector-values-as-single-meta/';
 		$field_id        = $field[ 'id' ];
 		$field_name      = $field[ 'name' ];
 		$field_label     = __( 'Save as single meta', 'acf-city-selector' );
@@ -606,7 +606,7 @@
 					<?php echo $field_label; ?>
 				</label>
 				|
-				<a href="<?php echo $faq_explanation; ?>">
+				<a href="<?php echo $faq_explanation; ?>" target="_blank" rel="noopener">
 					<?php esc_html_e( 'Explanation', 'acf-city-selector' ); ?>
 				</a>
 			</div>
