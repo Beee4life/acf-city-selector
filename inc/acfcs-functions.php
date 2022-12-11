@@ -42,7 +42,6 @@
             $countries = array_merge( $countries, $country_results );
         }
 
-
         return $countries;
     }
 
@@ -210,7 +209,7 @@
 
 
 	/**
-     * Checks if there any cities in the database (for page availability)
+     * Checks if there are any cities in the database (for page availability)
 	 *
 	 * @param $country_code
 	 *
@@ -240,8 +239,10 @@
      * @return array
      */
     function acfcs_check_if_files() {
-        $target_dir = acfcs_upload_folder();
-        if ( is_dir( $target_dir ) ) {
+		$actual_files = [];
+		$target_dir   = acfcs_upload_folder();
+
+		if ( is_dir( $target_dir ) ) {
             $file_index = scandir( $target_dir );
             $excluded_files = [
                 '.',
@@ -251,7 +252,6 @@
             ];
 
             if ( is_array( $file_index ) ) {
-                $actual_files = array();
                 foreach ( $file_index as $file ) {
                     if ( ! in_array( $file, $excluded_files ) ) {
                         $actual_files[] = $file;
@@ -263,7 +263,7 @@
             }
         }
 
-        return array();
+        return $actual_files;
     }
 
 
@@ -785,7 +785,8 @@
      * @return false|string
      */
     function acfcs_render_preview_results( $csv_data = [] ) {
-        if ( ! empty( $csv_data ) ) {
+        $table = '';
+		if ( ! empty( $csv_data ) ) {
             $table_columns = [
                 esc_html__( 'City', 'acf-city-selector' ),
                 esc_html__( 'State code', 'acf-city-selector' ),
@@ -811,11 +812,9 @@
             $table_rows = ob_get_clean();
             $table_body = sprintf( '<tbody>%s</tbody>', $table_rows );
             $table      = sprintf( '<table class="acfcs__table acfcs__table--preview-result scrollable">%s%s</table>', $table_headers, $table_body );
-
-            return $table;
         }
 
-        return '';
+		return $table;
     }
 
 
@@ -828,6 +827,8 @@
      */
     function acfcs_get_states_optgroup() {
         $results = acfcs_get_countries( false );
+		$states  = [];
+
         // if there is at least 1 country
         if ( ! empty( $results ) ) {
             foreach ( $results as $country_code => $label ) {
@@ -841,7 +842,6 @@
             if ( ! empty( $countries ) ) {
 				global $wpdb;
 				$table  = $wpdb->prefix . 'cities';
-				$states = [];
 
 				foreach ( $countries as $country ) {
                     $states[] = array(
@@ -872,12 +872,10 @@
                         'name'  => '',
                     );
                 }
-
-                return $states;
             }
         }
 
-        return [];
+		return $states;
     }
 
 
