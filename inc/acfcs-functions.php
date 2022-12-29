@@ -71,9 +71,9 @@
         if ( false != $country_code ) {
             $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
             if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
-                $order = 'ORDER BY state_name ASC';
+                $order = ' ORDER BY state_name ASC';
                 if ( 'FR' == $country_code ) {
-                    $order = "ORDER BY LENGTH(state_name), state_name";
+                    $order = " ORDER BY LENGTH(state_name), state_name";
                 }
 
 				global $wpdb;
@@ -581,8 +581,40 @@
 
 	function acfcs_render_hidden_field( $name, $value ) {
 		if ( $name && $value ) {
-			return sprintf( '<input type="hidden" name="%s" value="%d" />', $name, $value );
+			return sprintf( '<input type="hidden" name="%s" value="%s" />', $name, $value );
 		}
+
+		return false;
+    }
+
+
+	function acfcs_render_checkbox( $field, $stored_value ) {
+		$faq_explanation = ACFCS_WEBSITE_URL . '/faq/store-city-selector-values-as-single-meta/';
+		$field_id        = $field[ 'id' ];
+		$field_name      = $field[ 'name' ];
+		$field_label     = __( 'Save as single meta', 'acf-city-selector' );
+		$field_suffix    = 'save_single';
+
+		ob_start();
+		?>
+		<div class="acfcs__checkbox">
+			<div>
+				<input type="checkbox" id="<?php echo $field_id . $field_suffix; ?>" name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" value="1" <?php checked( $stored_value ); ?>/>
+			</div>
+			<div>
+				<label for="<?php echo $field_id . $field_suffix; ?>">
+					<?php echo $field_label; ?>
+				</label>
+				|
+				<a href="<?php echo $faq_explanation; ?>" target="_blank" rel="noopener">
+					<?php esc_html_e( 'Explanation', 'acf-city-selector' ); ?>
+				</a>
+			</div>
+		</div>
+		<?php
+		$input = ob_get_clean();
+
+		return $input;
 	}
 
 

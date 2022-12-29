@@ -58,7 +58,7 @@
 	 * @return void
 	 */
 	function acfcs_save_single_meta( $value, $post_id ) {
-		if ( isset( $value[ 'acfcs_store_meta' ] ) && 1 == $value[ 'acfcs_store_meta' ] ) {
+		if ( isset( $_POST[ 'store_meta' ] ) && 1 == $_POST[ 'store_meta' ] ) {
 			if ( ! empty( $value[ 'countryCode' ] ) ) {
 				update_post_meta( $post_id, 'acfcs_search_country', $value[ 'countryCode' ] );
 			}
