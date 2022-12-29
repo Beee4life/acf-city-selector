@@ -170,7 +170,7 @@
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
                 }
 
-				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
+				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) && is_admin() ) {
 					echo acfcs_render_checkbox( $field, $save_as_single );
                 }
             }
