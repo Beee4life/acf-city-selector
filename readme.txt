@@ -3,12 +3,12 @@ Tags: acf, custom, fields, custom fields, select, country, city, state, province
 Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
-Tested up to: 6.0.2
-Stable tag: 1.9.1
+Tested up to: 6.1.1
+Stable tag: 1.10.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugins adds a new (ACF) field to select a city depending on country and state/province.
+This plugin adds a new (ACF) field to select a city depending on country and state/province.
 
 == Description ==
 
@@ -40,6 +40,10 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
 
 == Changelog ==
+
+= 1.10.0 =
+* Add option to store location as single meta values
+* Fix ordering for states (which caused some issues)
 
 = 1.9.1 =
 * fix incorrect version

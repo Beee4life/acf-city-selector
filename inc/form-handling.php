@@ -118,10 +118,11 @@
                             $cities[] = $split[ 1 ];
                         }
                     }
-                    $cities  = implode( ', ', $cities );
-                    $row_ids = implode( ',', $ids );
-                    $query   = "DELETE FROM " . $wpdb->prefix . "cities WHERE id IN (" . $row_ids . ")";
-                    $amount  = $wpdb->query( $query );
+					$cities  = implode( ', ', $cities );
+					$row_ids = implode( ',', $ids );
+					$table   = $wpdb->prefix . 'cities';
+					$query   = $wpdb->prepare( "DELETE FROM {$table} WHERE id IN (%s)", $row_ids );
+					$amount  = $wpdb->query( $query );
 
                     if ( $amount > 0 ) {
                         ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', $amount, 'acf-city-selector' ), $cities ) );

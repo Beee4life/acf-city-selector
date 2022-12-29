@@ -3,8 +3,8 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.9.1
-    Tested up to:   6.0.2
+    Version:        1.10.0
+    Tested up to:   6.1.1
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -35,7 +35,7 @@
                 $this->settings = array(
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.9.1',
+                    'version'    => '1.10.0',
                 );
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -108,17 +108,6 @@
                 // this hook is here because I didn't want to create a new hook for an existing action
                 do_action( 'acfcs_delete_transients' );
                 // other important stuff gets done in uninstall.php
-            }
-
-
-            /*
-             * Prepare database upon plugin activation
-             */
-            public function acfcs_fill_database() {
-                $countries = array( 'nl', 'be' );
-                foreach( $countries as $country ) {
-                    acfcs_import_data( $country . '.csv', ACFCS_PLUGIN_PATH . 'import/' );
-                }
             }
 
 
@@ -269,7 +258,7 @@
              * @return array
              */
             public function acfcs_settings_link( $links ) {
-                $settings_link = [ 'settings' => '<a href="options-general.php?page=acfcs-dashboard">' . esc_html__( 'Settings', 'acf-city-selector' ) . '</a>' ];
+                $settings_link = [ 'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=acfcs-dashboard' ), esc_html__( 'Settings', 'acf-city-selector' ) ) ];
 
                 return array_merge( $settings_link, $links );
             }
@@ -382,7 +371,7 @@
              * @param $from_index
              * @param $to_index
              */
-            public static function acfcs_move_array_element( &$array, $from_index, $to_index ) {
+            public function acfcs_move_array_element( &$array, $from_index, $to_index ) {
                 $splice = array_splice( $array, $from_index, 1 );
                 array_splice( $array, $to_index, 0, $splice );
             }
