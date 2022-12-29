@@ -57,8 +57,8 @@
 	 *
 	 * @return void
 	 */
-	function acfcs_save_single( $value, $post_id ) {
-		if ( isset( $value[ 'save_single' ] ) && 1 == $value[ 'save_single' ] ) {
+	function acfcs_save_single_meta( $value, $post_id ) {
+		if ( isset( $value[ 'acfcs_store_meta' ] ) && 1 == $value[ 'acfcs_store_meta' ] ) {
 			if ( ! empty( $value[ 'countryCode' ] ) ) {
 				update_post_meta( $post_id, 'acfcs_search_country', $value[ 'countryCode' ] );
 			}
@@ -75,4 +75,4 @@
 			delete_post_meta( $post_id, 'acfcs_search_city' );
 		}
 	}
-	add_action( 'acfcs_store_meta', 'acfcs_save_single', 10, 2 );
+	add_action( 'acfcs_store_meta', 'acfcs_save_single_meta', 10, 2 );

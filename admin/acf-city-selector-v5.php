@@ -35,6 +35,7 @@
                 $this->label    = 'City Selector';
                 $this->category = esc_attr__( 'Choice', 'acf-city-selector' );
                 $this->defaults = array(
+                    'store_meta'   => 0,
                     'show_labels'  => 1,
                     'which_fields' => 'all',
                     'use_select2'  => 0,
@@ -72,7 +73,7 @@
                     'value'        => $field[ 'show_labels' ],
                 ) );
 
-                acf_render_field_setting( $field, array(
+				acf_render_field_setting( $field, array(
                     'choices'      => $select_options,
                     'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
@@ -81,6 +82,16 @@
                     'type'         => 'radio',
                     'value'        => $field[ 'use_select2' ],
                 ) );
+
+				acf_render_field_setting( $field, [
+					'choices'      => $select_options,
+					'instructions' => esc_html__( 'Store location as single meta values to make querying easier', 'acf-city-selector' ),
+					'label'        => esc_html__( 'Single meta values', 'acf-city-selector' ),
+					'layout'       => 'horizontal',
+					'name'         => 'store_meta',
+					'type'         => 'radio',
+					'value'        => $field[ 'store_meta' ],
+				] );
 
                 $countries = acfcs_get_countries( true, false, true );
                 acf_render_field_setting( $field, array(
@@ -118,12 +129,12 @@
             function render_field( $field ) {
 
 				$default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+				$store_meta       = isset( $field[ 'store_meta' ] )? $field[ 'store_meta' ] : false;
 				$prefill_cities   = [];
 				$prefill_states   = [];
 				$selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
 				$selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
 				$selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-				$save_as_single   = ( isset( $field[ 'value' ][ 'save_single' ] ) ) ? $field[ 'value' ][ 'save_single' ] : false;
 				$show_first       = true;
 				$which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
@@ -169,9 +180,8 @@
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
                 }
-
-				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) && is_admin() ) {
-					echo acfcs_render_checkbox( $field, $save_as_single );
+				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) && $store_meta ) {
+                    echo acfcs_render_hidden_field( 'acfcs_store_meta', '1' );
                 }
             }
 
@@ -197,9 +207,10 @@
                 $js_vars[ 'ajaxurl' ]         = admin_url( 'admin-ajax.php' );
                 $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
                 $js_vars[ 'post_id' ]         = ( isset( $_GET[ 'post' ] ) ) ? (int) $_GET[ 'post' ] : false;
-                $js_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : apply_filters( 'acfcs_show_labels', true );
-                $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
-                $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
+                $js_vars[ 'show_labels' ]     = ( ! empty( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : apply_filters( 'acfcs_show_labels', true );
+                $js_vars[ 'store_meta' ]      = ( ! empty( $all_info[ 'store_meta' ] ) ) ? $all_info[ 'store_meta' ] : 0;
+                $js_vars[ 'use_select2' ]     = ( ! empty( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
+                $js_vars[ 'which_fields' ]    = ( ! empty( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
 
