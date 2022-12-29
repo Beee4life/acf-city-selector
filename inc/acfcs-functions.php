@@ -71,9 +71,9 @@
         if ( false != $country_code ) {
             $transient = get_transient( 'acfcs_states_' . strtolower( $country_code ) );
             if ( false == $transient || is_array( $transient ) && empty( $transient ) ) {
-                $order = 'ORDER BY state_name ASC';
+                $order = ' ORDER BY state_name ASC';
                 if ( 'FR' == $country_code ) {
-                    $order = "ORDER BY LENGTH(state_name), state_name";
+                    $order = " ORDER BY LENGTH(state_name), state_name";
                 }
 
 				global $wpdb;
