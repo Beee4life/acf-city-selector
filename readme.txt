@@ -42,7 +42,8 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.10.0 =
-* ?
+* Add option to store location as single meta values
+* Fix ordering for states (which caused some issues)
 
 = 1.9.1 =
 * fix incorrect version
