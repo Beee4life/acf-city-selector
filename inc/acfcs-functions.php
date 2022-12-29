@@ -579,6 +579,15 @@
     }
 
 
+	function acfcs_render_hidden_field( $name, $value ) {
+		if ( $name && $value ) {
+			return sprintf( '<input type="hidden" name="%s" value="%s" />', $name, $value );
+		}
+
+		return false;
+    }
+
+
 	function acfcs_render_checkbox( $field, $stored_value ) {
 		$faq_explanation = ACFCS_WEBSITE_URL . '/faq/store-city-selector-values-as-single-meta/';
 		$field_id        = $field[ 'id' ];
