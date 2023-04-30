@@ -229,7 +229,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 1.11.0
-* ?
+* fix incorrect index for store as single meta
 
 1.10.1
 * new language files
