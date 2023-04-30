@@ -130,7 +130,7 @@
 				$selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
 				$selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
 				$show_first       = true;
-				$store_meta       = ( isset( $field[ 'value' ][ 'store_meta' ] ) ) ? $field[ 'value' ][ 'store_meta' ] : false;
+				$store_meta       = ( isset( $field[ 'store_meta' ] ) ) ? $field[ 'store_meta' ] : false;
 				$which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
 
 				if ( false !== $default_country && false == $selected_country ) {
