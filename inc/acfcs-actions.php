@@ -7,19 +7,27 @@
     function acfcs_delete_transients( $country_code = false ) {
         if ( false != $country_code ) {
             delete_transient( 'acfcs_states_' . strtolower( $country_code ) );
-            delete_transient( 'acfcs_cities_' . strtolower( $country_code ) );
+
+            // get states for country code
+            $states = acfcs_get_states( $country_code );
+            foreach( $states as $key => $state ) {
+                $country_code_with_state = strtolower( $key );
+                delete_transient( 'acfcs_cities_' . $country_code_with_state );
+            }
+            
         } else {
             delete_transient( 'acfcs_countries' );
             $countries = acfcs_get_countries( false, false, true );
+
             if ( ! empty( $countries ) ) {
                 foreach( $countries as $country_code => $label ) {
                     do_action( 'acfcs_delete_transients', $country_code );
-					// @TODO: also add states
+                    delete_transient( sprintf( 'acfcs_states_%s', $country_code ) );
                 }
             }
         }
     }
-    add_action( 'acfcs_delete_transients', 'acfcs_delete_transients' );
+    add_action( 'acfcs_delete_transients', 'i will try acfcs_delete_transients' );
     add_action( 'acfcs_after_success_import', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_import_raw', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_nuke', 'acfcs_delete_transients' );
