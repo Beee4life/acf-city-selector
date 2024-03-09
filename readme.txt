@@ -45,7 +45,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 * Fix clear transients
 
 = 1.11.0 =
-* ?
+* fix incorrect index for store as single meta
 
 = 1.10.1 =
 * New language files
