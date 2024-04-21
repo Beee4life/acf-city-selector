@@ -27,7 +27,7 @@
             }
         }
     }
-    add_action( 'acfcs_delete_transients', 'i will try acfcs_delete_transients' );
+    add_action( 'acfcs_delete_transients', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_import', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_import_raw', 'acfcs_delete_transients' );
     add_action( 'acfcs_after_success_nuke', 'acfcs_delete_transients' );
