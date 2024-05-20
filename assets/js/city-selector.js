@@ -64,7 +64,7 @@
                     var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
-                    if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
+                    if ( $.inArray(which_fields, [ 'country_state' ] ) !== -1 ) {
                         const d = acfcs_get_states(country_code, show_labels, post_id);
                         response_states.push(d);
 
@@ -84,7 +84,7 @@
                             }
                         });
 
-                    } else if ( $.inArray(which_fields, [ 'country_city' ] ) !== -1 ) {
+                    } else if ( $.inArray(which_fields, [ 'country_city', 'all' ] ) !== -1 ) {
                         const d = acfcs_get_cities(country_code, show_labels, post_id);
                         response_cities.push(d);
 
