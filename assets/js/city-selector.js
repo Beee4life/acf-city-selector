@@ -64,27 +64,7 @@
                     var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
-                    if ( $.inArray(which_fields, [ 'country_state' ] ) !== -1 ) {
-                        const d = acfcs_get_states(country_code, show_labels, post_id);
-                        response_states.push(d);
-
-                        Promise.all(response_states).then(function(jsonResults) {
-                            for (i = 0; i < jsonResults.length; i++) {
-                                var obj          = JSON.parse(jsonResults[i]);
-                                var len          = obj.length;
-                                var $stateValues = '';
-
-                                changed_state.empty();
-                                changed_state.fadeIn();
-                                for (j = 0; j < len; j++) {
-                                    var state = obj[j];
-                                    $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
-                                }
-                                changed_state.append($stateValues);
-                            }
-                        });
-
-                    } else if ( $.inArray(which_fields, [ 'country_city', 'all' ] ) !== -1 ) {
+                     if ( $.inArray(which_fields, [ 'country_city', 'all' ] ) !== -1 ) {
                         const d = acfcs_get_cities(country_code, show_labels, post_id);
                         response_cities.push(d);
 
@@ -107,7 +87,26 @@
                                 changed_city.append($cityValues);
                             }
                         });
-                    }
+                    } else if ( $.inArray(which_fields, [ 'country_state' ] ) !== -1 ) {
+                        const d = acfcs_get_states(country_code, show_labels, post_id);
+                        response_states.push(d);
+
+                        Promise.all(response_states).then(function(jsonResults) {
+                            for (i = 0; i < jsonResults.length; i++) {
+                                var obj          = JSON.parse(jsonResults[i]);
+                                var len          = obj.length;
+                                var $stateValues = '';
+
+                                changed_state.empty();
+                                changed_state.fadeIn();
+                                for (j = 0; j < len; j++) {
+                                    var state = obj[j];
+                                    $stateValues += '<option value="' + state.country_state + '">' + state.state_name + '</option>';
+                                }
+                                changed_state.append($stateValues);
+                            }
+                        });
+                     }
                 });
             }
 
