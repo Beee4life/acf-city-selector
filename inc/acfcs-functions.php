@@ -867,18 +867,23 @@
      */
     function acfcs_get_searched_cities() {
         global $wpdb;
+        $orderby                 = false;
+        $table                   = $wpdb->prefix . 'cities';
         $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_state' ] ) : false;
         $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_country' ] ) : false;
         $search_limit            = false;
         $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_orderby' ] ) : false;
         $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_search' ] ) : false;
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
-        $where                   = array();
-
+        $where                   = [];
+        $select                  = "SELECT * FROM $table WHERE";
+        
         if ( false != $search_criteria_state ) {
             $where[] = "state_code = '" . substr( $search_criteria_state, 3, 3) . "' AND country_code = '" . substr( $search_criteria_state, 0, 2) . "'";
         } elseif ( false != $search_criteria_country ) {
-            $where[] = "country_code = '" . $search_criteria_country . "'";
+            $select .= sprintf( " country_code = '%s'", $search_criteria_country );
+            // $where[] = sprintf( 'country_code = "%s"', $search_criteria_country );
+            // $where[] = "country_code = '" . $search_criteria_country . "'";
         }
         if ( false != $searched_term ) {
             $search[] = 'city_name LIKE "%' . $searched_term . '%"';
@@ -888,26 +893,30 @@
             } else {
                 $where[] = implode( ' OR ', $search );
             }
-
-        }
-        if ( 0 != $selected_limit ) {
-            $search_limit = "LIMIT " . $selected_limit;
         }
 
-        if ( ! empty( $where ) ) {
-            $where   = "WHERE " . implode( ' AND ', $where );
-        } else {
-            $where = false;
-        }
+        // echo '<pre>'; var_dump($where); echo '</pre>'; exit;
 
         if ( 'state' == $searched_orderby ) {
             $orderby = 'ORDER BY state_name ASC, city_name ASC';
         } else {
             $orderby = 'ORDER BY city_name ASC, state_name ASC';
+            // $select .= ' ORDER BY city_name ASC, state_name ASC';
         }
 
-		$table  = $wpdb->prefix . 'cities';
-		$query  = $wpdb->prepare( "SELECT * FROM $table %s %s %s", $where, $orderby, $search_limit );
+        if ( 0 != $selected_limit ) {
+            $search_limit = "LIMIT " . $selected_limit;
+            // $select .= " LIMIT " . $selected_limit;
+        }
+
+        if ( ! empty( $where ) ) {
+            $where = implode( ' AND ', $where );
+        } else {
+            $where = false;
+        }
+
+		$query  = $wpdb->prepare( "%s", $select );
+        // echo '<pre>'; var_dump($query); echo '</pre>'; exit;
 		$cities = $wpdb->get_results( $query );
 
         return $cities;
