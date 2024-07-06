@@ -42,7 +42,8 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.14.0 =
-* ???
+* update database queries for searching citites in admin
+* update database queries for deleting countries in admin
 
 = 1.13.0 =
 * Fix typo in function call
