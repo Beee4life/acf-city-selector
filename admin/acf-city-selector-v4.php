@@ -12,16 +12,18 @@
             // vars
             var $settings, // will hold info such as dir / path
                 $defaults; // will hold default field options
-
-
-            /*
-            *  __construct
-            *
-            *  Set name / label needed for actions / filters
-            *
-            *  @since	3.6
-            *  @date	23/01/13
-            */
+            
+            
+            /**
+             * __construct
+             *
+             * Set name / label needed for actions / filters
+             *
+             * @since	3.6
+             * @date	23/01/13
+             *
+             * @param $settings
+             */
             function __construct( $settings ) {
 
                 $this->name     = 'acf_city_selector';
@@ -41,18 +43,20 @@
             }
 
 
-            /*
-            *  create_options()
-            *
-            *  Create extra options for your field. This is rendered when editing a field.
-            *  The value of $field['name'] can be used (like below) to save extra data to the $field
-            *
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	$field	- an array holding all the field's data
-            */
+            /**
+             * create_options()
+             *
+             * Create extra options for your field. This is rendered when editing a field.
+             * The value of $field['name'] can be used (like below) to save extra data to the $field
+             *
+             * @type    action
+             * @since   3.6
+             * @date    23/01/13
+             *
+             * @param $field
+             *
+             * @return void
+             */
             function create_options( $field ) {
                 $field = array_merge($this->defaults, $field);
 
@@ -129,17 +133,19 @@
             }
 
 
-            /*
-            *  create_field()
-            *
-            *  Create the HTML interface for your field
-            *
-            *  @param	$field - an array holding all the field's data
-            *
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            */
+            /**
+             * create_field()
+             *
+             * Create the HTML interface for your field
+             *
+             * @type    action
+             * @since   3.6
+             * @date    23/01/13
+             *
+             * @param $field
+             *
+             * @return void
+             */
             function create_field( $field ) {
                 $field            = array_merge( $this->defaults, $field );
                 $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
@@ -196,19 +202,21 @@
             }
 
 
-            /*
-            *  input_admin_enqueue_scripts()
-            *
-            *  This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
-            *  Use this action to add CSS + JavaScript to assist your create_field() action.
-            *
-            *  $info	https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
-            *  @type	action
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @TODO: DRY
-            */
+            /**
+             * input_admin_enqueue_scripts()
+             *
+             * This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
+             * Use this action to add CSS + JavaScript to assist your create_field() action.
+             *
+             * $info    https://codex.wordpress.org/Plugin_API/Action_Reference/admin_enqueue_scripts
+             * @type    action
+             * @since   3.6
+             * @date    23/01/13
+             *
+             * @return void
+             *
+             * @TODO: DRY
+             */
             function input_admin_enqueue_scripts() {
 
                 $plugin_url     = $this->settings[ 'url' ];
@@ -264,23 +272,23 @@
             }
 
 
-            /*
-            *  load_value()
-            *
-            *  This filter is applied to the $value after it is loaded from the db
-            *
-            *  @type	filter
-            *  @since	3.6
-            *  @date	23/01/13
-            *
-            *  @param	$value - the value found in the database
-            *  @param	$post_id - the $post_id from which the value was loaded
-            *  @param	$field - the field array holding all the field options
-            *
-            *  @TODO: DRY
-            *
-            *  @return	$value - the value to be saved in the database
-            */
+            /**
+             * load_value()
+             *
+             * This filter is applied to the $value after it is loaded from the db
+             *
+             * @type filter
+             * @since   3.6
+             * @date    23/01/13
+             *
+             * @param $value
+             * @param $post_id
+             * @param $field
+             *
+             * @return mixed
+             *
+             * @TODO: DRY
+             */
             function load_value( $value, $post_id, $field ) {
                 $state_code   = false;
                 $country_code = ( isset( $value[ 'countryCode' ] ) ) ? $value[ 'countryCode' ] : false;
@@ -387,10 +395,7 @@
             }
         }
 
-
         // initialize
         new acf_field_city_selector( $this->settings );
 
-
-        // class_exists check
     endif;
