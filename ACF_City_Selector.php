@@ -46,30 +46,30 @@
                     $plugin_path = plugin_dir_path( __FILE__ );
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
-
-                register_activation_hook( __FILE__,             array( $this, 'acfcs_plugin_activation' ) );
-                register_deactivation_hook( __FILE__,           array( $this, 'acfcs_plugin_deactivation' ) );
-
-                add_action( 'acf/register_fields',                  array( $this, 'acfcs_include_field_types' ) ); // v4
-                add_action( 'acf/include_field_types',              array( $this, 'acfcs_include_field_types' ) ); // v5
-
-                add_action( 'admin_enqueue_scripts',                array( $this, 'acfcs_add_scripts' ) );
-                add_action( 'wp_enqueue_scripts',                   array( $this, 'acfcs_add_scripts' ) );
-
-                add_action( 'admin_menu',                           array( $this, 'acfcs_add_admin_pages' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_check_table' ) );
-                add_action( 'admin_notices',                        array( $this, 'acfcs_check_cities' ) );
-                add_action( 'init',                           	   array( $this, 'acfcs_load_textdomain' ) );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_change_plugin_order' ), 5 );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_for_acf' ), 6 );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_acf_version' ) );
-
-                add_action( 'acf/input/admin_l10n',                 array( $this, 'acfcs_error_messages' ) );
-
-                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
-
+                
+                register_activation_hook( __FILE__,     [ $this, 'acfcs_plugin_activation' ] );
+                register_deactivation_hook( __FILE__,   [ $this, 'acfcs_plugin_deactivation' ] );
+                
+                add_action( 'acf/register_fields',      [ $this, 'acfcs_include_field_types' ] ); // v4
+                add_action( 'acf/include_field_types',  [ $this, 'acfcs_include_field_types' ] ); // v5
+                
+                add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts' ] );
+                add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts' ] );
+                
+                add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_admin_menu' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_check_table' ] );
+                add_action( 'admin_notices',            [ $this, 'acfcs_check_cities' ] );
+                add_action( 'init',                     [ $this, 'acfcs_load_textdomain' ] );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_change_plugin_order' ], 5 );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_check_for_acf' ], 6 );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_check_acf_version' ] );
+                
+                add_action( 'acf/input/admin_l10n',     [ $this, 'acfcs_error_messages' ] );
+                
+                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'acfcs_settings_link' ] );
+                
                 // functions & hooks
                 include 'inc/acfcs-actions.php';
                 include 'inc/acfcs-functions.php';
