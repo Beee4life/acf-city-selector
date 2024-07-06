@@ -31,13 +31,13 @@
              * This function will set up the class functionality
              */
             public function __construct() {
-
-                $this->settings = array(
+                
+                $this->settings = [
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
                     'version'    => '1.14.0',
-                );
-
+                ];
+                
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acf-city-selector.com' );
                 }
