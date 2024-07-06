@@ -147,29 +147,29 @@
                     mkdir( $target_folder, 0755 );
                 }
             }
-
-
-			/**
-			 * Check if cities need to be re-imported
-			 *
-			 * @return void
-			 */
+            
+            
+            /**
+             * Check if cities need to be re-imported
+             *
+             * @return void
+             */
             public function acfcs_check_cities() {
-				if ( '1.7.0' < $this->settings[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
-					$countries = [ 'nl', 'be' ];
-					foreach( $countries as $country_code ) {
-						if ( true === acfcs_has_cities( $country_code ) ) {
-							$reimport[] = $country_code;
-						}
-					}
-					if ( isset( $reimport ) ) {
-						$country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
-						$notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
-						echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
-					} else {
-						update_option( 'acfcs_city_update_1_8_0', 'done' );
-					}
-				}
+                if ( '1.7.0' < $this->settings[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
+                    $countries = [ 'nl', 'be' ];
+                    foreach( $countries as $country_code ) {
+                        if ( true === acfcs_has_cities( $country_code ) ) {
+                            $reimport[] = $country_code;
+                        }
+                    }
+                    if ( isset( $reimport ) ) {
+                        $country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
+                        $notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
+                        echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
+                    } else {
+                        update_option( 'acfcs_city_update_1_8_0', 'done' );
+                    }
+                }
             }
 
 
@@ -342,7 +342,7 @@
 
 
             public function acfcs_load_textdomain() {
-				load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+                load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
             }
 
 
