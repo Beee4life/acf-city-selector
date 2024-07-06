@@ -105,8 +105,6 @@
              */
             public function acfcs_plugin_deactivation() {
                 delete_option( 'acfcs_db_version' );
-                // this hook is here because I didn't want to create a new hook for an existing action
-                do_action( 'acfcs_delete_transients' );
                 // other important stuff gets done in uninstall.php
             }
 

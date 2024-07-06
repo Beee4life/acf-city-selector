@@ -135,22 +135,6 @@
 
 
     /**
-     * Form to handle deleting of all transients
-     */
-    function acfcs_delete_all_transients() {
-        if ( isset( $_POST[ 'acfcs_delete_transients' ] ) ) {
-            if ( ! wp_verify_nonce( $_POST[ 'acfcs_delete_transients' ], 'acfcs-delete-transients-nonce' ) ) {
-                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-            } else {
-                do_action( 'acfcs_delete_transients' );
-                ACF_City_Selector::acfcs_errors()->add( 'success_transients_delete', esc_html__( 'You have successfully deleted all transients.', 'acf-city-selector' ) );
-            }
-        }
-    }
-    add_action( 'admin_init', 'acfcs_delete_all_transients' );
-
-
-    /**
      * Delete contents of entire cities table
      */
     function acfcs_truncate_table() {
@@ -200,11 +184,9 @@
                 if ( isset( $_POST[ 'acfcs_import_be' ] ) || isset( $_POST[ 'acfcs_import_nl' ] ) ) {
                     if ( isset( $_POST[ 'acfcs_import_be' ] ) && 1 == $_POST[ 'acfcs_import_be' ] ) {
                         acfcs_import_data( 'be.csv', ACFCS_PLUGIN_PATH . 'import/' );
-                        do_action( 'acfcs_delete_transients', 'be' );
                     }
                     if ( isset( $_POST[ 'acfcs_import_nl' ] ) && 1 == $_POST[ 'acfcs_import_nl' ] ) {
                         acfcs_import_data( 'nl.csv', ACFCS_PLUGIN_PATH . 'import/' );
-                        do_action( 'acfcs_delete_transients', 'nl' );
                     }
                     do_action( 'acfcs_after_success_import' );
                 }
