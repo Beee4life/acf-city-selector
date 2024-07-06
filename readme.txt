@@ -44,6 +44,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 = 1.14.0 =
 * update database queries for searching citites in admin
 * update database queries for deleting countries in admin
+* removed transients because it conflicted with translation
 
 = 1.13.0 =
 * Fix typo in function call

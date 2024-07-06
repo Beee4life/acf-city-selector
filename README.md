@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.14.0 - 2x.06.24
+1.14.0 - xx.07.24
 
 <a name="description"></a>
 ### Description
@@ -231,6 +231,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 1.14.0
 * update database queries for searching citites in admin
 * update database queries for deleting countries in admin
+* removed transients because it conflicted with translation
 
 1.13.0
 * remove typo in function call
