@@ -24,6 +24,5 @@
 
             echo sprintf( '<p>%s</p>', esc_html__( 'If you have some good suggestions for improvements and/or new features, please share them with us, maybe we can incorporate it.', 'acf-city-selector' ) );
         ?>
-
     </div>
 </div>
