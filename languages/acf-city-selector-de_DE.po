@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector\n"
 "POT-Creation-Date: 2022-12-29 19:50+0100\n"
-"PO-Revision-Date: 2024-07-29 20:53+0200\n"
+"PO-Revision-Date: 2024-08-08 23:57+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -24,12 +24,13 @@ msgid ""
 "Several %s had broken ascii characters. You need to re-import these "
 "countries to get the correct city names."
 msgstr ""
+"Mehrere %s hatten defekte ASCII-Zeichen. Du musst diese Länder neu "
+"importieren um die korrekten Städtenamen zu erhalten."
 
 #: ACF_City_Selector.php:169
-#, fuzzy, php-format
-#| msgid "# cities"
+#, php-format
 msgid "cities in %s"
-msgstr "# Städte"
+msgstr "Städte in %s"
 
 #: ACF_City_Selector.php:169
 msgid "cities in Belgium and Netherlands"
@@ -72,16 +73,13 @@ msgstr ""
 "a>."
 
 #: ACF_City_Selector.php:334
-#, fuzzy, php-format
-#| msgid ""
-#| "<b>Warning</b>: The \"%s\" plugin will probably not work properly "
-#| "(anymore) with %s v4.x. Please upgrade to PRO."
+#, php-format
 msgid ""
 "%s: The \"%s\" plugin will probably not work properly (anymore) with %s v4."
 "x. Please upgrade to PRO."
 msgstr ""
-"<b>Warnung</b>: Das Plugin \"%s\" funktioniert warscheinlich leider nicht "
-"(mehr) ordnungsgemäß mit %s v4.x. Bitte aktualisiere auf die PRO Version."
+"%s: Das Plugin \"%s\" funktioniert wahrscheinlich leider nicht (mehr) "
+"ordnungsgemäß mit %s v4.x. Bitte aktualisiere auf die PRO Version."
 
 #: ACF_City_Selector.php:335
 msgid "Warning"
@@ -171,11 +169,11 @@ msgstr "Select2"
 
 #: admin/acf-city-selector-v5.php:84
 msgid "Store location as single meta values"
-msgstr ""
+msgstr "Standort als einzelnen Meta Wert speichern"
 
 #: admin/acf-city-selector-v5.php:85
 msgid "Store meta"
-msgstr ""
+msgstr "Meta speichern"
 
 #: admin/acf-city-selector-v5.php:352
 msgid "You didn't select anything."
@@ -289,7 +287,7 @@ msgstr ""
 
 #: admin/acfcs-countries.php:149
 msgid "request"
-msgstr ""
+msgstr "anfragen"
 
 #: admin/acfcs-countries.php:151
 msgid "Get your country now"
@@ -307,6 +305,8 @@ msgstr "Wähle eine Datei für den Import"
 msgid ""
 "Max lines has no effect when verifying. The entire file will be checked."
 msgstr ""
+"Max lines hat keinen Effekt bei der Verifizierung. Die gesamte Datei wird "
+"geprüft werden."
 
 #: admin/acfcs-dashboard.php:43
 msgid "Import CSV data (from clipboard)"
@@ -472,7 +472,7 @@ msgstr "JSON Datei ansehen"
 
 #: admin/acfcs-info.php:238
 msgid "left-click to open, right-click to save"
-msgstr ""
+msgstr "Linksklick zum öffnen, Rechtsklick zum speichern"
 
 #: admin/acfcs-preview-form.php:6
 msgid "Here you can preview any uploaded csv files."
@@ -561,6 +561,7 @@ msgstr "Suche nach Städten"
 #, php-format
 msgid "You haven't imported any cities yet. Import any files from your %s."
 msgstr ""
+"Du hast noch keine Städte importiert. Importiere Dateien von deiner %s."
 
 #: admin/acfcs-search.php:68 admin/acfcs-search.php:71
 #: inc/acfcs-functions.php:21 inc/acfcs-functions.php:506
@@ -733,11 +734,11 @@ msgstr ""
 #: admin/admin-right.php:13
 #, php-format
 msgid "%s for the plugin's official website."
-msgstr ""
+msgstr "%s für die offizielle Plugin Webseite."
 
 #: admin/admin-right.php:13
 msgid "Click here"
-msgstr ""
+msgstr "Klicke hier"
 
 #: admin/admin-right.php:17
 msgid "Support"
@@ -746,17 +747,13 @@ msgstr "Unterstützung"
 #: admin/admin-right.php:19
 #, php-format
 msgid "If you need support for this plugin, please turn to %s."
-msgstr ""
+msgstr "Wende dich an %s wenn du Hilfe für diesem Plugin benötigst."
 
 #: admin/admin-right.php:23
 msgid "Requests"
-msgstr ""
+msgstr "Anfragen"
 
 #: admin/admin-right.php:25
-#, fuzzy
-#| msgid ""
-#| "If you need support for this plugin or if you have some good suggestions "
-#| "for improvements and/or new features, please turn to %s."
 msgid ""
 "If you have some good suggestions for improvements and/or new features, "
 "please share them with us, maybe we can incorporate it."
@@ -778,7 +775,7 @@ msgstr "Ausgewählte Datei entfernen"
 
 #: admin/raw-input-form.php:8
 msgid "Raw CSV import"
-msgstr ""
+msgstr "Roher CSV Import"
 
 #: admin/raw-input-form.php:12
 msgid "Verify CSV data"
@@ -1007,6 +1004,8 @@ msgstr "Mehr Länder"
 msgid ""
 "If you need more countries, you can get them on the official website: %s."
 msgstr ""
+"Wenn du weitere Länder benötigst, kannst du diese auf der offiziellen "
+"Webseite herunterladen: %s."
 
 #: inc/acfcs-help-tabs.php:101
 msgid "Official website"
@@ -1014,11 +1013,11 @@ msgstr "Offizielle Website"
 
 #: inc/acfcs-i18n.php:16
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: inc/acfcs-i18n.php:17
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #: inc/acfcs-i18n.php:18
 msgid "Austria"
@@ -1038,11 +1037,11 @@ msgstr "Kanada"
 
 #: inc/acfcs-i18n.php:22
 msgid "China"
-msgstr ""
+msgstr "China"
 
 #: inc/acfcs-i18n.php:23
 msgid "Curaçao"
-msgstr ""
+msgstr "Curaçao"
 
 #: inc/acfcs-i18n.php:24
 msgid "Europe"
@@ -1058,7 +1057,7 @@ msgstr "Deutschland"
 
 #: inc/acfcs-i18n.php:27
 msgid "Grenada"
-msgstr ""
+msgstr "Genada"
 
 #: inc/acfcs-i18n.php:28
 msgid "Great Britain"
@@ -1070,7 +1069,7 @@ msgstr "Luxemburg"
 
 #: inc/acfcs-i18n.php:30
 msgid "Mexico"
-msgstr ""
+msgstr "Mexiko"
 
 #: inc/acfcs-i18n.php:31
 msgid "Netherlands"
@@ -1082,7 +1081,7 @@ msgstr "Neuseeland"
 
 #: inc/acfcs-i18n.php:33
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 #: inc/acfcs-i18n.php:34
 msgid "South Korea"
@@ -1102,7 +1101,7 @@ msgstr "Vereinigte Staaten"
 
 #: inc/acfcs-i18n.php:38
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #: inc/acfcs-i18n.php:39
 msgid "World"
