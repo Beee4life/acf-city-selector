@@ -3,8 +3,8 @@ Tags: acf, custom, fields, custom fields, select, country, city, state, province
 Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
-Tested up to: 6.5.2
-Stable tag: 1.13.0
+Tested up to: 6.6.1
+Stable tag: 1.14.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
 
 == Changelog ==
+
+= 1.14.0 =
+* update database queries for searching citites in admin
+* update database queries for deleting countries in admin
+* removed transients because it conflicted with translation
 
 = 1.13.0 =
 * Fix typo in function call

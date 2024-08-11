@@ -68,8 +68,8 @@
                     'type'         => 'radio',
                     'value'        => $field[ 'show_labels' ],
                 ) );
-
-				acf_render_field_setting( $field, array(
+                
+                acf_render_field_setting( $field, array(
                     'choices'      => $select_options,
                     'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
                     'label'        => esc_html__( 'Select2', 'acf-city-selector' ),
@@ -123,17 +123,17 @@
              * @param $field (array) the $field being edited
              */
             function render_field( $field ) {
-				$default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
-				$prefill_cities   = [];
-				$prefill_states   = [];
-				$selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
-				$selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
-				$selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
-				$show_first       = true;
-				$store_meta       = ( isset( $field[ 'store_meta' ] ) ) ? $field[ 'store_meta' ] : false;
-				$which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
-
-				if ( false !== $default_country && false == $selected_country ) {
+                $default_country  = ( isset( $field[ 'default_country' ] ) && ! empty( $field[ 'default_country' ] ) ) ? $field[ 'default_country' ] : false;
+                $prefill_cities   = [];
+                $prefill_states   = [];
+                $selected_country = ( isset( $field[ 'value' ][ 'countryCode' ] ) ) ? $field[ 'value' ][ 'countryCode' ] : false;
+                $selected_state   = ( isset( $field[ 'value' ][ 'stateCode' ] ) ) ? $field[ 'value' ][ 'stateCode' ] : false;
+                $selected_city    = ( isset( $field[ 'value' ][ 'cityName' ] ) ) ? $field[ 'value' ][ 'cityName' ] : false;
+                $show_first       = true;
+                $store_meta       = ( isset( $field[ 'store_meta' ] ) ) ? $field[ 'store_meta' ] : false;
+                $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
+                
+                if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country
                     if ( in_array( $which_fields, [ 'all', 'country_state', 'state_city' ] ) ) {
                         $prefill_states = acfcs_get_states( $default_country, $show_first, $field );
@@ -175,8 +175,8 @@
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
                     echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
                 }
-				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) && $store_meta ) {
-					echo acfcs_render_hidden_field( 'store_meta', '1' );
+                if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) && $store_meta ) {
+                    echo acfcs_render_hidden_field( 'store_meta', '1' );
                 }
             }
 
@@ -237,15 +237,15 @@
                         $state_code = $value[ 'stateCode' ];
                     }
                 }
-
+                
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-					$table                  = $wpdb->prefix . 'cities';
-					$sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$table} WHERE country_code = %s AND state_code = %s", $country_code, $state_code );
-					$row                    = $wpdb->get_row( $sql_query );
-					$value[ 'stateCode' ]   = $state_code;
-					$value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
-					$value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
+                    $table                  = $wpdb->prefix . 'cities';
+                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$table} WHERE country_code = %s AND state_code = %s", $country_code, $state_code );
+                    $row                    = $wpdb->get_row( $sql_query );
+                    $value[ 'stateCode' ]   = $state_code;
+                    $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
+                    $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
                 }
 
                 return $value;
@@ -324,10 +324,10 @@
                         }
                     }
                 }
-
-				if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
-					do_action( 'acfcs_store_meta', $value, $post_id );
-				}
+                
+                if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
+                    do_action( 'acfcs_store_meta', $value, $post_id );
+                }
 
                 return $value;
             }

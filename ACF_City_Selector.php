@@ -3,8 +3,8 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.13.0
-    Tested up to:   6.5.2
+    Version:        1.14.0
+    Tested up to:   6.6.1
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -31,13 +31,13 @@
              * This function will set up the class functionality
              */
             public function __construct() {
-
-                $this->settings = array(
+                
+                $this->settings = [
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.13.0',
-                );
-
+                    'version'    => '1.14.0',
+                ];
+                
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acf-city-selector.com' );
                 }
@@ -46,30 +46,30 @@
                     $plugin_path = plugin_dir_path( __FILE__ );
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
-
-                register_activation_hook( __FILE__,             array( $this, 'acfcs_plugin_activation' ) );
-                register_deactivation_hook( __FILE__,           array( $this, 'acfcs_plugin_deactivation' ) );
-
-                add_action( 'acf/register_fields',                  array( $this, 'acfcs_include_field_types' ) ); // v4
-                add_action( 'acf/include_field_types',              array( $this, 'acfcs_include_field_types' ) ); // v5
-
-                add_action( 'admin_enqueue_scripts',                array( $this, 'acfcs_add_scripts' ) );
-                add_action( 'wp_enqueue_scripts',                   array( $this, 'acfcs_add_scripts' ) );
-
-                add_action( 'admin_menu',                           array( $this, 'acfcs_add_admin_pages' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_admin_menu' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_errors' ) );
-                add_action( 'admin_init',                           array( $this, 'acfcs_check_table' ) );
-                add_action( 'admin_notices',                        array( $this, 'acfcs_check_cities' ) );
-                add_action( 'init',                           		array( $this, 'acfcs_load_textdomain' ) );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_change_plugin_order' ), 5 );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_for_acf' ), 6 );
-                add_action( 'plugins_loaded',                       array( $this, 'acfcs_check_acf_version' ) );
-
-                add_action( 'acf/input/admin_l10n',                 array( $this, 'acfcs_error_messages' ) );
-
-                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'acfcs_settings_link' ) );
-
+                
+                register_activation_hook( __FILE__,     [ $this, 'acfcs_plugin_activation' ] );
+                register_deactivation_hook( __FILE__,   [ $this, 'acfcs_plugin_deactivation' ] );
+                
+                add_action( 'acf/register_fields',      [ $this, 'acfcs_include_field_types' ] ); // v4
+                add_action( 'acf/include_field_types',  [ $this, 'acfcs_include_field_types' ] ); // v5
+                
+                add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts' ] );
+                add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts' ] );
+                
+                add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_admin_menu' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_check_table' ] );
+                add_action( 'admin_notices',            [ $this, 'acfcs_check_cities' ] );
+                add_action( 'init',                     [ $this, 'acfcs_load_textdomain' ] );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_change_plugin_order' ], 5 );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_check_for_acf' ], 6 );
+                add_action( 'plugins_loaded',           [ $this, 'acfcs_check_acf_version' ] );
+                
+                add_action( 'acf/input/admin_l10n',     [ $this, 'acfcs_error_messages' ] );
+                
+                add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'acfcs_settings_link' ] );
+                
                 // functions & hooks
                 include 'inc/acfcs-actions.php';
                 include 'inc/acfcs-functions.php';
@@ -105,8 +105,6 @@
              */
             public function acfcs_plugin_deactivation() {
                 delete_option( 'acfcs_db_version' );
-                // this hook is here because I didn't want to create a new hook for an existing action
-                do_action( 'acfcs_delete_transients' );
                 // other important stuff gets done in uninstall.php
             }
 
@@ -149,29 +147,29 @@
                     mkdir( $target_folder, 0755 );
                 }
             }
-
-
-			/**
-			 * Check if cities need to be re-imported
-			 *
-			 * @return void
-			 */
+            
+            
+            /**
+             * Check if cities need to be re-imported
+             *
+             * @return void
+             */
             public function acfcs_check_cities() {
-				if ( '1.7.0' < $this->settings[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
-					$countries = [ 'nl', 'be' ];
-					foreach( $countries as $country_code ) {
-						if ( true === acfcs_has_cities( $country_code ) ) {
-							$reimport[] = $country_code;
-						}
-					}
-					if ( isset( $reimport ) ) {
-						$country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
-						$notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
-						echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
-					} else {
-						update_option( 'acfcs_city_update_1_8_0', 'done' );
-					}
-				}
+                if ( '1.7.0' < $this->settings[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
+                    $countries = [ 'nl', 'be' ];
+                    foreach( $countries as $country_code ) {
+                        if ( true === acfcs_has_cities( $country_code ) ) {
+                            $reimport[] = $country_code;
+                        }
+                    }
+                    if ( isset( $reimport ) ) {
+                        $country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
+                        $notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
+                        echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
+                    } else {
+                        update_option( 'acfcs_city_update_1_8_0', 'done' );
+                    }
+                }
             }
 
 
@@ -344,7 +342,7 @@
 
 
             public function acfcs_load_textdomain() {
-				load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+                load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
             }
 
 

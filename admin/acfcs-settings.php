@@ -60,15 +60,6 @@
                         <?php } ?>
 
                         <form method="post" action="">
-                            <input name="acfcs_delete_transients" value="<?php echo wp_create_nonce( 'acfcs-delete-transients-nonce' ); ?>" type="hidden" />
-                            <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Delete transients', 'acf-city-selector' ) ); ?>
-                            <?php echo sprintf( '<p>%s</p>', esc_html__( "If you're seeing unexpected results in your dropdowns, try clearing all transients with this option.", 'acf-city-selector' ) ); ?>
-                            <input type="submit" class="button button-primary" value="<?php esc_html_e( "Delete transients", 'acf-city-selector' ); ?>" />
-                        </form>
-
-                        <br /><hr />
-
-                        <form method="post" action="">
                             <input name="acfcs_truncate_table_nonce" value="<?php echo wp_create_nonce( 'acfcs-truncate-table-nonce' ); ?>" type="hidden" />
                             <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Clear the database', 'acf-city-selector' ) ); ?>
                             <?php echo sprintf( '<p>%s</p>', esc_html__( "By selecting this option, you will remove all cities, which are present in the database. This is useful if you don't need the preset cities or you want a fresh start.", 'acf-city-selector' ) ); ?>

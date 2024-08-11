@@ -112,21 +112,21 @@
                                     <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--search">
-										<label for="acfcs_search" class="screen-reader-text"><?php esc_attr_e( 'Search term', 'acf-city-selector' ); ?></label>
+                                        <label for="acfcs_search" class="screen-reader-text"><?php esc_attr_e( 'Search term', 'acf-city-selector' ); ?></label>
                                         <input name="acfcs_search" id="acfcs_search" type="text" value="<?php if ( false != $searched_term ) { echo stripslashes( $searched_term ); } ?>" placeholder="<?php esc_html_e( 'City name', 'acf-city-selector' ); ?>">
                                     </div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--limit">
-										<label for="acfcs_limit" class="screen-reader-text"><?php esc_attr_e( 'Limit', 'acf-city-selector' ); ?></label>
+                                        <label for="acfcs_limit" class="screen-reader-text"><?php esc_attr_e( 'Limit', 'acf-city-selector' ); ?></label>
                                         <input name="acfcs_limit" id="acfcs_limit" type="number" value="<?php if ( false != $selected_limit ) { echo $selected_limit; } ?>" placeholder="<?php esc_html_e( 'Limit', 'acf-city-selector' ); ?>">
                                     </div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--plus">+</div>
 
                                     <div class="acfcs__search-criteria acfcs__search-criteria--orderby">
-										<label for="acfcs_orderby" class="screen-reader-text"><?php esc_attr_e( 'Order by', 'acf-city-selector' ); ?></label>
+                                        <label for="acfcs_orderby" class="screen-reader-text"><?php esc_attr_e( 'Order by', 'acf-city-selector' ); ?></label>
                                         <select name="acfcs_orderby" id="acfcs_orderby">
                                             <option value="">
                                                 <?php esc_attr_e( 'Order by', 'acf-city-selector' ); ?>
