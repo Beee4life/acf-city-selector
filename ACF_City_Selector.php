@@ -71,7 +71,7 @@
                 include 'inc/acfcs-ajax.php';
                 include 'inc/form-handling.php';
 
-                $this->l10n = acfcs_get_js_translations();
+                // $this->l10n = acfcs_get_js_translations();
 
                 // admin pages
                 include 'admin/acfcs-dashboard.php';
@@ -268,7 +268,8 @@
              * Admin menu
              */
             public static function acfcs_admin_menu() {
-                $admin_url      = admin_url( 'options-general.php?page=' );
+                $dashboard_url  = admin_url( 'options-general.php?page=' );
+                $admin_url      = admin_url( 'options.php?page=' );
                 $current_class  = ' class="current_page"';
                 $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
                 $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
@@ -294,7 +295,14 @@
                     $current_page = ( $acfcs_subpage == $slug ) ? $current_class : false;
                     $current_page = ( 'countries' == $slug ) ? ' class="cta"' : $current_page;
                     echo ( 'dashboard' != $slug ) ? ' | ' : false;
-                    echo '<a href="' . $admin_url . 'acfcs-' . $slug . '"' . $current_page . '>' . $label . '</a>';
+                    switch( $slug ) {
+                        case 'dashboard':
+                            $url = sprintf( '%sacfcs-%s', $dashboard_url, $slug );
+                            break;
+                        default:
+                            $url = sprintf( '%sacfcs-%s', $admin_url, $slug );
+                    }
+                    echo sprintf( '<a href="%s"%s>%s</a>', $url, $current_page, $label );
                 }
                 $menu_items = ob_get_clean();
                 $menu       = sprintf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
@@ -382,11 +390,11 @@
              */
             public function acfcs_add_admin_pages() {
                 add_options_page( 'ACF City Selector', 'City Selector', apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-dashboard', 'acfcs_dashboard' );
-                add_submenu_page( null, __( 'Preview data', 'acf-city-selector' ), __( 'Preview data', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-preview', 'acfcs_preview_page' );
-                add_submenu_page( null, __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-settings', 'acfcs_settings' );
-                add_submenu_page( null, __( 'Get countries', 'acf-city-selector' ), __( 'Get countries', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-countries', 'acfcs_country_page' );
-                add_submenu_page( null, __( 'Search', 'acf-city-selector' ), __( 'Search', 'acf-city-selector' ),  apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
-                add_submenu_page( null, __( 'Info', 'acf-city-selector' ), __( 'Info', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
+                add_submenu_page( 'options.php', __( 'Preview data', 'acf-city-selector' ), __( 'Preview data', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-preview', 'acfcs_preview_page' );
+                add_submenu_page( 'options.php', __( 'Settings', 'acf-city-selector' ), __( 'Settings', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-settings', 'acfcs_settings' );
+                add_submenu_page( 'options.php', __( 'Get countries', 'acf-city-selector' ), __( 'Get countries', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-countries', 'acfcs_country_page' );
+                add_submenu_page( 'options.php', __( 'Search', 'acf-city-selector' ), __( 'Search', 'acf-city-selector' ),  apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
+                add_submenu_page( 'options.php', __( 'Info', 'acf-city-selector' ), __( 'Info', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
             }
 
 
