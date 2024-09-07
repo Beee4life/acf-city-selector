@@ -71,8 +71,6 @@
                 include 'inc/acfcs-ajax.php';
                 include 'inc/form-handling.php';
 
-                // $this->l10n = acfcs_get_js_translations();
-
                 // admin pages
                 include 'admin/acfcs-dashboard.php';
                 include 'admin/acfcs-preview.php';

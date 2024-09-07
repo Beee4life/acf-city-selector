@@ -47,6 +47,11 @@
             }
 
 
+            function settings( $settings ) {
+                return $settings;
+            }
+
+
             /**
              * render_field_settings()
              *
@@ -394,5 +399,5 @@
             }
         }
 
-        new acf_field_city_selector( $this->settings );
+        new acf_field_city_selector( $this );
     }
