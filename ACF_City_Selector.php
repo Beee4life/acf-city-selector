@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.14.0
+    Version:        1.15.0
     Tested up to:   6.6.1
     Requires PHP:   7.0
     Author:         Beee
@@ -31,13 +31,6 @@
              * This function will set up the class functionality
              */
             public function __construct() {
-                
-                $this->settings = [
-                    'db_version' => '1.0',
-                    'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.14.0',
-                ];
-                
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
                     define( 'ACFCS_WEBSITE_URL', 'https://acf-city-selector.com' );
                 }
@@ -109,12 +102,21 @@
             }
 
 
+            public function acfcs_settings() {
+                return [
+                    'db_version' => '1.0',
+                    'url'        => plugin_dir_url( __FILE__ ),
+                    'version'    => '1.15.0',
+                ];
+            }
+
+
             /*
              * Check if table exists
              */
             public function acfcs_check_table() {
                 $acfcs_db_version = get_option( 'acfcs_db_version', false );
-                if ( false == $acfcs_db_version || $acfcs_db_version != $this->settings[ 'db_version' ] ) {
+                if ( false == $acfcs_db_version || $acfcs_db_version != $this->acfcs_settings()[ 'db_version' ] ) {
                     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
                     ob_start();
                     global $wpdb;
@@ -132,7 +134,7 @@
                     <?php
                     $sql = ob_get_clean();
                     dbDelta( $sql );
-                    update_option( 'acfcs_db_version', $this->settings[ 'db_version' ] );
+                    update_option( 'acfcs_db_version', $this->acfcs_settings()[ 'db_version' ] );
                 }
             }
 
@@ -155,7 +157,7 @@
              * @return void
              */
             public function acfcs_check_cities() {
-                if ( '1.7.0' < $this->settings[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
+                if ( '1.7.0' < $this->acfcs_settings()[ 'version' ] && false == get_option( 'acfcs_city_update_1_8_0' ) ) {
                     $countries = [ 'nl', 'be' ];
                     foreach( $countries as $country_code ) {
                         if ( true === acfcs_has_cities( $country_code ) ) {
@@ -392,10 +394,10 @@
              * Adds CSS on the admin side
              */
             public function acfcs_add_scripts() {
-                wp_enqueue_style( 'acfcs-general', plugins_url( 'assets/css/general.css', __FILE__ ), [], $this->settings[ 'version' ] );
+                wp_enqueue_style( 'acfcs-general', plugins_url( 'assets/css/general.css', __FILE__ ), [], $this->acfcs_settings()[ 'version' ] );
                 if ( is_admin() ) {
-                    wp_enqueue_style( 'acfcs-admin', plugins_url( 'assets/css/admin.css', __FILE__ ), [], $this->settings[ 'version' ] );
-                    wp_register_script( 'acfcs-upload', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ] );
+                    wp_enqueue_style( 'acfcs-admin', plugins_url( 'assets/css/admin.css', __FILE__ ), [], $this->acfcs_settings()[ 'version' ] );
+                    wp_register_script( 'acfcs-upload', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->acfcs_settings()[ 'version' ] );
                     wp_enqueue_script( 'acfcs-upload' );
                 }
             }
