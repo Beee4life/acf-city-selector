@@ -43,6 +43,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 
 = 1.15.0 =
 * remove static settings variable (for php 8.2)
+* set menu slug for (hidden) admin pages to prevent empty admin page title
 
 = 1.14.0 =
 * update database queries for searching citites in admin
