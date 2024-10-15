@@ -162,10 +162,15 @@
                     }
                     if ( isset( $reimport ) ) {
                         $country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
-                        /* translators: %s cities in ... */
-                        $notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
-                        /* translators: %s notice */
-                        echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', esc_html( $notice ) );
+                        echo '<div class="notice notice-warning is-dismissible"><p>';
+                        if ( 1 === count( $reimport ) ) {
+                            /* translators: %s country name */
+                            printf( esc_html__( 'Several cities in %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), esc_html( $country_name ) );
+                        } else {
+                            esc_html__( 'Several cities in Belgium and Netherlands had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' );
+                        }
+                        echo '</p></div>';
+
                     } else {
                         update_option( 'acfcs_city_update_1_8_0', 'done' );
                     }
