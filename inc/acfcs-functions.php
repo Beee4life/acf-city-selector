@@ -775,8 +775,6 @@
             echo '</tbody>';
             echo '</table>';
         }
-        
-        return $table;
     }
 
 
