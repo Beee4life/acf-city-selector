@@ -36,7 +36,8 @@
             $country_results = [];
             foreach ( $results as $data ) {
                 if ( isset( $data->country_code ) && isset( $data->country ) ) {
-                    $country_results[ $data->country_code ] = esc_html__( $data->country, 'acf-city-selector' );
+                    // @TODO: check before merge
+                    $country_results[ $data->country_code ] = esc_attr( $data->country );
                 }
             }
             $countries = array_merge( $countries, $country_results );
@@ -80,7 +81,8 @@
             $results       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s GROUP BY state_code%s", strtoupper( $country_code ), $order ) );
             
             foreach ( $results as $data ) {
-                $state_results[ strtoupper( $country_code ) . '-' . $data->state_code ] = esc_attr__( $data->state_name, 'acf-city-selector' );
+                // @TODO: check before merge
+                $state_results[ strtoupper( $country_code ) . '-' . $data->state_code ] = esc_attr( $data->state_name );
             }
             
             $states = array_merge( $states, $state_results );
@@ -140,7 +142,8 @@
                 uasort( $city_results, 'acfcs_sort_array_with_quotes' );
             }
             foreach ( $city_results as $data ) {
-                $city_array[ esc_attr__( $data[ 'city_name' ], 'acf-city-selector' ) ] = esc_attr__( $data[ 'city_name' ], 'acf-city-selector' );
+                // @TODO: check before merge
+                $city_array[ esc_attr( $data[ 'city_name' ] ) ] = esc_attr( $data[ 'city_name' ] );
             }
             if ( isset( $city_array ) ) {
                 $cities = array_merge( $cities, $city_array );
@@ -620,7 +623,8 @@
 
                             do_action( 'acfcs_after_success_import' );
                         } else {
-                            ACF_City_Selector::acfcs_errors()->add( 'error_file_name', sprintf( esc_html__( 'There\'s an error in "%1$s".', 'acf-city-selector' ), $file_name ) );
+                            /* translators: %s file name */
+                            ACF_City_Selector::acfcs_errors()->add( 'error_file_name', sprintf( esc_html__( 'There\'s an error in "%s".', 'acf-city-selector' ), $file_name ) );
                         }
                     }
                 }
@@ -804,7 +808,7 @@
                 foreach( $countries as $country ) {
                     $states[] = [
                         'state' => 'open_optgroup',
-                        'name'  => esc_attr__( acfcs_get_country_name( $country[ 'code' ] ), 'acf-city-selector' ),
+                        'name'  => esc_attr( acfcs_get_country_name( $country[ 'code' ] ) ),
                     ];
                     
                     $order = 'ORDER BY state_name ASC';
@@ -818,7 +822,7 @@
                         foreach ( $results as $data ) {
                             $states[] = [
                                 'state' => strtolower( $data->country_code ) . '-' . strtolower( $data->state_code ),
-                                'name'  => esc_attr__( $data->state_name, 'acf-city-selector' ),
+                                'name'  => esc_attr( $data->state_name ),
                             ];
                         }
                     }
