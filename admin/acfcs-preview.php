@@ -13,9 +13,9 @@
 
         <div class="wrap acfcs">
             <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
-
+            
             <?php
-                echo esc_html( ACF_City_Selector::acfcs_admin_menu() );
+                do_action( 'acfcs_admin_menu' );
 
                 $file_index      = acfcs_check_if_files();
                 $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? $_POST[ 'acfcs_file_name' ] : false;

@@ -50,7 +50,6 @@
                 add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts_front' ] );
                 
                 add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
-                add_action( 'admin_init',               [ $this, 'acfcs_admin_menu' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_check_table' ] );
                 add_action( 'admin_notices',            [ $this, 'acfcs_check_cities' ] );
@@ -78,7 +77,6 @@
                 include 'admin/acfcs-search.php';
                 include 'admin/acfcs-info.php';
                 include 'admin/acfcs-countries.php';
-
             }
 
 
@@ -261,53 +259,6 @@
                 $settings_link = [ 'settings' => sprintf( '<a href="%s">%s</a>', admin_url( 'options-general.php?page=acfcs-dashboard' ), esc_html__( 'Settings', 'acf-city-selector' ) ) ];
 
                 return array_merge( $settings_link, $links );
-            }
-
-
-            /*
-             * Admin menu
-             */
-            public static function acfcs_admin_menu() {
-                $dashboard_url  = admin_url( 'options-general.php?page=' );
-                $admin_url      = admin_url( 'options.php?page=' );
-                $current_class  = ' class="current_page"';
-                $url_array      = wp_parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
-                $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
-
-                $pages = [
-                    'dashboard' => esc_html__( 'Dashboard', 'acf-city-selector' ),
-                    'settings'  => esc_html__( 'Settings', 'acf-city-selector' ),
-                ];
-                if ( true === acfcs_has_cities() ) {
-                    $pages[ 'search' ] = esc_html__( 'Search', 'acf-city-selector' );
-                }
-                if ( ! empty ( acfcs_check_if_files() ) ) {
-                    $pages[ 'preview' ] = esc_html__( 'Preview', 'acf-city-selector' );
-                }
-                if ( current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-                    $pages[ 'info' ] = esc_html__( 'Info', 'acf-city-selector' );
-                }
-
-                $pages[ 'countries' ] = esc_html__( 'Get more countries', 'acf-city-selector' );
-
-                ob_start();
-                foreach( $pages as $slug => $label ) {
-                    $current_page = ( $acfcs_subpage == $slug ) ? $current_class : false;
-                    $current_page = ( 'countries' == $slug ) ? ' class="cta"' : $current_page;
-                    echo ( 'dashboard' != $slug ) ? ' | ' : false;
-                    switch( $slug ) {
-                        case 'dashboard':
-                            $url = sprintf( '%sacfcs-%s', $dashboard_url, $slug );
-                            break;
-                        default:
-                            $url = sprintf( '%sacfcs-%s', $admin_url, $slug );
-                    }
-                    echo sprintf( '<a href="%s"%s>%s</a>', esc_attr( $url ), esc_attr( $current_page ), esc_html( $label ) );
-                }
-                $menu_items = ob_get_clean();
-                $menu       = sprintf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
-
-                return $menu;
             }
 
 

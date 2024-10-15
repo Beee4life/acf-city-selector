@@ -50,3 +50,46 @@
         }
     }
     add_action( 'acfcs_store_meta', 'acfcs_save_single_meta', 10, 2 );
+    
+    
+    function acfcs_admin_menu() {
+        $dashboard_url  = admin_url( 'options-general.php?page=' );
+        $admin_url      = admin_url( 'options.php?page=' );
+        $current_class  = ' class="current_page"';
+        $url_array      = wp_parse_url( esc_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
+        $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
+        
+        $pages = [
+            'dashboard' => esc_html__( 'Dashboard', 'acf-city-selector' ),
+            'settings'  => esc_html__( 'Settings', 'acf-city-selector' ),
+        ];
+        if ( true === acfcs_has_cities() ) {
+            $pages[ 'search' ] = esc_html__( 'Search', 'acf-city-selector' );
+        }
+        if ( ! empty ( acfcs_check_if_files() ) ) {
+            $pages[ 'preview' ] = esc_html__( 'Preview', 'acf-city-selector' );
+        }
+        if ( current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
+            $pages[ 'info' ] = esc_html__( 'Info', 'acf-city-selector' );
+        }
+        
+        $pages[ 'countries' ] = esc_html__( 'Get more countries', 'acf-city-selector' );
+        
+        ob_start();
+        foreach( $pages as $slug => $label ) {
+            $current_page = ( $acfcs_subpage == $slug ) ? $current_class : false;
+            $current_page = ( 'countries' == $slug ) ? ' class="cta"' : $current_page;
+            echo ( 'dashboard' != $slug ) ? ' | ' : false;
+            switch( $slug ) {
+                case 'dashboard':
+                    $url = sprintf( '%sacfcs-%s', $dashboard_url, $slug );
+                    break;
+                default:
+                    $url = sprintf( '%sacfcs-%s', $admin_url, $slug );
+            }
+            echo sprintf( '<a href="%s"%s>%s</a>', esc_attr( $url ), esc_attr( $current_page ), esc_html( $label ) );
+        }
+        $menu_items = ob_get_clean();
+        printf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
+    }
+    add_action( 'acfcs_admin_menu', 'acfcs_admin_menu' );

@@ -40,8 +40,8 @@
 
         <div class="wrap acfcs">
             <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
-
-            <?php echo esc_html( ACF_City_Selector::acfcs_admin_menu() ); ?>
+            
+            <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">
                 <div class="admin_left">
