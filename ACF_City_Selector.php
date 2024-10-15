@@ -119,7 +119,7 @@
                     ob_start();
                     global $wpdb;
                     ?>
-                    CREATE TABLE <?php echo $wpdb->prefix; ?>cities (
+                    CREATE TABLE <?php echo esc_attr( $wpdb->prefix ); ?>cities (
                     id int(6) unsigned NOT NULL auto_increment,
                     city_name varchar(50) NULL,
                     state_code varchar(3) NULL,
@@ -128,7 +128,7 @@
                     country varchar(50) NULL,
                     PRIMARY KEY  (id)
                     )
-                    COLLATE <?php echo $wpdb->collate; ?>;
+                    COLLATE <?php echo esc_attr( $wpdb->collate ); ?>;
                     <?php
                     $sql = ob_get_clean();
                     dbDelta( $sql );
@@ -167,7 +167,7 @@
                         /* translators: %s cities in ... */
                         $notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
                         /* translators: %s notice */
-                        echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
+                        echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', esc_html( $notice ) );
                     } else {
                         update_option( 'acfcs_city_update_1_8_0', 'done' );
                     }
@@ -225,9 +225,9 @@
                                 $span_class = 'notice--error ';
                             }
                         }
-                        echo sprintf( '<div id="message" class="notice %s is-dismissible">', $span_class );
+                        echo sprintf( '<div id="message" class="notice %s is-dismissible">', esc_attr( $span_class ) );
                         foreach ( $codes as $code ) {
-                            echo sprintf( '<p>%s</p>', ACF_City_Selector::acfcs_errors()->get_error_message( $code ) );
+                            echo sprintf( '<p>%s</p>', esc_html( ACF_City_Selector::acfcs_errors()->get_error_message( $code ) ) );
                         }
                         echo '</div>';
                     }
@@ -271,7 +271,7 @@
                 $dashboard_url  = admin_url( 'options-general.php?page=' );
                 $admin_url      = admin_url( 'options.php?page=' );
                 $current_class  = ' class="current_page"';
-                $url_array      = parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
+                $url_array      = wp_parse_url( esc_url_raw( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
                 $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
 
                 $pages = [
@@ -302,7 +302,7 @@
                         default:
                             $url = sprintf( '%sacfcs-%s', $admin_url, $slug );
                     }
-                    echo sprintf( '<a href="%s"%s>%s</a>', $url, $current_page, $label );
+                    echo sprintf( '<a href="%s"%s>%s</a>', esc_attr( $url ), esc_attr( $current_page ), esc_html( $label ) );
                 }
                 $menu_items = ob_get_clean();
                 $menu       = sprintf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
@@ -322,7 +322,7 @@
                             'ACF City Selector',
                             esc_url( admin_url( 'plugins.php?s=acf&plugin_status=inactive' ) ) );
                         /* translators: %s message */
-                        echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', $message );
+                        echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', esc_html( $message ) );
                     });
                 }
             }
@@ -346,7 +346,7 @@
                                 'City Selector'
                             );
                             /* translators: %s message */
-                            echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', $message );
+                            echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', esc_html( $message ) );
                         } );
                     }
                 }

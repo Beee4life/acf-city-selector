@@ -79,7 +79,7 @@
 
                 // Create Field Options HTML
                 ?>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
+                <tr class="field_option field_option_<?php echo esc_attr( $this->name ); ?>">
                     <td class="label">
                         <label><?php esc_html_e('Show labels','acf-city-selector'); ?></label>
                         <p class="description"><?php esc_html_e( 'Show field labels above the dropdown menus', 'acf-city-selector' ); ?></p>
@@ -96,7 +96,7 @@
                         ?>
                     </td>
                 </tr>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
+                <tr class="field_option field_option_<?php echo esc_attr( $this->name ); ?>">
                     <td class="label">
                         <label><?php esc_html_e('Default country','acf-city-selector'); ?></label>
                         <p class="description"><?php esc_html_e( 'Select a default country for a new field', 'acf-city-selector' ); ?></p>
@@ -113,7 +113,7 @@
                         ?>
                     </td>
                 </tr>
-                <tr class="field_option field_option_<?php echo $this->name; ?>">
+                <tr class="field_option field_option_<?php echo esc_attr( $this->name ); ?>">
                     <td class="label">
                         <label><?php esc_html_e('Fields to use','acf-city-selector'); ?></label>
                         <p class="description"><?php esc_html_e( 'Select which fields are used', 'acf-city-selector' ); ?></p>
@@ -182,7 +182,7 @@
                 } elseif ( false == $default_country && 'state_city' == $which_fields ) {
                     // no default country is set, so show warning
                     $error_message = esc_html__( "You haven't set a default country, so NO provinces/states and cities will be loaded.", 'acf-city-selector' );
-                    echo sprintf( '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">%s</div></div>', $error_message );
+                    echo sprintf( '<div class="acfcs"><div class="acfcs__notice field__message field__message--error">%s</div></div>', esc_attr( $error_message ) );
                 }
 
                 $prefill_values = [
@@ -191,13 +191,13 @@
                 ];
 
                 if ( 'state_city' != $which_fields ) {
-                    echo acfcs_render_dropdown( 'country', $field, $selected_country, $prefill_values );
+                    acfcs_render_dropdown( 'country', $field, $selected_country, $prefill_values );
                 }
                 if ( 'all' == $which_fields || strpos( $which_fields, 'state' ) !== false ) {
-                    echo acfcs_render_dropdown( 'state', $field, $selected_state, $prefill_values );
+                    acfcs_render_dropdown( 'state', $field, $selected_state, $prefill_values );
                 }
                 if ( 'all' == $which_fields || strpos( $which_fields, 'city' ) !== false ) {
-                    echo acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
+                    acfcs_render_dropdown( 'city', $field, $selected_city, $prefill_values );
                 }
             }
 
@@ -306,8 +306,7 @@
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $sql_query              = $wpdb->prepare( "SELECT country, state_name FROM {$wpdb->prefix}cities WHERE country_code= %s AND state_code= %s", $country_code, $state_code );
-                    $row                    = $wpdb->get_row( $sql_query );
+                    $row                    = $wpdb->get_row( $wpdb->prepare( "SELECT country, state_name FROM {$wpdb->prefix}cities WHERE country_code= %s AND state_code= %s", $country_code, $state_code ) );
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;

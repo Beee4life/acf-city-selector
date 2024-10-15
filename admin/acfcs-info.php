@@ -230,7 +230,7 @@
                                 <?php } ?>
                             </p>
                             <?php if ( file_exists( $file_name ) ) { ?>
-                                <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
+                                <?php $serialized_json = wp_json_encode( $prepare_json ); // encode json before saving ?>
                                 <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
                                 <p class="json_button">
                                     <a href="<?php echo esc_url( wp_upload_dir()['baseurl'] . '/acfcs/debug.json' ); ?>" class="button button-primary">
