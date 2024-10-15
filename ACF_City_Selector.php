@@ -46,8 +46,8 @@
                 add_action( 'acf/register_fields',      [ $this, 'acfcs_include_field_types' ] ); // v4
                 add_action( 'acf/include_field_types',  [ $this, 'acfcs_include_field_types' ] ); // v5
                 
-                add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts' ] );
-                add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts' ] );
+                add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts_admin' ] );
+                add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts_front' ] );
                 
                 add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_admin_menu' ] );
@@ -164,7 +164,9 @@
                     }
                     if ( isset( $reimport ) ) {
                         $country_name = 1 === count( $reimport ) ? acfcs_get_country_name( $reimport[ 0 ] ) : false;
+                        /* translators: %s cities in ... */
                         $notice       = sprintf( __( 'Several %s had broken ascii characters. You need to re-import these countries to get the correct city names.', 'acf-city-selector' ), _n( sprintf( __( 'cities in %s', 'acf-city-selector' ), $country_name ), __( 'cities in Belgium and Netherlands', 'acf-city-selector' ), count( $reimport ), 'acf-city-selector' ) );
+                        /* translators: %s notice */
                         echo sprintf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $notice );
                     } else {
                         update_option( 'acfcs_city_update_1_8_0', 'done' );
@@ -315,10 +317,11 @@
             public function acfcs_check_for_acf() {
                 if ( ! class_exists( 'acf' ) ) {
                     add_action( 'admin_notices', function () {
-                        $message = sprintf( __( '"%s" is not activated. This plugin <strong>must</strong> be activated, because without it "%s" won\'t work. Activate it <a href="%s">here</a>.', 'acf-city-selector' ),
-                            'Advanced Custom Fields',
+                        /* translators: %s name current plugin, %s link tag */
+                        $message = sprintf( __( '"Advanced Custom Fields" is not activated. This plugin <strong>must</strong> be activated, because without it "%1$s" won\'t work. Activate it <a href="%2$s">here</a>.', 'acf-city-selector' ),
                             'ACF City Selector',
                             esc_url( admin_url( 'plugins.php?s=acf&plugin_status=inactive' ) ) );
+                        /* translators: %s message */
                         echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', $message );
                     });
                 }
@@ -337,11 +340,12 @@
                 if ( isset( $plugins[ 'advanced-custom-fields-pro/acf.php' ] ) ) {
                     if ( $plugins[ 'advanced-custom-fields-pro/acf.php' ][ 'Version' ] < 5 && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) {
                         add_action( 'admin_notices', function () {
-                            $message = sprintf( __( '%s: The "%s" plugin will probably not work properly (anymore) with %s v4.x. Please upgrade to PRO.', 'acf-city-selector' ),
+                            /* translators: %s warning, %s name current plugin */
+                            $message = sprintf( __( '%1$s: The "%2$s" plugin will probably not work properly (anymore) with Advanced Custom Fields v4.x. Please upgrade to PRO.', 'acf-city-selector' ),
                                 sprintf( '<b>%s</b>', __( 'Warning', 'acf-city-selector' ) ),
-                                'City Selector',
-                                'Advanced Custom Fields'
+                                'City Selector'
                             );
+                            /* translators: %s message */
                             echo sprintf( '<div class="notice notice-error"><p>%s</p></div>', $message );
                         } );
                     }
@@ -399,11 +403,10 @@
             /*
              * Adds CSS on the admin side
              */
-            public function acfcs_add_scripts() {
-                wp_enqueue_style( 'acfcs-general', plugins_url( 'assets/css/general.css', __FILE__ ), [], $this->acfcs_settings()[ 'version' ] );
+            public function acfcs_add_scripts_admin() {
                 if ( is_admin() ) {
                     wp_enqueue_style( 'acfcs-admin', plugins_url( 'assets/css/admin.css', __FILE__ ), [], $this->acfcs_settings()[ 'version' ] );
-                    wp_register_script( 'acfcs-upload', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->acfcs_settings()[ 'version' ] );
+                    wp_register_script( 'acfcs-upload', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->acfcs_settings()[ 'version' ], [ 'in_footer' => true, 'strategy' => 'defer' ] );
                     wp_enqueue_script( 'acfcs-upload' );
                 }
             }

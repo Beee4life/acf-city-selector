@@ -5,7 +5,7 @@
     function acfcs_country_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
@@ -51,6 +51,7 @@
                             <?php echo sprintf( '<p>%s</p>', esc_html__( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( "And now you can !! We have created several 'country packages' for you to import 'as is'.", 'acf-city-selector' ); ?>
+                                <?php /* translators: %s a tag, %s download location */ ?>
                                 <?php echo sprintf( esc_html__( 'Download them %s.', 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'here', 'acf-city-selector' ) ) ); ?>
                             </p>
                         </div>
@@ -146,6 +147,7 @@
                                 </table>
                             <?php } ?>
 
+                            <?php /* translators: %s link tag, %s github location, %s anchor */ ?>
                             <?php echo sprintf( '<p>%s</p>', sprintf( __( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), __( 'request', 'acf-city-selector' ) ) ) ); ?>
 
                             <?php echo sprintf( '<p><a href="%s" target="_blank" rel="noopener" class="button button-primary">%s</a></p>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'Get your country now', 'acf-city-selector' ) ); ?>

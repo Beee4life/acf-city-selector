@@ -5,7 +5,7 @@
     function acfcs_settings() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
         $countries = acfcs_get_countries( false, false, true );
 
@@ -49,6 +49,7 @@
                                 <ul class="acfcs__checkboxes">
                                     <?php foreach( $countries as $key => $value ) { ?>
                                         <li>
+                                            <?php /* translators: %s input label, %s country name */ ?>
                                             <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . strtolower( $key ), esc_attr__( $value, 'acf-city-selector' ) ); ?>
                                             <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo strtolower( $key ); ?>" value="<?php echo strtolower( $key ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
                                         </li>

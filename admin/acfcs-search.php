@@ -5,7 +5,7 @@
     function acfcs_search() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
@@ -56,6 +56,7 @@
                         <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Search for cities', 'acf-city-selector' ) ); ?>
 
                         <?php if ( count( $countries ) == 0 ) { ?>
+                            <?php /* translators: %s link tag, %s, dashboard link, %s anchor */ ?>
                             <?php echo sprintf( '<div>%s</div>', sprintf( esc_html__( "You haven't imported any cities yet. Import any files from your %s.", 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( admin_url( 'options-general.php?page=acfcs-dashboard' ) ), esc_html__( 'dashboard', 'acf-city-selector' ) ) ) ); ?>
                         <?php } else { ?>
                             <form action="" method="POST">

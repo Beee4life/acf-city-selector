@@ -119,15 +119,15 @@
                             $cities[] = $split[ 1 ];
                         }
                     }
-                    $cities  = implode( ', ', $cities );
-                    $row_ids = implode( ',', $ids );
-                    $table   = $wpdb->prefix . 'cities';
-                    $query   = $wpdb->prepare( "DELETE FROM {$table} WHERE id IN (%s)", $row_ids );
-                    $amount  = $wpdb->query( $query );
+                    $city_string = implode( ', ', $cities );
+                    $row_ids     = implode( ',', $ids );
+                    $table       = $wpdb->prefix . 'cities';
+                    $query       = $wpdb->prepare( "DELETE FROM {$table} WHERE id IN (%s)", $row_ids );
+                    $amount      = $wpdb->query( $query );
 
                     if ( $amount > 0 ) {
                         /* translators: 1 city name, 2 city names */
-                        ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %1$s.', 'You have deleted the following cities: %2$s.', $amount, 'acf-city-selector' ), $cities ) );
+                        ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
                     }
                 }
             }

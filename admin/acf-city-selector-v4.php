@@ -222,13 +222,13 @@
                 $plugin_url     = $this->settings[ 'url' ];
                 $plugin_version = $this->settings[ 'version' ];
 
-                wp_enqueue_script( 'acf-custom-validation', "{$plugin_url}assets/js/field-validation.js", array( 'acf-input' ), $plugin_version );
+                wp_enqueue_script( 'acf-custom-validation', "{$plugin_url}assets/js/field-validation.js", array( 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acf-custom-validation' );
 
-                wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version );
+                wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acfcs-init' );
 
-                wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version );
+                wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acfcs-process' );
 
                 $all_info                     = acfcs_get_field_settings();

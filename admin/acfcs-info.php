@@ -5,7 +5,7 @@
     function acfcs_info_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();

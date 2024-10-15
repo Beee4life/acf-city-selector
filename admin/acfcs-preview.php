@@ -40,6 +40,7 @@
                         <?php } else { ?>
                             <div>
                                 <?php esc_html_e( 'You have no files to preview.', 'acf-city-selector' ); ?>
+                                <?php /* translators: %s link tag, %s dashboard link, %s anchor */ ?>
                                 <?php echo sprintf( __( 'Upload a csv file from your %s.', 'acf-city-selector' ), sprintf( '<a href="%s">%s</a>', esc_url( admin_url( '/admin.php?page=acfcs-dashboard' ) ), __( 'dashboard', 'acf-city-selector' ) ) ); ?>
                             </div>
                         <?php } ?>
@@ -49,7 +50,9 @@
                                 echo '<div class="acfcs__section acfcs__section--results">';
                                 if ( array_key_exists( 'error', $csv_info ) ) {
                                     if ( 'file_deleted' == $csv_info[ 'error' ] ) {
+                                        /* translators: %s screen reader text */
                                         $dismiss_button = sprintf( '<button type="button" class="notice-dismiss"><span class="screen-reader-text">%s</span></button>', esc_html__( 'Dismiss this notice', 'acf-city-selector' ) );
+                                        /* translators: %s file name */
                                         $error_message  = sprintf( esc_html__( 'You either have errors in your CSV or there is no data. In case of an error, the file is deleted. Please check "%s".', 'acf-city-selector' ), $file_name );
                                         echo sprintf( '<div class="notice notice-error is-dismissable"><p>%s</p>%s</div>', $error_message, $dismiss_button );
 
