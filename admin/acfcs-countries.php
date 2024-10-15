@@ -79,11 +79,11 @@
                                             $flag_folder  = ( isset( $package[ 'flag_folder' ] ) ) ? $package[ 'flag_folder' ] : ACFCS_WEBSITE_URL . '/flags/';
                                         ?>
                                         <tr>
-                                            <?php echo sprintf( '<td><img src="%s" alt="" /></td>', esc_url( $flag_folder . $package[ 'country_code' ] . '.png' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_attr($package[ 'country_name' ] ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_attr(( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_attr($package[ 'number_cities' ] ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_attr(( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ) ); ?>
+                                            <?php echo sprintf( '<td><img src="%s" alt="" /></td>', esc_url_raw( $flag_folder . $package[ 'country_code' ] . '.png' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'country_name' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'number_cities' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ) ); ?>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -96,16 +96,16 @@
                                 <table class="acfcs__table acfcs__table--packages">
                                     <thead>
                                     <tr>
-                                        <?php echo sprintf( '<th>%s</th>', esc_attr__( 'Package', 'acf-city-selector' ) ); ?>
-                                        <?php echo sprintf( '<th>%s</th>', esc_attr__( 'Included countries', 'acf-city-selector' ) ); ?>
-                                        <?php echo sprintf( '<th>%s</th>', esc_attr__( 'As separate countries', 'acf-city-selector' ) ); ?>
-                                        <?php echo sprintf( '<th>%s</th>', esc_attr__( 'Package price', 'acf-city-selector' ) ); ?>
+                                        <?php echo sprintf( '<th>%s</th>', esc_html__( 'Package', 'acf-city-selector' ) ); ?>
+                                        <?php echo sprintf( '<th>%s</th>', esc_html__( 'Included countries', 'acf-city-selector' ) ); ?>
+                                        <?php echo sprintf( '<th>%s</th>', esc_html__( 'As separate countries', 'acf-city-selector' ) ); ?>
+                                        <?php echo sprintf( '<th>%s</th>', esc_html__( 'Package price', 'acf-city-selector' ) ); ?>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php foreach( $country_packages as $package ) { ?>
                                         <tr>
-                                            <?php echo sprintf( '<td>%s</td>', esc_attr__( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html__( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
 
                                             <td>
                                                 <?php
