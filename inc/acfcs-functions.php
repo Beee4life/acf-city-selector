@@ -522,16 +522,16 @@
 
         ob_start();
         ?>
-        <div class="acfcs__dropdown-box acfcs__dropdown-box--<?php echo $modifier; ?>">
+        <div class="acfcs__dropdown-box acfcs__dropdown-box--<?php echo esc_attr( $modifier ); ?>">
             <?php if ( $show_labels ) { ?>
                 <div class="acf-input-header">
-                    <?php echo $field_label; ?>
+                    <?php echo esc_html( $field_label ); ?>
                 </div>
             <?php } ?>
-            <label for="<?php echo $field_id . $field_suffix; ?>" class="screen-reader-text">
-                <?php echo $field_label; ?>
+            <label for="<?php echo esc_attr( $field_id ) . esc_attr( $field_suffix ); ?>" class="screen-reader-text">
+                <?php echo esc_html( $field_label ); ?>
             </label>
-            <select name="<?php echo $field_name; ?>[<?php echo $field_suffix; ?>]" id="<?php echo $field_id . $field_suffix; ?>" class="<?php echo $dropdown_class; ?>" data-show-labels="<?php echo $data_label_value; ?>" data-which-fields="<?php echo $which_fields; ?>">
+            <select name="<?php echo esc_attr( $field_name ); ?>[<?php echo esc_attr( $field_suffix ); ?>]" id="<?php echo esc_attr( $field_id ) . esc_attr( $field_suffix ); ?>" class="<?php echo esc_attr( $dropdown_class ); ?>" data-show-labels="<?php echo esc_attr( $data_label_value ); ?>" data-which-fields="<?php echo esc_attr( $which_fields ); ?>">
                 <?php
                     if ( ! empty( $values ) ) {
                         foreach ( $values as $key => $label ) {
@@ -542,7 +542,7 @@
                                 // only when a default country is set
                                 $selected = ( $default_value == $key ) ? $selected_selected : false;
                             }
-                            echo '<option value="' . $key . '"' . $selected . '>' . $label . '</option>';
+                            echo '<option value="' . esc_attr( $key ) . '"' . esc_attr( $selected ) . '>' . esc_html( $label ) . '</option>';
                         }
                     }
                 ?>
@@ -762,7 +762,7 @@
             ];
             ob_start();
             foreach( $table_columns as $column ) {
-                echo sprintf( '<th>%s</th>', $column );
+                echo sprintf( '<th>%s</th>', esc_attr( $column ) );
             }
             $table_headers = ob_get_clean();
 
@@ -770,7 +770,7 @@
             foreach ( $csv_data as $line ) {
                 echo '<tr>';
                 foreach ( $line as $column ) {
-                    echo sprintf( '<td>%s</td>', stripslashes( htmlspecialchars( $column ) ) );
+                    echo sprintf( '<td>%s</td>', esc_attr( stripslashes( htmlspecialchars( $column ) ) ) );
                 }
                 echo '</tr>';
             }

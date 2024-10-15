@@ -12,7 +12,7 @@
             echo sprintf( '<p>%s</p>', sprintf( esc_html__( 'This plugin is an extension for %s. I built it because there was no properly working plugin which offered what I needed.', 'acf-city-selector' ), '<a href="https://www.advancedcustomfields.com/" rel="noopener" target="_blank">Advanced Custom Fields</a>' ) );
 
             /* translators: %s link tag. %s acf link, %s anchor */
-            echo sprintf( '<p>%s</p>', sprintf( __( "%s for the plugin's official website.", 'acf-city-selector' ), sprintf( '<a href="%s" rel="noopener" target="_blank">%s</a>', ACFCS_WEBSITE_URL . '/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin', __( 'Click here', 'acf-city-selector' ) ) ) );
+            echo sprintf( '<p>%s</p>', sprintf( esc_html__( "%s for the plugin's official website.", 'acf-city-selector' ), sprintf( '<a href="%s" rel="noopener" target="_blank">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/?utm_source=wpadmin&utm_medium=about_plugin&utm_campaign=acf-plugin' ), esc_html__( 'Click here', 'acf-city-selector' ) ) ) );
 
             echo '<hr />';
 
