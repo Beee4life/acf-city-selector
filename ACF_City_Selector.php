@@ -410,6 +410,11 @@
                     wp_enqueue_script( 'acfcs-upload' );
                 }
             }
+            
+            
+            public function acfcs_add_scripts_front() {
+                // @TODO: maybe
+            }
         }
 
         new ACF_City_Selector();
