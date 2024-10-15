@@ -9,12 +9,16 @@
             } else {
                 ACF_City_Selector::acfcs_check_uploads_folder();
                 $target_file = acfcs_upload_folder( '/' ) . basename( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] );
-                if ( move_uploaded_file( $_FILES[ 'acfcs_csv_upload' ][ 'tmp_name' ], $target_file ) ) {
-                    /* translators: %s file name */
-                    ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) );
-                    do_action( 'acfcs_after_success_file_upload' );
+                if ( str_ends_with( $target_file, '.csv' ) ) {
+                    if ( move_uploaded_file( $_FILES[ 'acfcs_csv_upload' ][ 'tmp_name' ], $target_file ) ) {
+                        /* translators: %s file name */
+                        ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) );
+                        do_action( 'acfcs_after_success_file_upload' );
+                    } else {
+                        ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
+                    }
                 } else {
-                    ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
+                    error_log("File is not a csv. Only CSV files can be processed.");
                 }
             }
         }
