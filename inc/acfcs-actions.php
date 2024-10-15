@@ -75,7 +75,7 @@
         
         $pages[ 'countries' ] = esc_html__( 'Get more countries', 'acf-city-selector' );
         
-        ob_start();
+        echo '<p class="acfcs-admin-menu">';
         foreach( $pages as $slug => $label ) {
             $current_page = ( $acfcs_subpage == $slug ) ? $current_class : false;
             $current_page = ( 'countries' == $slug ) ? ' class="cta"' : $current_page;
@@ -87,9 +87,8 @@
                 default:
                     $url = sprintf( '%sacfcs-%s', $admin_url, $slug );
             }
-            echo sprintf( '<a href="%s"%s>%s</a>', esc_attr( $url ), esc_attr( $current_page ), esc_html( $label ) );
+            echo sprintf( '<a href="%s"%s>%s</a>', esc_url_raw( $url ), esc_attr( $current_page ), esc_html( $label ) );
         }
-        $menu_items = ob_get_clean();
-        printf( '<p class="acfcs-admin-menu">%s</p>', $menu_items );
+        echo '</p>';
     }
     add_action( 'acfcs_admin_menu', 'acfcs_admin_menu' );
