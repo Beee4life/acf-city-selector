@@ -4,21 +4,37 @@
      */
     function acfcs_upload_csv_file() {
         if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( $_POST[ 'acfcs_upload_csv_nonce' ], 'acfcs-upload-csv-nonce' ) ) {
+            if ( ! wp_verify_nonce( sanitize_text_field( $_POST[ 'acfcs_upload_csv_nonce' ] ), 'acfcs-upload-csv-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 ACF_City_Selector::acfcs_check_uploads_folder();
-                $target_file = acfcs_upload_folder( '/' ) . basename( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] );
-                if ( str_ends_with( $target_file, '.csv' ) ) {
-                    if ( move_uploaded_file( $_FILES[ 'acfcs_csv_upload' ][ 'tmp_name' ], $target_file ) ) {
-                        /* translators: %s file name */
-                        ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) );
-                        do_action( 'acfcs_after_success_file_upload' );
-                    } else {
-                        ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
+                $local_file_path = acfcs_upload_folder( '/' ) . basename( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] );
+                $file_type       = wp_check_filetype( basename( $local_file_path ), null );
+
+                if ( 'text/csv' === $file_type[ 'type' ] ) {
+                    if ( copy( $_FILES[ 'acfcs_csv_upload' ][ 'tmp_name' ], $local_file_path ) ) {
+                        $file_data = [
+                            'file_name'     => basename( $local_file_path ),
+                            'file_location' => $local_file_path,
+                        ];
+                        $attachment_args = [
+                            'guid'        => wp_upload_dir()[ 'url' ] . '/' . basename( $local_file_path ),
+                            'post_title'  => $file_data[ 'file_name' ],
+                            'post_author' => get_current_user_id(),
+                            'post_date'   => gmdate( 'Y-m-d H:i:s' ),
+                            'post_status' => 'inherit',
+                        ];
+                        $attachment_id = wp_insert_attachment( $attachment_args, $local_file_path );
+                        if ( ! is_wp_error( $attachment_id ) && 0 < $attachment_id ) {
+                            /* translators: %s file name */
+                            ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) );
+                            do_action( 'acfcs_after_success_file_upload' );
+                        } else {
+                            ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
+                        }
                     }
                 } else {
-                    error_log("File is not a csv. Only CSV files can be processed.");
+                    ACF_City_Selector::acfcs_errors()->add( 'error_no_csv', esc_html__( 'Only csv files are allowed.', 'acf-city-selector' ) );
                 }
             }
         }
@@ -126,8 +142,7 @@
                     $city_string = implode( ', ', $cities );
                     $row_ids     = implode( ',', $ids );
                     $table       = $wpdb->prefix . 'cities';
-                    $query       = $wpdb->prepare( "DELETE FROM {$table} WHERE id IN (%s)", $row_ids );
-                    $amount      = $wpdb->query( $query );
+                    $amount      = $wpdb->query( $wpdb->prepare( "DELETE FROM {$table} WHERE id IN (%s)", $row_ids ) );
 
                     if ( $amount > 0 ) {
                         /* translators: 1 city name, 2 city names */
