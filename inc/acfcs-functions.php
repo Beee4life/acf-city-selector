@@ -269,7 +269,8 @@
                     // if column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
-                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        /* translators: 1 line number 2 error message */
+                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %1$d. %2$s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
                         // if column count > benchmark
@@ -277,7 +278,8 @@
                         if ( false === $verify ) {
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
                         }
-                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too many columns on line %d. %s', 'acf-city-selector' ), $line_number, $error_message ) );
+                        /* translators: 1 line number 2 error message */
+                        $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too many columns on line %1$d. %2$s', 'acf-city-selector' ), $line_number, $error_message ) );
                     }
                 }
 
@@ -348,11 +350,13 @@
                 if ( count( $line_array ) != $column_benchmark ) {
                     // length of a line is not correct
                     if ( count( $line_array ) < $column_benchmark ) {
+                        /* translators: %d line number */
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too few columns on line %d.', 'acf-city-selector' ), $line_number ) );
 
                         return false;
 
                     } elseif ( count( $line_array ) > $column_benchmark ) {
+                        /* translators: %d line number */
                         ACF_City_Selector::acfcs_errors()->add( 'error_no_correct_columns', sprintf( esc_html__( 'There are too many columns on line %d.', 'acf-city-selector' ), $line_number ) );
 
                         return false;
@@ -364,6 +368,7 @@
                     $column_counter++;
                     if ( $column_counter == 4 ) {
                         if ( 2 != strlen( $element ) ) {
+                            /* translators: %d line number */
                             ACF_City_Selector::acfcs_errors()->add( 'error_wrong_country_length', sprintf( esc_html__( 'The length of the country abbreviation on line %d is incorrect.', 'acf-city-selector' ), $line_number ) );
 
                             return false;
@@ -569,6 +574,7 @@
     function acfcs_verify_data( $file_name, $delimiter = ';', $verify = true ) {
         $csv_array = acfcs_csv_to_array( $file_name, '', $delimiter, $verify );
         if ( isset( $csv_array[ 'data' ] ) ) {
+            /* translators: file name */
             ACF_City_Selector::acfcs_errors()->add( 'success_no_errors_in_csv', sprintf( esc_html__( 'Congratulations, there appear to be no errors in CSV file: "%s".', 'acf-city-selector' ), $file_name ) );
             do_action( 'acfcs_after_success_verify' );
         }
@@ -610,9 +616,11 @@
                             }
                             if ( in_array( $file_name, [ 'be.csv', 'nl.csv' ] ) ) {
                                 $country_code = substr( $file_name, 0, 2 );
-                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported_' . $country_code, sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                                /* translators: 1 amount cities, 2 file name */
+                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported_' . $country_code, sprintf( esc_html__( 'You have successfully imported %1$d cities from "%2$s".', 'acf-city-selector' ), $line_number, $file_name ) );
                             } else {
-                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'You have successfully imported %d cities from "%s".', 'acf-city-selector' ), $line_number, $file_name ) );
+                                /* translators: 1 amount cities, 2 file name */
+                                ACF_City_Selector::acfcs_errors()->add( 'success_lines_imported', sprintf( esc_html__( 'You have successfully imported %1$d cities from "%2$s".', 'acf-city-selector' ), $line_number, $file_name ) );
                             }
 
                             do_action( 'acfcs_after_success_import' );
@@ -642,7 +650,8 @@
                     
                     $wpdb->insert( $wpdb->prefix . 'cities', $city_row );
                 }
-                ACF_City_Selector::acfcs_errors()->add( 'success_cities_imported', sprintf( _n( 'Congratulations, you imported 1 city.', 'Congratulations, you imported %d cities.', $line_number, 'acf-city-selector' ), $line_number ) );
+                /* translators: amount cities */
+                ACF_City_Selector::acfcs_errors()->add( 'success_cities_imported', sprintf( esc_html( _n( 'You imported %d city.', 'You imported %d cities.', $line_number, 'acf-city-selector'  ) ), $line_number ) );
 
                 do_action( 'acfcs_after_success_import_raw' );
             }
@@ -662,9 +671,11 @@
             if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
                 $delete_result = unlink( acfcs_upload_folder( '/' ) . $file_name );
                 if ( true === $delete_result ) {
+                    /* translators: %s file name */
                     ACF_City_Selector::acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
                     do_action( 'acfcs_after_success_file_delete' );
                 } else {
+                    /* translators: %s file name */
                     ACF_City_Selector::acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
                 }
             }
@@ -709,6 +720,7 @@
             $result = $wpdb->query( $query );
 
             if ( $result > 0 ) {
+                /* translators: %s country name */
                 ACF_City_Selector::acfcs_errors()->add( 'success_country_remove', sprintf( esc_html__( 'You have successfully removed all entries for %s.', 'acf-city-selector' ), $country_names_and ) );
             }
         }
