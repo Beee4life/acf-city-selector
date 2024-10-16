@@ -4,7 +4,7 @@
     }
 ?>
 <form method="post">
-    <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo wp_create_nonce( 'acfcs-select-file-nonce' ); ?>" />
+    <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'acfcs-select-file-nonce' ) ); ?>" />
 
     <div class="acfcs__process-file">
         <div class="acfcs__process-file-element acfcs__process-file-element--file">
@@ -15,7 +15,7 @@
                 <?php } ?>
                 <?php foreach ( $file_index as $file_name ) { ?>
                     <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
-                    <?php echo sprintf( '<option value="%s"%s>%s</option>', $file_name, $selected, $file_name ); ?>
+                    <?php echo sprintf( '<option value="%s"%s>%s</option>', esc_attr( $file_name ), esc_attr( $selected ), esc_attr( $file_name ) ); ?>
                 <?php } ?>
             </select>
         </div>
@@ -26,7 +26,7 @@
             <select name="acfcs_delimiter" id="acfcs_delimiter">
                 <?php foreach( $delimiters as $delimiter ) { ?>
                     <?php $selected_delimiter = ( $delimiter == apply_filters( 'acfcs_delimiter', ';' ) ) ? ' selected' : false; ?>
-                    <?php echo sprintf( '<option value="%s"%s>%s</option>', $delimiter, $selected_delimiter, $delimiter ); ?>
+                    <?php echo sprintf( '<option value="%s"%s>%s</option>', esc_attr( $delimiter ), esc_attr( $selected_delimiter ), esc_attr( $delimiter ) ); ?>
                 <?php } ?>
             </select>
         </div>
