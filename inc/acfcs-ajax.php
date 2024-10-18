@@ -16,7 +16,7 @@
             $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
 
             if ( is_string( $_POST[ 'country_code' ] ) ) {
-                $country_code = wp_unslash( $_POST[ 'country_code' ] );
+                $country_code = sanitize_text_field( wp_unslash( $_POST[ 'country_code' ] ) );
             }
 
             if ( false != $post_id ) {
@@ -27,7 +27,7 @@
             }
             
             if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = ( '1' == sanitize_text_field( $_POST[ 'show_labels' ] ) ) ? true : false;
+                $field[ 'show_labels' ] = ( '1' == sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) ) ) ? true : false;
             }
 
             if ( isset( $country_code ) ) {
@@ -69,7 +69,7 @@
             $field             = false;
             $items             = array();
             $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
-            $posted_state_code = sanitize_text_field( $_POST[ 'state_code' ] );
+            $posted_state_code = sanitize_text_field( wp_unslash( $_POST[ 'state_code' ] ) );
             $state_code        = false;
 
             if ( false != $post_id ) {
@@ -80,7 +80,7 @@
             }
             
             if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
-                $show_labels = sanitize_text_field( $_POST[ 'show_labels' ] );
+                $show_labels = sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) );
                 if ( '1' == $show_labels ) {
                     $field[ 'show_labels' ] = true;
                 } elseif ( '0' == $show_labels ) {

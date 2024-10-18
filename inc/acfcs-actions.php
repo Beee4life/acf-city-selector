@@ -56,7 +56,11 @@
         $dashboard_url  = admin_url( 'options-general.php?page=' );
         $admin_url      = admin_url( 'options.php?page=' );
         $current_class  = ' class="current_page"';
-        $url_array      = wp_parse_url( esc_url( $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ) );
+        $url_array      = [];
+        
+        if ( isset( $_SERVER[ 'HTTP_HOST' ] ) && isset( $_SERVER[ 'REQUEST_URI' ] ) ) {
+            $url_array = wp_parse_url( esc_url( sanitize_text_field( wp_unslash( $_SERVER[ 'HTTP_HOST' ] ) ) . sanitize_text_field( wp_unslash( $_SERVER[ 'REQUEST_URI' ] ) ) ) );
+        }
         $acfcs_subpage = ( isset( $url_array[ 'query' ] ) ) ? substr( $url_array[ 'query' ], 11 ) : false;
         
         $pages = [

@@ -38,7 +38,7 @@
 
                         <?php if ( true === $show_raw_import ) { ?>
                             <?php $placeholder = "Amsterdam;NH;Noord-Holland;NL;Netherlands\nRotterdam;ZH;Zuid-Holland;NL;Netherlands"; ?>
-                            <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? sanitize_textarea_field( $_POST[ 'raw_csv_import' ] ) : false; ?>
+                            <?php $submitted_raw_data = ( isset( $_POST[ 'raw_csv_import' ] ) ) ? sanitize_textarea_field( wp_unslash( $_POST[ 'raw_csv_import' ] ) ) : false; ?>
                             <div class="acfcs__section acfcs__section--raw-import">
                                 <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Import CSV data (from clipboard)', 'acf-city-selector' ) ); ?>
                                 <p>

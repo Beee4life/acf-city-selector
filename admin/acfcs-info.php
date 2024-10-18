@@ -65,9 +65,9 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'operating_system' ] = $_SERVER[ 'SERVER_SOFTWARE' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'operating_system' ] = isset( $_SERVER[ 'SERVER_SOFTWARE' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Operating system', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( $_SERVER[ 'SERVER_SOFTWARE' ] ); ?></td>
+                                    <td><?php echo sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'phpversion' ] = phpversion(); ?>
@@ -75,24 +75,24 @@
                                     <td><?php echo esc_html( phpversion() ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'server_ip' ] = $_SERVER[ 'SERVER_ADDR' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'server_ip' ] = isset( $_SERVER[ 'SERVER_ADDR' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_ADDR' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server IP', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( $_SERVER[ 'SERVER_ADDR' ] ); ?></td>
+                                    <td><?php echo sanitize_text_field( wp_unslash(  $_SERVER[ 'SERVER_ADDR' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'server_port' ] = $_SERVER[ 'SERVER_PORT' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'server_port' ] = isset( $_SERVER[ 'SERVER_PORT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_PORT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server port', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( $_SERVER[ 'SERVER_PORT' ] ); ?></td>
+                                    <td><?php echo sanitize_text_field( wp_unslash(  $_SERVER[ 'SERVER_PORT' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'scheme' ] = $_SERVER[ 'REQUEST_SCHEME' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'scheme' ] = isset( $_SERVER[ 'REQUEST_SCHEME' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'REQUEST_SCHEME' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Scheme', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( $_SERVER[ 'REQUEST_SCHEME' ] ); ?></td>
+                                    <td><?php echo sanitize_text_field( wp_unslash(  $_SERVER[ 'REQUEST_SCHEME' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'document_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'document_root' ] = isset( $_SERVER[ 'DOCUMENT_ROOT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'DOCUMENT_ROOT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Home path', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( $_SERVER[ 'DOCUMENT_ROOT' ] ); ?></td>
+                                    <td><?php echo sanitize_text_field( wp_unslash(  $_SERVER[ 'DOCUMENT_ROOT' ] ) ); ?></td>
                                 </tr>
                                 </tbody>
                             </table>

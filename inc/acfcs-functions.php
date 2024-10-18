@@ -29,8 +29,7 @@
         }
         
         global $wpdb;
-        $table   = $wpdb->prefix . 'cities';
-        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table GROUP BY country ORDER BY country ASC" ) );
+        $results = $wpdb->get_results( "SELECT * FROM $wpdb->prefix . 'cities' GROUP BY country ORDER BY country ASC" );
 
         if ( ! empty( $results ) ) {
             $country_results = [];
@@ -76,9 +75,8 @@
             }
             
             global $wpdb;
-            $table         = $wpdb->prefix . 'cities';
             $state_results = [];
-            $results       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s GROUP BY state_code%s", strtoupper( $country_code ), $order ) );
+            $results       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = %s GROUP BY state_code%s", strtoupper( $country_code ), $order ) );
             
             foreach ( $results as $data ) {
                 // @TODO: check before merge
@@ -165,7 +163,7 @@
         if ( false != $country_code ) {
             global $wpdb;
             $table   = $wpdb->prefix . 'cities';
-            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM $table WHERE country_code = %s", $country_code ) );
+            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM $wpdb->prefix . 'cities' WHERE country_code = %s", $country_code ) );
 
             if ( isset( $country->country ) ) {
                 return $country->country;
@@ -194,9 +192,9 @@
         $table   = $wpdb->prefix . 'cities';
         
         if ( $country_code ) {
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s LIMIT 1", $country_code ) );
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = %s LIMIT 1", $country_code ) );
         } else {
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table LIMIT 1" ) );
+            $results = $wpdb->get_results( "SELECT * FROM $wpdb->prefix . 'cities' LIMIT 1" );
         }
 
         if ( count( $results ) > 0 ) {
@@ -416,12 +414,11 @@
     function acfcs_get_countries_info() {
         global $wpdb;
         $acfcs_info = [];
-        $table      = $wpdb->prefix . 'cities';
-        $results    = $wpdb->get_results( $wpdb->prepare( "SELECT country_code FROM $table GROUP BY country_code ORDER BY country_code ASC" ) );
+        $results    = $wpdb->get_results( "SELECT country_code FROM $wpdb->prefix . 'cities' GROUP BY country_code ORDER BY country_code ASC" );
         
         foreach ( $results as $data ) {
             $country_code = $data->country_code;
-            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s ORDER BY country_code ASC", $country_code ) );
+            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = %s ORDER BY country_code ASC", $country_code ) );
 
             $acfcs_info[ $country_code ] = [
                 'country_code' => $country_code,
@@ -712,8 +709,7 @@
             }
             
             global $wpdb;
-            $table  = $wpdb->prefix . 'cities';
-            $result = $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE country_code IN (%s)", $country_string ) );
+            $result = $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->prefix . 'cities' WHERE country_code IN (%s)", $country_string ) );
 
             if ( $result > 0 ) {
                 /* translators: %s country name */
@@ -801,7 +797,6 @@
             // get states for these countries
             if ( ! empty( $countries ) ) {
                 global $wpdb;
-                $table = $wpdb->prefix . 'cities';
                 
                 foreach( $countries as $country ) {
                     $states[] = [
@@ -814,7 +809,7 @@
                         $order = 'ORDER BY LENGTH(state_name), state_name';
                     }
 
-                    $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s GROUP BY state_code %s", $country[ 'code' ], $order ) );
+                    $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = %s GROUP BY state_code %s", $country[ 'code' ], $order ) );
 
                     if ( count( $results ) > 0 ) {
                         foreach ( $results as $data ) {
@@ -848,10 +843,10 @@
         global $wpdb;
         $orderby                 = false;
         $table                   = $wpdb->prefix . 'cities';
-        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_state' ] ) : false;
-        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_country' ] ) : false;
-        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_orderby' ] ) : false;
-        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( $_POST[ 'acfcs_search' ] ) : false;
+        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
+        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
+        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
+        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
         $select                  = "SELECT * FROM $table WHERE";
         
