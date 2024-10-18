@@ -30,7 +30,7 @@
         
         global $wpdb;
         $table   = $wpdb->prefix . 'cities';
-        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s GROUP BY country ORDER BY country ASC", $table ) );
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table GROUP BY country ORDER BY country ASC" ) );
 
         if ( ! empty( $results ) ) {
             $country_results = [];
@@ -78,7 +78,7 @@
             global $wpdb;
             $table         = $wpdb->prefix . 'cities';
             $state_results = [];
-            $results       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE country_code = %s GROUP BY state_code%s", $table, strtoupper( $country_code ), $order ) );
+            $results       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s GROUP BY state_code%s", strtoupper( $country_code ), $order ) );
             
             foreach ( $results as $data ) {
                 // @TODO: check before merge
@@ -165,7 +165,7 @@
         if ( false != $country_code ) {
             global $wpdb;
             $table   = $wpdb->prefix . 'cities';
-            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM %s WHERE country_code = %s", $table, $country_code ) );
+            $country = $wpdb->get_row( $wpdb->prepare( "SELECT country FROM $table WHERE country_code = %s", $country_code ) );
 
             if ( isset( $country->country ) ) {
                 return $country->country;
@@ -194,9 +194,9 @@
         $table   = $wpdb->prefix . 'cities';
         
         if ( $country_code ) {
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE country_code = %s LIMIT 1", $table, $country_code ) );
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s LIMIT 1", $country_code ) );
         } else {
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s LIMIT 1", $table ) );
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table LIMIT 1" ) );
         }
 
         if ( count( $results ) > 0 ) {
@@ -417,11 +417,11 @@
         global $wpdb;
         $acfcs_info = [];
         $table      = $wpdb->prefix . 'cities';
-        $results    = $wpdb->get_results( $wpdb->prepare( "SELECT country_code FROM %s GROUP BY country_code ORDER BY country_code ASC", $table ) );
+        $results    = $wpdb->get_results( $wpdb->prepare( "SELECT country_code FROM $table GROUP BY country_code ORDER BY country_code ASC" ) );
         
         foreach ( $results as $data ) {
             $country_code = $data->country_code;
-            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %s WHERE country_code = %s ORDER BY country_code ASC", $table, $country_code ) );
+            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = %s ORDER BY country_code ASC", $country_code ) );
 
             $acfcs_info[ $country_code ] = [
                 'country_code' => $country_code,
