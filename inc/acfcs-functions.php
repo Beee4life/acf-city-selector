@@ -194,7 +194,8 @@
         if ( $country_code ) {
             $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = %s LIMIT 1", $country_code ) );
         } else {
-            $results = $wpdb->get_results( "SELECT * FROM $wpdb->prefix . 'cities' LIMIT 1" );
+            $table   = $wpdb->prefix . 'cities';
+            $results = $wpdb->get_results( "SELECT * FROM $table LIMIT 1" );
         }
 
         if ( count( $results ) > 0 ) {
