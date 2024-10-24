@@ -4,7 +4,7 @@
      */
     function acfcs_upload_csv_file() {
         if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_upload_csv_nonce' ] ) ), 'acfcs-upload-csv-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_upload_csv_nonce' ] ), 'acfcs-upload-csv-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 ACF_City_Selector::acfcs_check_uploads_folder();
@@ -27,7 +27,7 @@
                         $attachment_id = wp_insert_attachment( $attachment_args, $local_file_path );
                         if ( ! is_wp_error( $attachment_id ) && 0 < $attachment_id ) {
                             /* translators: %s file name */
-                            ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), sanitize_text_field( wp_unslash( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) ) ) );
+                            ACF_City_Selector::acfcs_errors()->add( 'success_file_uploaded', sprintf( esc_html__( "File '%s' is successfully uploaded and now shows under 'Select files to import'", 'acf-city-selector' ), wp_unslash( $_FILES[ 'acfcs_csv_upload' ][ 'name' ] ) ) );
                             do_action( 'acfcs_after_success_file_upload' );
                         } else {
                             ACF_City_Selector::acfcs_errors()->add( 'error_file_uploaded', esc_html__( 'Upload failed. Please try again.', 'acf-city-selector' ) );
@@ -47,17 +47,17 @@
      */
     function acfcs_do_something_with_file() {
         if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_select_file_nonce' ] ) ), 'acfcs-select-file-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_select_file_nonce' ] ), 'acfcs-select-file-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( empty( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) ) ) {
+                if ( empty( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_file_selected', esc_html__( "You didn't select a file.", 'acf-city-selector' ) );
 
                     return;
                 }
 
-                $file_name = sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) );
-                $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', ';' );
+                $file_name = wp_unslash( $_POST[ 'acfcs_file_name' ] );
+                $delimiter = ! empty( $_POST[ 'acfcs_delimiter' ] ) ? wp_unslash( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
                 $import    = isset( $_POST[ 'acfcs_import' ] ) ? true : false;
                 $max_lines = isset( $_POST[ 'acfcs_max_lines' ] ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $remove    = isset( $_POST[ 'acfcs_remove' ] ) ? true : false;
@@ -81,10 +81,10 @@
      */
     function acfcs_import_raw_data() {
         if ( isset( $_POST[ 'acfcs_import_raw_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_import_raw_nonce' ] ) ), 'acfcs-import-raw-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_import_raw_nonce' ] ), 'acfcs-import-raw-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                $verified_data = isset( $_POST[ 'acfcs_raw_csv_import' ] ) ? acfcs_verify_csv_data( sanitize_textarea_field( wp_unslash( $_POST[ 'acfcs_raw_csv_import' ] ) ) ) : [];
+                $verified_data = isset( $_POST[ 'acfcs_raw_csv_import' ] ) ? acfcs_verify_csv_data( sanitize_textarea_field( $_POST[ 'acfcs_raw_csv_import' ] ) ) : [];
                 if ( isset( $_POST[ 'acfcs_verify' ] ) ) {
                     if ( false != $verified_data ) {
                         ACF_City_Selector::acfcs_errors()->add( 'success_csv_valid', esc_html__( 'Congratulations, your CSV data seems valid.', 'acf-city-selector' ) );
@@ -105,14 +105,14 @@
      */
     function acfcs_delete_countries() {
         if ( isset( $_POST[ 'acfcs_remove_countries_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_remove_countries_nonce' ] ) ), 'acfcs-remove-countries-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_remove_countries_nonce' ] ), 'acfcs-remove-countries-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( empty( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) ) ) {
+                if ( empty( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
                 } else {
                     if ( is_array( $_POST[ 'acfcs_delete_country' ] ) ) {
-                        acfcs_delete_country( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) );
+                        acfcs_delete_country( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) );
                     }
                 }
             }
@@ -126,13 +126,13 @@
      */
     function acfcs_delete_rows() {
         if ( isset( $_POST[ 'acfcs_delete_row_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_row_nonce' ] ) ), 'acfcs-delete-row-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_delete_row_nonce' ] ), 'acfcs-delete-row-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
                 if ( isset( $_POST[ 'row_id' ] ) ) {
                     if ( is_array( $_POST[ 'row_id' ] ) ) {
-                        foreach( sanitize_text_field( wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
+                        foreach( wp_unslash( $_POST[ 'row_id' ] ) as $row ) {
                             $sanitized_row = sanitize_text_field( $row );
                             $split         = explode( ' ', $sanitized_row, 2 );
                             
@@ -163,7 +163,7 @@
      */
     function acfcs_truncate_table() {
         if ( isset( $_POST[ 'acfcs_truncate_table_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_truncate_table_nonce' ] ) ), 'acfcs-truncate-table-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_truncate_table_nonce' ] ), 'acfcs-truncate-table-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
@@ -182,7 +182,7 @@
      */
     function acfcs_delete_settings() {
         if ( isset( $_POST[ 'acfcs_remove_cities_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_remove_cities_nonce' ] ) ), 'acfcs-remove-cities-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_remove_cities_nonce' ] ), 'acfcs-remove-cities-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 if ( isset( $_POST[ 'remove_cities_table' ] ) ) {
@@ -202,7 +202,7 @@
      */
     function acfcs_import_preset_countries() {
         if ( isset( $_POST[ 'acfcs_import_actions_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_import_actions_nonce' ] ) ), 'acfcs-import-actions-nonce' ) ) {
+            if ( ! wp_verify_nonce( wp_unslash( $_POST[ 'acfcs_import_actions_nonce' ] ), 'acfcs-import-actions-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 if ( isset( $_POST[ 'acfcs_import_be' ] ) || isset( $_POST[ 'acfcs_import_nl' ] ) ) {
