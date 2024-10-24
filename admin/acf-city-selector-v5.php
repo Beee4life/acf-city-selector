@@ -193,8 +193,8 @@
              * Use this action to add CSS + JavaScript to assist your render_field() action.
              */
             function input_admin_enqueue_scripts() {
-                $plugin_url     = $this->settings[ 'url' ];
-                $plugin_version = $this->settings[ 'version' ];
+                $plugin_url     = sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL );
+                $plugin_version = '1.15.0';
 
                 wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acfcs-init' );
