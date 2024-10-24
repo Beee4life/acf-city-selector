@@ -96,6 +96,7 @@
             public function acfcs_plugin_activation() {
                 $this->acfcs_check_table();
                 $this->acfcs_check_uploads_folder();
+                update_option( 'acfcs_version', $this->settings[ 'version' ] );
             }
 
 
@@ -103,6 +104,7 @@
              * Do stuff upon plugin activation
              */
             public function acfcs_plugin_deactivation() {
+                delete_option( 'acfcs_version' );
                 delete_option( 'acfcs_db_version' );
                 // other important stuff gets done in uninstall.php
             }
