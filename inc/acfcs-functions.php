@@ -188,9 +188,8 @@
         $table   = $wpdb->prefix . 'cities';
         
         if ( $country_code ) {
-            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = '%s' LIMIT 1", $country_code ) );
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = '%s' LIMIT 1", $country_code ) );
         } else {
-            $table   = $wpdb->prefix . 'cities';
             $results = $wpdb->get_results( "SELECT * FROM $table LIMIT 1" );
         }
 
@@ -411,11 +410,12 @@
     function acfcs_get_countries_info() {
         global $wpdb;
         $acfcs_info = [];
-        $results    = $wpdb->get_results( "SELECT country_code FROM $wpdb->prefix . 'cities' GROUP BY country_code ORDER BY country_code ASC" );
+        $table = $wpdb->prefix . 'cities';
+        $results    = $wpdb->get_results( "SELECT country_code FROM $table GROUP BY country_code ORDER BY country_code ASC" );
         
         foreach ( $results as $data ) {
             $country_code = $data->country_code;
-            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $wpdb->prefix . 'cities' WHERE country_code = '%s' ORDER BY country_code ASC", $country_code ) );
+            $results      = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE country_code = '%s' ORDER BY country_code ASC", $country_code ) );
 
             $acfcs_info[ $country_code ] = [
                 'country_code' => $country_code,
@@ -705,7 +705,8 @@
             }
             
             global $wpdb;
-            $result = $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->prefix . 'cities' WHERE country_code IN (%s)", $country_string ) );
+            $table  = $wpdb->prefix . 'cities';
+            $result = $wpdb->query( $wpdb->prepare( "DELETE FROM $tabke WHERE country_code IN (%s)", $country_string ) );
 
             if ( $result > 0 ) {
                 /* translators: %s country name */

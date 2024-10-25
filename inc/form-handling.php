@@ -130,25 +130,25 @@
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
-                if ( isset( $_POST[ 'row_id' ] ) ) {
-                    if ( is_array( $_POST[ 'row_id' ] ) ) {
-                        foreach( wp_unslash( $_POST[ 'row_id' ] ) as $row ) {
-                            $sanitized_row = sanitize_text_field( $row );
-                            $split         = explode( ' ', $sanitized_row, 2 );
-                            
-                            if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
-                                $ids[]    = $split[ 0 ];
-                                $cities[] = $split[ 1 ];
-                            }
+                if ( isset( $_POST[ 'row_id' ] ) && is_array( $_POST[ 'row_id' ] ) ) {
+                    foreach( wp_unslash( $_POST[ 'row_id' ] ) as $row ) {
+                        $sanitized_row = sanitize_text_field( $row );
+                        $split         = explode( ' ', $sanitized_row, 2 );
+                        
+                        if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
+                            $ids[]    = $split[ 0 ];
+                            $cities[] = $split[ 1 ];
                         }
-                        $city_string = implode( ', ', $cities );
-                        $row_ids     = implode( ',', $ids );
-                        $amount      = $wpdb->query( $wpdb->prepare( "DELETE FROM $wpdb->prefix . 'cities' WHERE id IN (%s)", $row_ids ) );
-    
-                        if ( $amount > 0 ) {
-                            /* translators: 1 city name, 2 city names */
-                            ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
-                        }
+                    }
+                    
+                    $city_string = implode( ', ', $cities );
+                    $row_ids     = implode( ',', $ids );
+                    $table       = $wpdb->prefix . 'cities';
+                    $amount      = $wpdb->query( $wpdb->prepare( "DELETE FROM $table WHERE id IN (%s)", $row_ids ) );
+
+                    if ( $amount > 0 ) {
+                        /* translators: 1 city name, 2 city names */
+                        ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
                     }
                 }
                 
