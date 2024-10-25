@@ -21,9 +21,10 @@
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
                 $single_file                   = (array) $single_file;
-                $single_file[ 'country_name' ] = esc_attr__( $single_file[ 'country_name' ], 'acf-city-selector' );
+                $single_file[ 'country_name' ] = acfcs_country_i18n( $single_file[ 'country_code' ] );
                 $single_files[]                = $single_file;
             }
+
             if ( ! empty( $single_files ) ) {
                 $country_name = array_column( $single_files, 'country_name' );
                 array_multisort( $country_name, SORT_ASC, $single_files );
@@ -32,7 +33,7 @@
         if ( is_array( $country_packs ) ) {
             foreach( $country_packs as $country_package ) {
                 $country_package                   = (array) $country_package;
-                $country_package[ 'country_name' ] = esc_attr__( $country_package[ 'country_name' ], 'acf-city-selector' );
+                $country_package[ 'country_name' ] = acfcs_country_i18n( $country_package[ 'package_code' ] );
                 $country_packages[]                = $country_package;
             }
         }
@@ -148,7 +149,7 @@
                             <?php } ?>
 
                             <?php /* translators: %s link tag, %s github location, %s anchor */ ?>
-                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_attr( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_attr__( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
 
                             <?php echo sprintf( '<p><a href="%s" target="_blank" rel="noopener" class="button button-primary">%s</a></p>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'Get your country now', 'acf-city-selector' ) ); ?>
 
