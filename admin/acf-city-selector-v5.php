@@ -193,7 +193,7 @@
              * Use this action to add CSS + JavaScript to assist your render_field() action.
              */
             function input_admin_enqueue_scripts() {
-                $plugin_url     = sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL );
+                $plugin_url     = trailingslashit( sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL ) );
                 $plugin_version = get_option( 'acfcs_version' );
 
                 wp_register_script( 'acfcs-init', "{$plugin_url}assets/js/init.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
@@ -245,7 +245,7 @@
                 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $row                    = $wpdb->get_row( $wpdb->prepare( "SELECT country, state_name FROM $wpdb->prefix . 'cities WHERE country_code = %s AND state_code = %s", $country_code, $state_code ) );
+                    $row                    = $wpdb->get_row( $wpdb->prepare( "SELECT country, state_name FROM $wpdb->prefix . 'cities WHERE country_code = '%s' AND state_code = '%s'", $country_code, $state_code ) );
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
