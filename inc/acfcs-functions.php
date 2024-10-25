@@ -861,8 +861,8 @@
         
         if ( false != $searched_term ) {
             if ( $search_criteria_country || $search_criteria_state ) {
-                $where        .= ' AND city_name LIKE "%%%s%%"';
-                $parameters[] = $searched_term;
+                $where        .= ' AND city_name LIKE "%s%"';
+                $parameters[] = '%' . $searched_term . '%';
             }
         }
 
