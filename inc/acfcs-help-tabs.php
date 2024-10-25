@@ -98,7 +98,7 @@
                     'content' => $more_countries_content
                 ) );
                 
-                $server_name = isset( $_SERVER[ 'SERVER_NAME' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_NAME' ] ) ) : 'localhost';
+                $server_name = isset( $_SERVER[ 'SERVER_NAME' ] ) ? wp_unslash( $_SERVER[ 'SERVER_NAME' ] ) : 'localhost';
                 get_current_screen()->set_help_sidebar(
                     '<p><strong>' . esc_html__( 'Official website', 'acf-city-selector' ) . '</strong></p>
                 <p><a href="' . ACFCS_WEBSITE_URL . '?utm_source=' . $server_name . '&utm_medium=plugin_admin&utm_campaign=free_promo">acf-city-selector.com</a></p>'

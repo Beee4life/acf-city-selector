@@ -18,10 +18,10 @@
                 do_action( 'acfcs_admin_menu' );
 
                 $file_index      = acfcs_check_if_files();
-                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_sql_orderby( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
+                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? wp_unslash( $_POST[ 'acfcs_file_name' ] ) : false;
                 $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
                 $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
-                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', ';' );
+                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? wp_unslash( $_POST[ 'acfcs_delimiter' ] ) : apply_filters( 'acfcs_delimiter', ';' );
 
                 // Get imported data
                 if ( $file_name ) {
