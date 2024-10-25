@@ -1,5 +1,5 @@
 === ACF City Selector ===
-Tags: acf custom fields, country, city, state, province
+Tags: advanced custom fields, country, city, state, province
 Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
@@ -42,9 +42,10 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.15.0 =
-* remove static settings variable (for php 8.2)
 * set menu slug for (hidden) admin pages to prevent empty admin page title
 * fix vulnerability in file upload
+* improved i18n strings
+* sanitized/escaped more input/output
 
 = 1.14.0 =
 * update database queries for searching citites in admin

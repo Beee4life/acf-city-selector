@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.15.0 - xx.09.24
+1.15.0 - 25.10.24
 
 <a name="description"></a>
 ### Description
@@ -183,8 +183,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] WordPress 6.6.1
-* [X] Advanced Custom Fields Pro 6.3.5
+* [X] WordPress 6.6.
+* [X] Advanced Custom Fields Pro 6.3.9
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
@@ -229,9 +229,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 1.15.0
-* remove static settings variable (for php 8.2)
 * set menu slug for (hidden) admin pages to prevent empty admin page title
 * fix vulnerability in file upload
+* improved i18n strings
+* sanitized/escaped more input/output
 
 1.14.0
 * update database queries for searching citites in admin
