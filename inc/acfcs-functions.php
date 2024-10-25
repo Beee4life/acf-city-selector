@@ -29,15 +29,14 @@
         }
         
         global $wpdb;
-        $table = $wpdb->prefix . 'cities';
+        $table   = $wpdb->prefix . 'cities';
         $results = $wpdb->get_results( "SELECT * FROM $table GROUP BY country ORDER BY country ASC" );
         
         if ( ! empty( $results ) ) {
             $country_results = [];
             foreach ( $results as $data ) {
                 if ( isset( $data->country_code ) && isset( $data->country ) ) {
-                    // @TODO: check before merge
-                    $country_results[ $data->country_code ] = esc_attr( $data->country );
+                    $country_results[ esc_attr( $data->country_code ) ] = esc_attr( $data->country );
                 }
             }
             $countries = array_merge( $countries, $country_results );
@@ -81,8 +80,7 @@
             }
             
             foreach ( $results as $data ) {
-                // @TODO: check before merge
-                $state_results[ strtoupper( $country_code ) . '-' . $data->state_code ] = esc_attr( $data->state_name );
+                $state_results[ esc_attr( strtoupper( $country_code ) . '-' . $data->state_code ) ] = esc_attr( $data->state_name );
             }
             
             $states = array_merge( $states, $state_results );
@@ -139,7 +137,6 @@
                 uasort( $city_results, 'acfcs_sort_array_with_quotes' );
             }
             foreach ( $city_results as $data ) {
-                // @TODO: check before merge
                 $city_array[ esc_attr( $data[ 'city_name' ] ) ] = esc_attr( $data[ 'city_name' ] );
             }
             if ( isset( $city_array ) ) {
@@ -743,7 +740,6 @@
      * @return false|string
      */
     function acfcs_render_preview_results( $csv_data = [] ) {
-        // @TODO: check output before merge
         if ( ! empty( $csv_data ) ) {
             echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
             $table_columns = [
