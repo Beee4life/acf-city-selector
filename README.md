@@ -228,6 +228,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.16.0
+* add ajax nonces
+
 1.15.1
 * use wp_filesystem for csv files
 * sanitize/escape more
