@@ -59,6 +59,7 @@
                 add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts_admin' ] );
                 add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
+                add_action( 'admin_init',               [ $this, 'acfcs_check_version' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_check_table' ] );
                 add_action( 'admin_notices',            [ $this, 'acfcs_check_cities' ] );
                 add_action( 'init',                     [ $this, 'acfcs_load_textdomain' ] );
@@ -105,6 +106,17 @@
                 delete_option( 'acfcs_version' );
                 delete_option( 'acfcs_db_version' );
                 // other important stuff gets done in uninstall.php
+            }
+
+
+            /*
+             * Check if version needs updating
+             */
+            public function acfcs_check_version() {
+                $acfcs_version = get_option( 'acfcs_version', false );
+                if ( false == $acfcs_version || $acfcs_version != $this->settings[ 'version' ] ) {
+                    update_option( 'acfcs_version', $this->settings[ 'version' ] );
+                }
             }
 
 
