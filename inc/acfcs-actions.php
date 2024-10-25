@@ -98,7 +98,7 @@
     add_action( 'acfcs_admin_menu', 'acfcs_admin_menu' );
     
     
-    function acfcs_delete_file_new( $file_name = false ) {
+    function acfcs_delete_file( $file_name = false ) {
         if ( $file_name ) {
             if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
                 $wp_upload_dir = wp_upload_dir();
@@ -120,4 +120,4 @@
             }
         }
     }
-    add_action( 'acfcs_delete_file', 'acfcs_delete_file_new' );
+    add_action( 'acfcs_delete_file', 'acfcs_delete_file' );
