@@ -7,7 +7,22 @@
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
             wp_die( esc_html__( 'Sorry, you do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
-
+        
+        $file_name = false;
+        $limit     = 100;
+        $delimiter = ';';
+        
+        if ( isset( $_POST[ 'acfcs_preview_nonce' ] ) ) {
+            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_preview_nonce' ] ) ), 'acfcs-preview-nonce' ) ) {
+                ACF_City_Selector::acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+                return;
+            } else {
+                $file_name = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
+                $max_lines = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : $limit;
+                $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', $delimiter );
+            }
+        }
+        
         ACF_City_Selector::acfcs_show_admin_notices();
         ?>
 
@@ -16,12 +31,8 @@
             
             <?php
                 do_action( 'acfcs_admin_menu' );
-
-                $file_index      = acfcs_check_if_files();
-                $file_name       = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
-                $max_lines       = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : false;
-                $max_lines_value = ( false != $max_lines ) ? $max_lines : 100;
-                $delimiter       = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', ';' );
+                
+                $file_index = acfcs_check_if_files();
 
                 // Get imported data
                 if ( $file_name ) {

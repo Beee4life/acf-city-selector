@@ -10,46 +10,48 @@
      * @return JSON Object
      */
     function acfcs_get_states_call() {
-        if ( isset( $_POST[ 'country_code' ] ) ) {
-            $field   = false;
-            $items   = array();
-            $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
-
-            if ( is_string( $_POST[ 'country_code' ] ) ) {
-                $country_code = sanitize_text_field( wp_unslash( $_POST[ 'country_code' ] ) );
-            }
-
-            if ( false != $post_id ) {
-                $fields = get_field_objects( $post_id );
-                if ( is_array( $fields ) && ! empty( $fields ) ) {
-                    $field = acfcs_get_field_settings( $fields );
+        if ( isset( $_POST[ 'acfcs_state_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state_nonce' ] ) ), 'acfcs-state-nonce' ) ) {
+            if ( isset( $_POST[ 'country_code' ] ) ) {
+                $field   = false;
+                $items   = array();
+                $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
+    
+                if ( is_string( $_POST[ 'country_code' ] ) ) {
+                    $country_code = sanitize_text_field( wp_unslash( $_POST[ 'country_code' ] ) );
                 }
-            }
-            
-            if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
-                $field[ 'show_labels' ] = ( '1' == sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) ) ) ? true : false;
-            }
-
-            if ( isset( $country_code ) ) {
-                $states_transient = acfcs_get_states( $country_code, true, $field );
-            }
-
-            if ( isset( $states_transient ) && ! empty( $states_transient ) ) {
-                foreach ( $states_transient as $key => $label ) {
-                    if ( $label != 'N/A' ) {
-                        $items[] = [
-                            'state_name'    => $label,
-                            'country_state' => $key,
-                        ];
-                    } else {
-                        $items[] = [
-                            'state_name'    => $country_code,
-                            'country_state' => $key,
-                        ];
+    
+                if ( false != $post_id ) {
+                    $fields = get_field_objects( $post_id );
+                    if ( is_array( $fields ) && ! empty( $fields ) ) {
+                        $field = acfcs_get_field_settings( $fields );
                     }
                 }
-                echo wp_json_encode( $items );
-                wp_die();
+                
+                if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
+                    $field[ 'show_labels' ] = ( '1' == sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) ) ) ? true : false;
+                }
+    
+                if ( isset( $country_code ) ) {
+                    $states_transient = acfcs_get_states( $country_code, true, $field );
+                }
+    
+                if ( isset( $states_transient ) && ! empty( $states_transient ) ) {
+                    foreach ( $states_transient as $key => $label ) {
+                        if ( $label != 'N/A' ) {
+                            $items[] = [
+                                'state_name'    => $label,
+                                'country_state' => $key,
+                            ];
+                        } else {
+                            $items[] = [
+                                'state_name'    => $country_code,
+                                'country_state' => $key,
+                            ];
+                        }
+                    }
+                    echo wp_json_encode( $items );
+                    wp_die();
+                }
             }
         }
     }
@@ -63,7 +65,9 @@
      * @return JSON Object
      */
     function acfcs_get_cities_call() {
-
+        if ( isset( $_POST[ 'acfcs_ajax_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_ajax_nonce' ] ) ), 'acfcs-ajax-nonce' ) ) {
+            // error_log('OK');
+        }
         if ( isset( $_POST[ 'state_code' ] ) ) {
             $country_code      = false;
             $field             = false;

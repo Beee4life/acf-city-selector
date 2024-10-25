@@ -201,15 +201,17 @@
 
                 wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acfcs-process' );
-
-                $all_info                     = acfcs_get_field_settings();
-                $js_vars[ 'ajaxurl' ]         = admin_url( 'admin-ajax.php' );
-                $js_vars[ 'default_country' ] = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
-                $js_vars[ 'post_id' ]         = ( isset( $_GET[ 'post' ] ) ) ? (int) $_GET[ 'post' ] : false;
-                $js_vars[ 'show_labels' ]     = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : apply_filters( 'acfcs_show_labels', true );
-                $js_vars[ 'store_meta' ]      = ( isset( $all_info[ 'store_meta' ] ) ) ? $all_info[ 'store_meta' ] : false;
-                $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
-                $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
+                
+                $all_info                       = acfcs_get_field_settings();
+                $js_vars[ 'ajaxurl' ]           = admin_url( 'admin-ajax.php' );
+                $js_vars[ 'default_country' ]   = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
+                $js_vars[ 'post_id' ]           = 0 < get_the_ID() ? (int) get_the_ID() : false;
+                $js_vars[ 'acfcs_state_nonce' ] = wp_create_nonce( 'acfcs-state-nonce' );
+                $js_vars[ 'acfcs_city_nonce' ]  = wp_create_nonce( 'acfcs-city-nonce' );
+                $js_vars[ 'show_labels' ]       = ( isset( $all_info[ 'show_labels' ] ) ) ? $all_info[ 'show_labels' ] : apply_filters( 'acfcs_show_labels', true );
+                $js_vars[ 'store_meta' ]        = ( isset( $all_info[ 'store_meta' ] ) ) ? $all_info[ 'store_meta' ] : false;
+                $js_vars[ 'use_select2' ]       = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
+                $js_vars[ 'which_fields' ]      = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
             }

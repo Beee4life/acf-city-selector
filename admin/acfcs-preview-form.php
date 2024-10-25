@@ -8,6 +8,7 @@
 
 <div class="acfcs__section acfcs__section--preview">
     <form name="select-preview-file" id="settings-form" action="" method="post">
+        <input type="hidden" name="acfcs_preview_nonce" value="<?php echo esc_attr( wp_create_nonce( 'acfcs-preview-nonce' ) ); ?>" />
         <div class="acfcs__process-file">
             <div class="acfcs__process-file-element">
                 <?php echo sprintf( '<label for="acfcs_file_name">%s</label>', esc_attr__( 'File', 'acf-city-selector' ) ); ?>

@@ -2,6 +2,16 @@
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
+    
+    $selected_file_name = false;
+    if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
+        if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_select_file_nonce' ] ) ), 'acfcs-select-file-nonce' ) ) {
+            ACF_City_Selector::acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+            return;
+        } else {
+            $selected_file_name = isset( $_POST[ 'acfcs_file_name' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
+        }
+    }
 ?>
 <form method="post">
     <input name="acfcs_select_file_nonce" type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'acfcs-select-file-nonce' ) ); ?>" />
@@ -14,7 +24,7 @@
                     <?php echo sprintf( '<option value="">%s</option>', esc_attr__( 'Select a file', 'acf-city-selector' ) ); ?>
                 <?php } ?>
                 <?php foreach ( $file_index as $file_name ) { ?>
-                    <?php $selected = ( isset( $_POST[ 'acfcs_file_name' ] ) && $_POST[ 'acfcs_file_name' ] == $file_name ) ? ' selected="selected"' : false; ?>
+                    <?php $selected = $selected_file_name == $file_name ? ' selected="selected"' : false; ?>
                     <?php echo sprintf( '<option value="%s"%s>%s</option>', esc_attr( $file_name ), esc_attr( $selected ), esc_attr( $file_name ) ); ?>
                 <?php } ?>
             </select>

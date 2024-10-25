@@ -47,8 +47,8 @@
                     const response_states = []
 
                     var $this             = $(this);
-                    var country_code      = $this.val();
-                    var country_field_id  = $this.attr('id');
+                    var country_code  = $this.val();
+                    var country_field_id = $this.attr('id');
                     var state_field_id    = country_field_id.replace( 'countryCode', 'stateCode' );
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
@@ -61,11 +61,12 @@
                         $show_labels = $(this).data('show-labels');
                         $which_fields = $(this).data('which-fields');
                     }
+                    var nonce = city_selector_vars[ 'acfcs_state_nonce' ];
                     var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
-                        const d = acfcs_get_states(country_code, show_labels, post_id);
+                        const d = acfcs_get_states(country_code, show_labels, post_id, nonce);
                         response_states.push(d);
 
                         Promise.all(response_states).then(function(jsonResults) {
@@ -122,6 +123,7 @@
                         $show_labels = $(this).data('show-labels');
                         $which_fields = $(this).data('which-fields');
                     }
+                    var nonce = city_selector_vars[ 'acfcs_city_nonce' ];
                     var show_labels = $show_labels;
                     var which_fields = $which_fields;
 
@@ -132,7 +134,7 @@
                         var state_field_id = $this.attr('id');
                         var city_field_id = state_field_id.replace('stateCode', 'cityName');
                         var changed_city = $('select[id="' + city_field_id + '"]');
-                        const d = acfcs_get_cities(state_code, show_labels, post_id);
+                        const d = acfcs_get_cities(state_code, show_labels, post_id, nonce);
                         response_cities.push(d);
 
                         Promise.all(response_cities).then(function(jsonResults) {
@@ -166,10 +168,12 @@
          * @param showLabels
          * @param postID
          * @param callback
+         * @param nonce
          * @returns {Promise<unknown>}
          */
-        function acfcs_get_states(countryCode, showLabels, postID, callback) {
+        function acfcs_get_states(countryCode, showLabels, postID, nonce, callback) {
             const state_data = {
+                acfcs_state_nonce: nonce,
                 action: 'get_states_call',
                 country_code: countryCode,
                 post_id: postID,
@@ -189,11 +193,13 @@
          * @param stateCode
          * @param showLabels
          * @param postID
+         * @param nonce
          * @param callback
          * @returns {Promise<unknown>}
          */
-        function acfcs_get_cities(stateCode, showLabels, postID, callback) {
+        function acfcs_get_cities(stateCode, showLabels, postID, nonce, callback) {
             const city_data = {
+                acfcs_city_nonce: nonce,
                 action: 'get_cities_call',
                 post_id: postID,
                 show_labels: showLabels,
