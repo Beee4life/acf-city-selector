@@ -149,7 +149,7 @@
                             <?php } ?>
 
                             <?php /* translators: %s link tag, %s github location, %s anchor */ ?>
-                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_attr__( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_html__( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
 
                             <?php echo sprintf( '<p><a href="%s" target="_blank" rel="noopener" class="button button-primary">%s</a></p>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'Get your country now', 'acf-city-selector' ) ); ?>
 
