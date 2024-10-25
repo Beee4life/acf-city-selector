@@ -6,5 +6,5 @@
 
     if ( false != get_option( 'acfcs_delete_cities_table' ) ) {
         global $wpdb;
-        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}cities");
+        $wpdb->query($wpdb->prepare( "DROP TABLE IF EXISTS %i", $wpdb->prefix . 'cities' ) );
     }
