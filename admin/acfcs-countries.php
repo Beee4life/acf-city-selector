@@ -106,7 +106,7 @@
                                     <tbody>
                                     <?php foreach( $country_packages as $package ) { ?>
                                         <tr>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html__( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( $package[ 'country_name' ] ) ); ?>
 
                                             <td>
                                                 <?php
