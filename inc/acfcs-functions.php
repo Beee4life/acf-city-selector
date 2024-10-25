@@ -517,7 +517,6 @@
         }
         $dropdown_class = $dropdown_class . ' ' . $acfcs_dropdown . '--' . $modifier;
 
-        // ob_start();
         ?>
         <div class="acfcs__dropdown-box acfcs__dropdown-box--<?php echo esc_attr( $modifier ); ?>">
             <?php if ( $show_labels ) { ?>
