@@ -17,7 +17,7 @@
                     <?php } ?>
                     <?php foreach ( $file_index as $file ) { ?>
                         <?php $selected = ( $file_name == $file ) ? ' selected="selected"' : false; ?>
-                        <option value="<?php echo $file; ?>"<?php echo $selected; ?>><?php echo $file; ?></option>
+                        <option value="<?php echo esc_attr( $file ); ?>"<?php echo esc_attr( $selected ); ?>><?php echo esc_html( $file ); ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -28,14 +28,14 @@
                 <select name="acfcs_delimiter" id="acfcs_delimiter">
                     <?php foreach( $delimiters as $delimiter_value ) { ?>
                         <?php $selected_delimiter = ( $delimiter_value == $delimiter ) ? ' selected' : false; ?>
-                        <option value="<?php echo $delimiter_value; ?>"<?php echo $selected_delimiter; ?>><?php echo $delimiter_value; ?></option>
+                        <option value="<?php echo esc_attr( $delimiter_value ); ?>"<?php echo esc_attr( $selected_delimiter ); ?>><?php echo esc_html( $delimiter_value ); ?></option>
                     <?php } ?>
                 </select>
             </div>
 
             <div class="acfcs__process-file-element">
                 <?php echo sprintf( '<label for="acfcs_max_lines">%s</label>', esc_attr__( 'Max lines', 'acf-city-selector' ) ); ?>
-                <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo $max_lines_value; ?>" />
+                <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo esc_attr( $max_lines_value ); ?>" />
             </div>
         </div>
 

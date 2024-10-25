@@ -5,7 +5,7 @@
     function acfcs_country_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
@@ -39,9 +39,9 @@
         ?>
 
         <div class="wrap acfcs">
-            <h1>ACF City Selector</h1>
-
-            <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
+            <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
+            
+            <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">
                 <div class="admin_left">
@@ -51,6 +51,7 @@
                             <?php echo sprintf( '<p>%s</p>', esc_html__( 'Default the plugin comes with 2 countries included, the Netherlands and Belgium but you might want to add more countries to choose from.', 'acf-city-selector' ) ); ?>
                             <p>
                                 <?php esc_html_e( "And now you can !! We have created several 'country packages' for you to import 'as is'.", 'acf-city-selector' ); ?>
+                                <?php /* translators: %s a tag, %s download location */ ?>
                                 <?php echo sprintf( esc_html__( 'Download them %s.', 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'here', 'acf-city-selector' ) ) ); ?>
                             </p>
                         </div>
@@ -78,11 +79,11 @@
                                             $flag_folder  = ( isset( $package[ 'flag_folder' ] ) ) ? $package[ 'flag_folder' ] : ACFCS_WEBSITE_URL . '/flags/';
                                         ?>
                                         <tr>
-                                            <?php echo sprintf( '<td><img src="%s" alt="" /></td>', $flag_folder . $package[ 'country_code' ] . '.png' ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', $package[ 'country_name' ] ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', ( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', $package[ 'number_cities' ] ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', ( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ); ?>
+                                            <?php echo sprintf( '<td><img src="%s" alt="" /></td>', esc_url_raw( $flag_folder . $package[ 'country_code' ] . '.png' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'country_name' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'number_cities' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ) ); ?>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -104,14 +105,14 @@
                                     <tbody>
                                     <?php foreach( $country_packages as $package ) { ?>
                                         <tr>
-                                            <?php echo sprintf( '<td>%s</td>', __( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html__( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
 
                                             <td>
                                                 <?php
                                                     if ( isset( $package[ 'included_countries' ] ) && is_array( $package[ 'included_countries' ] ) && ! empty( $package[ 'included_countries' ] ) ) {
                                                         foreach( $package[ 'included_countries' ] as $country ) {
                                                             $flag_folder  = ( isset( $package[ 'flag_folder' ] ) ) ? $package[ 'flag_folder' ] : ACFCS_WEBSITE_URL . '/flags/';
-                                                            echo sprintf( '<img src="%s" alt="%s" class="flag" />', $flag_folder . $country->value . '.png', $country->value );
+                                                            echo sprintf( '<img src="%s" alt="%s" class="flag" />', esc_attr( $flag_folder . $country->value . '.png' ), esc_attr( $country->value ) );
                                                         }
                                                     }
                                                 ?>
@@ -138,7 +139,7 @@
 
                                             <?php
                                                 $price = ( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : '&nbsp;';
-                                                echo sprintf( '<td>%s</td>', $price );
+                                                echo sprintf( '<td>%s</td>', esc_attr( $price ) );
                                             ?>
                                         </tr>
                                     <?php } ?>
@@ -146,7 +147,8 @@
                                 </table>
                             <?php } ?>
 
-                            <?php echo sprintf( '<p>%s</p>', sprintf( __( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), __( 'request', 'acf-city-selector' ) ) ) ); ?>
+                            <?php /* translators: %s link tag, %s github location, %s anchor */ ?>
+                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_attr( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
 
                             <?php echo sprintf( '<p><a href="%s" target="_blank" rel="noopener" class="button button-primary">%s</a></p>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'Get your country now', 'acf-city-selector' ) ); ?>
 

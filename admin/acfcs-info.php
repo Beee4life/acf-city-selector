@@ -5,7 +5,7 @@
     function acfcs_info_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
-            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.' ) );
+            wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
@@ -15,9 +15,9 @@
         ?>
 
         <div class="wrap acfcs">
-            <h1>ACF City Selector</h1>
-
-            <?php echo ACF_City_Selector::acfcs_admin_menu(); ?>
+            <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
+            
+            <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">
                 <div class="admin_left">
@@ -44,8 +44,8 @@
                                     <?php foreach( $countries as $country_code => $values ) { ?>
                                         <?php $prepare_json[ 'countries' ][ $country_code ] = $values[ 'name' ] . ' (' . $values[ 'count' ] . ')'; ?>
                                         <tr>
-                                            <td><?php echo $values[ 'name' ]; ?></td>
-                                            <td><?php echo $values[ 'count' ]; ?></td>
+                                            <td><?php echo esc_html( $values[ 'name' ] ); ?></td>
+                                            <td><?php echo esc_html( $values[ 'count' ] ); ?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -65,34 +65,34 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'operating_system' ] = $_SERVER[ 'SERVER_SOFTWARE' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'operating_system' ] = isset( $_SERVER[ 'SERVER_SOFTWARE' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Operating system', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $_SERVER[ 'SERVER_SOFTWARE' ]; ?></td>
+                                    <td><?php echo esc_html( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'phpversion' ] = phpversion(); ?>
                                     <td><?php esc_html_e( 'PHP version', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo phpversion(); ?></td>
+                                    <td><?php echo esc_html( phpversion() ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'server_ip' ] = $_SERVER[ 'SERVER_ADDR' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'server_ip' ] = isset( $_SERVER[ 'SERVER_ADDR' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_ADDR' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server IP', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $_SERVER[ 'SERVER_ADDR' ]; ?></td>
+                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'SERVER_ADDR' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'server_port' ] = $_SERVER[ 'SERVER_PORT' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'server_port' ] = isset( $_SERVER[ 'SERVER_PORT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_PORT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server port', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $_SERVER[ 'SERVER_PORT' ]; ?></td>
+                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'SERVER_PORT' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'scheme' ] = $_SERVER[ 'REQUEST_SCHEME' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'scheme' ] = isset( $_SERVER[ 'REQUEST_SCHEME' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'REQUEST_SCHEME' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Scheme', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $_SERVER[ 'REQUEST_SCHEME' ]; ?></td>
+                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'REQUEST_SCHEME' ] ) ); ?></td>
                                 </tr>
                                 <tr>
-                                    <?php $prepare_json[ 'server_info' ][ 'document_root' ] = $_SERVER[ 'DOCUMENT_ROOT' ]; ?>
+                                    <?php $prepare_json[ 'server_info' ][ 'document_root' ] = isset( $_SERVER[ 'DOCUMENT_ROOT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'DOCUMENT_ROOT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Home path', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $_SERVER[ 'DOCUMENT_ROOT' ]; ?></td>
+                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'DOCUMENT_ROOT' ] ) ); ?></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -110,17 +110,17 @@
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'wordpress_version' ] = get_bloginfo( 'version' ); ?>
                                     <td><?php esc_html_e( 'WordPress version', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_bloginfo( 'version' ); ?></td>
+                                    <td><?php echo esc_html( get_bloginfo( 'version' ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'home_url' ] = get_home_url(); ?>
                                     <td><?php esc_html_e( 'Home URL', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_home_url(); ?></td>
+                                    <td><?php echo esc_html( get_home_url() ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'current_theme' ] = get_option( 'current_theme' ); ?>
                                     <td><?php esc_html_e( 'Current theme', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'current_theme' ); ?></td>
+                                    <td><?php echo esc_html( get_option( 'current_theme' ) ); ?></td>
                                 </tr>
                                 <?php $stylesheet = get_option( 'stylesheet' ); ?>
                                 <?php $template   = get_option( 'template' ); ?>
@@ -128,29 +128,29 @@
                                     <tr>
                                         <?php $prepare_json[ 'wordpress_info' ][ 'stylesheet' ] = $stylesheet; ?>
                                         <td><?php esc_html_e( 'Stylesheet folder', 'acf-city-selector' ); ?></td>
-                                        <td><?php echo $stylesheet; ?></td>
+                                        <td><?php echo esc_html( $stylesheet ); ?></td>
                                     </tr>
                                 <?php } ?>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'template' ] = get_option( 'template' ); ?>
                                     <td><?php esc_html_e( 'Template folder', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_option( 'template' ); ?></td>
+                                    <td><?php echo esc_html( get_option( 'template' ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'charset' ] = get_option( 'charset' ); ?>
                                     <td><?php esc_html_e( 'Charset', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_bloginfo( 'charset' ); ?></td>
+                                    <td><?php echo esc_html( get_bloginfo( 'charset' ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $text_direction = is_rtl() ? 'RTL' : 'LTR'; ?>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'text_direction' ] = $text_direction; ?>
                                     <td><?php esc_html_e( 'Text direction', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo $text_direction; ?></td>
+                                    <td><?php echo esc_html( $text_direction ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'wordpress_info' ][ 'language' ] = get_bloginfo( 'language' ); ?>
                                     <td><?php esc_html_e( 'Language', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo get_bloginfo( 'language' ); ?></td>
+                                    <td><?php echo esc_html( get_bloginfo( 'language' ) ); ?></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -170,20 +170,20 @@
                                         <?php $main_site = ( is_main_site() ) ? esc_html__( 'Yes', 'acf-city-selector' ) : esc_html__( 'No', 'acf-city-selector' ); ?>
                                         <?php $prepare_json[ 'multisite' ][ 'main_site' ] = $main_site; ?>
                                         <td><?php esc_html_e( 'Main site', 'acf-city-selector' ); ?></td>
-                                        <td><?php echo $main_site; ?> </td>
+                                        <td><?php echo esc_html( $main_site ); ?> </td>
                                     </tr>
                                     <tr>
                                         <?php $registration = ( get_site_option( 'registration' ) ) ? 'TRUE' : 'FALSE'; ?>
                                         <?php $prepare_json[ 'multisite' ][ 'registration' ] = $registration; ?>
                                         <td><?php esc_html_e( 'Main registration', 'acf-city-selector' ); ?></td>
-                                        <td><?php echo $registration; ?> </td>
+                                        <td><?php echo esc_html( $registration ); ?> </td>
                                     </tr>
                                     <?php if ( class_exists( 'B3Onboarding' ) ) { ?>
                                         <?php $subsite_registration = ( get_option( 'b3_registration_type' ) ) ? 'TRUE' : 'FALSE'; ?>
                                         <?php $prepare_json[ 'multisite' ][ 'subsite_registration' ] = $subsite_registration; ?>
                                         <tr>
                                             <td><?php esc_html_e( 'Subsite registration', 'acf-city-selector' ); ?></td>
-                                            <td><?php echo $subsite_registration; ?> </td>
+                                            <td><?php echo esc_html( $subsite_registration ); ?> </td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
@@ -206,8 +206,8 @@
                                         <?php if ( is_plugin_active( $key ) ) { ?>
                                             <?php $prepare_json[ 'plugins' ][] = [ 'name' => $value[ 'Name' ], 'version' => $value[ 'Version' ], 'author' => $value[ 'Author' ], 'author_uri' => $value[ 'AuthorURI' ] ]; ?>
                                             <tr>
-                                                <td><?php echo $value[ 'Name' ]; ?></td>
-                                                <td><?php echo $value[ 'Version' ]; ?></td>
+                                                <td><?php echo esc_html( $value[ 'Name' ] ); ?></td>
+                                                <td><?php echo esc_html( $value[ 'Version' ] ); ?></td>
                                             </tr>
                                         <?php } ?>
                                     <?php } ?>
@@ -230,12 +230,12 @@
                                 <?php } ?>
                             </p>
                             <?php if ( file_exists( $file_name ) ) { ?>
-                                <?php $serialized_json = json_encode( $prepare_json ); // encode json before saving ?>
+                                <?php $serialized_json = wp_json_encode( $prepare_json ); // encode json before saving ?>
                                 <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
                                 <p class="json_button">
-                                    <a href="<?php echo wp_upload_dir()['baseurl'] . '/acfcs/debug.json'; ?>" class="button button-primary">
+                                    <a href="<?php echo esc_url( wp_upload_dir()['baseurl'] . '/acfcs/debug.json' ); ?>" class="button button-primary">
                                         <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
-                                    </a> <small>(<?php _e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
+                                    </a> <small>(<?php esc_html_e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
                                 </p>
                             <?php } ?>
                         </div>
