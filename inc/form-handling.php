@@ -167,8 +167,8 @@
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
-                $prefix = $wpdb->get_blog_prefix();
-                $wpdb->query( $wpdb->prepare( 'TRUNCATE TABLE %scities', $wpdb->get_blog_prefix() ) );
+                $table = $wpdb->prefix . 'cities';
+                $wpdb->query( "TRUNCATE TABLE $table" );
                 ACF_City_Selector::acfcs_errors()->add( 'success_table_truncated', esc_html__( 'All cities are deleted.', 'acf-city-selector' ) );
                 do_action( 'acfcs_after_success_nuke' );
             }
