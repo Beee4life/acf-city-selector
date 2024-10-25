@@ -334,6 +334,7 @@
                 $active_plugins = get_option( 'active_plugins' );
                 $acfcs_key      = array_search( 'acf-city-selector/ACF_City_Selector.php', $active_plugins );
                 $acf_key        = array_search( 'advanced-custom-fields-pro/acf.php', $active_plugins );
+                
                 if ( false !== $acf_key && false !== $acfcs_key ) {
                     if ( $acfcs_key < $acf_key ) {
                         $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );
