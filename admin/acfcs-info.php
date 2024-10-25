@@ -220,7 +220,6 @@
 
                         <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                         <?php if ( ! file_exists( $file_name ) ) { ?>
-                            <?php //file_put_contents( $file_name, '' ); // create empty file ?>
                             <?php $wp_filesystem->put_contents( $file_name, '' ); // create empty file ?>
                         <?php } ?>
                         <div class="acfcs__section acfcs__section--export">
@@ -236,7 +235,7 @@
                                 <?php $serialized_json = wp_json_encode( $prepare_json ); // encode json before saving ?>
                                 <?php $wp_filesystem->put_contents( $file_name, $serialized_json ); // write to file ?>
                                 <p class="json_button">
-                                    <a href="<?php echo esc_url( wp_upload_dir()['baseurl'] . '/acfcs/debug.json' ); ?>" class="button button-primary">
+                                    <a href="<?php echo esc_url( wp_upload_dir()[ 'baseurl' ] . '/acfcs/debug.json' ); ?>" class="button button-primary">
                                         <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
                                     </a> <small>(<?php esc_html_e( 'left-click to open, right-click to save', 'acf-city-selector' ); ?>)</small>
                                 </p>
