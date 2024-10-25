@@ -21,7 +21,7 @@
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
                 $single_file                   = (array) $single_file;
-                $single_file[ 'country_name' ] = acfcs_country_i18n( $single_file[ 'country_code' ] );
+                $single_file[ 'country_name' ] = acfcs_get_country_name( strtolower( $single_file[ 'country_code' ] ) );
                 $single_files[]                = $single_file;
             }
 
@@ -33,7 +33,7 @@
         if ( is_array( $country_packs ) ) {
             foreach( $country_packs as $country_package ) {
                 $country_package                   = (array) $country_package;
-                $country_package[ 'country_name' ] = acfcs_country_i18n( $country_package[ 'package_code' ] );
+                $country_package[ 'country_name' ] = acfcs_get_country_name( strtolower( $country_package[ 'package_code' ] ) );
                 $country_packages[]                = $country_package;
             }
         }
@@ -81,9 +81,9 @@
                                         ?>
                                         <tr>
                                             <?php echo sprintf( '<td><img src="%s" alt="" /></td>', esc_url_raw( $flag_folder . $package[ 'country_code' ] . '.png' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'country_name' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( acfcs_get_country_name( strtolower( $package[ 'country_code' ] ) ) ) ); ?>
                                             <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'number_cities' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( $package[ 'number_cities' ] ) ); ?>
                                             <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ) ); ?>
                                         </tr>
                                     <?php } ?>
