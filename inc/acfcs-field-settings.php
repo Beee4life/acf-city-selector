@@ -20,10 +20,6 @@
             if ( 'acf-field-group' != get_post_type( $post_id ) ) {
                 $activate = true;
             }
-        } elseif ( isset( $_GET[ 'id' ] ) ) {
-            // this is for my own project, will be gone in a future version
-            $activate = true;
-            $post_id  = (int) $_GET[ 'id' ];
         } else {
             $activate = true;
             if ( defined( 'IS_PROFILE_PAGE' ) ) {
