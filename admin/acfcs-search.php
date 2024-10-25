@@ -14,19 +14,19 @@
         $cities                  = array();
         $city_array              = array();
         $countries               = array();
-        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? wp_unslash( $_POST[ 'acfcs_state' ] ) : false;
-        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? wp_unslash( $_POST[ 'acfcs_country' ] ) : false;
-        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? wp_unslash( $_POST[ 'acfcs_orderby' ] ) : false;
-        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? wp_unslash( $_POST[ 'acfcs_search' ] ) : false;
+        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
+        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
+        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
+        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
         $states                  = acfcs_get_states_optgroup();
 
         // if there is at least 1 country
         if ( ! empty( $all_countries ) ) {
-            foreach ( $all_countries as $country_code => $label ) {
+            foreach ( $all_countries as $country_code => $country_name ) {
                 $countries[] = [
                     'code' => $country_code,
-                    'name' => esc_attr__( $label, 'acf-city-selector' ),
+                    'name' => esc_attr( $country_name ),
                 ];
             }
         }
@@ -35,7 +35,8 @@
         if ( isset( $_POST[ 'acfcs_search_form' ] ) ) {
             $cities = acfcs_get_searched_cities();
 
-            foreach( $cities as $city_object ) {
+            foreach( $cities as $key => $city_object ) {
+                $city_object->country = acfcs_get_country_name( strtolower( $city_object->country_code ) );
                 $city_array[] = (array) $city_object;
             }
 
@@ -73,8 +74,8 @@
                                                 </option>
                                                 <?php foreach( $countries as $country ) { ?>
                                                     <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
-                                                    <option value="<?php echo esc_attr( $country[ 'code' ] ); ?>"<?php echo esc_attr( $selected ); ?>>
-                                                        <?php esc_html_e( $country[ 'name' ], 'acf-city-selector' ); ?>
+                                                    <option value="<?php echo esc_attr( strtolower( $country[ 'code' ] ) ); ?>"<?php echo esc_attr( $selected ); ?>>
+                                                        <?php echo esc_html( $country[ 'name' ] ); ?>
                                                     </option>
                                                 <?php } ?>
                                             </select>
@@ -100,7 +101,7 @@
                                                     }
                                                     if ( strpos( $state[ 'state' ], 'optgroup' ) === false ) {
                                                         $selected = ( $state[ 'state' ] == $search_criteria_state ) ? ' selected="selected"' : false;
-                                                        echo '<option value="' . esc_attr( $state[ 'state' ] ) . '"' . esc_attr( $selected ) . '>' . esc_html__( $state[ 'name' ], 'acf-city-selector' ) . '</option>';
+                                                        echo '<option value="' . esc_attr( $state[ 'state' ] ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $state[ 'name' ] ) . '</option>';
                                                     }
                                                     if ( 'close_optgroup' == $state[ 'state' ] ) {
                                                         echo '</optgroup>';
@@ -188,7 +189,7 @@
                                                 <?php echo sprintf( '<td>%s</td>', sprintf( '<label>%s</label>', sprintf( '<input name="row_id[]" type="checkbox" value="%s %s">', esc_attr( $city[ 'id' ] ), esc_attr( $city[ 'city_name' ] ) ) ) ); ?>
                                                 <?php echo sprintf( '<td>%s</td>', esc_attr( $city[ 'city_name' ] ) ); ?>
                                                 <?php echo sprintf( '<td>%s</td>', esc_attr( $city[ 'state_name' ] ) ); ?>
-                                                <?php echo sprintf( '<td>%s</td>', esc_attr__( $city[ 'country' ], 'acf-city-selector' ) ); ?>
+                                                <?php echo sprintf( '<td>%s</td>', esc_attr( $city[ 'country' ], 'acf-city-selector' ) ); ?>
                                             </tr>
                                         <?php } ?>
                                     </table>

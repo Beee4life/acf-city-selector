@@ -47,11 +47,11 @@
                                 <input name="acfcs_remove_countries_nonce" value="<?php echo esc_attr( wp_create_nonce( 'acfcs-remove-countries-nonce' ) ); ?>" type="hidden" />
                                 <?php echo sprintf( '<p>%s</p>', esc_html__( "Here you can remove a country and all its states and cities from the database.", 'acf-city-selector' ) ); ?>
                                 <ul class="acfcs__checkboxes">
-                                    <?php foreach( $countries as $key => $value ) { ?>
+                                    <?php foreach( $countries as $country_code => $country_name ) { ?>
                                         <li>
                                             <?php /* translators: %s input label, %s country name */ ?>
-                                            <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . esc_attr( strtolower( $key ) ), esc_attr__( $value, 'acf-city-selector' ) ); ?>
-                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $key ) ); ?>" value="<?php echo esc_attr( strtolower( $key ) ); ?>" /> <?php esc_html_e( $value, 'acf-city-selector' ); ?>
+                                            <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . esc_attr( strtolower( $country_code ) ), esc_attr( $country_name ) ); ?>
+                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" /> <?php esc_html( $country_name ); ?>
                                         </li>
                                     <?php } ?>
                                 </ul>
