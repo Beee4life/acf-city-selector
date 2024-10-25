@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ACF City Selector 1.0\n"
 "POT-Creation-Date: 2024-10-25 21:24+0200\n"
-"PO-Revision-Date: 2024-10-25 21:25+0200\n"
+"PO-Revision-Date: 2024-10-25 21:42+0200\n"
 "Last-Translator: Beee\n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -1096,7 +1096,7 @@ msgstr "Nederland"
 
 #: inc/acfcs-i18n.php:40
 msgid "New Zealand"
-msgstr "Nieuw Zeeland"
+msgstr "Nieuw-Zeeland"
 
 #: inc/acfcs-i18n.php:41
 msgid "Portugal"
