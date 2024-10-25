@@ -57,8 +57,6 @@
                 add_action( 'acf/include_field_types',  [ $this, 'acfcs_include_field_types' ] ); // v5
                 
                 add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts_admin' ] );
-                add_action( 'wp_enqueue_scripts',       [ $this, 'acfcs_add_scripts_front' ] );
-                
                 add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_check_table' ] );
@@ -368,11 +366,6 @@
                     wp_register_script( 'acfcs-upload', plugins_url( 'assets/js/upload-csv.js', __FILE__ ), [ 'jquery' ], $this->settings[ 'version' ], [ 'in_footer' => true, 'strategy' => 'defer' ] );
                     wp_enqueue_script( 'acfcs-upload' );
                 }
-            }
-            
-            
-            public function acfcs_add_scripts_front() {
-                // @TODO: maybe
             }
         }
 
