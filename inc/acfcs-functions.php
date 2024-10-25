@@ -827,7 +827,6 @@
         $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
         $parameters              = [ $table ];
         $where                   = '';
-        // error_log($search_criteria_country);
         
         if ( false != $search_criteria_state ) {
             $state_code   = strtoupper( substr( $search_criteria_state, 3, 3 ) );
