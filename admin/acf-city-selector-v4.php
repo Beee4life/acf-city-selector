@@ -218,9 +218,9 @@
              * @TODO: DRY
              */
             function input_admin_enqueue_scripts() {
-
-                $plugin_url     = $this->settings[ 'url' ];
-                $plugin_version = $this->settings[ 'version' ];
+                
+                $plugin_url     = trailingslashit( sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL ) );
+                $plugin_version = get_option( 'acfcs_version' );
 
                 wp_enqueue_script( 'acf-custom-validation', "{$plugin_url}assets/js/field-validation.js", array( 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acf-custom-validation' );
