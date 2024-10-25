@@ -42,8 +42,8 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.15.1 =
-* catch more i18n strings
 * use wp_filesystem for csv files
+* sanitize/escape more
 
 = 1.15.0 =
 * set menu slug for (hidden) admin pages to prevent empty admin page title
