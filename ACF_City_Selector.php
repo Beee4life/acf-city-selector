@@ -155,7 +155,9 @@
             public static function acfcs_check_uploads_folder() {
                 $target_folder = acfcs_upload_folder( '/' );
                 if ( ! file_exists( $target_folder ) ) {
-                    mkdir( $target_folder, 0755 );
+                    WP_Filesystem();
+                    global $wp_filesystem;
+                    $wp_filesystem->mkdir( $target_folder, 0755 );
                 }
             }
             

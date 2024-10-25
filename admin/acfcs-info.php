@@ -9,7 +9,9 @@
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
-
+        
+        WP_Filesystem();
+        global $wp_filesystem;
         $countries    = acfcs_get_countries_info();
         $prepare_json = array();
         ?>
@@ -67,7 +69,7 @@
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'operating_system' ] = isset( $_SERVER[ 'SERVER_SOFTWARE' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Operating system', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ); ?></td>
+                                    <td><?php echo esc_html( sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_SOFTWARE' ] ) ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'phpversion' ] = phpversion(); ?>
@@ -77,22 +79,22 @@
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'server_ip' ] = isset( $_SERVER[ 'SERVER_ADDR' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_ADDR' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server IP', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'SERVER_ADDR' ] ) ); ?></td>
+                                    <td><?php echo esc_html( sanitize_text_field( wp_unslash(  $_SERVER[ 'SERVER_ADDR' ] ) ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'server_port' ] = isset( $_SERVER[ 'SERVER_PORT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_PORT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Server port', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'SERVER_PORT' ] ) ); ?></td>
+                                    <td><?php echo esc_html( sanitize_text_field( wp_unslash(  $_SERVER[ 'SERVER_PORT' ] ) ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'scheme' ] = isset( $_SERVER[ 'REQUEST_SCHEME' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'REQUEST_SCHEME' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Scheme', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'REQUEST_SCHEME' ] ) ); ?></td>
+                                    <td><?php echo esc_html( sanitize_text_field( wp_unslash(  $_SERVER[ 'REQUEST_SCHEME' ] ) ) ); ?></td>
                                 </tr>
                                 <tr>
                                     <?php $prepare_json[ 'server_info' ][ 'document_root' ] = isset( $_SERVER[ 'DOCUMENT_ROOT' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'DOCUMENT_ROOT' ] ) ) : ''; ?>
                                     <td><?php esc_html_e( 'Home path', 'acf-city-selector' ); ?></td>
-                                    <td><?php echo esc_html( wp_unslash(  $_SERVER[ 'DOCUMENT_ROOT' ] ) ); ?></td>
+                                    <td><?php echo esc_html( sanitize_text_field( wp_unslash(  $_SERVER[ 'DOCUMENT_ROOT' ] ) ) ); ?></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -218,7 +220,8 @@
 
                         <?php $file_name = acfcs_upload_folder( '/' ) . 'debug.json'; ?>
                         <?php if ( ! file_exists( $file_name ) ) { ?>
-                            <?php file_put_contents( $file_name, '' ); // create empty file ?>
+                            <?php //file_put_contents( $file_name, '' ); // create empty file ?>
+                            <?php $wp_filesystem->put_contents( $file_name, '' ); // create empty file ?>
                         <?php } ?>
                         <div class="acfcs__section acfcs__section--export">
                             <?php echo sprintf( '<h2>%s</h2>', esc_html__( 'Download JSON', 'acf-city-selector' ) ); ?>
@@ -231,7 +234,7 @@
                             </p>
                             <?php if ( file_exists( $file_name ) ) { ?>
                                 <?php $serialized_json = wp_json_encode( $prepare_json ); // encode json before saving ?>
-                                <?php file_put_contents( $file_name, $serialized_json ); // write to file ?>
+                                <?php $wp_filesystem->put_contents( $file_name, $serialized_json ); // write to file ?>
                                 <p class="json_button">
                                     <a href="<?php echo esc_url( wp_upload_dir()['baseurl'] . '/acfcs/debug.json' ); ?>" class="button button-primary">
                                         <?php esc_attr_e( 'View JSON file', 'acf-city-selector' ); ?>
