@@ -96,3 +96,28 @@
         echo '</p>';
     }
     add_action( 'acfcs_admin_menu', 'acfcs_admin_menu' );
+    
+    
+    function acfcs_delete_file( $file_name = false ) {
+        if ( $file_name ) {
+            if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
+                $wp_upload_dir = wp_upload_dir();
+                $local_path    = acfcs_upload_folder( '/' ) . $file_name;
+                $file_url      = str_replace( $wp_upload_dir[ 'basedir' ], $wp_upload_dir[ 'baseurl' ], $local_path );
+                $attachment_id = attachment_url_to_postid( $file_url );
+                
+                if ( is_int( $attachment_id ) && 0 < $attachment_id ) {
+                    $deleted = wp_delete_attachment( $attachment_id, true );
+                    if ( $deleted instanceof WP_POST ) {
+                        /* translators: %s file name */
+                        ACF_City_Selector::acfcs_errors()->add( 'success_file_deleted', sprintf( esc_html__( 'File "%s" successfully deleted.', 'acf-city-selector' ), $file_name ) );
+                        do_action( 'acfcs_after_success_file_delete' );
+                    } else {
+                        /* translators: %s file name */
+                        ACF_City_Selector::acfcs_errors()->add( 'error_file_deleted', sprintf( esc_html__( 'File "%s" is not deleted. Please try again.', 'acf-city-selector' ), $file_name ) );
+                    }
+                }
+            }
+        }
+    }
+    add_action( 'acfcs_delete_file', 'acfcs_delete_file' );

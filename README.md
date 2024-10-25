@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.15.0 - 25.10.24
+1.15.1 - 26.10.24
 
 <a name="description"></a>
 ### Description
@@ -227,6 +227,10 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.15.1
+* use wp_filesystem for csv files
+* sanitize/escape more
 
 1.15.0
 * set menu slug for (hidden) admin pages to prevent empty admin page title

@@ -4,7 +4,7 @@ Contributors: beee
 Requires at least: 3.6.0
 Requires PHP: 7.0
 Tested up to: 6.6.1
-Stable tag: 1.15.0
+Stable tag: 1.15.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ ACF City Selector is an extension for Advanced Custom Fields which creates a new
 A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://acf-city-selector.com/documentation/)
 
 == Changelog ==
+
+= 1.15.1 =
+* use wp_filesystem for csv files
+* sanitize/escape more
 
 = 1.15.0 =
 * set menu slug for (hidden) admin pages to prevent empty admin page title

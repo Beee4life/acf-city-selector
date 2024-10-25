@@ -21,9 +21,10 @@
         if ( is_array( $country_files ) ) {
             foreach( $country_files as $single_file ) {
                 $single_file                   = (array) $single_file;
-                $single_file[ 'country_name' ] = esc_attr__( $single_file[ 'country_name' ], 'acf-city-selector' );
+                $single_file[ 'country_name' ] = acfcs_get_country_name( strtolower( $single_file[ 'country_code' ] ) );
                 $single_files[]                = $single_file;
             }
+
             if ( ! empty( $single_files ) ) {
                 $country_name = array_column( $single_files, 'country_name' );
                 array_multisort( $country_name, SORT_ASC, $single_files );
@@ -32,7 +33,7 @@
         if ( is_array( $country_packs ) ) {
             foreach( $country_packs as $country_package ) {
                 $country_package                   = (array) $country_package;
-                $country_package[ 'country_name' ] = esc_attr__( $country_package[ 'country_name' ], 'acf-city-selector' );
+                $country_package[ 'country_name' ] = acfcs_get_country_name( strtolower( $country_package[ 'package_code' ] ) );
                 $country_packages[]                = $country_package;
             }
         }
@@ -80,9 +81,9 @@
                                         ?>
                                         <tr>
                                             <?php echo sprintf( '<td><img src="%s" alt="" /></td>', esc_url_raw( $flag_folder . $package[ 'country_code' ] . '.png' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'country_name' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( acfcs_get_country_name( strtolower( $package[ 'country_code' ] ) ) ) ); ?>
                                             <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'number_states' ] ) ) ? $package[ 'number_states' ] : 'n/a' ) ); ?>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html($package[ 'number_cities' ] ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( $package[ 'number_cities' ] ) ); ?>
                                             <?php echo sprintf( '<td>%s</td>', esc_html(( ! empty( $package[ 'price' ] ) ) ? '&euro; ' . $package[ 'price' ] . ',00' : esc_html__( 'FREE', 'acf-city-selector' ) ) ); ?>
                                         </tr>
                                     <?php } ?>
@@ -105,7 +106,7 @@
                                     <tbody>
                                     <?php foreach( $country_packages as $package ) { ?>
                                         <tr>
-                                            <?php echo sprintf( '<td>%s</td>', esc_html__( $package[ 'country_name' ], 'acf-city-selector' ) ); ?>
+                                            <?php echo sprintf( '<td>%s</td>', esc_html( $package[ 'country_name' ] ) ); ?>
 
                                             <td>
                                                 <?php
@@ -148,7 +149,7 @@
                             <?php } ?>
 
                             <?php /* translators: %s link tag, %s github location, %s anchor */ ?>
-                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_attr( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
+                            <?php echo sprintf( '<p>%s</p>', sprintf( esc_html__( "More countries will be added soon. Feel free to %s a country, if it's not available (yet).", 'acf-city-selector' ), sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( 'https://github.com/Beee4life/acf-city-selector/issues' ), esc_attr__( 'request', 'acf-city-selector' ) ) ) ); ?>
 
                             <?php echo sprintf( '<p><a href="%s" target="_blank" rel="noopener" class="button button-primary">%s</a></p>', esc_url( ACFCS_WEBSITE_URL . '/get-countries/' ), esc_html__( 'Get your country now', 'acf-city-selector' ) ); ?>
 
