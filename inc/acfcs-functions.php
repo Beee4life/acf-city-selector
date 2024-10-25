@@ -859,11 +859,9 @@
             $parameters[] = $search_criteria_country;
         }
         
-        if ( false != $searched_term ) {
-            if ( $search_criteria_country || $search_criteria_state ) {
-                $where        .= ' AND city_name LIKE "%s%"';
-                $parameters[] = '%' . $searched_term . '%';
-            }
+        if ( false != $searched_term && ( $search_criteria_country || $search_criteria_state ) ) {
+            $where        .= ' AND city_name LIKE "%s%"';
+            $parameters[] = '%' . $searched_term . '%';
         }
 
         if ( 'state' == $searched_orderby ) {
