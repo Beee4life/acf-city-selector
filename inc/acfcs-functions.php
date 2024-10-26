@@ -816,44 +816,52 @@
      * @return array|object|stdClass[]|null
      */
     function acfcs_get_searched_cities() {
-        global $wpdb;
-        $cities                  = [];
-        $orderby                 = false;
-        $table                   = $wpdb->prefix . 'cities';
-        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
-        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
-        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
-        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
-        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
-        $parameters              = [ $table ];
-        $where                   = '';
+        $cities = [];
         
-        if ( false != $search_criteria_state ) {
-            $state_code   = strtoupper( substr( $search_criteria_state, 3, 3 ) );
-            $parameters[] = $state_code;
-            $country_code = strtoupper( substr( $search_criteria_state, 0, 2 ) );
-            $parameters[] = $country_code;
-            $where        .= "WHERE state_code = %s AND country_code = %s";
-
-        } elseif ( false != $search_criteria_country ) {
-            $where        .= "WHERE country_code = %s";
-            $parameters[] = $search_criteria_country;
-        }
+        if ( isset( $_POST[ 'acfcs_search_form_nonce' ] ) ) {
+            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search_form_nonce' ] ) ), 'acfcs-search-form-nonce' ) ) {
+                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+                return;
+            } else {
+                global $wpdb;
+                $orderby                 = false;
+                $table                   = $wpdb->prefix . 'cities';
+                $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
+                $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
+                $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
+                $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
+                $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
+                $parameters              = [ $table ];
+                $where                   = '';
+                
+                if ( false != $search_criteria_state ) {
+                    $state_code   = strtoupper( substr( $search_criteria_state, 3, 3 ) );
+                    $parameters[] = $state_code;
+                    $country_code = strtoupper( substr( $search_criteria_state, 0, 2 ) );
+                    $parameters[] = $country_code;
+                    $where        .= "WHERE state_code = %s AND country_code = %s";
         
-        if ( false != $searched_term && ( $search_criteria_country || $search_criteria_state ) ) {
-            $where        .= ' AND city_name LIKE "%s%"';
-            $parameters[] = '%' . $searched_term . '%';
-        }
-
-        if ( 'state' == $searched_orderby ) {
-            $where .= ' ORDER BY state_name ASC, city_name ASC';
-        } else {
-            $where .= ' ORDER BY city_name ASC, state_name ASC';
-        }
+                } elseif ( false != $search_criteria_country ) {
+                    $where        .= "WHERE country_code = %s";
+                    $parameters[] = $search_criteria_country;
+                }
+                
+                if ( false != $searched_term && ( $search_criteria_country || $search_criteria_state ) ) {
+                    $where        .= ' AND city_name LIKE "%s%"';
+                    $parameters[] = '%' . $searched_term . '%';
+                }
         
-        $where        .= ' LIMIT %d';
-        $parameters[] = $selected_limit;
-        $cities       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i $where", $parameters ) );
+                if ( 'state' == $searched_orderby ) {
+                    $where .= ' ORDER BY state_name ASC, city_name ASC';
+                } else {
+                    $where .= ' ORDER BY city_name ASC, state_name ASC';
+                }
+                
+                $where        .= ' LIMIT %d';
+                $parameters[] = $selected_limit;
+                $cities       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i $where", $parameters ) );
+            }
+        }
 
         return $cities;
     }

@@ -14,13 +14,28 @@
         $cities                  = array();
         $city_array              = array();
         $countries               = array();
-        $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
-        $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
-        $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
-        $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
-        $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
+        
+        $search_criteria_state   = false;
+        $search_criteria_country = false;
+        $searched_orderby        = false;
+        $searched_term           = false;
+        $selected_limit          = false;
+        $limit                   = 100;
         $states                  = acfcs_get_states_optgroup();
-
+        
+        if ( isset( $_POST[ 'acfcs_search_form_nonce' ] ) ) {
+            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search_form_nonce' ] ) ), 'acfcs-search-form-nonce' ) ) {
+                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+                return;
+            } else {
+                $search_criteria_state   = ( ! empty( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
+                $search_criteria_country = ( ! empty( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
+                $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
+                $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
+                $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : $limit;
+            }
+        }
+        
         // if there is at least 1 country
         if ( ! empty( $all_countries ) ) {
             foreach ( $all_countries as $country_code => $country_name ) {
@@ -62,6 +77,7 @@
                         <?php } else { ?>
                             <form action="" method="POST">
                                 <input name="acfcs_search_form" type="hidden" value="1" />
+                                <input name="acfcs_search_form_nonce" type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'acfcs-search-form-nonce' ) ); ?>" />
 
                                 <div class="acfcs__search-form">
                                     <?php // if there's only 1 country, no need to add country dropdown ?>
