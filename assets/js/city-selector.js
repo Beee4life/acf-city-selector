@@ -47,7 +47,7 @@
                     const response_states = []
                     var $this             = $(this);
                     var country_code      = $this.val();
-                    var country_field_id = $this.attr('id');
+                    var country_field_id  = $this.attr('id');
                     var state_field_id    = country_field_id.replace( 'countryCode', 'stateCode' );
                     var city_field_id     = country_field_id.replace( 'countryCode', 'cityName' );
                     var changed_state     = $('select[id="' + state_field_id + '"]');
