@@ -42,7 +42,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.16.0 =
-* add ajax nonces
+* add nonces for forms
 
 = 1.15.1 =
 * use wp_filesystem for csv files
