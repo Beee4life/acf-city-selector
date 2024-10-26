@@ -45,7 +45,6 @@
                 countries.on('change', function () {
                     const response_cities = []
                     const response_states = []
-
                     var $this             = $(this);
                     var country_code  = $this.val();
                     var country_field_id = $this.attr('id');
@@ -64,6 +63,10 @@
                     var nonce = city_selector_vars[ 'acfcs_state_nonce' ];
                     var show_labels = $show_labels;
                     var which_fields = $which_fields;
+
+                    if ( '' === country_code ) {
+                        changed_city.empty();
+                    }
 
                     if ( $.inArray(which_fields, [ 'country_state', 'all' ] ) !== -1 ) {
                         const d = acfcs_get_states(country_code, show_labels, post_id, nonce);
