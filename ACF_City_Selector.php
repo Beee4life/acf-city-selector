@@ -74,7 +74,6 @@
                 // functions & hooks
                 include 'inc/acfcs-actions.php';
                 include 'inc/acfcs-functions.php';
-                include 'inc/acfcs-block.php';
                 include 'inc/acfcs-help-tabs.php';
                 include 'inc/acfcs-i18n.php';
                 include 'inc/acfcs-ajax.php';
