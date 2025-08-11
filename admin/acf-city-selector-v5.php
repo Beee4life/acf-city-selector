@@ -16,6 +16,7 @@
             public $defaults;
             public $l10n;
             public $settings;
+            
             /*
              * Function index
              * - construct( $settings )
