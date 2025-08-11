@@ -229,7 +229,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 ### Changelog
 
 1.17.0
-* ?
+* define properties
 
 1.16.0
 * add nonces for forms

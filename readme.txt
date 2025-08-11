@@ -42,7 +42,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 == Changelog ==
 
 = 1.17.0 =
-* ?
+* define properties
 
 = 1.16.0 =
 * add nonces for forms
