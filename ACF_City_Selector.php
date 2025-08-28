@@ -3,8 +3,8 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.16.0
-    Tested up to:   6.6.1
+    Version:        1.17.0
+    Tested up to:   6.8.2
     Requires PHP:   7.0
     Author:         Beee
     Author URI:     https://berryplasman.com
@@ -32,13 +32,13 @@
              */
             private array $settings = array();
             private array $l10n = array();
-            
+
             public function __construct() {
-                
+
                 $this->settings = [
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.16.0',
+                    'version'    => '1.17.0',
                 ];
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -49,13 +49,13 @@
                     $plugin_path = plugin_dir_path( __FILE__ );
                     define( 'ACFCS_PLUGIN_PATH', $plugin_path );
                 }
-                
+
                 register_activation_hook( __FILE__,     [ $this, 'acfcs_plugin_activation' ] );
                 register_deactivation_hook( __FILE__,   [ $this, 'acfcs_plugin_deactivation' ] );
-                
+
                 add_action( 'acf/register_fields',      [ $this, 'acfcs_include_field_types' ] ); // v4
                 add_action( 'acf/include_field_types',  [ $this, 'acfcs_include_field_types' ] ); // v5
-                
+
                 add_action( 'admin_enqueue_scripts',    [ $this, 'acfcs_add_scripts_admin' ] );
                 add_action( 'admin_menu',               [ $this, 'acfcs_add_admin_pages' ] );
                 add_action( 'admin_init',               [ $this, 'acfcs_errors' ] );
@@ -66,11 +66,11 @@
                 add_action( 'plugins_loaded',           [ $this, 'acfcs_change_plugin_order' ], 5 );
                 add_action( 'plugins_loaded',           [ $this, 'acfcs_check_for_acf' ], 6 );
                 add_action( 'plugins_loaded',           [ $this, 'acfcs_check_acf_version' ] );
-                
+
                 add_action( 'acf/input/admin_l10n',     [ $this, 'acfcs_error_messages' ] );
-                
+
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'acfcs_settings_link' ] );
-                
+
                 // functions & hooks
                 include 'inc/acfcs-actions.php';
                 include 'inc/acfcs-functions.php';
@@ -160,8 +160,8 @@
                     $wp_filesystem->mkdir( $target_folder, 0755 );
                 }
             }
-            
-            
+
+
             /**
              * Check if cities need to be re-imported
              *
@@ -336,7 +336,7 @@
                 $active_plugins = get_option( 'active_plugins' );
                 $acfcs_key      = array_search( 'acf-city-selector/ACF_City_Selector.php', $active_plugins );
                 $acf_key        = array_search( 'advanced-custom-fields-pro/acf.php', $active_plugins );
-                
+
                 if ( false !== $acf_key && false !== $acfcs_key ) {
                     if ( $acfcs_key < $acf_key ) {
                         $this->acfcs_move_array_element( $active_plugins, $acfcs_key, $acf_key );

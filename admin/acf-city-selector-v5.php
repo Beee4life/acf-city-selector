@@ -10,6 +10,13 @@
          * Main class
          */
         class acf_field_city_selector extends acf_field {
+            public $name;
+            public $label;
+            public $category;
+            public $defaults;
+            public $l10n;
+            public $settings;
+            
             /*
              * Function index
              * - construct( $settings )

@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.15.1 - 26.10.24
+1.17.0 - 27.08.25
 
 <a name="description"></a>
 ### Description
@@ -183,8 +183,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] WordPress 6.6.2
-* [X] Advanced Custom Fields Pro 6.3.9
+* [X] WordPress 6.8.2
+* [X] Advanced Custom Fields Pro 6.5.0.1
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
@@ -227,6 +227,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 <a name="changelog"></a>
 ### Changelog
+
+1.17.0
+* define properties
 
 1.16.0
 * add nonces for forms
