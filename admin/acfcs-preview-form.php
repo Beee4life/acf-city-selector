@@ -2,6 +2,7 @@
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
+    $max_lines_value = isset( $_POST[ 'acfcs_max_lines' ] ) ? $_POST[ 'acfcs_max_lines' ] : '';
 ?>
 <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
 <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
