@@ -1,5 +1,5 @@
 <?php
-    /**
+    /*
      * Handle CSV upload form
      */
     function acfcs_upload_csv_file() {
@@ -41,8 +41,7 @@
     }
     add_action( 'admin_init', 'acfcs_upload_csv_file' );
 
-
-    /**
+    /*
      * Handle process CSV form
      */
     function acfcs_do_something_with_file() {
@@ -75,8 +74,7 @@
     }
     add_action( 'admin_init', 'acfcs_do_something_with_file' );
 
-
-    /**
+    /*
      * Handle importing of raw CSV data
      */
     function acfcs_import_raw_data() {
@@ -99,8 +97,7 @@
     }
     add_action( 'admin_init', 'acfcs_import_raw_data' );
 
-
-    /**
+    /*
      * Handle form to delete one or more countries
      */
     function acfcs_delete_countries() {
@@ -120,8 +117,7 @@
     }
     add_action( 'admin_init', 'acfcs_delete_countries' );
 
-
-    /**
+    /*
      * Form to delete individual rows/cities
      */
     function acfcs_delete_rows() {
@@ -135,13 +131,13 @@
                     foreach( sanitize_text_field( wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
                         $sanitized_row = sanitize_text_field( $row );
                         $split         = explode( ' ', $sanitized_row, 2 );
-                        
+
                         if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
                             $ids[]    = $split[ 0 ];
                             $cities[] = $split[ 1 ];
                         }
                     }
-                    
+
                     $city_string = implode( ', ', $cities );
                     $row_ids     = implode( ',', $ids );
                     $table       = $wpdb->prefix . 'cities';
@@ -152,14 +148,13 @@
                         ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
                     }
                 }
-                
+
             }
         }
     }
     add_action( 'admin_init', 'acfcs_delete_rows' );
 
-
-    /**
+    /*
      * Delete contents of entire cities table
      */
     function acfcs_truncate_table() {
@@ -177,8 +172,7 @@
     }
     add_action( 'admin_init', 'acfcs_truncate_table' );
 
-
-    /**
+    /*
      * Handle preserve settings option
      */
     function acfcs_delete_settings() {
@@ -197,8 +191,7 @@
     }
     add_action( 'admin_init', 'acfcs_delete_settings' );
 
-
-    /**
+    /*
      * Manually import default available countries
      */
     function acfcs_import_preset_countries() {

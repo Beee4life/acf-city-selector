@@ -41,6 +41,9 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 
 == Changelog ==
 
+= 1.18.0 =
+* code reformatting/optimize
+
 = 1.17.1 =
 * set missing fallback value
 

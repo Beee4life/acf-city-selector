@@ -5,9 +5,6 @@
 
     /*
      * Get states by country code
-     *
-     * @param bool $country_code
-     * @return JSON Object
      */
     function acfcs_get_states_call() {
         if ( isset( $_POST[ 'acfcs_state_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state_nonce' ] ) ), 'acfcs-state-nonce' ) ) {
@@ -15,26 +12,26 @@
                 $field   = false;
                 $items   = array();
                 $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
-    
+
                 if ( is_string( $_POST[ 'country_code' ] ) ) {
                     $country_code = sanitize_text_field( wp_unslash( $_POST[ 'country_code' ] ) );
                 }
-    
+
                 if ( false != $post_id ) {
                     $fields = get_field_objects( $post_id );
                     if ( is_array( $fields ) && ! empty( $fields ) ) {
                         $field = acfcs_get_field_settings( $fields );
                     }
                 }
-                
+
                 if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
                     $field[ 'show_labels' ] = ( '1' == sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) ) ) ? true : false;
                 }
-    
+
                 if ( isset( $country_code ) ) {
                     $states_transient = acfcs_get_states( $country_code, true, $field );
                 }
-    
+
                 if ( isset( $states_transient ) && ! empty( $states_transient ) ) {
                     foreach ( $states_transient as $key => $label ) {
                         if ( $label != 'N/A' ) {
@@ -58,11 +55,8 @@
     add_action( 'wp_ajax_get_states_call', 'acfcs_get_states_call' );
     add_action( 'wp_ajax_nopriv_get_states_call', 'acfcs_get_states_call' );
 
-
     /*
      * Get cities by state code and/or country code
-     *
-     * @return JSON Object
      */
     function acfcs_get_cities_call() {
         if ( isset( $_POST[ 'acfcs_city_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_city_nonce' ] ) ), 'acfcs-city-nonce' ) ) {
@@ -73,14 +67,14 @@
                 $post_id           = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
                 $posted_state_code = sanitize_text_field( wp_unslash( $_POST[ 'state_code' ] ) );
                 $state_code        = false;
-    
+
                 if ( false != $post_id ) {
                     $fields = get_field_objects( $post_id );
                     if ( ! empty( $fields ) ) {
                         $field = acfcs_get_field_settings( $fields );
                     }
                 }
-                
+
                 if ( ! isset( $field[ 'show_labels' ] ) && isset( $_POST[ 'show_labels' ] ) ) {
                     $show_labels = sanitize_text_field( wp_unslash( $_POST[ 'show_labels' ] ) );
                     if ( '1' == $show_labels ) {
@@ -89,7 +83,7 @@
                         $field[ 'show_labels' ] = false;
                     }
                 }
-    
+
                 if ( 6 <= strlen( $posted_state_code ) ) {
                     $codes        = explode( '-', $posted_state_code );
                     $country_code = $codes[ 0 ];
@@ -112,9 +106,9 @@
                         $country_code = $field[ 'default_country' ];
                     }
                 }
-    
+
                 $cities_transient = acfcs_get_cities( $country_code, $state_code, $field );
-    
+
                 if ( ! empty( $cities_transient ) ) {
                     foreach ( $cities_transient as $city ) {
                         $items[] = [

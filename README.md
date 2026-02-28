@@ -228,6 +228,9 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 <a name="changelog"></a>
 ### Changelog
 
+1.18.0
+* code reformatting/optimize
+
 1.17.1
 * set missing fallback value
 

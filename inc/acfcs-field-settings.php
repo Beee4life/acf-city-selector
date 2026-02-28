@@ -1,8 +1,6 @@
 <?php
-    /**
+    /*
      * Return the field settings for a group (for use in js), only if post has saved values
-     *
-     * @return array
      */
     function acfcs_get_field_settings( $fields = array() ) {
 

@@ -88,7 +88,6 @@
                 include 'admin/acfcs-countries.php';
             }
 
-
             /*
              * Do stuff upon plugin activation
              */
@@ -97,7 +96,6 @@
                 $this->acfcs_check_uploads_folder();
                 update_option( 'acfcs_version', $this->settings[ 'version' ] );
             }
-
 
             /*
              * Do stuff upon plugin activation
@@ -108,7 +106,6 @@
                 // other important stuff gets done in uninstall.php
             }
 
-
             /*
              * Check if version needs updating
              */
@@ -118,7 +115,6 @@
                     update_option( 'acfcs_version', $this->settings[ 'version' ] );
                 }
             }
-
 
             /*
              * Check if table exists
@@ -147,7 +143,6 @@
                 }
             }
 
-
             /*
              * Check if (upload) folder exists
              * If not, create it.
@@ -160,7 +155,6 @@
                     $wp_filesystem->mkdir( $target_folder, 0755 );
                 }
             }
-
 
             /**
              * Check if cities need to be re-imported
@@ -192,7 +186,6 @@
                 }
             }
 
-
             /**
              * Add our error messages to acf filter
              *
@@ -210,7 +203,6 @@
                 return $messages;
             }
 
-
             /*
              * Error function
              *
@@ -221,7 +213,6 @@
 
                 return isset( $wp_error ) ? $wp_error : ( $wp_error = new WP_Error( null, null, null ) );
             }
-
 
             /*
              * Displays error messages from form submissions
@@ -252,7 +243,6 @@
                 }
             }
 
-
             /**
              * include_field_types
              *
@@ -267,7 +257,6 @@
                 include_once 'admin/acf-city-selector-v' . $version . '.php';
             }
 
-
             /*
              * Add settings link on plugin page
              *
@@ -280,7 +269,6 @@
 
                 return array_merge( $settings_link, $links );
             }
-
 
             /*
              * Check if ACF is active and if not add an admin notice
@@ -297,7 +285,6 @@
                     });
                 }
             }
-
 
             /*
              * Add admin notice when ACF version < 5
@@ -323,11 +310,9 @@
                 }
             }
 
-
             public function acfcs_load_textdomain() {
                 load_plugin_textdomain( 'acf-city-selector', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
             }
-
 
             /*
              * Change plugin order so ACFCS loads after ACF
@@ -345,7 +330,6 @@
                 }
             }
 
-
             /**
              * Move array element to specific position
              *
@@ -358,7 +342,6 @@
                 array_splice( $array, $to_index, 0, $splice );
             }
 
-
             /*
              * Add admin pages
              */
@@ -370,7 +353,6 @@
                 add_submenu_page( 'options.php', __( 'Search', 'acf-city-selector' ), __( 'Search', 'acf-city-selector' ),  apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-search', 'acfcs_search' );
                 add_submenu_page( 'options.php', __( 'Info', 'acf-city-selector' ), __( 'Info', 'acf-city-selector' ), apply_filters( 'acfcs_user_cap', 'manage_options' ), 'acfcs-info', 'acfcs_info_page' );
             }
-
 
             /*
              * Adds CSS on the admin side
