@@ -2,13 +2,16 @@
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
+    $acfcs_file_name = false;
+    $acfcs_delimiter = apply_filters( 'acfcs_delimiter', ';' );
+    $acfcs_max_lines = 100;
+
     if ( isset( $_POST[ 'acfcs_preview_nonce' ] ) ) {
         if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_preview_nonce' ] ) ), 'acfcs-preview-nonce' ) ) {
             return;
         } else {
-            $acfcs_limit     = 100;
             $acfcs_file_name = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
-            $acfcs_max_lines = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : $acfcs_limit;
+            $acfcs_max_lines = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : 100;
             $acfcs_delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', ';' );
         }
     }
