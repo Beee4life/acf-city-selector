@@ -16,7 +16,7 @@
             public $defaults;
             public $l10n;
             public $settings;
-            
+
             /*
              * Function index
              * - construct( $settings )
@@ -80,7 +80,7 @@
                     'type'         => 'radio',
                     'value'        => $field[ 'show_labels' ],
                 ) );
-                
+
                 acf_render_field_setting( $field, array(
                     'choices'      => $select_options,
                     'instructions' => esc_html__( 'Use select2 for dropdowns', 'acf-city-selector' ),
@@ -144,7 +144,7 @@
                 $show_first       = true;
                 $store_meta       = ( isset( $field[ 'store_meta' ] ) ) ? $field[ 'store_meta' ] : false;
                 $which_fields     = ( isset( $field[ 'which_fields' ] ) ) ? $field[ 'which_fields' ] : 'all';
-                
+
                 if ( false !== $default_country && false == $selected_country ) {
                     // New post with default country
                     if ( in_array( $which_fields, [ 'all', 'country_state', 'state_city' ] ) ) {
@@ -208,7 +208,7 @@
 
                 wp_register_script( 'acfcs-process', "{$plugin_url}assets/js/city-selector.js", array( 'jquery', 'acf-input' ), $plugin_version, false );
                 wp_enqueue_script( 'acfcs-process' );
-                
+
                 $all_info                       = acfcs_get_field_settings();
                 $js_vars[ 'ajaxurl' ]           = admin_url( 'admin-ajax.php' );
                 $js_vars[ 'default_country' ]   = ( isset( $all_info[ 'default_country' ] ) && false != $all_info[ 'default_country' ] ) ? $all_info[ 'default_country' ] : false;
@@ -251,7 +251,7 @@
                         $state_code = $value[ 'stateCode' ];
                     }
                 }
-                
+
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
                     $table                  = $wpdb->prefix . 'cities';
@@ -337,7 +337,7 @@
                         }
                     }
                 }
-                
+
                 if ( ! isset( $field[ 'parent_layout' ] ) && ! isset( $field[ 'parent_repeater' ] ) ) {
                     do_action( 'acfcs_store_meta', $value, $post_id );
                 }
