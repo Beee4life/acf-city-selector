@@ -213,7 +213,6 @@
             WP_Filesystem();
         }
 
-        $delimiter     = apply_filters( 'acfcs_delimiter', $delimiter );
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
         $file_path     = $upload_folder . $file_name;
 
@@ -311,7 +310,6 @@
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
         if ( false != $csv_data ) {
             $column_benchmark = 5;
-            $delimiter        = apply_filters( 'acfcs_delimiter', $delimiter );
             $line_number      = 0;
             $lines            = explode( "\r\n", $csv_data );
 
