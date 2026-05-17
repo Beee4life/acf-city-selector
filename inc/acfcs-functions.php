@@ -704,56 +704,64 @@
 
     /*
      * Get search results (admin)
-     * Check https://gemini.google.com/app/9ad1ae12356f7140
      */
     function acfcs_get_searched_cities() {
         $cities = [];
 
-        if ( isset( $_POST[ 'acfcs_search_form_nonce' ] ) ) {
-            if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search_form_nonce' ] ) ), 'acfcs-search-form-nonce' ) ) {
-                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
-                return;
-            } else {
-                global $wpdb;
-                $orderby                 = false;
-                $table                   = $wpdb->prefix . 'cities';
-                $search_criteria_state   = ( isset( $_POST[ 'acfcs_state' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
-                $search_criteria_country = ( isset( $_POST[ 'acfcs_country' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
-                $searched_orderby        = ( ! empty( $_POST[ 'acfcs_orderby' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
-                $searched_term           = ( ! empty( $_POST[ 'acfcs_search' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
-                $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : 100;
-                $parameters              = [ $table ];
-                $where                   = '';
-
-                if ( false != $search_criteria_state ) {
-                    $state_code   = strtoupper( substr( $search_criteria_state, 3, 3 ) );
-                    $parameters[] = $state_code;
-                    $country_code = strtoupper( substr( $search_criteria_state, 0, 2 ) );
-                    $parameters[] = $country_code;
-                    $where        .= "WHERE state_code = %s AND country_code = %s";
-
-                } elseif ( false != $search_criteria_country ) {
-                    $where        .= "WHERE country_code = %s";
-                    $parameters[] = $search_criteria_country;
-                }
-
-                if ( false != $searched_term && ( $search_criteria_country || $search_criteria_state ) ) {
-                    $where        .= ' AND city_name LIKE "%s%"';
-                    $parameters[] = '%' . $searched_term . '%';
-                }
-
-                if ( 'state' == $searched_orderby ) {
-                    $where .= ' ORDER BY state_name ASC, city_name ASC';
-                } else {
-                    $where .= ' ORDER BY city_name ASC, state_name ASC';
-                }
-
-                $where        .= ' LIMIT %d';
-                $parameters[] = $selected_limit;
-                $query        = $wpdb->prepare( "SELECT * FROM %i $where", $parameters );
-                $cities       = $wpdb->get_results( $query );
-            }
+        if ( ! isset( $_POST[ 'acfcs_search_form_nonce' ] ) ) {
+            return $cities;
         }
+
+        $nonce = sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search_form_nonce' ] ) );
+        if ( ! wp_verify_nonce( $nonce, 'acfcs-search-form-nonce' ) ) {
+            if ( method_exists( 'ACF_City_Selector', 'acfcs_errors' ) ) {
+                ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
+            }
+
+            return $cities;
+        }
+
+        global $wpdb;
+        $table          = $wpdb->prefix . 'cities';
+        $state_input    = ! empty( $_POST[ 'acfcs_state' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state' ] ) ) : false;
+        $country_input  = ! empty( $_POST[ 'acfcs_country' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_country' ] ) ) : false;
+        $searched_by    = ! empty( $_POST[ 'acfcs_orderby' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_orderby' ] ) ) : false;
+        $searched_term  = ! empty( $_POST[ 'acfcs_search' ] ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search' ] ) ) : false;
+        $selected_limit = ! empty( $_POST[ 'acfcs_limit' ] ) ? absint( $_POST[ 'acfcs_limit' ] ) : 100;
+        $query_args     = [];
+        $where_clauses  = [];
+
+        if ( $state_input ) {
+            $state_code      = strtoupper( substr( $state_input, 3, 3 ) );
+            $country_code    = strtoupper( substr( $state_input, 0, 2 ) );
+            $where_clauses[] = "state_code = %s AND country_code = %s";
+            $query_args[]    = $state_code;
+            $query_args[]    = $country_code;
+        } elseif ( $country_input ) {
+            $where_clauses[] = "country_code = %s";
+            $query_args[]    = $country_input;
+        }
+
+        if ( $searched_term ) {
+            $where_clauses[] = "city_name LIKE %s";
+            $query_args[]    = '%' . $wpdb->esc_like( $searched_term ) . '%';
+        }
+
+        $where_sql = ! empty( $where_clauses ) ? 'WHERE ' . implode( ' AND ', $where_clauses ) : '';
+
+        if ( 'state' === $searched_by ) {
+            $order_sql = 'ORDER BY state_name ASC, city_name ASC';
+        } else {
+            $order_sql = 'ORDER BY city_name ASC, state_name ASC';
+        }
+
+        $limit_sql    = ' LIMIT %d';
+        $query_args[] = $selected_limit;
+
+        // Use %i for table name identifier, rest are injected via $query_args
+        $raw_query = "SELECT * FROM %i $where_sql $order_sql $limit_sql";
+        $query  = $wpdb->prepare( $raw_query, array_merge( [ $table ], $query_args ) );
+        $cities = $wpdb->get_results( $query );
 
         return $cities;
     }
