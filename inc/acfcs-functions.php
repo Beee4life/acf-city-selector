@@ -740,9 +740,7 @@
         $query_args[] = $selected_limit;
 
         // Use %i for table name identifier, rest are injected via $query_args
-        $raw_query = "SELECT * FROM %i $where_sql $order_sql $limit_sql";
-        $query  = $wpdb->prepare( $raw_query, array_merge( [ $table ], $query_args ) );
-        $cities = $wpdb->get_results( $query );
+        $cities = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i $where_sql $order_sql $limit_sql", array_merge( [ $table ], $query_args ) ) );
 
         return $cities;
     }
