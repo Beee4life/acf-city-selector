@@ -1,7 +1,6 @@
 <?php
-    if ( ! defined( 'ABSPATH' ) ) {
-        exit;
-    }
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
 
     // function to check for field values
     include 'acfcs-field-settings.php';
@@ -207,30 +206,54 @@
      * Convert data from an uploaded CSV file to an array
      */
     function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
+        global $wp_filesystem;
+
+        if ( empty( $wp_filesystem ) ) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
+
         $upload_folder = ( ! empty( $upload_folder ) ) ? $upload_folder : acfcs_upload_folder( '/' );
-        $csv_array     = [];
-        $empty_array   = false;
-        $errors        = ACF_City_Selector::acfcs_errors();
-        $new_array     = [];
+        $file_path     = $upload_folder . $file_name;
 
-        if ( ( file_exists( $upload_folder . $file_name ) && $handle = fopen( $upload_folder . $file_name, "r" ) ) !== false ) {
+        if ( $wp_filesystem->exists( $file_path ) && false !== ( $file_content = $wp_filesystem->get_contents( $file_path ) ) ) {
             $column_benchmark = 5;
+            $empty_array      = false;
+            $errors           = ACF_City_Selector::acfcs_errors();
             $line_number      = 0;
+            $new_array        = [];
 
-            while ( ( $csv_line = fgetcsv( $handle, apply_filters( 'acfcs_line_length', 1000 ), "{$delimiter}" ) ) !== false ) {
+            foreach ( $csv_lines as $line ) {
+                // Skip completely empty lines to prevent false errors
+                if ( '' === trim( $line ) ) {
+                    continue;
+                }
+
                 $line_number++;
                 $csv_array[ 'delimiter' ] = $delimiter;
 
-                // if column count doesn't match benchmark
+                // Enforce the line length filter if necessary
+                if ( strlen( $line ) > $max_line_length ) {
+                    $line = substr( $line, 0, $max_line_length );
+                }
+
+                // Parse the line string as CSV
+                $csv_line = str_getcsv( $line, "{$delimiter}" );
+
+                if ( false === $csv_line || null === $csv_line[0] ) {
+                    continue;
+                }
+
+                // If column count doesn't match benchmark
                 if ( count( $csv_line ) != $column_benchmark ) {
-                    // if column count < benchmark
+                    // If column count < benchmark
                     if ( count( $csv_line ) < $column_benchmark ) {
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
                         /* translators: 1 line number 2 error message */
                         $errors->add( 'error_no_correct_columns_' . $line_number, sprintf( esc_html__( 'There are too few columns on line %1$d. %2$s', 'acf-city-selector' ), $line_number, $error_message ) );
 
                     } elseif ( count( $csv_line ) > $column_benchmark ) {
-                        // if column count > benchmark
+                        // If column count > benchmark
                         $error_message = esc_html__( 'Since your file is not accurate anymore, the file is deleted.', 'acf-city-selector' );
                         if ( false === $verify ) {
                             $error_message = 'Lines 0-' . ( $line_number - 1 ) . ' are correctly imported but since your file is not accurate anymore, the file is deleted';
@@ -244,7 +267,7 @@
                     $empty_array = true;
                     $new_array   = [];
                 } else {
-                    // create a new array for each row
+                    // Create a new array for each row
                     $new_line = [];
                     foreach ( $csv_line as $item ) {
                         $new_line[] = $item;
@@ -260,11 +283,10 @@
                     }
                 }
             }
-            fclose( $handle );
 
             if ( $errors->has_errors() ) {
-                // delete file
-                if ( file_exists( acfcs_upload_folder( '/' ) . $file_name ) ) {
+                $delete_check_path = acfcs_upload_folder( '/' ) . $file_name;
+                if ( $wp_filesystem->exists( $delete_check_path ) ) {
                     do_action( 'acfcs_delete_file', $file_name );
                     $csv_array[ 'error' ] = 'file_deleted';
                 }
