@@ -5,10 +5,7 @@
     // function to check for field values
     include 'acfcs-field-settings.php';
 
-    /*
-     * Create an array with available countries from db.
-     * This function makes use of a transient to speed up the process.
-     */
+    // Create an array with available countries from db.
     function acfcs_get_countries( $show_first = true, $field = false, $force = false ) {
         $countries            = [];
         $select_country_label = apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) );
@@ -38,9 +35,7 @@
         return $countries;
     }
 
-    /*
-     * Create an array with states based on a country code
-     */
+    // Create an array with states based on a country code
     function acfcs_get_states( $country_code = false, $show_first = true, $field = false ) {
         $select_province_state_label = apply_filters( 'acfcs_select_province_state_label', esc_attr__( 'Select a province/state', 'acf-city-selector' ) );
         $show_labels                 = ( isset( $field[ 'show_labels' ] ) ) ? $field[ 'show_labels' ] : true;
@@ -75,9 +70,7 @@
         return $states;
     }
 
-    /*
-     * Create an array with cities for a certain country/state
-     */
+    // Create an array with cities for a certain country/state
     function acfcs_get_cities( $country_code = false, $state_code = false, $field = false ) {
         $cities            = [];
         $select_city_label = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
@@ -126,9 +119,7 @@
         return $cities;
     }
 
-    /*
-     * Get country name by country code
-     */
+    // Get country name by country code
     function acfcs_get_country_name( $country_code = false ) {
         if ( false != $country_code ) {
             $country_name = acfcs_country_i18n( strtolower( $country_code ) );
@@ -149,9 +140,7 @@
         return $country_code;
     }
 
-    /*
-     * Checks if there are any cities in the database (for page availability)
-     */
+    // Checks if there are any cities in the database (for page availability)
     function acfcs_has_cities( $country_code = false ) {
         global $wpdb;
         $results = [];
@@ -170,9 +159,7 @@
         }
     }
 
-    /*
-     * Checks if files are uploaded
-     */
+    // Checks if files are uploaded
     function acfcs_check_if_files() {
         $actual_files = [];
         $target_dir   = acfcs_upload_folder();
@@ -202,9 +189,7 @@
         return $actual_files;
     }
 
-    /*
-     * Convert data from an uploaded CSV file to an array
-     */
+    // Convert data from an uploaded CSV file to an array
     function acfcs_csv_to_array( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
         global $wp_filesystem;
 
@@ -304,9 +289,7 @@
         return $csv_array;
     }
 
-    /*
-     * Verify raw csv import
-     */
+    // Verify raw csv import
     function acfcs_verify_csv_data( $csv_data = false, $delimiter = ";" ) {
         if ( false != $csv_data ) {
             $column_benchmark = 5;
@@ -357,9 +340,7 @@
         return false;
     }
 
-    /*
-     * Get packages through WP_Http
-     */
+    // Get packages through WP_Http
     function acfcs_get_packages( $endpoint = 'single' ) {
         $url     = sprintf( '%s/wp-json/countries/v1/%s', ACFCS_WEBSITE_URL, $endpoint );
         $request = new WP_Http;
@@ -374,9 +355,7 @@
         return [];
     }
 
-    /*
-     * Get country info for debug
-     */
+    // Get country info for debug
     function acfcs_get_countries_info() {
         global $wpdb;
         $acfcs_info = [];
@@ -397,16 +376,12 @@
         return $acfcs_info;
     }
 
-    /*
-     * Search an array which contains quotes like "'t Veld"
-     */
+    // Search an array which contains quotes like "'t Veld"
     function acfcs_sort_array_with_quotes( $a, $b ) {
         return strnatcasecmp( acfcs_custom_sort_with_quotes( $a[ 'city_name' ] ), acfcs_custom_sort_with_quotes( $b[ 'city_name' ] ) );
     }
 
-    /*
-     * Sort with quotes
-     */
+    // Sort with quotes
     function acfcs_custom_sort_with_quotes( $city ) {
         // strip quote marks
         if ( strpos( $city, "'s" ) !== false ) {
@@ -420,9 +395,7 @@
         return $city;
     }
 
-    /*
-     * Render select in ACF field
-     */
+    // Render select in ACF field
     function acfcs_render_dropdown( $type, $field, $stored_value, $prefill_values ) {
         $acfcs_dropdown       = 'acfcs__dropdown';
         $city_label           = apply_filters( 'acfcs_select_city_label', esc_attr__( 'Select a city', 'acf-city-selector' ) );
@@ -504,9 +477,7 @@
         }
     }
 
-    /*
-     * Verify CSV data
-     */
+    // Verify CSV data
     function acfcs_verify_data( $file_name, $delimiter = ';', $verify = true ) {
         $csv_array = acfcs_csv_to_array( $file_name, '', $delimiter, $verify );
         if ( isset( $csv_array[ 'data' ] ) ) {
@@ -516,9 +487,7 @@
         }
     }
 
-    /*
-     * Import CSV data
-     */
+    // Import CSV data
     function acfcs_import_data( $file_name, $upload_folder = '', $delimiter = ';', $verify = false, $max_lines = false ) {
         if ( $file_name ) {
             if ( ! is_array( $file_name ) ) {
@@ -589,9 +558,7 @@
         }
     }
 
-    /*
-     * Delete one or more countries
-     */
+    // Delete one or more countries
     function acfcs_delete_country( $countries ) {
         $country_names_and       = false;
         $sanitized_country_codes = [];
@@ -629,18 +596,14 @@
         }
     }
 
-    /*
-     * Get upload folder for plugin, can be overriden with filter
-     */
+    // Get upload folder for plugin, can be overriden with filter
     function acfcs_upload_folder( $suffix = false ) {
         $upload_folder = apply_filters( 'acfcs_upload_folder', wp_upload_dir()[ 'basedir' ] . '/acfcs' . $suffix );
 
         return $upload_folder;
     }
 
-    /*
-     * Render preview results
-     */
+    // Render preview results
     function acfcs_render_preview_results( $csv_data = [] ) {
         if ( ! empty( $csv_data ) ) {
             echo '<table class="acfcs__table acfcs__table--preview-result scrollable">';
@@ -671,9 +634,7 @@
         }
     }
 
-    /*
-     * Get optgroups for states
-     */
+    // Get optgroups for states
     function acfcs_get_states_optgroup() {
         $results = acfcs_get_countries( false );
         $states  = [];
@@ -724,9 +685,7 @@
         return $states;
     }
 
-    /*
-     * Get search results (admin)
-     */
+    // Get search results (admin)
     function acfcs_get_searched_cities() {
         $cities = [];
 
@@ -788,9 +747,7 @@
         return $cities;
     }
 
-    /*
-     * Get all translation strings for js/input fields
-     */
+    // Get all translation strings for js/input fields
     function acfcs_get_js_translations() {
         $translations = [
             'no_countries'         => esc_attr__( 'No countries', 'acf-city-selector' ),
