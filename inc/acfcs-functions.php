@@ -704,6 +704,7 @@
 
     /*
      * Get search results (admin)
+     * Check https://gemini.google.com/app/9ad1ae12356f7140
      */
     function acfcs_get_searched_cities() {
         $cities = [];
@@ -749,7 +750,8 @@
 
                 $where        .= ' LIMIT %d';
                 $parameters[] = $selected_limit;
-                $cities       = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i $where", $parameters ) );
+                $query        = $wpdb->prepare( "SELECT * FROM %i $where", $parameters );
+                $cities       = $wpdb->get_results( $query );
             }
         }
 
