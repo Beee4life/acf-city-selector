@@ -2,6 +2,9 @@
     /*
      * Add help tabs
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_help_tabs( $screen ) {
 
         if ( isset( $screen->id ) ) {

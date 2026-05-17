@@ -2,6 +2,9 @@
     /*
      * Return the field settings for a group (for use in js), only if post has saved values
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_get_field_settings( $fields = array() ) {
 
         $acf_version = get_option( 'acf_version' );

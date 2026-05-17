@@ -3,6 +3,8 @@
      * Ajax functions
      */
 
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     /*
      * Get states by country code
      */

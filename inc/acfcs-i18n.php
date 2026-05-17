@@ -3,6 +3,9 @@
      * Get country name + i18n country names
      * These are defined here (just in case) so they are 'picked up' as translatable strings, because not all values occur in the plugin itself.
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_country_i18n( $country_code ) {
 
         $country_array = array(

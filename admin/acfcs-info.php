@@ -2,6 +2,9 @@
     /*
      * Content for the settings page
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_info_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
@@ -9,7 +12,7 @@
         }
 
         ACF_City_Selector::acfcs_show_admin_notices();
-        
+
         WP_Filesystem();
         global $wp_filesystem;
         $countries    = acfcs_get_countries_info();
@@ -18,7 +21,7 @@
 
         <div class="wrap acfcs">
             <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
-            
+
             <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">

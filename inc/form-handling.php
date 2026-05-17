@@ -1,4 +1,7 @@
 <?php
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_upload_csv_file() {
         if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_upload_csv_nonce' ] ) ), 'acfcs-upload-csv-nonce' ) ) {

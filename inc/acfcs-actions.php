@@ -1,4 +1,7 @@
 <?php
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_reimport_cities( $country_code = false ) {
         if ( $country_code && in_array( $country_code, [ 'nl', 'be' ] ) ) {
             update_option( 'acfcs_city_update_1_8_0_' . $country_code, 'done' );

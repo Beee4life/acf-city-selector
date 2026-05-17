@@ -2,6 +2,9 @@
     /*
      * Content for the settings page
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_settings() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
@@ -51,7 +54,8 @@
                                         <li>
                                             <?php /* translators: %s input label, %s country name */ ?>
                                             <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . esc_attr( strtolower( $country_code ) ), esc_attr( $country_name ) ); ?>
-                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" /> <?php esc_html_e( $country_name ); ?>
+                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" />
+                                            <?php esc_html( $country_name ); ?>
                                         </li>
                                     <?php } ?>
                                 </ul>
