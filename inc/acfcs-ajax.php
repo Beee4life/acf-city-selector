@@ -9,7 +9,7 @@
     function acfcs_get_states_call() {
         if ( isset( $_POST[ 'acfcs_state_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state_nonce' ] ) ), 'acfcs-state-nonce' ) ) {
             if ( isset( $_POST[ 'country_code' ] ) ) {
-                $field   = false;
+                $field   = [];
                 $items   = array();
                 $post_id = ( isset( $_POST[ 'post_id' ] ) ) ? (int) $_POST[ 'post_id' ] : false;
 
