@@ -233,6 +233,7 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 * code reformatting/optimize
 * change tested up to
 * fix 'automatic conversion of false to array'
+* fix and improve search
 
 1.17.1
 * set missing fallback value
