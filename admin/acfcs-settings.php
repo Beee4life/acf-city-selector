@@ -55,7 +55,7 @@
                                             <?php /* translators: %s input label, %s country name */ ?>
                                             <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . esc_attr( strtolower( $country_code ) ), esc_attr( $country_name ) ); ?>
                                             <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" />
-                                            <?php esc_html( $country_name ); ?>
+                                            <?php echo esc_html( $country_name ); ?>
                                         </li>
                                     <?php } ?>
                                 </ul>
