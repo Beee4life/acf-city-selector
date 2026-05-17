@@ -70,6 +70,7 @@
 .acfcs__search-form {
   display:   flex;
   flex-flow: row wrap;
+  align-items: center;
 }
 
 .acfcs__search-criteria {
