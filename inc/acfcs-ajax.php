@@ -5,9 +5,7 @@
 
     if ( ! defined( 'ABSPATH' ) ) exit;
 
-    /*
-     * Get states by country code
-     */
+    // Get states by country code
     function acfcs_get_states_call() {
         if ( isset( $_POST[ 'acfcs_state_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_state_nonce' ] ) ), 'acfcs-state-nonce' ) ) {
             if ( isset( $_POST[ 'country_code' ] ) ) {
@@ -57,9 +55,7 @@
     add_action( 'wp_ajax_get_states_call', 'acfcs_get_states_call' );
     add_action( 'wp_ajax_nopriv_get_states_call', 'acfcs_get_states_call' );
 
-    /*
-     * Get cities by state code and/or country code
-     */
+    // Get cities by state code and/or country code
     function acfcs_get_cities_call() {
         if ( isset( $_POST[ 'acfcs_city_nonce' ] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_city_nonce' ] ) ), 'acfcs-city-nonce' ) ) {
             if ( isset( $_POST[ 'state_code' ] ) ) {
