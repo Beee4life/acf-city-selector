@@ -2,7 +2,16 @@
     if ( ! defined( 'ABSPATH' ) ) {
         exit;
     }
-    $max_lines_value = isset( $_POST[ 'acfcs_max_lines' ] ) ? $_POST[ 'acfcs_max_lines' ] : '';
+    if ( isset( $_POST[ 'acfcs_preview_nonce' ] ) ) {
+        if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_preview_nonce' ] ) ), 'acfcs-preview-nonce' ) ) {
+            return;
+        } else {
+            $acfcs_limit     = 100;
+            $acfcs_file_name = ( isset( $_POST[ 'acfcs_file_name' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_file_name' ] ) ) : false;
+            $acfcs_max_lines = ( isset( $_POST[ 'acfcs_max_lines' ] ) ) ? (int) $_POST[ 'acfcs_max_lines' ] : $acfcs_limit;
+            $acfcs_delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', ';' );
+        }
+    }
 ?>
 <p><?php esc_html_e( 'Here you can preview any uploaded csv files.', 'acf-city-selector' ); ?></p>
 <p><?php esc_html_e( 'Please keep in mind that all csv files are verified before displaying (and therefor can be deleted, when errors are encountered).', 'acf-city-selector' ); ?></p>
@@ -17,27 +26,27 @@
                     <?php if ( count( $file_index ) > 1 ) { ?>
                         <option value=""><?php esc_html_e( 'Select a file', 'acf-city-selector' ); ?></option>
                     <?php } ?>
-                    <?php foreach ( $file_index as $file ) { ?>
-                        <?php $selected = ( $file_name == $file ) ? ' selected="selected"' : false; ?>
-                        <option value="<?php echo esc_attr( $file ); ?>"<?php echo esc_attr( $selected ); ?>><?php echo esc_html( $file ); ?></option>
+                    <?php foreach ( $file_index as $acfcs_file ) { ?>
+                        <?php $acfcs_curent_file = ( $acfcs_file_name == $acfcs_file ) ? ' selected="selected"' : false; ?>
+                        <option value="<?php echo esc_attr( $acfcs_file ); ?>"<?php echo esc_attr( $acfcs_curent_file ); ?>><?php echo esc_html( $acfcs_file ); ?></option>
                     <?php } ?>
                 </select>
             </div>
 
             <div class="acfcs__process-file-element">
-                <?php $delimiters = [ ';', ',', '|' ]; ?>
+                <?php $acfcs_delimiters = [ ';', ',', '|' ]; ?>
                 <?php echo sprintf( '<label for="acfcs_delimiter">%s</label>', esc_attr__( 'Delimiter', 'acf-city-selector' ) ); ?>
                 <select name="acfcs_delimiter" id="acfcs_delimiter">
-                    <?php foreach( $delimiters as $delimiter_value ) { ?>
-                        <?php $selected_delimiter = ( $delimiter_value == $delimiter ) ? ' selected' : false; ?>
-                        <option value="<?php echo esc_attr( $delimiter_value ); ?>"<?php echo esc_attr( $selected_delimiter ); ?>><?php echo esc_html( $delimiter_value ); ?></option>
+                    <?php foreach( $acfcs_delimiters as $acfcs_delimiter_value ) { ?>
+                        <?php $acfcs_current_delimiter = ( $acfcs_delimiter_value == $acfcs_delimiter ) ? ' selected' : false; ?>
+                        <option value="<?php echo esc_attr( $acfcs_delimiter_value ); ?>"<?php echo esc_attr( $acfcs_current_delimiter ); ?>><?php echo esc_html( $acfcs_delimiter_value ); ?></option>
                     <?php } ?>
                 </select>
             </div>
 
             <div class="acfcs__process-file-element">
                 <?php echo sprintf( '<label for="acfcs_max_lines">%s</label>', esc_attr__( 'Max lines', 'acf-city-selector' ) ); ?>
-                <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo esc_attr( $max_lines_value ); ?>" />
+                <input type="number" name="acfcs_max_lines" id="acfcs_max_lines" value="<?php echo esc_attr( $acfcs_max_lines ); ?>" />
             </div>
         </div>
 
