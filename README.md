@@ -23,7 +23,7 @@ Welcome to the City Selector plugin, which is an extension for [Advanced Custom 
 <a name="version"></a>
 ### Version
 
-1.18.0 - xx.03.26
+1.18.0 - xx.05.26
 
 <a name="description"></a>
 ### Description
@@ -183,8 +183,8 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 <a name="tested"></a>
 ### Tested with
 
-* [X] WordPress 6.8.2
-* [X] Advanced Custom Fields Pro 6.5.0.1
+* [X] WordPress 7.0
+* [X] Advanced Custom Fields Pro 6.8.1
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
@@ -204,7 +204,7 @@ The plugin works in the following situations:
 * in a single field
 * in a repeater field
 * in a group
-* in a flexible content block
+* in a flexible content block (only with select2 disabled)
 * in an accordion field
 * as a cloned field
 * on taxonomy terms
@@ -212,6 +212,7 @@ The plugin works in the following situations:
 
 The plugin does NOT work properly yet in the following situations: 
 * when multiple instances of the field are used in 1 group/on 1 post
+* in a flexible content block with select2 disabled
 
 It might have some twitches with taxonomies, but need some more testing.
 
@@ -221,7 +222,7 @@ This seems to be very random and unpredictable.
 <a name="credit"></a>
 ### Credit
 
-I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently, which can ben seen [here](http://www.deskema.it/en/articles/multi-level-country-state-city-cascading-select-wordpress).
+I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab01) who used it a bit differently.
 
 [Jarah de Jong](https://github.com/inquota) helped me out with some JS at the start and [John McDonald](https://github.com/mrjohnmc) did some of the German translations.
 
@@ -230,6 +231,8 @@ I got the idea for this plugin through [Fabrizio Sabato](https://github.com/fab0
 
 1.18.0
 * code reformatting/optimize
+* change tested up to
+* fix 'automatic conversion of false to array'
 
 1.17.1
 * set missing fallback value
