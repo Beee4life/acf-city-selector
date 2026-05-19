@@ -53,11 +53,9 @@
                 parent::__construct();
             }
 
-
             function settings( $settings ) {
                 return $settings;
             }
-
 
             /**
              * render_field_settings()
@@ -126,7 +124,6 @@
                 ) );
             }
 
-
             /**
              * render_field()
              *
@@ -192,7 +189,6 @@
                 }
             }
 
-
             /**
              * input_admin_enqueue_scripts()
              *
@@ -222,7 +218,6 @@
 
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
             }
-
 
             /*
              * load_value()
@@ -263,7 +258,6 @@
 
                 return $value;
             }
-
 
             /*
              * update_value()
@@ -344,7 +338,6 @@
 
                 return $value;
             }
-
 
             /*
              * validate_value()
