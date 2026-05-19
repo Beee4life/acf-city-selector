@@ -19,15 +19,16 @@
     add_action( 'acfcs_after_success_import', 'acfcs_reimport_cities' );
 
     function acfcs_save_single_meta( $value, $post_id ) {
-        if ( isset( $_POST[ 'store_meta' ] ) && 1 == $_POST[ 'store_meta' ] ) {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
+        if ( isset( $_POST[ 'store_meta' ] ) && 1 == sanitize_text_field( wp_unslash( $_POST[ 'store_meta' ] ) ) ) {
             if ( ! empty( $value[ 'countryCode' ] ) ) {
-                update_post_meta( $post_id, 'acfcs_search_country', $value[ 'countryCode' ] );
+                update_post_meta( $post_id, 'acfcs_search_country', sanitize_text_field( $value[ 'countryCode' ] ) );
             }
             if ( ! empty( $value[ 'stateCode' ] ) ) {
-                update_post_meta( $post_id, 'acfcs_search_state', $value[ 'stateCode' ] );
+                update_post_meta( $post_id, 'acfcs_search_state', sanitize_text_field( $value[ 'stateCode' ] ) );
             }
             if ( ! empty( $value[ 'cityName' ] ) ) {
-                update_post_meta( $post_id, 'acfcs_search_city', $value[ 'cityName' ] );
+                update_post_meta( $post_id, 'acfcs_search_city', sanitize_text_field( $value[ 'cityName' ] ) );
             }
         } elseif ( $post_id ) {
             // remove meta

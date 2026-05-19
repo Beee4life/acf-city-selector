@@ -13,10 +13,14 @@
 
         if ( ! empty( $fields ) ) {
             $activate = true;
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         } elseif ( isset( $_GET[ 'user_id' ] ) ) {
             $activate = true;
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $user_id  = (int) $_GET[ 'user_id' ];
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         } elseif ( isset( $_GET[ 'post' ] ) ) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $post_id = (int) $_GET[ 'post' ];
             if ( 'acf-field-group' != get_post_type( $post_id ) ) {
                 $activate = true;

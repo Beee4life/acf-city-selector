@@ -12,8 +12,7 @@
             // vars
             var $settings, // will hold info such as dir / path
                 $defaults; // will hold default field options
-            
-            
+
             /**
              * __construct
              *
@@ -41,7 +40,6 @@
                 $this->settings = $settings;
 
             }
-
 
             /**
              * create_options()
@@ -132,7 +130,6 @@
                 <?php
             }
 
-
             /**
              * create_field()
              *
@@ -201,7 +198,6 @@
                 }
             }
 
-
             /**
              * input_admin_enqueue_scripts()
              *
@@ -218,7 +214,7 @@
              * @TODO: DRY
              */
             function input_admin_enqueue_scripts() {
-                
+
                 $plugin_url     = trailingslashit( sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL ) );
                 $plugin_version = get_option( 'acfcs_version' );
 
@@ -239,8 +235,11 @@
                 $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
                 $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     if ( isset( $_GET[ 'id' ] ) ) {
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                         $post_id = (int) $_GET[ 'id' ];
                     } else {
                         $post_id = get_the_ID();
@@ -268,9 +267,7 @@
                     }
                 }
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
-
             }
-
 
             /**
              * load_value()
@@ -315,7 +312,6 @@
 
                 return $value;
             }
-
 
             /**
              * Update value before it's changed in the database
