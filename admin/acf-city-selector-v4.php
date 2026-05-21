@@ -303,16 +303,14 @@
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-
                     $cache_key   = 'country_state_' . md5( $country_code . '_' . $state_code );
                     $cache_group = 'cities_data';
-
-                    $row = wp_cache_get( $cache_key, $cache_group );
+                    $row         = wp_cache_get( $cache_key, $cache_group );
 
                     if ( false === $row ) {
-                        $table = $wpdb->prefix . 'cities';
+                        $table   = $wpdb->prefix . 'cities';
                         $method  = 'get_row';
-                        $row   = $wpdb->$method(
+                        $row     = $wpdb->$method(
                             $wpdb->prepare(
                                 "SELECT country, state_name FROM %i WHERE country_code = %s AND state_code = %s",
                                 $table,
