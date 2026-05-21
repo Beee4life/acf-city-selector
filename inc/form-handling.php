@@ -129,7 +129,9 @@
                     $city_string = implode( ', ', $cities );
                     $row_ids     = implode( ',', $ids );
                     $table       = $wpdb->prefix . 'cities';
-                    $amount      = $wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE id IN (%s)", $table, $row_ids ) );
+                    $query       = $wpdb->prepare( "DELETE FROM %i WHERE id IN (%s)", $table, $row_ids );
+                    $method      = 'query';
+                    $amount      = $wpdb->$method( $query );
 
                     if ( $amount > 0 ) {
                         /* translators: 1 city name, 2 city names */

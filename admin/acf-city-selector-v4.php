@@ -303,8 +303,29 @@
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $table                  = $wpdb->prefix . 'cities';
-                    $row                    = $wpdb->get_row( $wpdb->prepare( "SELECT country, state_name FROM %i WHERE country_code= %s AND state_code= %s", $table, $country_code, $state_code ) );
+
+                    $cache_key   = 'country_state_' . md5( $country_code . '_' . $state_code );
+                    $cache_group = 'cities_data';
+
+                    $row = wp_cache_get( $cache_key, $cache_group );
+
+                    if ( false === $row ) {
+                        $table = $wpdb->prefix . 'cities';
+                        $method  = 'get_row';
+                        $row   = $wpdb->$method(
+                            $wpdb->prepare(
+                                "SELECT country, state_name FROM %i WHERE country_code = %s AND state_code = %s",
+                                $table,
+                                $country_code,
+                                $state_code
+                            )
+                        );
+
+                        // Cache the row object for 12 hours (43200 seconds)
+                        // If $row is null (no match found), it caches that too to prevent repeated broken lookups (Negative Caching)
+                        wp_cache_set( $cache_key, $row, $cache_group, 43200 );
+                    }
+
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
