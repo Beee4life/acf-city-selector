@@ -46,6 +46,7 @@ A. Please read the FAQ @ [https://acf-city-selector.com/documentation/](https://
 * change tested up to
 * fix 'automatic conversion of false to array'
 * fix and improve search
+* added database cache for queries
 
 = 1.17.1 =
 * set missing fallback value
