@@ -96,11 +96,16 @@
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_remove_countries_nonce' ] ) ), 'acfcs-remove-countries-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( empty( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) ) ) {
+                if ( empty( $_POST[ 'acfcs_delete_country' ] ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
                 } else {
                     if ( is_array( $_POST[ 'acfcs_delete_country' ] ) ) {
-                        acfcs_delete_country( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) );
+                        foreach( wp_unslash($_POST[ 'acfcs_delete_country' ] ) as $country_code ) {
+                            $country_codes[] = sanitize_text_field( $country_code );
+                        }
+                        if ( ! empty( $country_codes ) ) {
+                            acfcs_delete_country( $country_codes );
+                        }
                     }
                 }
             }
