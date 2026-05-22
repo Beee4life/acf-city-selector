@@ -74,6 +74,7 @@
                     $query = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s GROUP BY state_code ORDER BY state_name ASC", $table, strtoupper( $country_code ) );
                 }
                 $results = $wpdb->$method( $query );
+                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
             }
 
             if ( is_array( $results ) ) {
@@ -119,6 +120,7 @@
                 if ( false === $results ) {
                     $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s AND state_code = %s ORDER BY state_name, city_name ASC", $table, $country_code, $state_code );
                     $results = $wpdb->$method( $query );
+                    wp_cache_set( $cache_key, $results, $cache_group, 43200 );
                 }
 
             } elseif ( $country_code ) {
@@ -128,6 +130,7 @@
                 if ( false === $results ) {
                     $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s", $table, $country_code );
                     $results = $wpdb->$method( $query );
+                    wp_cache_set( $cache_key, $results, $cache_group, 43200 );
                 }
             }
 
@@ -172,6 +175,7 @@
                 $table   = $wpdb->prefix . 'cities';
                 $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s", $table, $country_code );
                 $country = $wpdb->$method( $query );
+                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
             }
 
             if ( isset( $country->country ) ) {
@@ -197,6 +201,7 @@
             if ( false === $results ) {
                 $query     = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s LIMIT 1", $table, $country_code );
                 $results   = $wpdb->$method( $query );
+                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
             }
 
         } else {
@@ -206,6 +211,7 @@
             if ( false === $results ) {
                 $query = $wpdb->prepare( "SELECT * FROM %i LIMIT 1", $table );
                 $results = $wpdb->$method( $query );
+                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
             }
         }
 
@@ -427,6 +433,7 @@
         if ( false === $results ) {
             $query   = $wpdb->prepare( "SELECT country_code FROM %i GROUP BY country_code ORDER BY country_code ASC", $table );
             $results = $wpdb->$method( $query );
+            wp_cache_set( $cache_key, $results, $cache_group, 43200 );
         }
 
         if ( is_array( $results ) ) {
@@ -434,15 +441,16 @@
                 if ( isset( $data->country_code ) ) {
                     $country_code = $data->country_code;
                     $cache_key    = 'country_info_' . md5( strtoupper( $country_code ) );
-                    $results      = wp_cache_get( $cache_key, $cache_group );
+                    $sub_results  = wp_cache_get( $cache_key, $cache_group );
 
-                    if ( false === $results ) {
-                        $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s ORDER BY country_code ASC", $table, $country_code );
-                        $results = $wpdb->$method( $query );
+                    if ( false === $sub_results ) {
+                        $query       = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s ORDER BY country_code ASC", $table, $country_code );
+                        $sub_results = $wpdb->$method( $query );
+                        wp_cache_set( $cache_key, $sub_results, $cache_group, 43200 );
 
                         $acfcs_info[ $country_code ] = [
                             'country_code' => $country_code,
-                            'count'        => count( $results ),
+                            'count'        => count( $sub_results ),
                             'name'         => acfcs_get_country_name( $country_code ),
                         ];
                     }
@@ -642,8 +650,7 @@
     function acfcs_delete_country( $countries ) {
         $country_names_and       = false;
         $sanitized_country_codes = [];
-        $cache_group = 'cities_data';
-        $method      = 'query';
+        $method                  = 'query';
 
         foreach( $countries as $country_code ) {
             $sanitized_country_code    = strtoupper( $country_code );
@@ -666,16 +673,10 @@
                 $country_string = strtoupper( "'" . implode( "', '", $sanitized_country_codes ) . "'" );
             }
 
-            $cache_key = 'delete_country_' . md5( sanitize_title( $country_string ) );
-            $results   = wp_cache_get( $cache_key, $cache_group );
-
-            if ( false === $results ) {
-                global $wpdb;
-                $table  = $wpdb->prefix . 'cities';
-                $query  = $wpdb->prepare( "DELETE FROM %i WHERE country_code IN (%s)", $table, $country_string );
-                $result = $wpdb->$method( $query );
-                wp_cache_delete( $cache_key, $cache_group );
-            }
+            global $wpdb;
+            $table  = $wpdb->prefix . 'cities';
+            $query  = $wpdb->prepare( "DELETE FROM %i WHERE country_code IN (%s)", $table, $country_string );
+            $result = $wpdb->$method( $query );
 
             if ( isset( $result ) && 0 < $result ) {
                 /* translators: %s country name */
@@ -759,6 +760,7 @@
                             $query = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s GROUP BY state_code ORDER BY state_name ASC", $table, $country[ 'code' ] );
                         }
                         $results = $wpdb->$method( $query );
+                        wp_cache_set( $cache_key, $results, $cache_group, 43200 );
                     }
 
                     if ( count( $results ) > 0 ) {
