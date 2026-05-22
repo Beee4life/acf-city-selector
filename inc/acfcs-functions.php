@@ -28,7 +28,7 @@
             $method  = 'get_results';
             $results = $wpdb->$method( $query );
 
-            wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+            wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
         }
 
         if ( ! empty( $results ) ) {
@@ -74,7 +74,7 @@
                     $query = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s GROUP BY state_code ORDER BY state_name ASC", $table, strtoupper( $country_code ) );
                 }
                 $results = $wpdb->$method( $query );
-                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
             }
 
             if ( is_array( $results ) ) {
@@ -120,7 +120,7 @@
                 if ( false === $results ) {
                     $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s AND state_code = %s ORDER BY state_name, city_name ASC", $table, $country_code, $state_code );
                     $results = $wpdb->$method( $query );
-                    wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                    wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
                 }
 
             } elseif ( $country_code ) {
@@ -130,7 +130,7 @@
                 if ( false === $results ) {
                     $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s", $table, $country_code );
                     $results = $wpdb->$method( $query );
-                    wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                    wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
                 }
             }
 
@@ -175,7 +175,7 @@
                 $table   = $wpdb->prefix . 'cities';
                 $query   = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s", $table, $country_code );
                 $country = $wpdb->$method( $query );
-                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
             }
 
             if ( isset( $country->country ) ) {
@@ -201,7 +201,7 @@
             if ( false === $results ) {
                 $query     = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s LIMIT 1", $table, $country_code );
                 $results   = $wpdb->$method( $query );
-                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
             }
 
         } else {
@@ -211,7 +211,7 @@
             if ( false === $results ) {
                 $query = $wpdb->prepare( "SELECT * FROM %i LIMIT 1", $table );
                 $results = $wpdb->$method( $query );
-                wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
             }
         }
 
@@ -433,7 +433,7 @@
         if ( false === $results ) {
             $query   = $wpdb->prepare( "SELECT country_code FROM %i GROUP BY country_code ORDER BY country_code ASC", $table );
             $results = $wpdb->$method( $query );
-            wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+            wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
         }
 
         if ( is_array( $results ) ) {
@@ -446,7 +446,7 @@
                     if ( false === $sub_results ) {
                         $query       = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s ORDER BY country_code ASC", $table, $country_code );
                         $sub_results = $wpdb->$method( $query );
-                        wp_cache_set( $cache_key, $sub_results, $cache_group, 43200 );
+                        wp_cache_set( $cache_key, $sub_results, $cache_group, 2 * HOUR_IN_SECONDS );
 
                         $acfcs_info[ $country_code ] = [
                             'country_code' => $country_code,
@@ -760,7 +760,7 @@
                             $query = $wpdb->prepare( "SELECT * FROM %i WHERE country_code = %s GROUP BY state_code ORDER BY state_name ASC", $table, $country[ 'code' ] );
                         }
                         $results = $wpdb->$method( $query );
-                        wp_cache_set( $cache_key, $results, $cache_group, 43200 );
+                        wp_cache_set( $cache_key, $results, $cache_group, 2 * HOUR_IN_SECONDS );
                     }
 
                     if ( count( $results ) > 0 ) {
