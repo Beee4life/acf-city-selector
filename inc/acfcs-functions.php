@@ -263,7 +263,9 @@
             $empty_array      = false;
             $errors           = ACF_City_Selector::acfcs_errors();
             $line_number      = 0;
+            $max_line_length  = 500;
             $new_array        = [];
+            $csv_lines        = explode( "\n", $file_content );
 
             foreach ( $csv_lines as $line ) {
                 // Skip completely empty lines to prevent false errors
@@ -599,6 +601,7 @@
                             }
 
                             do_action( 'acfcs_after_success_import' );
+
                         } else {
                             /* translators: %s file name */
                             ACF_City_Selector::acfcs_errors()->add( 'error_file_name', sprintf( esc_html__( 'There\'s an error in "%s".', 'acf-city-selector' ), $file_name ) );
@@ -643,7 +646,7 @@
         $method      = 'query';
 
         foreach( $countries as $country_code ) {
-            $sanitized_country_code    = sanitize_text_field( strtoupper( $country_code ) );
+            $sanitized_country_code    = strtoupper( $country_code );
             $sanitized_country_codes[] = $sanitized_country_code;
             $country_names[]           = acfcs_get_country_name( $sanitized_country_code );
         }
@@ -656,7 +659,6 @@
                 $country_names_and = $country_names_quotes;
             }
         }
-
         if ( ! empty( $sanitized_country_codes ) ) {
             if ( 1 === count( $sanitized_country_codes ) ) {
                 $country_string = strtoupper( $sanitized_country_codes[ 0 ] );
@@ -672,6 +674,7 @@
                 $table  = $wpdb->prefix . 'cities';
                 $query  = $wpdb->prepare( "DELETE FROM %i WHERE country_code IN (%s)", $table, $country_string );
                 $result = $wpdb->$method( $query );
+                wp_cache_delete( $cache_key, $cache_group );
             }
 
             if ( isset( $result ) && 0 < $result ) {
