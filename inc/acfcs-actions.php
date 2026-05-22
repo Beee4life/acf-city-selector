@@ -107,3 +107,10 @@
         }
     }
     add_action( 'acfcs_delete_file', 'acfcs_delete_file' );
+
+    function acfcs_clear_all_cities_cache() {
+        wp_cache_delete( 'all_countries', 'cities_data' );
+        wp_cache_delete( 'has_cities', 'cities_data' );
+    }
+    add_action( 'acfcs_after_success_import', 'acfcs_clear_all_cities_cache' );
+    add_action( 'acfcs_after_success_import_raw', 'acfcs_clear_all_cities_cache' );
