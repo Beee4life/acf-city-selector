@@ -241,8 +241,12 @@
             public static function acfcs_check_uploads_folder() {
                 $target_folder = acfcs_upload_folder( '/' );
                 if ( ! file_exists( $target_folder ) ) {
-                    WP_Filesystem();
                     global $wp_filesystem;
+                    if ( empty( $wp_filesystem ) ) {
+                        require_once ABSPATH . 'wp-admin/includes/file.php';
+                        WP_Filesystem();
+                    }
+
                     $wp_filesystem->mkdir( $target_folder, 0755 );
                 }
             }
