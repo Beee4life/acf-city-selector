@@ -124,31 +124,37 @@
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
+
                 if ( isset( $_POST[ 'row_id' ] ) && is_array( $_POST[ 'row_id' ] ) ) {
-                    // @TODO: test this
-                    foreach( sanitize_text_field( wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
-                        $sanitized_row = sanitize_text_field( $row );
-                        $split         = explode( ' ', $sanitized_row, 2 );
+                    $ids    = [];
+                    $cities = [];
+
+                    foreach( array_map( 'sanitize_text_field', wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
+                        $split = explode( ' ', $row, 2 );
 
                         if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
-                            $ids[]    = $split[ 0 ];
+                            $ids[]    = intval( $split[ 0 ] );
                             $cities[] = $split[ 1 ];
                         }
                     }
 
-                    $city_string = implode( ', ', $cities );
-                    $row_ids     = implode( ',', $ids );
-                    $table       = $wpdb->prefix . 'cities';
-                    $query       = $wpdb->prepare( "DELETE FROM %i WHERE id IN (%s)", $table, $row_ids );
-                    $method      = 'query';
-                    $amount      = $wpdb->$method( $query );
+                    if ( ! empty( $ids ) ) {
+                        $table        = $wpdb->prefix . 'cities';
+                        $city_string  = implode( ', ', $cities );
+                        $placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+                        /* phpcs:disable */
+                        $query_template = "DELETE FROM %i WHERE id IN ($placeholders)";
+                        $prep_args      = array_merge( [ $table ], $ids );
+                        $method = 'query';
+                        $amount = $wpdb->$method( $wpdb->prepare( $query_template, $prep_args ) );
+                        /* phpcs:enable */
+                    }
 
                     if ( $amount > 0 ) {
                         /* translators: 1 city name, 2 city names */
                         ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
                     }
                 }
-
             }
         }
     }
