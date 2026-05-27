@@ -319,9 +319,8 @@
                             )
                         );
 
-                        // Cache the row object for 12 hours (43200 seconds)
                         // If $row is null (no match found), it caches that too to prevent repeated broken lookups (Negative Caching)
-                        wp_cache_set( $cache_key, $row, $cache_group, 43200 );
+                        wp_cache_set( $cache_key, $row, $cache_group, 2 * HOUR_IN_SECONDS );
                     }
 
                     $value[ 'stateCode' ]   = $state_code;
