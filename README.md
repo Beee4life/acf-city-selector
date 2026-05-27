@@ -184,7 +184,7 @@ This ACF field type is compatible/tested with ACF 5 (Pro). It's slightly tested 
 ### Tested with
 
 * [X] WordPress 7.0
-* [X] Advanced Custom Fields Pro 6.8.1
+* [X] Advanced Custom Fields Pro 6.8.2
 * [X] Advanced Custom Fields 4.4.12
 
 <a name="support"></a>
