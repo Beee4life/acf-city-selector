@@ -14,10 +14,9 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $all_countries           = acfcs_get_countries( false );
-        $cities                  = array();
-        $city_array              = array();
-        $countries               = array();
-
+        $cities                  = [];
+        $city_array              = [];
+        $countries               = [];
         $search_criteria_state   = false;
         $search_criteria_country = false;
         $searched_orderby        = false;
@@ -92,7 +91,7 @@
                                                     <?php echo esc_attr( apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ) ); ?>
                                                 </option>
                                                 <?php foreach( $countries as $country ) { ?>
-                                                    <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                                    <?php $selected = ( $country[ 'code' ] == strtoupper( $search_criteria_country ) ) ? ' selected="selected"' : false; ?>
                                                     <option value="<?php echo esc_attr( strtolower( $country[ 'code' ] ) ); ?>"<?php echo esc_attr( $selected ); ?>>
                                                         <?php echo esc_html( $country[ 'name' ] ); ?>
                                                     </option>
