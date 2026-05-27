@@ -13,8 +13,12 @@
 
         ACF_City_Selector::acfcs_show_admin_notices();
 
-        WP_Filesystem();
         global $wp_filesystem;
+
+        if ( empty( $wp_filesystem ) ) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            WP_Filesystem();
+        }
         $countries    = acfcs_get_countries_info();
         $prepare_json = array();
         ?>
