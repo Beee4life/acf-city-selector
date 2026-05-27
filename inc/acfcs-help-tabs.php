@@ -1,11 +1,10 @@
 <?php
-    /**
+    /*
      * Add help tabs
-     *
-     * @param $screen
-     *
-     * @return bool
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_help_tabs( $screen ) {
 
         if ( isset( $screen->id ) ) {
@@ -87,7 +86,7 @@
                         <p>' . esc_html__( 'On the search page, you can search in imported cities. Not to be confused with preview where you can preview uploaded csv files.', 'acf-city-selector' ) . '</p>
                         '
                 ) );
-                
+
                 $more_countries_header = sprintf( '<h5>%s</h5>', esc_html__( 'More countries', 'acf-city-selector' ) );
                 /* translators: %s: link to official website */
                 $more_countries_text = '<p>' . sprintf( __( 'If you need more countries, you can get them on the official website: %s.', 'acf-city-selector' ), '<a href="' . ACFCS_WEBSITE_URL . '/get-countries/" target="_blank" rel="noopener">acf-city-selector.com</a>' ) . '</p>';
@@ -97,7 +96,7 @@
                     'title'   => esc_html__( 'More countries', 'acf-city-selector' ),
                     'content' => $more_countries_content
                 ) );
-                
+
                 $server_name = isset( $_SERVER[ 'SERVER_NAME' ] ) ? sanitize_text_field( wp_unslash( $_SERVER[ 'SERVER_NAME' ] ) ) : 'localhost';
                 get_current_screen()->set_help_sidebar(
                     '<p><strong>' . esc_html__( 'Official website', 'acf-city-selector' ) . '</strong></p>

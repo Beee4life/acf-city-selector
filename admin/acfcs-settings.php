@@ -2,6 +2,9 @@
     /*
      * Content for the settings page
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_settings() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
@@ -10,12 +13,12 @@
         $countries = acfcs_get_countries( false, false, true );
 
         ACF_City_Selector::acfcs_show_admin_notices();
-        
+
         ?>
 
         <div class="wrap acfcs">
             <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
-            
+
             <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">
@@ -51,7 +54,8 @@
                                         <li>
                                             <?php /* translators: %s input label, %s country name */ ?>
                                             <?php echo sprintf( '<label for="%s" class="screen-reader-text">%s</label>', 'delete_' . esc_attr( strtolower( $country_code ) ), esc_attr( $country_name ) ); ?>
-                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" /> <?php esc_html( $country_name ); ?>
+                                            <input type="checkbox" name="acfcs_delete_country[]" id="delete_<?php echo esc_attr( strtolower( $country_code ) ); ?>" value="<?php echo esc_attr( strtolower( $country_code ) ); ?>" />
+                                            <?php echo esc_html( $country_name ); ?>
                                         </li>
                                     <?php } ?>
                                 </ul>

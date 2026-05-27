@@ -2,16 +2,19 @@
     /**
      * Content for the settings page
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_preview_page() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
             wp_die( esc_html__( 'Sorry, you do not have sufficient permissions to access this page.', 'acf-city-selector' ) );
         }
-        
+
         $file_name = false;
         $limit     = 100;
         $delimiter = ';';
-        
+
         if ( isset( $_POST[ 'acfcs_preview_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_preview_nonce' ] ) ), 'acfcs-preview-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_nonce_no_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
@@ -22,16 +25,16 @@
                 $delimiter = ( isset( $_POST[ 'acfcs_delimiter' ] ) ) ? sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delimiter' ] ) ) : apply_filters( 'acfcs_delimiter', $delimiter );
             }
         }
-        
+
         ACF_City_Selector::acfcs_show_admin_notices();
         ?>
 
         <div class="wrap acfcs">
             <h1><?php echo sprintf( 'ACF City Selector: %s', esc_html( get_admin_page_title() ) ); ?></h1>
-            
+
             <?php
                 do_action( 'acfcs_admin_menu' );
-                
+
                 $file_index = acfcs_check_if_files();
 
                 // Get imported data

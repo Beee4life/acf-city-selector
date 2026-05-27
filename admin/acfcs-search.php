@@ -2,6 +2,9 @@
     /*
      * Content for the search page
      */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_search() {
 
         if ( ! current_user_can( apply_filters( 'acfcs_user_cap', 'manage_options' ) ) ) {
@@ -11,10 +14,9 @@
         ACF_City_Selector::acfcs_show_admin_notices();
 
         $all_countries           = acfcs_get_countries( false );
-        $cities                  = array();
-        $city_array              = array();
-        $countries               = array();
-        
+        $cities                  = [];
+        $city_array              = [];
+        $countries               = [];
         $search_criteria_state   = false;
         $search_criteria_country = false;
         $searched_orderby        = false;
@@ -22,7 +24,7 @@
         $selected_limit          = false;
         $limit                   = 100;
         $states                  = acfcs_get_states_optgroup();
-        
+
         if ( isset( $_POST[ 'acfcs_search_form_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_search_form_nonce' ] ) ), 'acfcs-search-form-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
@@ -35,7 +37,7 @@
                 $selected_limit          = ( ! empty( $_POST[ 'acfcs_limit' ] ) ) ? (int) $_POST[ 'acfcs_limit' ] : $limit;
             }
         }
-        
+
         // if there is at least 1 country
         if ( ! empty( $all_countries ) ) {
             foreach ( $all_countries as $country_code => $country_name ) {
@@ -63,7 +65,7 @@
         ?>
         <div class="wrap acfcs">
             <h1>ACF City Selector</h1>
-            
+
             <?php do_action( 'acfcs_admin_menu' ); ?>
 
             <div class="acfcs__container">
@@ -89,7 +91,7 @@
                                                     <?php echo esc_attr( apply_filters( 'acfcs_select_country_label', esc_html__( 'Select a country', 'acf-city-selector' ) ) ); ?>
                                                 </option>
                                                 <?php foreach( $countries as $country ) { ?>
-                                                    <?php $selected = ( $country[ 'code' ] == $search_criteria_country ) ? ' selected="selected"' : false; ?>
+                                                    <?php $selected = ( $country[ 'code' ] == strtoupper( $search_criteria_country ) ) ? ' selected="selected"' : false; ?>
                                                     <option value="<?php echo esc_attr( strtolower( $country[ 'code' ] ) ); ?>"<?php echo esc_attr( $selected ); ?>>
                                                         <?php echo esc_html( $country[ 'name' ] ); ?>
                                                     </option>

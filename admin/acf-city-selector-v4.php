@@ -12,8 +12,7 @@
             // vars
             var $settings, // will hold info such as dir / path
                 $defaults; // will hold default field options
-            
-            
+
             /**
              * __construct
              *
@@ -41,7 +40,6 @@
                 $this->settings = $settings;
 
             }
-
 
             /**
              * create_options()
@@ -132,7 +130,6 @@
                 <?php
             }
 
-
             /**
              * create_field()
              *
@@ -201,7 +198,6 @@
                 }
             }
 
-
             /**
              * input_admin_enqueue_scripts()
              *
@@ -218,7 +214,7 @@
              * @TODO: DRY
              */
             function input_admin_enqueue_scripts() {
-                
+
                 $plugin_url     = trailingslashit( sprintf( '%s/plugins/acf-city-selector', WP_CONTENT_URL ) );
                 $plugin_version = get_option( 'acfcs_version' );
 
@@ -239,8 +235,11 @@
                 $js_vars[ 'use_select2' ]     = ( isset( $all_info[ 'use_select2' ] ) ) ? $all_info[ 'use_select2' ] : false;
                 $js_vars[ 'which_fields' ]    = ( isset( $all_info[ 'which_fields' ] ) ) ? $all_info[ 'which_fields' ] : 'all';
 
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                 if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] === 'edit' ) {
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     if ( isset( $_GET[ 'id' ] ) ) {
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                         $post_id = (int) $_GET[ 'id' ];
                     } else {
                         $post_id = get_the_ID();
@@ -268,9 +267,7 @@
                     }
                 }
                 wp_localize_script( 'acfcs-process', 'city_selector_vars', $js_vars );
-
             }
-
 
             /**
              * load_value()
@@ -306,8 +303,26 @@
 
                 if ( strlen( $country_code ) == 2 && false != $state_code ) {
                     global $wpdb;
-                    $table                  = $wpdb->prefix . 'cities';
-                    $row                    = $wpdb->get_row( $wpdb->prepare( "SELECT country, state_name FROM %i WHERE country_code= %s AND state_code= %s", $table, $country_code, $state_code ) );
+                    $cache_key   = 'country_state_' . md5( $country_code . '_' . $state_code );
+                    $cache_group = 'cities_data';
+                    $row         = wp_cache_get( $cache_key, $cache_group );
+
+                    if ( false === $row ) {
+                        $table   = $wpdb->prefix . 'cities';
+                        $method  = 'get_row';
+                        $row     = $wpdb->$method(
+                            $wpdb->prepare(
+                                "SELECT country, state_name FROM %i WHERE country_code = %s AND state_code = %s",
+                                $table,
+                                $country_code,
+                                $state_code
+                            )
+                        );
+
+                        // If $row is null (no match found), it caches that too to prevent repeated broken lookups (Negative Caching)
+                        wp_cache_set( $cache_key, $row, $cache_group, 2 * HOUR_IN_SECONDS );
+                    }
+
                     $value[ 'stateCode' ]   = $state_code;
                     $value[ 'stateName' ]   = ( isset( $row->state_name ) ) ? $row->state_name : false;
                     $value[ 'countryName' ] = ( isset( $row->country ) ) ? $row->country : false;
@@ -315,7 +330,6 @@
 
                 return $value;
             }
-
 
             /**
              * Update value before it's changed in the database

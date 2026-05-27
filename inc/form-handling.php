@@ -1,7 +1,7 @@
 <?php
-    /**
-     * Handle CSV upload form
-     */
+
+    if ( ! defined( 'ABSPATH' ) ) exit;
+
     function acfcs_upload_csv_file() {
         if ( isset( $_POST[ 'acfcs_upload_csv_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_upload_csv_nonce' ] ) ), 'acfcs-upload-csv-nonce' ) ) {
@@ -41,10 +41,6 @@
     }
     add_action( 'admin_init', 'acfcs_upload_csv_file' );
 
-
-    /**
-     * Handle process CSV form
-     */
     function acfcs_do_something_with_file() {
         if ( isset( $_POST[ 'acfcs_select_file_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_select_file_nonce' ] ) ), 'acfcs-select-file-nonce' ) ) {
@@ -75,10 +71,6 @@
     }
     add_action( 'admin_init', 'acfcs_do_something_with_file' );
 
-
-    /**
-     * Handle importing of raw CSV data
-     */
     function acfcs_import_raw_data() {
         if ( isset( $_POST[ 'acfcs_import_raw_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_import_raw_nonce' ] ) ), 'acfcs-import-raw-nonce' ) ) {
@@ -99,20 +91,26 @@
     }
     add_action( 'admin_init', 'acfcs_import_raw_data' );
 
-
-    /**
-     * Handle form to delete one or more countries
-     */
     function acfcs_delete_countries() {
         if ( isset( $_POST[ 'acfcs_remove_countries_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_remove_countries_nonce' ] ) ), 'acfcs-remove-countries-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
-                if ( empty( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) ) ) {
+                if ( empty( $_POST[ 'acfcs_delete_country' ] ) ) {
                     ACF_City_Selector::acfcs_errors()->add( 'error_no_country_selected', esc_html__( "You didn't select any countries, please try again.", 'acf-city-selector' ) );
                 } else {
-                    if ( is_array( $_POST[ 'acfcs_delete_country' ] ) ) {
-                        acfcs_delete_country( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_country' ] ) ) );
+
+                    if ( isset( $_POST[ 'acfcs_delete_country' ] ) ) {
+                        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                        $raw_country_input = wp_unslash( $_POST[ 'acfcs_delete_country' ] );
+                        if ( is_array( $raw_country_input ) ) {
+                            $country_codes = array_map( 'sanitize_text_field', $raw_country_input );
+                            $country_codes = array_filter( $country_codes );
+
+                            if ( ! empty( $country_codes ) ) {
+                                acfcs_delete_country( $country_codes );
+                            }
+                        }
                     }
                 }
             }
@@ -120,48 +118,48 @@
     }
     add_action( 'admin_init', 'acfcs_delete_countries' );
 
-
-    /**
-     * Form to delete individual rows/cities
-     */
     function acfcs_delete_rows() {
         if ( isset( $_POST[ 'acfcs_delete_row_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_delete_row_nonce' ] ) ), 'acfcs-delete-row-nonce' ) ) {
                 ACF_City_Selector::acfcs_errors()->add( 'error_no_nonce_match', esc_html__( 'Something went wrong, please try again.', 'acf-city-selector' ) );
             } else {
                 global $wpdb;
+
                 if ( isset( $_POST[ 'row_id' ] ) && is_array( $_POST[ 'row_id' ] ) ) {
-                    // @TODO: test this
-                    foreach( sanitize_text_field( wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
-                        $sanitized_row = sanitize_text_field( $row );
-                        $split         = explode( ' ', $sanitized_row, 2 );
-                        
+                    $ids    = [];
+                    $cities = [];
+
+                    foreach( array_map( 'sanitize_text_field', wp_unslash( $_POST[ 'row_id' ] ) ) as $row ) {
+                        $split = explode( ' ', $row, 2 );
+
                         if ( isset( $split[ 0 ] ) && isset( $split[ 1 ] ) ) {
-                            $ids[]    = $split[ 0 ];
+                            $ids[]    = intval( $split[ 0 ] );
                             $cities[] = $split[ 1 ];
                         }
                     }
-                    
-                    $city_string = implode( ', ', $cities );
-                    $row_ids     = implode( ',', $ids );
-                    $table       = $wpdb->prefix . 'cities';
-                    $amount      = $wpdb->query( $wpdb->prepare( "DELETE FROM %i WHERE id IN (%s)", $table, $row_ids ) );
+
+                    if ( ! empty( $ids ) ) {
+                        $table        = $wpdb->prefix . 'cities';
+                        $city_string  = implode( ', ', $cities );
+                        $placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+                        /* phpcs:disable */
+                        $query_template = "DELETE FROM %i WHERE id IN ($placeholders)";
+                        $prep_args      = array_merge( [ $table ], $ids );
+                        $method = 'query';
+                        $amount = $wpdb->$method( $wpdb->prepare( $query_template, $prep_args ) );
+                        /* phpcs:enable */
+                    }
 
                     if ( $amount > 0 ) {
                         /* translators: 1 city name, 2 city names */
                         ACF_City_Selector::acfcs_errors()->add( 'success_row_delete', sprintf( _n( 'You have deleted the city %s.', 'You have deleted the following cities: %s.', count($cities), 'acf-city-selector' ), $city_string ) );
                     }
                 }
-                
             }
         }
     }
     add_action( 'admin_init', 'acfcs_delete_rows' );
 
-
-    /**
-     * Delete contents of entire cities table
-     */
     function acfcs_truncate_table() {
         if ( isset( $_POST[ 'acfcs_truncate_table_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_truncate_table_nonce' ] ) ), 'acfcs-truncate-table-nonce' ) ) {
@@ -177,10 +175,6 @@
     }
     add_action( 'admin_init', 'acfcs_truncate_table' );
 
-
-    /**
-     * Handle preserve settings option
-     */
     function acfcs_delete_settings() {
         if ( isset( $_POST[ 'acfcs_remove_cities_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_remove_cities_nonce' ] ) ), 'acfcs-remove-cities-nonce' ) ) {
@@ -197,10 +191,6 @@
     }
     add_action( 'admin_init', 'acfcs_delete_settings' );
 
-
-    /**
-     * Manually import default available countries
-     */
     function acfcs_import_preset_countries() {
         if ( isset( $_POST[ 'acfcs_import_actions_nonce' ] ) ) {
             if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST[ 'acfcs_import_actions_nonce' ] ) ), 'acfcs-import-actions-nonce' ) ) {
