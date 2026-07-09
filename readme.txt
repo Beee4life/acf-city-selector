@@ -1,7 +1,7 @@
 === ACF City Selector ===
 Tags: advanced custom fields, country, city, state, province
 Contributors: beee
-Requires at least: 3.6.0
+Requires at least: 4.7.0
 Requires PHP: 7.4
 Tested up to: 7.0
 Stable tag: 1.18.0
