@@ -62,7 +62,7 @@
             global $wpdb;
             $table         = $wpdb->prefix . 'cities';
             $cache_group   = 'cities_data';
-            $cache_key     = 'states_' . md5( strtoupper( $country_code ) . '_' . strtoupper( $state_code ) );
+            $cache_key     = 'states_' . md5( strtoupper( $country_code ) );
             $method        = 'get_results';
             $results       = wp_cache_get( $cache_key, $cache_group );
             $state_results = [];
