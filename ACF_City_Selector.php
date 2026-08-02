@@ -3,7 +3,7 @@
     Plugin Name:    ACF City Selector
     Plugin URI:     https://acf-city-selector.com
     Description:    An extension for ACF which allows you to select a city based on country and province/state.
-    Version:        1.18.0
+    Version:        1.19.0
     Tested up to:   7.0
     Requires PHP:   7.4
     Author:         Beee
@@ -29,7 +29,7 @@
                 $this->settings = [
                     'db_version' => '1.0',
                     'url'        => plugin_dir_url( __FILE__ ),
-                    'version'    => '1.18.0',
+                    'version'    => '1.19.0',
                 ];
 
                 if ( ! class_exists( 'ACFCS_WEBSITE_URL' ) ) {
@@ -60,6 +60,7 @@
                 add_action( 'acf/input/admin_l10n',     [ $this, 'acfcs_error_messages' ] );
 
                 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'acfcs_settings_link' ] );
+                add_filter( 'plugin_row_meta',          [ $this, 'acfcs_set_plugin_meta' ], 10, 2 );
 
                 // functions & hooks
                 include 'inc/acfcs-actions.php';
@@ -88,6 +89,17 @@
                 delete_option( 'acfcs_version' );
                 delete_option( 'acfcs_db_version' );
                 // other important stuff gets done in uninstall.php
+            }
+
+            public function acfcs_set_plugin_meta( $links, $file ) {
+                static $acfcs_links;
+                $acfcs_links = plugin_basename(__FILE__);
+
+                if ( $file === $acfcs_links ) {
+                    $links[] = sprintf( '<a href="https://acf-city-selector.com" target="_blank">%s</a>', esc_html__( 'Visit plugin site', 'acf-city-selector' ) );
+                }
+
+                return $links;
             }
 
             public function acfcs_check_version() {
